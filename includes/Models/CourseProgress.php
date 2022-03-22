@@ -9,9 +9,8 @@
 
 namespace Masteriyo\Models;
 
-use Masteriyo\MetaData;
 use Masteriyo\Database\Model;
-use Masteriyo\Cache\CacheInterface;
+use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -372,10 +371,10 @@ class CourseProgress extends Model {
 	 * Get all valid statuses for this course progress
 	 *
 	 * @since 1.0.0
-	 * @return array Internal status keys e.g. (start, progress, complete)
+	 * @return array
 	 */
 	protected function get_valid_statuses() {
-		return masteriyo_get_user_activity_statuses();
+		return CourseProgressStatus::all();
 	}
 
 	/**

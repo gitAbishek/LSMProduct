@@ -8,6 +8,7 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\CourseProgressItemQuery;
 use Masteriyo\Repository\AbstractRepository;
@@ -154,7 +155,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		if ( array_intersect( $course_progress_data_keys, array_keys( $changes ) ) ) {
 			$completed_at = '';
-			if ( 'completed' === $course_progress->get_status( 'edit' ) ) {
+			if ( CourseProgressStatus::COMPLETED === $course_progress->get_status( 'edit' ) ) {
 				$completed_at = $course_progress->get_completed_at( 'edit' );
 				$completed_at = is_null( $completed_at ) ? current_time( 'mysql', true ) : gmdate( 'Y-m-d H:i:s', $completed_at->getTimestamp() );
 			}

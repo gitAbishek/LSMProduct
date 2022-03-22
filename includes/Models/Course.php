@@ -12,6 +12,7 @@ namespace Masteriyo\Models;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Database\Model;
 use Masteriyo\Query\SectionQuery;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -414,7 +415,7 @@ class Course extends Model {
 	 *
 	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
-	 * @return string|NULL object if the date is set or null if there is no date.
+	 * @return Masteriyo\DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_on_sale_from( $context = 'view' ) {
 		return $this->get_prop( 'date_on_sale_from', $context );
@@ -425,7 +426,7 @@ class Course extends Model {
 	 *
 	 * @since  1.0.0
 	 * @param  string $context What the value is for. Valid values are view and edit.
-	 * @return DateTime|NULL object if the date is set or null if there is no date.
+	 * @return Masteriyo\DateTime|NULL object if the date is set or null if there is no date.
 	 */
 	public function get_date_on_sale_to( $context = 'view' ) {
 		return $this->get_prop( 'date_on_sale_to', $context );
@@ -1179,7 +1180,7 @@ class Course extends Model {
 	public function is_purchasable() {
 		return apply_filters(
 			'masteriyo_is_purchasable',
-			( 'publish' === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
+			( PostStatus::PUBLISH === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
 			$this
 		);
 	}
@@ -1215,9 +1216,9 @@ class Course extends Model {
 	protected function is_visible_core() {
 		$visible = 'visible' === $this->get_catalog_visibility() || ( is_search() && 'search' === $this->get_catalog_visibility() ) || ( ! is_search() && 'catalog' === $this->get_catalog_visibility() );
 
-		if ( 'trash' === $this->get_status() ) {
+		if ( PostStatus::TRASH === $this->get_status() ) {
 			$visible = false;
-		} elseif ( 'publish' !== $this->get_status() && ! current_user_can( 'edit_post', $this->get_id() ) ) {
+		} elseif ( PostStatus::PUBLISH !== $this->get_status() && ! current_user_can( 'edit_post', $this->get_id() ) ) {
 			$visible = false;
 		}
 

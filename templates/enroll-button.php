@@ -3,8 +3,9 @@
  * "Add to Cart" button.
  *
  * @version 1.0.0
- */
+*/
 
+use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\Notice;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -18,11 +19,11 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 ?>
 
 <?php if ( masteriyo_can_start_course( $course ) ) : ?>
-	<?php if ( $progress && 'completed' === $progress->get_status() ) : ?>
+	<?php if ( $progress && CourseProgressStatus::COMPLETED === $progress->get_status() ) : ?>
 		<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-course-complete masteriyo-btn-primary masteriyo-single-course--btn mb-0">
 			<?php echo esc_html( $course->single_course_completed_text() ); ?>
 		</a>
-	<?php elseif ( $progress && 'progress' === $progress->get_status() ) : ?>
+	<?php elseif ( $progress && CourseProgressStatus::PROGRESS === $progress->get_status() ) : ?>
 		<a href="<?php echo esc_url( $course->start_course_url() ); ?>" target="_blank" class="masteriyo-btn masteriyo-course-continue masteriyo-btn-primary masteriyo-single-course--btn mb-0">
 			<?php echo esc_html( $course->single_course_continue_text() ); ?>
 		</a>

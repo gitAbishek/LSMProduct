@@ -10,6 +10,7 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Section;
 
 /**
@@ -54,7 +55,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 				'masteriyo_new_section_data',
 				array(
 					'post_type'      => 'mto-section',
-					'post_status'    => 'publish',
+					'post_status'    => PostStatus::PUBLISH,
 					'post_author'    => $section->get_author_id( 'edit' ),
 					'post_title'     => $section->get_name(),
 					'post_content'   => $section->get_description(),
@@ -143,7 +144,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 				'post_title'     => $section->get_name( 'edit' ),
 				'post_parent'    => $section->get_parent_id( 'edit' ),
 				'comment_status' => 'closed',
-				'post_status'    => 'publish',
+				'post_status'    => PostStatus::PUBLISH,
 				'menu_order'     => $section->get_menu_order( 'edit' ),
 				'post_type'      => 'mto-section',
 			);

@@ -1,6 +1,6 @@
 <?php
 /**
- * SectionsController class.
+ * Sections Controller class.
  *
  * @since 1.0.0
  *
@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Helper\Permission;
 
 /**
@@ -271,7 +272,7 @@ class SectionsController extends PostsController {
 		$args = parent::prepare_objects_query( $request );
 
 		// Set post_status.
-		$args['post_status'] = 'publish';
+		$args['post_status'] = PostStatus::PUBLISH;
 
 		if ( ! empty( $request['course_id'] ) ) {
 			$args['meta_query'] = array(
@@ -423,7 +424,7 @@ class SectionsController extends PostsController {
 
 		// Post status.
 		if ( isset( $request['status'] ) ) {
-			$section->set_status( 'publish' );
+			$section->set_status( PostStatus::PUBLISH );
 		}
 
 		// Menu order.

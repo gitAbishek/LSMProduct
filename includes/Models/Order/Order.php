@@ -14,6 +14,8 @@ use Masteriyo\Database\Model;
 use Masteriyo\Cache\CacheInterface;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Abstracts\Order as AbstractOrder;
+use Masteriyo\Enums\OrderStatus;
+use Masteriyo\RestApi\Controllers\Version1\OrdersController;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -173,7 +175,7 @@ class Order extends AbstractOrder {
 
 				// Work out if this was for a payment, and trigger a payment_status hook instead.
 				if (
-					in_array( $status_transition['from'], apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $this ), true )
+					in_array( $status_transition['from'], apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( OrderStatus::PENDING, OrderStatus::FAILED ), $this ), true )
 					&& in_array( $status_transition['to'], masteriyo_get_is_paid_statuses(), true )
 				) {
 					/**
@@ -192,7 +194,7 @@ class Order extends AbstractOrder {
 				// Note the transition occurred.
 				$this->add_status_transition_note( $transition_note, $status_transition );
 			}
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			$this->add_order_note( __( 'Error during status transition.', 'masteriyo' ) . ' ' . $e->getMessage() );
 		}
 	}
@@ -899,7 +901,7 @@ class Order extends AbstractOrder {
 		if ( ! $this->get_date_paid( 'edit' ) ) {
 			$payment_completed_status = apply_filters(
 				'masteriyo_payment_complete_order_status',
-				$this->needs_processing() ? 'processing' : 'completed',
+				$this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED,
 				$this->get_id(),
 				$this
 			);
@@ -908,7 +910,7 @@ class Order extends AbstractOrder {
 				// If payment complete status is reached, set paid now.
 				$this->set_date_paid( time() );
 
-			} elseif ( 'processing' === $payment_completed_status && $this->has_status( 'completed' ) ) {
+			} elseif ( OrderStatus::PROCESSING === $payment_completed_status && $this->has_status( OrderStatus::COMPLETED ) ) {
 				// If payment complete status was processing, but we've passed that and still have no date, set it now.
 				$this->set_date_paid( time() );
 			}
@@ -923,7 +925,7 @@ class Order extends AbstractOrder {
 	 * @since 1.0.0
 	 */
 	protected function maybe_set_date_completed() {
-		if ( $this->has_status( 'completed' ) ) {
+		if ( $this->has_status( OrderStatus::COMPLETED ) ) {
 			$this->set_date_completed( time() );
 		}
 	}
@@ -1042,7 +1044,7 @@ class Order extends AbstractOrder {
 	 * @return bool
 	 */
 	public function needs_payment() {
-		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( 'pending', 'failed' ), $this );
+		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( OrderStatus::PENDING, OrderStatus::FAILED ), $this );
 		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
 	}
 
@@ -1074,7 +1076,7 @@ class Order extends AbstractOrder {
 
 			$statuses = apply_filters(
 				'masteriyo_valid_order_statuses_for_payment_complete',
-				array( 'on-hold', 'pending', 'failed', 'cancelled' ),
+				array( OrderStatus::ON_HOLD, OrderStatus::PENDING, OrderStatus::FAILED, OrderStatus::CANCELLED ),
 				$this
 			);
 
@@ -1087,7 +1089,7 @@ class Order extends AbstractOrder {
 					$this->set_date_paid( time() );
 				}
 
-				$order_status   = $this->needs_processing() ? 'processing' : 'completed';
+				$order_status   = $this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED;
 				$payment_status = apply_filters( 'masteriyo_payment_complete_order_status', $order_status, $this->get_id(), $this );
 
 				$this->set_status( $payment_status );

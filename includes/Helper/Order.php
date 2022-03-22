@@ -6,6 +6,8 @@
  * @package Masteriyo\Helper
  */
 
+use Masteriyo\Enums\OrderStatus;
+
 /**
  * Get order.
  *
@@ -156,7 +158,7 @@ function masteriyo_is_order_status( $maybe_status ) {
  * @return array
  */
 function masteriyo_get_is_paid_statuses() {
-	return apply_filters( 'masteriyo_order_is_paid_statuses', array( 'processing', 'completed' ) );
+	return apply_filters( 'masteriyo_order_is_paid_statuses', array( OrderStatus::PROCESSING, OrderStatus::COMPLETED ) );
 }
 
 /**
@@ -166,7 +168,7 @@ function masteriyo_get_is_paid_statuses() {
  * @return array
  */
 function masteriyo_get_is_pending_statuses() {
-	return apply_filters( 'masteriyo_order_is_pending_statuses', array( 'pending' ) );
+	return apply_filters( 'masteriyo_order_is_pending_statuses', array( OrderStatus::PENDING ) );
 }
 
 /**
@@ -300,7 +302,7 @@ function masteriyo_get_account_orders_actions( $order ) {
 		unset( $actions['pay'] );
 	}
 
-	if ( ! in_array( $order->get_status(), apply_filters( 'masteriyo_valid_order_statuses_for_cancel', array( 'pending', 'failed' ), $order ), true ) ) {
+	if ( ! in_array( $order->get_status(), apply_filters( 'masteriyo_valid_order_statuses_for_cancel', array( OrderStatus::PENDING, OrderStatus::FAILED ), $order ), true ) ) {
 		unset( $actions['cancel'] );
 	}
 

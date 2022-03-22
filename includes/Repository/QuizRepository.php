@@ -10,6 +10,7 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Quiz;
 
 /**
@@ -62,7 +63,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				'masteriyo_new_quiz_data',
 				array(
 					'post_type'     => 'mto-quiz',
-					'post_status'   => $quiz->get_status() ? $quiz->get_status() : 'publish',
+					'post_status'   => $quiz->get_status() ? $quiz->get_status() : PostStatus::PUBLISH,
 					'post_author'   => $quiz->get_author_id( 'edit' ),
 					'post_title'    => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
 					'post_content'  => $quiz->get_description(),
@@ -156,7 +157,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				'post_content' => $quiz->get_description( 'edit' ),
 				'post_excerpt' => $quiz->get_short_description( 'edit' ),
 				'post_title'   => $quiz->get_name( 'edit' ),
-				'post_status'  => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : 'publish',
+				'post_status'  => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : PostStatus::PUBLISH,
 				'post_name'    => $quiz->get_slug( 'edit' ),
 				'post_parent'  => $quiz->get_parent_id(),
 				'post_type'    => 'mto-quiz',

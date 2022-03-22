@@ -6,6 +6,7 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Lesson;
 
 class LessonRepository extends AbstractRepository implements RepositoryInterface {
@@ -56,7 +57,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 				'masteriyo_new_lesson_data',
 				array(
 					'post_type'      => 'mto-lesson',
-					'post_status'    => $lesson->get_status() ? $lesson->get_status() : 'publish',
+					'post_status'    => $lesson->get_status() ? $lesson->get_status() : PostStatus::PUBLISH,
 					'post_author'    => $lesson->get_author_id(),
 					'post_title'     => $lesson->get_name() ? $lesson->get_name() : __( 'Lesson', 'masteriyo' ),
 					'post_content'   => $lesson->get_description(),
@@ -158,7 +159,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 				'post_title'     => $lesson->get_name( 'edit' ),
 				'post_parent'    => $lesson->get_parent_id( 'edit' ),
 				'comment_status' => $lesson->get_reviews_allowed( 'edit' ) ? 'open' : 'closed',
-				'post_status'    => $lesson->get_status( 'edit' ) ? $lesson->get_status( 'edit' ) : 'publish',
+				'post_status'    => $lesson->get_status( 'edit' ) ? $lesson->get_status( 'edit' ) : PostStatus::PUBLISH,
 				'menu_order'     => $lesson->get_menu_order( 'edit' ),
 				'post_password'  => $lesson->get_post_password( 'edit' ),
 				'post_name'      => $lesson->get_slug( 'edit' ),

@@ -17,6 +17,8 @@ use Masteriyo\Models\CourseReview;
 use Masteriyo\Enums\NotificationLevel;
 use Masteriyo\Enums\NotificationStatus;
 use Masteriyo\Enums\NotificationType;
+use Masteriyo\Enums\OrderStatus;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Notification;
 
 /**
@@ -2198,7 +2200,7 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
 	if ( $previous_value > 0 ) {
 		$page_object = get_post( $previous_value );
 
-		if ( $page_object && 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( 'pending', 'trash', 'future', 'auto-draft' ), true ) ) {
+		if ( $page_object && 'page' === $page_object->post_type && ! in_array( $page_object->post_status, array( PostStatus::PENDING, PostStatus::TRASH, PostStatus::FUTURE, PostStatus::AUTO_DRAFT ), true ) ) {
 			// Valid page is already in place.
 			if ( strlen( $page_content ) > 0 ) {
 				// Search for an existing page with the specified page content (typically a shortcode).
@@ -2229,12 +2231,12 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
 		$page_id   = $trashed_page_found;
 		$page_data = array(
 			'ID'          => $page_id,
-			'post_status' => 'publish',
+			'post_status' => PostStatus::PUBLISH,
 		);
 		wp_update_post( $page_data );
 	} else {
 		$page_data = array(
-			'post_status'    => 'publish',
+			'post_status'    => PostStatus::PUBLISH,
 			'post_type'      => 'page',
 			'post_author'    => 1,
 			'post_name'      => $slug,
@@ -2719,6 +2721,7 @@ function masteriyo_get_settings() {
  * Get user activity statuses.
  *
  * @since 1.0.0
+ * @deprecated x.x.x
  *
  * @return array
  */

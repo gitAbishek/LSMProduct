@@ -11,6 +11,7 @@
 
 namespace Masteriyo\Cart;
 
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Session\Session;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Arr;
@@ -324,7 +325,7 @@ class Cart {
 		$order = masteriyo_get_order( $order_id );
 
 		if ( ! $order->get_id()
-			|| ! $order->has_status( apply_filters( 'masteriyo_valid_order_statuses_for_order_again', array( 'completed' ) ) )
+			|| ! $order->has_status( apply_filters( 'masteriyo_valid_order_statuses_for_order_again', array( OrderStatus::COMPLETED ) ) )
 			|| ! current_user_can( 'order_again', $order->get_id() ) ) {
 			return;
 		}

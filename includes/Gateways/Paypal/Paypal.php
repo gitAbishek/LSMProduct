@@ -19,6 +19,7 @@ use Masteriyo\Gateways\Paypal\PdtHandler;
 use Masteriyo\Gateways\Paypal\IpnHandler;
 use Masteriyo\Abstracts\PaymentGateway;
 use Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
+use Masteriyo\Enums\OrderStatus;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -398,7 +399,7 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	public function capture_payment( $order_id ) {
 		$order = masteriyo_get_order( $order_id );
 
-		if ( 'paypal' === $order->get_payment_method() && 'pending' === $order->get_meta( '_paypal_status', true ) && $order->get_transaction_id() ) {
+		if ( 'paypal' === $order->get_payment_method() && OrderStatus::PENDING === $order->get_meta( '_paypal_status', true ) && $order->get_transaction_id() ) {
 			$this->init_api();
 			$result = ApiHandler::do_capture( $order );
 

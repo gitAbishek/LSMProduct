@@ -14,6 +14,8 @@
  * @version 1.0.0
  */
 
+use Masteriyo\Enums\OrderStatus;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! $order ) {
@@ -32,7 +34,7 @@ if ( ! $order ) {
 <div class="masteriyo-w-100 masteriyo-container masteriyo-order">
 <?php do_action( 'masteriyo_before_thankyou', $order->get_id() ); ?>
 
-	<?php if ( $order->has_status( 'failed' ) ) : ?>
+	<?php if ( $order->has_status( OrderStatus::FAILED ) ) : ?>
 
 		<p class="masteriyo-notice masteriyo-notice--error masteriyo-thankyou-order-failed">
 			<?php esc_html_e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.', 'masteriyo' ); ?>

@@ -7,6 +7,7 @@ namespace Masteriyo\RestApi\Controllers\Store;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\RestApi\Controllers\Version1\CrudController;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
@@ -397,7 +398,7 @@ class CheckoutController extends CrudController {
 				'status'              => array(
 					'description' => __( 'Lesson status (post status).', 'masteriyo' ),
 					'type'        => 'string',
-					'default'     => 'publish',
+					'default'     => PostStatus::PUBLISH,
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),

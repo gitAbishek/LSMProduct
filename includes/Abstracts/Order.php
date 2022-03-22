@@ -11,6 +11,7 @@ namespace Masteriyo\Abstracts;
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Traits\ItemTotals;
 use Masteriyo\Repository\OrderRepository;
 
@@ -366,12 +367,12 @@ abstract class Order extends Model {
 		if ( true === $this->object_read ) {
 			// Only allow valid new status.
 			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) && 'trash' !== $new_status ) {
-				$new_status = 'pending';
+				$new_status = OrderStatus::PENDING;
 			}
 
 			// If the old status is set but unknown (e.g. draft) assume its pending for action usage.
 			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) && 'trash' !== $old_status ) {
-				$old_status = 'pending';
+				$old_status = OrderStatus::PENDING;
 			}
 		}
 

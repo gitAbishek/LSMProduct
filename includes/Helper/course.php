@@ -10,6 +10,7 @@
 
 use Masteriyo\Constants;
 use Masteriyo\Activation;
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Models\CourseCategory;
 use Masteriyo\Query\UserCourseQuery;
 
@@ -81,7 +82,7 @@ function masteriyo_can_start_course( $course, $user = null ) {
 
 			if ( $user_course ) {
 				$order            = $user_course->get_order();
-				$can_start_course = $order ? 'completed' === $order->get_status() : false;
+				$can_start_course = $order ? OrderStatus::COMPLETED === $order->get_status() : false;
 			}
 		}
 	}

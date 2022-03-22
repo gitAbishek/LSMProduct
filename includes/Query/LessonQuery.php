@@ -9,6 +9,7 @@
 
 namespace Masteriyo\Query;
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Abstracts\ObjectQuery;
 
 defined( 'ABSPATH' ) || exit;
@@ -32,7 +33,7 @@ class LessonQuery extends ObjectQuery {
 				'slug'                => '',
 				'date_created'        => null,
 				'date_modified'       => null,
-				'status'              => array( 'draft', 'pending', 'publish', 'ongoing', 'completed' ),
+				'status'              => array( PostStatus::DRAFT, PostStatus::PENDING, PostStatus::PVT, PostStatus::PUBLISH ),
 				'menu_order'          => '',
 				'description'         => '',
 				'short_description'   => '',

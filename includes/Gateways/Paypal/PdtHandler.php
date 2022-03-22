@@ -10,6 +10,7 @@ namespace Masteriyo\Gateways\Paypal;
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Constants;
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Gateways\Paypal\Response;
 
 /**
@@ -112,7 +113,7 @@ class PdtHandler extends Response {
 			$order->add_meta_data( '_paypal_status', $status );
 			$order->set_transaction_id( $transaction );
 
-			if ( 'completed' === $status ) {
+			if ( OrderStatus::COMPLETED === $status ) {
 				if ( number_format( $order->get_total(), 2, '.', '' ) !== number_format( $amount, 2, '.', '' ) ) {
 					Paypal::log( 'Payment error: Amounts do not match (amt ' . $amount . ')', 'error' );
 					/* translators: 1: Payment amount */

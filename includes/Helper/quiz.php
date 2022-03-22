@@ -8,6 +8,8 @@
  * @version 1.0.0
  */
 
+use Masteriyo\Enums\PostStatus;
+
 /**
  * Get quiz question.
  *
@@ -22,7 +24,7 @@ function masteriyo_get_quiz_questions( $quiz_id, $by ) {
 	$args = array(
 		'post_type'     => 'mto-question',
 		'post_per_page' => -1,
-		'post_status'   => 'publish',
+		'post_status'   => PostStatus::PUBLISH,
 	);
 
 	switch ( $by ) {

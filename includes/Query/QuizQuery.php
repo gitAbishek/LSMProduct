@@ -9,6 +9,7 @@
 
 namespace Masteriyo\Query;
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Abstracts\ObjectQuery;
 
 defined( 'ABSPATH' ) || exit;
@@ -19,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class QuizQuery extends ObjectQuery {
 
 	/**
-	 * Valid query vars for quizes.
+	 * Valid query vars for quizzes.
 	 *
 	 * @since 1.0.0
 	 *
@@ -32,7 +33,7 @@ class QuizQuery extends ObjectQuery {
 				'slug'          => '',
 				'date_created'  => null,
 				'date_modified' => null,
-				'status'        => array( 'draft', 'pending', 'private', 'publish' ),
+				'status'        => array( PostStatus::DRAFT, PostStatus::PENDING, PostStatus::PVT, PostStatus::PUBLISH ),
 				'parent_id'     => '',
 				'course_id'     => '',
 			)

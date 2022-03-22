@@ -6,6 +6,7 @@
  * @since 1.0.0
  */
 
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\UserCourseQuery;
 
@@ -537,7 +538,7 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 
 		$notes                 = $order->get_customer_order_notes();
 		$order_items           = $order->get_items( 'course' );
-		$show_purchase_note    = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( 'completed', 'processing' ) ) );
+		$show_purchase_note    = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( OrderStatus::COMPLETED, OrderStatus::PROCESSING ) ) );
 		$show_customer_details = masteriyo_is_current_user_admin() || ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() );
 
 		masteriyo_get_template(

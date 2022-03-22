@@ -10,6 +10,7 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Question;
 
 /**
@@ -64,7 +65,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'masteriyo_new_question_data',
 				array(
 					'post_type'     => 'mto-question',
-					'post_status'   => $question->get_status() ? $question->get_status() : 'publish',
+					'post_status'   => $question->get_status() ? $question->get_status() : PostStatus::PUBLISH,
 					'post_author'   => $question->get_author_id( 'edit' ),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
 					'post_content'  => wp_json_encode( $question->get_answers() ),
@@ -155,7 +156,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'post_content' => wp_json_encode( $question->get_answers( 'edit' ) ),
 				'post_excerpt' => $question->get_description( 'edit' ),
 				'post_title'   => $question->get_name( 'edit' ),
-				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : 'publish',
+				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : PostStatus::PUBLISH,
 				'menu_order'   => $question->get_menu_order( 'edit' ),
 				'post_name'    => '',
 				'post_parent'  => $question->get_parent_id( 'edit' ),

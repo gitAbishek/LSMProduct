@@ -11,6 +11,7 @@ namespace Masteriyo\Gateways\Paypal;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Gateways\Paypal\Response;
 
 /**
@@ -154,7 +155,7 @@ class IpnHandler extends Response {
 			Paypal::log( 'Payment error: Currencies do not match (sent "' . $order->get_currency() . '" | returned "' . $currency . '")' );
 
 			/* translators: %s: currency code. */
-			$order->update_status( 'on-hold', sprintf( __( 'Validation error: PayPal currencies do not match (code %s).', 'masteriyo' ), $currency ) );
+			$order->update_status( OrderStatus::ON_HOLD, sprintf( __( 'Validation error: PayPal currencies do not match (code %s).', 'masteriyo' ), $currency ) );
 			exit;
 		}
 	}
@@ -172,7 +173,7 @@ class IpnHandler extends Response {
 			Paypal::log( 'Payment error: Amounts do not match (gross ' . $amount . ')' );
 
 			/* translators: %s: Amount. */
-			$order->update_status( 'on-hold', sprintf( __( 'Validation error: PayPal amounts do not match (gross %s).', 'masteriyo' ), $amount ) );
+			$order->update_status( OrderStatus::ON_HOLD, sprintf( __( 'Validation error: PayPal amounts do not match (gross %s).', 'masteriyo' ), $amount ) );
 			exit;
 		}
 	}
@@ -191,7 +192,7 @@ class IpnHandler extends Response {
 			Paypal::log( "IPN Response is for another account: {$receiver_email}. Your email is {$this->receiver_email}" );
 
 			/* translators: %s: email address . */
-			$order->update_status( 'on-hold', sprintf( __( 'Validation error: PayPal IPN response from a different email address (%s).', 'masteriyo' ), $receiver_email ) );
+			$order->update_status( OrderStatus::ON_HOLD, sprintf( __( 'Validation error: PayPal IPN response from a different email address (%s).', 'masteriyo' ), $receiver_email ) );
 			exit;
 		}
 	}
@@ -216,8 +217,8 @@ class IpnHandler extends Response {
 		$this->validate_receiver_email( $order, $posted['receiver_email'] );
 		$this->save_paypal_meta_data( $order, $posted );
 
-		if ( 'completed' === $posted['payment_status'] ) {
-			if ( $order->has_status( 'cancelled' ) ) {
+		if ( OrderStatus::COMPLETED === $posted['payment_status'] ) {
+			if ( $order->has_status( OrderStatus::CANCELLED ) ) {
 				$this->payment_status_paid_cancelled_order( $order, $posted );
 			}
 
@@ -258,7 +259,7 @@ class IpnHandler extends Response {
 	 */
 	protected function payment_status_failed( $order, $posted ) {
 		/* translators: %s: payment status. */
-		$order->update_status( 'failed', sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), masteriyo_clean( $posted['payment_status'] ) ) );
+		$order->update_status( OrderStatus::FAILED, sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), masteriyo_clean( $posted['payment_status'] ) ) );
 	}
 
 	/**
@@ -327,7 +328,7 @@ class IpnHandler extends Response {
 		if ( $order->get_total() === masteriyo_format_decimal( $posted['mc_gross'] * -1, masteriyo_get_price_decimals() ) ) {
 
 			/* translators: %s: payment status. */
-			$order->update_status( 'refunded', sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), strtolower( $posted['payment_status'] ) ) );
+			$order->update_status( OrderStatus::REFUNDED, sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), strtolower( $posted['payment_status'] ) ) );
 
 			$this->send_ipn_email_notification(
 			/* translators: %s: order link. */
@@ -348,7 +349,7 @@ class IpnHandler extends Response {
 	 */
 	protected function payment_status_reversed( $order, $posted ) {
 		/* translators: %s: payment status. */
-		$order->update_status( 'on-hold', sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), masteriyo_clean( $posted['payment_status'] ) ) );
+		$order->update_status( OrderStatus::ON_HOLD, sprintf( __( 'Payment %s via IPN.', 'masteriyo' ), masteriyo_clean( $posted['payment_status'] ) ) );
 
 		$this->send_ipn_email_notification(
 		/* translators: %s: order link. */

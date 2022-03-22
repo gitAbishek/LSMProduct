@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Exceptions\RestException;
 use Masteriyo\ModelException;
@@ -429,8 +430,8 @@ class OrdersController extends PostsController {
 				'status'               => array(
 					'description' => __( 'Order status', 'masteriyo' ),
 					'type'        => 'string',
-					'default'     => 'pending',
-					'enum'        => array_keys( masteriyo_get_order_statuses() ),
+					'default'     => OrderStatus::PENDING,
+					'enum'        => OrderStatus::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'total'                => array(
@@ -734,7 +735,7 @@ class OrdersController extends PostsController {
 
 		// Set set paid.
 		if ( $request['set_paid'] ) {
-			$order->set_status( 'completed' );
+			$order->set_status( OrderStatus::COMPLETED );
 		}
 
 		// Add course items.

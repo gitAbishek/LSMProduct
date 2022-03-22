@@ -7,6 +7,8 @@
 
 namespace Masteriyo\Gateways\Paypal;
 
+use Masteriyo\Enums\OrderStatus;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -69,7 +71,7 @@ abstract class Response {
 	 * @param  string   $note Payment note.
 	 */
 	protected function payment_complete( $order, $txn_id = '', $note = '' ) {
-		if ( ! $order->has_status( array( 'processing', 'completed' ) ) ) {
+		if ( ! $order->has_status( array( OrderStatus::PROCESSING, OrderStatus::COMPLETED ) ) ) {
 			$order->add_order_note( $note );
 			$order->payment_complete( $txn_id );
 
@@ -88,7 +90,7 @@ abstract class Response {
 	 * @param  string   $reason Reason why the payment is on hold.
 	 */
 	protected function payment_on_hold( $order, $reason = '' ) {
-		$order->update_status( 'on-hold', $reason );
+		$order->update_status( OrderStatus::ON_HOLD, $reason );
 
 		if ( masteriyo( 'cart' ) ) {
 			masteriyo( 'cart' )->clear();

@@ -11,6 +11,7 @@
 namespace Masteriyo;
 
 use Masteriyo\Cart\Cart;
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Query\UserCourseQuery;
 
 use Masteriyo\Session\Session;
@@ -575,7 +576,7 @@ class Checkout {
 			 * different items or cost, create a new order. We use a hash to
 			 * detect changes which is based on cart items + order total.
 			 */
-			if ( $order && $order->has_cart_hash( $cart_hash ) && $order->has_status( array( 'pending', 'failed' ) ) ) {
+			if ( $order && $order->has_cart_hash( $cart_hash ) && $order->has_status( array( OrderStatus::PENDING, OrderStatus::FAILED ) ) ) {
 				// Action for 3rd parties.
 				do_action( 'masteriyo_resume_order', $order_id );
 

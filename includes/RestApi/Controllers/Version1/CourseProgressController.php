@@ -11,10 +11,12 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Models\Order\OrderItem;
 use Masteriyo\Exceptions\RestException;
+use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\CourseProgressItemQuery;
 
@@ -196,7 +198,7 @@ class CourseProgressController extends CrudController {
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
 			'validate_callback' => 'rest_validate_request_arg',
-			'enum'              => masteriyo_get_user_activity_statuses(),
+			'enum'              => CourseProgressStatus::all(),
 		);
 
 		$params['date_start'] = array(
@@ -311,7 +313,7 @@ class CourseProgressController extends CrudController {
 		$summary = $this->get_course_progress_summary( $course_progress );
 
 		if ( 0 === $summary['total']['pending'] ) {
-			$course_progress->set_status( 'completed' );
+			$course_progress->set_status( CourseProgressStatus::COMPLETED );
 		}
 
 		$data = array(
@@ -408,7 +410,7 @@ class CourseProgressController extends CrudController {
 				'status'       => array(
 					'description' => __( 'Course progress status.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => masteriyo_get_user_activity_statuses(),
+					'enum'        => CourseProgressStatus::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'started_at'   => array(
@@ -1181,7 +1183,7 @@ class CourseProgressController extends CrudController {
 
 			$object->set_modified_at( current_time( 'mysql' ) );
 
-			if ( 'completed' === $object->get_status() ) {
+			if ( CourseProgressStatus::COMPLETED === $object->get_status() ) {
 				$object->set_completed_at( current_time( 'mysql' ) );
 			}
 

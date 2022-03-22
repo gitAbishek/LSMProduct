@@ -12,6 +12,7 @@ namespace Masteriyo\Repository;
 use Masteriyo\Helper\Number;
 use Masteriyo\Models\Course;
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Query\CourseProgressQuery;
@@ -72,7 +73,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'masteriyo_new_course_data',
 				array(
 					'post_type'      => 'mto-course',
-					'post_status'    => $course->get_status() ? $course->get_status() : 'publish',
+					'post_status'    => $course->get_status() ? $course->get_status() : PostStatus::PUBLISH,
 					'post_author'    => $course->get_author_id( 'edit' ),
 					'post_title'     => $course->get_name() ? $course->get_name() : __( 'Course', 'masteriyo' ),
 					'post_content'   => $course->get_description(),
@@ -180,7 +181,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'post_title'     => $course->get_name( 'edit' ),
 				'post_parent'    => $course->get_parent_id( 'edit' ),
 				'comment_status' => $course->get_reviews_allowed( 'edit' ) ? 'open' : 'closed',
-				'post_status'    => $course->get_status( 'edit' ) ? $course->get_status( 'edit' ) : 'publish',
+				'post_status'    => $course->get_status( 'edit' ) ? $course->get_status( 'edit' ) : PostStatus::PUBLISH,
 				'menu_order'     => $course->get_menu_order( 'edit' ),
 				'post_password'  => $course->get_post_password( 'edit' ),
 				'post_name'      => $course->get_slug( 'edit' ),
@@ -246,7 +247,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$query = new \WP_Query(
 			array(
 				'post_type'      => array( 'mto-lesson', 'mto-question', 'mto-quiz', 'mto-section' ),
-				'post_status'    => array( 'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash' ),
+				'post_status'    => PostStatus::all(),
 				'nopaging'       => true,
 				'posts_per_page' => -1,
 				'meta_query'     => array(

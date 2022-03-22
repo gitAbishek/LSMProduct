@@ -9,6 +9,8 @@
 
 namespace Masteriyo\Emails;
 
+use Masteriyo\Enums\OrderStatus;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -63,9 +65,9 @@ class EmailHooks {
 	 */
 	public static function trigger_order_status_change_email( $id, $old_status, $new_status ) {
 		$email_handlers = array(
-			'cancelled' => 'email.order-cancelled',
-			'completed' => 'email.order-completed',
-			'on-hold'   => 'email.order-onhold',
+			OrderStatus::CANCELLED => 'email.order-cancelled',
+			OrderStatus::COMPLETED => 'email.order-completed',
+			OrderStatus::ON_HOLD   => 'email.order-onhold',
 		);
 
 		if ( ! isset( $email_handlers[ $new_status ] ) ) {

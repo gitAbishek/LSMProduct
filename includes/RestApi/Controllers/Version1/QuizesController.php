@@ -7,6 +7,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 use Masteriyo\RestApi\Controllers\Version1\QuestionsController;
@@ -1043,7 +1044,7 @@ class QuizesController extends PostsController {
 				'status'                     => array(
 					'description' => __( 'Quiz status (post status).', 'masteriyo' ),
 					'type'        => 'string',
-					'default'     => 'publish',
+					'default'     => PostStatus::PUBLISH,
 					'enum'        => array_merge( array_keys( get_post_statuses() ), array( 'future' ) ),
 					'context'     => array( 'view', 'edit' ),
 				),

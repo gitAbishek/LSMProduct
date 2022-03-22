@@ -16,6 +16,7 @@ use Masteriyo\Models\Order;
 use Masteriyo\Database\Model;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
+use Masteriyo\Enums\OrderStatus;
 
 /**
  * OrderRepository class.
@@ -83,7 +84,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 				'masteriyo_new_order_data',
 				array(
 					'post_type'     => 'mto-order',
-					'post_status'   => $order->get_status() ? $order->get_status() : 'pending',
+					'post_status'   => $order->get_status() ? $order->get_status() : OrderStatus::PENDING,
 					'post_author'   => 1,
 					'post_title'    => $this->get_order_title(),
 					'post_password' => $this->get_order_key( $order ),

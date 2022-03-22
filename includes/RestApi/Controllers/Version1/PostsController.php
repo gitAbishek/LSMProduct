@@ -8,6 +8,8 @@
 
 namespace Masteriyo\RestApi\Controllers\Version1;
 
+use Masteriyo\Enums\PostStatus;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -235,7 +237,7 @@ abstract class PostsController extends CrudController {
 		$query = new \WP_Query(
 			array(
 				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
-				'post_status'    => 'publish',
+				'post_status'    => PostStatus::PUBLISH,
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',
 				'meta_compare'   => '=',

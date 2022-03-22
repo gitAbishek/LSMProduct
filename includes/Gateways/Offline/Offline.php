@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) || exit;
 use Masteriyo\Constants;
 use Masteriyo\Abstracts\PaymentGateway;
 use Masteriyo\Contracts\PaymentGateway as PaymentGatewayInterface;
+use Masteriyo\Enums\OrderStatus;
 
 /**
  * Cash on Delivery Gateway.
@@ -75,7 +76,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 
 		if ( $order->get_total() > 0 ) {
 			// Mark as processing or on-hold (payment won't be taken until send).
-			$status = apply_filters( 'masteriyo_offline_process_payment_order_status', 'on-hold', $order );
+			$status = apply_filters( 'masteriyo_offline_process_payment_order_status', OrderStatus::ON_HOLD, $order );
 			$order->update_status( $status, __( 'Payment to be made offline.', 'masteriyo' ) );
 		} else {
 			$order->payment_complete();
@@ -114,7 +115,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	 */
 	public function change_payment_complete_order_status( $status, $order_id = 0, $order = false ) {
 		if ( $order && 'offline' === $order->get_payment_method() ) {
-			$status = 'completed';
+			$status = OrderStatus::COMPLETED;
 		}
 
 		return $status;

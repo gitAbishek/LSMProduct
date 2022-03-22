@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
 use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Exceptions\RestException;
-use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\CourseProgressItemQuery;
 
 /**
@@ -832,13 +831,13 @@ class CourseProgressItemsController extends CrudController {
 			}
 
 			if ( ! $progress_item->get_started_at() ) {
-				$progress_item->set_started_at( current_time( 'mysql' ) );
+				$progress_item->set_started_at( current_time( 'mysql' ), true );
 			}
 
-			$progress_item->set_modified_at( current_time( 'mysql' ) );
+			$progress_item->set_modified_at( current_time( 'mysql' ), true );
 
 			if ( $progress_item->get_completed() ) {
-				$progress_item->set_completed_at( current_time( 'mysql' ) );
+				$progress_item->set_completed_at( current_time( 'mysql' ), true );
 			} else {
 				$progress_item->set_completed_at( null );
 			}

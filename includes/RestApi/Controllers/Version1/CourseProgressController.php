@@ -1178,13 +1178,13 @@ class CourseProgressController extends CrudController {
 			}
 
 			if ( ! $object->get_started_at() ) {
-				$object->set_started_at( current_time( 'mysql' ) );
+				$object->set_started_at( current_time( 'mysql' ), true );
 			}
 
-			$object->set_modified_at( current_time( 'mysql' ) );
+			$object->set_modified_at( current_time( 'mysql' ), true );
 
 			if ( CourseProgressStatus::COMPLETED === $object->get_status() ) {
-				$object->set_completed_at( current_time( 'mysql' ) );
+				$object->set_completed_at( current_time( 'mysql' ), true );
 			}
 
 			$course_progress = $session->get( 'course_progress', array() );

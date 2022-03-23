@@ -12,6 +12,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Helper\Permission;
+use WP_HTTP_Response;
 
 /**
  * UsersController class.
@@ -168,6 +169,21 @@ class UsersController extends PostsController {
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)
 		);
+
+		/**
+		 * @since x.x.x
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/logout',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'logout' ),
+					'permission_callback' => 'is_user_logged_in',
+				),
+			)
+		);
 	}
 
 	/**
@@ -315,6 +331,26 @@ class UsersController extends PostsController {
 				'current_page' => $query_args['paged'],
 				'per_page'     => $query_args['number'],
 			),
+		);
+	}
+
+	/**
+	 * Logout User.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return WP_REST_Response Response object on success.
+	 */
+	public function logout() {
+		$url      = masteriyo_get_page_permalink( 'account', home_url() );
+		$redirect = apply_filters( 'masteriyo_redirect_logout_url', $url );
+
+		wp_logout();
+
+		return new WP_HTTP_Response(
+			array(
+				'redirect_url' => $redirect,
+			)
 		);
 	}
 

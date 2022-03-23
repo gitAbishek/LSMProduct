@@ -1,5 +1,13 @@
 import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
 	Avatar,
+	Button,
+	ButtonGroup,
 	Divider,
 	Heading,
 	Link,
@@ -7,9 +15,10 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	BiBook,
 	BiBookAlt,
@@ -31,7 +40,11 @@ import routes from '../constants/routes';
 const Sidebar = () => {
 	const location = useLocation();
 	const userAPI = new API(urls.currentUser);
+	const userLogoutAPI = new API(urls.userLogout);
 	const userQuery = useQuery<UserSchema>('userProfile', () => userAPI.get());
+	const { onClose, onOpen, isOpen } = useDisclosure();
+	const [isLogoutLoading, setIsLogoutLoading] = useState(false);
+	const cancelRef = React.useRef<any>();
 	const navLinkStyles = {
 		borderRight: '2px',
 		d: 'block',
@@ -47,6 +60,15 @@ const Sidebar = () => {
 		borderColor: 'blue.500',
 		color: 'blue.500',
 	};
+
+	const redirectLogoutUser = () => {
+		setIsLogoutLoading(true);
+		userLogoutAPI.get().then((data: { redirect_url: string }) => {
+			setIsLogoutLoading(false);
+			window.location.href = data?.redirect_url;
+		});
+	};
+
 	if (userQuery.isSuccess) {
 		return (
 			<List
@@ -142,11 +164,41 @@ const Sidebar = () => {
 				</ListItem>
 
 				<ListItem>
-					<Link sx={navLinkStyles} href={localized.urls.logout}>
+					<Link sx={navLinkStyles} onClick={onOpen}>
 						<ListIcon fontSize="md" mr="3" as={BiLogOut} />
 						{__('Logout', 'masteriyo')}
 					</Link>
 				</ListItem>
+
+				<AlertDialog
+					isOpen={isOpen}
+					onClose={onClose}
+					isCentered
+					leastDestructiveRef={cancelRef}>
+					<AlertDialogOverlay>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								{__('Log Out', 'masteriyo')} {name}
+							</AlertDialogHeader>
+							<AlertDialogBody>
+								{__('Do you really want to logout?', 'masteriyo')}
+							</AlertDialogBody>
+							<AlertDialogFooter>
+								<ButtonGroup>
+									<Button onClick={onClose} variant="outline" ref={cancelRef}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+									<Button
+										colorScheme="red"
+										onClick={redirectLogoutUser}
+										isLoading={isLogoutLoading}>
+										{__('Logout', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialogOverlay>
+				</AlertDialog>
 			</List>
 		);
 	}

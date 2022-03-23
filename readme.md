@@ -56,9 +56,9 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 - Enhancement - Getting started steps label orientation to vertical.
 - Enhancement - Replace WordPress logout with custom logout process.
 - Fix - Enroll button for guest users not working properly.
-- Fix: Session key duplication.
-- Fix: `__wakeup()` should be public warning message.
-- Fix: Course completion for guest users.
+- Fix - Session key duplication.
+- Fix - `__wakeup()` should be public warning message.
+- Fix - Course completion for guest users.
 
 ### 1.4.5 - 16-03-2022
 

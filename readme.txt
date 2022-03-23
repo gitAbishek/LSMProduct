@@ -205,9 +205,9 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 - Enhancement - Getting started steps label orientation to vertical.
 - Enhancement - Replace WordPress logout with custom logout process.
 - Fix - Enroll button for guest users not working properly.
-- Fix: Session key duplication.
-- Fix: `__wakeup()` should be public warning message.
-- Fix: Course completion for guest users.
+- Fix - Session key duplication.
+- Fix - `__wakeup()` should be public warning message.
+- Fix - Course completion for guest users.
 
 = 1.4.5 - 16-03-2022 =
 - Enhancement - Display proper error message on the backend while 505 error.

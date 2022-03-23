@@ -2,7 +2,7 @@
 /**
  * Course progress status enums.
  *
- * @since x.x.x
+ * @since 1.4.6
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course progress status enum class.
  *
- * @since x.x.x
+ * @since 1.4.6
  */
 class CourseProgressStatus {
 	/**
 	 * Course progress started status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const STARTED = 'started';
@@ -27,7 +27,7 @@ class CourseProgressStatus {
 	/**
 	 * Course progress progress status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PROGRESS = 'progress';
@@ -35,7 +35,7 @@ class CourseProgressStatus {
 	/**
 	 * Course progress completed status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const COMPLETED = 'completed';
@@ -43,7 +43,7 @@ class CourseProgressStatus {
 	/**
 	 * Return course progress statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 *
 	 * @return array
 	 */

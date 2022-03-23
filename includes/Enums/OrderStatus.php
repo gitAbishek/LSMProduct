@@ -2,7 +2,7 @@
 /**
  * Order status enums.
  *
- * @since x.x.x
+ * @since 1.4.6
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Order status enum class.
  *
- * @since x.x.x
+ * @since 1.4.6
  */
 class OrderStatus extends PostStatus {
 	/**
 	 * Order processing status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PROCESSING = 'processing';
@@ -27,7 +27,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order pending status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PENDING = 'pending';
@@ -35,7 +35,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order on-hold status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const ON_HOLD = 'on-hold';
@@ -43,7 +43,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order completed status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const COMPLETED = 'completed';
@@ -51,7 +51,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order masteriyo cancelled status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const CANCELLED = 'cancelled';
@@ -59,7 +59,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order refunded status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const REFUNDED = 'refunded';
@@ -67,7 +67,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Order failed status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const FAILED = 'failed';
@@ -75,7 +75,7 @@ class OrderStatus extends PostStatus {
 	/**
 	 * Return all order statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 *
 	 * @return array
 	 */

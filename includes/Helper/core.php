@@ -2721,7 +2721,7 @@ function masteriyo_get_settings() {
  * Get user activity statuses.
  *
  * @since 1.0.0
- * @deprecated x.x.x
+ * @deprecated 1.4.6
  *
  * @return array
  */

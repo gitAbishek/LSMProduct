@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 5.9.2
 Requires PHP: 7.0
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,14 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.4.6 - 23-03-2022 =
+- Enhancement - Getting started steps label orientation to vertical.
+- Enhancement - Replace WordPress logout with custom logout process.
+- Fix - Enroll button for guest users not working properly.
+- Fix: Session key duplication.
+- Fix: `__wakeup()` should be public warning message.
+- Fix: Course completion for guest users.
 
 = 1.4.5 - 16-03-2022 =
 - Enhancement - Display proper error message on the backend while 505 error.

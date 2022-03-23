@@ -171,7 +171,7 @@ class UsersController extends PostsController {
 		);
 
 		/**
-		 * @since x.x.x
+		 * @since 1.4.6
 		 */
 		register_rest_route(
 			$this->namespace,
@@ -337,7 +337,7 @@ class UsersController extends PostsController {
 	/**
 	 * Logout User.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 *
 	 * @return WP_REST_Response Response object on success.
 	 */
@@ -348,7 +348,7 @@ class UsersController extends PostsController {
 		 * Filter redirect logout url.
 		 * Redirect url will be home page url if account page url is empty.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.6
 		 *
 		 * @param string $url Redirect url.
 		 */

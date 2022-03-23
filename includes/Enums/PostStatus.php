@@ -2,7 +2,7 @@
 /**
  * Post status enums.
  *
- * @since x.x.x
+ * @since 1.4.6
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Post status enum class.
  *
- * @since x.x.x
+ * @since 1.4.6
  */
 class PostStatus {
 	/**
 	 * Post any status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const ANY = 'any';
@@ -27,7 +27,7 @@ class PostStatus {
 	/**
 	 * Post publish status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PUBLISH = 'publish';
@@ -35,7 +35,7 @@ class PostStatus {
 	/**
 	 * Post future status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const FUTURE = 'future';
@@ -43,7 +43,7 @@ class PostStatus {
 	/**
 	 * Post masteriyo draft status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const DRAFT = 'draft';
@@ -51,7 +51,7 @@ class PostStatus {
 	/**
 	 * Post pending status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PENDING = 'pending';
@@ -59,7 +59,7 @@ class PostStatus {
 	/**
 	 * Post private status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const PVT = 'private';
@@ -67,7 +67,7 @@ class PostStatus {
 	/**
 	 * Post trash status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const TRASH = 'trash';
@@ -75,7 +75,7 @@ class PostStatus {
 	/**
 	 * Post auto draft status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const AUTO_DRAFT = 'auto-draft';
@@ -83,7 +83,7 @@ class PostStatus {
 	/**
 	 * Post inherit status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 * @var string
 	 */
 	const INHERIT = 'inherit';
@@ -91,7 +91,7 @@ class PostStatus {
 	/**
 	 * Return all the post statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.6
 	 *
 	 * @return array
 	 */

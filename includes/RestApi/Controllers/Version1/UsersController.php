@@ -342,7 +342,16 @@ class UsersController extends PostsController {
 	 * @return WP_REST_Response Response object on success.
 	 */
 	public function logout() {
-		$url      = masteriyo_get_page_permalink( 'account', home_url() );
+		$url = masteriyo_get_page_permalink( 'account', home_url() );
+
+		/**
+		 * Filter redirect logout url.
+		 * Redirect url will be home page url if account page url is empty.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string $url Redirect url.
+		 */
 		$redirect = apply_filters( 'masteriyo_redirect_logout_url', $url );
 
 		wp_logout();

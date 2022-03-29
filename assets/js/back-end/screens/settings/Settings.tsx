@@ -125,38 +125,38 @@ const Settings = () => {
 									<TabPanels>
 										<TabPanel sx={tabPanelStyles}>
 											<GeneralSettings
-												generalData={settingsQuery.data?.general}
+												generalData={settingsQuery?.data?.general}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<CourseArchiveSettings
-												courseArchiveData={settingsQuery.data?.course_archive}
+												courseArchiveData={settingsQuery?.data?.course_archive}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<SingleCourseSettings
-												singleCourseData={settingsQuery.data?.single_course}
+												singleCourseData={settingsQuery?.data?.single_course}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<LearningPageSettings
-												learningPageData={settingsQuery.data?.learn_page}
+												learningPageData={settingsQuery?.data?.learn_page}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<PaymentsSettings
-												paymentsData={settingsQuery.data?.payments}
+												paymentsData={settingsQuery?.data?.payments}
 											/>
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
-											<QuizSettings quizData={settingsQuery.data?.quiz} />
+											<QuizSettings quizData={settingsQuery?.data?.quiz} />
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
-											<EmailSetttings emailData={settingsQuery.data?.emails} />
+											<EmailSetttings emailData={settingsQuery?.data?.emails} />
 										</TabPanel>
 										<TabPanel sx={tabPanelStyles}>
 											<AdvancedSettings
-												advanceData={settingsQuery.data?.advance}
+												advanceData={settingsQuery?.data?.advance}
 											/>
 										</TabPanel>
 									</TabPanels>

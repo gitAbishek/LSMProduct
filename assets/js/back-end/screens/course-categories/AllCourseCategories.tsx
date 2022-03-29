@@ -32,6 +32,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
 import API from '../../utils/api';
+import { isEmpty } from '../../utils/utils';
 import CategoriesFilter from './components/CategoriesFilter';
 import CategoryRow from './components/CategoryRow';
 
@@ -127,19 +128,19 @@ const AllCourseCategories = () => {
 									<Tbody>
 										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 										{categoriesQuery.isSuccess &&
-										categoriesQuery?.data?.data.length === 0 ? (
+										isEmpty(categoriesQuery?.data?.data.length) ? (
 											<EmptyInfo
 												message={__('No categories found.', 'masteriyo')}
 											/>
 										) : (
-											categoriesQuery?.data?.data.map((cat: any) => (
+											categoriesQuery?.data?.data?.map((cat: any) => (
 												<CategoryRow
-													key={cat.id}
-													id={cat.id}
-													name={cat.name}
-													slug={cat.slug}
-													count={cat.count}
-													link={cat.link}
+													key={cat?.id}
+													id={cat?.id}
+													name={cat?.name}
+													slug={cat?.slug}
+													count={cat?.count}
+													link={cat?.link}
 													onDeletePress={onDeletePress}
 												/>
 											))
@@ -150,9 +151,9 @@ const AllCourseCategories = () => {
 						</Stack>
 					</Box>
 					{categoriesQuery.isSuccess &&
-						categoriesQuery?.data?.data.length > 0 && (
+						!isEmpty(categoriesQuery?.data?.data) && (
 							<MasteriyoPagination
-								metaData={categoriesQuery.data.meta}
+								metaData={categoriesQuery?.data?.meta}
 								setFilterParams={setFilterParams}
 								perPageText={__('Categories Per Page:', 'masteriyo')}
 							/>

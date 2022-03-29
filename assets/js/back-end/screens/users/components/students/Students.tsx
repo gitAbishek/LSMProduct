@@ -11,6 +11,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { SkeletonStudentsList } from '../../../../skeleton';
 import API from '../../../../utils/api';
+import { isEmpty } from '../../../../utils/utils';
 import UserHeader from '../../UserHeader';
 import StudentList from './StudentList';
 import StudentsFilter from './StudentsFilter';
@@ -57,20 +58,20 @@ const Students: React.FC = () => {
 							</Thead>
 							<Tbody>
 								{usersQuery.isLoading && <SkeletonStudentsList />}
-								{usersQuery.isSuccess && usersQuery?.data?.data.length === 0 ? (
+								{usersQuery.isSuccess && isEmpty(usersQuery?.data?.data) ? (
 									<EmptyInfo message={__('No students found.', 'masteriyo')} />
 								) : (
-									usersQuery?.data?.data.map((user: any) => (
-										<StudentList key={user.id} data={user} />
+									usersQuery?.data?.data?.map((user: any) => (
+										<StudentList key={user?.id} data={user} />
 									))
 								)}
 							</Tbody>
 						</Table>
 					</Stack>
 				</Box>
-				{usersQuery.isSuccess && usersQuery?.data?.data.length > 0 && (
+				{usersQuery.isSuccess && !isEmpty(usersQuery?.data?.data) && (
 					<MasteriyoPagination
-						metaData={usersQuery.data.meta}
+						metaData={usersQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Students Per Page:', 'masteriyo')}
 						extraFilterParams={{ role: 'masteriyo_student' }}

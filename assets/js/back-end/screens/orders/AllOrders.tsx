@@ -21,6 +21,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
+import { isEmpty } from '../../utils/utils';
 import NoOrdersNotice from './components/NoOrdersNotice';
 import OrderRow from './components/OrderRow';
 import OrdersFilter from './components/OrdersFilter';
@@ -81,12 +82,11 @@ const AllOrders = () => {
 								</Thead>
 								<Tbody>
 									{ordersQuery.isLoading && <SkeletonOrdersList />}
-									{ordersQuery.isSuccess &&
-									ordersQuery?.data?.data.length === 0 ? (
+									{ordersQuery.isSuccess && isEmpty(ordersQuery?.data?.data) ? (
 										<NoOrdersNotice />
 									) : (
-										ordersQuery?.data?.data.map((order: any) => (
-											<OrderRow key={order.id} data={order} />
+										ordersQuery?.data?.data?.map((order: any) => (
+											<OrderRow key={order?.id} data={order} />
 										))
 									)}
 								</Tbody>
@@ -94,9 +94,9 @@ const AllOrders = () => {
 						</Stack>
 					</Stack>
 				</Box>
-				{ordersQuery.isSuccess && ordersQuery?.data?.data.length > 0 && (
+				{ordersQuery.isSuccess && !isEmpty(ordersQuery?.data?.data) && (
 					<MasteriyoPagination
-						metaData={ordersQuery.data.meta}
+						metaData={ordersQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Orders Per Page:', 'masteriyo')}
 					/>

@@ -21,6 +21,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonQuizAttemptList } from '../../skeleton';
 import API from '../../utils/api';
+import { isEmpty } from '../../utils/utils';
 import QuizAttemptFilter from './components/QuizAttemptFilter';
 import QuizAttemptList from './components/QuizAttemptList';
 
@@ -72,12 +73,12 @@ const AllQuizAttempts: React.FC = () => {
 								<Tbody>
 									{quizAttemptsQuery?.isLoading && <SkeletonQuizAttemptList />}
 									{quizAttemptsQuery?.isSuccess &&
-									quizAttemptsQuery?.data?.data.length === 0 ? (
+									isEmpty(quizAttemptsQuery?.data?.data) ? (
 										<EmptyInfo message="No quiz attempts found." />
 									) : (
 										quizAttemptsQuery?.data?.data?.map((quizAttempt: any) => (
 											<QuizAttemptList
-												key={quizAttempt.id}
+												key={quizAttempt?.id}
 												data={quizAttempt}
 											/>
 										))
@@ -88,9 +89,9 @@ const AllQuizAttempts: React.FC = () => {
 					</Stack>
 				</Box>
 				{quizAttemptsQuery.isSuccess &&
-					quizAttemptsQuery?.data?.data.length > 0 && (
+					!isEmpty(quizAttemptsQuery?.data?.data) && (
 						<MasteriyoPagination
-							metaData={quizAttemptsQuery.data.meta}
+							metaData={quizAttemptsQuery?.data?.meta}
 							setFilterParams={setFilterParams}
 							perPageText="Quiz Attempts Per Page:"
 						/>

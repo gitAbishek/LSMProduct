@@ -11,6 +11,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { SkeletonInstructorsList } from '../../../../skeleton/index';
 import API from '../../../../utils/api';
+import { isEmpty } from '../../../../utils/utils';
 import UserHeader from '../../UserHeader';
 import InstructorList from './InstructorList';
 import InstructorsFilter from './InstructorsFilter';
@@ -56,22 +57,22 @@ const Instructors: React.FC = () => {
 							</Thead>
 							<Tbody>
 								{usersQuery.isLoading && <SkeletonInstructorsList />}
-								{usersQuery.isSuccess && usersQuery?.data?.data.length === 0 ? (
+								{usersQuery.isSuccess && isEmpty(usersQuery?.data?.data) ? (
 									<EmptyInfo
 										message={__('No instructors found.', 'masteriyo')}
 									/>
 								) : (
-									usersQuery?.data?.data.map((user: any) => (
-										<InstructorList key={user.id} data={user} />
+									usersQuery?.data?.data?.map((user: any) => (
+										<InstructorList key={user?.id} data={user} />
 									))
 								)}
 							</Tbody>
 						</Table>
 					</Stack>
 				</Box>
-				{usersQuery.isSuccess && usersQuery?.data?.data.length > 0 && (
+				{usersQuery.isSuccess && !isEmpty(usersQuery?.data?.data) && (
 					<MasteriyoPagination
-						metaData={usersQuery.data.meta}
+						metaData={usersQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Instructors Per Page:', 'masteriyo')}
 						extraFilterParams={{

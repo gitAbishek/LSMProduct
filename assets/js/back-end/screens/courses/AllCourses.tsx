@@ -32,6 +32,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
+import { isEmpty } from '../../utils/utils';
 import CourseFilter from './components/CourseFilter';
 import CourseList from './components/CourseList';
 
@@ -153,25 +154,24 @@ const AllCourses = () => {
 								</Thead>
 								<Tbody>
 									{courseQuery.isLoading && <SkeletonCourseList />}
-									{courseQuery.isSuccess &&
-									courseQuery?.data?.data.length === 0 ? (
+									{courseQuery.isSuccess && isEmpty(courseQuery?.data?.data) ? (
 										<EmptyInfo message={__('No courses found.', 'masteriyo')} />
 									) : (
-										courseQuery?.data?.data.map((course: any) => (
+										courseQuery?.data?.data?.map((course: any) => (
 											<CourseList
-												id={course.id}
-												name={course.name}
-												price={course.price}
-												categories={course.categories}
-												key={course.id}
-												createdOn={course.date_created}
-												permalink={course.permalink}
-												editPostLink={course.edit_post_link}
-												author={course.author}
+												id={course?.id}
+												name={course?.name}
+												price={course?.price}
+												categories={course?.categories}
+												key={course?.id}
+												createdOn={course?.date_created}
+												permalink={course?.permalink}
+												editPostLink={course?.edit_post_link}
+												author={course?.author}
 												onDeletePress={onDeletePress}
 												onTrashPress={onTrashPress}
 												onRestorePress={onRestorePress}
-												status={course.status}
+												status={course?.status}
 											/>
 										))
 									)}
@@ -180,16 +180,16 @@ const AllCourses = () => {
 						</Stack>
 					</Stack>
 				</Box>
-				{courseQuery.isSuccess && courseQuery?.data?.data.length > 0 && (
+				{courseQuery.isSuccess && !isEmpty(courseQuery?.data?.data) && (
 					<MasteriyoPagination
-						metaData={courseQuery.data.meta}
+						metaData={courseQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Courses Per Page:', 'masteriyo')}
 						extraFilterParams={{
-							search: filterParams.search,
-							status: filterParams.status,
-							category: filterParams.category,
-							price_type: filterParams.price,
+							search: filterParams?.search,
+							status: filterParams?.status,
+							category: filterParams?.category,
+							price_type: filterParams?.price,
 						}}
 					/>
 				)}

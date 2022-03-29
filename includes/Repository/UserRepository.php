@@ -47,6 +47,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		'nickname'             => 'nickname',
 		'description'          => 'description',
 		'approved'             => '_approved',
+		'profile_image_id'     => '_profile_image_id',
 
 		// Billing fields.
 		'billing_first_name'   => '_billing_first_name',

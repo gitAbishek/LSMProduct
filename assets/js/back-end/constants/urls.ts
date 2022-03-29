@@ -27,6 +27,7 @@ const urls = {
 	instructors: base + 'users/instructors',
 	myCourses: base + 'users/courses',
 	userLogout: base + 'users/logout',
+	profileImage: base + 'users/account/profile-image',
 };
 
 export default urls;

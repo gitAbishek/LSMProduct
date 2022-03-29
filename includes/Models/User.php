@@ -73,6 +73,7 @@ class User extends Model {
 		'show_admin_bar_front' => true,
 		'locale'               => '',
 		'roles'                => array(),
+		'profile_image_id'     => 0,
 		// Billing details.
 		'billing_first_name'   => '',
 		'billing_last_name'    => '',
@@ -111,6 +112,26 @@ class User extends Model {
 	 */
 	public function get_avatar_url( $args = null ) {
 		return get_avatar_url( $this->get_id(), $args );
+	}
+
+	/**
+	 * Get User's profile image URL.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string
+	 */
+	public function profile_image_url() {
+		$image_id = $this->get_profile_image_id();
+		$post     = get_post( $image_id );
+
+		if ( $post && 'attachment' === $post->post_type ) {
+			$image_url = wp_get_attachment_image_url( $image_id );
+		} else {
+			$image_url = $this->get_avatar_url();
+		}
+
+		return apply_filters( 'masteriyo_profile_image_url', $image_url, $this );
 	}
 
 	/**
@@ -422,6 +443,19 @@ class User extends Model {
 	 */
 	public function get_roles( $context = 'view' ) {
 		return $this->get_prop( 'roles', $context );
+	}
+
+	/**
+	 * Get user's profile_image_id.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 *
+	 * @return string
+	 */
+	public function get_profile_image_id( $context = 'view' ) {
+		return $this->get_prop( 'profile_image_id', $context );
 	}
 
 	/**
@@ -855,6 +889,18 @@ class User extends Model {
 
 		$this->set_prop( 'roles', $roles );
 	}
+
+	/**
+	 * Set user's profile image id.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $profile_image_id User's profile_image_id.
+	 */
+	public function set_profile_image_id( $profile_image_id ) {
+		$this->set_prop( 'profile_image_id', absint( $profile_image_id ) );
+	}
+
 
 	/**
 	 * Set user's billing first name.

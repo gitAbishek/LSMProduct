@@ -557,6 +557,7 @@ export interface UserSchema {
 	show_admin_bar_front: boolean;
 	locale: string;
 	roles: string[];
+	profile_image: { id: number; url: string };
 	billing: {
 		first_name: string;
 		last_name: string;

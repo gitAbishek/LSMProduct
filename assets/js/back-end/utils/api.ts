@@ -73,6 +73,21 @@ class API {
 			method: 'post',
 		}).then((res: any) => res);
 	}
+
+	async updateProfileImage(data: any) {
+		return http({
+			path: this.uri,
+			body: data,
+			method: 'post',
+		}).then((res: any) => res);
+	}
+
+	async deleteProfileImage() {
+		return http({
+			path: this.uri,
+			method: 'delete',
+		}).then((res: any) => res);
+	}
 }
 
 export default API;

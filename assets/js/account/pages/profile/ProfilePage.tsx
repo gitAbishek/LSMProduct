@@ -62,7 +62,7 @@ const ProfilePage = () => {
 					</Link>
 				</Flex>
 				<Stack direction="row" spacing="6" sx={tableStyles}>
-					<Avatar src={data?.avatar_url} size="xl" />
+					<Avatar src={data?.profile_image?.url} size="2xl" />
 
 					<Stack direction="column" spacing="6" flex="1">
 						<Text as="h3" fontSize="4xl" fontWeight="medium">

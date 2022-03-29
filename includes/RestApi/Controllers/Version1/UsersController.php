@@ -184,6 +184,33 @@ class UsersController extends PostsController {
 				),
 			)
 		);
+
+		/**
+		 * @since x.x.x
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/account/profile-image',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::EDITABLE,
+					'callback'            => array( $this, 'update_profile_image' ),
+					'permission_callback' => 'is_user_logged_in',
+					'args'                => array(
+						'context' => $this->get_context_param(
+							array(
+								'default' => 'view',
+							)
+						),
+					),
+				),
+				array(
+					'methods'             => \WP_REST_Server::DELETABLE,
+					'callback'            => array( $this, 'delete_profile_image' ),
+					'permission_callback' => 'is_user_logged_in',
+				),
+			)
+		);
 	}
 
 	/**
@@ -279,6 +306,113 @@ class UsersController extends PostsController {
 			'total'   => (int) $total_users,
 			'pages'   => (int) ceil( $total_users / (int) $query_args['number'] ),
 		);
+	}
+
+	/**
+	 * Update user profile image.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
+	 */
+	public function update_profile_image( $request ) {
+
+		$image_data = $request->get_file_params()['image_data'];
+		$image_size = $image_data['size'];
+		$image_type = $image_data['type'];
+
+		if ( strpos( $image_type, 'image' ) !== false && $image_size ) {
+			if ( ! function_exists( 'wp_handle_sideload' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/file.php';
+			}
+
+			$upload_overrides = array(
+				/*
+				* Tells WordPress to not look for the POST form fields that would
+				* normally be present, default is true, we downloaded the file from
+				* a remote server, so there will be no form fields.
+				*/
+				'test_form' => false,
+			);
+			$uploaded_file    = wp_handle_sideload( $image_data, $upload_overrides );
+
+			if ( isset( $uploaded_file['error'] ) ) {
+				return new \WP_Error(
+					'masteriyo_rest_cannot upload',
+					$uploaded_file['error'],
+					array( 'status' => 400 )
+				);
+			}
+
+			$file_name = $uploaded_file['file']; // Full path to the file.
+			$local_url = $uploaded_file['url']; // URL to the file in the uploads dir.
+
+			$media_id = wp_insert_attachment(
+				array(
+					'guid'           => $file_name,
+					'post_mime_type' => mime_content_type( $file_name ),
+					'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $local_url ) ),
+					'post_content'   => '',
+					'post_status'    => 'inherit',
+				),
+				$file_name,
+				0,
+				true
+			);
+
+			if ( is_wp_error( $media_id ) ) {
+				return $media_id;
+			}
+
+			// wp_generate_attachment_metadata() won't work if you do not include this file
+			require_once ABSPATH . 'wp-admin/includes/image.php';
+
+			// Generate and save the attachment metas into the database
+			wp_update_attachment_metadata( $media_id, wp_generate_attachment_metadata( $media_id, $file_name ) );
+
+			$user = masteriyo_get_current_user();
+
+			// If exist old profile image, delete it.
+			wp_delete_attachment( $user->get_profile_image_id(), true );
+
+			$user->set_profile_image_id( $media_id );
+			$user->save();
+
+			return new \WP_REST_Response(
+				array(
+					'id'  => $user->get_profile_image_id(),
+					'url' => $user->profile_image_url(),
+				)
+			);
+
+		}
+
+	}
+
+	/**
+	 * Delete User's profile image.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return WP_REST_Response Response object on success.
+	 */
+	public function delete_profile_image() {
+		$user     = masteriyo_get_current_user();
+		$image_id = $user->get_profile_image_id();
+
+		wp_delete_attachment( $image_id, true );
+
+		$user->set_profile_image_id( 0 );
+		$user->save();
+
+		return new \WP_REST_Response(
+			array(
+				'id'  => $user->get_profile_image_id(),
+				'url' => $user->profile_image_url(),
+			)
+		);
+
 	}
 
 	/**
@@ -395,6 +529,10 @@ class UsersController extends PostsController {
 			'show_admin_bar_front' => $user->get_show_admin_bar_front( $context ),
 			'locale'               => $user->get_locale( $context ),
 			'roles'                => $user->get_roles( $context ),
+			'profile_image'        => array(
+				'id'  => $user->get_profile_image_id( $context ),
+				'url' => $user->profile_image_url(),
+			),
 			'billing'              => array(
 				'first_name'   => $user->get_billing_first_name( $context ),
 				'last_name'    => $user->get_billing_last_name( $context ),
@@ -596,6 +734,11 @@ class UsersController extends PostsController {
 					'description' => __( 'User role', 'masteriyo' ),
 					'type'        => 'array',
 					'enum'        => masteriyo_get_wp_roles(),
+					'context'     => array( 'view', 'edit' ),
+				),
+				'profile_image'        => array(
+					'description' => __( 'User profile image', 'masteriyo' ),
+					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
 				),
 				'billing'              => array(
@@ -816,6 +959,11 @@ class UsersController extends PostsController {
 		// User's role.
 		if ( isset( $request['role'] ) ) {
 			$user->set_roles( $request['role'] );
+		}
+
+		// User's profile_image.
+		if ( isset( $request['profile_image'] ) ) {
+			$user->set_profile_image( $request['profile_image'] );
 		}
 
 		// User billing details.

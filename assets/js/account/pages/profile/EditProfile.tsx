@@ -1,7 +1,6 @@
 import {
 	Avatar,
 	AvatarBadge,
-	Box,
 	Button,
 	ButtonGroup,
 	Center,
@@ -9,11 +8,15 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Heading,
-	Icon,
 	IconButton,
 	Input,
 	Link,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
 	SimpleGrid,
+	SkeletonCircle,
 	Spacer,
 	Stack,
 	Tab,
@@ -25,9 +28,15 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronLeft, BiCopy, BiEdit } from 'react-icons/bi';
+import {
+	BiChevronLeft,
+	BiCopy,
+	BiEdit,
+	BiTrash,
+	BiUpload,
+} from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
@@ -42,8 +51,10 @@ import PasswordSecurity from './PasswordSecurity';
 const EditProfile: React.FC = () => {
 	const toast = useToast();
 	const userAPI = new API(urls.currentUser);
+	const profileImageAPI = new API(urls.profileImage);
 	const statesAPI = new API(urls.states);
 	const countriesAPI = new API(urls.countries);
+	const inputFile = useRef<any>(null);
 
 	const userDataQuery = useQuery<UserSchema>('userProfile', () =>
 		userAPI.get()
@@ -100,6 +111,51 @@ const EditProfile: React.FC = () => {
 		setValue('billing.last_name', getValues('last_name'));
 	};
 
+	const updateProfileImage = useMutation(
+		(data: any) => {
+			const formData = new FormData();
+			formData.append('image_data', data);
+
+			return profileImageAPI.updateProfileImage(formData);
+		},
+		{
+			onSuccess: () => {
+				userDataQuery.refetch();
+				toast({
+					title: __('Profile Image Updated', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
+				});
+			},
+		}
+	);
+
+	const deleteProfileImage = useMutation(
+		() => profileImageAPI.deleteProfileImage(),
+		{
+			onSuccess: () => {
+				userDataQuery.refetch();
+				toast({
+					title: __('Profile Image Deleted.', 'masteriyo'),
+					isClosable: true,
+					status: 'success',
+				});
+			},
+		}
+	);
+
+	const onUploadProfileImageClick = () => {
+		inputFile.current.click();
+	};
+
+	const onRemoveProfileImageClick = () => {
+		deleteProfileImage.mutate();
+	};
+
+	const handleImageSelected = (e: any) => {
+		updateProfileImage.mutate(e.target.files[0]);
+	};
+
 	if (
 		userDataQuery?.isSuccess &&
 		countriesQuery.isSuccess &&
@@ -133,24 +189,60 @@ const EditProfile: React.FC = () => {
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<Stack direction="column" spacing="6">
 											<Center pos="relative">
-												<Avatar
-													size="xl"
-													fontSize="3xl"
-													name={userDataQuery?.data?.first_name}
-													src={userDataQuery?.data?.avatar_url}
-													background="none">
-													<AvatarBadge boxSize="1.25em" bg="gray.400">
-														<Tooltip
-															label={__(
-																'Avatar should be changed from gravatar',
-																'masteriyo'
-															)}>
-															<Box pb="1">
-																<Icon as={BiEdit} fontSize="sm" />
-															</Box>
-														</Tooltip>
-													</AvatarBadge>
-												</Avatar>
+												{!updateProfileImage.isLoading ? (
+													<Avatar
+														size="2xl"
+														fontSize="3xl"
+														name={userDataQuery?.data?.first_name}
+														src={userDataQuery?.data?.profile_image?.url}
+														background="none">
+														<Menu>
+															<AvatarBadge
+																boxSize="1.25em"
+																bg="gray.300"
+																rounded="full">
+																<MenuButton
+																	border="4px solid"
+																	borderColor="white"
+																	_hover={{
+																		bg: 'blue.500',
+																		color: 'white',
+																	}}
+																	as={IconButton}
+																	icon={<BiEdit />}
+																	rounded="full"
+																	variant="ghost"
+																	fontSize="md"
+																	color="gray.700"
+																/>
+															</AvatarBadge>
+															<MenuList fontSize="sm">
+																<MenuItem
+																	color="gray.600"
+																	icon={<BiUpload />}
+																	onClick={onUploadProfileImageClick}>
+																	<input
+																		hidden
+																		type="file"
+																		id="file"
+																		ref={inputFile}
+																		accept=".jpg, .jpeg, .png"
+																		onChange={handleImageSelected}
+																	/>
+																	{__('Upload', 'masteriyo')}
+																</MenuItem>
+																<MenuItem
+																	color="gray.600"
+																	icon={<BiTrash />}
+																	onClick={onRemoveProfileImageClick}>
+																	{__('Remove', 'masteriyo')}
+																</MenuItem>
+															</MenuList>
+														</Menu>
+													</Avatar>
+												) : (
+													<SkeletonCircle size="28" />
+												)}
 											</Center>
 											<SimpleGrid columns={2} spacing="6">
 												<FormControl isInvalid={!!errors?.first_name}>

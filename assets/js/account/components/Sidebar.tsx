@@ -85,7 +85,7 @@ const Sidebar = () => {
 						<Avatar
 							size="sm"
 							name={userQuery?.data?.first_name}
-							src={userQuery?.data?.avatar_url}
+							src={userQuery?.data?.profile_image?.url}
 							showBorder
 							shadow="md"
 						/>

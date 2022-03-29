@@ -117,7 +117,7 @@ class User extends Model {
 	/**
 	 * Get User's profile image URL.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.7
 	 *
 	 * @return string
 	 */
@@ -448,7 +448,7 @@ class User extends Model {
 	/**
 	 * Get user's profile_image_id.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.7
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *

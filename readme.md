@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.6
+**Stable tag**: 1.4.7
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.7 - 29-03-2022
+
+- Feature - User profile image uploader on the account page.
+- Enhancement - Added delete button for quiz attempts.
+- Enhancement - Backend listing pages minor enhancements.
+- Enhancement - Display users option and user not found message in course instructor setting if the user is not found.
 
 ### 1.4.6 - 23-03-2022
 

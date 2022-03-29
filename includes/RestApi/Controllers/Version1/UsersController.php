@@ -186,7 +186,7 @@ class UsersController extends PostsController {
 		);
 
 		/**
-		 * @since x.x.x
+		 * @since 1.4.7
 		 */
 		register_rest_route(
 			$this->namespace,
@@ -311,7 +311,7 @@ class UsersController extends PostsController {
 	/**
 	 * Update user profile image.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.7
 	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -393,7 +393,7 @@ class UsersController extends PostsController {
 	/**
 	 * Delete User's profile image.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.7
 	 *
 	 * @return WP_REST_Response Response object on success.
 	 */

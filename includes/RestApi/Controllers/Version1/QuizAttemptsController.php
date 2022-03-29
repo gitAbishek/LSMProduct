@@ -480,7 +480,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Check if a given request has access to delete an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.7
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

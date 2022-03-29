@@ -100,7 +100,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		/**
 		 * Trigger action before deleting quiz attempt from DB.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.7
 		 *
 		 * @param string  $object_type The object type.
 		 * @param integer $quiz_id Quiz ID.
@@ -123,7 +123,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		/**
 		 * Trigger action after deleting quiz attempt from DB.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.7
 		 *
 		 * @param string  $object_type The object type.
 		 * @param integer $quiz_id Quiz ID.

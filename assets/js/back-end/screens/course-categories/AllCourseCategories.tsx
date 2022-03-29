@@ -128,7 +128,7 @@ const AllCourseCategories = () => {
 									<Tbody>
 										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
 										{categoriesQuery.isSuccess &&
-										isEmpty(categoriesQuery?.data?.data.length) ? (
+										isEmpty(categoriesQuery?.data?.data) ? (
 											<EmptyInfo
 												message={__('No categories found.', 'masteriyo')}
 											/>

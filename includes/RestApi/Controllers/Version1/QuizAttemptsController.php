@@ -97,6 +97,11 @@ class QuizAttemptsController extends CrudController {
 						),
 					),
 				),
+				array(
+					'methods'             => \WP_REST_Server::DELETABLE,
+					'callback'            => array( $this, 'delete_item' ),
+					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+				),
 			)
 		);
 	}
@@ -175,7 +180,7 @@ class QuizAttemptsController extends CrudController {
 	 * @since 1.3.2
 	 *
 	 * @param  int $id Object ID.
-	 * @return object Model object or WP_Error object.
+	 * @return QuizAttempt|false Model object or false.
 	 */
 	protected function get_object( $id ) {
 		try {
@@ -472,4 +477,69 @@ class QuizAttemptsController extends CrudController {
 		return $data;
 	}
 
+	/**
+	 * Check if a given request has access to delete an item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function delete_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$instructor = masteriyo_get_current_instructor();
+
+		if ( $instructor && ! $instructor->is_approved() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		$attempt_id = absint( $request['id'] );
+		$attempt    = $this->get_object( $attempt_id );
+
+		if ( ! $attempt ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->object_type}_invalid_id",
+				__( 'Invalid ID', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		$course = masteriyo_get_course( $attempt->get_course_id() );
+
+		if ( ! $course ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->object_type}_invalid_id",
+				__( 'Invalid ID', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		if ( masteriyo_is_current_user_post_author( $course->get_id() ) ) {
+			return true;
+		}
+
+		return new \WP_Error(
+			'masteriyo_rest_cannot_delete',
+			__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
+			array(
+				'status' => rest_authorization_required_code(),
+			)
+		);
+	}
 }

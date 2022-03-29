@@ -1,8 +1,32 @@
-import { Badge, Stack, Text, VStack } from '@chakra-ui/react';
+import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Badge,
+	Button,
+	ButtonGroup,
+	IconButton,
+	Menu,
+	MenuButton,
+	MenuItem,
+	MenuList,
+	Stack,
+	Text,
+	useDisclosure,
+	useToast,
+	VStack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useRef } from 'react';
+import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
+import { useMutation, useQueryClient } from 'react-query';
 import { Td, Tr } from 'react-super-responsive-table';
+import urls from '../../../constants/urls';
 import { QuizAttempt } from '../../../schemas';
+import API from '../../../utils/api';
 
 interface Props {
 	data: QuizAttempt;
@@ -10,14 +34,52 @@ interface Props {
 
 const QuizAttemptList: React.FC<Props> = (props) => {
 	const { data } = props;
+	const quizAttemptsAPI = new API(urls.quizesAttempts);
 
-	const Result = (earned_marks: number, total_marks: number) => {
-		if (isNaN(earned_marks) || isNaN(total_marks)) {
+	const cancelRef = useRef<any>();
+	const queryClient = useQueryClient();
+	const { onClose, onOpen, isOpen } = useDisclosure();
+	const toast = useToast();
+
+	const deleteQuizAttempt = useMutation(
+		(id: number) => quizAttemptsAPI.delete(id),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries('quizAttemptsList');
+				onClose();
+				toast({
+					title: __('Quiz attempt deleted', 'masteriyo'),
+					status: 'success',
+					isClosable: true,
+				});
+			},
+			onError: (error: any) => {
+				onClose();
+				toast({
+					title: __('Failed to delete quiz attempt', 'masteriyo'),
+					description: error?.message
+						? error?.message
+						: error?.response?.data?.message
+						? `${error?.response?.data?.message}`
+						: null,
+					isClosable: true,
+					status: 'error',
+				});
+			},
+		}
+	);
+
+	const Result = (earnedMarks: number, totalMarks: number) => {
+		if (isNaN(earnedMarks) || isNaN(totalMarks)) {
 			return;
 		}
-		const total = (earned_marks / total_marks) * 100;
+		const total = (earnedMarks / totalMarks) * 100;
 
 		return Math.round(total) + '%';
+	};
+
+	const onDeleteConfirm = () => {
+		deleteQuizAttempt.mutate(data?.id);
 	};
 
 	return (
@@ -68,6 +130,63 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 							<Badge colorScheme="green">{__('Pass', 'masteriyo')}</Badge>
 						))}
 				</VStack>
+			</Td>
+			<Td>
+				<Menu placement="bottom-end">
+					<MenuButton
+						as={IconButton}
+						icon={<BiDotsVerticalRounded />}
+						variant="outline"
+						rounded="sm"
+						fontSize="large"
+						size="xs"
+					/>
+					<MenuList>
+						<MenuItem
+							onClick={onOpen}
+							icon={<BiTrash />}
+							_hover={{ color: 'red.500' }}>
+							{__('Delete', 'masteriyo')}
+						</MenuItem>
+					</MenuList>
+				</Menu>
+				<AlertDialog
+					isOpen={isOpen}
+					onClose={onClose}
+					isCentered
+					leastDestructiveRef={cancelRef}>
+					<AlertDialogOverlay>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								{__('Deleting Quiz Attempt', 'masteriyo')}{' '}
+								{data?.id ? `#${data.id}` : ''}
+							</AlertDialogHeader>
+							<AlertDialogBody>
+								{__(
+									"Are you sure? You can't restore after deleting.",
+									'masteriyo'
+								)}
+							</AlertDialogBody>
+							<AlertDialogFooter>
+								<ButtonGroup>
+									<Button
+										onClick={onClose}
+										variant="outline"
+										ref={cancelRef}
+										isDisabled={deleteQuizAttempt.isLoading}>
+										{__('Cancel', 'masteriyo')}
+									</Button>
+									<Button
+										colorScheme="red"
+										isLoading={deleteQuizAttempt.isLoading}
+										onClick={onDeleteConfirm}>
+										{__('Delete', 'masteriyo')}
+									</Button>
+								</ButtonGroup>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialogOverlay>
+				</AlertDialog>
 			</Td>
 		</Tr>
 	);

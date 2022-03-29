@@ -192,7 +192,8 @@ const theme = extendTheme({
 									pl: '12',
 								},
 								':last-child': {
-									pr: '6',
+									pr: '12',
+									textAlign: 'right',
 								},
 							},
 						},

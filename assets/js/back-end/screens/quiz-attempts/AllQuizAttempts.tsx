@@ -66,6 +66,7 @@ const AllQuizAttempts: React.FC = () => {
 										<Th>{__('Quiz', 'masteriyo')}</Th>
 										<Th>{__('Quiz overview', 'masteriyo')}</Th>
 										<Th>{__('Result', 'masteriyo')}</Th>
+										<Th>{__('Actions', 'masteriyo')}</Th>
 									</Tr>
 								</Thead>
 								<Tbody>

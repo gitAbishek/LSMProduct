@@ -156,7 +156,10 @@ const CreateNewOrder: React.FC = () => {
 														__('Searching customer...', 'masteriyo')
 													}
 													noOptionsMessage={() =>
-														__('Please enter 3 or more characters.', 'masteriyo')
+														__(
+															'Please enter 3 or more characters.',
+															'masteriyo'
+														)
 													}
 													isClearable={true}
 													placeholder={__(

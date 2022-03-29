@@ -92,7 +92,44 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 * @param array $args Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$quiz_attempt, $args = array() ) {
+		global $wpdb;
 
+		$quiz_id     = $quiz_attempt->get_id();
+		$object_type = $quiz_attempt->get_object_type();
+
+		/**
+		 * Trigger action before deleting quiz attempt from DB.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string  $object_type The object type.
+		 * @param integer $quiz_id Quiz ID.
+		 * @param Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
+		 */
+		do_action( 'masteriyo_before_delete_' . $object_type, $quiz_id, $quiz_attempt );
+
+		$wpdb->delete(
+			$wpdb->prefix . 'masteriyo_quiz_attempts',
+			array(
+				'id' => $quiz_id,
+			),
+			array(
+				'%d',
+			)
+		);
+
+		$quiz_attempt->set_id( 0 );
+
+		/**
+		 * Trigger action after deleting quiz attempt from DB.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string  $object_type The object type.
+		 * @param integer $quiz_id Quiz ID.
+		 * @param Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
+		 */
+		do_action( 'masteriyo_after_delete_' . $object_type, $quiz_id, $quiz_attempt );
 	}
 
 	/**

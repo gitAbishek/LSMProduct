@@ -99,6 +99,13 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			)
 		);
 
+		if ( is_wp_error( $id ) ) {
+			throw new ModelException(
+				'masteriyo_user_already_exists',
+				$id->get_error_message()
+			);
+		}
+
 		if ( $id && ! is_wp_error( $id ) ) {
 			// Append roles if there are more than one roles.
 			if ( count( $user->get_roles( 'edit' ) ) > 1 ) {
@@ -112,9 +119,16 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			$this->update_user_meta( $user, true );
 			$user->apply_changes();
 
+			/**
+			 * Fire after a new user is created.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id User ID.
+			 * @param Masteriyo\Models\User $user User object.
+			 */
 			do_action( 'masteriyo_new_user', $id, $user );
 		}
-
 	}
 
 	/**
@@ -156,6 +170,14 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		$this->read_extra_data( $user );
 		$user->set_object_read( true );
 
+		/**
+		 * Fire after a user is read.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $id User ID.
+		 * @param Masteriyo\Models\User $user User object.
+		 */
 		do_action( 'masteriyo_user_read', $user->get_id(), $user );
 	}
 
@@ -198,7 +220,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 
 			// Append roles if there are more than one roles.
 			if ( count( $user->get_roles( 'edit' ) ) > 1 ) {
-				$wp_user = get_user_by( 'id', $id );
+				$wp_user = get_user_by( 'id', $user->get_id() );
 				foreach ( $user->get_roles( 'edit' ) as $role ) {
 					$wp_user->add_role( $role );
 				}
@@ -219,6 +241,14 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		$this->update_user_meta( $user );
 		$user->apply_changes();
 
+		/**
+		 * Fire after a user is updated.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $id User ID.
+		 * @param Masteriyo\Models\User $user User object.
+		 */
 		do_action( 'masteriyo_update_user', $user->get_id(), $user );
 	}
 

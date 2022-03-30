@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstract class controller.
+ * Courses controller class.
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;

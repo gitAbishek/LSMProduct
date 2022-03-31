@@ -61,7 +61,7 @@ const AddInstructor: React.FC = () => {
 		},
 		onError: (error: any) => {
 			toast({
-				description: `${error?.response?.data?.message}`,
+				title: error?.message,
 				isClosable: true,
 				status: 'error',
 			});

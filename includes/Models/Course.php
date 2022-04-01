@@ -1368,7 +1368,7 @@ class Course extends Model {
 		$url .= '#course/' . $this->get_id();
 
 		if ( $append_first_lesson_or_quiz && $lesson_or_quiz ) {
-			$url .= '/lesson/' . $lesson_or_quiz->get_id();
+			$url .= "/{$lesson_or_quiz->get_object_type()}/" . $lesson_or_quiz->get_id();
 		}
 
 		return apply_filters( 'masteriyo_start_course_url', $url, $this );

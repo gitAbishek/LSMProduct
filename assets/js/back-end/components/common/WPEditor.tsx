@@ -1,4 +1,4 @@
-import { Textarea } from '@chakra-ui/react';
+import { Box, Textarea } from '@chakra-ui/react';
 import React, { PropsWithChildren } from 'react';
 import { isUndefined } from '../../utils/utils';
 
@@ -60,12 +60,70 @@ class WPEditor extends React.Component<PropsWithChildren<any>, any> {
 	render() {
 		const name = this.props.name ? this.props.name : '';
 		return (
-			<Textarea
-				id={this.props.id}
-				value={this.props.value}
-				onChange={(e: any) => this.props.onContentChange(e.target.value)}
-				name={name}
-			/>
+			<Box
+				sx={{
+					'.mce-tinymce': {
+						shadow: 'input',
+						border: '1px',
+						borderColor: 'gray.100',
+
+						'.mce-statusbar': {
+							borderTop: '1px solid',
+							borderColor: 'gray.100',
+						},
+
+						'.mce-container-body': {
+							bg: 'white',
+						},
+
+						'.mce-toolbar': {
+							'.mce-btn': {
+								borderColor: 'transparent',
+								shadow: 'none',
+
+								'&.mce-listbox': {
+									borderColor: 'gray.100',
+									rounded: '3px',
+								},
+
+								button: {
+									rounded: '3px',
+									padding: '1',
+									transition: 'all 0.35s',
+
+									'&:hover': {
+										borderColor: 'gray.100',
+									},
+								},
+
+								'.mce-ico': {
+									fontSize: '1rem',
+									lineHeight: 1.2,
+								},
+
+								'&.mce-active': {
+									bg: 'blue.500',
+									color: 'white',
+								},
+							},
+						},
+
+						'.mce-toolbar-grp.mce-container.mce-panel.mce-first.mce-last': {
+							borderBottom: '2px solid',
+							borderColor: 'gray.100',
+						},
+						'.mce-top-part::before': {
+							boxShadow: 'none',
+						},
+					},
+				}}>
+				<Textarea
+					id={this.props.id}
+					value={this.props.value}
+					onChange={(e: any) => this.props.onContentChange(e.target.value)}
+					name={name}
+				/>
+			</Box>
 		);
 	}
 }

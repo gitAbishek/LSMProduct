@@ -1371,7 +1371,17 @@ class Course extends Model {
 			$url .= "/{$lesson_or_quiz->get_object_type()}/" . $lesson_or_quiz->get_id();
 		}
 
-		return apply_filters( 'masteriyo_start_course_url', $url, $this );
+		/**
+		 * Filter start course URL.
+		 *
+		 * @since 1.0.0
+		 * @since x.x.x Added `append_first_lesson_or_quiz` parameter whether to append first lesson or quiz or not.
+		 *
+		 * @param string $url Start course URL.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 * @param boolean $append_first_lesson_or_quiz Whether to append first lesson or quiz or not.
+		 */
+		return apply_filters( 'masteriyo_start_course_url', $url, $this, $append_first_lesson_or_quiz );
 	}
 
 	/**

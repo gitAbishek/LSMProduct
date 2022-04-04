@@ -143,10 +143,6 @@ const InteractiveLesson = () => {
 										__html: lessonQuery?.data?.description,
 									}}
 								/>
-
-								{/* {!isEmpty(lessonQuery?.data?.attachments) && (
-						<LessonAttachment lessonQuery={lessonQuery?.data} />
-					)} */}
 							</Stack>
 							<FloatingNavigation
 								navigation={lessonQuery?.data?.navigation}

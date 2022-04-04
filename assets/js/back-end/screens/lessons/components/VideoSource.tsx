@@ -14,6 +14,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
+import ReactPlayer from 'react-player';
 import { useQuery } from 'react-query';
 import MediaUploader from '../../../components/common/MediaUploader';
 import { MediaSchema } from '../../../schemas';
@@ -107,8 +108,14 @@ const VideoSource: React.FC<Props> = (props) => {
 					)}
 					{mediaQuery.isSuccess && (
 						<AspectRatio ratio={16 / 9} mb="4">
-							<video
-								src={mediaQuery?.data?.source_url}
+							<ReactPlayer
+								style={{
+									marginLeft: 'auto',
+									marginRight: 'auto',
+								}}
+								height="100%"
+								width="100%"
+								url={mediaQuery?.data?.source_url}
 								title={mediaQuery?.data?.title?.rendered}
 								controls
 							/>

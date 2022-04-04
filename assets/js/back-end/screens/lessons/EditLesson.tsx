@@ -213,13 +213,6 @@ const EditLesson = () => {
 												defaultSourceID={lessonQuery.data.video_source_id}
 											/>
 
-											{/* <Box py="3">
-												<Divider />
-											</Box>
-
-											<Attachment
-												defaultSourceID={lessonQuery?.data?.attachments[0]?.id}
-											/> */}
 											<Box py="3">
 												<Divider />
 											</Box>

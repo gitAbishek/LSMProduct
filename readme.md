@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.7
+**Stable tag**: 1.4.8
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.8 - 05-04-2022
+
+- Enhancement - Adds new style for the editor on our plugin.
+- Enhancement - Disable right click on the self-hosted video player.
+- Fix - Start course URL when the first item is a quiz in the course section.
+- Fix - Highlight the submenu during page load and when changed.
 
 ### 1.4.7 - 29-03-2022
 

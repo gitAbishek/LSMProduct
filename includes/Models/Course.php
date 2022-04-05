@@ -1375,7 +1375,7 @@ class Course extends Model {
 		 * Filter start course URL.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added `append_first_lesson_or_quiz` parameter whether to append first lesson or quiz or not.
+		 * @since 1.4.8 Added `append_first_lesson_or_quiz` parameter whether to append first lesson or quiz or not.
 		 *
 		 * @param string $url Start course URL.
 		 * @param Masteriyo\Models\Course $course Course object.

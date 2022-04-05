@@ -652,7 +652,7 @@ abstract class Model {
 	/**
 	 * Delete meta data.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.8
 	 * @param int $mid Meta ID.
 	 */
 	public function delete_meta_data_by_mid( $mid ) {
@@ -738,7 +738,7 @@ abstract class Model {
 	/**
 	 * Check if the key is an internal one.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.8
 	 * @param  string $key Key to check.
 	 * @return bool   true if it's an internal key, false otherwise
 	 */
@@ -761,7 +761,7 @@ abstract class Model {
 				__( 'Generic add/update/get meta methods should not be used for internal meta data, including "%s". Use getters and setters.', 'masteriyo' ),
 				$key
 			),
-			'x.x.x'
+			'1.4.8'
 		);
 
 		return true;
@@ -770,7 +770,7 @@ abstract class Model {
 	/**
 	 * Update meta data by key or ID, if provided.
 	 *
-	 * @since  x.x.x
+	 * @since  1.4.8
 	 *
 	 * @param  string       $key Meta key.
 	 * @param  string|array $value Meta value.

@@ -10,8 +10,8 @@
 namespace Masteriyo\Database;
 
 use Masteriyo\ModelException;
-use Masteriyo\DateTime;
 use Masteriyo\MetaData;
+use Masteriyo\DateTime;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -511,9 +511,11 @@ abstract class Model {
 	 */
 	public function get_meta_data() {
 		$this->maybe_read_meta_data();
+
 		if ( is_null( $this->meta_data ) ) {
 			return array();
 		}
+
 		return array_values( array_filter( $this->meta_data, array( $this, 'filter_null_meta' ) ) );
 	}
 
@@ -551,7 +553,7 @@ abstract class Model {
 	 * @return void
 	 */
 	public function read_meta_data( $force_read = false ) {
-		// TODO Implemnet caching system here.
+		// TODO Implement caching system here.
 
 		// Bail early if the id is zero.
 		if ( ! $this->get_id() ) {
@@ -564,6 +566,7 @@ abstract class Model {
 		}
 
 		$raw_meta_data = $this->repository->read_meta( $this );
+
 		if ( $raw_meta_data ) {
 			$this->meta_data = $raw_meta_data;
 		}
@@ -647,6 +650,23 @@ abstract class Model {
 	}
 
 	/**
+	 * Delete meta data.
+	 *
+	 * @since x.x.x
+	 * @param int $mid Meta ID.
+	 */
+	public function delete_meta_data_by_mid( $mid ) {
+		$this->maybe_read_meta_data();
+		$array_keys = array_keys( wp_list_pluck( $this->meta_data, 'id' ), (int) $mid, true );
+
+		if ( $array_keys ) {
+			foreach ( $array_keys as $array_key ) {
+				$this->meta_data[ $array_key ]->value = null;
+			}
+		}
+	}
+
+	/**
 	 * Get object type.
 	 *
 	 * @since 1.0.0
@@ -713,5 +733,89 @@ abstract class Model {
 	 */
 	protected function error( $code, $message, $http_status_code = 400, $data = array() ) {
 		throw new ModelException( $code, $message, $http_status_code, $data );
+	}
+
+	/**
+	 * Check if the key is an internal one.
+	 *
+	 * @since  x.x.x
+	 * @param  string $key Key to check.
+	 * @return bool   true if it's an internal key, false otherwise
+	 */
+	protected function is_internal_meta_key( $key ) {
+		$internal_meta_key = ! empty( $key ) && $this->repository && in_array( $key, $this->repository->get_internal_meta_keys(), true );
+
+		if ( ! $internal_meta_key ) {
+			return false;
+		}
+
+		$has_setter_or_getter = is_callable( array( $this, 'set_' . $key ) ) || is_callable( array( $this, 'get_' . $key ) );
+
+		if ( ! $has_setter_or_getter ) {
+			return false;
+		}
+		masteriyo_doing_it_wrong(
+			__FUNCTION__,
+			sprintf(
+				/* translators: %s: $key Key to check */
+				__( 'Generic add/update/get meta methods should not be used for internal meta data, including "%s". Use getters and setters.', 'masteriyo' ),
+				$key
+			),
+			'x.x.x'
+		);
+
+		return true;
+	}
+
+	/**
+	 * Update meta data by key or ID, if provided.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  string       $key Meta key.
+	 * @param  string|array $value Meta value.
+	 * @param  int          $meta_id Meta ID.
+	 */
+	public function update_meta_data( $key, $value, $meta_id = 0 ) {
+		if ( $this->is_internal_meta_key( $key ) ) {
+			$function = 'set_' . $key;
+
+			if ( is_callable( array( $this, $function ) ) ) {
+				return $this->{$function}( $value );
+			}
+		}
+
+		$this->maybe_read_meta_data();
+
+		$array_key = false;
+
+		if ( $meta_id ) {
+			$array_keys = array_keys( wp_list_pluck( $this->meta_data, 'id' ), $meta_id, true );
+			$array_key  = $array_keys ? current( $array_keys ) : false;
+		} else {
+			// Find matches by key.
+			$matches = array();
+			foreach ( $this->meta_data as $meta_data_array_key => $meta ) {
+				if ( $meta->key === $key ) {
+					$matches[] = $meta_data_array_key;
+				}
+			}
+
+			if ( ! empty( $matches ) ) {
+				// Set matches to null so only one key gets the new value.
+				foreach ( $matches as $meta_data_array_key ) {
+					$this->meta_data[ $meta_data_array_key ]->value = null;
+				}
+				$array_key = current( $matches );
+			}
+		}
+
+		if ( false !== $array_key ) {
+			$meta        = $this->meta_data[ $array_key ];
+			$meta->key   = $key;
+			$meta->value = $value;
+		} else {
+			$this->add_meta_data( $key, $value, true );
+		}
 	}
 }

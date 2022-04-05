@@ -134,7 +134,7 @@ abstract class AbstractRepository {
 	 *
 	 * @return MetaData[]
 	 */
-	public function read_meta( &$model ) {
+	public function  read_meta( &$model ) {
 		// phpcs:disable
 		// TODO Abstract global $wpdb;
 		global $wpdb;
@@ -836,10 +836,11 @@ abstract class AbstractRepository {
 	 * Get internal meta keys.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Changed access modifier to `public`.
 	 *
 	 * @return array
 	 */
-	protected function get_internal_meta_keys() {
+	public function get_internal_meta_keys() {
 		return $this->internal_meta_keys;
 	}
 

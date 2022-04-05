@@ -1,6 +1,6 @@
 <?php
 /**
- * Ajax.
+ * Manages scripts and styles.
  *
  * @package Masteriyo
  *
@@ -14,9 +14,9 @@ use Masteriyo\Query\CourseCategoryQuery;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Main Masteriyo class.
+ * Manages scripts and styles.
  *
- * @class Masteriyo\Masteriyo
+ * @class Masteriyo\ScriptStyle
  */
 
 class ScriptStyle {
@@ -149,9 +149,10 @@ class ScriptStyle {
 		$suffix = self::get_asset_suffix();
 
 		$account_src         = self::get_asset_url( "/assets/js/build/masteriyo-account{$suffix}.js" );
-		$admin_src           = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
+		$backend_src         = self::get_asset_url( "/assets/js/build/masteriyo-backend{$suffix}.js" );
 		$learn_src           = self::get_asset_url( "/assets/js/build/masteriyo-interactive{$suffix}.js" );
 		$single_course_src   = self::get_asset_url( "/assets/js/build/single-course{$suffix}.js" );
+		$admin_src           = self::get_asset_url( "/assets/js/build/admin{$suffix}.js" );
 		$login_form_src      = self::get_asset_url( "/assets/js/build/login-form{$suffix}.js" );
 		$checkout_src        = self::get_asset_url( "/assets/js/build/checkout{$suffix}.js" );
 		$ask_review_src      = self::get_asset_url( "/assets/js/build/ask-review{$suffix}.js" );
@@ -159,9 +160,10 @@ class ScriptStyle {
 
 		if ( masteriyo_is_development() ) {
 			$account_src         = 'http://localhost:3000/dist/account.js';
-			$admin_src           = 'http://localhost:3000/dist/backend.js';
+			$backend_src         = 'http://localhost:3000/dist/backend.js';
 			$learn_src           = 'http://localhost:3000/dist/interactive.js';
 			$single_course_src   = self::get_asset_url( '/assets/js/frontend/single-course.js' );
+			$admin_src           = self::get_asset_url( '/assets/js/admin/admin.js' );
 			$login_form_src      = self::get_asset_url( '/assets/js/frontend/login-form.js' );
 			$checkout_src        = self::get_asset_url( '/assets/js/frontend/checkout.js' );
 			$ask_review_src      = self::get_asset_url( '/assets/js/frontend/ask-review.js' );
@@ -186,6 +188,12 @@ class ScriptStyle {
 				),
 				'admin'           => array(
 					'src'      => $admin_src,
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor' ) ),
+					'context'  => 'admin',
+					'callback' => 'masteriyo_is_admin_page',
+				),
+				'backend'         => array(
+					'src'      => $backend_src,
 					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
@@ -718,7 +726,7 @@ class ScriptStyle {
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_admin_scripts',
 			array(
-				'admin'      => array(
+				'backend'    => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
 						'rootApiUrl'          => esc_url_raw( untrailingslashit( rest_url() ) ),

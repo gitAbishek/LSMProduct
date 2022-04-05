@@ -67,16 +67,16 @@ const paths = {
 		src: 'assets/scss/**/*.scss',
 		dest: 'assets/css',
 	},
-
 	js: {
 		src: ['assets/js/build/*.js', '!assets/js/build/*.min.js'],
 		dest: 'assets/js/build',
 	},
-
-	frontEndJs: {
-		src: ['assets/js/frontend/*.js', '!assets/js/frontend*.min.js'],
+	adminJs: {
+		src: ['assets/js/admin/*.js', '!assets/js/admin/*.min.js'],
 	},
-
+	frontEndJs: {
+		src: ['assets/js/frontend/*.js', '!assets/js/frontend/*.min.js'],
+	},
 	images: {
 		src: ['assets/img/*.png', 'assets/img/*.jpg'],
 		dest: 'assets/img',
@@ -111,6 +111,12 @@ function startBrowserSync(cb) {
 
 function moveFrontEndJs() {
 	return src(paths.frontEndJs.src)
+		.pipe(rename({ suffix: `.${pkg.version}` }))
+		.pipe(dest(paths.js.dest));
+}
+
+function copyAdminJs() {
+	return src(paths.adminJs.src)
 		.pipe(rename({ suffix: `.${pkg.version}` }))
 		.pipe(dest(paths.js.dest));
 }
@@ -190,6 +196,7 @@ function compressBuildWithVersion() {
 const build = series(
 	removeBuild,
 	removeCompiledAssets,
+	copyAdminJs,
 	moveFrontEndJs,
 	compileSass,
 	minifyJs,

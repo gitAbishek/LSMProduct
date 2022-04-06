@@ -103,9 +103,6 @@ export const SkeletonOrdersList: React.FC = () => {
 					<Td>
 						<SkeletonText noOfLines={1} />
 					</Td>
-					<Td>
-						<SkeletonText noOfLines={1} />
-					</Td>
 				</Tr>
 			))}
 		</>

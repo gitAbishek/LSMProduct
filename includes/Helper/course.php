@@ -312,8 +312,9 @@ function masteriyo_get_course_contents( $course_id ) {
  * @return array
  */
 function masteriyo_get_course_structure( $course_id ) {
-	$objects  = masteriyo_get_course_contents( $course_id );
-	$objects  = array_map(
+	$objects = masteriyo_get_course_contents( $course_id );
+
+	$objects = array_map(
 		function( $object ) {
 			return array(
 				'id'          => $object->get_id(),
@@ -328,6 +329,7 @@ function masteriyo_get_course_structure( $course_id ) {
 		},
 		$objects
 	);
+
 	$contents = array_values(
 		array_filter(
 			$objects,
@@ -336,10 +338,16 @@ function masteriyo_get_course_structure( $course_id ) {
 			}
 		)
 	);
+
+	// Sort section contents (lessons ane quizzes) by menu order in ascending order.
 	usort(
 		$contents,
 		function( $a, $b ) {
-			return $a['menu_order'] > $b['menu_order'];
+			if ( $a['menu_order'] === $b['menu_order'] ) {
+				return 0;
+			}
+
+			return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
 		}
 	);
 
@@ -351,10 +359,16 @@ function masteriyo_get_course_structure( $course_id ) {
 			}
 		)
 	);
+
+	// Sort sections by menu order in ascending order.
 	usort(
 		$sections,
 		function( $a, $b ) {
-			return $a['menu_order'] > $b['menu_order'];
+			if ( $a['menu_order'] === $b['menu_order'] ) {
+				return 0;
+			}
+
+			return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
 		}
 	);
 
@@ -369,12 +383,15 @@ function masteriyo_get_course_structure( $course_id ) {
 			if ( $content['parent_id'] !== $section['id'] ) {
 				continue;
 			}
+
 			if ( 'lesson' === $content['type'] ) {
 				$lessons_count++;
 			}
+
 			if ( 'quiz' === $content['type'] ) {
 				$quiz_count++;
 			}
+
 			$section_contents[] = $content;
 		}
 
@@ -384,6 +401,13 @@ function masteriyo_get_course_structure( $course_id ) {
 		$ordered_sections[]       = $section;
 	}
 
+	/**
+	 * Filter course structure.
+	 *
+	 * @since 1.0.0
+	 * @param array $ordered_sections Ordered sections.
+	 * @param int $course_id Course ID.
+	 */
 	return apply_filters( 'masteriyo_course_structure', $ordered_sections, $course_id );
 }
 

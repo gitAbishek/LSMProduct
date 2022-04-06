@@ -1036,10 +1036,15 @@ class CourseProgressController extends CrudController {
 			}
 		);
 
+		// Sort sections by menu order in ascending order.
 		usort(
 			$sections,
 			function( $a, $b ) {
-				return $a->menu_order > $b->menu_order;
+				if ( $a->menu_order === $b->menu_order ) {
+					return 0;
+				}
+
+				return $a->menu_order > $b->menu_order ? 1 : -1;
 			}
 		);
 
@@ -1074,10 +1079,15 @@ class CourseProgressController extends CrudController {
 			}
 		);
 
+		// Sort lessons and quizzes by menu order in ascending order.
 		usort(
 			$lessons_quizzes,
 			function( $a, $b ) {
-				return $a->menu_order > $b->menu_order;
+				if ( $a->menu_order === $b->menu_order ) {
+					return 0;
+				}
+
+				return $a->menu_order > $b->menu_order ? 1 : -1;
 			}
 		);
 

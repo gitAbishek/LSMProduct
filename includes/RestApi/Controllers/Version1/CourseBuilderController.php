@@ -469,8 +469,11 @@ class CourseBuilderController extends PostsController {
 		usort(
 			$sections,
 			function( $a, $b ) {
-				$c = 1;
-				return $a['menu_order'] > $b['menu_order'];
+				if ( $a['menu_order'] === $b['menu_order'] ) {
+					return 0;
+				}
+
+				return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
 			}
 		);
 
@@ -498,8 +501,11 @@ class CourseBuilderController extends PostsController {
 		usort(
 			$items,
 			function( $a, $b ) {
-				$c = 1;
-				return $a['menu_order'] > $b['menu_order'];
+				if ( $a['menu_order'] === $b['menu_order'] ) {
+					return 0;
+				}
+
+				return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
 			}
 		);
 

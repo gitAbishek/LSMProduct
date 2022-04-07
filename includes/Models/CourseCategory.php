@@ -307,14 +307,9 @@ class CourseCategory extends Model {
 	 */
 	public function get_image( $size = 'masteriyo_thumbnail', $attr = array(), $placeholder = true ) {
 		$image = '';
+
 		if ( $this->get_image_id() ) {
 			$image = wp_get_attachment_image( $this->get_image_id(), $size, false, $attr );
-		} elseif ( $this->get_parent_id() ) {
-			$parent_cat = masteriyo_get_course_cat( $this->get_parent_id() );
-
-			if ( $parent_cat ) {
-				$image = $parent_cat->get_image( $size, $attr, $placeholder );
-			}
 		}
 
 		if ( ! $image && $placeholder ) {

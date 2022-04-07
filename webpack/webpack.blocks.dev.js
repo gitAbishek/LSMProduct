@@ -1,5 +1,4 @@
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const ForkTsCheckerPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintPlugin = require('eslint-webpack-plugin');
 const WebpackBar = require('webpackbar');
@@ -65,7 +64,6 @@ module.exports = (env) => ({
 	},
 
 	plugins: [
-		new ErrorOverlayPlugin(),
 		new WebpackBar(),
 		new ForkTsCheckerPlugin({
 			async: true,

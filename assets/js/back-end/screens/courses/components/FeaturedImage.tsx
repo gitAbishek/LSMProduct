@@ -42,12 +42,12 @@ const FeaturedImage: React.FC<Props> = (props) => {
 
 	const onComplete = (imageId: number) => {
 		setImageId(imageId);
-		setValue('featured_image', imageId);
+		setValue('featuredImage', imageId);
 	};
 
 	const onDelete = () => {
 		setImageId(null);
-		setValue('featured_image', 0);
+		setValue('featuredImage', 0);
 	};
 
 	return (

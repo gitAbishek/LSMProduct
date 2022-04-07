@@ -7,17 +7,26 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
+import { makeSlug } from '../../../utils/categories';
 
 interface Props {
 	defaultValue?: string;
+	defaultNameValue?: string;
 }
 const SlugInput: React.FC<Props> = (props) => {
-	const { defaultValue } = props;
+	const { defaultValue, defaultNameValue } = props;
 	const {
 		register,
 		formState: { errors },
+		control,
 	} = useFormContext();
+
+	const watchedName = useWatch({
+		name: 'name',
+		defaultValue: defaultNameValue || '',
+		control,
+	});
 
 	return (
 		<FormControl isInvalid={!!errors?.slug}>
@@ -30,6 +39,7 @@ const SlugInput: React.FC<Props> = (props) => {
 							? __('Spaces are not allowed.', 'masteriyo')
 							: true,
 				})}
+				placeholder={watchedName ? makeSlug(watchedName) : ''}
 			/>
 			<FormHelperText fontSize="xs">
 				{__(

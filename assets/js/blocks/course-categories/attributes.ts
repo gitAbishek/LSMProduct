@@ -20,5 +20,9 @@ const attributes: BlockAttributesDefinition = {
 		type: String,
 		default: 'no',
 	},
+	include_sub_categories: {
+		type: Boolean,
+		default: false,
+	},
 };
 export default attributes;

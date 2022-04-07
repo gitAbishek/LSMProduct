@@ -15,7 +15,9 @@ import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { useOnType } from 'use-ontype';
 import urls from '../../../constants/urls';
+import { CourseCategoriesResponse } from '../../../types/course';
 import API from '../../../utils/api';
+import { makeCategoriesHierarchy } from '../../../utils/categories';
 import { deepClean, deepMerge } from '../../../utils/utils';
 
 const courseStatusList = [
@@ -52,13 +54,18 @@ interface Props {
 const CourseFilter: React.FC<Props> = (props) => {
 	const { setFilterParams, filterParams } = props;
 	const categoryAPI = new API(urls.categories);
-	const categoryQuery = useQuery(
+	const categoriesQuery = useQuery<CourseCategoriesResponse>(
 		'categoryLists',
 		() => categoryAPI.list({ per_page: 100 }),
 		{
 			retry: false,
 		}
 	);
+
+	const categories = categoriesQuery.isSuccess
+		? makeCategoriesHierarchy(categoriesQuery.data.data)
+		: [];
+
 	const { handleSubmit, register } = useForm();
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const onSearchInput = useOnType(
@@ -112,14 +119,13 @@ const CourseFilter: React.FC<Props> = (props) => {
 						/>
 						<Select {...register('category')}>
 							<option value="">{__('All Categories', 'masteriyo')}</option>
-							{categoryQuery.isSuccess &&
-								categoryQuery?.data?.data?.map(
-									(category: { id: number; name: string }) => (
+							{categoriesQuery.isSuccess
+								? categories.map((category) => (
 										<option key={category.id} value={category.id}>
-											{category.name}
+											{'— '.repeat(category.depth) + category.name}
 										</option>
-									)
-								)}
+								  ))
+								: null}
 						</Select>
 
 						<Select {...register('status')}>

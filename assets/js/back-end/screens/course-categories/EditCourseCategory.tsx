@@ -37,13 +37,28 @@ import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import { makeSlug } from '../../utils/categories';
 import { deepClean } from '../../utils/utils';
 import FeaturedImage from '../courses/components/FeaturedImage';
 import DescriptionInput from './components/DescriptionInput';
 import NameInput from './components/NameInput';
+import ParentCategory from './components/ParentCategory';
 import SlugInput from './components/SlugInput';
 
-const EditCourseCategory = () => {
+interface CategoryOption {
+	value: string | number;
+	label: string;
+}
+
+interface EditFormData {
+	name: string;
+	slug: string;
+	parentId?: CategoryOption;
+	description: string;
+	featuredImage?: number;
+}
+
+const EditCourseCategory: React.FC = () => {
 	const { categoryId }: any = useParams();
 	const history = useHistory();
 	const methods = useForm();
@@ -58,7 +73,7 @@ const EditCourseCategory = () => {
 		() => categoryAPI.get(categoryId)
 	);
 
-	const updateCategory = useMutation(
+	const updateCategoryMutation = useMutation(
 		(data: object) => categoryAPI.update(categoryId, data),
 		{
 			onSuccess: () => {
@@ -105,8 +120,15 @@ const EditCourseCategory = () => {
 		}
 	);
 
-	const onSubmit = (data: object) => {
-		updateCategory.mutate(deepClean(data));
+	const onSubmit = (data: EditFormData) => {
+		updateCategoryMutation.mutate(
+			deepClean({
+				...data,
+				parent_id: data.parentId?.value,
+				slug: data.slug ? data.slug : makeSlug(data.name),
+				featured_image: data.featuredImage,
+			})
+		);
 	};
 
 	const onDeletePress = () => {
@@ -178,7 +200,13 @@ const EditCourseCategory = () => {
 								<form onSubmit={methods.handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
 										<NameInput defaultValue={categoryQuery.data.name} />
-										<SlugInput defaultValue={categoryQuery.data.slug} />
+										<SlugInput
+											defaultValue={categoryQuery?.data?.slug}
+											defaultNameValue={categoryQuery?.data?.name}
+										/>
+										<ParentCategory
+											defaultValue={categoryQuery.data.parent_id}
+										/>
 										<DescriptionInput
 											defaultValue={categoryQuery.data.description}
 										/>
@@ -194,7 +222,7 @@ const EditCourseCategory = () => {
 											<Button
 												colorScheme="blue"
 												type="submit"
-												isLoading={updateCategory.isLoading}>
+												isLoading={updateCategoryMutation.isLoading}>
 												{__('Update', 'masteriyo')}
 											</Button>
 											<Button

@@ -31,7 +31,12 @@ import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonCourseTaxonomy } from '../../skeleton';
+import {
+	CourseCategoriesResponse,
+	CourseCategoryHierarchy,
+} from '../../types/course';
 import API from '../../utils/api';
+import { makeCategoriesHierarchy } from '../../utils/categories';
 import { isEmpty } from '../../utils/utils';
 import CategoriesFilter from './components/CategoriesFilter';
 import CategoryRow from './components/CategoryRow';
@@ -49,9 +54,25 @@ const AllCourseCategories = () => {
 	const history = useHistory();
 
 	const [filterParams, setFilterParams] = useState<FilterParams>({});
-	const categoriesQuery = useQuery(['courseCategoriesList', filterParams], () =>
-		categoryAPI.list(filterParams)
+
+	const categoriesQuery = useQuery<CourseCategoriesResponse>(
+		['courseCategoriesList', filterParams],
+		() => categoryAPI.list(filterParams)
 	);
+
+	let categories: CourseCategoryHierarchy[] = [];
+
+	if (categoriesQuery.isSuccess) {
+		if (filterParams.search) {
+			categories = categoriesQuery.data?.data?.map((cat) => ({
+				...cat,
+				depth: 0,
+			}));
+		} else {
+			categories = makeCategoriesHierarchy(categoriesQuery.data?.data);
+		}
+	}
+
 	const [deleteCategoryId, setDeleteCategoryId] = useState<number>();
 	const { onClose, onOpen, isOpen } = useDisclosure();
 
@@ -84,6 +105,31 @@ const AllCourseCategories = () => {
 	const onDeleteConfirm = () => {
 		deleteCategoryId && deleteCategory.mutate(deleteCategoryId);
 	};
+
+	let renderCategories: React.ReactNode = null;
+
+	if (!categoriesQuery.isLoading && categoriesQuery?.data?.data.length) {
+		let isCurrentColorEmpty = true;
+
+		renderCategories = categories?.map((cat) => {
+			if (cat.depth === 0) {
+				isCurrentColorEmpty = !isCurrentColorEmpty;
+			}
+
+			return (
+				<CategoryRow
+					key={cat.id}
+					id={cat.id}
+					name={'— '.repeat(filterParams.search ? 0 : cat.depth) + cat.name}
+					slug={cat.slug}
+					count={cat.count}
+					link={cat.link}
+					onDeletePress={onDeletePress}
+					background={isCurrentColorEmpty ? 'transparent' : '#f8f9fa'}
+				/>
+			);
+		});
+	}
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -126,24 +172,14 @@ const AllCourseCategories = () => {
 										</Tr>
 									</Thead>
 									<Tbody>
-										{categoriesQuery.isLoading && <SkeletonCourseTaxonomy />}
-										{categoriesQuery.isSuccess &&
-										isEmpty(categoriesQuery?.data?.data) ? (
+										{categoriesQuery.isLoading ? (
+											<SkeletonCourseTaxonomy />
+										) : isEmpty(categoriesQuery?.data?.data) ? (
 											<EmptyInfo
 												message={__('No categories found.', 'masteriyo')}
 											/>
 										) : (
-											categoriesQuery?.data?.data?.map((cat: any) => (
-												<CategoryRow
-													key={cat?.id}
-													id={cat?.id}
-													name={cat?.name}
-													slug={cat?.slug}
-													count={cat?.count}
-													link={cat?.link}
-													onDeletePress={onDeletePress}
-												/>
-											))
+											renderCategories
 										)}
 									</Tbody>
 								</Table>

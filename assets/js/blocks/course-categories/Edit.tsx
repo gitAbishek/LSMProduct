@@ -28,6 +28,7 @@ const Edit: React.FC<any> = (props) => {
 						columns: props.attributes.columns,
 						categoryIds: props.attributes.categoryIds,
 						hide_courses_count: props.attributes.hide_courses_count,
+						include_sub_categories: props.attributes.include_sub_categories,
 					}}
 				/>
 			</div>

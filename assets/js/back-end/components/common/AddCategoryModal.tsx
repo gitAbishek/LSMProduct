@@ -18,14 +18,24 @@ import urls from '../../constants/urls';
 import { CreateCatModal } from '../../context/CreateCatProvider';
 import DescriptionInput from '../../screens/course-categories/components/DescriptionInput';
 import NameInput from '../../screens/course-categories/components/NameInput';
+import ParentCategory from '../../screens/course-categories/components/ParentCategory';
 import SlugInput from '../../screens/course-categories/components/SlugInput';
+import FeaturedImage from '../../screens/courses/components/FeaturedImage';
 import API from '../../utils/api';
+import { makeSlug } from '../../utils/categories';
 import { deepClean } from '../../utils/utils';
+
+interface CategoryOption {
+	value: string | number;
+	label: string;
+}
 
 interface AddCatData {
 	name: string;
 	slug: string;
 	description: string;
+	parentId?: CategoryOption;
+	featuredImage?: number;
 }
 
 const AddCategoryModal = () => {
@@ -65,15 +75,21 @@ const AddCategoryModal = () => {
 	);
 
 	const onSubmit = (data: AddCatData) => {
-		createCategory.mutate(deepClean(data));
+		createCategory.mutate(
+			deepClean({
+				...data,
+				slug: data.slug ? data.slug : makeSlug(data.name),
+				parent_id: data.parentId?.value,
+				featured_image: data.featuredImage,
+			})
+		);
 	};
 
 	return (
 		<Modal
 			isOpen={isCreateCatModalOpen}
 			onClose={() => setIsCreateCatModalOpen(false)}
-			size="2xl"
-			isCentered>
+			size="2xl">
 			<ModalOverlay />
 			<ModalContent>
 				<FormProvider {...methods}>
@@ -84,7 +100,9 @@ const AddCategoryModal = () => {
 							<Stack direction="column" spacing="4">
 								<NameInput />
 								<SlugInput />
+								<ParentCategory />
 								<DescriptionInput />
+								<FeaturedImage />
 							</Stack>
 						</ModalBody>
 

@@ -76,21 +76,25 @@ class Blocks {
 			'masteriyo/course-categories',
 			array(
 				'attributes'      => array(
-					'clientId'           => array(
+					'clientId'               => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'count'              => array(
+					'count'                  => array(
 						'type'    => 'number',
 						'default' => 12,
 					),
-					'columns'            => array(
+					'columns'                => array(
 						'type'    => 'number',
 						'default' => 3,
 					),
-					'hide_courses_count' => array(
+					'hide_courses_count'     => array(
 						'type'    => 'string',
 						'default' => 'no',
+					),
+					'include_sub_categories' => array(
+						'type'    => 'boolean',
+						'default' => false,
 					),
 				),
 				'style'           => 'masteriyo-public',
@@ -147,11 +151,16 @@ class Blocks {
 	 * @return CourseCategory[]
 	 */
 	protected function get_categories( $attr ) {
-		$args       = array(
+		$args = array(
 			'order'   => 'ASC',
 			'orderby' => 'name',
 			'number'  => absint( $attr['count'] ),
 		);
+
+		if ( ! masteriyo_string_to_bool( $attr['include_sub_categories'] ) ) {
+			$args['parent'] = 0;
+		}
+
 		$query      = new CourseCategoryQuery( $args );
 		$categories = $query->get_categories();
 

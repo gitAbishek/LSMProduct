@@ -23,13 +23,28 @@ import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import API from '../../utils/api';
+import { makeSlug } from '../../utils/categories';
 import { deepClean } from '../../utils/utils';
 import FeaturedImage from '../courses/components/FeaturedImage';
 import DescriptionInput from './components/DescriptionInput';
 import NameInput from './components/NameInput';
+import ParentCategory from './components/ParentCategory';
 import SlugInput from './components/SlugInput';
 
-const AddNewCourseCategory = () => {
+interface CategoryOption {
+	value: string | number;
+	label: string;
+}
+
+interface AddCatData {
+	name: string;
+	slug: string;
+	description: string;
+	parentId?: CategoryOption;
+	featuredImage?: number;
+}
+
+const AddNewCourseCategory: React.FC = () => {
 	const history = useHistory();
 	const methods = useForm();
 	const toast = useToast();
@@ -60,8 +75,15 @@ const AddNewCourseCategory = () => {
 		}
 	);
 
-	const onSubmit = (data: object) => {
-		createCategory.mutate(deepClean(data));
+	const onSubmit = (data: AddCatData) => {
+		createCategory.mutate(
+			deepClean({
+				...data,
+				parent_id: data.parentId?.value,
+				slug: data.slug ? data.slug : makeSlug(data.name),
+				featured_image: data.featuredImage,
+			})
+		);
 	};
 
 	return (
@@ -98,6 +120,7 @@ const AddNewCourseCategory = () => {
 									<Stack direction="column" spacing="6">
 										<NameInput />
 										<SlugInput />
+										<ParentCategory />
 										<DescriptionInput />
 										<FeaturedImage />
 

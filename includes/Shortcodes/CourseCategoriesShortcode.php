@@ -33,9 +33,10 @@ class CourseCategoriesShortcode extends Shortcode {
 	 * @var array
 	 */
 	protected $default_attributes = array(
-		'count'              => 12,
-		'columns'            => 4,
-		'hide_courses_count' => 'no',
+		'count'                => 12,
+		'columns'              => 4,
+		'hide_courses_count'   => 'no',
+		'include_sub_categories' => false,
 	);
 
 	/**
@@ -73,14 +74,19 @@ class CourseCategoriesShortcode extends Shortcode {
 	 * @return Array[CourseCategory]
 	 */
 	protected function get_categories() {
-		$attr       = $this->get_attributes();
-		$args       = array(
+		$attr = $this->get_attributes();
+		$args = array(
 			'taxonomy'   => 'course_cat',
 			'order'      => 'ASC',
 			'orderby'    => 'name',
 			'number'     => absint( $attr['count'] ),
 			'hide_empty' => false,
 		);
+
+		if ( ! masteriyo_string_to_bool( $attr['include_sub_categories'] ) ) {
+			$args['parent'] = 0;
+		}
+
 		$query      = new \WP_Term_Query();
 		$result     = $query->query( $args );
 		$categories = array_filter( array_map( 'masteriyo_get_course_cat', $result ) );

@@ -928,7 +928,19 @@ abstract class AbstractRepository {
 			}
 		}
 
-		return apply_filters( 'masteriyo_get_wp_query_args', $wp_query_args, $query_vars );
+		/**
+		 * Filter WP query vars.
+		 *
+		 * @since 1.0.0
+		 * @since x.x.x Added third parameter $repository.
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars query vars from a ObjectQuery.
+		 * @param Masteriyo\Repository\AbstractRepository $repository AbstractRepository object.
+		 *
+		 * @return array WP Query args.
+		 */
+		return apply_filters( 'masteriyo_get_wp_query_args', $wp_query_args, $query_vars, $this );
 	}
 
 	/**

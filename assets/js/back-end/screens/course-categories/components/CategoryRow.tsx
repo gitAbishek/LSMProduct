@@ -23,14 +23,16 @@ interface Props {
 	count: Number;
 	link: string;
 	onDeletePress: any;
+	background?: React.CSSProperties['background'];
 }
 
 const CategoryRow: React.FC<Props> = (props) => {
-	const { id, name, slug, count, link, onDeletePress } = props;
+	const { id, name, slug, count, link, onDeletePress, background } = props;
+	const tdStyle: React.CSSProperties = { background };
 
 	return (
 		<Tr>
-			<Td>
+			<Td style={tdStyle}>
 				<Link
 					as={RouterLink}
 					to={routes.course_categories.edit.replace(
@@ -42,13 +44,13 @@ const CategoryRow: React.FC<Props> = (props) => {
 					{name}
 				</Link>
 			</Td>
-			<Td>{slug}</Td>
-			<Td>
+			<Td style={tdStyle}>{slug}</Td>
+			<Td style={tdStyle}>
 				<Link href={link} isExternal>
 					{count}
 				</Link>
 			</Td>
-			<Td>
+			<Td style={tdStyle}>
 				<ButtonGroup>
 					<RouterLink
 						to={routes.course_categories.edit.replace(

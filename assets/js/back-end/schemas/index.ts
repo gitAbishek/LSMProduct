@@ -134,6 +134,7 @@ export interface CourseCategorySchema {
 	display: string;
 	term_order: number;
 	count: number;
+	link: string;
 }
 
 export interface CourseDifficultySchema {

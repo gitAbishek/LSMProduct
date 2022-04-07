@@ -8,7 +8,7 @@ import Toggle from '../../components/toggle';
 
 const BlockSettings = (props: any) => {
 	const {
-		attributes: { count, columns, hide_courses_count },
+		attributes: { count, columns, hide_courses_count, include_sub_categories },
 		setAttributes,
 	} = props;
 
@@ -50,10 +50,17 @@ const BlockSettings = (props: any) => {
 						/>
 						<Toggle
 							checked={hide_courses_count === 'yes'}
-							onChange={(val: any) =>
+							onChange={(val: boolean) =>
 								setAttributes({ hide_courses_count: val ? 'yes' : 'no' })
 							}
 							label={__('Hide courses count', 'masteriyo')}
+						/>
+						<Toggle
+							checked={include_sub_categories}
+							onChange={(val: boolean) =>
+								setAttributes({ include_sub_categories: val })
+							}
+							label={__('Include sub-categories', 'masteriyo')}
 						/>
 					</Panel>
 					<Panel title={__('Layout', 'masteriyo')}>

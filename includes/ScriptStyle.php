@@ -752,7 +752,7 @@ class ScriptStyle {
 								return ! empty( $state );
 							}
 						),
-						'show_review_notice'  => masteriyo_is_show_review_notice() ? 'yes' : 'no',
+						'show_review_notice'  => masteriyo_bool_to_string( masteriyo_is_show_review_notice() ),
 						'total_posts'         => count_user_posts( get_current_user_id() ),
 					),
 				),

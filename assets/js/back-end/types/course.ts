@@ -1,3 +1,5 @@
+import { CourseCategorySchema } from '../schemas';
+
 export interface AuthorMap {
 	id: number;
 	display_name: string;
@@ -40,4 +42,18 @@ export interface CourseDataMap {
 	_links: CourseLinksMap;
 	highlights: string;
 	edit_post_link: string;
+}
+
+export interface CourseCategoriesResponse {
+	data: CourseCategorySchema[];
+	meta: {
+		current_page: number;
+		pages: number;
+		per_page: number;
+		total: number;
+	};
+}
+
+export interface CourseCategoryHierarchy extends CourseCategorySchema {
+	depth: number;
 }

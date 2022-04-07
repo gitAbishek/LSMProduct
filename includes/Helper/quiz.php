@@ -78,11 +78,14 @@ function masteriyo_is_quiz_started( $quiz_id = 0 ) {
  * Get quiz attempt data according to attempt id and after attempt ended.
  *
  * @since 1.0.0
+ * @since x.x.x Changed position of required and optional parameters as it will throw deprecated notice in php 8.0.
  *
- * @param int $quiz Quiz ID.
  * @param int $id User Attempt ID.
+ * @param int $quiz Quiz ID.
+ *
+ * @return array
  */
-function masteriyo_get_quiz_attempt_ended_data( $quiz_id = 0, $id ) {
+function masteriyo_get_quiz_attempt_ended_data( $id, $quiz_id = 0 ) {
 	global $wpdb;
 
 	$user_id = get_current_user_id();

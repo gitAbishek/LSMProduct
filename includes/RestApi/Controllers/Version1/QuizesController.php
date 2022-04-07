@@ -536,7 +536,7 @@ class QuizesController extends PostsController {
 	 * @since 1.3.8
 	 *
 	 * @param int $quiz_id Quiz ID
-	 * @return boolean|array Return false if the quiz is not started else return last attempt data.
+	 * @return boolean|stdClass Return false if the quiz is not started else return last attempt data.
 	 */
 	protected function is_quiz_started( $quiz_id ) {
 		$is_quiz_started = false;
@@ -588,7 +588,7 @@ class QuizesController extends PostsController {
 				array( 'id' => $attempt_data->id )
 			);
 
-			$attempt_datas = masteriyo_get_quiz_attempt_ended_data( $quiz_id, $attempt_data->id );
+			$attempt_datas = masteriyo_get_quiz_attempt_ended_data( $attempt_data->id, $quiz_id );
 		} else {
 			$session      = masteriyo( 'session' );
 			$all_attempts = $session->get( 'quiz_attempts', array() );

@@ -34,9 +34,9 @@ import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
+import { OrderStatus } from '../../../enums/Enum';
 import API from '../../../utils/api';
 import { getLocalTime } from '../../../utils/utils';
-
 const makeOrderNumberLabel = (order: any) => {
 	if (order.billing.first_name || order.billing.last_name) {
 		return `#${order.id} ${order.billing.first_name} ${order.billing.last_name}`.trim();
@@ -82,7 +82,6 @@ interface Order {
 interface Props {
 	data: Order;
 }
-
 const OrderRow: React.FC<Props> = (props) => {
 	const { data } = props;
 	const { id, status, total, currency_symbol, billing } = data;
@@ -148,6 +147,21 @@ const OrderRow: React.FC<Props> = (props) => {
 
 	const onRestorePress = () => restoreOrder.mutate(id);
 
+	const orderStatus =
+		status == OrderStatus.Completed
+			? 'green'
+			: status == OrderStatus.OnHold
+			? 'orange'
+			: status == OrderStatus.Pending
+			? 'yellow'
+			: status == OrderStatus.Cancelled
+			? 'red'
+			: status == OrderStatus.Refunded
+			? 'blue'
+			: status == OrderStatus.Failed
+			? 'blackalpha'
+			: 'gray';
+
 	return (
 		<Tr>
 			<Td>
@@ -185,7 +199,7 @@ const OrderRow: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<Badge>{status}</Badge>
+				<Badge colorScheme={orderStatus}>{status}</Badge>
 			</Td>
 			<Td>{PriceWithSymbol(total, currency_symbol)}</Td>
 			<Td>

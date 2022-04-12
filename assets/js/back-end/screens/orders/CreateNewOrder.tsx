@@ -155,11 +155,13 @@ const CreateNewOrder: React.FC = () => {
 													loadingMessage={() =>
 														__('Searching customer...', 'masteriyo')
 													}
-													noOptionsMessage={() =>
-														__(
-															'Please enter 3 or more characters.',
-															'masteriyo'
-														)
+													noOptionsMessage={({ inputValue }) =>
+														inputValue.length > 2
+															? __('Users not found.', 'masteriyo')
+															: __(
+																	'Please enter 3 or more characters.',
+																	'masteriyo'
+															  )
 													}
 													isClearable={true}
 													placeholder={__(
@@ -215,8 +217,13 @@ const CreateNewOrder: React.FC = () => {
 											loadingMessage={() =>
 												__('Searching course...', 'masteriyo')
 											}
-											noOptionsMessage={() =>
-												__('Please enter 3 or more characters.', 'masteriyo')
+											noOptionsMessage={({ inputValue }) =>
+												inputValue.length > 2
+													? __('Course not found.', 'masteriyo')
+													: __(
+															'Please enter 3 or more characters.',
+															'masteriyo'
+													  )
 											}
 											isClearable={true}
 											placeholder={__('Search courses', 'masteriyo')}

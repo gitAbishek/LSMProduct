@@ -95,12 +95,11 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 					styles={reactSelectStyles}
 					cacheOptions={true}
 					loadingMessage={() => __('Searching...', 'masteriyo')}
-					noOptionsMessage={({ inputValue }) => {
-						if (inputValue.length > 2) {
-							return __('Users not found.', 'masteriyo');
-						}
-						return __('Please enter 3 or more characters.', 'masteriyo');
-					}}
+					noOptionsMessage={({ inputValue }) =>
+						inputValue.length > 2
+							? __('Users not found.', 'masteriyo')
+							: __('Please enter 3 or more characters.', 'masteriyo')
+					}
 					isClearable={true}
 					placeholder={__('Search by username or email', 'masteriyo')}
 					defaultValue={

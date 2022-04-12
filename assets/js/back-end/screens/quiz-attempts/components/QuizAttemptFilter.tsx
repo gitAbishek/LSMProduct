@@ -48,8 +48,10 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 						styles={reactSelectStyles}
 						cacheOptions={true}
 						loadingMessage={() => __('Searching...', 'masteriyo')}
-						noOptionsMessage={() =>
-							__('Please enter 3 or more characters.', 'masteriyo')
+						noOptionsMessage={({ inputValue }) =>
+							inputValue.length > 2
+								? __('Users not found.', 'masteriyo')
+								: __('Please enter 3 or more characters.', 'masteriyo')
 						}
 						isClearable={true}
 						placeholder={__('Search by username or email', 'masteriyo')}
@@ -80,8 +82,10 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 						styles={reactSelectStyles}
 						cacheOptions={true}
 						loadingMessage={() => __('Searching...', 'masteriyo')}
-						noOptionsMessage={() =>
-							__('Please enter 3 or more characters.', 'masteriyo')
+						noOptionsMessage={({ inputValue }) =>
+							inputValue.length > 2
+								? __('Quiz not found.', 'masteriyo')
+								: __('Please enter 3 or more characters.', 'masteriyo')
 						}
 						isClearable={true}
 						placeholder={__('Search by Quiz', 'masteriyo')}

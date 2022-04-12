@@ -23,6 +23,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
 import { CourseProgressItemMap } from '../schemas';
+import localized from '../utils/global';
 import QuestionList from './qa/QuestionList';
 import SidebarItem from './SidebarItem';
 
@@ -35,9 +36,6 @@ interface Props {
 	coursePermalink: string;
 	activeIndex: number;
 }
-
-//@ts-ignore
-const qaEnable = _MASTERIYO_.qaEnable;
 
 const Sidebar: React.FC<Props> = (props) => {
 	const {
@@ -175,7 +173,7 @@ const Sidebar: React.FC<Props> = (props) => {
 								onClick={() => setCurrentTab(1)}>
 								{__('Lessons', 'masteriyo')}
 							</Button>
-							{qaEnable && (
+							{localized.qaEnable && (
 								<Button
 									leftIcon={<BiInfoCircle />}
 									isActive={currentTab === 2}

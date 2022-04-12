@@ -1,12 +1,10 @@
+import localized from '../../utils/global';
 import { decodeEntity } from '../../utils/utils';
-
-//@ts-ignore
-const currencyPosition = window._MASTERIYO_.currency.position;
 
 const PriceWithSymbol = (price: string | number, currencySymbol: string) => {
 	let FormattedPriceWithSymbol: string;
 
-	switch (currencyPosition) {
+	switch (localized.currency.position) {
 		case 'left':
 			FormattedPriceWithSymbol = `${decodeEntity(currencySymbol)}${price}`;
 			break;

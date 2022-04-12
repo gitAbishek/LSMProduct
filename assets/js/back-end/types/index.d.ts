@@ -190,9 +190,25 @@ export interface SetttingsMap {
 export type MasteriyoLocalized = {
 	rootApiUrl: string;
 	ajax_url: string;
+	home_url: string;
 	current_user_id: string;
 	nonce: string;
 	review_notice_nonce: string;
+	total_posts: number;
+	imageSizes: string[];
+	pageSlugs: {
+		courses: string;
+		account: string;
+		checkout: string;
+	};
+	countries: {
+		[country_code: string]: string;
+	};
+	states: {
+		[country_code: string]: {
+			[code: string]: string;
+		};
+	};
 	labels: {
 		save: string;
 		saving: string;

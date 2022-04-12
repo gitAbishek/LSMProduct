@@ -32,6 +32,7 @@ import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { Polygon } from '../../back-end/constants/images';
 import localized from '../../back-end/utils/global';
 import { CourseProgressSummaryMap } from '../schemas';
+import localized from '../utils/global';
 import AvatarMenu from './AvatarMenu';
 
 interface Props {
@@ -39,17 +40,6 @@ interface Props {
 	isOpen: boolean;
 	onToggle: () => void;
 }
-
-// @ts-ignore
-const logoData = window._MASTERIYO_.logo;
-// @ts-ignore
-const siteTitle = window._MASTERIYO_.siteTitle;
-
-// @ts-ignore
-const courseUrl = window._MASTERIYO_.urls.courses;
-
-// @ts-ignore
-const homeUrl = window._MASTERIYO_.urls.home;
 
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;
@@ -121,11 +111,11 @@ const Header: React.FC<Props> = (props) => {
 								py="4"
 								justifyContent="space-between">
 								<Box w="165px">
-									<Link href={homeUrl}>
-										{'' != logoData ? (
-											<Image src={logoData[0]} height="36px" />
+									<Link href={localized.urls.home}>
+										{'' != localized.logo ? (
+											<Image src={localized.logo[0]} height="36px" />
 										) : (
-											<Text textAlign="center">{siteTitle}</Text>
+											<Text textAlign="center">{localized.siteTitle}</Text>
 										)}
 									</Link>
 								</Box>
@@ -336,7 +326,7 @@ const Header: React.FC<Props> = (props) => {
 									)}
 								</AlertDescription>
 							</Stack>
-							<Link href={courseUrl}>
+							<Link href={localized.urls.courses}>
 								<Button size="sm">{__('Back to Course', 'masteriyo')}</Button>
 							</Link>
 						</Stack>

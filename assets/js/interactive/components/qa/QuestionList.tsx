@@ -29,10 +29,8 @@ import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import localized from '../../../back-end/utils/global';
 import { QuestionAnswerSchema } from '../../schemas';
+import localized from '../../utils/global';
 import QaChat from './QaChat';
-
-// @ts-ignore
-const myAccountUrl = window._MASTERIYO_.urls.account;
 
 /*
 TODO: implement infinite scroll on question list
@@ -247,7 +245,7 @@ const QuestionList: React.FC = () => {
 						'You must be logged in to ask question. You can register from',
 						'masteriyo'
 					)}
-					<Link isExternal color="blue.500" href={myAccountUrl}>
+					<Link isExternal color="blue.500" href={localized.urls.account}>
 						{__(' here.', 'masteriyo')}
 					</Link>
 				</Text>

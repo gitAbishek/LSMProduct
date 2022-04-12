@@ -34,17 +34,12 @@ import {
 	tabStyles,
 } from '../../../config/styles';
 import { AdvancedSettingsMap, SetttingsMap } from '../../../types';
+import localized from '../../../utils/global';
 import PagesAPI from '../../../utils/pages';
 
 interface Props {
 	advanceData?: AdvancedSettingsMap;
 }
-
-//@ts-ignore
-const coursesSlug = window._MASTERIYO_.pageSlugs.courses;
-
-//@ts-ignore
-const homeURL = window._MASTERIYO_.home_url;
 
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
@@ -224,7 +219,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{...register('advance.permalinks.category_base')}
 									/>
 									<Code>
-										{homeURL}/{watchPermalinkData.category_base}/
+										{localized.home_url}/{watchPermalinkData.category_base}/
 										{__('uncategorized', 'masteriyo')}
 									</Code>
 								</Stack>
@@ -241,7 +236,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										defaultValue={advanceData?.permalinks?.difficulty_base}
 									/>
 									<Code>
-										{homeURL}/{watchPermalinkData.difficulty_base}
+										{localized.home_url}/{watchPermalinkData.difficulty_base}
 										{__('/uncategorized', 'masteriyo')}
 									</Code>
 								</Stack>
@@ -267,24 +262,28 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 																{__('Default', 'masteriyo')}
 															</Text>
 															<Code flex="1">
-																{homeURL}
+																{localized.home_url}
 																{__('?course=sample-course', 'masteriyo')}
 															</Code>
 														</Flex>
 													</Radio>
 													{/** TS */}
-													<Radio value={coursesSlug}>
+													<Radio value={localized.pageSlugs.courses}>
 														<Flex>
 															<Text fontSize="sm" w="150px">
 																{__('Courses page base', 'masteriyo')}
 															</Text>
 															<Code flex="1">
-																{homeURL}/{coursesSlug}
+																{localized.home_url}/
+																{localized.pageSlugs.courses}
 																{__('/sample-course', 'masteriyo')}
 															</Code>
 														</Flex>
 													</Radio>
-													<Radio value={coursesSlug + '/%course_cat%/'}>
+													<Radio
+														value={
+															localized.pageSlugs.courses + '/%course_cat%/'
+														}>
 														<Flex>
 															<Text fontSize="sm" w="150px">
 																{__(
@@ -293,7 +292,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 																)}
 															</Text>
 															<Code flex="1">
-																{homeURL}/{coursesSlug}
+																{localized.home_url}/
+																{localized.pageSlugs.courses}
 																{__(
 																	'/course-category/sample-course',
 																	'masteriyo'

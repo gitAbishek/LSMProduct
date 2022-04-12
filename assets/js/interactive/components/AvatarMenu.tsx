@@ -10,36 +10,22 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiLogOut, BiUserCircle } from 'react-icons/bi';
-
-//@ts-ignore
-const userAvatar = _MASTERIYO_.userAvatar;
+import localized from '../utils/global';
 
 const AvatarMenu = () => {
 	return (
 		<Menu placement="bottom-end">
 			<MenuButton>
-				<Avatar src={userAvatar} size="sm" />
+				<Avatar src={localized.userAvatar} size="sm" />
 			</MenuButton>
 			<MenuList fontSize="sm" textAlign="center">
-				<Link
-					color="gray.500"
-					href={
-						//@ts-ignore
-						`${_MASTERIYO_.urls.account}`
-					}
-					isExternal>
+				<Link color="gray.500" href={localized.urls.account} isExternal>
 					<MenuItem icon={<BiUserCircle size={22} />}>
 						{__('My Profile', 'masteriyo')}
 					</MenuItem>
 				</Link>
 				<MenuDivider />
-				<Link
-					color="gray.500"
-					href={
-						//@ts-ignore
-						`${_MASTERIYO_.urls.logout}`
-					}
-					isExternal>
+				<Link color="gray.500" href={localized.urls.logout} isExternal>
 					<MenuItem icon={<BiLogOut size={22} />}>
 						{__('Log Out', 'masteriyo')}
 					</MenuItem>

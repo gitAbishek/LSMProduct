@@ -28,6 +28,7 @@ import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../../components/common/PriceWithSymbol';
 import routes from '../../../constants/routes';
 import { CourseCategorySchema } from '../../../schemas';
+import localized from '../../../utils/global';
 import { isEmpty } from '../../../utils/utils';
 interface Props {
 	id: number;
@@ -61,8 +62,7 @@ const CourseList: React.FC<Props> = (props) => {
 	} = props;
 
 	const createdOnDate = createdOn.split(' ')[0];
-	//@ts-ignore
-	const currencySymbol = window._MASTERIYO_.currency.symbol;
+	const currencySymbol = localized.currency.symbol;
 
 	return (
 		<Tr>

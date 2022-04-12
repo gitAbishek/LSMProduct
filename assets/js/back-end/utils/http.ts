@@ -1,9 +1,7 @@
 import http from '@wordpress/api-fetch';
+import localized from './global';
 
-//@ts-ignore
-http.use(http.createNonceMiddleware(_MASTERIYO_.nonce));
-
-//@ts-ignore
-http.use(http.createRootURLMiddleware(_MASTERIYO_.rootApiUrl));
+http.use(http.createNonceMiddleware(localized.nonce));
+http.use(http.createRootURLMiddleware(localized.rootApiUrl));
 
 export default http;

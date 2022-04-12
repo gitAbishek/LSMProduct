@@ -31,6 +31,7 @@ import { useQuery } from 'react-query';
 import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
 import API from '../../../utils/api';
+import localized from '../../../utils/global';
 import { convertMinutesToHours } from '../../../utils/math';
 import { decodeEntity } from '../../../utils/utils';
 import ChangeInstructorSetting from './ChangeInstructorSetting';
@@ -100,11 +101,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 		borderRightColor: 'gray.200',
 	};
 
-	//@ts-ignore
-	const currencyCode = window._MASTERIYO_.currency.code;
-
-	//@ts-ignore
-	const currencySymbol = window._MASTERIYO_.currency.symbol;
+	const currencyCode = localized.currency.code;
+	const currencySymbol = localized.currency.symbol;
 
 	const onChangePriceType = (priceType: string) => {
 		setPricingDisplayValue(priceType);

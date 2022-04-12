@@ -932,7 +932,7 @@ abstract class AbstractRepository {
 		 * Filter WP query vars.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added third parameter $repository.
+		 * @since 1.4.9 Added third parameter $repository.
 		 *
 		 * @param array $wp_query_args WP Query args.
 		 * @param array $query_vars query vars from a ObjectQuery.

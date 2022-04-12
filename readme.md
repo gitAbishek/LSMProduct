@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.9.2
+**Tested up to**: 5.9.3
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.8
+**Stable tag**: 1.4.9
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,17 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.9 - 12-04-2022
+
+- Enhancement - Added sub-categories feature.
+- Enhancement - On learn page hide the user avatar menu if the user is not logged in.
+- Enhancement - Added 'Users not found' message in the filters while the user doesn't exist.
+- Enhancement - Added order status colour on order listing.
+- Fix - Course preview link being directed to the learning page.
+- Fix - Deprecated Message: usort(): Returning bool from comparison function is deprecated in PHP8.
+- Fix - Deprecated Message: Required parameter follows optional parameter in PHP8.
+- Fix - Extra skeleton loading on orders listing.
 
 ### 1.4.8 - 05-04-2022
 

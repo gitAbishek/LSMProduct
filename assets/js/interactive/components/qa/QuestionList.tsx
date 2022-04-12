@@ -27,7 +27,6 @@ import { useParams } from 'react-router-dom';
 import { useOnType } from 'use-ontype';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
-import localized from '../../../back-end/utils/global';
 import { QuestionAnswerSchema } from '../../schemas';
 import localized from '../../utils/global';
 import QaChat from './QaChat';

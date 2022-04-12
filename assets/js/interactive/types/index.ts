@@ -11,4 +11,5 @@ export interface MasteriyoLocalized {
 		courses: string;
 		home: string;
 	};
+	isUserLoggedIn: boolean;
 }

@@ -30,7 +30,6 @@ import React from 'react';
 import { BiChevronDown, BiInfoCircle } from 'react-icons/bi';
 import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { Polygon } from '../../back-end/constants/images';
-import localized from '../../back-end/utils/global';
 import { CourseProgressSummaryMap } from '../schemas';
 import localized from '../utils/global';
 import AvatarMenu from './AvatarMenu';

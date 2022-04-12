@@ -285,7 +285,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get valid WP_Term_Query args from a ObjectQuery's query variables.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.9
 	 * @param array $query_vars query vars from a ObjectQuery.
 	 * @return array
 	 */
@@ -317,7 +317,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 		 * Filter WP query vars.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added third parameter $repository.
+		 * @since 1.4.9 Added third parameter $repository.
 		 *
 		 * @param array $wp_query_args WP Query args.
 		 * @param array $query_vars query vars from a ObjectQuery.

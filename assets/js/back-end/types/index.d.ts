@@ -212,4 +212,5 @@ export type MasteriyoLocalized = {
 		addNewCourse: string;
 	};
 	show_review_notice: 'yes' | 'no';
+	isUserLoggedIn: boolean;
 };

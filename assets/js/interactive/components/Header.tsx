@@ -30,6 +30,7 @@ import React from 'react';
 import { BiChevronDown, BiInfoCircle } from 'react-icons/bi';
 import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { Polygon } from '../../back-end/constants/images';
+import localized from '../../back-end/utils/global';
 import { CourseProgressSummaryMap } from '../schemas';
 import AvatarMenu from './AvatarMenu';
 
@@ -295,13 +296,15 @@ const Header: React.FC<Props> = (props) => {
 									</Stack>
 								</Stack>
 
-								<Stack
-									direction="row"
-									spacing="3"
-									align="center"
-									color="gray.400">
-									<AvatarMenu />
-								</Stack>
+								{localized.isUserLoggedIn ? (
+									<Stack
+										direction="row"
+										spacing="3"
+										align="center"
+										color="gray.400">
+										<AvatarMenu />
+									</Stack>
+								) : null}
 							</Stack>
 						</Container>
 					</Box>

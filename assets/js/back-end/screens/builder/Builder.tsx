@@ -167,7 +167,7 @@ const Builder: React.FC = () => {
 								course={{
 									name: courseQuery.data.name,
 									id: courseQuery.data.id,
-									previewUrl: courseQuery.data.preview_permalink,
+									previewUrl: courseQuery.data.permalink,
 								}}
 								secondBtn={{
 									label: isDrafted()

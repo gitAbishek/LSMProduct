@@ -19,6 +19,15 @@ defined( 'ABSPATH' ) || exit;
 abstract class CommentsController extends CrudController {
 
 	/**
+	 * Comment Type.
+	 *
+	 @since x.x.x
+	 *
+	 * @var string
+	 */
+	protected $comment_type = 'all';
+
+	/**
 	 * Retrieves the query params for collections.
 	 *
 	 * @since 1.0.0
@@ -42,19 +51,21 @@ abstract class CommentsController extends CrudController {
 		);
 
 		$params['user'] = array(
-			'description' => __( 'Limit result set to comments assigned to specific user IDs. Requires authorization.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'description'       => __( 'Limit result set to comments assigned to specific user IDs. Requires authorization.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['user_exclude'] = array(
-			'description' => __( 'Ensure result set excludes comments assigned to specific user IDs. Requires authorization.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'description'       => __( 'Ensure result set excludes comments assigned to specific user IDs. Requires authorization.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['user_email'] = array(
@@ -77,21 +88,23 @@ abstract class CommentsController extends CrudController {
 		);
 
 		$params['exclude'] = array(
-			'description' => __( 'Ensure result set excludes specific IDs.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'description'       => __( 'Ensure result set excludes specific IDs.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
-			'default'     => array(),
+			'default'           => array(),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['include'] = array(
-			'description' => __( 'Limit result set to specific IDs.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'description'       => __( 'Limit result set to specific IDs.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
-			'default'     => array(),
+			'default'           => array(),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['offset'] = array(
@@ -123,30 +136,33 @@ abstract class CommentsController extends CrudController {
 		);
 
 		$params['parent'] = array(
-			'default'     => array(),
-			'description' => __( 'Limit result set to comments of specific parent IDs.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'default'           => array(),
+			'description'       => __( 'Limit result set to comments of specific parent IDs.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['parent_exclude'] = array(
-			'default'     => array(),
-			'description' => __( 'Ensure result set excludes specific parent IDs.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'default'           => array(),
+			'description'       => __( 'Ensure result set excludes specific parent IDs.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['post'] = array(
-			'default'     => array(),
-			'description' => __( 'Limit result set to comments assigned to specific post IDs.', 'masteriyo' ),
-			'type'        => 'array',
-			'items'       => array(
+			'default'           => array(),
+			'description'       => __( 'Limit result set to comments assigned to specific post IDs.', 'masteriyo' ),
+			'type'              => 'array',
+			'items'             => array(
 				'type' => 'integer',
 			),
+			'sanitize_callback' => 'wp_parse_id_list',
 		);
 
 		$params['status'] = array(
@@ -169,7 +185,7 @@ abstract class CommentsController extends CrudController {
 		 * collection parameter to an internal WP_Comment_Query parameter. Use the
 		 * `rest_comment_query` filter to set WP_Comment_Query parameters.
 		 *
-		 * @since 4.7.0
+		 * @since 1.0.0
 		 *
 		 * @param array $params JSON Schema-formatted collection parameters.
 		 */
@@ -192,9 +208,9 @@ abstract class CommentsController extends CrudController {
 			);
 		}
 
-		$post = get_comment( (int) $request['id'] );
+		$comment = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_comment_permissions( 'read', $request['id'] ) ) {
+		if ( $comment && ! $this->permission->rest_check_comment_permissions( 'read', $request['id'] ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
@@ -279,9 +295,9 @@ abstract class CommentsController extends CrudController {
 			);
 		}
 
-		$post = get_comment( (int) $request['id'] );
+		$comment = get_comment( (int) $request['id'] );
 
-		if ( $post && ! $this->permission->rest_check_comment_permissions( 'delete', $post->ID ) ) {
+		if ( $comment && ! $this->permission->rest_check_comment_permissions( 'delete', $comment->ID ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_delete',
 				__( 'Sorry, you are not allowed to delete resources.', 'masteriyo' ),
@@ -364,8 +380,13 @@ abstract class CommentsController extends CrudController {
 			'author__in'      => $request['user'],
 			'author__not_in'  => $request['user_exclude'],
 			'author_email'    => $request['user_email'],
-			'post__in'        => $request['course_id'],
+			'post__in'        => $request['post'],
+			'status'          => $request['status'],
 		);
+
+		if ( isset( $this->comment_type ) ) {
+			$args['type'] = $this->comment_type;
+		}
 
 		if ( 'date' === $args['orderby'] ) {
 			$args['orderby'] = 'date ID';
@@ -420,6 +441,8 @@ abstract class CommentsController extends CrudController {
 				 *
 				 * The dynamic portion of the hook name, $var, refers to the query_var key.
 				 *
+				 * @since 1.0.0
+				 *
 				 * @param mixed $prepared_args[ $var ] The query_var value.
 				 */
 				$query_args[ $var ] = apply_filters( "masteriyo_rest_query_var-{$var}", $prepared_args[ $var ] ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
@@ -435,7 +458,7 @@ abstract class CommentsController extends CrudController {
 		return $query_args;
 	}
 
-		/**
+	/**
 	 * Get all the WP Query vars that are allowed for the API request.
 	 *
 	 * @since 1.0.0
@@ -466,12 +489,15 @@ abstract class CommentsController extends CrudController {
 			 * To disable anyway, use
 			 * `add_filter( 'masteriyo_rest_private_query_vars', '__return_empty_array' );`
 			 *
+			 * @since 1.0.0
+			 *
 			 * @param array $private_query_vars Array of allowed query vars for authorized users.
 			 * }
 			 */
 			$private    = apply_filters( 'masteriyo_rest_private_query_vars', $wp->private_query_vars );
 			$valid_vars = array_merge( $valid_vars, $private );
 		}
+
 		// Define our own in addition to WP's normal vars.
 		$rest_valid = array(
 			'search',
@@ -485,12 +511,17 @@ abstract class CommentsController extends CrudController {
 			'comment__in',
 			'comment__not_in',
 			'number',
+			'type',
+			'status',
+			'author_email',
+			'author__in',
 			'meta_query',
 			'meta_key',
 			'meta_value',
 			'meta_compare',
 			'meta_value_num',
 		);
+
 		$valid_vars = array_merge( $valid_vars, $rest_valid );
 
 		/**
@@ -499,6 +530,8 @@ abstract class CommentsController extends CrudController {
 		 * This filter allows you to add or remove query vars from the final allowed
 		 * list for all requests, including unauthenticated ones. To alter the
 		 * vars for editors only.
+		 *
+		 * @since 1.0.0
 		 *
 		 * @param array {
 		 *    Array of allowed WP_Query query vars.
@@ -510,5 +543,28 @@ abstract class CommentsController extends CrudController {
 		$valid_vars = array_values( array_unique( $valid_vars ) );
 
 		return $valid_vars;
+	}
+
+	/**
+	 * Process objects collection.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $objects Courses data.
+	 * @param array $query_args Query arguments.
+	 * @param array $query_results Courses query result data.
+	 *
+	 * @return array
+	 */
+	protected function process_objects_collection( $objects, $query_args, $query_results ) {
+		return array(
+			'data' => $objects,
+			'meta' => array(
+				'total'        => $query_results['total'],
+				'pages'        => $query_results['pages'],
+				'current_page' => $query_args['paged'],
+				'per_page'     => $query_args['number'],
+			),
+		);
 	}
 }

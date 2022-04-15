@@ -33,18 +33,18 @@ class CourseReviewsController extends CommentsController {
 	protected $rest_base = 'courses/reviews';
 
 	/**
-	 * Post Type.
+	 * Object Type.
 	 *
 	 * @var string
 	 */
 	protected $object_type = 'course_review';
 
 	/**
-	 * If object is hierarchial.
+	 * Comment Type.
 	 *
-	 * @var bool
+	 * @var string
 	 */
-	protected $hierarchial = false;
+	protected $comment_type = 'mto_course_review';
 
 	/**
 	 * Permission class.
@@ -141,8 +141,29 @@ class CourseReviewsController extends CommentsController {
 	public function get_collection_params() {
 		$params = parent::get_collection_params();
 
-		return $params;
+		unset( $params['post'] );
 
+		$params['course'] = array(
+			'default'     => array(),
+			'description' => __( 'Limit result set to course reviews assigned to specific course IDs.', 'masteriyo' ),
+			'type'        => 'array',
+			'items'       => array(
+				'type' => 'integer',
+			),
+		);
+
+		/**
+		 * Filters REST API collection parameters for the course reviews controller.
+		 *
+		 * This filter registers the collection parameter, but does not map the
+		 * collection parameter to an internal WP_Comment_Query parameter. Use the
+		 * `rest_comment_query` filter to set WP_Comment_Query parameters.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $params JSON Schema-formatted collection parameters.
+		 */
+		return apply_filters( 'masteriyo_rest_course_review_collection_params', $params );
 	}
 
 	/**
@@ -180,23 +201,48 @@ class CourseReviewsController extends CommentsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$course_reviews = new \WP_Comment_Query( $query_args );
-		$course_reviews = $course_reviews->comments;
-		$total_posts    = count( $course_reviews );
+		$query          = new \WP_Comment_Query( $query_args );
+		$course_reviews = $query->comments;
+		$total_comments = $this->get_total_comments( $query_args );
 
-		if ( $total_posts < 1 ) {
+		if ( $total_comments < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
-			unset( $query_args['paged'] );
-			$course_reviews = new \WP_Comment_Query( $query_args );
-			$course_reviews = $course_reviews->comments;
-			$total_posts    = count( $course_reviews );
+			$total_comments = $this->get_total_comments( $query_args );
 		}
 
 		return array(
 			'objects' => array_filter( array_map( array( $this, 'get_object' ), $course_reviews ) ),
-			'total'   => (int) $total_posts,
-			'pages'   => (int) ceil( $total_posts / (int) 10 ),
+			'total'   => (int) $total_comments,
+			'pages'   => (int) ceil( $total_comments / (int) $query_args['number'] ),
 		);
+	}
+
+	/**
+	 * Get the total number of comments by comment type.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $query_args WP_Comment_Query args.
+	 * @return int
+	 */
+	protected function get_total_comments( $query_args ) {
+		if ( isset( $query_args['paged'] ) ) {
+			unset( $query_args['paged'] );
+		}
+
+		if ( isset( $query_args['number'] ) ) {
+			unset( $query_args['number'] );
+		}
+
+		if ( isset( $query_args['offset'] ) ) {
+			unset( $query_args['offset'] );
+		}
+
+		$query_args['fields'] = 'ids';
+
+		$comments = get_comments( $query_args );
+
+		return count( $comments );
 	}
 
 	/**
@@ -297,6 +343,8 @@ class CourseReviewsController extends CommentsController {
 	/**
 	 * Get course review data.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param CourseReview $course_review Course Review instance.
 	 * @param string       $context Request context.
 	 *                             Options: 'view' and 'edit'.
@@ -322,7 +370,16 @@ class CourseReviewsController extends CommentsController {
 			'author_id'    => $course_review->get_author_id( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter the course review data for a response.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course review data.
+		 * @param Masteriyo\Models\CourseREview $course_review Course review object.
+		 * @param string $context Request context.
+		 */
+		return apply_filters( 'masteriyo_rest_course_review_data', $data, $course_review, $context );
 	}
 
 	/**
@@ -335,26 +392,11 @@ class CourseReviewsController extends CommentsController {
 	 * @return array
 	 */
 	protected function prepare_objects_query( $request ) {
-		$args = array(
-			'offset'   => $request['offset'],
-			'paged'    => $request['page'],
-			'per_page' => $request['per_page'],
-			'search'   => $request['search'],
-			'type'     => 'mto_course_review',
-		);
+		$args = parent::prepare_objects_query( $request );
 
-		/**
-		 * Filter the query arguments for a request.
-		 *
-		 * Enables adding extra arguments or setting defaults for a post
-		 * collection request.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param array           $args    Key value array of query var to query value.
-		 * @param WP_REST_Request $request The request used.
-		 */
-		return apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
+		$args['post__in'] = $request['course'];
+
+		return $args;
 	}
 
 	/**

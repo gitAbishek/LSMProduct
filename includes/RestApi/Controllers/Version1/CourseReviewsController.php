@@ -183,6 +183,7 @@ class CourseReviewsController extends CommentsController {
 		$course_reviews = new \WP_Comment_Query( $query_args );
 		$course_reviews = $course_reviews->comments;
 		$total_posts    = count( $course_reviews );
+
 		if ( $total_posts < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
@@ -338,7 +339,7 @@ class CourseReviewsController extends CommentsController {
 			'offset'   => $request['offset'],
 			'paged'    => $request['page'],
 			'per_page' => $request['per_page'],
-			's'        => $request['search'],
+			'search'   => $request['search'],
 			'type'     => 'mto_course_review',
 		);
 
@@ -348,12 +349,12 @@ class CourseReviewsController extends CommentsController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
 		 */
-		$args = apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
-
-		return $args;
+		return apply_filters( "masteriyo_rest_{$this->object_type}_object_query", $args, $request );
 	}
 
 	/**

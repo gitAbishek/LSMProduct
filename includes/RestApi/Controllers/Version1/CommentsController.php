@@ -389,7 +389,9 @@ abstract class CommentsController extends CrudController {
 		}
 
 		if ( 'date' === $args['orderby'] ) {
-			$args['orderby'] = 'date ID';
+			$args['orderby'] = 'comment_date comment_ID';
+		} elseif ( 'date_gmt' === $args['orderby'] ) {
+			$args['orderby'] = 'comment_date_gmt comment_ID';
 		}
 
 		$args['date_query'] = array();
@@ -452,7 +454,9 @@ abstract class CommentsController extends CrudController {
 		if ( 'include' === $query_args['orderby'] ) {
 			$query_args['orderby'] = 'comment__in';
 		} elseif ( 'id' === $query_args['orderby'] ) {
-			$query_args['orderby'] = 'ID'; // ID must be capitalized.
+			$query_args['orderby'] = 'comment_ID'; // ID must be capitalized.
+		} elseif ( 'parent' === $query_args['orderby'] ) {
+			$query_args['orderby'] = 'comment_parent';
 		}
 
 		return $query_args;

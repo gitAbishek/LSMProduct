@@ -370,6 +370,16 @@ class CourseReviewsController extends CommentsController {
 			'author_id'    => $course_review->get_author_id( $context ),
 		);
 
+		$course = masteriyo_get_course( $course_review->get_course_id() );
+		if ( $course ) {
+			$data['course'] = array(
+				'id'   => $course->get_id(),
+				'name' => $course->get_name(),
+			);
+		} else {
+			$data['course'] = null;
+		}
+
 		/**
 		 * Filter the course review data for a response.
 		 *

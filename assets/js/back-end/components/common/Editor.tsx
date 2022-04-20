@@ -1,6 +1,7 @@
 import { Input } from '@chakra-ui/react';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import { isEmpty } from '../../utils/utils';
 import WPEditor from './WPEditor';
 
 interface Props {
@@ -21,7 +22,7 @@ const Editor: React.FC<Props> = (props) => {
 				id={id}
 				value={defaultValue}
 				onContentChange={(value: string) => {
-					setValue(name, value);
+					setValue(name, !isEmpty(value) ? value : ' ');
 				}}
 				height={height}
 			/>

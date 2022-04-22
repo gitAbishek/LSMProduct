@@ -623,6 +623,7 @@ class QuizesController extends PostsController {
 		$attempt_questions       = 0;
 		$total_correct_answers   = 0;
 		$total_incorrect_answers = 0;
+		$answers_data            = array();
 
 		$quiz           = masteriyo_get_quiz( $quiz_id );
 		$quiz_questions = masteriyo_get_quiz_questions( $quiz_id, 'post_parent' );

@@ -1218,7 +1218,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.3.8
 	 *
-	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 *
 	 * @return array
 	 */

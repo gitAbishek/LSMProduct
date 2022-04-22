@@ -19,9 +19,14 @@ import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import { getLocalTime, humanizeTime } from '../../back-end/utils/utils';
+import {
+	getLocalTime,
+	humanizeTime,
+	isNumber,
+} from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
+import { calculatePercentage } from '../utils/percentage';
 
 interface Props {
 	courseData: MyCoursesSchema;
@@ -58,7 +63,20 @@ const CourseItem: React.FC<Props> = (props) => {
 		);
 	};
 
+	const calculateProgress = () => {
+		const completed: any = courseProgressQuery?.data?.summary?.total?.completed;
+		const pending: any = courseProgressQuery?.data?.summary?.total?.pending;
+
+		if (isNumber(completed) && isNumber(pending)) {
+			return calculatePercentage(completed, pending + completed);
+		} else {
+			return 0;
+		}
+	};
+
 	if (course) {
+		const progress = calculateProgress();
+
 		return (
 			<Box borderWidth="1px" borderColor="gray.100">
 				<Box as="figure" pos="relative">
@@ -133,16 +151,7 @@ const CourseItem: React.FC<Props> = (props) => {
 							</Stack>
 							{courseProgressQuery.isSuccess && (
 								<Text>
-									{courseProgressQuery?.data?.summary?.total?.completed === 0 &&
-									courseProgressQuery?.data?.summary?.total?.pending === 0
-										? 0
-										: Math?.round(
-												(courseProgressQuery?.data?.summary?.total?.completed /
-													(courseProgressQuery?.data?.summary?.total?.pending +
-														courseProgressQuery?.data?.summary?.total
-															?.completed)) *
-													100
-										  )}
+									{progress}
 									{__('% Complete', 'masteriyo')}
 								</Text>
 							)}
@@ -174,8 +183,14 @@ const CourseItem: React.FC<Props> = (props) => {
 								</Text>
 							)}
 							<Link href={course?.start_course_url}>
-								<Button colorScheme="blue" size="sm" borderRadius="full">
-									{__('Continue', 'masteriyo')}
+								<Button
+									colorScheme="blue"
+									size="sm"
+									borderRadius="full"
+									isDisabled={progress >= 100}>
+									{progress >= 100
+										? __('Completed', 'masteriyo')
+										: __('Continue', 'masteriyo')}
 								</Button>
 							</Link>
 						</Stack>

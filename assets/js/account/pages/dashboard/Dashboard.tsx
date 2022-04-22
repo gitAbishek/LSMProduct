@@ -1,4 +1,12 @@
-import { Button, ButtonGroup, Heading, Icon, Stack } from '@chakra-ui/react';
+import {
+	Alert,
+	AlertIcon,
+	Button,
+	ButtonGroup,
+	Heading,
+	Icon,
+	Stack,
+} from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Col, Row } from 'react-grid-system';
@@ -11,10 +19,12 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import { CourseProgressSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
+import { isEmpty } from '../../../back-end/utils/utils';
 import CountBox from '../../components/CountBox';
 import CourseGridItem from '../../components/CourseGridItem';
 import routes from '../../constants/routes';
 import { MyCoursesSchema } from '../../schemas';
+import localized from '../../utils/global';
 
 const Dashboard: React.FC = () => {
 	const courseAPI = new API(urls.myCourses);
@@ -25,7 +35,7 @@ const Dashboard: React.FC = () => {
 	);
 
 	const courseProgressQuery = useQuery('dashboardCourseProgress', () =>
-		courseProgressAPI.list()
+		courseProgressAPI.list({ user_id: localized?.current_user_id })
 	);
 
 	const enrolledCoursesCount = courseProgressQuery?.data?.length;
@@ -48,6 +58,11 @@ const Dashboard: React.FC = () => {
 	const validCoursesIds = validCourses?.map(
 		(course: CourseProgressSchema) => course.course_id
 	);
+
+	const coursesToContinue: MyCoursesSchema[] | undefined =
+		dashboardCourseQuery?.data?.data?.filter((course: MyCoursesSchema) =>
+			validCoursesIds?.includes(course.course.id)
+		);
 
 	if (dashboardCourseQuery.isSuccess && courseProgressQuery.isSuccess) {
 		return (
@@ -88,7 +103,7 @@ const Dashboard: React.FC = () => {
 							alignItems="center">
 							<Stack direction="row">
 								<Heading size="md">
-									{__(' Continue Studying ', 'masteriyo')}
+									{__('Continue Studying', 'masteriyo')}
 								</Heading>
 							</Stack>
 							<ButtonGroup>
@@ -107,10 +122,15 @@ const Dashboard: React.FC = () => {
 								</Link>
 							</ButtonGroup>
 						</Stack>
-						{dashboardCourseQuery?.data?.data?.map((course: MyCoursesSchema) =>
-							validCoursesIds?.includes(course.course.id) ? (
+						{isEmpty(coursesToContinue) ? (
+							<Alert status="info">
+								<AlertIcon />
+								{__("You don't have any course in progress.", 'masteriyo')}
+							</Alert>
+						) : (
+							coursesToContinue?.map((course) => (
 								<CourseGridItem key={course.id} course={course} />
-							) : null
+							))
 						)}
 					</Stack>
 				</Stack>

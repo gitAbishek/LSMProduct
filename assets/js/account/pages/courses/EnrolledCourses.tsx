@@ -1,4 +1,4 @@
-import { Heading, SimpleGrid, Stack } from '@chakra-ui/react';
+import { Alert, AlertIcon, Heading, SimpleGrid, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -33,12 +33,19 @@ const EnrolledCourses: React.FC = () => {
 						return <CourseItem key={myCourse.id} courseData={myCourse} />;
 					})}
 				</SimpleGrid>
-				{myCourseQuery.isSuccess && !isEmpty(myCourseQuery?.data?.data) ? (
-					<MasteriyoPagination
-						metaData={myCourseQuery?.data?.meta}
-						setFilterParams={setFilterParams}
-						perPageText={__('Courses Per Page:', 'masteriyo')}
-					/>
+				{myCourseQuery.isSuccess ? (
+					isEmpty(myCourseQuery?.data?.data) ? (
+						<Alert status="info">
+							<AlertIcon />
+							{__("You haven't enrolled to any courses yet.", 'masteriyo')}
+						</Alert>
+					) : (
+						<MasteriyoPagination
+							metaData={myCourseQuery?.data?.meta}
+							setFilterParams={setFilterParams}
+							perPageText={__('Courses Per Page:', 'masteriyo')}
+						/>
+					)
 				) : null}
 			</Stack>
 		);

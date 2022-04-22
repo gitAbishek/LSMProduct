@@ -9,11 +9,13 @@ import { __ } from '@wordpress/i18n';
 import React, { useContext, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { BiPlus } from 'react-icons/bi';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import Select from 'react-select';
+import ReactSelectOptions from '../../../components/common/ReactSelectOptions';
 import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
 import { CreateCatModal } from '../../../context/CreateCatProvider';
+import { CourseCategorySchema } from '../../../schemas';
 import { CourseCategoriesResponse } from '../../../types/course';
 import API from '../../../utils/api';
 import { makeCategoriesHierarchy } from '../../../utils/categories';
@@ -21,36 +23,47 @@ import { makeCategoriesHierarchy } from '../../../utils/categories';
 interface Props {
 	defaultValue?: any;
 }
-
-interface CategoryOption {
-	value: any;
+interface SelectOption {
+	value: number;
 	label: string;
 }
 
 const Categories: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
-	const [categoriesList, setCategoriesList] = useState<CategoryOption[]>([]);
 	const { setIsCreateCatModalOpen } = useContext(CreateCatModal);
+	const [categoriesList, setCategoriesList] = useState<SelectOption[]>([]);
 
 	const categoryAPI = new API(urls.categories);
 
-	const categoriesQuery = useQuery<CourseCategoriesResponse>(
+	const categoriesQuery = useInfiniteQuery<CourseCategoriesResponse>(
 		'categoryLists',
-		() => categoryAPI.list({ per_page: 100 }),
+		({ pageParam = 1 }) => categoryAPI.list({ per_page: 10, page: pageParam }),
 		{
 			retry: false,
-			onSuccess: (data) => {
-				const categories = makeCategoriesHierarchy(data?.data);
+			onSuccess: (response) => {
+				let categories: CourseCategorySchema[] = [];
+
+				response?.pages?.forEach((page) => {
+					page.data.forEach((category) => {
+						categories.push(category);
+					});
+				});
 
 				setCategoriesList(
-					categories.map((cat) => ({
-						value: cat.id,
-						label: '— '.repeat(cat.depth) + cat.name,
+					makeCategoriesHierarchy(categories).map((category) => ({
+						value: category.id,
+						label: '— '.repeat(category.depth) + category.name,
 					}))
 				);
 			},
+			getNextPageParam: (lastResponse) =>
+				lastResponse.meta.current_page >= lastResponse.meta.pages
+					? undefined
+					: lastResponse.meta.current_page + 1,
 		}
 	);
+	const { hasNextPage, fetchNextPage, isFetchingNextPage } = categoriesQuery;
+
 	const { control } = useFormContext();
 
 	if (categoriesQuery.isSuccess) {
@@ -76,7 +89,20 @@ const Categories: React.FC<Props> = (props) => {
 							styles={reactSelectStyles}
 							closeMenuOnSelect={false}
 							isMulti
+							isFetchingNextPage={isFetchingNextPage}
 							options={categoriesList}
+							onMenuScrollToBottom={() => {
+								if (hasNextPage) {
+									fetchNextPage();
+								}
+							}}
+							components={{ MenuList: ReactSelectOptions }}
+							noOptionsMessage={({ inputValue }) => {
+								if (inputValue.length > 0) {
+									return __('No categories found.', 'masteriyo');
+								}
+								return __('No categories.', 'masteriyo');
+							}}
 						/>
 					)}
 				/>

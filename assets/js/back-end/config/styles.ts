@@ -27,6 +27,12 @@ export const infoIconStyles = {
 };
 
 export const reactSelectStyles = {
+	valueContainer: (provided: any) => ({
+		...provided,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+
 	control: (provided: any, state: any) => ({
 		...provided,
 		minHeight: '40px',
@@ -72,6 +78,7 @@ export const reactSelectStyles = {
 			: state.isFocused
 			? theme.colors.blue[10]
 			: 'transparent',
+		color: state.data?.isDisabled ? '#1a202c' : provided.color,
 	}),
 
 	multiValue: (provided: any) => ({

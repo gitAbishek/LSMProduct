@@ -10,11 +10,15 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
+import ReactSelect from 'react-select';
 import { useOnType } from 'use-ontype';
+import ReactSelectOptions from '../../../components/common/ReactSelectOptions';
+import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
+import { CourseCategorySchema } from '../../../schemas';
 import { CourseCategoriesResponse } from '../../../types/course';
 import API from '../../../utils/api';
 import { makeCategoriesHierarchy } from '../../../utils/categories';
@@ -50,23 +54,47 @@ interface Props {
 	setFilterParams: any;
 	filterParams: FilterParams;
 }
+interface SelectOption {
+	value: number;
+	label: string;
+}
 
 const CourseFilter: React.FC<Props> = (props) => {
 	const { setFilterParams, filterParams } = props;
+	const [categoriesList, setCategoriesList] = useState<SelectOption[]>([]);
+
 	const categoryAPI = new API(urls.categories);
-	const categoriesQuery = useQuery<CourseCategoriesResponse>(
+	const categoriesQuery = useInfiniteQuery<CourseCategoriesResponse>(
 		'categoryLists',
-		() => categoryAPI.list({ per_page: 100 }),
+		({ pageParam = 1 }) => categoryAPI.list({ per_page: 10, page: pageParam }),
 		{
 			retry: false,
+			getNextPageParam: (lastResponse) =>
+				lastResponse.meta.current_page >= lastResponse.meta.pages
+					? undefined
+					: lastResponse.meta.current_page + 1,
+			onSuccess: (response) => {
+				let categories: CourseCategorySchema[] = [];
+
+				response?.pages?.forEach((page) => {
+					page.data.forEach((category) => {
+						categories.push(category);
+					});
+				});
+
+				setCategoriesList(
+					makeCategoriesHierarchy(categories).map((category) => ({
+						value: category.id,
+						label: '— '.repeat(category.depth) + category.name,
+					}))
+				);
+			},
 		}
 	);
+	const { hasNextPage, fetchNextPage, isFetchingNextPage } = categoriesQuery;
 
-	const categories = categoriesQuery.isSuccess
-		? makeCategoriesHierarchy(categoriesQuery.data.data)
-		: [];
+	const { handleSubmit, register, control } = useForm();
 
-	const { handleSubmit, register } = useForm();
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const onSearchInput = useOnType(
 		{
@@ -83,9 +111,14 @@ const CourseFilter: React.FC<Props> = (props) => {
 	);
 	const [isOpen, setIsOpen] = useState(isMobile);
 
-	const onChange = (data: FilterParams) => {
+	const onChange = (data: any) => {
 		setFilterParams(
-			deepClean(deepMerge(data, { search: filterParams.search }))
+			deepClean(
+				deepMerge(data, {
+					search: filterParams.search,
+					category: data.category?.value,
+				})
+			)
 		);
 	};
 
@@ -117,16 +150,37 @@ const CourseFilter: React.FC<Props> = (props) => {
 							placeholder={__('Search courses', 'masteriyo')}
 							{...onSearchInput}
 						/>
-						<Select {...register('category')}>
-							<option value="">{__('All Categories', 'masteriyo')}</option>
-							{categoriesQuery.isSuccess
-								? categories.map((category) => (
-										<option key={category.id} value={category.id}>
-											{'— '.repeat(category.depth) + category.name}
-										</option>
-								  ))
-								: null}
-						</Select>
+						<Controller
+							name="category"
+							control={control}
+							render={({ field: { onChange: onChangeValue, value } }) => (
+								<ReactSelect
+									placeholder={__('All Categories', 'masteriyo')}
+									onChange={(...args: any[]) => {
+										onChangeValue(...args);
+										handleSubmit(onChange)();
+									}}
+									value={value}
+									styles={reactSelectStyles}
+									closeMenuOnSelect={true}
+									isClearable={true}
+									options={categoriesList}
+									isFetchingNextPage={isFetchingNextPage}
+									onMenuScrollToBottom={() => {
+										if (hasNextPage) {
+											fetchNextPage();
+										}
+									}}
+									components={{ MenuList: ReactSelectOptions }}
+									noOptionsMessage={({ inputValue }) => {
+										if (inputValue.length > 0) {
+											return __('No categories found.', 'masteriyo');
+										}
+										return __('No categories.', 'masteriyo');
+									}}
+								/>
+							)}
+						/>
 
 						<Select {...register('status')}>
 							{courseStatusList.map((option: any) => (

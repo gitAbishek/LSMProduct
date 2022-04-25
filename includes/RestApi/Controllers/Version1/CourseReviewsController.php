@@ -11,7 +11,6 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 
 /**
@@ -358,7 +357,7 @@ class CourseReviewsController extends CommentsController {
 			'author_email' => $course_review->get_author_email( $context ),
 			'author_url'   => $course_review->get_author_url( $context ),
 			'ip_address'   => $course_review->get_ip_address( $context ),
-			'date_created' => $course_review->get_date_created( $context ),
+			'date_created' => masteriyo_rest_prepare_date_response( $course_review->get_date_created( $context ) ),
 			'title'        => $course_review->get_title( $context ),
 			'description'  => $course_review->get_content( $context ),
 			'rating'       => $course_review->get_rating( $context ),
@@ -367,6 +366,7 @@ class CourseReviewsController extends CommentsController {
 			'type'         => $course_review->get_type( $context ),
 			'parent'       => $course_review->get_parent( $context ),
 			'author_id'    => $course_review->get_author_id( $context ),
+			'course'       => null,
 		);
 
 		$course = masteriyo_get_course( $course_review->get_course_id() );
@@ -375,20 +375,18 @@ class CourseReviewsController extends CommentsController {
 				'id'   => $course->get_id(),
 				'name' => $course->get_name(),
 			);
-		} else {
-			$data['course'] = null;
 		}
 
 		/**
-			 * Filter course reviews rest response data.
-			 *
-			 * @since 1.4.10
-			 *
-			 * @param array $data Course review data.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
-			 * @param string $context What the value is for. Valid values are view and edit.
-			 * @param Masteriyo\RestApi\Controllers\Version1\CourseReviewsController $controller REST courses controller object.
-			 */
+		 * Filter course reviews rest response data.
+		 *
+		 * @since 1.4.10
+		 *
+		 * @param array $data Course review data.
+		 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseReviewsController $controller REST courses controller object.
+		 */
 		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_review, $context, $this );
 	}
 

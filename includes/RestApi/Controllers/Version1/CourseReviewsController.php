@@ -159,7 +159,7 @@ class CourseReviewsController extends CommentsController {
 		 * collection parameter to an internal WP_Comment_Query parameter. Use the
 		 * `rest_comment_query` filter to set WP_Comment_Query parameters.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $params JSON Schema-formatted collection parameters.
 		 */
@@ -220,7 +220,7 @@ class CourseReviewsController extends CommentsController {
 	/**
 	 * Get the total number of comments by comment type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @param array $query_args WP_Comment_Query args.
 	 * @return int
@@ -379,16 +379,16 @@ class CourseReviewsController extends CommentsController {
 			$data['course'] = null;
 		}
 
-	/**
-		 * Filter course reviews rest response data.
-		 *
-		 * @since x.x.x
-		 *
-		 * @param array $data Course review data.
-		 * @param Masteriyo\Models\CourseReview $course_review Course review object.
-		 * @param string $context What the value is for. Valid values are view and edit.
-		 * @param Masteriyo\RestApi\Controllers\Version1\CourseReviewsController $controller REST courses controller object.
-		 */
+		/**
+			 * Filter course reviews rest response data.
+			 *
+			 * @since 1.4.10
+			 *
+			 * @param array $data Course review data.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param string $context What the value is for. Valid values are view and edit.
+			 * @param Masteriyo\RestApi\Controllers\Version1\CourseReviewsController $controller REST courses controller object.
+			 */
 		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_review, $context, $this );
 	}
 

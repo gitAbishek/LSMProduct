@@ -553,7 +553,7 @@ class UsersController extends PostsController {
 		/**
 		 * Filter users rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data User data.
 		 * @param Masteriyo\Models\User $user User object.

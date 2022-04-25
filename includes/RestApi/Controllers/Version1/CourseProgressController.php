@@ -333,7 +333,7 @@ class CourseProgressController extends CrudController {
 		/**
 		 * Filter course progress rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course progress data.
 		 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.

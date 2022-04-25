@@ -216,7 +216,7 @@ class FaqsController extends PostsController {
 		/**
 		 * Filter faqs rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data FAQ data.
 		 * @param Masteriyo\Models\Faq $faq FAQ object.

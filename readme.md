@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.9
+**Stable tag**: 1.4.10
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.10 - 25-04-2022
+
+- Enhancement - Lazy load categories filter options.
+- Enhancement - Show completed button instead of continue, if user has completed the course.
+- Fix - Account page enrolled, progress and completed courses count issue.
+- Fix - Clearing all content on editor not being updated.
+- Fix - Courses, Lessons and categories featured image not being set.
 
 ### 1.4.9 - 12-04-2022
 

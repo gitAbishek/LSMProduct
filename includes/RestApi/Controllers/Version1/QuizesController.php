@@ -891,7 +891,7 @@ class QuizesController extends PostsController {
 		/**
 		 * Filter quiz rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Quiz data.
 		 * @param Masteriyo\Models\Quiz $quiz Quiz object.

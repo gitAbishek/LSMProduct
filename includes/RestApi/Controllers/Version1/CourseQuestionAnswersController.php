@@ -287,7 +287,7 @@ class CourseQuestionAnswersController extends CommentsController {
 		/**
 		 * Filter course question answer rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course question answer data.
 		 * @param Masteriyo\Models\CourseQuestionAnswer $course_qa Course question answer object.

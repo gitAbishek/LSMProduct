@@ -260,7 +260,7 @@ class SectionsController extends PostsController {
 		/**
 		 * Filter section rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Section data.
 		 * @param Masteriyo\Models\Section $section Section object.

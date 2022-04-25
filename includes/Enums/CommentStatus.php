@@ -2,7 +2,7 @@
 /**
  * Comment status enums.
  *
- * @since x.x.x
+ * @since 1.4.10
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Comment status enum class.
  *
- * @since x.x.x
+ * @since 1.4.10
  */
 class CommentStatus {
 	/**
 	 * Comment all status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const ALL = 'all';
@@ -27,7 +27,7 @@ class CommentStatus {
 	/**
 	 * Comment approved status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const APPROVED = '1';
@@ -35,7 +35,7 @@ class CommentStatus {
 	/**
 	 * Comment hold status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const HOLD = '0';
@@ -43,7 +43,7 @@ class CommentStatus {
 	/**
 	 * Comment masteriyo spam status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const SPAM = 'spam';
@@ -51,7 +51,7 @@ class CommentStatus {
 	/**
 	 * Comment trash status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const TRASH = 'trash';
@@ -59,7 +59,7 @@ class CommentStatus {
 	/**
 	 * Comment approved status in readable/string format.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const APPROVED_STR = 'approved';
@@ -67,7 +67,7 @@ class CommentStatus {
 	/**
 	 * Comment hold status in readable/string format.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 * @var string
 	 */
 	const HOLD_STR = 'hold';
@@ -75,7 +75,7 @@ class CommentStatus {
 	/**
 	 * Return all the comment statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @return array
 	 */
@@ -96,7 +96,7 @@ class CommentStatus {
 	/**
 	 * Return all the comment statuses in readable format.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @return array
 	 */

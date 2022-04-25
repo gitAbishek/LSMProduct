@@ -288,7 +288,7 @@ class LessonsController extends PostsController {
 		/**
 		 * Filter lesson rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Lesson data.
 		 * @param Masteriyo\Models\lesson $lesson Lesson object.

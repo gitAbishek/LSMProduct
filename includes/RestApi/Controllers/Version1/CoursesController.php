@@ -378,7 +378,7 @@ class CoursesController extends PostsController {
 		/**
 		 * Filter course rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course data.
 		 * @param Masteriyo\Models\Course $course Course object.

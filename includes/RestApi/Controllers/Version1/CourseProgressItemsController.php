@@ -319,7 +319,7 @@ class CourseProgressItemsController extends CrudController {
 		/**
 		 * Filter course progress item rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course progress item data.
 		 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.

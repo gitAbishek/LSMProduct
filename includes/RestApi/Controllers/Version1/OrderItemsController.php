@@ -242,7 +242,7 @@ class OrderItemsController extends PostsController {
 		/**
 		 * Filter order item rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Order Item data.
 		 * @param Masteriyo\Models\OrderItem $order_item Order item object.

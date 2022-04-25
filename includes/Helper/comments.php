@@ -2,7 +2,7 @@
 /**
  * Comments related functions.
  *
- * @since x.x.x
+ * @since 1.4.10
  */
 
 use Masteriyo\Enums\CommentStatus;
@@ -11,7 +11,7 @@ use PHP_CodeSniffer\Util\Common;
 /**
  * Return an array of comments count by status for specific comment type and post ID.
  *
- * @since x.x.x
+ * @since 1.4.10
  *
  * @param string $type Comment type.
  * @param integer $post_id Post ID
@@ -56,7 +56,7 @@ function masteriyo_count_comments( $type = 'comment', $post_id = 0 ) {
 	/**
 	 * Filter comments count by comment type and post ID.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @param string $count Comment counts by status.
 	 * @param string $type Comment type.

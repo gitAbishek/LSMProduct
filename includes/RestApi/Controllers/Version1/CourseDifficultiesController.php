@@ -245,7 +245,7 @@ class CourseDifficultiesController extends RestTermsController {
 		/**
 		 * Filter course difficulty rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course difficulty data.
 		 * @param Masteriyo\Models\Course $course_difficulty Course difficulty object.

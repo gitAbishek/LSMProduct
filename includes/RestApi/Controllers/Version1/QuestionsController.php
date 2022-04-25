@@ -386,7 +386,7 @@ class QuestionsController extends PostsController {
 		/**
 		 * Filter question rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Question data.
 		 * @param Masteriyo\Models\Question $question Question object.

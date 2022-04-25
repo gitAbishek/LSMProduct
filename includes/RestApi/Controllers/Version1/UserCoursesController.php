@@ -340,7 +340,7 @@ class UserCoursesController extends CrudController {
 		/**
 		 * Filter user courses rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data User course data.
 		 * @param Masteriyo\Models\Usercourse $user_course User Course object.

@@ -1108,7 +1108,7 @@ class SettingsController extends CrudController {
 		/**
 		 * Filter global setting  rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Setting data.
 		 * @param Masteriyo\Models\Setting $setting Setting object.

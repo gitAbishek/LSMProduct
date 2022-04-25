@@ -597,7 +597,7 @@ class NotificationsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_notification_data( $notification, $context = 'view' ) {
-		$data =  array(
+		$data = array(
 			'id'            => $notification->get_id( $context ),
 			'title'         => $notification->get_title( $context ),
 			'description'   => $notification->get_description( $context ),
@@ -620,7 +620,7 @@ class NotificationsController extends CrudController {
 		/**
 		 * Filter notification rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Notification data.
 		 * @param Masteriyo\Models\Notification $notification Notification object.

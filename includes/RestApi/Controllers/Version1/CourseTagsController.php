@@ -246,7 +246,7 @@ class CourseTagsController extends RestTermsController {
 		/**
 		 * Filter course tags rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course tag data.
 		 * @param Masteriyo\Models\CourseTag $course_tag Course tag object.

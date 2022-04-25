@@ -21,7 +21,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Comment Type.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @var string
 	 */
@@ -552,7 +552,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Process objects collection.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @param array $objects Courses data.
 	 * @param array $query_args Query arguments.
@@ -576,7 +576,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Get comments count by status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.10
 	 *
 	 * @return Array
 	 */

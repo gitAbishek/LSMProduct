@@ -270,7 +270,7 @@ class CourseCategoriesController extends RestTermsController {
 		/**
 		 * Filter course categories rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.4.10
 		 *
 		 * @param array $data Course category data.
 		 * @param Masteriyo\Models\CourseCategory $course_cat Course category object.

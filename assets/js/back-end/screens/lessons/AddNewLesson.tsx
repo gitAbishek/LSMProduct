@@ -35,6 +35,10 @@ import Description from './components/Description';
 import Name from './components/Name';
 import VideoSource from './components/VideoSource';
 
+interface AddLessonFormData extends LessonSchema {
+	featuredImage?: number;
+}
+
 const AddNewLesson: React.FC = () => {
 	const { sectionId, courseId }: any = useParams();
 	const toast = useToast();
@@ -59,10 +63,11 @@ const AddNewLesson: React.FC = () => {
 	// adds lesson on the database
 	const addLesson = useMutation((data: LessonSchema) => lessonAPI.store(data));
 
-	const onSubmit = (data: LessonSchema, status?: 'publish' | 'draft') => {
+	const onSubmit = (data: AddLessonFormData, status?: 'publish' | 'draft') => {
 		const newData = {
 			course_id: courseId,
 			parent_id: sectionId,
+			featured_image: data.featuredImage,
 		};
 		status === 'draft' && draftCourse.mutate(courseId);
 		status === 'publish' && publishCourse.mutate(courseId);
@@ -118,7 +123,7 @@ const AddNewLesson: React.FC = () => {
 						label: isDrafted()
 							? __('Save To Draft', 'masteriyo')
 							: __('Switch To Draft', 'masteriyo'),
-						action: methods.handleSubmit((data: LessonSchema) =>
+						action: methods.handleSubmit((data: AddLessonFormData) =>
 							onSubmit(data, 'draft')
 						),
 						isLoading: draftCourse.isLoading,
@@ -127,7 +132,7 @@ const AddNewLesson: React.FC = () => {
 						label: isPublished()
 							? __('Update', 'masteriyo')
 							: __('Publish', 'masteriyo'),
-						action: methods.handleSubmit((data: LessonSchema) =>
+						action: methods.handleSubmit((data: AddLessonFormData) =>
 							onSubmit(data, 'publish')
 						),
 						isLoading: publishCourse.isLoading,
@@ -163,7 +168,7 @@ const AddNewLesson: React.FC = () => {
 									</Flex>
 
 									<form
-										onSubmit={methods.handleSubmit((data: LessonSchema) =>
+										onSubmit={methods.handleSubmit((data: AddLessonFormData) =>
 											onSubmit(data)
 										)}>
 										<Stack direction="column" spacing="6">

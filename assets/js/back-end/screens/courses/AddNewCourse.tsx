@@ -30,6 +30,10 @@ import FeaturedImage from './components/FeaturedImage';
 import Highlights from './components/Highlights';
 import Name from './components/Name';
 
+interface AddNewCourseForm extends CourseSchema {
+	featuredImage?: number;
+}
+
 const AddNewCourse: React.FC = () => {
 	const history = useHistory();
 	const methods = useForm();
@@ -56,7 +60,7 @@ const AddNewCourse: React.FC = () => {
 	);
 
 	// On Add Course
-	const onSubmit = (data: CourseSchema) => {
+	const onSubmit = (data: AddNewCourseForm) => {
 		const newData = {
 			...(data.categories && {
 				categories: data.categories.map((category: any) => ({
@@ -65,6 +69,7 @@ const AddNewCourse: React.FC = () => {
 			}),
 			regular_price: `${data.regular_price}`,
 			status: 'draft',
+			featured_image: data.featuredImage,
 		};
 
 		addMutation.mutate(deepClean(deepMerge(data, newData)), {

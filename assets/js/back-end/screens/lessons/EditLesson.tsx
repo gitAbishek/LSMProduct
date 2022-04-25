@@ -41,6 +41,10 @@ import Description from './components/Description';
 import Name from './components/Name';
 import VideoSource from './components/VideoSource';
 
+interface EditLessonFormData extends LessonSchema {
+	featuredImage?: number;
+}
+
 const EditLesson = () => {
 	const { lessonId, courseId }: any = useParams();
 	const { draftCourse, publishCourse } = useCourse();
@@ -99,10 +103,12 @@ const EditLesson = () => {
 		}
 	);
 
-	const onSubmit = (data: LessonSchema, status?: 'draft' | 'publish') => {
+	const onSubmit = (data: EditLessonFormData, status?: 'draft' | 'publish') => {
 		status === 'draft' && draftCourse.mutate(courseId);
 		status === 'publish' && publishCourse.mutate(courseId);
-		updateLesson.mutate(deepClean(data));
+		updateLesson.mutate(
+			deepClean({ ...data, featured_image: data.featuredImage })
+		);
 	};
 
 	const onDeletePress = () => {
@@ -153,7 +159,7 @@ const EditLesson = () => {
 						label: isDrafted()
 							? __('Save To Draft', 'masteriyo')
 							: __('Switch To Draft', 'masteriyo'),
-						action: methods.handleSubmit((data: LessonSchema) =>
+						action: methods.handleSubmit((data: EditLessonFormData) =>
 							onSubmit(data, 'draft')
 						),
 						isLoading: draftCourse.isLoading,
@@ -162,7 +168,7 @@ const EditLesson = () => {
 						label: isPublished()
 							? __('Update', 'masteriyo')
 							: __('Publish', 'masteriyo'),
-						action: methods.handleSubmit((data: LessonSchema) =>
+						action: methods.handleSubmit((data: EditLessonFormData) =>
 							onSubmit(data, 'publish')
 						),
 						isLoading: publishCourse.isLoading,
@@ -195,7 +201,7 @@ const EditLesson = () => {
 									</Flex>
 
 									<form
-										onSubmit={methods.handleSubmit((data: LessonSchema) =>
+										onSubmit={methods.handleSubmit((data: EditLessonFormData) =>
 											onSubmit(data)
 										)}>
 										<Stack direction="column" spacing="6">

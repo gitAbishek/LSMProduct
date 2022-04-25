@@ -130,6 +130,7 @@ const Builder: React.FC = () => {
 			duration_hour: null,
 			duration_minute: null,
 			regular_price: `${data.regular_price}`,
+			featured_image: data.featuredImage,
 		};
 
 		if (type === 'draft') {

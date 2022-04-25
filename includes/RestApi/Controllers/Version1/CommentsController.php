@@ -21,7 +21,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Comment Type.
 	 *
-	 @since x.x.x
+	 * @since x.x.x
 	 *
 	 * @var string
 	 */
@@ -564,11 +564,28 @@ abstract class CommentsController extends CrudController {
 		return array(
 			'data' => $objects,
 			'meta' => array(
-				'total'        => $query_results['total'],
-				'pages'        => $query_results['pages'],
-				'current_page' => $query_args['paged'],
-				'per_page'     => $query_args['number'],
+				'total'         => $query_results['total'],
+				'pages'         => $query_results['pages'],
+				'current_page'  => $query_args['paged'],
+				'per_page'      => $query_args['number'],
+				'reviews_count' => $this->get_comments_count(),
 			),
 		);
+	}
+
+	/**
+	 * Get comments count by status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return Array
+	 */
+	protected function get_comments_count() {
+		$post_count = (array) masteriyo_count_comments( $this->comment_type );
+
+		$post_count        = array_map( 'absint', $post_count );
+		$post_count['all'] = array_sum( $post_count );
+
+		return $post_count;
 	}
 }

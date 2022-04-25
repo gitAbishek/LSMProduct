@@ -337,7 +337,17 @@ class UserCoursesController extends CrudController {
 			);
 		}
 
-			return $data;
+		/**
+		 * Filter user courses rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data User course data.
+		 * @param Masteriyo\Models\Usercourse $user_course User Course object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\UserCoursesController $controller REST user courses controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $user_course, $context, $this );
 	}
 
 	/**

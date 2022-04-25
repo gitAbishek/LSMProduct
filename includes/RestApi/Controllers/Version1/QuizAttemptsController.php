@@ -474,7 +474,17 @@ class QuizAttemptsController extends CrudController {
 			$data['user'] = null;
 		}
 
-		return $data;
+		/**
+		 * Filter quiz attempt rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Quiz attempt data.
+		 * @param Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuizAttemptsController $controller REST quiz attempts controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $quiz_attempt, $context, $this );
 	}
 
 	/**

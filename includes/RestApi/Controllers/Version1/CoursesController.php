@@ -375,7 +375,17 @@ class CoursesController extends PostsController {
 			'difficulty'        => $this->get_taxonomy_terms( $course, 'difficulty' ),
 		);
 
-		return $data;
+		/**
+		 * Filter course rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course data.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CoursesController $controller REST courses controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course, $context, $this );
 	}
 
 	/**

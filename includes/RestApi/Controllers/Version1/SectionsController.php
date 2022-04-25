@@ -257,7 +257,17 @@ class SectionsController extends PostsController {
 			'description' => 'view' === $context ? wpautop( do_shortcode( $section->get_description() ) ) : $section->get_description( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter section rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Section data.
+		 * @param Masteriyo\Models\Section $section Section object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\SectionsController $controller REST Sections controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $section, $context, $this );
 	}
 
 	/**

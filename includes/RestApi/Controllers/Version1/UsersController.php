@@ -550,7 +550,17 @@ class UsersController extends PostsController {
 			'avatar_url'           => $user->get_avatar_url(),
 		);
 
-		return $data;
+		/**
+		 * Filter users rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data User data.
+		 * @param Masteriyo\Models\User $user User object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\UsersController $controller REST users controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $user, $context, $this );
 	}
 
 	/**

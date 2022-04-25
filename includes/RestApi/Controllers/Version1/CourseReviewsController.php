@@ -354,7 +354,6 @@ class CourseReviewsController extends CommentsController {
 	protected function get_course_review_data( $course_review, $context = 'view' ) {
 		$data = array(
 			'id'           => $course_review->get_id(),
-			'course_id'    => $course_review->get_course_id(),
 			'author_name'  => $course_review->get_author_name( $context ),
 			'author_email' => $course_review->get_author_email( $context ),
 			'author_url'   => $course_review->get_author_url( $context ),
@@ -380,16 +379,17 @@ class CourseReviewsController extends CommentsController {
 			$data['course'] = null;
 		}
 
-		/**
-		 * Filter the course review data for a response.
+	/**
+		 * Filter course reviews rest response data.
 		 *
 		 * @since x.x.x
 		 *
 		 * @param array $data Course review data.
-		 * @param Masteriyo\Models\CourseREview $course_review Course review object.
-		 * @param string $context Request context.
+		 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseReviewsController $controller REST courses controller object.
 		 */
-		return apply_filters( 'masteriyo_rest_course_review_data', $data, $course_review, $context );
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_review, $context, $this );
 	}
 
 	/**

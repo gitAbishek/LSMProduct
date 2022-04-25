@@ -1100,12 +1100,22 @@ class SettingsController extends CrudController {
 	 */
 	protected function get_setting_data( $setting, $context = 'view', $name = '' ) {
 		if ( empty( $name ) ) {
-			$value = $setting->get_data();
+			$data = $setting->get_data();
 		} else {
-			$value = $setting->get( $name, $context );
+			$data = $setting->get( $name, $context );
 		}
 
-		return $value;
+		/**
+		 * Filter global setting  rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Setting data.
+		 * @param Masteriyo\Models\Setting $setting Setting object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\SettingsController $controller REST settings controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $setting, $context, $this );
 	}
 
 	/**

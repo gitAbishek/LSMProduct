@@ -243,7 +243,17 @@ class CourseTagsController extends RestTermsController {
 			'count'       => $course_tag->get_count( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter course tags rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course tag data.
+		 * @param Masteriyo\Models\CourseTag $course_tag Course tag object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseTagsController $controller REST course tags controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_tag, $context, $this );
 	}
 
 	/**

@@ -213,7 +213,17 @@ class FaqsController extends PostsController {
 			'created_at' => $faq->get_created_at( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter faqs rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data FAQ data.
+		 * @param Masteriyo\Models\Faq $faq FAQ object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\FaqsController $controller REST faqs controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $faq, $context, $this );
 	}
 
 	/**

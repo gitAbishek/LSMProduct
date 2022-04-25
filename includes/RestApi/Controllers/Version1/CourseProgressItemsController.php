@@ -316,7 +316,17 @@ class CourseProgressItemsController extends CrudController {
 			'completed_at' => masteriyo_rest_prepare_date_response( $course_progress_item->get_completed_at( $context ) ),
 		);
 
-		return $data;
+		/**
+		 * Filter course progress item rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course progress item data.
+		 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CoursesController $controller REST courses controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_progress_item, $context, $this );
 	}
 
 	/**

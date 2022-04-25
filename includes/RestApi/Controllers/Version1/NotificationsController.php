@@ -597,7 +597,7 @@ class NotificationsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_notification_data( $notification, $context = 'view' ) {
-		return array(
+		$data =  array(
 			'id'            => $notification->get_id( $context ),
 			'title'         => $notification->get_title( $context ),
 			'description'   => $notification->get_description( $context ),
@@ -616,6 +616,18 @@ class NotificationsController extends CrudController {
 			'modified_at'   => masteriyo_rest_prepare_date_response( $notification->get_modified_at( $context ) ),
 			'expire_at'     => masteriyo_rest_prepare_date_response( $notification->get_expire_at( $context ) ),
 		);
+
+		/**
+		 * Filter notification rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Notification data.
+		 * @param Masteriyo\Models\Notification $notification Notification object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\NotificationsController $controller REST Notifications controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $notification, $context, $this );
 	}
 
 	/**

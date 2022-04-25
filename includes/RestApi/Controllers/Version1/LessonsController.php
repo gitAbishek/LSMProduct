@@ -285,7 +285,17 @@ class LessonsController extends PostsController {
 			'navigation'          => $this->get_navigation_items( $lesson, $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter lesson rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Lesson data.
+		 * @param Masteriyo\Models\lesson $lesson Lesson object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\lessonsController $controller REST lessons controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $lesson, $context, $this );
 	}
 
 	/**

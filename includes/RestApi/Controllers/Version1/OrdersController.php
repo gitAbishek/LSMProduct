@@ -335,7 +335,17 @@ class OrdersController extends PostsController {
 			'course_lines'         => $this->get_order_item_course( $items, $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter Order rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Order data.
+		 * @param Masteriyo\Models\Order $order Order object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\OrdersController $controller REST Orders controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $order, $context, $this );
 	}
 
 	/**

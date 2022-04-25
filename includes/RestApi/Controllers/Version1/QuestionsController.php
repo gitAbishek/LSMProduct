@@ -383,7 +383,17 @@ class QuestionsController extends PostsController {
 			$data['answers'] = $this->process_answers( $question->get_answers( $context ), $question );
 		}
 
-		return $data;
+		/**
+		 * Filter question rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Question data.
+		 * @param Masteriyo\Models\Question $question Question object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuestionsController $controller REST Questions controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $question, $context, $this );
 	}
 
 	/**

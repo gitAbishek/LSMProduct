@@ -239,7 +239,17 @@ class OrderItemsController extends PostsController {
 			'total'     => $order_item->get_total( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter order item rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Order Item data.
+		 * @param Masteriyo\Models\OrderItem $order_item Order item object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\OrderItemsController $controller REST order items controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $order_item, $context, $this );
 	}
 
 	/**

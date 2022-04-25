@@ -242,7 +242,17 @@ class CourseDifficultiesController extends RestTermsController {
 			'count'       => $course_difficulty->get_count( $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter course difficulty rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course difficulty data.
+		 * @param Masteriyo\Models\Course $course_difficulty Course difficulty object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseDifficultiesController $controller REST course difficulties controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_difficulty, $context, $this );
 	}
 
 	/**

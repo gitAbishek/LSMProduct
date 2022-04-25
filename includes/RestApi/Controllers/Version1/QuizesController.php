@@ -888,7 +888,17 @@ class QuizesController extends PostsController {
 			'navigation'                        => $this->get_navigation_items( $quiz, $context ),
 		);
 
-		return $data;
+		/**
+		 * Filter quiz rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Quiz data.
+		 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuizesController $controller REST Quizzes controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $quiz, $context, $this );
 	}
 
 	/**

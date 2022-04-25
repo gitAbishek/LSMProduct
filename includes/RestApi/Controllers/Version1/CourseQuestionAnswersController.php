@@ -284,7 +284,17 @@ class CourseQuestionAnswersController extends CommentsController {
 			$data['answers_count'] = $course_qa->get_answers_count();
 		}
 
-		return $data;
+		/**
+		 * Filter course question answer rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Course question answer data.
+		 * @param Masteriyo\Models\CourseQuestionAnswer $course_qa Course question answer object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CoursesController $controller REST course question answer controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $course_qa, $context, $this );
 	}
 
 	/**

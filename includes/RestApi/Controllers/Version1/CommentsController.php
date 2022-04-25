@@ -8,6 +8,8 @@
 
 namespace Masteriyo\RestApi\Controllers\Version1;
 
+use Masteriyo\Enums\CommentStatus;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -166,10 +168,11 @@ abstract class CommentsController extends CrudController {
 		);
 
 		$params['status'] = array(
-			'default'           => 'approve',
+			'default'           => CommentStatus::ALL,
 			'description'       => __( 'Limit result set to comments assigned a specific status. Requires authorization.', 'masteriyo' ),
 			'sanitize_callback' => 'sanitize_key',
 			'type'              => 'string',
+			'enum'              => array_merge( array( CommentStatus::ALL ), CommentStatus::readable() ),
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 

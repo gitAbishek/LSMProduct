@@ -25,12 +25,12 @@ class CommentStatus {
 	const ALL = 'all';
 
 	/**
-	 * Comment approved status.
+	 * Comment approve status.
 	 *
 	 * @since 1.4.10
 	 * @var string
 	 */
-	const APPROVED = '1';
+	const APPROVE = '1';
 
 	/**
 	 * Comment hold status.
@@ -57,12 +57,12 @@ class CommentStatus {
 	const TRASH = 'trash';
 
 	/**
-	 * Comment approved status in readable/string format.
+	 * Comment approve status in readable/string format.
 	 *
 	 * @since 1.4.10
 	 * @var string
 	 */
-	const APPROVED_STR = 'approved';
+	const APPROVE_STR = 'approve';
 
 	/**
 	 * Comment hold status in readable/string format.
@@ -85,7 +85,7 @@ class CommentStatus {
 				'masteriyo_comment_statuses',
 				array(
 					self::HOLD,
-					self::APPROVED,
+					self::APPROVE,
 					self::SPAM,
 					self::TRASH,
 				)
@@ -106,7 +106,7 @@ class CommentStatus {
 				'masteriyo_readable_comment_statuses',
 				array(
 					self::HOLD_STR,
-					self::APPROVED_STR,
+					self::APPROVE_STR,
 					self::SPAM,
 					self::TRASH,
 				)

@@ -42,8 +42,8 @@ function masteriyo_count_comments( $type = 'comment', $post_id = 0 ) {
 	$counts = array_fill_keys( CommentStatus::readable(), 0 );
 
 	foreach ( $results as $row ) {
-		if ( CommentStatus::APPROVED === $row['comment_approved'] ) {
-			$row['comment_approved'] = CommentStatus::APPROVED_STR;
+		if ( CommentStatus::APPROVE === $row['comment_approved'] ) {
+			$row['comment_approved'] = CommentStatus::APPROVE_STR;
 		} elseif ( CommentStatus::HOLD === $row['comment_approved'] ) {
 			$row['comment_approved'] = CommentStatus::HOLD_STR;
 		}

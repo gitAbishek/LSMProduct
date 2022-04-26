@@ -11,13 +11,15 @@ import React, { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { useQuery } from 'react-query';
 import AsyncSelect from 'react-select/async';
 import DesktopHidden from '../../../components/common/DesktopHidden';
 import MobileHidden from '../../../components/common/MobileHidden';
 import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
+import { UsersApiResponse } from '../../../types/users';
 import API from '../../../utils/api';
-import { deepClean } from '../../../utils/utils';
+import { deepClean, isEmpty } from '../../../utils/utils';
 
 interface Props {
 	setFilterParams: any;
@@ -40,6 +42,20 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 	const usersAPI = new API(urls.users);
 	const quizAPI = new API(urls.quizes);
 
+	const usersQuery = useQuery<UsersApiResponse>('users', () =>
+		usersAPI.list({
+			orderby: 'display_name',
+			order: 'asc',
+			per_page: 10,
+		})
+	);
+
+	const quizzesQuery = useQuery('quizzes', () =>
+		quizAPI.list({
+			per_page: 10,
+		})
+	);
+
 	const QuizAttemptFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
 			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
@@ -49,9 +65,11 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 						cacheOptions={true}
 						loadingMessage={() => __('Searching...', 'masteriyo')}
 						noOptionsMessage={({ inputValue }) =>
-							inputValue.length > 2
+							!isEmpty(inputValue)
 								? __('Users not found.', 'masteriyo')
-								: __('Please enter 3 or more characters.', 'masteriyo')
+								: usersQuery.isLoading
+								? __('Loading...', 'masteriyo')
+								: __('Please enter one or more characters.', 'masteriyo')
 						}
 						isClearable={true}
 						placeholder={__('Search by username or email', 'masteriyo')}
@@ -59,8 +77,19 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 							setValue('user_id', selectedOption?.value);
 							handleSubmit(onChange)();
 						}}
+						defaultOptions={
+							usersQuery.isSuccess
+								? usersQuery.data?.data?.map((user) => {
+										return {
+											value: user.id,
+											label: `${user.display_name} (#${user.id} - ${user.email})`,
+											avatar_url: user.avatar_url,
+										};
+								  })
+								: []
+						}
 						loadOptions={(searchValue, callback) => {
-							if (searchValue.length < 3) {
+							if (isEmpty(searchValue)) {
 								return callback([]);
 							}
 							usersAPI.list({ search: searchValue }).then((data) => {
@@ -68,7 +97,7 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 									data.data.map((user: any) => {
 										return {
 											value: user.id,
-											label: `${user.display_name} (#${user.id} – ${user.email})`,
+											label: `${user.display_name} (#${user.id} - ${user.email})`,
 										};
 									})
 								);
@@ -83,9 +112,11 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 						cacheOptions={true}
 						loadingMessage={() => __('Searching...', 'masteriyo')}
 						noOptionsMessage={({ inputValue }) =>
-							inputValue.length > 2
+							!isEmpty(inputValue)
 								? __('Quiz not found.', 'masteriyo')
-								: __('Please enter 3 or more characters.', 'masteriyo')
+								: quizzesQuery.isLoading
+								? __('Loading...', 'masteriyo')
+								: __('Please enter one or more characters.', 'masteriyo')
 						}
 						isClearable={true}
 						placeholder={__('Search by Quiz', 'masteriyo')}
@@ -93,8 +124,18 @@ const QuizAttemptFilter: React.FC<Props> = (props) => {
 							setValue('quiz_id', selectedOption?.value);
 							handleSubmit(onChange)();
 						}}
+						defaultOptions={
+							quizzesQuery.isSuccess
+								? quizzesQuery.data?.map((quiz: any) => {
+										return {
+											value: quiz.id,
+											label: quiz.name,
+										};
+								  })
+								: []
+						}
 						loadOptions={(searchValue, callback) => {
-							if (searchValue.length < 3) {
+							if (isEmpty(searchValue)) {
 								return callback([]);
 							}
 							quizAPI.list({ search: searchValue }).then((data) => {

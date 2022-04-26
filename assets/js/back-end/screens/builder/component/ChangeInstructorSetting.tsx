@@ -77,7 +77,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 
 	const usersAPI = new API(urls.users);
 
-	const categoryQuery = useQuery<UsersApiResponse>('users', () =>
+	const usersQuery = useQuery<UsersApiResponse>('users', () =>
 		usersAPI.list({
 			roles: 'administrator,masteriyo_instructor',
 			orderby: 'display_name',
@@ -86,7 +86,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 		})
 	);
 
-	if (!categoryQuery.isLoading && canEditUsers === true && defaultInstructor) {
+	if (!usersQuery.isLoading && canEditUsers === true && defaultInstructor) {
 		return (
 			<FormControl>
 				<FormLabel>{__('Instructor', 'masteriyo')}</FormLabel>
@@ -96,9 +96,9 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 					cacheOptions={true}
 					loadingMessage={() => __('Searching...', 'masteriyo')}
 					noOptionsMessage={({ inputValue }) =>
-						inputValue.length > 2
+						!isEmpty(inputValue)
 							? __('Users not found.', 'masteriyo')
-							: __('Please enter 3 or more characters.', 'masteriyo')
+							: __('Please enter one or more characters.', 'masteriyo')
 					}
 					isClearable={true}
 					placeholder={__('Search by username or email', 'masteriyo')}
@@ -115,8 +115,8 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 						setValue('author_id', selectedOption?.value);
 					}}
 					defaultOptions={
-						categoryQuery.isSuccess
-							? categoryQuery.data?.data?.map((user) => {
+						usersQuery.isSuccess
+							? usersQuery.data?.data?.map((user) => {
 									return {
 										value: user.id,
 										label: user.display_name,
@@ -126,7 +126,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 							: []
 					}
 					loadOptions={(searchValue, callback) => {
-						if (searchValue.length < 3) {
+						if (isEmpty(searchValue)) {
 							return callback([]);
 						}
 						usersAPI

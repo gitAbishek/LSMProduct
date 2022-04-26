@@ -1,4 +1,4 @@
-import { CourseCategorySchema } from '../schemas';
+import { CourseCategorySchema, CourseSchema } from '../schemas';
 
 export interface AuthorMap {
 	id: number;
@@ -56,4 +56,14 @@ export interface CourseCategoriesResponse {
 
 export interface CourseCategoryHierarchy extends CourseCategorySchema {
 	depth: number;
+}
+
+export interface CoursesApiResponse {
+	data: CourseSchema[];
+	meta: {
+		current_page: number;
+		pages: number;
+		per_page: number;
+		total: number;
+	};
 }

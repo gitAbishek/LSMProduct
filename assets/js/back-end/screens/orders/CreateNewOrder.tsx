@@ -20,7 +20,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiChevronLeft } from 'react-icons/bi';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { Link as RouterLink, NavLink, useHistory } from 'react-router-dom';
 import AsyncSelect from 'react-select/async';
 import Header from '../../components/common/Header';
@@ -32,8 +32,10 @@ import {
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { OrderSchema } from '../../schemas';
+import { CoursesApiResponse } from '../../types/course';
+import { UsersApiResponse } from '../../types/users';
 import API from '../../utils/api';
-import { deepClean } from '../../utils/utils';
+import { deepClean, isEmpty } from '../../utils/utils';
 
 const orderStatusList = [
 	{
@@ -75,6 +77,20 @@ const CreateNewOrder: React.FC = () => {
 	const coursesAPI = new API(urls.courses);
 	const ordersAPI = new API(urls.orders);
 	const toast = useToast();
+
+	const usersQuery = useQuery<UsersApiResponse>('users', () =>
+		usersAPI.list({
+			orderby: 'display_name',
+			order: 'asc',
+			per_page: 10,
+		})
+	);
+
+	const coursesQuery = useQuery<CoursesApiResponse>('courses', () =>
+		coursesAPI.list({
+			per_page: 10,
+		})
+	);
 
 	const addOrder = useMutation((data: OrderSchema) => ordersAPI.store(data), {
 		onSuccess: () => {
@@ -156,10 +172,12 @@ const CreateNewOrder: React.FC = () => {
 														__('Searching customer...', 'masteriyo')
 													}
 													noOptionsMessage={({ inputValue }) =>
-														inputValue.length > 2
+														!isEmpty(inputValue)
 															? __('Users not found.', 'masteriyo')
+															: usersQuery.isLoading
+															? __('Loading...', 'masteriyo')
 															: __(
-																	'Please enter 3 or more characters.',
+																	'Please enter one or more characters.',
 																	'masteriyo'
 															  )
 													}
@@ -174,8 +192,19 @@ const CreateNewOrder: React.FC = () => {
 															selectedOption?.value.toString()
 														);
 													}}
+													defaultOptions={
+														usersQuery.isSuccess
+															? usersQuery.data?.data?.map((user) => {
+																	return {
+																		value: user.id,
+																		label: `${user.display_name} (#${user.id} - ${user.email})`,
+																		avatar_url: user.avatar_url,
+																	};
+															  })
+															: []
+													}
 													loadOptions={(searchValue, callback) => {
-														if (searchValue.length < 3) {
+														if (isEmpty(searchValue)) {
 															return callback([]);
 														}
 														usersAPI
@@ -185,7 +214,7 @@ const CreateNewOrder: React.FC = () => {
 																	data.data.map((user: any) => {
 																		return {
 																			value: user.id,
-																			label: `${user.display_name} (#${user.id} – ${user.email})`,
+																			label: `${user.display_name} (#${user.id} - ${user.email})`,
 																		};
 																	})
 																);
@@ -218,10 +247,12 @@ const CreateNewOrder: React.FC = () => {
 												__('Searching course...', 'masteriyo')
 											}
 											noOptionsMessage={({ inputValue }) =>
-												inputValue.length > 2
+												!isEmpty(inputValue)
 													? __('Course not found.', 'masteriyo')
+													: coursesQuery.isLoading
+													? __('Loading...', 'masteriyo')
 													: __(
-															'Please enter 3 or more characters.',
+															'Please enter one or more characters.',
 															'masteriyo'
 													  )
 											}
@@ -233,8 +264,18 @@ const CreateNewOrder: React.FC = () => {
 													selectedOption?.value
 												);
 											}}
+											defaultOptions={
+												coursesQuery.isSuccess
+													? coursesQuery.data?.data?.map((course) => {
+															return {
+																value: course.id,
+																label: `#${course.id} ${course.name}`,
+															};
+													  })
+													: []
+											}
 											loadOptions={(searchValue, callback) => {
-												if (searchValue.length < 3) {
+												if (isEmpty(searchValue)) {
 													return callback([]);
 												}
 												coursesAPI

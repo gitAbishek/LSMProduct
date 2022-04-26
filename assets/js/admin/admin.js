@@ -3,22 +3,22 @@
  */
 (function ($) {
 	var $topLevelMenu = $('#toplevel_page_masteriyo');
-	var hash = window.location.hash;
 
-	if (!$topLevelMenu) {
-		return;
+	function makeCurrentSubmenuActive() {
+		if (!$topLevelMenu.length) {
+			return;
+		}
+
+		$topLevelMenu.find('li').removeClass('current');
+
+		$topLevelMenu
+			.find('a[href$="' + window.location.hash + '"]')
+			.parent('li')
+			.addClass('current');
 	}
 
-	var $activeLi = $topLevelMenu.find('a[href$="' + hash + '"]').parent('li');
+	makeCurrentSubmenuActive();
 
-	$activeLi.addClass('current');
-
-	// Handle change of menus.
-	$topLevelMenu.on('click', '.wp-submenu li', function (e) {
-		$activeLi.removeClass('current');
-
-		$activeLi = $(this);
-
-		$(this).addClass('current');
-	});
+	// Handle change of URL.
+	window.addEventListener('popstate', makeCurrentSubmenuActive);
 })(jQuery);

@@ -389,7 +389,7 @@ abstract class CommentsController extends CrudController {
 
 		// When status is 'all' or '', only approve or hold comment is returned.
 		// @see https://github.com/WordPress/WordPress/blob/df148d90fc6d39c8453aff4486c60f97c1dd1141/wp-includes/class-wp-comment-query.php#L568
-		if ( CommentStatus::ALL === $request['status'] ) {
+		if ( CommentStatus::ALL === $request['status'] || empty( $request['status'] ) ) {
 			// @see https://github.com/WordPress/WordPress/blob/df148d90fc6d39c8453aff4486c60f97c1dd1141/wp-includes/class-wp-comment-query.php#L245
 			// For why we are imploding array with comma separated.
 			$args['status'] = implode( ',', CommentStatus::all() );

@@ -108,15 +108,15 @@ const QaChat: React.FC<Props> = (props) => {
 					</Box>
 
 					<Stack direction="column-reverse" spacing="4" px="4" overflowY="auto">
-						{chatQuery.data.map((chat: QuestionAnswerSchema) => (
+						{chatQuery?.data?.data.map((chat: QuestionAnswerSchema) => (
 							<Message
-								key={chat.id}
-								name={chat.user_name}
-								avatar={chat.user_avatar}
-								message={chat.content}
-								sender={chat.sender}
-								time={chat.created_at}
-								byCurrentUser={chat.by_current_user}
+								key={chat?.id}
+								name={chat?.user_name}
+								avatar={chat?.user_avatar}
+								message={chat?.content}
+								sender={chat?.sender}
+								time={chat?.created_at}
+								byCurrentUser={chat?.by_current_user}
 							/>
 						))}
 					</Stack>

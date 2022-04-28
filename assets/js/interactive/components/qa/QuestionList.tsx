@@ -142,7 +142,7 @@ const QuestionList: React.FC = () => {
 							</FormControl>
 						</Box>
 						<Stack direction="column" spacing="0" flex="1" overflowY="auto">
-							{qaQuery.data.map(
+							{qaQuery?.data?.data.map(
 								(question: QuestionAnswerSchema, index: number) => (
 									<Link
 										key={index}
@@ -165,9 +165,9 @@ const QuestionList: React.FC = () => {
 											py="2"
 											onClick={() =>
 												onQuestionPress(
-													question.id,
-													question.content,
-													question.answers_count
+													question?.id,
+													question?.content,
+													question?.answers_count
 												)
 											}>
 											<Stack direction="column" spacing="2">
@@ -177,11 +177,11 @@ const QuestionList: React.FC = () => {
 														_nx(
 															'%d Answer',
 															'%d Answers',
-															question.answers_count,
+															question?.answers_count,
 															'number of answers',
 															'masteriyo'
 														),
-														question.answers_count
+														question?.answers_count
 													)}
 												</Text>
 											</Stack>

@@ -1,4 +1,5 @@
 export { default as FourOFour } from './404/FourOFour';
+export { default as AddOns } from './add-ons/AddOns';
 export { default as Builder } from './builder/Builder';
 export { default as AddNewCourseCategory } from './course-categories/AddNewCourseCategory';
 export { default as AllCourseCategories } from './course-categories/AllCourseCategories';

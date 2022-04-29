@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.10
+**Stable tag**: 1.4.11
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.11 - 29-04-2022
+
+- Enhancement - Added Masteriyo addons listing page.
+- Enhancement - By default show 10 options on dropdown of filters.
+- Fix - Question answers tab not working on learn page.
+- Fix - Backend sub menu not being active when clicking on the Masteriyo logo.
 
 ### 1.4.10 - 25-04-2022
 

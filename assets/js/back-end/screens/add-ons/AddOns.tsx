@@ -81,7 +81,7 @@ const AddOns = () => {
 							</Box>
 
 							<Text fontSize="15px" fontWeight="400">
-								We are giving{' '}
+								{__('We are giving', 'masteriyo')}
 								<Center
 									d="inline-flex"
 									w="40px"
@@ -93,19 +93,25 @@ const AddOns = () => {
 									<Text as="span" fontSize="xx-small">
 										%
 									</Text>
-								</Center>{' '}
-								off on our all premium plans
+								</Center>
+								{__('off on all our premium plans.', 'masteriyo')}
 							</Text>
 						</Stack>
 						<Stack direction="row" spacing="5">
-							<Button color="black">Buy now</Button>
-							<Link>
+							<Link
+								href="https://masteriyo.com/wordpress-lms/pricing/"
+								target="_blank">
+								<Button color="black">{__('Buy now', 'masteriyo')}</Button>
+							</Link>
+							<Link
+								href="https://masteriyo.com/wordpress-lms/contact/"
+								target="_blank">
 								<Button
 									variant="unstyled"
 									textDecor="underline"
 									color="rgba(255,255,255,0.8)"
 									_hover={{ color: 'white' }}>
-									Any Queries?
+									{__('Any Queries?', 'masteriyo')}
 								</Button>
 							</Link>
 						</Stack>
@@ -128,7 +134,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Download Materials', 'masteriyo')}
 							addOnDescription={__(
-								'Download materials description',
+								'Attach unlimited lesson materials such as PDF, Doc, etc. Provide students with quick and easy access to download materials, and preview without download.',
 								'masteriyo'
 							)}
 							thumbnailSrc={DownloadMaterial}

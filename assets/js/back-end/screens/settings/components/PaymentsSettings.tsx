@@ -143,7 +143,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 													)
 												)
 											) : (
-												<option>{__('No state founds', 'masteriyo')}</option>
+												<option>{__('No state found', 'masteriyo')}</option>
 											)}
 										</Select>
 									</FormControl>

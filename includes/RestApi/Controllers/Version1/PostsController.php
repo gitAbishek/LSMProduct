@@ -391,4 +391,20 @@ abstract class PostsController extends CrudController {
 		return $args;
 
 	}
+
+	/**
+	 * Get posts count by status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return Array
+	 */
+	protected function get_posts_count() {
+		$post_count = (array) wp_count_posts( $this->post_type );
+
+		$post_count        = array_map( 'absint', $post_count );
+		$post_count['any'] = array_sum( $post_count );
+
+		return $post_count;
+	}
 }

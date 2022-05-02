@@ -312,12 +312,27 @@ class CoursesController extends PostsController {
 		return array(
 			'data' => $objects,
 			'meta' => array(
-				'total'        => $query_results['total'],
-				'pages'        => $query_results['pages'],
-				'current_page' => $query_args['paged'],
-				'per_page'     => $query_args['posts_per_page'],
+				'total'         => $query_results['total'],
+				'pages'         => $query_results['pages'],
+				'current_page'  => $query_args['paged'],
+				'per_page'      => $query_args['posts_per_page'],
+				'courses_count' => $this->get_courses_count(),
 			),
 		);
+	}
+
+	/**
+	 * Get courses count by status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return Array
+	 */
+	protected function get_courses_count() {
+		$post_count = parent::get_posts_count();
+
+		return masteriyo_array_only( $post_count, PostStatus::all() );
+
 	}
 
 	/**

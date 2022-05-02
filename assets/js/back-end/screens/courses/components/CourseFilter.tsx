@@ -24,35 +24,17 @@ import API from '../../../utils/api';
 import { makeCategoriesHierarchy } from '../../../utils/categories';
 import { deepClean, deepMerge } from '../../../utils/utils';
 
-const courseStatusList = [
-	{
-		label: __('All', 'masteriyo'),
-		value: '',
-	},
-	{
-		label: __('Published', 'masteriyo'),
-		value: 'publish',
-	},
-	{
-		label: __('Draft', 'masteriyo'),
-		value: 'draft',
-	},
-	{
-		label: __('Trash', 'masteriyo'),
-		value: 'trash',
-	},
-];
-
 interface FilterParams {
 	category?: string | number;
 	search?: string;
 	status?: string;
-	price_type?: string;
+	priceType?: string;
 }
 
 interface Props {
 	setFilterParams: any;
 	filterParams: FilterParams;
+	courseStatus: string;
 }
 interface SelectOption {
 	value: number;
@@ -60,9 +42,8 @@ interface SelectOption {
 }
 
 const CourseFilter: React.FC<Props> = (props) => {
-	const { setFilterParams, filterParams } = props;
 	const [categoriesList, setCategoriesList] = useState<SelectOption[]>([]);
-
+	const { setFilterParams, filterParams, courseStatus } = props;
 	const categoryAPI = new API(urls.categories);
 	const categoriesQuery = useInfiniteQuery<CourseCategoriesResponse>(
 		'categoryLists',
@@ -102,8 +83,8 @@ const CourseFilter: React.FC<Props> = (props) => {
 				setFilterParams({
 					search: val,
 					category: filterParams.category,
-					status: filterParams.status,
-					price_type: filterParams.price_type,
+					status: courseStatus,
+					price_type: filterParams.priceType,
 				});
 			},
 		},
@@ -117,6 +98,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 				deepMerge(data, {
 					search: filterParams.search,
 					category: data.category?.value,
+					status: courseStatus,
 				})
 			)
 		);
@@ -181,14 +163,6 @@ const CourseFilter: React.FC<Props> = (props) => {
 								/>
 							)}
 						/>
-
-						<Select {...register('status')}>
-							{courseStatusList.map((option: any) => (
-								<option key={option.value} value={option.value}>
-									{option.label}
-								</option>
-							))}
-						</Select>
 
 						<Select {...register('price_type')}>
 							<option value="">{__('Pricing', 'masteriyo')}</option>

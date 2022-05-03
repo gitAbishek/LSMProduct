@@ -324,7 +324,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Get courses count by status.
 	 *
-	 * @since x.x.x
+	 * @since 1.4.12
 	 *
 	 * @return Array
 	 */

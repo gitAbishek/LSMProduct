@@ -55,7 +55,7 @@ interface Cache {
 	 * Saves the data to cache.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Added default value zero to expire parameter.
+	 * @since 1.4.12 Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The contents to store in the cache.
@@ -70,7 +70,7 @@ interface Cache {
 	 * Adds data to the cache, if the cache key doesn’t already exist.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Added default value zero to expire parameter.
+	 * @since 1.4.12 Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The data to add to the cache.
@@ -85,7 +85,7 @@ interface Cache {
 	 * Replaces the contents of the cache with new data.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Added default value zero to expire parameter.
+	 * @since 1.4.12 Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The new data to store in the cache.

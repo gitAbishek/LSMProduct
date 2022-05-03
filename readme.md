@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.11
+**Stable tag**: 1.4.12
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.4.12 - 04-05-2022
+
+- Enhancement - Added tabs to differentiate status of course on backend course list page.
+- Fix - Renamed "No state founds" to "No state found" on state option.
+- Fix - Cancel queries being cached on error boundary which leads to 505 error on backend pages.
+- Fix - Deprecated Message: Required parameter follows optional parameter in PHP8.
 
 ### 1.4.11 - 29-04-2022
 

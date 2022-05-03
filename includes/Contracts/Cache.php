@@ -33,7 +33,7 @@ interface Cache {
 	 * Invalidate cache group.
 	 *
 	 * @param string $group Group of cache to clear.
-	 * @since 3.9.0
+	 * @since 1.0.0
 	 */
 	public function invalidate_cache_group( $group );
 
@@ -55,6 +55,7 @@ interface Cache {
 	 * Saves the data to cache.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The contents to store in the cache.
@@ -63,12 +64,13 @@ interface Cache {
 	 *
 	 * @return bool True on success, false on failure.
 	 */
-	public function set( $key, $data, $group = '', $expire );
+	public function set( $key, $data, $group = '', $expire = 0  );
 
 	/**
 	 * Adds data to the cache, if the cache key doesn’t already exist.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The data to add to the cache.
@@ -77,12 +79,13 @@ interface Cache {
 	 *
 	 * @return bool True on success, false if cache key and group already exist.
 	 */
-	public function add( $key, $data, $group = '', $expire );
+	public function add( $key, $data, $group = '', $expire = 0 );
 
 	/**
 	 * Replaces the contents of the cache with new data.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Added default value zero to expire parameter.
 	 *
 	 * @param int|string $key   The cache key to use for retrieval later.
 	 * @param mixed $data       The new data to store in the cache.
@@ -91,7 +94,7 @@ interface Cache {
 	 *
 	 * @return bool  False if original value does not exist, true if contents were replaced
 	 */
-	public function replace( $key, $data, $group = '', $expire );
+	public function replace( $key, $data, $group = '', $expire = 0 );
 
 	/**
 	 * Retrieves the cache contents from the cache by key and group.

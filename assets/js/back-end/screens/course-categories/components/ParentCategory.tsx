@@ -63,6 +63,7 @@ const ParentCategory: React.FC<Props> = (props) => {
 						value={value}
 						styles={reactSelectStyles}
 						options={categories}
+						isClearable
 					/>
 				)}
 			/>

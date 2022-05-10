@@ -4,7 +4,6 @@ import {
 	Flex,
 	IconButton,
 	Input,
-	Select,
 	Stack,
 	useMediaQuery,
 } from '@chakra-ui/react';
@@ -23,6 +22,17 @@ import { CourseCategoriesResponse } from '../../../types/course';
 import API from '../../../utils/api';
 import { makeCategoriesHierarchy } from '../../../utils/categories';
 import { deepClean, deepMerge } from '../../../utils/utils';
+
+const pricingOptions = [
+	{
+		label: __('Free', 'masteriyo'),
+		value: 'free',
+	},
+	{
+		label: __('Paid', 'masteriyo'),
+		value: 'paid',
+	},
+];
 
 interface FilterParams {
 	category?: string | number;
@@ -74,7 +84,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 	);
 	const { hasNextPage, fetchNextPage, isFetchingNextPage } = categoriesQuery;
 
-	const { handleSubmit, register, control } = useForm();
+	const { handleSubmit, control } = useForm();
 
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const onSearchInput = useOnType(
@@ -99,6 +109,7 @@ const CourseFilter: React.FC<Props> = (props) => {
 					search: filterParams.search,
 					category: data.category?.value,
 					status: courseStatus,
+					price_type: data.price_type?.value,
 				})
 			)
 		);
@@ -164,11 +175,24 @@ const CourseFilter: React.FC<Props> = (props) => {
 							)}
 						/>
 
-						<Select {...register('price_type')}>
-							<option value="">{__('Pricing', 'masteriyo')}</option>
-							<option value="free">{__('Free', 'masteriyo')}</option>
-							<option value="paid">{__('Paid', 'masteriyo')}</option>
-						</Select>
+						<Controller
+							name="price_type"
+							control={control}
+							render={({ field: { onChange: onChangeValue, value } }) => (
+								<ReactSelect
+									onChange={(...args: any[]) => {
+										onChangeValue(...args);
+										handleSubmit(onChange)();
+									}}
+									value={value}
+									styles={reactSelectStyles}
+									options={pricingOptions}
+									placeholder={__('Pricing', 'masteriyo')}
+									isClearable
+									isSearchable={false}
+								/>
+							)}
+						/>
 					</Stack>
 				</form>
 			</Collapse>

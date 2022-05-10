@@ -4,7 +4,6 @@ import {
 	Flex,
 	IconButton,
 	Input,
-	Select,
 	Stack,
 	useMediaQuery,
 } from '@chakra-ui/react';
@@ -15,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { useQuery } from 'react-query';
+import ReactSelect from 'react-select';
 import AsyncSelect from 'react-select/async';
 import DesktopHidden from '../../../components/common/DesktopHidden';
 import MobileHidden from '../../../components/common/MobileHidden';
@@ -24,11 +24,7 @@ import { UsersApiResponse } from '../../../types/users';
 import API from '../../../utils/api';
 import { deepClean, deepMerge, isEmpty } from '../../../utils/utils';
 
-const courseStatusList = [
-	{
-		label: __('All Status', 'masteriyo'),
-		value: '',
-	},
+const orderStatusList = [
 	{
 		label: __('Pending', 'masteriyo'),
 		value: 'pending',
@@ -60,7 +56,10 @@ const courseStatusList = [
 ];
 
 interface FilterParams {
-	status?: string;
+	status?: {
+		label: string;
+		value: string;
+	};
 	after?: Date;
 	before?: Date;
 }
@@ -71,7 +70,7 @@ interface Props {
 
 const OrdersFilter: React.FC<Props> = (props) => {
 	const { setFilterParams } = props;
-	const { handleSubmit, register, setValue, control } = useForm();
+	const { handleSubmit, setValue, control } = useForm();
 	const [isMobile] = useMediaQuery('(min-width: 48em)');
 	const [isOpen, setIsOpen] = useState(isMobile);
 
@@ -87,6 +86,7 @@ const OrdersFilter: React.FC<Props> = (props) => {
 		const formattedDate = {
 			before: data?.before?.toISOString(),
 			after: data?.after?.toISOString(),
+			status: data?.status?.value,
 		};
 		setFilterParams(deepClean(deepMerge(data, formattedDate)));
 	};
@@ -183,13 +183,23 @@ const OrdersFilter: React.FC<Props> = (props) => {
 					}}
 				/>
 				<Box flex="1">
-					<Select {...register('status')}>
-						{courseStatusList.map((option: any) => (
-							<option key={option.value} value={option.value}>
-								{option.label}
-							</option>
-						))}
-					</Select>
+					<Controller
+						name="status"
+						control={control}
+						render={({ field: { onChange: onChangeValue, value } }) => (
+							<ReactSelect
+								onChange={(...args: any[]) => {
+									onChangeValue(...args);
+									handleSubmit(onChange)();
+								}}
+								value={value}
+								styles={reactSelectStyles}
+								options={orderStatusList}
+								placeholder={__('All Status', 'masteriyo')}
+								isClearable
+							/>
+						)}
+					/>
 				</Box>
 			</Stack>
 		</form>

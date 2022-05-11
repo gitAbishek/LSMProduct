@@ -66,11 +66,14 @@ const PasswordSecurity = () => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<Stack spacing="9" w="xl">
+			<Stack spacing="9" w="100%">
 				<Heading as="h4" size="lg" fontWeight="medium">
 					{__('Change Password', 'masteriyo')}
 				</Heading>
-				<Stack direction="column" spacing="8">
+				<Stack
+					direction="column"
+					spacing="8"
+					w={{ base: '100%', sm: '100%', md: '50%', lg: '50%' }}>
 					<FormControl isInvalid={!!errors?.password}>
 						<FormLabel>{__('Current Password', 'masteriyo')}</FormLabel>
 						<Input

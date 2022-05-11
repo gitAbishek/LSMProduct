@@ -15,10 +15,12 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
+	Text,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
+import { IconType } from 'react-icons';
 import {
 	BiBook,
 	BiBookAlt,
@@ -69,11 +71,27 @@ const Sidebar = () => {
 		});
 	};
 
+	const navText = (text: string, icon: IconType) => (
+		<Stack
+			direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
+			spacing="4">
+			<ListIcon fontSize="md" mr="3" as={icon} />
+			<Text display={{ base: 'none', sm: 'none', md: 'block', lg: 'block' }}>
+				{__(text, 'masteriyo')}
+			</Text>
+		</Stack>
+	);
+
 	if (userQuery.isSuccess) {
 		return (
 			<List
-				mr="6"
-				flex="0 0 200px"
+				mr={{ base: '0', sm: '0', md: '4', lg: '6' }}
+				flex={{
+					base: '0 0 30px',
+					sm: '0 0 50px',
+					md: '0 0 90px',
+					lg: '0 0 200px',
+				}}
 				borderRight="1px"
 				borderRightColor="gray.100"
 				spacing="6"
@@ -88,8 +106,12 @@ const Sidebar = () => {
 							src={userQuery?.data?.profile_image?.url}
 							showBorder
 							shadow="md"
+							ml={{ base: '-5px', sm: '-5px', md: 0, lg: 0 }}
 						/>
-						<Stack direction="column" spacing="0">
+						<Stack
+							direction="column"
+							spacing="0"
+							display={{ base: 'none', sm: 'none', md: 'block', lg: 'block' }}>
 							<Heading as="h5" fontSize="xs" fontWeight="medium">
 								{userQuery?.data?.first_name && userQuery?.data?.last_name
 									? `${userQuery?.data?.first_name} ${userQuery?.data?.last_name}`
@@ -104,8 +126,7 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.dashboard}>
-						<ListIcon fontSize="md" mr="3" as={BiGrid} />
-						{__('Dashboard', 'masteriyo')}
+						{navText('Dashboard', BiGrid)}
 					</Link>
 				</ListItem>
 
@@ -115,14 +136,12 @@ const Sidebar = () => {
 						<Divider />
 						<ListItem>
 							<Link sx={navLinkStyles} href={localized.urls.addNewCourse}>
-								<ListIcon fontSize="md" mr="3" as={BiPlus} />
-								{__('Add course', 'masteriyo')}
+								{navText('Add Course', BiPlus)}
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link sx={navLinkStyles} href={localized.urls.myCourses}>
-								<ListIcon fontSize="md" mr="3" as={BiBookAlt} />
-								{__('My Courses', 'masteriyo')}
+								{navText('My Courses', BiBookAlt)}
 							</Link>
 						</ListItem>
 						<Divider />
@@ -134,8 +153,7 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.courses}>
-						<ListIcon fontSize="md" mr="3" as={BiBook} />
-						{__('Enrolled Courses', 'masteriyo')}
+						{navText('Enrolled Courses', BiBook)}
 					</Link>
 				</ListItem>
 				<ListItem>
@@ -148,8 +166,7 @@ const Sidebar = () => {
 						}
 						_activeLink={navActiveStyles}
 						to={routes.user.profile}>
-						<ListIcon fontSize="md" mr="3" as={BiUser} />
-						{__('Profile', 'masteriyo')}
+						{navText('Profile', BiUser)}
 					</Link>
 				</ListItem>
 
@@ -159,15 +176,13 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.order.list}>
-						<ListIcon fontSize="md" mr="3" as={BiHistory} />
-						{__('Order History', 'masteriyo')}
+						{navText('Order History', BiHistory)}
 					</Link>
 				</ListItem>
 
 				<ListItem>
 					<Link sx={navLinkStyles} onClick={onOpen}>
-						<ListIcon fontSize="md" mr="3" as={BiLogOut} />
-						{__('Logout', 'masteriyo')}
+						{navText('Logout', BiLogOut)}
 					</Link>
 				</ListItem>
 

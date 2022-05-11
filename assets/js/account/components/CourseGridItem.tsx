@@ -38,11 +38,28 @@ const CourseGridItem: React.FC<Props> = (props) => {
 
 	return (
 		<Box p="5" border="1px" borderColor="gray.100">
-			<Stack direction="row" spacing="10" align="center">
-				<Stack direction="row" spacing="4">
-					<Image w="80px" src={course?.featured_image_url} />
+			<Stack
+				direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
+				spacing="10"
+				align={{ base: 'left', sm: 'left', md: 'left', lg: 'center' }}>
+				<Stack
+					direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+					spacing="4"
+					mb={4}>
+					<Image
+						w={{ base: '100%', sm: '100%', md: '80px', lg: '80px' }}
+						src={course?.featured_image_url}
+						h={{ base: '170px', sm: '180px', md: '50px', lg: '50px' }}
+					/>
 					<Stack direction="column" spacing="2" w="120px">
-						<Stack direction="row" spacing="1" flexWrap="wrap">
+						<Stack
+							direction={{ base: 'column', sm: 'row', md: 'row', lg: 'row' }}
+							spacing="1"
+							w={{
+								sm: '20rem',
+								md: '30rem',
+								lg: '37rem',
+							}}>
 							{course?.categories?.map(
 								(category: { id: number; name: string; slug: string }) => (
 									<Tag
@@ -74,7 +91,11 @@ const CourseGridItem: React.FC<Props> = (props) => {
 					</Stack>
 				</Stack>
 
-				<Stack direction="row" align="center" justify="space-between" flex="1">
+				<Stack
+					direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
+					align={{ base: 'left', sm: 'left', md: 'left', lg: 'center' }}
+					justify="space-between"
+					flex="1">
 					<Stack
 						direction="column"
 						justifyContent="center"
@@ -114,7 +135,9 @@ const CourseGridItem: React.FC<Props> = (props) => {
 							</Text>
 						)}
 					</Stack>
-					<Link href={course?.start_course_url}>
+					<Link
+						href={course?.start_course_url}
+						style={{ width: 'fit-content' }}>
 						<Button
 							colorScheme="blue"
 							boxShadow="none"

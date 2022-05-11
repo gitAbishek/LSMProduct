@@ -6,6 +6,7 @@ import {
 	Heading,
 	Icon,
 	Stack,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -27,6 +28,8 @@ import { MyCoursesSchema } from '../../schemas';
 import localized from '../../utils/global';
 
 const Dashboard: React.FC = () => {
+	const [lg, md] = useMediaQuery(['(min-width:1290px)', '(min-width:992px)']);
+
 	const courseAPI = new API(urls.myCourses);
 	const courseProgressAPI = new API(urls.courseProgress);
 
@@ -64,77 +67,99 @@ const Dashboard: React.FC = () => {
 			validCoursesIds?.includes(course.course.id)
 		);
 
+	let direction: 'row' | 'column' | undefined = 'row';
+	let gap: number = 2;
+	let width: 'xs' | 'sm' | 'md' | 'lg' | '100%' = '100%';
+
+	if (md) {
+		gap = 0;
+	}
+
+	if (lg) {
+		direction = 'row';
+		gap = 0;
+		width = 'xs';
+	}
+
 	if (dashboardCourseQuery.isSuccess && courseProgressQuery.isSuccess) {
 		return (
-			<>
-				<Stack direction="column" spacing="10">
-					<Row gutterWidth={30}>
-						<Col sm={12} md={4}>
-							<CountBox
-								title={__('Enrolled Courses', 'masteriyo')}
-								count={enrolledCoursesCount}
-								icon={<Icon as={BsBook} fontSize="xl" />}
-								colorScheme="cyan"
-							/>
-						</Col>
-						<Col sm={12} md={4}>
-							<CountBox
-								title={__('In Progress Courses', 'masteriyo')}
-								count={inProgressCoursesCount}
-								icon={<Icon as={BsBookHalf} fontSize="xl" />}
-								colorScheme="blue"
-							/>
-						</Col>
-						<Col sm={12} md={4}>
-							<CountBox
-								title={__('Completed Courses', 'masteriyo')}
-								count={completedCoursesCount}
-								icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
-								colorScheme="green"
-							/>
-						</Col>
-					</Row>
-
-					<Stack direction="column" spacing="8">
-						<Stack
-							direction="row"
-							spacing="4"
-							justify="space-between"
-							alignItems="center">
-							<Stack direction="row">
-								<Heading size="md">
-									{__('Continue Studying', 'masteriyo')}
-								</Heading>
-							</Stack>
-							<ButtonGroup>
-								<Link to={routes.courses}>
-									<Button
-										rightIcon={
-											<IoIosArrowForward size={15} color={'gray.500'} />
-										}
-										color="gray.500"
-										size="sm"
-										borderRadius="full"
-										borderColor="gray.400"
-										variant="outline">
-										{__('SHOW ALL', 'masteriyo')}
-									</Button>
-								</Link>
-							</ButtonGroup>
-						</Stack>
-						{isEmpty(coursesToContinue) ? (
-							<Alert status="info">
-								<AlertIcon />
-								{__("You don't have any course in progress.", 'masteriyo')}
-							</Alert>
-						) : (
-							coursesToContinue?.map((course) => (
-								<CourseGridItem key={course.id} course={course} />
-							))
-						)}
+			<Stack direction="column" spacing="10">
+				<Row
+					gutterWidth={30}
+					justify="between"
+					direction={direction}
+					style={{ gap }}>
+					<Col lg={4} md={12} sm={12}>
+						<CountBox
+							title={__('Enrolled Courses', 'masteriyo')}
+							count={enrolledCoursesCount}
+							icon={<Icon as={BsBook} fontSize="xl" />}
+							colorScheme="cyan"
+							w={width}
+						/>
+					</Col>
+					<Col lg={4} md={12} sm={12}>
+						<CountBox
+							title={__('In Progress Courses', 'masteriyo')}
+							count={inProgressCoursesCount}
+							icon={<Icon as={BsBookHalf} fontSize="xl" />}
+							colorScheme="blue"
+							w={width}
+						/>
+					</Col>
+					<Col lg={4} md={12} sm={12}>
+						<CountBox
+							title={__('Completed Courses', 'masteriyo')}
+							count={completedCoursesCount}
+							icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
+							colorScheme="green"
+							w={width}
+						/>
+					</Col>
+				</Row>
+				<Stack direction="column" spacing="8">
+					<Stack
+						direction={{ base: 'column', sm: 'row', md: 'row', lg: 'row' }}
+						spacing="4"
+						justify={{
+							base: 'start',
+							sm: 'start',
+							md: 'start',
+							lg: 'space-between',
+						}}
+						alignItems={{
+							base: 'left',
+							sm: 'left',
+							md: 'center',
+							lg: 'center',
+						}}>
+						<Heading size="md">{__('Continue Studying', 'masteriyo')}</Heading>
+						<ButtonGroup>
+							<Link to={routes.courses}>
+								<Button
+									rightIcon={<IoIosArrowForward size={15} color={'gray.500'} />}
+									color="gray.500"
+									size="sm"
+									borderRadius="full"
+									borderColor="gray.400"
+									variant="outline">
+									{__('SHOW ALL', 'masteriyo')}
+								</Button>
+							</Link>
+						</ButtonGroup>
 					</Stack>
+					{isEmpty(coursesToContinue) ? (
+						<Alert status="info">
+							<AlertIcon />
+							{__("You don't have any course in progress.", 'masteriyo')}
+						</Alert>
+					) : (
+						coursesToContinue?.map((course) => (
+							<CourseGridItem key={course.id} course={course} />
+						))
+					)}
 				</Stack>
-			</>
+			</Stack>
 		);
 	}
 

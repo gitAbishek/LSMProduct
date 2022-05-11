@@ -3,7 +3,6 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Select,
-	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -34,7 +33,7 @@ const CountryState: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<Stack direction="row" spacing="8">
+		<>
 			<FormControl isInvalid={!!errors?.billing?.country}>
 				<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 				<Select {...register('billing.country')} defaultValue={country}>
@@ -71,7 +70,7 @@ const CountryState: React.FC<Props> = (props) => {
 					<FormErrorMessage>{errors?.billing.state.message}</FormErrorMessage>
 				)}
 			</FormControl>
-		</Stack>
+		</>
 	);
 };
 

@@ -244,7 +244,9 @@ const EditProfile: React.FC = () => {
 													<SkeletonCircle size="28" />
 												)}
 											</Center>
-											<SimpleGrid columns={2} spacing="6">
+											<SimpleGrid
+												columns={{ base: 1, sm: 1, md: 2, lg: 2 }}
+												spacing="6">
 												<FormControl isInvalid={!!errors?.first_name}>
 													<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 													<Input
@@ -325,7 +327,9 @@ const EditProfile: React.FC = () => {
 													/>
 												</Tooltip>
 											</Heading>
-											<SimpleGrid columns={2} spacing="6">
+											<SimpleGrid
+												columns={{ base: 1, sm: 1, md: 2, lg: 2 }}
+												spacing="6">
 												<FormControl isInvalid={!!errors?.billing?.first_name}>
 													<FormLabel>{__('First Name', 'masteriyo')}</FormLabel>
 													<Input
@@ -374,13 +378,15 @@ const EditProfile: React.FC = () => {
 													)}
 												</FormControl>
 											</Stack>
-											<CountryState
-												country={userDataQuery?.data?.billing?.country}
-												state={userDataQuery?.data?.billing?.state}
-												countriesQuery={countriesQuery}
-												statesQuery={statesQuery}
-											/>
-											<Stack direction="row" spacing="8">
+											<SimpleGrid
+												columns={{ base: 1, sm: 1, md: 2, lg: 2 }}
+												spacing="6">
+												<CountryState
+													country={userDataQuery?.data?.billing?.country}
+													state={userDataQuery?.data?.billing?.state}
+													countriesQuery={countriesQuery}
+													statesQuery={statesQuery}
+												/>
 												<FormControl isInvalid={!!errors?.billing?.city}>
 													<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 													<Input
@@ -409,8 +415,7 @@ const EditProfile: React.FC = () => {
 														</FormErrorMessage>
 													)}
 												</FormControl>
-											</Stack>
-											<Stack direction="row" spacing="8">
+
 												<FormControl isInvalid={!!errors?.billing?.address_1}>
 													<FormLabel>{__('Address 1', 'masteriyo')}</FormLabel>
 													<Input
@@ -441,8 +446,6 @@ const EditProfile: React.FC = () => {
 														</FormErrorMessage>
 													)}
 												</FormControl>
-											</Stack>
-											<Stack direction="row" spacing="8">
 												<FormControl
 													isInvalid={!!errors?.billing?.company_name}>
 													<FormLabel>
@@ -478,7 +481,7 @@ const EditProfile: React.FC = () => {
 														</FormErrorMessage>
 													)}
 												</FormControl>
-											</Stack>
+											</SimpleGrid>
 											<Spacer />
 											<ButtonGroup>
 												<Button

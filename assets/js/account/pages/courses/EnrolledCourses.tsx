@@ -28,7 +28,7 @@ const EnrolledCourses: React.FC = () => {
 				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 					{__('Enrolled Courses', 'masteriyo')}
 				</Heading>
-				<SimpleGrid columns={3} spacing="6">
+				<SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 3 }} spacing="6">
 					{myCourseQuery?.data?.data?.map((myCourse: MyCoursesSchema) => {
 						return <CourseItem key={myCourse.id} courseData={myCourse} />;
 					})}

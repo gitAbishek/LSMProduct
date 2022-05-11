@@ -84,6 +84,7 @@ const CourseItem: React.FC<Props> = (props) => {
 						src={course?.featured_image_url}
 						alt={course?.name}
 						height="180px"
+						width={'100%'}
 						objectFit="cover"
 					/>
 					{course?.difficulty && (

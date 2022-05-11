@@ -1,18 +1,9 @@
-import {
-	Avatar,
-	Button,
-	CSSObject,
-	Flex,
-	Heading,
-	Stack,
-	Text,
-} from '@chakra-ui/react';
+import { Avatar, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { Table, Tbody, Td, Tr } from 'react-super-responsive-table';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { UserSchema } from '../../../back-end/schemas';
@@ -26,21 +17,17 @@ const ProfilePage = () => {
 		userAPI.get()
 	);
 
-	const tableStyles: CSSObject = {
-		table: {
-			tr: {
-				td: {
-					fontSize: 'sm',
-					color: 'gray.600',
-
-					':first-child': {
-						fontWeight: 'medium',
-						color: 'gray.900',
-					},
-				},
-			},
-		},
-	};
+	const userInfo = (key: string, value: string = '', bg: boolean = false) => (
+		<Stack
+			p="12px 40px"
+			bg={bg ? '#f8f9fa' : ''}
+			marginTop="0px !important"
+			direction={{ base: 'column', sm: 'row', md: 'row', lg: 'row' }}
+			justifyContent="space-between">
+			<Text>{__(key, 'masteriyo')}</Text>
+			<Text>{value}</Text>
+		</Stack>
+	);
 
 	if (isSuccess) {
 		return (
@@ -61,89 +48,42 @@ const ProfilePage = () => {
 						</Button>
 					</Link>
 				</Flex>
-				<Stack direction="row" spacing="6" sx={tableStyles}>
+				<Stack
+					direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+					spacing="6">
 					<Avatar src={data?.profile_image?.url} size="2xl" />
 
-					<Stack direction="column" spacing="6" flex="1">
+					<Stack direction="column" spacing="8" flex="1">
 						<Text as="h3" fontSize="4xl" fontWeight="medium">
 							{data?.first_name && data?.last_name
 								? `${data?.first_name} ${data?.last_name}`
 								: data?.username}
 						</Text>
 
-						<Table>
-							<Tbody>
-								<Tr>
-									<Td>{__('First Name', 'masteriyo')}</Td>
-									<Td>{data?.first_name}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Last Name', 'masteriyo')}</Td>
-									<Td>{data?.last_name}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Username', 'masteriyo')}</Td>
-									<Td>{data?.username}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Email', 'masteriyo')}</Td>
-									<Td>{data?.email}</Td>
-								</Tr>
-							</Tbody>
-						</Table>
+						<Stack direction="column">
+							{userInfo('First Name', data?.first_name, true)}
+							{userInfo('Last Name', data?.last_name)}
+							{userInfo('Username', data?.username, true)}
+							{userInfo('Email', data?.email)}
+						</Stack>
 
 						<Heading fontSize="lg" px="6">
 							{__('Billing', 'masteriyo')}
 						</Heading>
 
-						<Table>
-							<Tbody>
-								<Tr>
-									<Td>{__('First Name', 'masteriyo')}</Td>
-									<Td>{data?.billing?.first_name}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Last Name', 'masteriyo')}</Td>
-									<Td>{data?.billing?.last_name}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Contact Number', 'masteriyo')}</Td>
-									<Td>{data?.billing?.phone}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Country', 'masteriyo')}</Td>
-									<Td>{data?.billing?.country}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('State', 'masteriyo')}</Td>
-									<Td>{data?.billing?.state}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('City', 'masteriyo')}</Td>
-									<Td>{data?.billing?.city}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Zip Code', 'masteriyo')}</Td>
-									<Td>{data?.billing?.postcode}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Address 1', 'masteriyo')}</Td>
-									<Td>{data?.billing?.address_1}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Address 2', 'masteriyo')}</Td>
-									<Td>{data?.billing?.address_2}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Company Name', 'masteriyo')}</Td>
-									<Td>{data?.billing?.company_name}</Td>
-								</Tr>
-								<Tr>
-									<Td>{__('Company VAT Number', 'masteriyo')}</Td>
-									<Td>{data?.billing?.company_id}</Td>
-								</Tr>
-							</Tbody>
-						</Table>
+						<Stack direction="column">
+							{userInfo('First Name', data?.billing?.first_name, true)}
+							{userInfo('Last Name', data?.billing?.last_name)}
+							{userInfo('Contact Number', data?.billing?.phone, true)}
+							{userInfo('Country', data?.billing?.country)}
+							{userInfo('State', data?.billing?.state, true)}
+							{userInfo('City', data?.billing?.city)}
+							{userInfo('Zip Code', data?.billing?.postcode, true)}
+							{userInfo('Address 1', data?.billing?.address_1)}
+							{userInfo('Address 2', data?.billing?.address_2, true)}
+							{userInfo('Company Name', data?.billing?.company_name)}
+							{userInfo('Company VAT Number', data?.billing?.company_id, true)}
+						</Stack>
 					</Stack>
 				</Stack>
 			</Stack>

@@ -39,6 +39,7 @@ import { Td, Tr } from 'react-super-responsive-table';
 import { infoIconStyles } from '../../../../config/styles';
 import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
+import { UserStatus } from '../../../../enums/Enum';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
 import { getLocalTime } from '../../../../utils/utils';
@@ -137,7 +138,7 @@ const InstructorList: React.FC<Props> = (props) => {
 							_hover={{ color: 'blue.500' }}>
 							{`#${data?.id} ${data?.first_name} ${data?.last_name}`}{' '}
 						</Link>
-						{data?.approved ? (
+						{UserStatus.Active === data?.status ? (
 							<Tooltip
 								label={__('Approved Instructor', 'masteriyo')}
 								hasArrow

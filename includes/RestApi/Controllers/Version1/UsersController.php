@@ -11,8 +11,9 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Permission;
 use WP_HTTP_Response;
+use Masteriyo\Enums\UserStatus;
+use Masteriyo\Helper\Permission;
 
 /**
  * UsersController class.
@@ -671,7 +672,8 @@ class UsersController extends PostsController {
 				),
 				'status'               => array(
 					'description' => __( 'User status', 'masteriyo' ),
-					'type'        => 'string',
+					'type'        => 'integer',
+					'enum'        => UserStatus::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'display_name'         => array(

@@ -1314,22 +1314,10 @@ if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
 	 * Display account approved notice if the user is instructor and is not approved.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.x
 	 */
 	function masteriyo_template_show_account_approved_notice() {
-		$instructor = masteriyo_get_current_instructor();
-
-		if ( is_null( $instructor ) ) {
-			return;
-		}
-
-		if ( ! $instructor->is_approved() ) {
-			masteriyo_get_template(
-				'notices/warning.php',
-				array(
-					'message' => __( 'You need to be approved by the administrator before you can create courses.', 'masteriyo' ),
-				)
-			);
-		}
+		masteriyo_deprecated_function( 'masteriyo_template_show_account_approved_notice', 'x.x.x' );
 	}
 }
 

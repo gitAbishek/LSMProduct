@@ -9,9 +9,6 @@
 
 namespace Masteriyo\Models;
 
-use Masteriyo\ModelException;
-use Masteriyo\Repository\UserRepository;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -39,16 +36,6 @@ class Instructor extends User {
 	 */
 	protected $cache_group = 'instructors';
 
-	/**
-	 * Extra data for only instructor.
-	 *
-	 * @since 1.3.0
-	 * @var array
-	 */
-	protected $extra_data = array(
-		'approved' => false,
-	);
-
 	/*
 	|--------------------------------------------------------------------------
 	| Getters
@@ -59,6 +46,7 @@ class Instructor extends User {
 	 * Get whether the instructor is approved by the manager/administrator or not.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean
@@ -77,6 +65,7 @@ class Instructor extends User {
 	 * Set the approved.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.x
 	 */
 	public function set_approved( $approved ) {
 		$this->set_prop( 'approved', masteriyo_string_to_bool( $approved ) );
@@ -91,6 +80,7 @@ class Instructor extends User {
 	 * Return true if the instructor is approved.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.x
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean

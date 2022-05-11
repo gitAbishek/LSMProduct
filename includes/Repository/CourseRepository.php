@@ -93,6 +93,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( $id && ! is_wp_error( $id ) ) {
 			$course->set_id( $id );
+
 			$this->update_post_meta( $course, true );
 			$this->update_terms( $course, true );
 			$this->handle_updated_props( $course );

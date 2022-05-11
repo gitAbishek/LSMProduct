@@ -31,6 +31,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Removed 'approved meta field.
 	 *
 	 * @var array
 	 */
@@ -72,6 +73,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * @param Model $user User object.
 	 */
 	public function create( Model &$user ) {
+		global $wpdb;
 		if ( ! $user->get_date_created( 'edit' ) ) {
 			$user->set_date_created( current_time( 'mysql', true ) );
 		}
@@ -91,7 +93,6 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 					'user_url'            => $user->get_url( 'edit' ),
 					'user_registered'     => $user->get_date_created( 'edit' ),
 					'user_activation_key' => $user->get_activation_key( 'edit' ),
-					'user_status'         => $user->get_status( 'edit' ),
 					'display_name'        => $user->get_display_name( 'edit' ),
 					'role'                => empty( $user->get_roles( 'edit' ) ) ? 'masteriyo_student' : current( $user->get_roles( 'edit' ) ),
 				),
@@ -115,7 +116,19 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				}
 			}
 
+			// Update user status.
+			$wpdb->update(
+				"{$wpdb->base_prefix}users",
+				array(
+					'user_status' => $user->get_status( 'edit' ),
+				),
+				array( 'ID' => $id ),
+				array( '%d' ),
+				array( '%d' )
+			);
+
 			$user->set_id( $id );
+			$user->set_object_read( true );
 			$this->update_user_meta( $user, true );
 			$user->apply_changes();
 
@@ -191,6 +204,8 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * @return void
 	 */
 	public function update( Model &$user ) {
+		global $wpdb;
+
 		$changes        = $user->get_changes();
 		$user_data_keys = array(
 			'username',
@@ -224,6 +239,19 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 				foreach ( $user->get_roles( 'edit' ) as $role ) {
 					$wp_user->add_role( $role );
 				}
+			}
+
+			// Update user status.
+			if ( isset( $changes['status'] ) ) {
+				$wpdb->update(
+					"{$wpdb->base_prefix}users",
+					array(
+						'user_status' => absint( $changes['status'] ),
+					),
+					array( 'ID' => $user->get_id() ),
+					array( '%d' ),
+					array( '%d' )
+				);
 			}
 		}
 

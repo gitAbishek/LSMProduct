@@ -544,7 +544,7 @@ export interface UserSchema {
 	url: string;
 	date_created: string;
 	activation_key: string;
-	status: string;
+	status: number;
 	display_name: string;
 	nickname: string;
 	first_name: string;

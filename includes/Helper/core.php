@@ -3240,3 +3240,90 @@ function masteriyo_get_checkout_endpoint_url( $endpoint ) {
 
 	return apply_filters( 'masteriyo_get_checkout_endpoint_url', $endpoint_url, $endpoint );
 }
+
+/**
+ * Runs a deprecated action with notice only if used.
+ *
+ * @since x.x.x
+ * @param string $tag         The name of the action hook.
+ * @param array  $args        Array of additional function arguments to be passed to do_action().
+ * @param string $version     The version of Masteriyo that deprecated the hook.
+ * @param string $replacement The hook that should have been used.
+ * @param string $message     A message regarding the change.
+ */
+function masteriyo_do_deprecated_action( $tag, $args, $version, $replacement = null, $message = null ) {
+	if ( ! has_action( $tag ) ) {
+		return;
+	}
+
+	masteriyo_deprecated_hook( $tag, $version, $replacement, $message );
+	do_action_ref_array( $tag, $args );
+}
+
+/**
+ * Wrapper for deprecated functions so we can apply some extra logic.
+ *
+ * @since x.x.x
+ * @param string $function Function used.
+ * @param string $version Version the message was added in.
+ * @param string $replacement Replacement for the called function.
+ */
+function masteriyo_deprecated_function( $function, $version, $replacement = null ) {
+	// @codingStandardsIgnoreStart
+	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		do_action( 'deprecated_function_run', $function, $replacement, $version );
+		$log_string  = "The {$function} function is deprecated since version {$version}.";
+		$log_string .= $replacement ? " Replace with {$replacement}." : '';
+		error_log( $log_string );
+	} else {
+		_deprecated_function( $function, $version, $replacement );
+	}
+	// @codingStandardsIgnoreEnd
+}
+
+/**
+ * Wrapper for deprecated hook so we can apply some extra logic.
+ *
+ * @since x.x.x
+ * @param string $hook        The hook that was used.
+ * @param string $version     The version of WordPress that deprecated the hook.
+ * @param string $replacement The hook that should have been used.
+ * @param string $message     A message regarding the change.
+ */
+function masteriyo_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
+	// @codingStandardsIgnoreStart
+	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
+
+		$message    = empty( $message ) ? '' : ' ' . $message;
+		$log_string = "{$hook} is deprecated since version {$version}";
+		$log_string .= $replacement ? "! Use {$replacement} instead." : ' with no alternative available.';
+
+		error_log( $log_string . $message );
+	} else {
+		_deprecated_hook( $hook, $version, $replacement, $message );
+	}
+	// @codingStandardsIgnoreEnd
+}
+
+/**
+ * Function to check if a instructor is approved or not.
+ *
+ * @since x.x.x
+ *
+ * @return boolean
+ */
+function masteriyo_is_instructor_active() {
+
+	if ( masteriyo_is_current_user_admin() ) {
+		return true;
+	}
+
+	$instructor = masteriyo_get_current_instructor();
+
+	if ( is_null( $instructor ) ) {
+		return false;
+	}
+
+	return $instructor->is_active();
+}

@@ -70,6 +70,7 @@ class InstructorsController extends UsersController {
 	 * Get the query params for collections of attachments.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.x
 	 *
 	 * @return array
 	 */
@@ -91,6 +92,7 @@ class InstructorsController extends UsersController {
 	 * Get the User's schema, conforming to JSON Schema.
 	 *
 	 * @since 1.3.0
+	 * @deprecated x.x.x
 	 *
 	 * @return array
 	 */
@@ -119,6 +121,7 @@ class InstructorsController extends UsersController {
 	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @since  1.3.0
+	 * @deprecated x.x.x
 	 *
 	 * @return array
 	 */
@@ -195,13 +198,6 @@ class InstructorsController extends UsersController {
 	 */
 	protected function get_user_data( $instructor, $context = 'view' ) {
 		$data = parent::get_user_data( $instructor, $context );
-
-		$data = array_merge(
-			$data,
-			array(
-				'approved' => $instructor->get_approved( $context ),
-			)
-		);
 
 		return $data;
 	}
@@ -364,10 +360,6 @@ class InstructorsController extends UsersController {
 
 		if ( isset( $request['billing']['phone'] ) ) {
 			$instructor->set_billing_phone( $request['billing']['phone'] );
-		}
-
-		if ( isset( $request['approved'] ) ) {
-			$instructor->set_approved( $request['approved'] );
 		}
 
 		// Allow set meta_data.

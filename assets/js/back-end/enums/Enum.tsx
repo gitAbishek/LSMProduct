@@ -6,3 +6,10 @@ export enum OrderStatus {
 	Cancelled = 'cancelled',
 	Pending = 'pending',
 }
+
+export enum UserStatus {
+	Active = 0,
+	Ham = 0,
+	Spam = 1,
+	Inactive = 1000,
+}

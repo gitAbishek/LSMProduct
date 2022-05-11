@@ -783,20 +783,20 @@ class ScriptStyle {
 				'account'       => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
-						'rootApiUrl'      => esc_url_raw( untrailingslashit( rest_url() ) ),
-						'current_user_id' => get_current_user_id(),
-						'nonce'           => wp_create_nonce( 'wp_rest' ),
-						'labels'          => array(
+						'rootApiUrl'         => esc_url_raw( untrailingslashit( rest_url() ) ),
+						'current_user_id'    => get_current_user_id(),
+						'nonce'              => wp_create_nonce( 'wp_rest' ),
+						'labels'             => array(
 							'save'                   => __( 'Save', 'masteriyo' ),
 							'saving'                 => __( 'Saving...', 'masteriyo' ),
 							'profile_update_success' => __( 'Your profile was updated successfully.', 'masteriyo' ),
 						),
-						'currency'        => array(
+						'currency'           => array(
 							'code'     => masteriyo_get_currency(),
 							'symbol'   => html_entity_decode( masteriyo_get_currency_symbol( masteriyo_get_currency() ) ),
 							'position' => masteriyo_get_setting( 'payments.currency.currency_position' ),
 						),
-						'urls'            => array(
+						'urls'               => array(
 							'logout'       => wp_logout_url( get_home_url() ),
 							'account'      => masteriyo_get_page_permalink( 'account' ),
 							'courses'      => masteriyo_get_page_permalink( 'courses' ),
@@ -804,6 +804,7 @@ class ScriptStyle {
 							'myCourses'    => admin_url( 'admin.php?page=masteriyo#/courses' ),
 							'addNewCourse' => admin_url( 'admin.php?page=masteriyo#/courses/add-new-course' ),
 						),
+						'isInstructorActive' => masteriyo_bool_to_string( masteriyo_is_instructor_active() ),
 					),
 				),
 				'login-form'    => array(

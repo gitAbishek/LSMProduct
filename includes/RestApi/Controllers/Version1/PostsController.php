@@ -114,7 +114,7 @@ abstract class PostsController extends CrudController {
 		}
 
 		$instructor = masteriyo_get_current_instructor();
-		if ( $instructor && ! $instructor->is_approved() ) {
+		if ( $instructor && ! $instructor->is_active() ) {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_approved',
 				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
@@ -154,7 +154,7 @@ abstract class PostsController extends CrudController {
 		}
 
 		$instructor = masteriyo_get_current_instructor();
-		if ( $instructor && ! $instructor->is_approved() ) {
+		if ( $instructor && ! $instructor->is_active() ) {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_approved',
 				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
@@ -196,7 +196,7 @@ abstract class PostsController extends CrudController {
 		}
 
 		$instructor = masteriyo_get_current_instructor();
-		if ( $instructor && ! $instructor->is_approved() ) {
+		if ( $instructor && ! $instructor->is_active() ) {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_approved',
 				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),
@@ -396,15 +396,21 @@ abstract class PostsController extends CrudController {
 	 * Get posts count by status.
 	 *
 	 * @since 1.4.12
+	 * @since x.x.x Filter post counts by post authors.
 	 *
 	 * @return Array
 	 */
 	protected function get_posts_count() {
-		$post_count = (array) wp_count_posts( $this->post_type );
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			$post_count = (array) wp_count_posts( $this->post_type );
+		} else {
+			$post_count = (array) masteriyo_count_posts( $this->post_type, get_current_user_id() );
+		}
 
 		$post_count        = array_map( 'absint', $post_count );
 		$post_count['any'] = array_sum( $post_count );
 
 		return $post_count;
 	}
+
 }

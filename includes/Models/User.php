@@ -12,6 +12,7 @@ namespace Masteriyo\Models;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Database\Model;
 use Masteriyo\ModelException;
+use Masteriyo\Enums\UserStatus;
 use Masteriyo\Cache\CacheInterface;
 use Masteriyo\Repository\UserRepository;
 
@@ -260,6 +261,12 @@ class User extends Model {
 	 * @return string
 	 */
 	public function get_status( $context = 'view' ) {
+		// TODO Remove this after a major release.
+		$status = masteriyo_string_to_bool( get_user_meta( $this->get_id(), '_approved', true ) );
+		if ( $status ) {
+			$this->set_status( UserStatus::ACTIVE );
+		}
+
 		return $this->get_prop( 'status', $context );
 	}
 
@@ -714,11 +721,12 @@ class User extends Model {
 	 * Set user's status.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Updated $status parameter to integer.
 	 *
-	 * @param string $status User's status.
+	 * @param integer $status User's status.
 	 */
 	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
+		$this->set_prop( 'status', absint( $status ) );
 	}
 
 	/**
@@ -1039,5 +1047,22 @@ class User extends Model {
 	 */
 	public function set_billing_phone( $phone ) {
 		$this->set_prop( 'billing_phone', $phone );
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Conditional
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Return true if the user is active.
+	 *
+	 * @return boolean
+	 */
+	public function is_active() {
+		$is_active = UserStatus::ACTIVE === $this->get_prop( 'status' );
+		return apply_filters( 'masteriyo_is_user_active', $is_active, $this );
 	}
 }

@@ -509,7 +509,7 @@ class QuizAttemptsController extends CrudController {
 
 		$instructor = masteriyo_get_current_instructor();
 
-		if ( $instructor && ! $instructor->is_approved() ) {
+		if ( $instructor && ! $instructor->is_active() ) {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_approved',
 				__( 'Sorry, you are not approved by the manager.', 'masteriyo' ),

@@ -436,3 +436,48 @@ function masteriyo_get_course_review_replies_count( $course_id ) {
 	);
 	return apply_filters( 'masteriyo_get_course_review_replies_count', $replies_count, $course_id );
 }
+
+/**
+ * Get post counts of post author.
+ *
+ * @since x.x.x
+ *
+ * @param string $type Post type.
+ * @param int $user_id User ID.
+ * @return stdClass
+ */
+function masteriyo_count_posts( $type, $user_id ) {
+	global $wpdb;
+
+	if ( ! post_type_exists( $type ) ) {
+		return new stdClass();
+	}
+
+	$results = (array) $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT post_status, COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE post_type = %s AND post_author = %d GROUP BY post_status",
+			$type,
+			$user_id
+		),
+		ARRAY_A
+	);
+	$counts  = array_fill_keys( get_post_stati(), 0 );
+
+	foreach ( $results as $row ) {
+		$counts[ $row['post_status'] ] = $row['num_posts'];
+	}
+
+	$counts = (object) $counts;
+
+	/**
+	 * Modify returned post counts by status for the current post type.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param stdClass $counts An object containing the current post_type's post
+	 *                         counts by status.
+	 * @param string   $type   Post type.
+	 * @param string   $user_id User ID.
+	 */
+	return apply_filters( 'masteriyo_count_posts', $counts, $type, $user_id );
+}

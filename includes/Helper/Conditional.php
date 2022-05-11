@@ -744,7 +744,7 @@ if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
 			$is_visible = true;
 		} elseif ( masteriyo_is_current_user_instructor() ) {
 			$instructor = masteriyo_get_current_instructor();
-			$is_visible = $instructor->is_approved();
+			$is_visible = $instructor->is_active();
 		}
 
 		return apply_filters( 'masteriyo_is_admin_menus_visible', $is_visible );

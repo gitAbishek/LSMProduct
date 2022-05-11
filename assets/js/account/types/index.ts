@@ -20,4 +20,5 @@ export interface MasteriyoLocalized {
 		myCourses: string;
 		addNewCourse: string;
 	};
+	isInstructorActive: string;
 }

@@ -144,7 +144,7 @@ class Masteriyo {
 		Shortcodes::instance()->register_shortcodes();
 		Install::init();
 
-		$this->restrict_wp_dashboard_and_admin_bar();
+		// $this->restrict_wp_dashboard_and_admin_bar();
 		$this->register_order_status();
 		$this->setup_wizard();
 

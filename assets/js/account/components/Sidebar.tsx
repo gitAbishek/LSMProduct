@@ -34,8 +34,8 @@ import FullScreenLoader from '../../back-end/components/layout/FullScreenLoader'
 import urls from '../../back-end/constants/urls';
 import { UserSchema } from '../../back-end/schemas';
 import API from '../../back-end/utils/api';
-import localized from '../../back-end/utils/global';
 import routes from '../constants/routes';
+import localized from '../utils/global';
 
 const Sidebar = () => {
 	const location = useLocation();
@@ -109,7 +109,8 @@ const Sidebar = () => {
 					</Link>
 				</ListItem>
 
-				{userQuery?.data?.roles.includes('masteriyo_instructor') ? (
+				{userQuery?.data?.roles.includes('masteriyo_instructor') &&
+				'yes' === localized.isInstructorActive ? (
 					<>
 						<Divider />
 						<ListItem>

@@ -33,9 +33,10 @@ import {
 } from '../../../../config/styles';
 import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
+import { UserStatus } from '../../../../enums/Enum';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { deepClean } from '../../../../utils/utils';
+import { deepClean, deepMerge } from '../../../../utils/utils';
 
 const AddInstructor: React.FC = () => {
 	const history = useHistory();
@@ -69,7 +70,14 @@ const AddInstructor: React.FC = () => {
 	});
 
 	const onSubmit = (data: any) => {
-		createUser.mutate(deepClean({ ...data, role: 'masteriyo_instructor' }));
+		createUser.mutate(
+			deepClean(
+				deepMerge(data, {
+					status: data.status ? UserStatus.Active : UserStatus.Inactive,
+					role: 'masteriyo_instructor',
+				})
+			)
+		);
 	};
 
 	return (
@@ -214,7 +222,7 @@ const AddInstructor: React.FC = () => {
 														<Box as="span" sx={infoIconStyles}>
 															<Switch
 																colorScheme="green"
-																{...register('approved')}
+																{...register('status')}
 															/>
 														</Box>
 													</Tooltip>

@@ -8,6 +8,7 @@
 
 namespace Masteriyo\FormHandler;
 
+use Masteriyo\Enums\UserStatus;
 use Masteriyo\Notice;
 
 defined( 'ABSPATH' ) || exit;
@@ -107,6 +108,9 @@ class InstructorRegistrationFormHandler {
 		if ( is_wp_error( $user ) ) {
 			return $user;
 		}
+
+		$user->set_status( UserStatus::INACTIVE );
+		$user->save();
 
 		if ( masteriyo_registration_is_generate_password() ) {
 			masteriyo_add_notice( __( 'Your account was created successfully and a password has been sent to your email address.', 'masteriyo' ) );

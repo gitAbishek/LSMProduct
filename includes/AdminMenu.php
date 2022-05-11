@@ -119,6 +119,15 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
+			esc_html__( 'Reviews', 'masteriyo' ),
+			esc_html__( 'Reviews', 'masteriyo' ),
+			'manage_masteriyo_settings',
+			'masteriyo#/reviews',
+			array( __CLASS__, 'display_main_page' )
+		);
+
+		add_submenu_page(
+			'masteriyo',
 			esc_html__( 'Add Ons', 'masteriyo' ),
 			esc_html__( 'Add Ons', 'masteriyo' ),
 			'manage_masteriyo_settings',

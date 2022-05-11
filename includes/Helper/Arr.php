@@ -600,7 +600,7 @@ function masteriyo_array_only( $array, $keys ) {
 	return array_intersect_key( $array, array_flip( (array) $keys ) );
 }
 
-  /**
+/**
  * Push an item onto the beginning of an array.
  *
  * @since 1.3.6

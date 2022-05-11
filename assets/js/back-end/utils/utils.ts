@@ -65,6 +65,10 @@ export const isNumber = (arg: any) => {
 	return repr(arg) === '[object Number]';
 };
 
+export const isFloat = (n: any) => {
+	return Number(n) === n && n % 1 !== 0;
+};
+
 /**
  * isNull :: checks if `arg` is null.
  * @param {} arg :: unknown function argument

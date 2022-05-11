@@ -234,3 +234,60 @@ export const SkeletonInstructorsList: React.FC = () => {
 		</>
 	);
 };
+
+export const SkeletonReviewsList: React.FC = () => {
+	const lengths = [1, 2, 3, 4, 5, 6, 7];
+	return (
+		<>
+			{lengths.map((index) => (
+				<Tr key={index}>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+				</Tr>
+			))}
+		</>
+	);
+};
+
+export const SkeletonReplyList: React.FC = () => {
+	const lengths = [1, 2, 3, 4];
+	return (
+		<>
+			{lengths.map((index) => (
+				<Tr key={index}>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+					<Td>
+						<SkeletonText noOfLines={1} />
+					</Td>
+				</Tr>
+			))}
+		</>
+	);
+};

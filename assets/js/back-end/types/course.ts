@@ -44,6 +44,16 @@ export interface CourseDataMap {
 	edit_post_link: string;
 }
 
+export interface CoursesResponse {
+	data: CourseSchema[];
+	meta: {
+		current_page: number;
+		pages: number;
+		per_page: number;
+		total: number;
+	};
+}
+
 export interface CourseCategoriesResponse {
 	data: CourseCategorySchema[];
 	meta: {

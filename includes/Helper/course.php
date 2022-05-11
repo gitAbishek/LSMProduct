@@ -416,11 +416,11 @@ function masteriyo_get_course_structure( $course_id ) {
  *
  * @since 1.0.5
  *
- * @param integer $course_id
+ * @param integer $course_review_id
  *
  * @return integer
  */
-function masteriyo_get_course_review_replies_count( $course_id ) {
+function masteriyo_get_course_review_replies_count( $course_review_id ) {
 	global $wpdb;
 
 	$replies_count = (int) $wpdb->get_var(
@@ -431,10 +431,19 @@ function masteriyo_get_course_review_replies_count( $course_id ) {
 			AND comment_approved = '1'
 			AND comment_type = 'mto_course_review'
 			",
-			absint( $course_id )
+			absint( $course_review_id )
 		)
 	);
-	return apply_filters( 'masteriyo_get_course_review_replies_count', $replies_count, $course_id );
+
+	/**
+	 * Filters replies count for a course review.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param integer $replies_count
+	 * @param integer $course_review_id
+	 */
+	return apply_filters( 'masteriyo_get_course_review_replies_count', absint( $replies_count ), $course_review_id );
 }
 
 /**

@@ -387,14 +387,6 @@ abstract class CommentsController extends CrudController {
 			'status'          => $request['status'],
 		);
 
-		// When status is 'all' or '', only approve or hold comment is returned.
-		// @see https://github.com/WordPress/WordPress/blob/df148d90fc6d39c8453aff4486c60f97c1dd1141/wp-includes/class-wp-comment-query.php#L568
-		if ( CommentStatus::ALL === $request['status'] || empty( $request['status'] ) ) {
-			// @see https://github.com/WordPress/WordPress/blob/df148d90fc6d39c8453aff4486c60f97c1dd1141/wp-includes/class-wp-comment-query.php#L245
-			// For why we are imploding array with comma separated.
-			$args['status'] = implode( ',', CommentStatus::all() );
-		}
-
 		if ( isset( $this->comment_type ) ) {
 			$args['type'] = $this->comment_type;
 		}
@@ -594,8 +586,9 @@ abstract class CommentsController extends CrudController {
 	protected function get_comments_count() {
 		$post_count = (array) masteriyo_count_comments( $this->comment_type );
 
-		$post_count        = array_map( 'absint', $post_count );
-		$post_count['all'] = array_sum( $post_count );
+		$post_count         = array_map( 'absint', $post_count );
+		$approve_hold_count = masteriyo_array_only( $post_count, array( CommentStatus::HOLD_STR, CommentStatus::APPROVE_STR ) );
+		$post_count['all']  = array_sum( $approve_hold_count );
 
 		return $post_count;
 	}

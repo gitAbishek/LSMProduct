@@ -75,6 +75,13 @@ const Router: React.FC = () => {
 				<Route path={routes.addOns} exact>
 					<screens.AddOns />
 				</Route>
+				<Route path={routes.reviews.list} exact>
+					<screens.AllReviews />
+				</Route>
+				<Route path={routes.reviews.edit} exact>
+					<screens.EditReview />
+				</Route>
+
 				<Route>
 					<screens.FourOFour />
 				</Route>

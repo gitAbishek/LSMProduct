@@ -11,6 +11,7 @@ namespace Masteriyo\Repository;
 
 use Masteriyo\CourseReviews;
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\CommentStatus;
 use Masteriyo\Models\CourseReview;
 
 /**
@@ -110,6 +111,14 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			$course_review->apply_changes();
 			CourseReviews::update_course_review_stats( $course_review->get_course_id() );
 
+			/**
+			 * Fires after new course review is added.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id Course review ID.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
 			do_action( 'masteriyo_new_course_review', $id, $course_review );
 		}
 	}
@@ -130,12 +139,12 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			throw new \Exception( __( 'Invalid Course Review.', 'masteriyo' ) );
 		}
 
-		// Map the comment status from numberical to word.
+		// Map the comment status from numerical to word.
 		$status = $course_review_obj->comment_approved;
-		if ( '1' === $status ) {
-			$status = 'approve';
-		} elseif ( '0' === $status ) {
-			$status = 'hold';
+		if ( CommentStatus::APPROVE === $status ) {
+			$status = CommentStatus::APPROVE_STR;
+		} elseif ( CommentStatus::HOLD === $status ) {
+			$status = CommentStatus::HOLD_STR;
 		}
 
 		$course_review->set_props(
@@ -160,6 +169,14 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		$this->read_extra_data( $course_review );
 		$course_review->set_object_read( true );
 
+		/**
+		 * Fires after course review is read from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $id Course review ID.
+		 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+		 */
 		do_action( 'masteriyo_course_review_read', $course_review->get_id(), $course_review );
 	}
 
@@ -208,6 +225,14 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		$this->update_comment_meta( $course_review );
 		$course_review->apply_changes();
 
+		/**
+		 * Fires after course review is updated.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int $id Course review ID.
+		 * @param Masteriyo\Models\CourseReview Course review object.
+		 */
 		do_action( 'masteriyo_update_course_review', $course_review->get_id(), $course_review );
 	}
 
@@ -222,24 +247,81 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	public function delete( Model &$course_review, $args = array() ) {
 		$id          = $course_review->get_id();
 		$object_type = $course_review->get_object_type();
+		$args        = array_merge(
+			array(
+				'force_delete' => false,
+				'children'     => false,
+			),
+			$args
+		);
 
 		if ( ! $id ) {
 			return;
 		}
 
-		if ( $args['force_delete'] ) {
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
-			wp_delete_comment( $id, true );
-			$course_review->set_id( 0 );
-			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
-		} else {
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
-			wp_trash_comment( $id );
-			$course_review->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
+		// Force delete replies.
+		$force_delete = $course_review->is_reply() ? true : $args['force_delete'];
+
+		// First delete replies because WP will change the comment_parent of replies later.
+		if ( ! $course_review->is_reply() && $args['children'] ) {
+			masteriyo_delete_comment_replies( $id );
 		}
 
-		CourseReviews::update_course_review_stats( $course_review->get_course_id() );
+		if ( $force_delete ) {
+			/**
+			 * Fires before course review is permanently deleted.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id Course review ID.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
+			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
+
+			wp_delete_comment( $id, true );
+			$course_review->set_id( 0 );
+
+			/**
+			 * Fires after course review is permanently deleted.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id Course review ID.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
+		} else {
+			/**
+			 * Fires before course review is trashed.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id Course review ID.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
+			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
+
+			wp_trash_comment( $id );
+			$course_review->set_status( 'trash' );
+
+			/**
+			 * Fires after course review is trashed.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $id Course review ID.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $course_review );
+		}
+
+		if ( ! $course_review->is_reply() ) {
+			CourseReviews::update_course_review_stats( $course_review->get_course_id() );
+		}
+
+		if ( $course_review->is_reply() ) {
+			$this->maybe_delete_review_from_trash( $course_review->get_parent() );
+		}
 	}
 
 	/**
@@ -341,5 +423,24 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		}
 
 		return $course_review;
+	}
+
+	/**
+	 * Delete a course review that has 'trash' status and doesn't have any replies.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param integer $review_id
+	 */
+	protected function maybe_delete_review_from_trash( $review_id ) {
+		$parent_review = masteriyo_get_course_review( $review_id );
+
+		if ( ! is_null( $parent_review ) ) {
+			$replies_count = masteriyo_get_course_review_replies_count( $parent_review->get_id() );
+
+			if ( CommentStatus::TRASH === $parent_review->get_status() && 0 === $replies_count ) {
+				$parent_review->delete( true );
+			}
+		}
 	}
 }

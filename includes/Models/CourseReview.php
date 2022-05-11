@@ -79,6 +79,36 @@ class CourseReview extends Model {
 
 	/*
 	|--------------------------------------------------------------------------
+	| Non-CRUD Getters and Setters
+	|--------------------------------------------------------------------------
+	*/
+
+	/**
+	 * Return array of replies with status along with counts.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public function replies_count() {
+		return masteriyo_count_comment_replies( "mto_{$this->object_type}", $this->get_id(), $this->get_course_id() );
+	}
+
+	/**
+	 * Return  total replies.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public function total_replies_count() {
+		$replies = masteriyo_count_comment_replies( "mto_{$this->object_type}", $this->get_id(), $this->get_course_id() );
+
+		return array_sum( $replies );
+	}
+
+	/*
+	|--------------------------------------------------------------------------
 	| Getters
 	|--------------------------------------------------------------------------
 	*/

@@ -24,6 +24,7 @@ const EmptyInfo: React.FC<Props> = (props) => {
 			<Td></Td>
 			<Td></Td>
 			<Td></Td>
+			<Td></Td>
 		</Tr>
 	);
 };

@@ -196,9 +196,11 @@ export interface CourseQASchema {
 
 export interface CourseReviewSchema {
 	id: number;
+	course: { id: number; name: string };
 	course_id: number;
 	name: string;
-	email: string;
+	author_email: string;
+	author_name: string;
 	url: string;
 	ip_address: string;
 	date_created: string;
@@ -211,6 +213,41 @@ export interface CourseReviewSchema {
 	type: string;
 	parent: number;
 	author_id: number;
+	replies_count: number;
+}
+
+export interface CourseReviewResponse {
+	data: CourseReviewSchema[];
+	meta: {
+		current_page: number;
+		pages: number;
+		per_page: number;
+		reviews_count: {
+			hold: number;
+			approve: number;
+			spam: number;
+			trash: number;
+			all: number;
+		};
+		total: number;
+	};
+}
+
+export interface CourseReviewResponse {
+	data: CourseReviewSchema[];
+	meta: {
+		current_page: number;
+		pages: number;
+		per_page: number;
+		reviews_count: {
+			hold: number;
+			approve: number;
+			spam: number;
+			trash: number;
+			all: number;
+		};
+		total: number;
+	};
 }
 
 export interface CourseSchema {

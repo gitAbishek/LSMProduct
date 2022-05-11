@@ -54,6 +54,7 @@ class CourseReviewsController extends CommentsController {
 	 */
 	protected $permission = null;
 
+
 	/**
 	 * Constructor.
 	 *
@@ -124,8 +125,48 @@ class CourseReviewsController extends CommentsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+					'args'                => array(
+						'force_delete' => array(
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
+							'type'        => 'boolean',
+							'default'     => false,
+						),
+						'children'     => array(
+							'description' => __( 'Whether to delete the replies.', 'masteriyo' ),
+							'type'        => 'boolean',
+							'default'     => false,
+						),
+					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
+			)
+		);
+
+		/**
+		 * @since x.x.x Added restore route.
+		 */
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/(?P<id>[\d]+)/restore',
+			array(
+				'args' => array(
+					'id' => array(
+						'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+						'type'        => 'integer',
+					),
+				),
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'restore_item' ),
+					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+					'args'                => array(
+						'context' => $this->get_context_param(
+							array(
+								'default' => 'view',
+							)
+						),
+					),
+				),
 			)
 		);
 	}
@@ -245,70 +286,6 @@ class CourseReviewsController extends CommentsController {
 	}
 
 	/**
-	 * Delete a single item.
-	 *
-	 * @since 1.0.5
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error
-	 */
-	public function delete_item( $request ) {
-		global $wpdb;
-
-		$object = $this->get_object( absint( $request['id'] ) );
-		$result = false;
-
-		if ( ! $object || 0 === $object->get_id() ) {
-			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
-		}
-
-		$request->set_param( 'context', 'edit' );
-		$response = $this->prepare_object_for_response( $object, $request );
-		$force    = $object->is_reply();
-
-		if ( ! $object->is_reply() ) {
-			$replies_count = masteriyo_get_course_review_replies_count( $object->get_id() );
-			$force         = 0 === $replies_count;
-
-			if ( ! $force && 'trash' === $object->get_status() ) {
-				/* translators: %s: post type */
-				return new \WP_Error( 'masteriyo_rest_already_trashed', sprintf( __( 'The %s has already been deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 410 ) );
-			}
-		}
-
-		$object->delete( $force );
-		$result = $force ? 0 === $object->get_id() : 'trash' === $object->get_status();
-
-		if ( ! $result ) {
-			/* translators: %s: post type */
-			return new \WP_Error( 'masteriyo_rest_cannot_delete', sprintf( __( 'The %s could not be deleted.', 'masteriyo' ), $this->object_type ), array( 'status' => 500 ) );
-		}
-
-		// Delete parent review if there is no remaining reply.
-		if ( $object->is_reply() ) {
-			$replies_count = masteriyo_get_course_review_replies_count( $object->get_parent() );
-
-			if ( 0 === $replies_count ) {
-				$this->get_object( $object->get_parent() )->delete( true );
-			}
-		}
-
-		/**
-		 * Fires after a single object is deleted or trashed via the REST API.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param Model          $object   The deleted or trashed object.
-		 * @param WP_REST_Response $response The response data.
-		 * @param WP_REST_Request  $request  The request sent to the API.
-		 */
-		do_action( "masteriyo_rest_delete_{$this->object_type}_object", $object, $response, $request );
-
-		return $response;
-	}
-
-	/**
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
@@ -352,21 +329,22 @@ class CourseReviewsController extends CommentsController {
 	 */
 	protected function get_course_review_data( $course_review, $context = 'view' ) {
 		$data = array(
-			'id'           => $course_review->get_id(),
-			'author_name'  => $course_review->get_author_name( $context ),
-			'author_email' => $course_review->get_author_email( $context ),
-			'author_url'   => $course_review->get_author_url( $context ),
-			'ip_address'   => $course_review->get_ip_address( $context ),
-			'date_created' => masteriyo_rest_prepare_date_response( $course_review->get_date_created( $context ) ),
-			'title'        => $course_review->get_title( $context ),
-			'description'  => $course_review->get_content( $context ),
-			'rating'       => $course_review->get_rating( $context ),
-			'status'       => $course_review->get_status( $context ),
-			'agent'        => $course_review->get_agent( $context ),
-			'type'         => $course_review->get_type( $context ),
-			'parent'       => $course_review->get_parent( $context ),
-			'author_id'    => $course_review->get_author_id( $context ),
-			'course'       => null,
+			'id'            => $course_review->get_id(),
+			'author_name'   => $course_review->get_author_name( $context ),
+			'author_email'  => $course_review->get_author_email( $context ),
+			'author_url'    => $course_review->get_author_url( $context ),
+			'ip_address'    => $course_review->get_ip_address( $context ),
+			'date_created'  => masteriyo_rest_prepare_date_response( $course_review->get_date_created( $context ) ),
+			'title'         => $course_review->get_title( $context ),
+			'description'   => $course_review->get_content( $context ),
+			'rating'        => $course_review->get_rating( $context ),
+			'status'        => $course_review->get_status( $context ),
+			'agent'         => $course_review->get_agent( $context ),
+			'type'          => $course_review->get_type( $context ),
+			'parent'        => $course_review->get_parent( $context ),
+			'author_id'     => $course_review->get_author_id( $context ),
+			'course'        => null,
+			'replies_count' => $course_review->total_replies_count(),
 		);
 
 		$course = masteriyo_get_course( $course_review->get_course_id() );
@@ -922,5 +900,36 @@ class CourseReviewsController extends CommentsController {
 	 */
 	protected function check_item_permission( $object_type, $context = 'read', $object_id = 0 ) {
 		return true;
+	}
+
+	/**
+	 * Restore course review.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return WP_Error|WP_REST_Response
+	 */
+	public function restore_item( $request ) {
+		$course_review = $this->get_object( (int) $request['id'] );
+
+		if ( ! $course_review || 0 === $course_review->get_id() ) {
+			return new \WP_Error(
+				"masteriyo_rest_{$this->comment_type}_invalid_id",
+				__( 'Invalid ID.', 'masteriyo' ),
+				array( 'status' => 404 )
+			);
+		}
+
+		wp_untrash_comment( $course_review->get_id() );
+
+		// Read course review again.
+		$course_review = $this->get_object( (int) $request['id'] );
+
+		$data     = $this->prepare_object_for_response( $course_review, $request );
+		$response = rest_ensure_response( $data );
+
+		return $response;
 	}
 }

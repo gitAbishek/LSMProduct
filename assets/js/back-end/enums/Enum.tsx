@@ -7,6 +7,13 @@ export enum OrderStatus {
 	Pending = 'pending',
 }
 
+export enum ReviewStatus {
+	approve = 'approve',
+	hold = 'hold',
+	spam = 'spam',
+	trash = 'trash',
+}
+
 export enum UserStatus {
 	Active = 0,
 	Ham = 0,

@@ -1048,7 +1048,7 @@ class CoursesController extends PostsController {
 	}
 
 	/**
-	 * Restore course..
+	 * Restore course.
 	 *
 	 * @since 1.4.1
 	 *

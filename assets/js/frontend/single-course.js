@@ -2,6 +2,13 @@
 	var masteriyo_api = {
 		deleteCourseReview: function (id, options) {
 			var url = mto_data.rootApiUrl + 'masteriyo/v1/courses/reviews/' + id;
+
+			if (options.force_delete) {
+				url += '?force_delete=true';
+			} else {
+				url += '?force_delete=false';
+			}
+
 			$.ajax({
 				type: 'delete',
 				headers: {
@@ -416,6 +423,7 @@
 					var $review = $(this).closest('.masteriyo-course-review');
 					var $delete_button = $(this);
 					var review_id = $review.data('id');
+					var $replies = $('[name=parent][value=' + review_id + ']');
 
 					if (isDeletingFlags[review_id]) return;
 
@@ -424,6 +432,8 @@
 							isDeletingFlags[review_id] = true;
 
 							masteriyo_api.deleteCourseReview(review_id, {
+								force_delete: $replies.length === 0,
+
 								onSuccess: function () {
 									if ($review.hasClass('is-course-review-reply')) {
 										var isDeleteReplyContainer =

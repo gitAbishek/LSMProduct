@@ -47,7 +47,14 @@ const routes = {
 		edit: '/quiz-attempts/:quizId',
 	},
 	settings: '/settings',
+
 	addOns: '/add-ons',
+	reviews: {
+		list: '/reviews',
+		add: '/reviews/new',
+		edit: '/reviews/:reviewId/edit',
+		replies: '/reviews/:reviewId/replies',
+	},
 	notFound: '/not-found',
 };
 

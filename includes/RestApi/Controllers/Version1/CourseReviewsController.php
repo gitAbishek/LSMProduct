@@ -346,7 +346,6 @@ class CourseReviewsController extends CommentsController {
 			'agent'             => $course_review->get_agent( $context ),
 			'type'              => $course_review->get_type( $context ),
 			'parent'            => $course_review->get_parent( $context ),
-			'author'            => $author,
 			'course'            => null,
 			'replies_count'     => $course_review->total_replies_count(),
 		);

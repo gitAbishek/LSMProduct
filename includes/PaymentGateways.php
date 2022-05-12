@@ -59,7 +59,13 @@ class PaymentGateways {
 			'Masteriyo\Gateways\Paypal\Paypal',
 		);
 
-		// Filter.
+		/**
+		 * Filters the payment gateway classes that will be loaded.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $gateways The gateway classes.
+		 */
 		$load_gateways = apply_filters( 'masteriyo_payment_gateways', $load_gateways );
 
 		// Filter whether the payment class exists or not.
@@ -139,6 +145,13 @@ class PaymentGateways {
 			}
 		}
 
+		/**
+		 * Filters the available payment gateways.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $available_gateways The gateway classes.
+		 */
 		$available_gateways = (array) apply_filters( 'masteriyo_available_payment_gateways', $available_gateways );
 		$available_gateways = array_filter( $available_gateways, array( $this, 'filter_valid_gateway_class' ) );
 

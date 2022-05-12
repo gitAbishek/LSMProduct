@@ -165,8 +165,16 @@ abstract class FileRestriction {
 	 * @return string
 	 */
 	protected function get_content_type( $file_path ) {
-		$file_extension     = strtolower( substr( strrchr( $file_path, '.' ), 1 ) );
-		$ctype              = 'application/force-download';
+		$file_extension = strtolower( substr( strrchr( $file_path, '.' ), 1 ) );
+		$ctype          = 'application/force-download';
+
+		/**
+		 * Filters the list of allowed mime types and file extensions.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $mime_types List of mime types.
+		 */
 		$allowed_mime_types = apply_filters( 'masteriyo_allowed_mime_types', get_allowed_mime_types() );
 
 		foreach ( $allowed_mime_types as $mime => $type ) {

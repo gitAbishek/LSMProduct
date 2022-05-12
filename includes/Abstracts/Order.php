@@ -174,6 +174,15 @@ abstract class Order extends Model {
 	 * @return bool
 	 */
 	public function has_status( $status ) {
+		/**
+		 * Filters has_status value of an order.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $has_status True if the order has the given status.
+		 * @param Masteriyo\Models\Order $order The order object.
+		 * @param array|string $status The status to check.
+		 */
 		return apply_filters( 'masteriyo_order_has_status', ( is_array( $status ) && in_array( $this->get_status(), $status, true ) ) || $this->get_status() === $status, $this, $status );
 	}
 
@@ -572,6 +581,13 @@ abstract class Order extends Model {
 	 * @return string
 	 */
 	protected function type_to_group( $type ) {
+		/**
+		 * Filters the type to group index.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $index The type to group index.
+		 */
 		$type_to_group = apply_filters(
 			'masteriyo_order_type_to_group',
 			array(
@@ -609,6 +625,15 @@ abstract class Order extends Model {
 			}
 		}
 
+		/**
+		 * Filters order items.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Order\OrderItem[] $items Order items.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 * @param string[] $type Order item types.
+		 */
 		return apply_filters( 'masteriyo_order_get_items', $items, $this, $types );
 	}
 
@@ -628,6 +653,15 @@ abstract class Order extends Model {
 			$count += $item->get_quantity();
 		}
 
+		/**
+		 * Filters the count of order items of a certain type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $count The count.
+		 * @param string $item_type Item type.
+		 * @param Masteriyo\Models\Order\Order $order The order object.
+		 */
 		return apply_filters( 'masteriyo_get_item_count', $count, $item_type, $this );
 	}
 
@@ -677,6 +711,14 @@ abstract class Order extends Model {
 			return 'course_lines';
 		}
 
+		/**
+		 * Filters order items key.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $key The items key.
+		 * @param string $item Order item (product, shipping, fee, coupon, tax).
+		 */
 		return apply_filters( 'masteriyo_get_items_key', '', $item );
 	}
 
@@ -810,6 +852,17 @@ abstract class Order extends Model {
 			$subtotal = $round ? number_format( (float) $subtotal, masteriyo_get_price_decimals(), '.', '' ) : $subtotal;
 		}
 
+		/**
+		 * Filters order item subtotal.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param float $subtotal The subtotal.
+		 * @param Masteriyo\Models\Order\Order $order The order object.
+		 * @param object $item The order item object.
+		 * @param boolean $inc_tax True if tax should be included.
+		 * @param boolean $round True if the subtotal should be rounded.
+		 */
 		return apply_filters( 'masteriyo_order_amount_item_subtotal', $subtotal, $this, $item, $inc_tax, $round );
 	}
 
@@ -881,6 +934,16 @@ abstract class Order extends Model {
 			$subtotal = $round ? masteriyo_round( $subtotal, masteriyo_get_price_decimals() ) : $subtotal;
 		}
 
+		/**
+		 * Filters line subtotal of and order item.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $subtotal The subtotal amount.
+		 * @param Masteriyo\Models\Order\Order $order The order object.
+		 * @param object $item The order item object.
+		 * @param boolean $round True if the amount should be rounded.
+		 */
 		return apply_filters( 'masteriyo_order_amount_line_subtotal', $subtotal, $this, $item, $round );
 	}
 
@@ -896,6 +959,15 @@ abstract class Order extends Model {
 	public function get_formatted_line_subtotal( $item ) {
 		$subtotal = masteriyo_price( $this->get_line_subtotal( $item, true ), array( 'currency' => $this->get_currency() ) );
 
+		/**
+		 * Filters the formatted line subtotal.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $subtotal The subtotal.
+		 * @param object $item The order item object.
+		 * @param Masteriyo\Models\Order\Order $order The order object.
+		 */
 		return apply_filters( 'masteriyo_order_formatted_line_subtotal', $subtotal, $item, $this );
 	}
 

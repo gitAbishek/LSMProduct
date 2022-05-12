@@ -76,8 +76,17 @@ class Geolocation {
 		}
 
 		if ( false === $external_ip_address ) {
-			$external_ip_address     = '0.0.0.0';
-			$ip_lookup_services      = apply_filters( 'masteriyo_geolocation_ip_lookup_apis', self::$ip_lookup_apis );
+			$external_ip_address = '0.0.0.0';
+
+			/**
+			 * Filters the geolocation IP lookup APIs.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $apis List of APIs.
+			 */
+			$ip_lookup_services = apply_filters( 'masteriyo_geolocation_ip_lookup_apis', self::$ip_lookup_apis );
+
 			$ip_lookup_services_keys = array_keys( $ip_lookup_services );
 			shuffle( $ip_lookup_services_keys );
 
@@ -86,6 +95,14 @@ class Geolocation {
 				$response         = wp_safe_remote_get( $service_endpoint, array( 'timeout' => 2 ) );
 
 				if ( ! is_wp_error( $response ) && rest_is_ip_address( $response['body'] ) ) {
+					/**
+					 * Filters the geolocation IP lookup API response.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param mixed $response The API response data.
+					 * @param string $service_name The API service name.
+					 */
 					$external_ip_address = apply_filters( 'masteriyo_geolocation_ip_lookup_api_response', masteriyo_clean( $response['body'] ), $service_name );
 					break;
 				}
@@ -108,7 +125,16 @@ class Geolocation {
 	 * @return array
 	 */
 	public static function geolocate_ip( $ip_address = '', $fallback = false, $api_fallback = true ) {
-		// Filter to allow custom geolocation of the IP address.
+		/**
+		 * Filter to allow custom geolocation of the IP address.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param false|string $code The country IP.
+		 * @param string $ip_address The given IP address.
+		 * @param boolean $fallback Whether to fallback or not.
+		 * @param boolean $api_fallback Whether to use fallback API or not.
+		 */
 		$country_code = apply_filters( 'masteriyo_geolocate_ip', false, $ip_address, $fallback, $api_fallback );
 
 		if ( false !== $country_code ) {
@@ -213,6 +239,13 @@ class Geolocation {
 		$country_code = get_transient( 'geoip_' . $ip_address );
 
 		if ( false === $country_code ) {
+			/**
+			 * Filters the API endpoints for geo-locating an IP address.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $geoip_apis List of APIs.
+			 */
 			$geoip_services = apply_filters( 'masteriyo_geolocation_geoip_apis', self::$geoip_apis );
 
 			if ( empty( $geoip_services ) ) {
@@ -238,6 +271,13 @@ class Geolocation {
 							$country_code = isset( $data->countryCode ) ? $data->countryCode : ''; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 							break;
 						default:
+							/**
+							 * Filters the IP geolocation API response.
+							 *
+							 * @since 1.0.0
+							 *
+							 * @param mixed $response The API response data.
+							 */
 							$country_code = apply_filters( 'masteriyo_geolocation_geoip_response_' . $service_name, '', $response['body'] );
 							break;
 					}

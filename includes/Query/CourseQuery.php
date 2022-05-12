@@ -57,7 +57,7 @@ class CourseQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Course objects
+	 * @return \Masteriyo\Models\Course[]|\Masteriyo\Models\Course Course objects
 	 */
 	public function get_courses() {
 		$args    = apply_filters( 'masteriyo_course_object_query_args', $this->get_query_vars() );

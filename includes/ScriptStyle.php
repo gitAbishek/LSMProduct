@@ -170,6 +170,13 @@ class ScriptStyle {
 			$jquery_block_ui_src = self::get_asset_url( '/assets/js/frontend/jquery-block-ui.js' );
 		}
 
+		/**
+		 * Filters the scripts.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $scripts List of scripts.
+		 */
 		self::$scripts = apply_filters(
 			'masteriyo_enqueue_scripts',
 			array(
@@ -259,6 +266,13 @@ class ScriptStyle {
 	private static function init_styles() {
 		$suffix = self::get_asset_suffix();
 
+		/**
+		 * Filters the styles.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $styles List of styles.
+		 */
 		self::$styles = apply_filters(
 			'masteriyo_enqueue_styles',
 			array(
@@ -359,6 +373,13 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public static function get_default_script_options() {
+		/**
+		 * Filters the default options for a script.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $options The default options.
+		 */
 		return apply_filters(
 			'masteriyo_get_default_script_options',
 			array(
@@ -381,6 +402,13 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public static function get_default_style_options() {
+		/**
+		 * Filters the default options for a style.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $options The default options.
+		 */
 		return apply_filters(
 			'masteriyo_get_default_style_options',
 			array(
@@ -407,6 +435,14 @@ class ScriptStyle {
 	 * @return string
 	 */
 	private static function get_asset_url( $path ) {
+		/**
+		 * Filters asset URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The asset URL.
+		 * @param string $path The relative path to the plugin directory.
+		 */
 		return apply_filters( 'masteriyo_get_asset_url', plugins_url( $path, Constants::get( 'MASTERIYO_PLUGIN_FILE' ) ), $path );
 	}
 
@@ -644,6 +680,13 @@ class ScriptStyle {
 		$query      = new CourseCategoryQuery( $args );
 		$categories = $query->get_categories();
 
+		/**
+		 * Filters the localized gutenberg block scripts.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param array $scripts The localized scripts.
+		 */
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_block_scripts',
 			array(
@@ -723,6 +766,13 @@ class ScriptStyle {
 		$checkout_page = get_post( masteriyo_get_page_id( 'checkout' ) );
 		$checkout_slug = ! is_null( $checkout_page ) ? $checkout_page->post_name : '';
 
+		/**
+		 * Filters the localized admin scripts.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $scripts The localized scripts.
+		 */
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_admin_scripts',
 			array(
@@ -777,6 +827,13 @@ class ScriptStyle {
 	 * @since 1.0.0
 	 */
 	public static function load_public_localized_scripts() {
+		/**
+		 * Filters the localized public scripts.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $scripts The localized scripts.
+		 */
 		self::$localized_scripts = apply_filters(
 			'masteriyo_localized_public_scripts',
 			array(
@@ -917,6 +974,13 @@ class ScriptStyle {
 	 * @return array
 	 */
 	public static function get_whitelist_styles_in_learn_page() {
+		/**
+		 * Filters the whitelisted styles for learn page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $styles List of style handles.
+		 */
 		return array_unique(
 			apply_filters(
 				'masteriyo_whitelist_scripts_learn_page',

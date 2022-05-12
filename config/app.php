@@ -5,6 +5,13 @@
  * @since 1.0.0
  */
 return array_unique(
+	/**
+	 * Filters service providers.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $service_providers Service provider classes.
+	 */
 	apply_filters(
 		'masteriyo_service_providers',
 		array(

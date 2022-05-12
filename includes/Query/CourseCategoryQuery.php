@@ -10,7 +10,6 @@
 namespace Masteriyo\Query;
 
 use Masteriyo\Abstracts\ObjectQuery;
-use Masteriyo\Models\CourseCategory;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,7 +36,7 @@ class CourseCategoryQuery extends ObjectQuery {
 	 *
 	 * @since 1.3.0
 	 *
-	 * @return CourseCategory[] Course objects
+	 * @return \Masteriyo\Models\CourseCategory[] Course objects
 	 */
 	public function get_categories() {
 		$args    = apply_filters( 'masteriyo_course_category_object_query_args', $this->get_query_vars() );

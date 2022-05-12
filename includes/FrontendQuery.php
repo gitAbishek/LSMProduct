@@ -64,6 +64,13 @@ class FrontendQuery {
 	 * @return array
 	 */
 	public function get_query_vars() {
+		/**
+		 * Filters the query vars.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_vars The query vars.
+		 */
 		return apply_filters( 'masteriyo_get_query_vars', $this->query_vars );
 	}
 
@@ -394,15 +401,34 @@ class FrontendQuery {
 		$q->set( 'meta_query', $this->get_meta_query( $q->get( 'meta_query' ), true ) );
 		$q->set( 'tax_query', $this->get_tax_query( $q->get( 'tax_query' ), true ) );
 		$q->set( 'masteriyo_query', 'course_query' );
-		$q->set( 'post__in', array_unique( (array) apply_filters( 'loop_courses_post_in', array() ) ) );
+
+		/**
+		 * Filters post__in value for courses loop.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $post__in Course IDs.
+		 */
+		$post__in = (array) apply_filters( 'loop_courses_post_in', array() );
+
+		$q->set( 'post__in', array_unique( $post__in ) );
+
+		/**
+		 * Filters posts_per_page value for courses loop.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $posts_per_page Number of courses per page.
+		 */
+		$posts_per_page = apply_filters(
+			'loop_courses_per_page',
+			masteriyo_get_default_course_rows_per_page()
+		);
 
 		// Work out how many courses to query.
 		$q->set(
 			'posts_per_page',
-			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : apply_filters(
-				'loop_courses_per_page',
-				masteriyo_get_default_course_rows_per_page()
-			)
+			$q->get( 'posts_per_page' ) ? $q->get( 'posts_per_page' ) : $posts_per_page
 		);
 
 		// Store reference to this query.
@@ -476,6 +502,13 @@ class FrontendQuery {
 				if ( is_search() ) {
 					$orderby_value = 'relevance';
 				} else {
+					/**
+					 * Filters the order by value.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param string $order_by Property to order by.
+					 */
 					$orderby_value = apply_filters( 'masteriyo_default_catalog_orderby', get_option( 'masteriyo_default_catalog_orderby', 'date' ) );
 				}
 			}
@@ -529,6 +562,15 @@ class FrontendQuery {
 				break;
 		}
 
+		/**
+		 * Filters the ordering args for loop.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args The ordering arguments.
+		 * @param string $orderby The property to order by.
+		 * @param string $order The order direction.
+		 */
 		return apply_filters( 'masteriyo_get_catalog_ordering_args', $args, $orderby, $order );
 	}
 
@@ -545,6 +587,14 @@ class FrontendQuery {
 		if ( ! is_array( $meta_query ) ) {
 			$meta_query = array();
 		}
+
+		/**
+		 * Filters the meta query args for course query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $meta_query Meta query args.
+		 */
 		return array_filter( apply_filters( 'masteriyo_course_query_meta_query', $meta_query ) );
 	}
 
@@ -604,6 +654,13 @@ class FrontendQuery {
 			);
 		}
 
+		/**
+		 * Filters tax query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $tax_query Tax query args.
+		 */
 		return array_filter( apply_filters( 'masteriyo_course_query_tax_query', $tax_query ) );
 	}
 

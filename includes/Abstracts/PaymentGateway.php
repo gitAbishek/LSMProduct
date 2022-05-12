@@ -2,7 +2,7 @@
 /**
  * Abstract payment gateway
  *
- * Hanldes generic payment gateway functionality which is extended by idividual payment gateways.
+ * Handles generic payment gateway functionality which is extended by individual payment gateways.
  *
  * @class PaymentGateway
  * @version 1.0.0
@@ -10,8 +10,6 @@
  */
 
 namespace Masteriyo\Abstracts;
-
-use Masteriyo\Constants;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -203,6 +201,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function get_order_button_text() {
+		/**
+		 * Filters the order button text.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text The order button text.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_order_button_text', $this->order_button_text, $this );
 	}
 
@@ -214,6 +220,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function is_enabled() {
+		/**
+		 * Filters the "is enabled" value of a payment gateway. One of "yes" or "no".
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $enabled One of "yes" or "no".
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_enabled', $this->enabled, $this );
 	}
 
@@ -225,6 +239,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters the payment gateway title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title The payment gateway title.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_title', $this->title, $this );
 	}
 
@@ -236,6 +258,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function get_description() {
+		/**
+		 * Filters the payment gateway description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $description The payment gateway description.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_description', $this->description, $this );
 	}
 
@@ -247,6 +277,14 @@ abstract class PaymentGateway {
 	 * @return boolean
 	 */
 	public function is_chosen() {
+		/**
+		 * Filters the "chosen" boolean value of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $chosen True if the gateway was chosen.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_chosen', $this->chosen, $this );
 	}
 
@@ -258,6 +296,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function get_method_title() {
+		/**
+		 * Filters the payment gateway method title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title The payment gateway method title.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_method_title', $this->method_title, $this );
 	}
 
@@ -269,6 +315,14 @@ abstract class PaymentGateway {
 	 * @return string
 	 */
 	public function get_method_description() {
+		/**
+		 * Filters the payment gateway method description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $description The payment gateway method description.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_method_description', $this->method_description, $this );
 	}
 
@@ -280,6 +334,14 @@ abstract class PaymentGateway {
 	 * @return boolean
 	 */
 	public function has_fields() {
+		/**
+		 * Filters the "has fields" boolean value of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $has_fields True if the payment gateway has fields.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_has_fields', $this->has_fields, $this );
 	}
 
@@ -291,6 +353,14 @@ abstract class PaymentGateway {
 	 * @return array
 	 */
 	public function get_countries() {
+		/**
+		 * Filters countries of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $countries The countries list.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_countries', $this->countries, $this );
 	}
 
@@ -302,6 +372,14 @@ abstract class PaymentGateway {
 	 * @return array
 	 */
 	public function get_availability() {
+		/**
+		 * Filters the availability of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $availability The availability.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_availability', $this->availability, $this );
 	}
 
@@ -316,6 +394,14 @@ abstract class PaymentGateway {
 		$icon_url = '<img href="%s" alt="%s" />';
 		$icon     = $this->icon ? sprintf( $icon_url, esc_url( $this->icon ), esc_attr( $this->get_title() ) ) : '';
 
+		/**
+		 * Filters the payment gateway icon.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $icon Icon HTML.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_icon', $icon, $this );
 	}
 
@@ -327,6 +413,14 @@ abstract class PaymentGateway {
 	 * @var array
 	 */
 	public function get_supports() {
+		/**
+		 * Filters the supports of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $supports List of supported features.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_supports', $this->supports, $this );
 	}
 
@@ -338,6 +432,14 @@ abstract class PaymentGateway {
 	 * @var int
 	 */
 	public function get_max_amount() {
+		/**
+		 * Filters the max amount of a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $max_amount Maximum amount.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_max_amount', $this->max_amount, $this );
 	}
 
@@ -349,6 +451,14 @@ abstract class PaymentGateway {
 	 * @var string
 	 */
 	public function get_view_transaction_url() {
+		/**
+		 * Filters the view transaction URL for a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The view transaction URL.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_view_transaction_url', $this->view_transaction_url, $this );
 	}
 
@@ -361,6 +471,14 @@ abstract class PaymentGateway {
 	 * @var string
 	 */
 	public function get_new_method_label() {
+		/**
+		 * Filters the new method label for a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $new_method_label The new method label.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_new_method_label', $this->new_method_label, $this );
 	}
 
@@ -372,6 +490,14 @@ abstract class PaymentGateway {
 	 * @var string
 	 */
 	public function get_pay_button_id() {
+		/**
+		 * Filters pay button id for a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $pay_button_id The pay button id.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_gateway_pay_button_id', $this->pay_button_id, $this );
 	}
 
@@ -597,6 +723,14 @@ abstract class PaymentGateway {
 			$return_url = masteriyo_get_endpoint_url( 'order-received', '', masteriyo_get_checkout_url() );
 		}
 
+		/**
+		 * Filters return URL for a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $return_url The return URL.
+		 * @param Masteriyo\Models\Order\Order|null $order The order object.
+		 */
 		return apply_filters( 'masteriyo_get_return_url', $return_url, $order );
 	}
 
@@ -616,6 +750,15 @@ abstract class PaymentGateway {
 			$return_url = sprintf( $this->view_transaction_url, $transaction_id );
 		}
 
+		/**
+		 * Filters transaction URL for a payment gateway.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The transaction URL.
+		 * @param Masteriyo\Models\Order\Order $order The order object.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_get_transaction_url', $return_url, $order, $this );
 	}
 
@@ -705,6 +848,15 @@ abstract class PaymentGateway {
 	 * @return bool True if the gateway supports the feature, false otherwise.
 	 */
 	public function supports( $feature ) {
+		/**
+		 * Filters boolean value whether a feature is supported or not.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if the given feature is supported by the payment gateway.
+		 * @param string $feature The name of a feature to test support for.
+		 * @param Masteriyo\Abstracts\PaymentGateway $obj The payment gateway object.
+		 */
 		return apply_filters( 'masteriyo_payment_gateway_supports', in_array( $feature, $this->supports, true ), $feature, $this );
 	}
 

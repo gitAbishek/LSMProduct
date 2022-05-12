@@ -37,7 +37,16 @@ class Install {
 		$masteriyo_version = get_option( 'masteriyo_plugin_version' );
 
 		if ( empty( $masteriyo_version ) ) {
-			if ( empty( $masteriyo_version ) && apply_filters( 'masteriyo_enable_setup_wizard', true ) ) {
+			/**
+			 * Filters boolean value to enable/disable setup wizard. True for enable.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $enable True to enable setup wizard.
+			 */
+			$enable_setup_wizard = apply_filters( 'masteriyo_enable_setup_wizard', true );
+
+			if ( empty( $masteriyo_version ) && $enable_setup_wizard ) {
 				set_transient( '_masteriyo_activation_redirect', 1, 30 );
 			}
 		}

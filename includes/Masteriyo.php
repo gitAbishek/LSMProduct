@@ -176,6 +176,15 @@ class Masteriyo {
 	 */
 	public function load_text_domain() {
 		$locale = determine_locale();
+
+		/**
+		 * Filters the masteriyo plugin locale.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $locale The plugin locale.
+		 * @param string $domain The text domain.
+		 */
 		$locale = apply_filters( 'plugin_locale', $locale, 'masteriyo' );
 
 		unload_textdomain( 'masteriyo' );
@@ -228,16 +237,37 @@ class Masteriyo {
 
 		$masteriyo_links = array(
 			'docs'    => array(
+				/**
+				 * Filters the masteriyo docs URL.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $url Docs URL.
+				 */
 				'url'        => apply_filters( 'masteriyo_docs_url', 'https://docs.masteriyo.com/' ),
 				'label'      => __( 'Docs', 'masteriyo' ),
 				'aria-label' => __( 'View Masteriyo documentation', 'masteriyo' ),
 			),
 			'support' => array(
+				/**
+				 * Filters the community support URL.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $url Community support URL.
+				 */
 				'url'        => apply_filters( 'masteriyo_community_support_url', 'https://wordpress.org/support/plugin/learning-management-system/' ),
 				'label'      => __( 'Community Support', 'masteriyo' ),
 				'aria-label' => __( 'Visit community forums', 'masteriyo' ),
 			),
 			'review'  => array(
+				/**
+				 * Filters the masteriyo review URL.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $url Review URL.
+				 */
 				'url'        => apply_filters( 'masteriyo_review_url', 'https://wordpress.org/support/plugin/learning-management-system/reviews/#new-post' ),
 				'label'      => __( 'Rate the plugin ★★★★★', 'masteriyo' ),
 				'aria-label' => __( 'Rate the plugin.', 'masteriyo' ),

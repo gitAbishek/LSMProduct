@@ -14,7 +14,6 @@ namespace Masteriyo\Cart;
 use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Session\Session;
 use Masteriyo\Helper\Utils;
-use Masteriyo\Helper\Arr;
 use Masteriyo\Notice;
 
 defined( 'ABSPATH' ) || exit;
@@ -266,6 +265,15 @@ class Cart {
 					)
 				);
 
+				/**
+				 * Filters cart item data obtained from session.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $data The cart item data obtained from session.
+				 * @param mixed $values Cart item values e.g. quantity and product_id.
+				 * @param mixed $key Cart item key.
+				 */
 				$cart_contents[ $key ] = apply_filters( 'masteriyo_get_cart_item_from_session', $session_data, $values, $key );
 
 				// Add to cart right away so the product is visible in masteriyo_get_cart_item_from_session hook.
@@ -275,6 +283,13 @@ class Cart {
 
 		// If it's not empty, it's been already populated by the loop above.
 		if ( ! empty( $cart_contents ) ) {
+			/**
+			 * Filters cart contents.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $cart_contents Cart contents.
+			 */
 			$this->set_cart_contents( apply_filters( 'masteriyo_cart_contents_changed', $cart_contents ) );
 		}
 

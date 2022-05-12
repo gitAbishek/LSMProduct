@@ -37,6 +37,40 @@ class Activation {
 	 * @since 1.0.0
 	 */
 	public static function create_pages() {
+		/**
+		 * Filters account page shortcode tag.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $tag The shortcode tag.
+		 */
+		$account_page_shortcode_tag = apply_filters( 'masteriyo_account_shortcode_tag', 'masteriyo_account' );
+
+		/**
+		 * Filters checkout page shortcode tag.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $tag The shortcode tag.
+		 */
+		$checkout_page_shortcode_tag = apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' );
+
+		/**
+		 * Filters instructor registration form shortcode tag.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param string $tag The shortcode tag.
+		 */
+		$instructor_registration_form_shortcode_tag = apply_filters( 'masteriyo_instructor_registration_shortcode_tag', 'masteriyo_instructor_registration' );
+
+		/**
+		 * Filters the list of pages that will be created on plugin activation.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array[] $pages List of pages.
+		 */
 		$pages = apply_filters(
 			'masteriyo_create_pages',
 			array(
@@ -49,13 +83,13 @@ class Activation {
 				'account'                 => array(
 					'name'         => _x( 'account', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Account', 'Page title', 'masteriyo' ),
-					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_account_shortcode_tag', 'masteriyo_account' ) . ']<!-- /wp:shortcode -->',
+					'content'      => '<!-- wp:shortcode -->[' . $account_page_shortcode_tag . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'account_page_id',
 				),
 				'checkout'                => array(
 					'name'         => _x( 'checkout', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Checkout', 'Page title', 'masteriyo' ),
-					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_checkout_shortcode_tag', 'masteriyo_checkout' ) . ']<!-- /wp:shortcode -->',
+					'content'      => '<!-- wp:shortcode -->[' . $checkout_page_shortcode_tag . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'checkout_page_id',
 				),
 				'learn'                   => array(
@@ -67,7 +101,7 @@ class Activation {
 				'instructor-registration' => array(
 					'name'         => _x( 'instructor-registration', 'Page slug', 'masteriyo' ),
 					'title'        => _x( 'Instructor Registration', 'Page title', 'masteriyo' ),
-					'content'      => '<!-- wp:shortcode -->[' . apply_filters( 'masteriyo_instructor_registration_shortcode_tag', 'masteriyo_instructor_registration' ) . ']<!-- /wp:shortcode -->',
+					'content'      => '<!-- wp:shortcode -->[' . $instructor_registration_form_shortcode_tag . ']<!-- /wp:shortcode -->',
 					'setting_name' => 'instructor_registration_page_id',
 				),
 			)

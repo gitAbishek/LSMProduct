@@ -83,9 +83,24 @@ class Countries {
 			$this->countries;
 		}
 
-		$countries       = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/countries.php';
+		$countries = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/countries.php';
+
+		/**
+		 * Filters countries.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $countries List of countries.
+		 */
 		$this->countries = apply_filters( 'masteriyo_countries', $countries );
 
+		/**
+		 * Filters whether the countries list should be sorted or not.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if the countries should be sorted.
+		 */
 		if ( apply_filters( 'masteriyo_sort_countries', true ) ) {
 			masteriyo_asort_by_locale( $this->countries );
 		}
@@ -116,7 +131,15 @@ class Countries {
 			return $this->continents;
 		}
 
-		$continents      = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/continents.php';
+		$continents = require Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/continents.php';
+
+		/**
+		 * Filters continents.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $continents List of continents.
+		 */
 		$this->continents = apply_filters( 'masteriyo_continents', $continents );
 
 		return $this->continents;
@@ -161,6 +184,13 @@ class Countries {
 			$calling_code = $calling_code[0];
 		}
 
+		/**
+		 * Filters calling code.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $calling_code The calling code.
+		 */
 		return apply_filters( 'masteriyo_country_calling_code', $calling_code );
 	}
 
@@ -195,7 +225,15 @@ class Countries {
 	 */
 	public function get_states( $cc = null ) {
 		if ( empty( $this->states ) ) {
-			$states       = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/states.php';
+			$states = include Constants::get( 'MASTERIYO_PLUGIN_DIR' ) . '/i18n/states.php';
+
+			/**
+			 * Filters states.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $states List of states.
+			 */
 			$this->states = apply_filters( 'masteriyo_states', $states );
 		}
 
@@ -214,6 +252,14 @@ class Countries {
 	 */
 	public function get_base_address() {
 		$base_address = masteriyo_get_setting( 'payments.store.address_line1' );
+
+		/**
+		 * Filters base address.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_address The base address.
+		 */
 		return apply_filters( 'masteriyo_countries_base_address', $base_address );
 	}
 
@@ -225,6 +271,14 @@ class Countries {
 	 */
 	public function get_base_address_2() {
 		$base_address_2 = masteriyo_get_setting( 'payments.store.address_line2' );
+
+		/**
+		 * Filters base address 2.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_address The base address.
+		 */
 		return apply_filters( 'masteriyo_countries_base_address_2', $base_address_2 );
 	}
 
@@ -237,6 +291,14 @@ class Countries {
 	 */
 	public function get_base_country() {
 		$default = masteriyo_get_base_location();
+
+		/**
+		 * Filters base country.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_country The base country.
+		 */
 		return apply_filters( 'masteriyo_countries_base_country', $default['country'] );
 	}
 
@@ -249,6 +311,14 @@ class Countries {
 	 */
 	public function get_base_state() {
 		$default = masteriyo_get_base_location();
+
+		/**
+		 * Filters base state.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_state The base state.
+		 */
 		return apply_filters( 'masteriyo_countries_base_state', $default['state'] );
 	}
 
@@ -260,6 +330,14 @@ class Countries {
 	 */
 	public function get_base_city() {
 		$base_city = masteriyo_get_setting( 'payments.store.city' );
+
+		/**
+		 * Filters base city.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_city The base city.
+		 */
 		return apply_filters( 'masteriyo_countries_base_city', $base_city );
 	}
 
@@ -271,6 +349,14 @@ class Countries {
 	 */
 	public function get_base_postcode() {
 		$base_postcode = masteriyo_get_setting( 'payments.store.postcode' );
+
+		/**
+		 * Filters base postcode.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $base_postcode The base postcode.
+		 */
 		return apply_filters( 'masteriyo_countries_base_postcode', $base_postcode );
 	}
 
@@ -283,6 +369,14 @@ class Countries {
 	 */
 	public function get_allowed_countries() {
 		if ( 'all' === get_option( 'masteriyo_allowed_countries' ) ) {
+
+			/**
+			 * Filters allowed countries.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $allowed_countries List of allowed countries.
+			 */
 			return apply_filters( 'masteriyo_countries_allowed_countries', $this->countries );
 		}
 
@@ -296,6 +390,14 @@ class Countries {
 				foreach ( $except_countries as $country ) {
 					unset( $all_except_countries[ $country ] );
 				}
+
+				/**
+				 * Filters allowed countries.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $allowed_countries List of countries.
+				 */
 				return apply_filters( 'masteriyo_countries_allowed_countries', $all_except_countries );
 			}
 		}
@@ -310,6 +412,13 @@ class Countries {
 			}
 		}
 
+		/**
+		 * Filters allowed countries.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $allowed_countries List of allowed countries.
+		 */
 		return apply_filters( 'masteriyo_countries_allowed_countries', $countries );
 	}
 
@@ -339,6 +448,13 @@ class Countries {
 			}
 		}
 
+		/**
+		 * Filters shipping countries.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $shipping_countries List of shipping countries.
+		 */
 		return apply_filters( 'masteriyo_countries_shipping_countries', $countries );
 	}
 
@@ -366,6 +482,13 @@ class Countries {
 			}
 		}
 
+		/**
+		 * Filters allowed states of a country.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $allowed_states List of allowed states.
+		 */
 		return apply_filters( 'masteriyo_countries_allowed_country_states', $states );
 	}
 
@@ -397,6 +520,13 @@ class Countries {
 			}
 		}
 
+		/**
+		 * Filters shipping country states.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $states List of shipping country states.
+		 */
 		return apply_filters( 'masteriyo_countries_shipping_country_states', $states );
 	}
 
@@ -415,6 +545,14 @@ class Countries {
 			$countries[] = 'MC';
 		}
 
+		/**
+		 * Filters european union countries.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $countries The european union countries list.
+		 * @param string $type Type of countries to retrieve. Blank for EU member countries. eu_vat for EU VAT countries.
+		 */
 		return apply_filters( 'masteriyo_european_union_countries', $countries, $type );
 	}
 
@@ -429,6 +567,13 @@ class Countries {
 		$eu_countries  = $this->get_european_union_countries();
 		$vat_countries = array( 'AE', 'AL', 'AR', 'AZ', 'BB', 'BH', 'BO', 'BS', 'BY', 'CL', 'CO', 'EC', 'EG', 'ET', 'FJ', 'GB', 'GH', 'GM', 'GT', 'IL', 'IM', 'IN', 'IR', 'KN', 'KR', 'KZ', 'LK', 'MC', 'MD', 'ME', 'MK', 'MN', 'MU', 'MX', 'NA', 'NG', 'NO', 'NP', 'PS', 'PY', 'RS', 'RU', 'RW', 'SA', 'SV', 'TH', 'TR', 'UA', 'UY', 'UZ', 'VE', 'VN', 'ZA' );
 
+		/**
+		 * Filters countries using VAT.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $countries The list of countries using VAT.
+		 */
 		return apply_filters( 'masteriyo_vat_countries', array_merge( $eu_countries, $vat_countries ) );
 	}
 
@@ -445,6 +590,14 @@ class Countries {
 		$countries    = array( 'GB', 'US', 'AE', 'CZ', 'DO', 'NL', 'PH', 'USAF' );
 		$return       = in_array( $country_code, $countries, true ) ? __( 'to the', 'masteriyo' ) : __( 'to', 'masteriyo' );
 
+		/**
+		 * Filters prefix string for a shipping country - either 'to the' or 'to'.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $prefix The prefix.
+		 * @param string $country_code The shipping country code.
+		 */
 		return apply_filters( 'masteriyo_countries_shipping_to_prefix', $return, $country_code );
 	}
 
@@ -461,6 +614,14 @@ class Countries {
 		$countries    = array( 'GB', 'US', 'AE', 'CZ', 'DO', 'NL', 'PH', 'USAF' );
 		$return       = in_array( $country_code, $countries, true ) ? __( 'the', 'masteriyo' ) . ' ' : '';
 
+		/**
+		 * Filters a prefixed string for certain countries with 'the'.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $prefix The prefix.
+		 * @param string $country_code The country code.
+		 */
 		return apply_filters( 'masteriyo_countries_estimated_for_prefix', $return, $country_code );
 	}
 
@@ -474,6 +635,13 @@ class Countries {
 	public function tax_or_vat() {
 		$return = in_array( $this->get_base_country(), $this->get_vat_countries(), true ) ? __( 'VAT', 'masteriyo' ) : __( 'Tax', 'masteriyo' );
 
+		/**
+		 * Filters the correct tax name in some countries' VAT.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $name The tax name.
+		 */
 		return apply_filters( 'masteriyo_countries_tax_or_vat', $return );
 	}
 
@@ -487,6 +655,13 @@ class Countries {
 	public function inc_tax_or_vat() {
 		$return = in_array( $this->get_base_country(), $this->get_vat_countries(), true ) ? __( '(incl. VAT)', 'masteriyo' ) : __( '(incl. tax)', 'masteriyo' );
 
+		/**
+		 * Filters the Inc Tax label.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $label The tax label.
+		 */
 		return apply_filters( 'masteriyo_countries_inc_tax_or_vat', $return );
 	}
 
@@ -500,6 +675,13 @@ class Countries {
 	public function ex_tax_or_vat() {
 		$return = in_array( $this->get_base_country(), $this->get_vat_countries(), true ) ? __( '(ex. VAT)', 'masteriyo' ) : __( '(ex. tax)', 'masteriyo' );
 
+		/**
+		 * Filters the Ex Tax label.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $label The tax label.
+		 */
 		return apply_filters( 'masteriyo_countries_ex_tax_or_vat', $return );
 	}
 
@@ -553,6 +735,13 @@ class Countries {
 			return $this->address_formats;
 		}
 
+		/**
+		 * Filters the country address formats.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $formats List of formats.
+		 */
 		$this->address_formats = apply_filters(
 			'masteriyo_localisation_address_formats',
 			array(
@@ -634,8 +823,17 @@ class Countries {
 		// Handle full country name.
 		$full_country = ( isset( $this->countries[ $country ] ) ) ? $this->countries[ $country ] : $country;
 
+		/**
+		 * Filters flag for forcefully displaying country in formatted address.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if country should be forcefully displayed.
+		 */
+		$force_country_display = apply_filters( 'masteriyo_formatted_address_force_country_display', false );
+
 		// Country is not needed if the same as base.
-		if ( $country === $this->get_base_country() && ! apply_filters( 'masteriyo_formatted_address_force_country_display', false ) ) {
+		if ( $country === $this->get_base_country() && ! $force_country_display ) {
 			$format = str_replace( '{country}', '', $format );
 		}
 
@@ -645,6 +843,14 @@ class Countries {
 		// Substitute address parts into the string.
 		$replace = array_map(
 			'esc_html',
+			/**
+			 * Filters formatted address replacements.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $replacements The replacements list.
+			 * @param array $args Replacement arguments.
+			 */
 			apply_filters(
 				'masteriyo_formatted_address_replacements',
 				array(
@@ -727,6 +933,13 @@ class Countries {
 			),
 		);
 
+		/**
+		 * Filters the default address fields.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $fields List of the default address fields.
+		 */
 		$default_address_fields = apply_filters( 'masteriyo_default_address_fields', $fields );
 
 		// Sort each of the fields based on priority.
@@ -749,6 +962,13 @@ class Countries {
 			return $this->locale;
 		}
 
+		/**
+		 * Filters country locales.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locales List of locales.
+		 */
 		$this->locale = apply_filters(
 			'masteriyo_get_country_locale',
 			array(
@@ -1391,7 +1611,13 @@ class Countries {
 
 		$this->locale = array_intersect_key( $this->locale, array_merge( $this->get_allowed_countries(), $this->get_shipping_countries() ) );
 
-		// Default Locale Can be filtered to override fields in get_address_fields(). Countries with no specific locale will use default.
+		/**
+		 * Filter default Locale to override fields in get_address_fields(). Countries with no specific locale will use default.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locale The default locale.
+		 */
 		$this->locale['default'] = apply_filters( 'masteriyo_get_country_locale_default', $this->get_default_address_fields() );
 
 		// Filter default AND shop base locales to allow overides via a single function. These will be used when changing countries on the checkout.
@@ -1399,7 +1625,22 @@ class Countries {
 			$this->locale[ $this->get_base_country() ] = $this->locale['default'];
 		}
 
-		$this->locale['default']                   = apply_filters( 'masteriyo_get_country_locale_base', $this->locale['default'] );
+		/**
+		 * Filters the base country locale.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locale The base country locale.
+		 */
+		$this->locale['default'] = apply_filters( 'masteriyo_get_country_locale_base', $this->locale['default'] );
+
+		/**
+		 * Filters the base country locale.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $locale The base country locale.
+		 */
 		$this->locale[ $this->get_base_country() ] = apply_filters( 'masteriyo_get_country_locale_base', $this->locale[ $this->get_base_country() ] );
 
 		return $this->locale;
@@ -1461,10 +1702,17 @@ class Countries {
 		);
 
 		/**
+		 * Filters address fields.
+		 *
 		 * Important note on this filter: Changes to address fields can and will be overridden by
 		 * the masteriyo_default_address_fields. The locales/default locales apply on top based
 		 * on country selection. If you want to change things like the required status of an
 		 * address field, filter masteriyo_default_address_fields instead.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $address_fields The list of address fields.
+		 * @param string $country Country code.
 		 */
 		$address_fields = apply_filters( 'masteriyo_' . $type . 'fields', $address_fields, $country );
 		// Sort each of the fields based on priority.
@@ -1485,6 +1733,14 @@ class Countries {
 	public function get_country_from_code( $code ) {
 		$country = isset( $this->countries[ $code ] ) ? $this->countries[ $code ] : '';
 
+		/**
+		 * Filters country name found using country code.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $country Country name.
+		 * @param string $code The country code.
+		 */
 		return apply_filters( 'masteriyo_get_country_from_code', $country, $code );
 	}
 }

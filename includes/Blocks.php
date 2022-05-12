@@ -165,9 +165,13 @@ class Blocks {
 		$categories = $query->get_categories();
 
 		/**
-		 * Hook: masteriyo_shortcode_course_categories.
+		 * Filters categories to display in course categories block.
 		 *
 		 * @since 1.3.0
+		 *
+		 * @param \Masteriyo\Models\CourseCategory[] $categories Categories list.
+		 * @param mixed[] $args Query args.
+		 * @param \Masteriyo\Query\CourseCategoryQuery $query The course category query object.
 		 */
 		return apply_filters( 'masteriyo_shortcode_course_categories', $categories, $args, $query );
 	}
@@ -231,8 +235,16 @@ class Blocks {
 			'category' => empty( $attr['categoryIds'] ) ? null : $attr['categoryIds'],
 		);
 		$course_query = new CourseQuery( $args );
-		$courses      = apply_filters( 'masteriyo_shortcode_courses_result', $course_query->get_courses() );
 		$client_id    = (string) $attr['clientId'];
+
+		/**
+		 * Filters courses to display in courses block.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param \Masteriyo\Models\Course[]|\Masteriyo\Models\Course $courses Single course object or list of course objects.
+		 */
+		$courses = apply_filters( 'masteriyo_shortcode_courses_result', $course_query->get_courses() );
 
 		masteriyo_set_loop_prop( 'columns', absint( $attr['columns'] ) );
 

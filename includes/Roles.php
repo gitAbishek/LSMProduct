@@ -9,13 +9,20 @@ namespace Masteriyo;
 
 class Roles {
 	/**
-	 * Retun all roles.
+	 * Return all roles.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
 	public static function get_all() {
+		/**
+		 * Filters the user roles.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $roles List of roles.
+		 */
 		return apply_filters(
 			'masteriyo_user_roles',
 			array(

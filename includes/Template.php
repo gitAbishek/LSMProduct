@@ -68,7 +68,15 @@ class Template implements TemplateInterface {
 			$template = Utils::untokenize_path( $template, Utils::get_path_define_tokens() );
 		}
 
-		// Allow 3rd party plugins to filter template file from their plugin.
+		/**
+		 * Allow 3rd party plugins to filter template file from their plugin.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template Template part filename.
+		 * @param string $slug Template slug.
+		 * @param string $name Template name from function parameter.
+		 */
 		$template = apply_filters( 'masteriyo_get_template_part', $template, $slug, $name );
 
 		if ( $template ) {
@@ -102,7 +110,17 @@ class Template implements TemplateInterface {
 			$template = Utils::untokenize_path( $template, Utils::get_path_define_tokens() );
 		}
 
-		// Allow 3rd party plugin filter template file from their plugin.
+		/**
+		 * Allow 3rd party plugin filter template file from their plugin.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template Template path.
+		 * @param string $template_name Template name.
+		 * @param array $args Template arguments.
+		 * @param string $template_path Template path from function parameter.
+		 * @param string $default_path Default templates directory path.
+		 */
 		$filter_template = apply_filters( 'masteriyo_get_template', $template, $template_name, $args, $template_path, $default_path );
 
 		if ( $filter_template !== $template ) {
@@ -238,7 +256,15 @@ class Template implements TemplateInterface {
 			$template = $default_path . $template_name;
 		}
 
-		// Return what we found.
+		/**
+		 * Filters the located template path.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template Template path.
+		 * @param string $template_name Template name.
+		 * @param string $template_path Template relative path.
+		 */
 		return apply_filters( 'masteriyo_locate_template', $template, $template_name, $template_path );
 	}
 }

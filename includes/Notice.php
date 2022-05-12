@@ -145,6 +145,13 @@ class Notice {
 	public function add( $message, $type = self::SUCCESS, $data = array() ) {
 		$notices = $this->session->get( 'notices', array() );
 
+		/**
+		 * Filters the notice message that will be added.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $message The notice message.
+		 */
 		$message = apply_filters( "masteriyo_add_notice_{$type}", $message );
 
 		if ( ! empty( $message ) ) {
@@ -189,6 +196,13 @@ class Notice {
 	 * @param array  $data        Optional notice data.
 	 */
 	public function display( $message, $type = self::SUCCESS, $data = array() ) {
+		/**
+		 * Filters the notice message that will be displayed.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $message The notice message.
+		 */
 		$message = apply_filters( "masteriyo_add_notice_{$type}", $message );
 		masteriyo_get_template(
 			"notices/{$type}.php",

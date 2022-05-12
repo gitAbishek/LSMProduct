@@ -260,6 +260,13 @@ class Capabilities {
 		$subscriber_caps = get_role( 'subscriber' )->capabilities;
 		$capabilities    = array_merge( $capabilities, $subscriber_caps );
 
+		/**
+		 * Filters capabilities for student role.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $capabilities List of capabilities.
+		 */
 		return apply_filters( 'masteriyo_student_capabilities', $capabilities );
 	}
 
@@ -338,6 +345,13 @@ class Capabilities {
 
 		$capabilities = array_merge( $capabilities, self::get_student_capabilities() );
 
+		/**
+		 * Filters capabilities for instructor role.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $capabilities List of capabilities.
+		 */
 		return apply_filters( 'masteriyo_instructor_capabilities', $capabilities );
 	}
 
@@ -426,6 +440,13 @@ class Capabilities {
 
 		$capabilities = array_merge( $capabilities, self::get_instructor_capabilities() );
 
+		/**
+		 * Filters capabilities for manager role.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $capabilities List of capabilities.
+		 */
 		return apply_filters( 'masteriyo_manager_capabilities', $capabilities );
 	}
 
@@ -442,6 +463,13 @@ class Capabilities {
 		$capabilities       = array_merge( $capabilities, $administrator_caps );
 		$capabilities       = array_merge( $capabilities, self::get_manager_capabilities() );
 
+		/**
+		 * Filters capabilities for administrator role.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $capabilities List of capabilities.
+		 */
 		return apply_filters( 'masteriyo_administrator_capabilities', $capabilities );
 	}
 }

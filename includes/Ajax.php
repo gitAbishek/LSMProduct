@@ -11,7 +11,6 @@
 namespace Masteriyo;
 
 use Exception;
-use Masteriyo\Query\CourseQuery;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -62,6 +61,13 @@ class Ajax {
 		$namespace = 'Masteriyo\\AjaxHandlers';
 
 		$handlers = array_unique(
+			/**
+			 * Filters ajax handler classes.
+			 *
+			 * @since 1.4.3
+			 *
+			 * @param string[] $ajax_handlers Ajax handler classes.
+			 */
 			apply_filters(
 				'masteriyo_ajax_handlers',
 				array(

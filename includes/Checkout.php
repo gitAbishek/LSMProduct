@@ -224,10 +224,24 @@ class Checkout {
 				}
 				// phpcs:enable WordPress.Security.NonceVerification.Missing
 
+				/**
+				 * Filters checkout field value.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param mixed $value Field value.
+				 */
 				$data[ $key ] = apply_filters( 'masteriyo_process_checkout_' . $type . '_field', apply_filters( 'masteriyo_process_checkout_field_' . $key, $value ) );
 			}
 		}
 
+		/**
+		 * Filters checkout form data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data Checkout form data.
+		 */
 		return apply_filters( 'masteriyo_checkout_posted_data', $data );
 	}
 
@@ -250,6 +264,13 @@ class Checkout {
 	 * @return boolean
 	 */
 	public function is_registration_required() {
+		/**
+		 * Filters whether registration is required for checkout.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if registration is required.
+		 */
 		return apply_filters( 'masteriyo_checkout_registration_required', true );
 	}
 
@@ -273,6 +294,13 @@ class Checkout {
 			'billing' => masteriyo( 'countries' )->get_address_fields( $billing_country, 'billing_' ),
 		);
 
+		/**
+		 * Filters checkout fields.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $fields Checkout fields.
+		 */
 		$this->fields = apply_filters( 'masteriyo_checkout_fields', $this->fields );
 
 		return $fieldset ? $this->fields[ $fieldset ] : $this->fields;
@@ -336,13 +364,28 @@ class Checkout {
 			return masteriyo_clean( wp_unslash( $_POST[ $input ] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		}
 
-		// Allow 3rd parties to short circuit the logic and return their own default value.
+		/**
+		 * Allow 3rd parties to short circuit the logic and return their own default value.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed $value Field value.
+		 * @param string $input Field name.
+		 */
 		$value = apply_filters( 'masteriyo_checkout_get_value', null, $input );
 
 		if ( ! is_null( $value ) ) {
 			return $value;
 		}
 
+		/**
+		 * Filters default value for a checkout field.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed $value Field value.
+		 * @param string $input Field name.
+		 */
 		return apply_filters( 'masteriyo_default_checkout_' . $input, $value, $input );
 	}
 
@@ -440,6 +483,15 @@ class Checkout {
 								/* translators: %s: field name */
 								$postcode_validation_notice = sprintf( __( '%s is not a valid postcode / ZIP.', 'masteriyo' ), '<strong>' . esc_html( $field_label ) . '</strong>' );
 						}
+						/**
+						 * Filters postcode validation notice in checkout form.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param string $notice Validation message.
+						 * @param mixed $country Country.
+						 * @param mixed $value Field value.
+						 */
 						$errors->add( $key . '_validation', apply_filters( 'masteriyo_checkout_postcode_validation_notice', $postcode_validation_notice, $country, $data[ $key ] ), array( 'id' => $key ) );
 					}
 				}
@@ -483,6 +535,15 @@ class Checkout {
 				}
 
 				if ( $validate_fieldset && $required && '' === $data[ $key ] ) {
+					/**
+					 * Filters notice for required field in checkout form.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param string $text Notice message.
+					 * @param string $field_label_html Field label html.
+					 * @param string $field_label Field label.
+					 */
 					/* translators: %s: field name */
 					$errors->add( $key . '_required', apply_filters( 'masteriyo_checkout_required_field_notice', sprintf( __( '%s is a required field.', 'masteriyo' ), '<strong>' . esc_html( $field_label ) . '</strong>' ), $field_label ), array( 'id' => $key ) );
 				}
@@ -497,6 +558,13 @@ class Checkout {
 	 * @param array $data Posted data.
 	 */
 	protected function process_user( $data ) {
+		/**
+		 * Filters customer ID for checkout form.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $user_id Customer ID.
+		 */
 		$user_id = apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() );
 
 		// On multisite, ensure user exists on current site, if not add them before allowing login.
@@ -504,8 +572,18 @@ class Checkout {
 			add_user_to_blog( get_current_blog_id(), $user_id, 'user' );
 		}
 
+		/**
+		 * Filters whether the user data should be updated or not from checkout form.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if user data should be updated.
+		 * @param Checkout $checkout_object Object of Checkout class.
+		 */
+		$is_update_user_data = apply_filters( 'masteriyo_checkout_update_user_data', true, $this );
+
 		// Add user info from other fields.
-		if ( $user_id && apply_filters( 'masteriyo_checkout_update_user_data', true, $this ) ) {
+		if ( $user_id && $is_update_user_data ) {
 			$user = masteriyo( 'user' );
 			$user->set_id( $user_id );
 
@@ -557,7 +635,15 @@ class Checkout {
 	 * @return int|WP_ERROR
 	 */
 	public function create_order( $data ) {
-		// Give plugins the opportunity to create an order themselves.
+		/**
+		 * Filters order id in checkout form.
+		 * Give plugins the opportunity to create an order themselves.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed $order_id Order ID.
+		 * @param Masteriyo\Checkout $checkout_object Object of Checkout class.
+		 */
 		$order_id = apply_filters( 'masteriyo_create_order', null, $this );
 
 		if ( $order_id ) {
@@ -596,9 +682,18 @@ class Checkout {
 				}
 			}
 
+			/**
+			 * Filters customer ID for checkout form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $user_id User ID.
+			 */
+			$customer_id = apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() );
+
 			$order->set_created_via( 'checkout' );
 			$order->set_cart_hash( $cart_hash );
-			$order->set_customer_id( apply_filters( 'masteriyo_checkout_user_id', get_current_user_id() ) );
+			$order->set_customer_id( $customer_id );
 			$order->set_currency( masteriyo_get_currency() );
 			$order->set_customer_ip_address( masteriyo_get_current_ip_address() );
 			$order->set_customer_user_agent( masteriyo_get_user_agent() );
@@ -738,6 +833,14 @@ class Checkout {
 		if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
 			$result['order_id'] = $order_id;
 
+			/**
+			 * Filters payment successful result data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $result Payment process result.
+			 * @param integer $order_id Order ID.
+			 */
 			$result = apply_filters( 'masteriyo_payment_successful_result', $result, $order_id );
 
 			if ( ! masteriyo_is_ajax() ) {
@@ -762,17 +865,25 @@ class Checkout {
 
 		$this->cart->clear();
 
+		/**
+		 * Filters no payment needed redirect URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The redirected URL.
+		 * @param \Masteriyo\Models\Order\Order|null $order Order object.
+		 */
+		$redirect_url = apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order );
+
 		if ( ! masteriyo_is_ajax() ) {
-			wp_safe_redirect(
-				apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order )
-			);
+			wp_safe_redirect( $redirect_url );
 			exit;
 		}
 
 		wp_send_json(
 			array(
 				'result'   => 'success',
-				'redirect' => apply_filters( 'masteriyo_checkout_no_payment_needed_redirect', $order->get_checkout_order_received_url(), $order ),
+				'redirect' => $redirect_url,
 			)
 		);
 	}

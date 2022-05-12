@@ -328,23 +328,27 @@ class CourseReviewsController extends CommentsController {
 	 * @return array
 	 */
 	protected function get_course_review_data( $course_review, $context = 'view' ) {
+		$author = masteriyo_get_user( $course_review->get_author_id( $context ) );
+
 		$data = array(
-			'id'            => $course_review->get_id(),
-			'author_name'   => $course_review->get_author_name( $context ),
-			'author_email'  => $course_review->get_author_email( $context ),
-			'author_url'    => $course_review->get_author_url( $context ),
-			'ip_address'    => $course_review->get_ip_address( $context ),
-			'date_created'  => masteriyo_rest_prepare_date_response( $course_review->get_date_created( $context ) ),
-			'title'         => $course_review->get_title( $context ),
-			'description'   => $course_review->get_content( $context ),
-			'rating'        => $course_review->get_rating( $context ),
-			'status'        => $course_review->get_status( $context ),
-			'agent'         => $course_review->get_agent( $context ),
-			'type'          => $course_review->get_type( $context ),
-			'parent'        => $course_review->get_parent( $context ),
-			'author_id'     => $course_review->get_author_id( $context ),
-			'course'        => null,
-			'replies_count' => $course_review->total_replies_count(),
+			'id'                => $course_review->get_id(),
+			'author_id'         => $course_review->get_author_id( $context ),
+			'author_name'       => $course_review->get_author_name( $context ),
+			'author_email'      => $course_review->get_author_email( $context ),
+			'author_url'        => $course_review->get_author_url( $context ),
+			'author_avatar_url' => is_wp_error( $author ) ? '' : $author->get_avatar_url(),
+			'ip_address'        => $course_review->get_ip_address( $context ),
+			'date_created'      => masteriyo_rest_prepare_date_response( $course_review->get_date_created( $context ) ),
+			'title'             => $course_review->get_title( $context ),
+			'description'       => $course_review->get_content( $context ),
+			'rating'            => $course_review->get_rating( $context ),
+			'status'            => $course_review->get_status( $context ),
+			'agent'             => $course_review->get_agent( $context ),
+			'type'              => $course_review->get_type( $context ),
+			'parent'            => $course_review->get_parent( $context ),
+			'author'            => $author,
+			'course'            => null,
+			'replies_count'     => $course_review->total_replies_count(),
 		);
 
 		$course = masteriyo_get_course( $course_review->get_course_id() );

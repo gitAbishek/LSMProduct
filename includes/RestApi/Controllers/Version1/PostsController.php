@@ -408,7 +408,7 @@ abstract class PostsController extends CrudController {
 		}
 
 		$post_count        = array_map( 'absint', $post_count );
-		$post_count['any'] = array_sum( $post_count );
+		$post_count['any'] = array_sum( masteriyo_array_except( $post_count, PostStatus::TRASH ) );
 
 		return $post_count;
 	}

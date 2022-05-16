@@ -604,6 +604,21 @@ class ScriptStyle {
 	}
 
 	/**
+	 * Load custom inline styles on admin page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return void
+	 */
+	public static function load_custom_admin_inline_styles() {
+		$custom_css = '
+				#toplevel_page_masteriyo ul.wp-submenu li:last-child a {
+						color: #27e527 !important;
+				}';
+		wp_add_inline_style( 'masteriyo-dependencies', $custom_css );
+	}
+
+	/**
 	 * Load block styles.
 	 *
 	 * @since 1.3.0
@@ -749,6 +764,8 @@ class ScriptStyle {
 		if ( function_exists( 'wp_set_script_translations' ) ) {
 			wp_set_script_translations( 'masteriyo-admin', 'masteriyo', Constants::get( 'MASTERIYO_LANGUAGES' ) );
 		}
+		self::load_custom_admin_inline_styles();
+
 	}
 
 	/**

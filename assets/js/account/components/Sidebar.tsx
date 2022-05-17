@@ -32,11 +32,11 @@ import {
 } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { NavLink, useLocation } from 'react-router-dom';
-import FullScreenLoader from '../../back-end/components/layout/FullScreenLoader';
 import urls from '../../back-end/constants/urls';
 import { UserSchema } from '../../back-end/schemas';
 import API from '../../back-end/utils/api';
 import routes from '../constants/routes';
+import SkeletonSidebar from '../skeleton/SideBar';
 import localized from '../utils/global';
 
 const Sidebar = () => {
@@ -219,7 +219,7 @@ const Sidebar = () => {
 		);
 	}
 
-	return <FullScreenLoader />;
+	return <SkeletonSidebar />;
 };
 
 export default Sidebar;

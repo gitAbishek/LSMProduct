@@ -4,11 +4,11 @@ import React from 'react';
 import { BiEdit } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { UserSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
 import routes from '../../constants/routes';
+import ProfileSkeleton from '../../skeleton/Profile';
 
 const ProfilePage = () => {
 	const userAPI = new API(urls.currentUser);
@@ -90,7 +90,7 @@ const ProfilePage = () => {
 		);
 	}
 
-	return <FullScreenLoader />;
+	return <ProfileSkeleton />;
 };
 
 export default ProfilePage;

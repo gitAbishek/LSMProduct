@@ -3,12 +3,12 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import MasteriyoPagination from '../../../back-end/components/common/MasteriyoPagination';
-import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
 import { isEmpty } from '../../../back-end/utils/utils';
 import CourseItem from '../../components/CourseItem';
 import { MyCoursesSchema } from '../../schemas';
+import CourseSkeleton from '../../skeleton/Courses';
 
 interface FilterParams {
 	per_page?: number;
@@ -50,7 +50,7 @@ const EnrolledCourses: React.FC = () => {
 			</Stack>
 		);
 	}
-	return <FullScreenLoader />;
+	return <CourseSkeleton />;
 };
 
 export default EnrolledCourses;

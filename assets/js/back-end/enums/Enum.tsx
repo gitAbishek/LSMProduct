@@ -5,6 +5,7 @@ export enum OrderStatus {
 	Refunded = 'refunded',
 	Cancelled = 'cancelled',
 	Pending = 'pending',
+	Trash = 'trash',
 }
 
 export enum ReviewStatus {

@@ -16,7 +16,6 @@ import { HiAcademicCap } from 'react-icons/hi';
 import { IoIosArrowForward } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
 import { CourseProgressSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
@@ -25,6 +24,7 @@ import CountBox from '../../components/CountBox';
 import CourseGridItem from '../../components/CourseGridItem';
 import routes from '../../constants/routes';
 import { MyCoursesSchema } from '../../schemas';
+import DashboardSkeleton from '../../skeleton/Dashboard';
 import localized from '../../utils/global';
 
 const Dashboard: React.FC = () => {
@@ -163,7 +163,7 @@ const Dashboard: React.FC = () => {
 		);
 	}
 
-	return <FullScreenLoader />;
+	return <DashboardSkeleton />;
 };
 
 export default Dashboard;

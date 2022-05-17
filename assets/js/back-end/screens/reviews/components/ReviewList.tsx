@@ -35,7 +35,7 @@ import { getLocalTime } from '../../../utils/utils';
 interface Props {
 	id: number;
 	title: string;
-	author: { id: number; display_name: string };
+	author: { id: number; display_name: string; avatar_url: string };
 	course: string;
 	rating: number;
 	status: string;
@@ -128,7 +128,7 @@ const ReviewList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				<Stack direction="row" spacing="2" alignItems="center">
-					<Avatar size="xs" />
+					<Avatar size="xs" src={author.avatar_url} />
 					<Text fontSize="xs" fontWeight="medium" color="gray.600">
 						{author?.display_name}
 					</Text>

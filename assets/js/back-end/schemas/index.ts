@@ -202,6 +202,7 @@ export interface CourseReviewSchema {
 	author_email: string;
 	author_name: string;
 	url: string;
+	author_avatar_url: string;
 	ip_address: string;
 	date_created: string;
 	description: string;

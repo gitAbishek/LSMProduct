@@ -9,7 +9,7 @@ const reviewStatusList = [
 		value: 'approve',
 	},
 	{
-		label: __('Hold', 'masteriyo'),
+		label: __('On Hold', 'masteriyo'),
 		value: 'hold',
 	},
 	{

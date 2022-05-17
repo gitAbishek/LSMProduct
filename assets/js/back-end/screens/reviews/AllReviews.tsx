@@ -211,8 +211,7 @@ const AllReviews = () => {
 	};
 
 	const onReviewUpdate = (data: CourseReviewSchema, status: string) => {
-		const newData = { ...data, status };
-		updateReviewMutation.mutate(deepClean(deepMerge(data, newData)));
+		updateReviewMutation.mutate(deepClean(deepMerge(data, { status })));
 	};
 
 	const reviewStatusBtnStyles = {
@@ -242,12 +241,12 @@ const AllReviews = () => {
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
-								{reviewQuery.isLoading ? (
-									<SkeletonCircle size="4" ml="1" mb="1" />
-								) : (
+								{reviewStatusCount[button.status] !== undefined ? (
 									<Badge color="inherit">
 										{reviewStatusCount[button.status]}
 									</Badge>
+								) : (
+									<SkeletonCircle size="4" ml="1" mb="1" />
 								)}
 							</Button>
 						</ListItem>
@@ -290,6 +289,7 @@ const AllReviews = () => {
 													author={{
 														id: review.author_id,
 														display_name: review.author_name,
+														avatar_url: review.author_avatar_url,
 													}}
 													replies_count={review.replies_count}
 													course={review?.course?.name}

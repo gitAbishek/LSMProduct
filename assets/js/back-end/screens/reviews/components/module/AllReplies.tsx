@@ -1,12 +1,11 @@
-import { Box, Container, Heading } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Spinner } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useInfiniteQuery } from 'react-query';
+import { useLocation } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import EmptyInfo from '../../../../components/common/EmptyInfo';
-import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { CourseReviewResponse, CourseReviewSchema } from '../../../../schemas';
 import { SkeletonReplyList } from '../../../../skeleton';
@@ -20,7 +19,6 @@ interface Props {
 
 const AllReplies: React.FC<Props> = (props) => {
 	const { reviewId } = props;
-	const history = useHistory();
 	const { search } = useLocation();
 	const { page } = queryString.parse(search);
 
@@ -34,18 +32,18 @@ const AllReplies: React.FC<Props> = (props) => {
 				?.scrollIntoView({ behavior: 'smooth' });
 	}, [page, reviewId]);
 
-	const reviewReplies = useQuery<CourseReviewResponse>(
-		['reviewList'],
-		() =>
-			reviewAPI.list({
-				parent: reviewId,
-			}),
-		{
-			onError: () => {
-				history.push(routes.notFound);
-			},
-		}
-	);
+	const { data, isLoading, isFetching, fetchNextPage, isSuccess, hasNextPage } =
+		useInfiniteQuery<CourseReviewResponse>(
+			'reviewList',
+			({ pageParam = 1 }) =>
+				reviewAPI.list({ parent: reviewId, per_page: 10, page: pageParam }),
+			{
+				getNextPageParam: ({ meta }) => {
+					if (meta.pages > meta.current_page) return meta.current_page + 1;
+					return false;
+				},
+			}
+		);
 
 	return (
 		<Container maxW="container.xl" marginTop="6">
@@ -66,21 +64,35 @@ const AllReplies: React.FC<Props> = (props) => {
 						<Tr>
 							<Th>{__('Author', 'masteriyo')}</Th>
 							<Th>{__('Content', 'masteriyo')}</Th>
-							<Th>{__('Created At', 'masteriyo')}</Th>
+							<Th>{__('Date', 'masteriyo')}</Th>
 							<Th>{__('Action', 'masteriyo')}</Th>
 						</Tr>
 					</Thead>
 					<Tbody>
-						{reviewReplies.isLoading && <SkeletonReplyList />}
-						{reviewReplies.isSuccess && isEmpty(reviewReplies?.data?.data) ? (
+						{isLoading && <SkeletonReplyList />}
+						{isSuccess && isEmpty(data?.pages[0]?.data) ? (
 							<EmptyInfo message={__('No replies found.', 'masteriyo')} />
 						) : (
-							reviewReplies.data?.data?.map((reply: CourseReviewSchema) => (
-								<ReplyList key={reply.id} reply={reply} />
-							))
+							data?.pages.map((page) =>
+								page?.data.map((reply: CourseReviewSchema) => (
+									<ReplyList key={reply.id} reply={reply} />
+								))
+							)
 						)}
 					</Tbody>
 				</Table>
+				{hasNextPage ? (
+					<Button
+						spinner={<Spinner />}
+						spinnerPlacement="end"
+						isLoading={isFetching}
+						w="20%"
+						m="auto"
+						onClick={() => fetchNextPage()}
+						variant="outline">
+						Load More
+					</Button>
+				) : null}
 			</Box>
 		</Container>
 	);

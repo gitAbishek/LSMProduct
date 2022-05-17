@@ -606,7 +606,7 @@ class ScriptStyle {
 	/**
 	 * Load custom inline styles on admin page.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @return void
 	 */

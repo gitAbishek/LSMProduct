@@ -86,7 +86,7 @@ class CourseReview extends Model {
 	/**
 	 * Return array of replies with status along with counts.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @return array
 	 */
@@ -97,7 +97,7 @@ class CourseReview extends Model {
 	/**
 	 * Return  total replies.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @return array
 	 */

@@ -438,7 +438,7 @@ function masteriyo_get_course_review_replies_count( $course_review_id ) {
 	/**
 	 * Filters replies count for a course review.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @param integer $replies_count
 	 * @param integer $course_review_id
@@ -449,7 +449,7 @@ function masteriyo_get_course_review_replies_count( $course_review_id ) {
 /**
  * Get post counts of post author.
  *
- * @since x.x.x
+ * @since 1.5.0
  *
  * @param string $type Post type.
  * @param int $user_id User ID.
@@ -481,7 +481,7 @@ function masteriyo_count_posts( $type, $user_id ) {
 	/**
 	 * Modify returned post counts by status for the current post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @param stdClass $counts An object containing the current post_type's post
 	 *                         counts by status.

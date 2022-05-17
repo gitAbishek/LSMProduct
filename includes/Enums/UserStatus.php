@@ -2,7 +2,7 @@
 /**
  * User status enums.
  *
- * @since x.x.x
+ * @since 1.5.0
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * User status enum class.
  *
- * @since x.x.x
+ * @since 1.5.0
  */
 class UserStatus {
 	/**
 	 * User HAM/Active status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @var string
 	 */
 	const HAM = 0;
@@ -27,7 +27,7 @@ class UserStatus {
 	/**
 	 * User HAM/Active status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @var string
 	 */
 	const ACTIVE = 0;
@@ -35,7 +35,7 @@ class UserStatus {
 	/**
 	 * User SPAM status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @var string
 	 */
 	const SPAM = 1;
@@ -43,7 +43,7 @@ class UserStatus {
 	/**
 	 * User inactive status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @var string
 	 */
 	const INACTIVE = 1000;
@@ -51,7 +51,7 @@ class UserStatus {
 	/**
 	 * Get all statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @static
 	 *
 	 * @return array
@@ -60,7 +60,7 @@ class UserStatus {
 		/**
 		 * Filter user statuses.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.0
 		 * @param string[] $statuses User statuses.
 		 */
 		$statuses = apply_filters(
@@ -78,7 +78,7 @@ class UserStatus {
 	/**
 	 * Get all statuses in string.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @static
 	 *
 	 * @return array
@@ -94,7 +94,7 @@ class UserStatus {
 	/**
 	 * User statuses maps.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @static
 	 *
 	 * @return array
@@ -103,7 +103,7 @@ class UserStatus {
 		/**
 		 * Filter user statuses maps.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.0
 		 * @param string[] $maps User statuses maps.
 		 */
 		$maps = array_filters(
@@ -123,7 +123,7 @@ class UserStatus {
 	/**
 	 * Convert string status to numeric.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @static
 	 *
 	 * @param string $status User status.
@@ -143,7 +143,7 @@ class UserStatus {
 	/**
 	 * Convert numeric status to string
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 * @static
 	 *
 	 * @param int $status User status.

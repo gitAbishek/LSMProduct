@@ -31,7 +31,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 * Data stored in meta keys, but not considered "meta".
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Removed 'approved meta field.
+	 * @since 1.5.0 Removed 'approved meta field.
 	 *
 	 * @var array
 	 */

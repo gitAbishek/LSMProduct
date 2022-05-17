@@ -428,7 +428,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Delete a course review that has 'trash' status and doesn't have any replies.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @param integer $review_id
 	 */

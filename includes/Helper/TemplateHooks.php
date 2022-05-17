@@ -67,7 +67,7 @@ add_action( 'masteriyo_account_order-history_endpoint', 'masteriyo_account_order
 add_action( 'masteriyo_account_view-order_endpoint', 'masteriyo_account_view_order_endpoint' );
 /**
  * @since 1.3.0
- * @deprecated x.x.x
+ * @deprecated 1.5.0
  */
 add_action( 'masteriyo_before_account_content', 'masteriyo_template_show_account_approved_notice' );
 

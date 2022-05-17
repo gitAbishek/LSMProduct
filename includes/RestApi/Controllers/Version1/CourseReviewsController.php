@@ -143,7 +143,7 @@ class CourseReviewsController extends CommentsController {
 		);
 
 		/**
-		 * @since x.x.x Added restore route.
+		 * @since 1.5.0 Added restore route.
 		 */
 		register_rest_route(
 			$this->namespace,
@@ -908,7 +908,7 @@ class CourseReviewsController extends CommentsController {
 	/**
 	 * Restore course review.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 *

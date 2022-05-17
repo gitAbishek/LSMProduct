@@ -65,7 +65,7 @@ class Instructor extends User {
 	 * Set the approved.
 	 *
 	 * @since 1.3.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.0
 	 */
 	public function set_approved( $approved ) {
 		$this->set_prop( 'approved', masteriyo_string_to_bool( $approved ) );
@@ -80,7 +80,7 @@ class Instructor extends User {
 	 * Return true if the instructor is approved.
 	 *
 	 * @since 1.3.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean

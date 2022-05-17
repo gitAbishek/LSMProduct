@@ -1314,10 +1314,10 @@ if ( ! function_exists( 'masteriyo_template_show_account_approved_notice' ) ) {
 	 * Display account approved notice if the user is instructor and is not approved.
 	 *
 	 * @since 1.3.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.0
 	 */
 	function masteriyo_template_show_account_approved_notice() {
-		masteriyo_deprecated_function( 'masteriyo_template_show_account_approved_notice', 'x.x.x' );
+		masteriyo_deprecated_function( 'masteriyo_template_show_account_approved_notice', '1.5.0' );
 	}
 }
 

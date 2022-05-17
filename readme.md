@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.4.12
+**Stable tag**: 1.5.0
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.0 - 17-05-2022
+
+- Feature: Add a course review management page on the backend.
+- Enhancement: Made banner responsive on addons listing page.
+- Enhancement: Made account page responsive.
+- Fix - Instructor approval notification on the account page.
+- Fix - Unable to create course review as a student.
 
 ### 1.4.12 - 04-05-2022
 

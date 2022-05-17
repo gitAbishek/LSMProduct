@@ -68,7 +68,7 @@ function masteriyo_count_comments( $type = 'comment', $post_id = 0 ) {
 /**
  * Return array of comments replies with counts for specific parent comment and post ID.
  *
- * @since x.x.x
+ * @since 1.5.0
  *
  * @param string $type Comment type.
  * @param int $parent Parent comment ID.
@@ -118,7 +118,7 @@ function masteriyo_count_comment_replies( $type = 'comment', $parent = 0, $post 
 	/**
 	 * Filter comments count by comment type and post ID.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.0
 	 *
 	 * @param string $counts Comment counts by status.
 	 * @param string $type Comment type.
@@ -131,7 +131,7 @@ function masteriyo_count_comment_replies( $type = 'comment', $parent = 0, $post 
 /**
  * Delete all replies of a comment.
  *
- * @since x.x.x
+ * @since 1.5.0
  *
  * @param integer $comment_id
  *

@@ -396,7 +396,7 @@ abstract class PostsController extends CrudController {
 	 * Get posts count by status.
 	 *
 	 * @since 1.4.12
-	 * @since x.x.x Filter post counts by post authors.
+	 * @since 1.5.0 Filter post counts by post authors.
 	 *
 	 * @return Array
 	 */

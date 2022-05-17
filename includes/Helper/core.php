@@ -3703,7 +3703,7 @@ function masteriyo_get_checkout_endpoint_url( $endpoint ) {
 /**
  * Runs a deprecated action with notice only if used.
  *
- * @since x.x.x
+ * @since 1.5.0
  * @param string $tag         The name of the action hook.
  * @param array  $args        Array of additional function arguments to be passed to do_action().
  * @param string $version     The version of Masteriyo that deprecated the hook.
@@ -3722,7 +3722,7 @@ function masteriyo_do_deprecated_action( $tag, $args, $version, $replacement = n
 /**
  * Wrapper for deprecated functions so we can apply some extra logic.
  *
- * @since x.x.x
+ * @since 1.5.0
  * @param string $function Function used.
  * @param string $version Version the message was added in.
  * @param string $replacement Replacement for the called function.
@@ -3743,7 +3743,7 @@ function masteriyo_deprecated_function( $function, $version, $replacement = null
 /**
  * Wrapper for deprecated hook so we can apply some extra logic.
  *
- * @since x.x.x
+ * @since 1.5.0
  * @param string $hook        The hook that was used.
  * @param string $version     The version of WordPress that deprecated the hook.
  * @param string $replacement The hook that should have been used.
@@ -3768,7 +3768,7 @@ function masteriyo_deprecated_hook( $hook, $version, $replacement = null, $messa
 /**
  * Function to check if a instructor is approved or not.
  *
- * @since x.x.x
+ * @since 1.5.0
  *
  * @return boolean
  */

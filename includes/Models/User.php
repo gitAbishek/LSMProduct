@@ -721,7 +721,7 @@ class User extends Model {
 	 * Set user's status.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Updated $status parameter to integer.
+	 * @since 1.5.0 Updated $status parameter to integer.
 	 *
 	 * @param integer $status User's status.
 	 */

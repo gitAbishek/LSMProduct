@@ -98,6 +98,7 @@ class OrderStatus extends PostStatus {
 					self::CANCELLED,
 					self::FAILED,
 					self::REFUNDED,
+					self::TRASH,
 				)
 			)
 		);

@@ -280,6 +280,7 @@ class OrdersController extends PostsController {
 				'pages'        => $query_results['pages'],
 				'current_page' => $query_args['paged'],
 				'per_page'     => $query_args['posts_per_page'],
+				'orders_count' => $this->get_orders_count(),
 			),
 		);
 	}
@@ -1318,5 +1319,21 @@ class OrdersController extends PostsController {
 		}
 
 		return $response;
+	}
+
+		/**
+	 * Get courses count by status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return Array
+	 */
+	protected function get_orders_count() {
+		$post_count = parent::get_posts_count();
+
+		$post_count        = masteriyo_array_only( $post_count, OrderStatus::all() );
+		$post_count['any'] = array_sum( masteriyo_array_except( $post_count, OrderStatus::TRASH ) );
+
+		return $post_count;
 	}
 }

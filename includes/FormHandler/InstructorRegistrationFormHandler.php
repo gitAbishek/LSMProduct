@@ -167,6 +167,14 @@ class InstructorRegistrationFormHandler {
 			}
 		}
 
+		/**
+		 * Validate instructor registration form data.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param \WP_Error $validation_error Error object which should contain validation errors if there is any.
+		 * @param array $data Submitted form data.
+		 */
 		$error = apply_filters( 'masteriyo_validate_registration_form_data', $error, $data );
 
 		if ( $error->has_errors() ) {
@@ -181,13 +189,30 @@ class InstructorRegistrationFormHandler {
 	 *
 	 * @since 1.2.0
 	 *
-	 * @param User $user
+	 * @param \Masteriyo\Models\User $user
 	 */
 	protected function redirect( $user ) {
+		/**
+		 * Filters boolean: True if new users should be logged in after registration.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param boolean $is_auth_new_user True if new users should be logged in after registration.
+		 * @param \Masteriyo\Models\User $user The registered user object.
+		 */
+		$is_auth_new_user = apply_filters( 'masteriyo_registration_auth_new_user', masteriyo_registration_is_auth_new_user(), $user );
+
 		// Only redirect after a forced login - otherwise output a success notice.
-		if ( apply_filters( 'masteriyo_registration_auth_new_user', masteriyo_registration_is_auth_new_user(), $user ) ) {
+		if ( $is_auth_new_user ) {
 			masteriyo_set_customer_auth_cookie( $user->get_id() );
 
+			/**
+			 * Filters redirection URL to redirect to after user registration.
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param string $url Redirection URL.
+			 */
 			$redirection_url = apply_filters( 'masteriyo_registration_redirect_url', masteriyo_get_page_permalink( 'account' ) );
 			$redirection_url = wp_validate_redirect( $redirection_url, masteriyo_get_page_permalink( 'account' ) );
 

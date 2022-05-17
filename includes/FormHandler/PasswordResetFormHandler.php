@@ -62,6 +62,13 @@ class PasswordResetFormHandler {
 
 			masteriyo_set_password_reset_cookie();
 
+			/**
+			 * Filters boolean: True if password change notification should be disabled.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $bool True if password change notification should be disabled.
+			 */
 			if ( ! apply_filters( 'masteriyo_disable_password_change_notification', false ) ) {
 				wp_password_change_notification( $user );
 			}
@@ -98,7 +105,16 @@ class PasswordResetFormHandler {
 		/**
 		 * Allow to validate for third parties.
 		 */
-		$validation_error  = new \WP_Error();
+		$validation_error = new \WP_Error();
+
+		/**
+		 * Validate password reset form data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \WP_Error $validation_error Error object which should contain validation errors if there is any.
+		 * @param array $data Submitted form data.
+		 */
 		$validation_error  = apply_filters( 'masteriyo_validate_password_reset_form_data', $validation_error, $data );
 		$validation_errors = $validation_error->get_error_messages();
 

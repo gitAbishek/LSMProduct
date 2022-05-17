@@ -10,8 +10,6 @@ namespace Masteriyo\Cart;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Helper\Utils;
-
 /**
  * Fees class.
  *
@@ -139,6 +137,7 @@ class Fees {
 		 * Filter sort fees callback.
 		 *
 		 * @since 1.0.0
+		 *
 		 * @param int Sort order, -1 or 1.
 		 * @param stdClass $a Fee object.
 		 * @param stdClass $b Fee object.
@@ -150,7 +149,7 @@ class Fees {
 	 * Generate a unique ID for the fee being added.
 	 *
 	 * @since 1.0.0
-	 * @param string $fee Fee object.
+	 * @param stdClass $fee Fee object.
 	 * @return string fee key.
 	 */
 	protected function generate_id( $fee ) {

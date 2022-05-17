@@ -41,6 +41,13 @@ class NotificationStatus {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters notification status list.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param string[] $statuses Notification status list.
+			 */
 			apply_filters(
 				'masteriyo_notification_statuses',
 				array(

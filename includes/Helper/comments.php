@@ -58,7 +58,7 @@ function masteriyo_count_comments( $type = 'comment', $post_id = 0 ) {
 	 *
 	 * @since 1.4.10
 	 *
-	 * @param string $count Comment counts by status.
+	 * @param integer[] $counts Comment counts by status.
 	 * @param string $type Comment type.
 	 * @param int $post_id Post ID.
 	 */

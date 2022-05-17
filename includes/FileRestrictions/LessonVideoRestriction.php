@@ -57,10 +57,31 @@ class LessonVideoRestriction extends FileRestriction {
 	public function send_lesson_video_file() {
 		$lesson = masteriyo_get_lesson( $_GET['lesson_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+		if ( is_null( $lesson ) ) {
+			$this->send_error( __( 'File not found.', 'masteriyo' ) );
+			return;
+		}
+
 		do_action( 'masteriyo_before_send_lesson_video_file', $lesson );
 
+		/**
+		 * Filters boolean-like value: 'yes' if it should be redirected to the actual file URL of a lesson video, otherwise 'no'.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $is_redirect One of 'yes' or 'no'.
+		 */
 		if ( 'yes' === apply_filters( 'masteriyo_lesson_video_restriction_redirect_to_file', 'no' ) ) {
 			$file_url = wp_get_attachment_url( $lesson->get_video_source_url( 'edit' ) );
+
+			/**
+			 * Filters self-hosted file URL of a lesson video.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $file_url Lesson video file URL.
+			 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
+			 */
 			$file_url = apply_filters( 'masteriyo_self_hosted_lesson_video_fileurl', $file_url, $lesson );
 
 			if ( ! is_string( $file_url ) || empty( $file_url ) ) {
@@ -70,6 +91,15 @@ class LessonVideoRestriction extends FileRestriction {
 		}
 
 		$file_path = get_attached_file( $lesson->get_video_source_url( 'edit' ) );
+
+		/**
+		 * Filters self-hosted filepath of a lesson video.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $file_path Absolute path of lesson video file.
+		 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
+		 */
 		$file_path = apply_filters( 'masteriyo_self_hosted_lesson_video_filepath', $file_path, $lesson );
 
 		if ( ! is_string( $file_path ) || empty( $file_path ) ) {

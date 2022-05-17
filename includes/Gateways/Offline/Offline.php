@@ -50,8 +50,17 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 	 * @since 1.0.0
 	 */
 	protected function setup_properties() {
-		$this->name               = 'offline';
-		$this->icon               = apply_filters( 'masteriyo_offline_icon', '' );
+		$this->name = 'offline';
+
+		/**
+		 * Filters offline payment gateway icon.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $icon Icon html.
+		 */
+		$this->icon = apply_filters( 'masteriyo_offline_icon', '' );
+
 		$this->method_title       = __( 'Offline', 'masteriyo' );
 		$this->method_description = __( 'Have your customers pay with cash (or by other means) upon delivery.', 'masteriyo' );
 		$this->has_fields         = false;
@@ -75,7 +84,16 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 		$order = masteriyo_get_order( $order_id );
 
 		if ( $order->get_total() > 0 ) {
-			// Mark as processing or on-hold (payment won't be taken until send).
+			/**
+			 * Filters offline payment order status.
+			 *
+			 * Mark as processing or on-hold (payment won't be taken until send).
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $status Order status.
+			 * @param \Masteriyo\Abstracts\Order $order Order object.
+			 */
 			$status = apply_filters( 'masteriyo_offline_process_payment_order_status', OrderStatus::ON_HOLD, $order );
 			$order->update_status( $status, __( 'Payment to be made offline.', 'masteriyo' ) );
 		} else {

@@ -158,6 +158,14 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 
 		$icon_html .= sprintf( '<a href="%1$s" class="about_paypal" onclick="javascript:window.open(\'%1$s\',\'WIPaypal\',\'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700\'); return false;">' . esc_attr__( 'What is PayPal?', 'masteriyo' ) . '</a>', esc_url( $this->get_icon_url( $base_country ) ) );
 
+		/**
+		 * Filters paypal payment gateway icon.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $icon Icon html.
+		 * @param string $name Payment gateway name.
+		 */
 		return apply_filters( 'masteriyo_gateway_icon', $icon_html, $this->name );
 	}
 
@@ -252,6 +260,14 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 				$icon = masteriyo_get_plugin_url() . '/includes/gateways/paypal/assets/images/paypal.png';
 				break;
 		}
+
+		/**
+		 * Filters paypal payment gateway icon URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $icon_url Icon URL.
+		 */
 		return apply_filters( 'masteriyo_paypal_icon', $icon );
 	}
 
@@ -265,6 +281,13 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 	public function is_valid_for_use() {
 		return in_array(
 			masteriyo_get_currency(),
+			/**
+			 * Filters supported currencies of paypal.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $currencies Paypal supported currencies.
+			 */
 			apply_filters(
 				'masteriyo_paypal_supported_currencies',
 				array( 'AUD', 'BRL', 'CAD', 'MXN', 'NZD', 'HKD', 'SGD', 'USD', 'EUR', 'JPY', 'TRY', 'NOK', 'CZK', 'DKK', 'HUF', 'ILS', 'MYR', 'PHP', 'PLN', 'SEK', 'CHF', 'TWD', 'THB', 'GBP', 'RMB', 'RUB', 'INR' )

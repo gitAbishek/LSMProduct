@@ -131,7 +131,13 @@ class Migrator {
 	 * @return array
 	 */
 	protected function get_migrations( $exclude = array(), $migration = null ) {
-		// Get the list of migration paths.
+		/**
+		 * Filters the list of migration paths.
+		 *
+		 * @since 1.3.4
+		 *
+		 * @param string[] $paths Migration paths.
+		 */
 		$paths = apply_filters(
 			'masteriyo_migrations_paths',
 			array(

@@ -269,6 +269,14 @@ abstract class Model {
 			$value = array_key_exists( $prop, $this->changes ) ? $this->changes[ $prop ] : $this->data[ $prop ];
 
 			if ( 'view' === $context ) {
+				/**
+				 * Filters model prop value, if context is 'view'.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param mixed $value Prop value.
+				 * @param Model $model Model object.
+				 */
 				$value = apply_filters( $this->get_hook_prefix() . $prop, $value, $this );
 			}
 		}
@@ -497,6 +505,14 @@ abstract class Model {
 		}
 
 		if ( 'view' === $context ) {
+			/**
+			 * Filters model meta data value, if context is 'view'.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param mixed $value Meta data value.
+			 * @param Masteriyo\Database\Model $model Model object.
+			 */
 			$value = apply_filters( $this->get_hook_prefix() . $key, $value, $this );
 		}
 

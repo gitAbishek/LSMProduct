@@ -57,6 +57,13 @@ class NotificationLevel {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters notification levels list.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param string[] $levels Notification levels list.
+			 */
 			apply_filters(
 				'masteriyo_notification_levels',
 				array(

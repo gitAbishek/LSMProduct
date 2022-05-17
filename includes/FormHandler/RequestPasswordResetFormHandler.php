@@ -51,7 +51,16 @@ class RequestPasswordResetFormHandler {
 
 			$data = $this->get_form_data();
 
-			if ( is_email( $data['user_login'] ) && apply_filters( 'masteriyo_get_username_from_email', true ) ) {
+			/**
+			 * Filters boolean: true if user object should be fetched using email for password reset request.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $bool True if user object should be fetched using email for password reset request.
+			 */
+			$get_user_name_from_email = apply_filters( 'masteriyo_get_username_from_email', true );
+
+			if ( is_email( $data['user_login'] ) && $get_user_name_from_email ) {
 				$wp_user = get_user_by( 'email', $data['user_login'] );
 			} else {
 				$wp_user = get_user_by( 'login', $data['user_login'] );
@@ -76,6 +85,14 @@ class RequestPasswordResetFormHandler {
 
 			do_action( 'retrieve_password', $user->get_username() );
 
+			/**
+			 * Filters boolean: 'false' if the given user should not be allowed to reset password, otherwise 'true'.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $bool 'false' if the given user should not be allowed to reset password, otherwise 'true'.
+			 * @param \Masteriyo\Models\User $user User object.
+			 */
 			if ( ! apply_filters( 'allow_password_reset', true, $user ) ) {
 				throw new \Exception( __( 'Password reset is not allowed for this user.', 'masteriyo' ) );
 			}
@@ -113,7 +130,16 @@ class RequestPasswordResetFormHandler {
 			throw new \Exception( __( 'Enter a username or email address.', 'masteriyo' ) );
 		}
 
-		$validation_error  = new \WP_Error();
+		$validation_error = new \WP_Error();
+
+		/**
+		 * Validate password reset request form data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \WP_Error $validation_error Error object which should contain validation errors if there is any.
+		 * @param array $data Submitted form data.
+		 */
 		$validation_error  = apply_filters( 'masteriyo_validate_password_reset_request_form_data', $validation_error, $data );
 		$validation_errors = $validation_error->get_error_messages();
 

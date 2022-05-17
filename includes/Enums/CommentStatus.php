@@ -81,6 +81,13 @@ class CommentStatus {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters comment status list.
+			 *
+			 * @since 1.4.10
+			 *
+			 * @param string[] $statuses Comment status list.
+			 */
 			apply_filters(
 				'masteriyo_comment_statuses',
 				array(
@@ -102,6 +109,13 @@ class CommentStatus {
 	 */
 	public static function readable() {
 		return array_unique(
+			/**
+			 * Filters readable comment status list.
+			 *
+			 * @since 1.4.10
+			 *
+			 * @param string[] $statuses Readable comment status list.
+			 */
 			apply_filters(
 				'masteriyo_readable_comment_statuses',
 				array(

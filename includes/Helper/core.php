@@ -49,6 +49,14 @@ function masteriyo_get_course( $course ) {
 		return null;
 	}
 
+	/**
+	 * Filters course object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Course $course_obj Course object.
+	 * @param int|\Masteriyo\Models\Course|WP_Post $course Course id or Course Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_course', $course_obj, $course );
 }
 
@@ -79,6 +87,15 @@ function masteriyo_get_lesson( $lesson ) {
 	} catch ( \Exception $e ) {
 		return null;
 	}
+
+	/**
+	 * Filters lesson object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Lesson $lesson_obj lesson object.
+	 * @param int|\Masteriyo\Models\Lesson|WP_Post $lesson lesson id or lesson Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_lesson', $lesson_obj, $lesson );
 
 }
@@ -111,6 +128,14 @@ function masteriyo_get_section( $section ) {
 		return null;
 	}
 
+	/**
+	 * Filters section object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Section $section_obj section object.
+	 * @param int|\Masteriyo\Models\Section|WP_Post $section section id or section Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_section', $section_obj, $section );
 }
 
@@ -143,6 +168,14 @@ function masteriyo_get_faq( $faq ) {
 		return null;
 	}
 
+	/**
+	 * Filters faq object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Faq $faq_obj faq object.
+	 * @param int|\Masteriyo\Models\Faq|WP_Post $faq faq id or faq Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_faq', $faq_obj, $faq );
 }
 
@@ -158,6 +191,14 @@ function masteriyo_get_faq( $faq ) {
 function masteriyo_get_sections( $args = array() ) {
 	$sections = masteriyo( 'query.sections' )->set_args( $args )->get_sections();
 
+	/**
+	 * Filters queried section objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Section|\Masteriyo\Models\Section[] $sections Queried sections.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_sections', $sections, $args );
 }
 
@@ -173,6 +214,14 @@ function masteriyo_get_sections( $args = array() ) {
 function masteriyo_get_lessons( $args = array() ) {
 	$lessons = masteriyo( 'query.lessons' )->set_args( $args )->get_lessons();
 
+	/**
+	 * Filters queried lesson objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Lesson|\Masteriyo\Models\Lesson[] $lessons Queried lessons.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_lessons', $lessons, $args );
 }
 
@@ -188,6 +237,14 @@ function masteriyo_get_lessons( $args = array() ) {
 function masteriyo_get_quizes( $args = array() ) {
 	$quizes = masteriyo( 'query.quizes' )->set_args( $args )->get_quizes();
 
+	/**
+	 * Filters queried quiz objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Quiz|\Masteriyo\Models\Quiz[] $quizzes Queried quizzes.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_quizes', $quizes, $args );
 }
 
@@ -203,6 +260,14 @@ function masteriyo_get_quizes( $args = array() ) {
 function masteriyo_get_faqs( $args = array() ) {
 	$faqs = masteriyo( 'query.faqs' )->set_args( $args )->get_faqs();
 
+	/**
+	 * Filters queried faq objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Faq|\Masteriyo\Models\Faq[] $faqs Queried faqs.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_faqs', $faqs, $args );
 }
 
@@ -218,6 +283,14 @@ function masteriyo_get_faqs( $args = array() ) {
 function masteriyo_get_course_reviews( $args = array() ) {
 	$course_reviews = masteriyo( 'query.course-reviews' )->set_args( $args )->get_courses_reviews();
 
+	/**
+	 * Filters queried course review objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseReview|\Masteriyo\Models\CourseReview[] $course_reviews Queried course reviews.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_course_reviews', $course_reviews, $args );
 }
 
@@ -249,6 +322,14 @@ function masteriyo_get_course_qa( $course_qa ) {
 		return null;
 	}
 
+	/**
+	 * Filters course qa object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseQuestionAnswer $course_qa_obj Course qa object.
+	 * @param int|\Masteriyo\Models\CourseQuestionAnswer|WP_Post $course qa course, qa id or course qa Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_course_qa', $course_qa_obj, $course_qa );
 }
 
@@ -264,6 +345,14 @@ function masteriyo_get_course_qa( $course_qa ) {
 function masteriyo_get_course_qas( $args = array() ) {
 	$course_qas = masteriyo( 'query.course-qas' )->set_args( $args )->get_course_qas();
 
+	/**
+	 * Filters queried course qa objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseQuestionAnswer|\Masteriyo\Models\CourseQuestionAnswer[] $course_qas Queried course qas.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_course_qas', $course_qas, $args );
 }
 
@@ -295,6 +384,14 @@ function masteriyo_get_course_cat( $course_cat ) {
 		return null;
 	}
 
+	/**
+	 * Filters queried course category objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseCategory|\Masteriyo\Models\CourseCategory[] $course_categories Queried course categories.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_course_cat', $course_cat_obj, $course_cat );
 }
 
@@ -326,6 +423,14 @@ function masteriyo_get_course_tag( $course_tag ) {
 		return null;
 	}
 
+	/**
+	 * Filters queried course tag objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseTag|\Masteriyo\Models\CourseTag[] $course_tags Queried course tags.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_course_tag', $course_tag_obj, $course_tag );
 }
 
@@ -357,6 +462,14 @@ function masteriyo_get_course_difficulty( $course_difficulty ) {
 		return null;
 	}
 
+	/**
+	 * Filters queried course difficulty objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseDifficulty|\Masteriyo\Models\CourseDifficulty[] $course_difficulties Queried course difficulties.
+	 * @param array $args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_course_difficulty', $course_difficulty_obj, $course_difficulty );
 }
 
@@ -388,6 +501,14 @@ function masteriyo_get_user( $user ) {
 		$user_obj = new \WP_Error( $e->getErrorCode(), $e->getMessage(), $e->getErrorData() );
 	}
 
+	/**
+	 * Filters user object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\User $user_obj user object.
+	 * @param int|\Masteriyo\Models\User|WP_Post $user user id or user Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_user', $user_obj, $user );
 }
 
@@ -495,6 +616,14 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
 function masteriyo_get_page_id( $page ) {
 	$page    = str_replace( '-', '_', $page );
 	$page_id = masteriyo_get_setting( "advance.pages.{$page}_page_id" );
+
+	/**
+	 * Filters page id - used for pages like courses, account etc.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $page_id Page id - used for pages like courses, account etc. Value should be -1 if no page is found.
+	 */
 	$page_id = apply_filters( 'masteriyo_get_' . $page . '_page_id', $page_id );
 
 	return $page_id ? absint( $page_id ) : -1;
@@ -518,6 +647,13 @@ function masteriyo_get_page_permalink( $page, $fallback = null ) {
 		$permalink = is_null( $fallback ) ? get_home_url() : $fallback;
 	}
 
+	/**
+	 * Filters page permalink.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $permalink Page permalink.
+	 */
 	return apply_filters( 'masteriyo_get_' . $page . '_page_permalink', $permalink );
 }
 
@@ -557,9 +693,17 @@ function masteriyo_get_current_user() {
  * @since 1.0.0
  *
  * @param string $classes
- * @return array
+ *
+ * @return string[]
  */
 function masteriyo_get_rating_indicators_markup( $classes = '' ) {
+	/**
+	 * Filters rating icons html.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $icons_html Icon type to icon html index array.
+	 */
 	return apply_filters(
 		'masteriyo_rating_indicators_markup',
 		array(
@@ -587,6 +731,13 @@ function masteriyo_get_rating_indicators_markup( $classes = '' ) {
  * @return integer
  */
 function masteriyo_get_max_course_rating() {
+	/**
+	 * Filters max course rating. Default is 5.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $max_rating Max course rating. Default is 5.
+	 */
 	return apply_filters( 'masteriyo_max_course_rating', 5 );
 }
 
@@ -659,7 +810,16 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
  */
 function masteriyo_get_related_courses( $course ) {
 	$max_related_posts = get_option( 'masteriyo_max_related_posts_count', 3 );
+
+	/**
+	 * Filters max related posts count, which is used to limit the number of related courses shown in course detail page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $max_related_posts Maximum related posts to be shown.
+	 */
 	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $max_related_posts );
+
 	$max_related_posts = absint( $max_related_posts );
 	$max_related_posts = max( $max_related_posts, 5 );
 
@@ -681,6 +841,14 @@ function masteriyo_get_related_courses( $course ) {
 	$query           = new WP_Query( $args );
 	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
 
+	/**
+	 * Filters related course objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Course|\Masteriyo\Models\Course[] $courses Related courses.
+	 * @param \WP_Query $query Query object.
+	 */
 	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
 }
 
@@ -903,7 +1071,10 @@ function masteriyo_get_theme_support( $prop = '', $default = null ) {
  *
  * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
  *
+ * @since 1.0.0
+ *
  * @param string $currency Currency. (default: '').
+ *
  * @return string
  */
 function masteriyo_get_currency_symbol( $currency = '' ) {
@@ -915,15 +1086,32 @@ function masteriyo_get_currency_symbol( $currency = '' ) {
 
 	$currency_symbol = isset( $symbols[ $currency ] ) ? $symbols[ $currency ] : '';
 
+	/**
+	 * Filters currency symbol.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $currency_symbol Currency symbol.
+	 * @param string $currency Currency.
+	 */
 	return apply_filters( 'masteriyo_currency_symbol', $currency_symbol, $currency );
 }
 
 /**
  * Get Base Currency Code.
  *
+ * @since 1.0.0
+ *
  * @return string
  */
 function masteriyo_get_currency() {
+	/**
+	 * Filters base currency code.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $code Base currency code.
+	 */
 	return apply_filters( 'masteriyo_currency', masteriyo_get_setting( 'payments.currency.currency' ) );
 }
 
@@ -932,11 +1120,18 @@ function masteriyo_get_currency() {
  *
  * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
  *
- * @since 4.1.0
+ * @since 1.0.0
+ *
  * @return array
  */
 function masteriyo_get_currency_symbols() {
-
+	/**
+	 * Filters currency symbols.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $currency_symbols Currency code to currency symbol index array.
+	 */
 	$symbols = apply_filters(
 		'masteriyo_currency_symbols',
 		array(
@@ -1113,6 +1308,8 @@ function masteriyo_get_currency_symbols() {
 /**
  * Get full list of currency codes with symbols.
  *
+ * @since 1.0.0
+ *
  * @return array
  */
 function masteriyo_get_currencies_with_symbols() {
@@ -1121,6 +1318,14 @@ function masteriyo_get_currencies_with_symbols() {
 	foreach ( $currencies as $key => $value ) {
 		$currencies[ $key ] = sprintf( '%s (%s)', $value, html_entity_decode( masteriyo_get_currency_symbol( $key ) ) );
 	}
+
+	/**
+	 * Filters list of currency codes with symbols.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $currencies List of currency codes with symbols.
+	 */
 	return apply_filters( 'masteriyo_currencies_with_symbols', $currencies );
 }
 
@@ -1129,10 +1334,19 @@ function masteriyo_get_currencies_with_symbols() {
  *
  * Currency symbols and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/currency-names)
  *
+ * @since 1.0.0
+ *
  * @return array
  */
 function masteriyo_get_currencies() {
 	$currencies = array_unique(
+		/**
+		 * Filters full list of currency codes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $currencies Full list of currency codes.
+		 */
 		apply_filters(
 			'masteriyo_currencies',
 			array(
@@ -1364,6 +1578,8 @@ function_exists( 'add_action' ) && add_action( 'masteriyo_after_register_post_ty
 /**
  * Filter to allow course_cat in the permalinks for course.
  *
+ * @since 1.0.0
+ *
  * @param  string  $permalink The existing permalink URL.
  * @param  WP_Post $post WP_Post object.
  * @return string
@@ -1383,20 +1599,39 @@ function masteriyo_course_post_type_link( $permalink, $post ) {
 	$terms = get_the_terms( $post->ID, 'course_cat' );
 
 	if ( ! empty( $terms ) ) {
-		$terms           = wp_list_sort(
+		$terms = wp_list_sort(
 			$terms,
 			array(
 				'parent'  => 'DESC',
 				'term_id' => 'ASC',
 			)
 		);
+
+		/**
+		 * Filters course category object to be used in generating course post type link.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \WP_Term $course_category Course category term object.
+		 * @param \WP_Term[] $terms Queried course category term objects.
+		 * @param \WP_Post $post WP post object.
+		 */
 		$category_object = apply_filters( 'masteriyo_course_post_type_link_course_cat', $terms[0], $terms, $post );
-		$course_cat      = $category_object->slug;
+
+		$course_cat = $category_object->slug;
 
 		if ( $category_object->parent ) {
 			$ancestors = get_ancestors( $category_object->term_id, 'course_cat' );
 			foreach ( $ancestors as $ancestor ) {
 				$ancestor_object = get_term( $ancestor, 'course_cat' );
+
+				/**
+				 * Filters boolean: true if only parent category should be included in course post type permalink. Default is false.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param boolean $bool true if only parent category should be included in course post type permalink.
+				 */
 				if ( apply_filters( 'masteriyo_course_post_type_link_parent_category_only', false ) ) {
 					$course_cat = $ancestor_object->slug;
 				} else {
@@ -1521,6 +1756,13 @@ function masteriyo_set_nocache_constants( $return = true ) {
  * @return string Url to cart page
  */
 function masteriyo_get_cart_url() {
+	/**
+	 * Filters cart page URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Cart page URL.
+	 */
 	return apply_filters( 'masteriyo_get_cart_url', masteriyo_get_page_permalink( 'cart' ) );
 }
 
@@ -1532,6 +1774,13 @@ function masteriyo_get_cart_url() {
  * @return string Url to checkout page
  */
 function masteriyo_get_checkout_url() {
+	/**
+	 * Filters Checkout page URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Checkout page URL.
+	 */
 	return apply_filters( 'masteriyo_get_checkout_url', masteriyo_get_page_permalink( 'checkout' ) );
 }
 
@@ -1543,6 +1792,13 @@ function masteriyo_get_checkout_url() {
  * @return string Url to courses page
  */
 function masteriyo_get_courses_url() {
+	/**
+	 * Filters Courses page URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Courses page URL.
+	 */
 	return apply_filters( 'masteriyo_get_courses_url', masteriyo_get_page_permalink( 'courses' ) );
 }
 
@@ -1554,6 +1810,13 @@ function masteriyo_get_courses_url() {
  * @return string Url to checkout page
  */
 function masteriyo_get_account_url() {
+	/**
+	 * Filters Account page URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Account page URL.
+	 */
 	return apply_filters( 'masteriyo_get_account_url', masteriyo_get_page_permalink( 'account' ) );
 }
 
@@ -1619,6 +1882,13 @@ function if_empty( $value, $default = null ) {
  * @return array
  */
 function masteriyo_get_account_endpoints() {
+	/**
+	 * Filters account endpoints.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $endpoints Endpoint ID to endpoint slug index array.
+	 */
 	return apply_filters(
 		'masteriyo_account_endpoints',
 		array(
@@ -1699,6 +1969,16 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 		$url = add_query_arg( $endpoint, $value, $permalink );
 	}
 
+	/**
+	 * Filters endpoint URL, which varies depending on permalink settings.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Endpoint URL.
+	 * @param string $endpoint Endpoint slug.
+	 * @param string $value Query param value.
+	 * @param string $permalink Permalink.
+	 */
 	return apply_filters( 'masteriyo_get_endpoint_url', $url, $endpoint, $value, $permalink );
 }
 
@@ -1712,6 +1992,15 @@ function masteriyo_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
  * @return string
  */
 function masteriyo_logout_url( $redirect = '' ) {
+	/**
+	 * Filters default redirection URL after logout.
+	 *
+	 * Default is account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Redirection URL.
+	 */
 	$redirect = $redirect ? $redirect : apply_filters( 'masteriyo_logout_default_redirect_url', masteriyo_get_page_permalink( 'account' ) );
 
 	if ( masteriyo_get_setting( 'logout', 'advance', 'account' ) ) {
@@ -1750,6 +2039,14 @@ function masteriyo_get_svg( $name, $echo = false ) {
 		$file_contents = $wp_filesystem->get_contents( $file_name );
 	}
 
+	/**
+	 * Filters svg file content.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $file_content SVG file content.
+	 * @param string $name SVG file name.
+	 */
 	$file_contents = apply_filters( 'masteriyo_svg_file', $file_contents, $name );
 
 	$svg_args = array(
@@ -1823,6 +2120,14 @@ function masteriyo_get_account_menu_items() {
 		}
 	}
 
+	/**
+	 * Filters account menu items.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $items Account menu items.
+	 * @param array $endpoints Account endpoints.
+	 */
 	return apply_filters( 'masteriyo_account_menu_items', $items, $endpoints );
 }
 
@@ -2037,6 +2342,14 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 		}
 
 		if ( email_exists( $email ) ) {
+			/**
+			 * Filters error message for already existing email address while creating new user.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $message The error message.
+			 * @param string $email The email address.
+			 */
 			$message = apply_filters( 'masteriyo_registration_error_email_exists', __( 'An account is already registered with your email address.', 'masteriyo' ), $email );
 			return new \WP_Error( 'registration-error-email-exists', $message );
 		}
@@ -2071,6 +2384,15 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 
 		do_action( 'masteriyo_register_post', $username, $email, $errors );
 
+		/**
+		 * Filters errors while registering new user.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \WP_Error $errors Errors object.
+		 * @param string $username The new user's username.
+		 * @param string $email The new user's email.
+		 */
 		$errors = apply_filters( 'masteriyo_registration_errors', $errors, $username, $email );
 
 		if ( $errors->get_error_code() ) {
@@ -2084,6 +2406,13 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 		$user->set_email( $email );
 		$user->set_roles( $roles );
 
+		/**
+		 * Filters new user data before registering the user.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data The new user's data.
+		 */
 		$user = apply_filters( 'masteriyo_new_user_data', $user );
 
 		masteriyo( 'user.store' )->create( $user );
@@ -2141,6 +2470,14 @@ function masteriyo_get_course_review( $course_review ) {
 		return null;
 	}
 
+	/**
+	 * Filters course review object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\CourseReview $course_review_obj Course review object.
+	 * @param int|WP_Comment|\Masteriyo\Models\CourseReview $course_review Object ID or WP_Comment or Model.
+	 */
 	return apply_filters( 'masteriyo_get_course_review', $course_review_obj, $course_review );
 }
 
@@ -2180,7 +2517,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 	);
 }
 
-/*
+/**
  * Create a page and store the ID in an option.
  *
  * @since 1.0.0
@@ -2190,6 +2527,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
  * @param string $page_title (default: '') Title for the new page.
  * @param string $page_content (default: '') Content for the new page.
  * @param int    $post_parent (default: 0) Parent for the new page.
+ *
  * @return int page ID.
  */
 function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
@@ -2210,6 +2548,15 @@ function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $pa
 				$valid_page_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type='page' AND post_status NOT IN ( 'pending', 'trash', 'future', 'auto-draft' )  AND post_name = %s LIMIT 1;", $slug ) );
 			}
 
+			/**
+			 * Filters page ID that was already created.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $page_id The already created page ID.
+			 * @param string $slug Page slug.
+			 * @param string $content Page content.
+			 */
 			$valid_page_id = apply_filters( 'masteriyo_create_page_id', $valid_page_id, $slug, $page_content );
 
 			if ( $valid_page_id ) {
@@ -2317,6 +2664,13 @@ function masteriyo_asort_by_locale( &$data, $locale = '' ) {
  * @return array
  */
 function masteriyo_get_base_location() {
+	/**
+	 * Filters base store location.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $location Base location.
+	 */
 	$default = apply_filters( 'masteriyo_get_base_location', get_option( 'masteriyo_default_country', 'US:CA' ) );
 
 	return masteriyo_format_country_state_string( $default );
@@ -2352,6 +2706,14 @@ function masteriyo_format_country_state_string( $country_string ) {
 function masteriyo_cart_redirect_after_add() {
 	$redirect_after_add = get_option( 'masteriyo_cart_redirect_after_add', true );
 	$redirect_after_add = masteriyo_string_to_bool( $redirect_after_add );
+
+	/**
+	 * Filters boolean: true if it should redirected after adding an item to cart.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if it should redirected after adding an item to cart.
+	 */
 	return apply_filters( 'masteriyo_cart_redirect_after_add', $redirect_after_add );
 }
 
@@ -2570,6 +2932,15 @@ function masteriyo_api_request_url( $request, $ssl = null ) {
 		$api_request_url = add_query_arg( 'masteriyo-api', $request, trailingslashit( home_url( '', $scheme ) ) );
 	}
 
+	/**
+	 * Filters masteriyo API request URL for a given request.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $api_request_url API request URL.
+	 * @param string $request Requested endpoint.
+	 * @param boolean|null $ssl If should use SSL, null if should auto detect. Default: null.
+	 */
 	return esc_url_raw( apply_filters( 'masteriyo_api_request_url', $api_request_url, $request, $ssl ) );
 }
 
@@ -2606,6 +2977,13 @@ function masteriyo_print_r( $expression, $return = false ) {
 		),
 	);
 
+	/**
+	 * Filters print_r function alternatives that will be called.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $alternatives print_r alternative functions.
+	 */
 	$alternatives = apply_filters( 'masteriyo_print_r_alternatives', $alternatives, $expression );
 
 	foreach ( $alternatives as $alternative ) {
@@ -2664,6 +3042,13 @@ function masteriyo_get_plugin_dir() {
  * @return array
  */
 function masteriyo_get_lesson_video_sources() {
+	/**
+	 * Filters lesson video sources.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $sources Lesson video sources.
+	 */
 	return apply_filters(
 		'masteriyo_lesson_video_sources',
 		array(
@@ -2699,6 +3084,14 @@ function masteriyo_generate_self_hosted_lesson_video_url( $lesson_id ) {
 		home_url( '/' )
 	);
 
+	/**
+	 * Filters generated URL of a self-hosted lesson video.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url The generated URL.
+	 * @param \Masteriyo\Models\Lesson $lesson The lesson object.
+	 */
 	return apply_filters( 'masteriyo_self_hosted_lesson_video_url', trim( $url ), $lesson );
 }
 
@@ -2726,6 +3119,13 @@ function masteriyo_get_settings() {
  * @return array
  */
 function masteriyo_get_user_activity_statuses() {
+	/**
+	 * Filters user activity statuses.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $statuses User activity statuses.
+	 */
 	return apply_filters(
 		'masteriyo_user_activity_statuses',
 		array(
@@ -2756,6 +3156,13 @@ function masteriyo_get_current_ip_address() {
  * @return string
  */
 function masteriyo_get_course_review_author_pp_placeholder() {
+	/**
+	 * Filters course review author profile picture placeholder image URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $url Course review author profile picture placeholder image URL.
+	 */
 	return apply_filters( 'masteriyo_course_review_author_pp_placeholder', 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png' );
 }
 
@@ -2914,6 +3321,13 @@ function masteriyo_get_image_size( $image_size ) {
 		}
 	}
 
+	/**
+	 * Filters image size.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $size Image size values.
+	 */
 	$size = apply_filters( 'masteriyo_get_image_size_' . $image_size, $size );
 
 	wp_cache_set( $cache_key, $size, 'masteriyo' );
@@ -3015,11 +3429,19 @@ function masteriyo_get_templates_path() {
  *
  * @since 1.0.0
  *
- * @return array Logo data.
+ * @return array|false Logo data.
  */
 function masteriyo_get_custom_logo_data() {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 	$image_data     = wp_get_attachment_image_src( $custom_logo_id, 'full' );
+
+	/**
+	 * Filters custom logo data.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array|false $image_data Custom logo data.
+	 */
 	return apply_filters( 'masteriyo_custom_logo', $image_data );
 }
 
@@ -3031,6 +3453,13 @@ function masteriyo_get_custom_logo_data() {
  * @return array
  */
 function masteriyo_get_allowed_svg_elements() {
+	/**
+	 * Filters allowed svg elements and attributes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $elements_and_attrs The allowed svg elements and attributes.
+	 */
 	return apply_filters(
 		'masteriyo_allowed_svg_elements',
 		array(
@@ -3133,6 +3562,13 @@ function masteriyo_get_current_user_id() {
 		$user_id = masteriyo( 'session' )->get_user_id();
 	}
 
+	/**
+	 * Filters current user ID.
+	 *
+	 * @since 1.2.1
+	 *
+	 * @param integer|string $user_id Current user ID.
+	 */
 	return apply_filters( 'masteriyo_get_current_user_id', $user_id );
 }
 
@@ -3202,6 +3638,14 @@ function masteriyo_get_learn_page_logo_data() {
 	$logo_id    = masteriyo_get_setting( 'learn_page.general.logo_id' );
 	$image_data = wp_get_attachment_image_src( $logo_id, 'full' );
 
+	/**
+	 * Filters learn page logo image data.
+	 *
+	 * @since 1.3.8
+	 *
+	 * @param array|false $image_data The learn page logo image data.
+	 * @param integer|null $logo_id Logo ID.
+	 */
 	return apply_filters( 'masteriyo_get_learn_page_logo', $image_data, $logo_id );
 }
 
@@ -3214,6 +3658,13 @@ function masteriyo_get_learn_page_logo_data() {
  * @return array
  */
 function masteriyo_get_blocks() {
+	/**
+	 * Filters names of masteriyo blocks.
+	 *
+	 * @since 1.3.8
+	 *
+	 * @param string[] $names Block names.
+	 */
 	return apply_filters(
 		'masteriyo_get_blocks',
 		array(
@@ -3238,6 +3689,14 @@ function masteriyo_get_checkout_endpoint_url( $endpoint ) {
 	$endpoint     = masteriyo_get_setting( 'advance.checkout.order_received' );
 	$endpoint_url = $checkout_url . '/' . $endpoint;
 
+	/**
+	 * Filters checkout endpoint URL.
+	 *
+	 * @since 1.4.2
+	 *
+	 * @param string $endpoint_url The checkout endpoint URL.
+	 * @param string $endpoint The checkout endpoint slug.
+	 */
 	return apply_filters( 'masteriyo_get_checkout_endpoint_url', $endpoint_url, $endpoint );
 }
 

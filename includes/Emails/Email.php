@@ -138,6 +138,15 @@ class Email {
 		$setting_name = 'masteriyo.emails.' . $this->setting_name_for_subject;
 		$subject      = $this->get_default_subject();
 
+		/**
+		 * Filters email subject.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $subject Email subject.
+		 * @param mixed $object Object of email related data. Can be empty or null.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( $setting_name, $this->format_string( $subject ), $this->get_object(), $this );
 	}
 
@@ -153,6 +162,15 @@ class Email {
 		$heading      = get_option( $setting_name, $this->get_default_heading() );
 		$heading      = empty( $heading ) ? $this->get_default_heading() : $heading;
 
+		/**
+		 * Filters email heading.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $heading Email heading.
+		 * @param mixed $object Object of email related data. Can be empty or null.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( $setting_name, $this->format_string( $heading ), $this->get_object(), $this );
 	}
 
@@ -167,6 +185,15 @@ class Email {
 		$setting_name = 'masteriyo_email_additional_content_' . $this->get_id();
 		$content      = $this->get_default_additional_content();
 
+		/**
+		 * Filters email additional content.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $additional_content Email additional content.
+		 * @param mixed $object Object of email related data. Can be empty or null.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( $setting_name, $this->format_string( $content ), $this->get_object(), $this );
 	}
 
@@ -183,6 +210,14 @@ class Email {
 		$find    = array_keys( $this->get_placeholders() );
 		$replace = array_values( $this->get_placeholders() );
 
+		/**
+		 * Filters formatted string in email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $str Formatted string.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( 'masteriyo_email_format_string', str_replace( $find, $replace, $string ), $this );
 	}
 
@@ -192,6 +227,13 @@ class Email {
 	 * @since 1.0.0
 	 */
 	public function setup_locale() {
+		/**
+		 * Filters boolean: True if locale should be setup for email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if locale should be setup for email.
+		 */
 		if ( apply_filters( 'masteriyo_email_setup_locale', true ) ) {
 			masteriyo_switch_to_site_locale();
 		}
@@ -203,6 +245,13 @@ class Email {
 	 * @since 1.0.0
 	 */
 	public function restore_locale() {
+		/**
+		 * Filters boolean: True if the setup locale should be restored for email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if the setup locale should be restored for email.
+		 */
 		if ( apply_filters( 'masteriyo_email_restore_locale', true ) ) {
 			masteriyo_restore_locale();
 		}
@@ -226,10 +275,37 @@ class Email {
 		add_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
 		add_filter( 'wp_mail_content_type', array( $this, 'get_content_type' ) );
 
-		$message              = apply_filters( 'masteriyo_mail_content', $this->apply_styles( $message ), $this );
-		$mail_callback        = apply_filters( 'masteriyo_mail_callback', 'wp_mail', $this );
+		/**
+		 * Filters email content.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $content Email content.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
+		$message = apply_filters( 'masteriyo_mail_content', $this->apply_styles( $message ), $this );
+
+		/**
+		 * Filters email sender function.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Callable $email_sender Email sender function.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
+		$mail_callback = apply_filters( 'masteriyo_mail_callback', 'wp_mail', $this );
+
+		/**
+		 * Filters email sender function parameters.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $params Parameters for the email sender function.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		$mail_callback_params = apply_filters( 'masteriyo_mail_callback_params', array( $to, $subject, $message, $headers, $attachments ), $this );
-		$return               = $mail_callback( ...$mail_callback_params );
+
+		$return = $mail_callback( ...$mail_callback_params );
 
 		remove_filter( 'wp_mail_from', array( $this, 'get_from_address' ) );
 		remove_filter( 'wp_mail_from_name', array( $this, 'get_from_name' ) );
@@ -252,6 +328,15 @@ class Email {
 			$header .= 'Reply-to: ' . $this->get_from_name() . ' <' . $this->get_from_address() . ">\r\n";
 		}
 
+		/**
+		 * Filters email headers.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $headers Email headers.
+		 * @param string $headers Email object id.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( 'masteriyo_email_headers', $header, $this->get_id(), $this );
 	}
 
@@ -263,6 +348,15 @@ class Email {
 	 * @return array
 	 */
 	public function get_attachments() {
+		/**
+		 * Filters email attachments.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $attachments Absolute paths of attachments.
+		 * @param string $headers Email object id.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( 'masteriyo_email_attachments', array(), $this->get_id(), $this );
 	}
 
@@ -309,6 +403,14 @@ class Email {
 	 * @return string
 	 */
 	public function apply_styles( $content ) {
+		/**
+		 * Filters email styles.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $css Email style CSS.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		$css = apply_filters( 'masteriyo_email_styles', masteriyo_get_template_html( 'emails/email-styles.php' ), $this );
 
 		try {
@@ -338,6 +440,15 @@ class Email {
 	 */
 	public function get_from_name( $from_name = '' ) {
 		$from_name = masteriyo_get_setting( 'emails.general.from_name' );
+
+		/**
+		 * Filters "From" value of an email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $from_name From name for an email.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		$from_name = apply_filters( 'masteriyo_email_from_name', $from_name, $this );
 
 		return wp_specialchars_decode( esc_html( $from_name ), ENT_QUOTES );
@@ -354,6 +465,15 @@ class Email {
 	 */
 	public function get_from_address( $from_email = '' ) {
 		$from_email = masteriyo_get_setting( 'emails.general.from_email' );
+
+		/**
+		 * Filters from address of an email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $from_email From email address.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		$from_email = apply_filters( 'masteriyo_email_from_address', $from_email, $this );
 
 		return sanitize_email( $from_email );
@@ -381,6 +501,15 @@ class Email {
 		$setting_name = 'emails.' . $this->setting_name_for_enable;
 		$is_enabled   = masteriyo_string_to_bool( masteriyo_get_setting( $setting_name ) );
 
+		/**
+		 * Filters boolean: True if an email with the given ID is enabled.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True if an email with the given ID is enabled.
+		 * @param mixed $object Object of email related data. Can be empty or null.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		return apply_filters( $setting_name, $is_enabled, $this->get_object(), $this );
 	}
 
@@ -403,6 +532,15 @@ class Email {
 	 * @return string
 	 */
 	public function get_recipient() {
+		/**
+		 * Filters recipient of an email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $recipient Email recipient.
+		 * @param mixed $object Object of email related data. Can be empty or null.
+		 * @param Masteriyo\Emails\Email $email Email class object.
+		 */
 		$recipient  = apply_filters( 'masteriyo_email_recipient_' . $this->get_id(), $this->recipient, $this->get_object(), $this );
 		$recipients = array_map( 'trim', explode( ',', $recipient ) );
 		$recipients = array_map( array( $this, 'format_string' ), $recipients );

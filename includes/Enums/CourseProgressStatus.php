@@ -49,6 +49,13 @@ class CourseProgressStatus {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters course progress status list.
+			 *
+			 * @since 1.4.6
+			 *
+			 * @param string[] $statuses Course progress status list.
+			 */
 			apply_filters(
 				'masteriyo_course_progress_statuses',
 				array(

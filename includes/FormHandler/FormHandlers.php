@@ -33,6 +33,13 @@ class FormHandlers {
 	public static function init() {
 		$namespace = '\Masteriyo\FormHandler';
 
+		/**
+		 * Filters form handler classes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $form_handlers Form handler classes.
+		 */
 		self::$form_handlers = apply_filters(
 			'masteriyo_form_handlers',
 			array(

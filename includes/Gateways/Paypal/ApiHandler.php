@@ -74,6 +74,18 @@ class ApiHandler {
 			'CURRENCYCODE'    => $order->get_currency(),
 			'COMPLETETYPE'    => 'Complete',
 		);
+
+		/**
+		 * Filters paypal capture request.
+		 *
+		 * See https://developer.paypal.com/docs/classic/api/merchant/DoCapture_API_Operation_NVP/.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $request Request data.
+		 * @param \Masteriyo\Abstracts\Order $order Order object.
+		 * @param float|null $amount Order amount.
+		 */
 		return apply_filters( 'masteriyo_paypal_capture_request', $request, $order, $amount );
 	}
 
@@ -105,6 +117,16 @@ class ApiHandler {
 			$request['REFUNDTYPE']   = 'Partial';
 		}
 
+		/**
+		 * Filters paypal refund request.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $request Request data.
+		 * @param \Masteriyo\Abstracts\Order $order Order object.
+		 * @param float|null $amount Order amount.
+		 * @param string $reason Refund reason.
+		 */
 		return apply_filters( 'masteriyo_paypal_refund_request', $request, $order, $amount, $reason );
 	}
 

@@ -81,6 +81,13 @@ class OrderStatus extends PostStatus {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters order status list.
+			 *
+			 * @since 1.4.6
+			 *
+			 * @param string[] $statuses Order status list.
+			 */
 			apply_filters(
 				'masteriyo_order_statuses',
 				array(

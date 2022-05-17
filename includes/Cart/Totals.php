@@ -296,6 +296,12 @@ final class Totals {
 				 * This is legacy and should probably be deprecated in the future.
 				 * $item->object is the cart item object.
 				 * $this->cart is the cart object.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param float $total Total
+				 * @param Masteriyo\Order\OrderItem $item Order item object.
+				 * @param Masteriyo\Cart\Cart $cart Cart object.
 				 */
 				$item->total = masteriyo_add_number_precision(
 					apply_filters( 'masteriyo_get_discounted_price', masteriyo_remove_number_precision( $item->total ), $item->object, $this->cart )
@@ -322,8 +328,6 @@ final class Totals {
 	 * @since 1.0.0
 	 */
 	protected function calculate_item_subtotals() {
-		$adjust_non_base_location_prices = apply_filters( 'masteriyo_adjust_non_base_location_prices', true );
-
 		foreach ( $this->items as $item_key => $item ) {
 			$item->subtotal = $item->price;
 			$this->cart->cart_contents[ $item_key ]['line_subtotal'] = masteriyo_remove_number_precision( $item->subtotal );
@@ -365,7 +369,16 @@ final class Totals {
 			do_action( 'masteriyo_calculate_totals', $this->cart );
 		}
 
-		// Allow plugins to filter the grand total, and sum the cart totals in case of modifications.
-		$this->cart->set_total( max( 0, apply_filters( 'masteriyo_calculated_total', $this->get_total( 'total' ), $this->cart ) ) );
+		/**
+		 * Allow plugins to filter the grand total, and sum the cart totals in case of modifications.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param float $total Cart total.
+		 * @param \Masteriyo\Cart\Cart $cart Cart object.
+		 */
+		$calculated_total = apply_filters( 'masteriyo_calculated_total', $this->get_total( 'total' ), $this->cart );
+
+		$this->cart->set_total( max( 0, $calculated_total ) );
 	}
 }

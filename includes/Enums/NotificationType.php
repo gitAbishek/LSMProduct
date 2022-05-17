@@ -98,6 +98,13 @@ class NotificationType {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters notification types.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param string[] $types Notification types.
+			 */
 			apply_filters(
 				'masteriyo_notification_types',
 				array(

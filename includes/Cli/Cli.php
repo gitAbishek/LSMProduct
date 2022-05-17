@@ -22,9 +22,16 @@ class Cli {
 	/**
 	 * Register CLI commands.
 	 *
-	 * @return void
+	 * @since 1.3.1
 	 */
 	public static function register() {
+		/**
+		 * Filters CLI commands.
+		 *
+		 * @since 1.3.1
+		 *
+		 * @param array $commands Command to command handler class index.
+		 */
 		$commands = apply_filters(
 			'masteriyo_cli_commands',
 			array(

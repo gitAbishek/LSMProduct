@@ -62,8 +62,17 @@ class ResetPasswordEmail extends Email {
 			return;
 		}
 
+		/**
+		 * Filters boolean-like value: 'yes' if reset password email should be disabled, otherwise 'no'.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $is_disabled 'yes' if reset password email should be disabled, otherwise 'no'.
+		 */
+		$is_disabled = apply_filters( 'masteriyo_disable_reset_password_email', 'no' );
+
 		// Bail early if this email notification is disabled.
-		if ( 'yes' === apply_filters( 'masteriyo_disable_reset_password_email', 'no' ) ) {
+		if ( 'yes' === $is_disabled ) {
 			return;
 		}
 

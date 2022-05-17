@@ -630,9 +630,9 @@ abstract class Order extends Model {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Masteriyo\Models\Order\OrderItem[] $items Order items.
-		 * @param Masteriyo\Models\Order\Order $order Order object.
-		 * @param string[] $type Order item types.
+		 * @param \Masteriyo\Models\Order\OrderItem[] $items Order items.
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 * @param string|array $type Order item types.
 		 */
 		return apply_filters( 'masteriyo_order_get_items', $items, $this, $types );
 	}

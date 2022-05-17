@@ -175,7 +175,7 @@ class Request {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Order $order Order to be sent to Paypal.
+	 * @param \Masteriyo\Models\Order\Order $order Order to be sent to Paypal.
 	 * @param array    $paypal_args Arguments sent to Paypal in the request.
 	 * @return array
 	 */
@@ -187,6 +187,14 @@ class Request {
 			return $paypal_args;
 		}
 
+		/**
+		 * Filters paypal request args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args Paypal request args.
+		 * @param \Masteriyo\Models\Order\Order $order Order to be sent to Paypal.
+		 */
 		return apply_filters(
 			'masteriyo_paypal_args',
 			array_merge(
@@ -203,18 +211,34 @@ class Request {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  Order $order Order object.
+	 * @param  \Masteriyo\Models\Order\Order $order Order object.
 	 * @return array
 	 */
 	protected function get_paypal_args( $order ) {
 		Paypal::log( 'Generating payment form for order ' . $order->get_order_number() . '. Notify URL: ' . $this->notify_url );
 
+		/**
+		 * Filters boolean: true if paypal one line item should be forced.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 */
 		$force_one_line_item = apply_filters( 'masteriyo_paypal_force_one_line_item', false, $order );
 
 		if ( ( masteriyo_is_tax_enabled() && masteriyo_prices_include_tax() ) || ! $this->line_items_valid( $order ) ) {
 			$force_one_line_item = true;
 		}
 
+		/**
+		 * Filters paypal request args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args Paypal request args.
+		 * @param \Masteriyo\Models\Order\Order $order Order to be sent to Paypal.
+		 */
 		$paypal_args = apply_filters(
 			'masteriyo_paypal_args',
 			array_merge(
@@ -320,7 +344,7 @@ class Request {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  Order $order Order object.
+	 * @param  \Masteriyo\Models\Order\Order $order Order object.
 	 * @return string
 	 */
 	protected function get_order_item_names( $order ) {
@@ -348,6 +372,14 @@ class Request {
 			$item_names[] = $item_name . ' x ' . $item->get_quantity();
 		}
 
+		/**
+		 * Filters paypal order item names.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $names Order item names.
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_paypal_get_order_item_names', implode( ', ', $item_names ), $order );
 	}
 
@@ -379,6 +411,15 @@ class Request {
 			$item_name .= ' (' . $item_meta . ')';
 		}
 
+		/**
+		 * Filters paypal order item name.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $item_name Order item name.
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 * @param object $item Order item object.
+		 */
 		return apply_filters( 'masteriyo_paypal_get_order_item_name', $item_name, $order, $item );
 	}
 
@@ -471,6 +512,17 @@ class Request {
 	protected function add_line_item( $item_name, $quantity = 1, $amount = 0.0, $item_number = '' ) {
 		$index = ( count( $this->line_items ) / 4 ) + 1;
 
+		/**
+		 * Filters paypal line item data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data Line item data.
+		 * @param string $name Item name.
+		 * @param integer $qty Item quantity.
+		 * @param float $amount Item amount.
+		 * @param string $item_number Item number.
+		 */
 		$item = apply_filters(
 			'masteriyo_paypal_line_item',
 			array(

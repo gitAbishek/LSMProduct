@@ -19,6 +19,13 @@ if ( ! function_exists( 'masteriyo_is_filtered' ) ) {
 	 * @return bool
 	 */
 	function masteriyo_is_filtered() {
+		/**
+		 * Filters boolean: true when filtering products using layered nav or price sliders.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool True when filtering products using layered nav or price sliders
+		 */
 		return apply_filters( 'masteriyo_is_filtered', false );
 	}
 }
@@ -115,6 +122,13 @@ function masteriyo_is_rest_api_request() {
 	$rest_prefix         = trailingslashit( rest_get_url_prefix() );
 	$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
+	/**
+	 * Filters boolean: true if current request is an API request.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if current request is an API request.
+	 */
 	return apply_filters( 'masteriyo_is_rest_api_request', $is_rest_api_request );
 }
 
@@ -183,6 +197,14 @@ if ( ! function_exists( 'masteriyo_prices_include_tax' ) ) {
 		}
 
 		$prices_include_tax = get_option( 'masteriyo_prices_include_tax' ) === 'yes';
+
+		/**
+		 * Filters boolean: true if prices should include tax.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if prices should include tax.
+		 */
 		return apply_filters( 'masteriyo_prices_include_tax', $prices_include_tax );
 	}
 }
@@ -288,6 +310,15 @@ function masteriyo_is_postcode( $postcode, $country ) {
 			break;
 	}
 
+	/**
+	 * Validate postcode.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $is_valid True if the given postcode is valid.
+	 * @param string $postcode Postcode to validate.
+	 * @param string $country Country to validate the postcode for.
+	 */
 	return apply_filters( 'masteriyo_validate_postcode', $valid, $postcode, $country );
 }
 
@@ -676,6 +707,15 @@ if ( ! function_exists( 'masteriyo_is_quiz_attempt_limit_reached' ) ) {
 
 		$is_limit_reached = 0 !== $quiz->get_attempts_allowed() && $attempted_count >= $quiz->get_attempts_allowed();
 
+		/**
+		 * Filters boolean: true if quiz attempt limit has been reached.
+		 *
+		 * @since 1.2.1
+		 *
+		 * @param boolean $is_limit_reached true if quiz attempt limit has been reached.
+		 * @param \Masteriyo\Models\Quiz $quiz Quiz object.
+		 * @param \Masteriyo\Models\User $user User object.
+		 */
 		return apply_filters( 'masteriyo_is_quiz_attempt_limit_reached', $is_limit_reached, $quiz, $user );
 	}
 }
@@ -701,6 +741,14 @@ if ( ! function_exists( 'masteriyo_is_instructor_registration_page' ) ) {
 			$is_page = $is_page && $post->ID === $page_id;
 		}
 
+		/**
+		 * Filters boolean: true if current page is instructor registration page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $is_page true if current page is instructor registration page.
+		 * @param integer|null $page_id Instructor registration page ID.
+		 */
 		return apply_filters( 'masteriyo_is_instructor_registration_page', $is_page, $page_id );
 	}
 }
@@ -725,6 +773,14 @@ if ( ! function_exists( 'masteriyo_is_role_exists' ) ) {
 			}
 		}
 
+		/**
+		 * Filters boolean: true if the given role exists.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param boolean $role_exists true if the given role exists.
+		 * @param string|string[] $roles Roles to check.
+		 */
 		return apply_filters( 'masteriyo_is_role_exists', $role_exists, $roles );
 	}
 }
@@ -747,6 +803,13 @@ if ( ! function_exists( 'masteriyo_is_admin_menus_visible' ) ) {
 			$is_visible = $instructor->is_active();
 		}
 
+		/**
+		 * Filters boolean: true if admin menus should be visible.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param boolean $is_visible true if admin menus should be visible.
+		 */
 		return apply_filters( 'masteriyo_is_admin_menus_visible', $is_visible );
 	}
 }

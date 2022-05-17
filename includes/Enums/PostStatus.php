@@ -97,6 +97,13 @@ class PostStatus {
 	 */
 	public static function all() {
 		return array_unique(
+			/**
+			 * Filters post status list.
+			 *
+			 * @since 1.4.6
+			 *
+			 * @param string[] $statuses Post status list.
+			 */
 			apply_filters(
 				'masteriyo_post_statuses',
 				array(

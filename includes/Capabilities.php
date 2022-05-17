@@ -227,34 +227,40 @@ class Capabilities {
 	 */
 	public static function get_student_capabilities() {
 		$capabilities = array(
-			'read_courses'              => true,
-			'read_sections'             => true,
-			'read_lessons'              => true,
-			'read_quizzes'              => true,
-			'read_questions'            => true,
-			'read_faqs'                 => true,
-			'read_orders'               => true,
-			'read_users'                => true,
-			'read_course_reviews'       => true,
-			'read_user_courses'         => true,
-			'read_orders'               => true,
+			'read_courses'                  => true,
+			'read_sections'                 => true,
+			'read_lessons'                  => true,
+			'read_quizzes'                  => true,
+			'read_questions'                => true,
+			'read_faqs'                     => true,
+			'read_orders'                   => true,
+			'read_users'                    => true,
+			'read_course_reviews'           => true,
+			'read_user_courses'             => true,
+			'read_orders'                   => true,
 
 			// Course Progress
-			'read_course_progresses'    => true,
-			'publish_course_progresses' => true,
-			'edit_course_progresses'    => true,
+			'read_course_progresses'        => true,
+			'publish_course_progresses'     => true,
+			'edit_course_progresses'        => true,
 
 			// Course Qas
-			'read_course_qas'           => true,
-			'create_course_qas'         => true,
-			'edit_course_qas'           => true,
-			'delete_course_qas'         => true,
+			'read_course_qas'               => true,
+			'create_course_qas'             => true,
+			'edit_course_qas'               => true,
+			'delete_course_qas'             => true,
+
+			// Course reviews
+			'publish_course_reviews'        => true,
+			'edit_course_reviews'           => true,
+			'edit_published_course_reviews' => true,
+			'delete_course_reviews'         => true,
 
 			// User courses
-			'read_user_courses'         => true,
+			'read_user_courses'             => true,
 
 			// Taxonomy.
-			'manage_course_categories'  => true,
+			'manage_course_categories'      => true,
 		);
 
 		$subscriber_caps = get_role( 'subscriber' )->capabilities;

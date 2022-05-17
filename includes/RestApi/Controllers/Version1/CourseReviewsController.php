@@ -728,7 +728,7 @@ class CourseReviewsController extends CommentsController {
 		if ( isset( $request['author_id'] ) && absint( $request['author_id'] ) === 0 ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_create',
-				__( 'Sorry, author_id cannot be empty or zero.', 'masteriyo' ),
+				__( 'Sorry, author ID cannot be empty or zero.', 'masteriyo' ),
 				array(
 					'status' => rest_authorization_required_code(),
 				)

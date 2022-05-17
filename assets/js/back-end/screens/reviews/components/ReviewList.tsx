@@ -73,8 +73,8 @@ const ReviewList: React.FC<Props> = (props) => {
 			: status === ReviewStatus.hold
 			? { color: 'orange', text: 'On Hold' }
 			: status === ReviewStatus.spam
-			? { color: 'pink', text: 'Spammed' }
-			: { color: 'red', text: 'Trashed' };
+			? { color: 'pink', text: 'Spam' }
+			: { color: 'red', text: 'Trash' };
 
 	const renderRatings = (rate: number) => {
 		const average = Number(rate);

@@ -483,7 +483,6 @@ class QuizBuilderController extends PostsController {
 	 */
 	protected function save_question_order( $request ) {
 		$questions = isset( $request['questions'] ) ? $request['questions'] : array();
-		$questions = array_unique( wp_list_pluck( $questions, 'id' ) );
 		$questions = array_filter( $questions, array( $this, 'filter_questions' ) );
 
 		foreach ( $questions as $menu_order => $question ) {

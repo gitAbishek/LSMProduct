@@ -216,7 +216,9 @@ class ScriptStyle {
 					'deps'     => self::get_asset_deps( 'masteriyo-account' ),
 					'version'  => self::get_version(),
 					'context'  => 'public',
-					'callback' => 'is_user_logged_in',
+					'callback' => function() {
+						return is_user_logged_in() && masteriyo_is_account_page();
+					},
 				),
 				'login-form'      => array(
 					'src'      => $login_form_src,

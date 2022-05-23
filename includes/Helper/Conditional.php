@@ -979,3 +979,84 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
 		return apply_filters( 'masteriyo_is_course_previewable', $preview, $course );
 	}
 }
+
+/**
+ * Check if the current page is the account page.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_account_page() {
+	global $post;
+
+	if ( $post instanceof \WP_Post ) {
+		$page_id = masteriyo_get_page_id( 'account' );
+
+		return $post->ID === $page_id;
+	}
+	return false;
+}
+
+/**
+ * Check if the current page is password reset page.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_lost_password_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['reset-password'] );
+}
+
+/**
+ * Check if the current page is signup page.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_signup_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['signup'] );
+}
+
+/**
+ * Check if the current page is view account page.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_view_account_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['view-account'] );
+}
+
+/**
+ * Check if the current page is edit account page.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean
+ */
+function masteriyo_is_edit_account_page() {
+	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
+}
+
+/**
+ * See if a course has FAQs.
+ *
+ * @since 1.0.0
+ *
+ * @param integer $course_id
+ *
+ * @return boolean
+ */
+function masteriyo_course_has_faqs( $course_id ) {
+	$faqs = masteriyo_get_faqs(
+		array(
+			'parent_id' => $course_id,
+		)
+	);
+
+	return count( $faqs ) > 0;
+}

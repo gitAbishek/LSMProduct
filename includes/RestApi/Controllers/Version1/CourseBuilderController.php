@@ -446,7 +446,7 @@ class CourseBuilderController extends PostsController {
 	 * @since 1.0.0
 	 *
 	 * @param array $objects
-	 * @return void
+	 * @return Model[]
 	 */
 	protected function filter_sections( $objects ) {
 		$sections = array_values(

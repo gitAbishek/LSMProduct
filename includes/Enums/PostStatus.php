@@ -107,7 +107,6 @@ class PostStatus {
 			apply_filters(
 				'masteriyo_post_statuses',
 				array(
-					self::ANY,
 					self::PUBLISH,
 					self::FUTURE,
 					self::DRAFT,

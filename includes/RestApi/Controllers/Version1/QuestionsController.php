@@ -677,8 +677,13 @@ class QuestionsController extends PostsController {
 			$question->set_slug( $request['slug'] );
 		}
 
-		// Menu order.
-		if ( isset( $request['menu_order'] ) ) {
+		// Automatically set the menu order if it's not set and the operation is POST.
+		if ( ! isset( $request['menu_order'] ) && $creating ) {
+			$lessons_count = (array) wp_count_posts( $this->post_type );
+			$total_lessons = array_sum( $lessons_count );
+
+			$question->set_menu_order( $total_lessons );
+		} else {
 			$question->set_menu_order( $request['menu_order'] );
 		}
 

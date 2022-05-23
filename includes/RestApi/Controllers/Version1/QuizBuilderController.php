@@ -163,7 +163,7 @@ class QuizBuilderController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'contents' => array(
+				'questions'      => array(
 					'description' => __( 'Quiz contents (question)', 'masteriyo' ),
 					'type'        => 'array',
 					'required'    => false,
@@ -205,6 +205,15 @@ class QuizBuilderController extends PostsController {
 						),
 					),
 				),
+				'question_order' => array(
+					'description' => __( 'Question order.', 'masteriyo' ),
+					'type'        => 'array',
+					'required'    => true,
+					'context'     => array( 'view', 'edit' ),
+					'items'       => array(
+						'type' => 'integer',
+					),
+				),
 			),
 		);
 
@@ -233,7 +242,7 @@ class QuizBuilderController extends PostsController {
 		$objects = $this->get_quiz_contents( $request );
 
 		foreach ( $objects as $object ) {
-			if ( ! $this->check_item_permission( $object->get_object_type(), 'read', $object->get_id() ) ) {
+			if ( ! $this->check_item_permission( $this->post_type, 'read', $object->get_id() ) ) {
 				continue;
 			}
 
@@ -358,11 +367,25 @@ class QuizBuilderController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model[] $objects Quiz contents(sections, quizzes, lessons)
-	 * @return Model[]
+	 * @param Masteriyo\Models\Question[] $questions$objects Questions
+	 * @return array
 	 */
-	protected function process_objects_collection( $objects ) {
-		$results['contents'] = $objects;
+	protected function process_objects_collection( $questions ) {
+		$results['questions'] = $questions;
+
+		usort(
+			$questions,
+			function( $a, $b ) {
+				if ( $a['menu_order'] === $b['menu_order'] ) {
+					return 0;
+				}
+
+				return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
+			}
+		);
+
+		$question_ids              = wp_list_pluck( $questions, 'id' );
+		$results['question_order'] = $question_ids;
 
 		return $results;
 	}

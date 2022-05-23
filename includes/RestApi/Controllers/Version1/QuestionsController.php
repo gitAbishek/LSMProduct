@@ -679,10 +679,16 @@ class QuestionsController extends PostsController {
 
 		// Automatically set the menu order if it's not set and the operation is POST.
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
-			$lessons_count = (array) wp_count_posts( $this->post_type );
-			$total_lessons = array_sum( $lessons_count );
+			$query = new \WP_Query(
+				array(
+					'post_type'      => array( 'mto-question' ),
+					'post_status'    => PostStatus::all(),
+					'posts_per_page' => 1,
+					'post_parent'    => $request['parent_id'],
+				)
+			);
 
-			$question->set_menu_order( $total_lessons );
+			$question->set_menu_order( $query->found_posts );
 		} else {
 			$question->set_menu_order( $request['menu_order'] );
 		}

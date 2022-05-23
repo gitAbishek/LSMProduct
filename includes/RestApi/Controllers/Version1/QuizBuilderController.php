@@ -482,7 +482,7 @@ class QuizBuilderController extends PostsController {
 	 * @param WP_REST_Request $request Full details about the request.
 	 */
 	protected function save_question_order( $request ) {
-		$questions = isset( $request['contents'] ) ? $request['contents'] : array();
+		$questions = isset( $request['questions'] ) ? $request['questions'] : array();
 		$questions = array_unique( wp_list_pluck( $questions, 'id' ) );
 		$questions = array_filter( $questions, array( $this, 'filter_questions' ) );
 

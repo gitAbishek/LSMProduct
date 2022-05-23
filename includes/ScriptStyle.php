@@ -279,7 +279,6 @@ class ScriptStyle {
 				'public'        => array(
 					'src'     => self::get_asset_url( "/assets/css/public{$suffix}.css" ),
 					'has_rtl' => false,
-					'deps'    => array( 'common' ),
 					'context' => 'public',
 				),
 				'dependencies'  => array(

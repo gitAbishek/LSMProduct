@@ -163,56 +163,11 @@ class QuizBuilderController extends PostsController {
 			'title'      => $this->object_type,
 			'type'       => 'object',
 			'properties' => array(
-				'questions'      => array(
-					'description' => __( 'Quiz contents (question)', 'masteriyo' ),
-					'type'        => 'array',
-					'required'    => false,
-					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type'       => 'object',
-						'properties' => array(
-							'id'         => array(
-								'description' => __( 'Question ID', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-								'readonly'    => true,
-							),
-							'name'       => array(
-								'description' => __( 'Question name', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'permalink'  => array(
-								'description' => __( 'Question permalink', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'type'       => array(
-								'description' => __( 'Question type.', 'masteriyo' ),
-								'type'        => 'string',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'menu_order' => array(
-								'description' => __( 'Question menu order', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-							),
-							'parent_id'  => array(
-								'description' => __( 'Quiz parent ID', 'masteriyo' ),
-								'type'        => 'integer',
-								'context'     => array( 'view', 'edit' ),
-							),
-						),
-					),
-				),
-				'question_order' => array(
-					'description' => __( 'Question order.', 'masteriyo' ),
+				'questions' => array(
+					'description' => __( 'Quiz contents (question IDs)', 'masteriyo' ),
 					'type'        => 'array',
 					'required'    => true,
 					'context'     => array( 'view', 'edit' ),
-					'items'       => array(
-						'type' => 'integer',
-					),
 				),
 			),
 		);

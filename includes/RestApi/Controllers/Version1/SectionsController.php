@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Helper\Permission;
+use WP_CLI\Fetchers\Post;
 
 /**
  * SectionsController class.
@@ -447,7 +448,7 @@ class SectionsController extends PostsController {
 			$query = new \WP_Query(
 				array(
 					'post_type'      => 'mto-section',
-					'post_status'    => 'any',
+					'post_status'    => PostStatus::all(),
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],
 				)

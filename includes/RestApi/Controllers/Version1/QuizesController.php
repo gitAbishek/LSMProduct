@@ -1196,7 +1196,7 @@ class QuizesController extends PostsController {
 			$query = new \WP_Query(
 				array(
 					'post_type'      => array( 'mto-quiz', 'mto-lesson' ),
-					'post_status'    => 'any',
+					'post_status'    => PostStatus::all(),
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],
 				)

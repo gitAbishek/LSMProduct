@@ -7,10 +7,12 @@ import {
 	ListIcon,
 	ListItem,
 	Stack,
+	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiCart, BiPlus } from 'react-icons/bi';
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { useQuery } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
@@ -21,7 +23,7 @@ import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { SkeletonOrdersList } from '../../skeleton';
 import API from '../../utils/api';
-import { isEmpty } from '../../utils/utils';
+import { deepMerge, isEmpty } from '../../utils/utils';
 import NoOrdersNotice from './components/NoOrdersNotice';
 import OrderRow from './components/OrderRow';
 import OrdersFilter from './components/OrdersFilter';
@@ -32,15 +34,33 @@ interface FilterParams {
 	status?: string;
 	after?: string;
 	before?: string;
+	orderby: string;
+	order: 'asc' | 'desc';
 }
 
 const AllOrders = () => {
-	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const [filterParams, setFilterParams] = useState<FilterParams>({
+		order: 'asc',
+		orderby: 'title',
+	});
 	const ordersAPI = new API(urls.orders);
-	const ordersQuery = useQuery(['ordersList', filterParams], () =>
-		ordersAPI.list(filterParams)
+	const ordersQuery = useQuery(
+		['ordersList', filterParams],
+		() => ordersAPI.list(filterParams),
+		{
+			keepPreviousData: true,
+		}
 	);
 	const history = useHistory();
+
+	const filterOrderBy = (order: 'asc' | 'desc', orderBy: string) =>
+		setFilterParams(
+			deepMerge({
+				filterParams,
+				order: order,
+				orderby: orderBy,
+			})
+		);
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -72,7 +92,36 @@ const AllOrders = () => {
 							<Table>
 								<Thead>
 									<Tr>
-										<Th>{__('Order', 'masteriyo')}</Th>
+										<Th>
+											<Stack direction="row" alignItems="center">
+												<Text>{__('Order', 'masteriyo')}</Text>
+												<Stack direction="column">
+													{filterParams?.order === 'desc' ? (
+														<Icon
+															as={MdOutlineArrowDropUp}
+															h={6}
+															w={6}
+															cursor="pointer"
+															color="lightgray"
+															transition="1s"
+															_hover={{ color: 'black' }}
+															onClick={() => filterOrderBy('asc', 'id')}
+														/>
+													) : (
+														<Icon
+															as={MdOutlineArrowDropDown}
+															h={6}
+															w={6}
+															cursor="pointer"
+															color="lightgray"
+															transition="1s"
+															_hover={{ color: 'black' }}
+															onClick={() => filterOrderBy('desc', 'id')}
+														/>
+													)}
+												</Stack>
+											</Stack>
+										</Th>
 										<Th>{__('Course', 'masteriyo')}</Th>
 										<Th>{__('Date', 'masteriyo')}</Th>
 										<Th>{__('Status', 'masteriyo')}</Th>
@@ -96,6 +145,10 @@ const AllOrders = () => {
 				</Box>
 				{ordersQuery.isSuccess && !isEmpty(ordersQuery?.data?.data) && (
 					<MasteriyoPagination
+						extraFilterParams={{
+							order: filterParams?.order,
+							orderby: filterParams?.orderby,
+						}}
 						metaData={ordersQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Orders Per Page:', 'masteriyo')}

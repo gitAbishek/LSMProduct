@@ -1,7 +1,8 @@
-import { Box, Container, Icon, Stack } from '@chakra-ui/react';
+import { Box, Container, Icon, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
@@ -11,7 +12,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { SkeletonStudentsList } from '../../../../skeleton';
 import API from '../../../../utils/api';
-import { isEmpty } from '../../../../utils/utils';
+import { deepMerge, isEmpty } from '../../../../utils/utils';
 import UserHeader from '../../UserHeader';
 import StudentList from './StudentList';
 import StudentsFilter from './StudentsFilter';
@@ -21,18 +22,35 @@ interface FilterParams {
 	page?: number;
 	role?: string;
 	search?: string;
+	orderby: string;
+	order: 'asc' | 'desc';
 }
 
 const Students: React.FC = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
 		role: 'masteriyo_student',
+		order: 'asc',
+		orderby: 'name',
 	});
 
 	const usersAPI = new API(urls.users);
-	const usersQuery = useQuery(['usersList', filterParams], () =>
-		usersAPI.list(filterParams)
+	const usersQuery = useQuery(
+		['usersList', filterParams],
+		() => usersAPI.list(filterParams),
+		{
+			keepPreviousData: true,
+		}
 	);
 	const history = useHistory();
+
+	const filterStudentsBy = (order: 'asc' | 'desc', orderBy: string) =>
+		setFilterParams(
+			deepMerge({
+				filterParams,
+				order: order,
+				orderby: orderBy,
+			})
+		);
 
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
@@ -50,7 +68,36 @@ const Students: React.FC = () => {
 						<Table>
 							<Thead>
 								<Tr>
-									<Th>{__('Name', 'masteriyo')}</Th>
+									<Th>
+										<Stack direction="row" alignItems="center">
+											<Text>{__('Name', 'masteriyo')}</Text>
+											<Stack direction="column">
+												{filterParams?.order === 'desc' ? (
+													<Icon
+														as={MdOutlineArrowDropUp}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color="lightgray"
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() => filterStudentsBy('asc', 'name')}
+													/>
+												) : (
+													<Icon
+														as={MdOutlineArrowDropDown}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color="lightgray"
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() => filterStudentsBy('desc', 'name')}
+													/>
+												)}
+											</Stack>
+										</Stack>
+									</Th>
 									<Th>{__('Email', 'masteriyo')}</Th>
 									<Th>{__('Registered On', 'masteriyo')}</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
@@ -74,7 +121,11 @@ const Students: React.FC = () => {
 						metaData={usersQuery?.data?.meta}
 						setFilterParams={setFilterParams}
 						perPageText={__('Students Per Page:', 'masteriyo')}
-						extraFilterParams={{ role: 'masteriyo_student' }}
+						extraFilterParams={{
+							role: 'masteriyo_student',
+							order: filterParams?.order,
+							orderby: filterParams?.orderby,
+						}}
 					/>
 				)}
 			</Container>

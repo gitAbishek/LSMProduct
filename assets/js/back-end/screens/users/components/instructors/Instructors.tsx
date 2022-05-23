@@ -1,7 +1,8 @@
-import { Box, Container, Icon, Stack } from '@chakra-ui/react';
+import { Box, Container, Icon, Stack, Text } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { useQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
@@ -11,7 +12,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { SkeletonInstructorsList } from '../../../../skeleton/index';
 import API from '../../../../utils/api';
-import { isEmpty } from '../../../../utils/utils';
+import { deepMerge, isEmpty } from '../../../../utils/utils';
 import UserHeader from '../../UserHeader';
 import InstructorList from './InstructorList';
 import InstructorsFilter from './InstructorsFilter';
@@ -22,14 +23,33 @@ interface FilterParams {
 	role?: string;
 	search?: string;
 	approved?: boolean | string;
+	orderby: string;
+	order: 'asc' | 'desc';
 }
 const Instructors: React.FC = () => {
-	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const [filterParams, setFilterParams] = useState<FilterParams>({
+		order: 'asc',
+		orderby: 'name',
+	});
 	const usersAPI = new API(urls.instructors);
-	const usersQuery = useQuery(['instructorsList', filterParams], () =>
-		usersAPI.list(filterParams)
+	const usersQuery = useQuery(
+		['instructorsList', filterParams],
+		() => usersAPI.list(filterParams),
+		{
+			keepPreviousData: true,
+		}
 	);
 	const history = useHistory();
+
+	const filterInstructorsBy = (order: 'asc' | 'desc', orderBy: string) =>
+		setFilterParams(
+			deepMerge({
+				filterParams,
+				order: order,
+				orderby: orderBy,
+			})
+		);
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<UserHeader
@@ -49,7 +69,36 @@ const Instructors: React.FC = () => {
 						<Table>
 							<Thead>
 								<Tr>
-									<Th>{__('Name', 'masteriyo')}</Th>
+									<Th>
+										<Stack direction="row" alignItems="center">
+											<Text>{__('Name', 'masteriyo')}</Text>
+											<Stack direction="column">
+												{filterParams?.order === 'desc' ? (
+													<Icon
+														as={MdOutlineArrowDropUp}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color="lightgray"
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() => filterInstructorsBy('asc', 'name')}
+													/>
+												) : (
+													<Icon
+														as={MdOutlineArrowDropDown}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color="lightgray"
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() => filterInstructorsBy('desc', 'name')}
+													/>
+												)}
+											</Stack>
+										</Stack>
+									</Th>
 									<Th>{__('Email', 'masteriyo')}</Th>
 									<Th>{__('Registered On', 'masteriyo')}</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
@@ -78,6 +127,8 @@ const Instructors: React.FC = () => {
 						extraFilterParams={{
 							approved: filterParams.approved,
 							search: filterParams.search,
+							order: filterParams?.order,
+							orderby: filterParams?.orderby,
 						}}
 					/>
 				)}

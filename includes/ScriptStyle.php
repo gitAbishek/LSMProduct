@@ -612,10 +612,15 @@ class ScriptStyle {
 	 * @return void
 	 */
 	public static function load_custom_admin_inline_styles() {
+		if ( ! current_user_can( 'manage_masteriyo_settings' ) ) {
+			return;
+		}
+
 		$custom_css = '
 				#toplevel_page_masteriyo ul.wp-submenu li:last-child a {
 						color: #27e527 !important;
 				}';
+
 		wp_add_inline_style( 'masteriyo-dependencies', $custom_css );
 	}
 

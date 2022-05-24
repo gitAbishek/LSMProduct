@@ -16,6 +16,7 @@ import {
 	ListItem,
 	SkeletonCircle,
 	Stack,
+	Text,
 	useDisclosure,
 	useToast,
 } from '@chakra-ui/react';
@@ -29,6 +30,7 @@ import {
 	BiTrash,
 } from 'react-icons/bi';
 import { IconType } from 'react-icons/lib';
+import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
@@ -52,13 +54,18 @@ interface FilterParams {
 	price?: string | number;
 	per_page?: number;
 	page?: number;
+	orderby: string;
+	order: 'asc' | 'desc';
 }
 
 const AllCourses = () => {
 	const courseAPI = new API(urls.courses);
 	const history = useHistory();
 	const toast = useToast();
-	const [filterParams, setFilterParams] = useState<FilterParams>({});
+	const [filterParams, setFilterParams] = useState<FilterParams>({
+		order: 'asc',
+		orderby: 'title',
+	});
 	const [deleteCourseId, setDeleteCourseId] = useState<number>();
 	const queryClient = useQueryClient();
 	const { onClose, onOpen, isOpen } = useDisclosure();
@@ -82,6 +89,7 @@ const AllCourses = () => {
 					trash: data?.meta?.courses_count?.trash,
 				});
 			},
+			keepPreviousData: true,
 		}
 	);
 
@@ -184,6 +192,15 @@ const AllCourses = () => {
 		);
 	};
 
+	const filterCoursesBy = (order: 'asc' | 'desc', orderBy: string) =>
+		setFilterParams(
+			deepMerge({
+				filterParams,
+				order: order,
+				orderby: orderBy,
+			})
+		);
+
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header
@@ -216,7 +233,36 @@ const AllCourses = () => {
 							<Table>
 								<Thead>
 									<Tr>
-										<Th>{__('Title', 'masteriyo')}</Th>
+										<Th>
+											<Stack direction="row" alignItems="center">
+												<Text>{__('Title', 'masteriyo')}</Text>
+												<Stack direction="column">
+													{filterParams?.order === 'desc' ? (
+														<Icon
+															as={MdOutlineArrowDropUp}
+															h={6}
+															w={6}
+															cursor="pointer"
+															color="lightgray"
+															transition="1s"
+															_hover={{ color: 'black' }}
+															onClick={() => filterCoursesBy('asc', 'title')}
+														/>
+													) : (
+														<Icon
+															as={MdOutlineArrowDropDown}
+															h={6}
+															w={6}
+															cursor="pointer"
+															color="lightgray"
+															transition="1s"
+															_hover={{ color: 'black' }}
+															onClick={() => filterCoursesBy('desc', 'title')}
+														/>
+													)}
+												</Stack>
+											</Stack>
+										</Th>
 										<Th>{__('Categories', 'masteriyo')}</Th>
 										<Th>{__('Instructor', 'masteriyo')}</Th>
 										<Th>{__('Price', 'masteriyo')}</Th>
@@ -258,6 +304,8 @@ const AllCourses = () => {
 						setFilterParams={setFilterParams}
 						perPageText={__('Courses Per Page:', 'masteriyo')}
 						extraFilterParams={{
+							order: filterParams?.order,
+							orderby: filterParams?.orderby,
 							search: filterParams?.search,
 							status: filterParams?.status,
 							category: filterParams?.category,

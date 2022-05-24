@@ -331,8 +331,7 @@ class CoursesController extends PostsController {
 	protected function get_courses_count() {
 		$post_count = parent::get_posts_count();
 
-		return masteriyo_array_only( $post_count, PostStatus::all() );
-
+		return masteriyo_array_only( $post_count, array_merge( array( 'any' ), PostStatus::all() ) );
 	}
 
 	/**

@@ -15,7 +15,13 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
-import { DownloadMaterial, Logo, Ribbon, Stripe } from '../../constants/images';
+import {
+	DownloadMaterial,
+	Logo,
+	Ribbon,
+	Stripe,
+	Woocommerce,
+} from '../../constants/images';
 import AddonItem from './components/AddonItem';
 
 const AddOns = () => {
@@ -138,6 +144,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={DownloadMaterial}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('WooCommerce', 'masteriyo')}
+							addOnDescription={__(
+								'WooCommerce Integration for Masteriyo allows to enroll users using WooCommerce checkout process and payment methods.',
+								'masteriyo'
+							)}
+							thumbnailSrc={Woocommerce}
 						/>
 					</Col>
 				</Row>

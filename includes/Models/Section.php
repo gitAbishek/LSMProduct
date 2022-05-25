@@ -88,9 +88,19 @@ class Section extends Model {
 	/**
 	 * Get the course's title. For courses this is the course name.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters section title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title Section title.
+		 * @param Masteriyo\Models\Section $section Section object.
+		 */
 		return apply_filters( 'masteriyo_section_title', $this->get_name(), $this );
 	}
 
@@ -148,6 +158,9 @@ class Section extends Model {
 		 * Section post preview link.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $url Preview URL.
+		 * @param Masteriyo\Models\Section $section Section object.
 		 */
 		return apply_filters( 'masteriyo_section_post_preview_link', $preview_link, $this );
 	}
@@ -172,6 +185,9 @@ class Section extends Model {
 		 * Section preview link for learn page.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $url Preview URL.
+		 * @param Masteriyo\Models\Section $section Section object.
 		 */
 		return apply_filters( 'masteriyo_section_preview_link', $preview_link, $this );
 	}
@@ -192,6 +208,14 @@ class Section extends Model {
 	 * @return string
 	 */
 	public function get_name( $context = 'view' ) {
+		/**
+		 * Filters section name.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $name Section name.
+		 * @param \Masteriyo\Models\Section $section Section object.
+		 */
 		return apply_filters( 'masteriyo_section_name', $this->get_prop( 'name', $context ), $this );
 	}
 

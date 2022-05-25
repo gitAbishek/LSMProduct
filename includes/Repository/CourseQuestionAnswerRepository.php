@@ -74,6 +74,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		}
 
 		$id = wp_insert_comment(
+			/**
+			 * Filters new course question-answer data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course question-answer data.
+			 * @param Masteriyo\Models\CourseQuestionAnswer $course_qa Course question-answer object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_qa_data',
 				array(

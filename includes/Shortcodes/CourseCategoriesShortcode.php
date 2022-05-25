@@ -33,9 +33,9 @@ class CourseCategoriesShortcode extends Shortcode {
 	 * @var array
 	 */
 	protected $default_attributes = array(
-		'count'                => 12,
-		'columns'              => 4,
-		'hide_courses_count'   => 'no',
+		'count'                  => 12,
+		'columns'                => 4,
+		'hide_courses_count'     => 'no',
 		'include_sub_categories' => false,
 	);
 
@@ -71,7 +71,7 @@ class CourseCategoriesShortcode extends Shortcode {
 	 *
 	 * @since 1.2.0
 	 *
-	 * @return Array[CourseCategory]
+	 * @return \Masteriyo\Models\CourseCategory[]
 	 */
 	protected function get_categories() {
 		$attr = $this->get_attributes();
@@ -91,6 +91,16 @@ class CourseCategoriesShortcode extends Shortcode {
 		$result     = $query->query( $args );
 		$categories = array_filter( array_map( 'masteriyo_get_course_cat', $result ) );
 
+		/**
+		 * Filters course categories that will be displayed in course categories shortcode.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param Masteriyo\Models\CourseCategory[] $categories The categories objects.
+		 * @param array $args The WP_Term_Query query args.
+		 * @param WP_Term_Query $query The query object.
+		 * @param Masteriyo\Shortcodes\CourseCategoriesShortcode $shortcode The course categories shortcode object.
+		 */
 		return apply_filters( 'masteriyo_shortcode_course_categories', $categories, $args, $query, $this );
 	}
 }

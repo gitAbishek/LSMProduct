@@ -372,6 +372,8 @@ class QuizAttemptsController extends CrudController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
+		 * @since 1.0.6
+		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
 		 */
@@ -384,8 +386,10 @@ class QuizAttemptsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.6
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -405,7 +409,7 @@ class QuizAttemptsController extends CrudController {
 		 * @since 1.3.2
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -416,7 +420,7 @@ class QuizAttemptsController extends CrudController {
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param QuizAttempt $quiz_attempt quiz attempt instance.
+	 * @param Masteriyo\Models\QuizAttempt $quiz_attempt quiz attempt instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *

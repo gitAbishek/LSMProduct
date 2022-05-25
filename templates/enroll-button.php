@@ -34,7 +34,16 @@ do_action( 'masteriyo_before_add_to_cart_button' );
 	<?php endif; ?>
 <?php else : ?>
 	<a href="<?php echo esc_url( $course->add_to_cart_url() ); ?>" class="masteriyo-course--btn masteriyo-btn masteriyo-btn-primary">
-		<?php echo esc_html( apply_filters( 'masteriyo_add_to_cart_text', __( 'Buy Now', 'masteriyo' ) ) ); ?>
+		<?php
+		/**
+		 * Filters add to cart button text.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text The add to cart button text.
+		 */
+		echo esc_html( apply_filters( 'masteriyo_add_to_cart_text', __( 'Buy Now', 'masteriyo' ) ) );
+		?>
 	</a>
 <?php endif; ?>
 

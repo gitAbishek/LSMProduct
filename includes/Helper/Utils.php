@@ -158,6 +158,8 @@ class Utils {
 	/**
 	 * Fetches an array containing all of the configurable path constants to be used in tokenization.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return array The key is the define and the path is the constant.
 	 */
 	public static function get_path_define_tokens() {
@@ -178,15 +180,31 @@ class Utils {
 			}
 		}
 
+		/**
+		 * Filters path tokens.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $path_tokens The path tokens.
+		 */
 		return apply_filters( 'masteriyo_get_path_define_tokens', $path_tokens );
 	}
 
 	/**
 	 * Get the template path.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	public static function template_path() {
+		/**
+		 * Filters relative templates directory.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template_path Template path.
+		 */
 		return apply_filters( 'masteriyo_template_path', 'masteriyo/' );
 	}
 
@@ -194,6 +212,8 @@ class Utils {
 	 * Returns true if the request is a non-legacy REST API request.
 	 *
 	 * Legacy REST requests should still run some extra code for backwards compatibility.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return bool
 	 */
@@ -205,6 +225,13 @@ class Utils {
 		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
 		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
+		/**
+		 * Filters boolean: true if current request is rest API request.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if current request is rest API request.
+		 */
 		return apply_filters( 'masteriyo_is_rest_api_request', $is_rest_api_request );
 	}
 
@@ -250,7 +277,20 @@ class Utils {
 	public static function set_cookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
 		if ( ! headers_sent() ) {
 			$cookie_path = COOKIEPATH ? COOKIEPATH : '/';
-			$http_only   = apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure );
+
+			/**
+			 * Filters boolean: true if the cookie is only accessible over HTTP, not scripting languages like JavaScript.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $bool true if the cookie is only accessible over HTTP, not scripting languages like JavaScript.
+			 * @param string $name Name of the cookie being set.
+			 * @param string $value Value of the cookie.
+			 * @param integer $expire Expiry of the cookie.
+			 * @param boolean $secure Whether the cookie should be served only over https.
+			 */
+			$http_only = apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure );
+
 			setcookie( $name, $value, $expire, $cookie_path, COOKIE_DOMAIN, $secure, $http_only );
 		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
 			headers_sent( $file, $line );

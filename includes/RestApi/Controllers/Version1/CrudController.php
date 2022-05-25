@@ -311,6 +311,8 @@ abstract class CrudController extends RestController {
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.
 		 */
@@ -340,6 +342,8 @@ abstract class CrudController extends RestController {
 				 * Filter the query_vars used in `get_items` for the constructed query.
 				 *
 				 * The dynamic portion of the hook name, $var, refers to the query_var key.
+				 *
+				 * @since 1.0.0
 				 *
 				 * @param mixed $prepared_args[ $var ] The query_var value.
 				 */
@@ -376,6 +380,8 @@ abstract class CrudController extends RestController {
 		 *
 		 * Allows adjusting of the default query vars that are made public.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param array  Array of allowed WP_Query query vars.
 		 */
 		$valid_vars = apply_filters( 'query_vars', $wp->public_query_vars );
@@ -392,8 +398,9 @@ abstract class CrudController extends RestController {
 			 * To disable anyway, use
 			 * `add_filter( 'masteriyo_rest_private_query_vars', '__return_empty_array' );`
 			 *
+			 * @since 1.0.0
+			 *
 			 * @param array $private_query_vars Array of allowed query vars for authorized users.
-			 * }
 			 */
 			$private    = apply_filters( 'masteriyo_rest_private_query_vars', $wp->private_query_vars );
 			$valid_vars = array_merge( $valid_vars, $private );
@@ -424,6 +431,8 @@ abstract class CrudController extends RestController {
 		 * This filter allows you to add or remove query vars from the final allowed
 		 * list for all requests, including unauthenticated ones. To alter the
 		 * vars for editors only.
+		 *
+		 * @since 1.0.0
 		 *
 		 * @param array {
 		 *    Array of allowed WP_Query query vars.
@@ -504,12 +513,30 @@ abstract class CrudController extends RestController {
 			$objects[] = $this->prepare_response_for_collection( $data );
 		}
 
+		/**
+		 * Filters objects collection before processing.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $objects Objects collection.
+		 * @param array $query_vars Query vars.
+		 * @param array $query_results Query results.
+		 */
 		$objects = apply_filters( 'masteriyo_before_process_objects_collection', $objects, $query_args, $query_results );
 
 		if ( is_callable( array( $this, 'process_objects_collection' ) ) ) {
 			$objects = $this->process_objects_collection( $objects, $query_args, $query_results );
 		}
 
+		/**
+		 * Filters objects collection after processing.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $objects Objects collection.
+		 * @param array $query_vars Query vars.
+		 * @param array $query_results Query results.
+		 */
 		$objects = apply_filters( 'masteriyo_after_process_objects_collection', $objects, $query_args, $query_results );
 
 		$page      = (int) $query_args['paged'];
@@ -567,7 +594,7 @@ abstract class CrudController extends RestController {
 		 * @since 1.0.0
 		 *
 		 * @param boolean $supports_trash Whether the object type support trashing.
-		 * @param Model $object         The object being considered for trashing support.
+		 * @param Masteriyo\Database\Model $object The object being considered for trashing support.
 		 */
 		$supports_trash = apply_filters( "masteriyo_rest_{$this->object_type}_object_trashable", $supports_trash, $object );
 

@@ -64,6 +64,14 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 
 		$result = $wpdb->insert(
 			$user_course->get_table_name(),
+			/**
+			 * Filters new user course data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New user course data.
+			 * @param Masteriyo\Models\UserCourse $user_course User course object.
+			 */
 			apply_filters(
 				'masteriyo_new_user_course_data',
 				array(
@@ -259,7 +267,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return UserCourse[]
+	 * @return \Masteriyo\Models\UserCourse[]
 	 */
 	public function query( $query_vars, $query ) {
 		global $wpdb;

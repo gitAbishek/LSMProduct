@@ -269,8 +269,10 @@ class CoursesController extends PostsController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -291,7 +293,7 @@ class CoursesController extends PostsController {
 		 * refers to object type being prepared for the response.
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -339,7 +341,7 @@ class CoursesController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Course $course Course instance.
+	 * @param Masteriyo\Models\Course $course Course instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -356,6 +358,15 @@ class CoursesController extends PostsController {
 			);
 		}
 
+		/**
+		 * Filters short description of course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $short_description Short description of course.
+		 */
+		$short_description = 'view' === $context ? apply_filters( 'masteriyo_short_description', $course->get_short_description() ) : $course->get_short_description();
+
 		$data = array(
 			'id'                => $course->get_id(),
 			'name'              => wp_specialchars_decode( $course->get_name( $context ) ),
@@ -364,7 +375,7 @@ class CoursesController extends PostsController {
 			'preview_permalink' => $course->get_preview_link(),
 			'status'            => $course->get_status( $context ),
 			'description'       => 'view' === $context ? wpautop( do_shortcode( $course->get_description() ) ) : $course->get_description( $context ),
-			'short_description' => 'view' === $context ? apply_filters( 'masteriyo_short_description', $course->get_short_description() ) : $course->get_short_description( $context ),
+			'short_description' => $short_description,
 			'reviews_allowed'   => $course->get_reviews_allowed( $context ),
 			'parent_id'         => $course->get_parent_id( $context ),
 			'menu_order'        => $course->get_menu_order( $context ),
@@ -819,7 +830,7 @@ class CoursesController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Models\Course
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 
@@ -957,7 +968,7 @@ class CoursesController extends PostsController {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model         $course  Object object.
+		 * @param Masteriyo\Models\Course $course  Course object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

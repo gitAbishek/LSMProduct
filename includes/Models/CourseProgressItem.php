@@ -105,6 +105,14 @@ class CourseProgressItem extends Model {
 			$item_title = $post->post_title;
 		}
 
+		/**
+		 * Filters course progress item title.
+		 *
+		 * @since 1.0.3
+		 *
+		 * @param string $title Course progress item title.
+		 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+		 */
 		return apply_filters( 'masteriyo_course_progress_item_title', $item_title, $this );
 	}
 

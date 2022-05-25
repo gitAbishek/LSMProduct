@@ -9,13 +9,8 @@
 
 namespace Masteriyo\Models\Order;
 
-use Masteriyo\Helper\Utils;
-use Masteriyo\Database\Model;
-use Masteriyo\Cache\CacheInterface;
-use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Abstracts\Order as AbstractOrder;
 use Masteriyo\Enums\OrderStatus;
-use Masteriyo\RestApi\Controllers\Version1\OrdersController;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -173,9 +168,19 @@ class Order extends AbstractOrder {
 				do_action( 'masteriyo_order_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
 				do_action( 'masteriyo_order_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 
+				/**
+				 * Filters order statuses for payment.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string[] $statuses The order statuses for payment.
+				 * @param Masteriyo\Models\Order\Order $order Order object.
+				 */
+				$payment_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( OrderStatus::PENDING, OrderStatus::FAILED ), $this );
+
 				// Work out if this was for a payment, and trigger a payment_status hook instead.
 				if (
-					in_array( $status_transition['from'], apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( OrderStatus::PENDING, OrderStatus::FAILED ), $this ), true )
+					in_array( $status_transition['from'], $payment_statuses, true )
 					&& in_array( $status_transition['to'], masteriyo_get_is_paid_statuses(), true )
 				) {
 					/**
@@ -573,6 +578,14 @@ class Order extends AbstractOrder {
 	 * @return array The stored address after filter.
 	 */
 	public function get_address() {
+		/**
+		 * Filters order address data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $address Order address data.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters(
 			'masteriyo_get_order_address',
 			array(
@@ -899,6 +912,15 @@ class Order extends AbstractOrder {
 	public function maybe_set_date_paid() {
 		// This logic only runs if the date_paid prop has not been set yet.
 		if ( ! $this->get_date_paid( 'edit' ) ) {
+			/**
+			 * Filters payment completion order status.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $status Payment completion order status.
+			 * @param integer $order_id Order ID.
+			 * @param Masteriyo\Models\Order\Order $order Order object.
+			 */
 			$payment_completed_status = apply_filters(
 				'masteriyo_payment_complete_order_status',
 				$this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED,
@@ -1022,6 +1044,14 @@ class Order extends AbstractOrder {
 	 * @return bool
 	 */
 	public function is_editable() {
+		/**
+		 * Filters boolean: true if order is editable.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if order is editable.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_order_is_editable', in_array( $this->get_status(), array( 'masteriyo-pending', 'masteriyo-on-hold' ), true ), $this );
 	}
 
@@ -1033,6 +1063,14 @@ class Order extends AbstractOrder {
 	 * @return bool
 	 */
 	public function is_paid() {
+		/**
+		 * Filters boolean: true if an order has been paid for.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if an order has been paid for.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_order_is_paid', $this->has_status( masteriyo_get_is_paid_statuses() ), $this );
 	}
 
@@ -1044,7 +1082,25 @@ class Order extends AbstractOrder {
 	 * @return bool
 	 */
 	public function needs_payment() {
+		/**
+		 * Filters valid order statuses for payment.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $statuses The order statuses for payment.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		$valid_order_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_payment', array( OrderStatus::PENDING, OrderStatus::FAILED ), $this );
+
+		/**
+		 * Filters boolean: true if an order needs payment, based on status and order total.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if an order needs payment, based on status and order total.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 * @param string[] $payment_statuses Valid order statuses for payment
+		 */
 		return apply_filters( 'masteriyo_order_needs_payment', ( $this->has_status( $valid_order_statuses ) && $this->get_total() > 0 ), $this, $valid_order_statuses );
 	}
 
@@ -1074,6 +1130,14 @@ class Order extends AbstractOrder {
 				masteriyo( 'session' )->put( 'order_awaiting_payment', false );
 			}
 
+			/**
+			 * Filters valid order statuses for payment completion.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $statuses Valid order statuses for payment completion.
+			 * @param Masteriyo\Models\Order\Order $order Order object.
+			 */
 			$statuses = apply_filters(
 				'masteriyo_valid_order_statuses_for_payment_complete',
 				array( OrderStatus::ON_HOLD, OrderStatus::PENDING, OrderStatus::FAILED, OrderStatus::CANCELLED ),
@@ -1089,7 +1153,17 @@ class Order extends AbstractOrder {
 					$this->set_date_paid( time() );
 				}
 
-				$order_status   = $this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED;
+				$order_status = $this->needs_processing() ? OrderStatus::PROCESSING : OrderStatus::COMPLETED;
+
+				/**
+				 * Filters payment completion order status.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $status Payment completion order status.
+				 * @param integer $order_id Order ID.
+				 * @param Masteriyo\Models\Order\Order $order Order object.
+				 */
 				$payment_status = apply_filters( 'masteriyo_payment_complete_order_status', $order_status, $this->get_id(), $this );
 
 				$this->set_status( $payment_status );
@@ -1099,7 +1173,7 @@ class Order extends AbstractOrder {
 			} else {
 				do_action( 'masteriyo_payment_complete_order_status_' . $this->get_status(), $this->get_id() );
 			}
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			return false;
 		}
 		return true;
@@ -1192,7 +1266,7 @@ class Order extends AbstractOrder {
 		 * @since 1.0.0
 		 *
 		 * @param string   $formatted_total  Total to display.
-		 * @param Order    $order            Order data.
+		 * @param Masteriyo\Models\Order\Order    $order            Order data.
 		 * @param bool     $display_refunded If should include refunded value.
 		 */
 		return apply_filters( 'masteriyo_get_formatted_order_total', $formatted_total, $this, $display_refunded );
@@ -1206,6 +1280,14 @@ class Order extends AbstractOrder {
 	 * @return string
 	 */
 	public function get_order_number() {
+		/**
+		 * Filters order number.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $order_number Order number.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return (string) apply_filters( 'masteriyo_order_number', $this->get_id(), $this );
 	}
 
@@ -1213,10 +1295,21 @@ class Order extends AbstractOrder {
 	 * Check if order has been created via admin, checkout, or in another way.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @param string $modus Way of creating the order to test for.
-	* @return bool
+	 *
+	 * @return boolean
 	 */
 	public function is_created_via( $modus ) {
+		/**
+		 * Filters boolean: true if order creation medium (like admin, checkout etc) matches with the given medium.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $medium true if order creation medium (like admin, checkout etc) matches with the given medium.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 * @param string $modus Way of creating the order to test for.
+		 */
 		return apply_filters( 'masteriyo_order_is_created_via', $modus === $this->get_created_via(), $this, $modus );
 	}
 
@@ -1237,6 +1330,14 @@ class Order extends AbstractOrder {
 		$order_received_url = masteriyo_get_endpoint_url( 'order-received', $this->get_id(), masteriyo_get_checkout_url() );
 		$order_received_url = add_query_arg( 'key', $this->get_order_key(), $order_received_url );
 
+		/**
+		 * Filters generated URL for the thanks page (order received).
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The generated URL for the thanks page (order received).
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_get_checkout_order_received_url', $order_received_url, $this );
 	}
 
@@ -1249,6 +1350,13 @@ class Order extends AbstractOrder {
 	 * @return string
 	 */
 	public function get_cancel_order_url( $redirect = '' ) {
+		/**
+		 * Filters cancel order URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url Order cancel URL.
+		 */
 		return apply_filters(
 			'masteriyo_get_cancel_order_url',
 			wp_nonce_url(
@@ -1275,6 +1383,15 @@ class Order extends AbstractOrder {
 	 */
 	public function get_view_order_url() {
 		$url = masteriyo_get_endpoint_url( 'view-order', $this->get_id(), masteriyo_get_page_permalink( 'account' ) );
+
+		/**
+		 * Filters view order URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url View order URL.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_get_view_order_url', $url, $this );
 	}
 
@@ -1297,6 +1414,15 @@ class Order extends AbstractOrder {
 	 */
 	public function get_edit_order_url() {
 		$url = get_admin_url( null, 'post.php?post=' . $this->get_id() . '&action=edit' );
+
+		/**
+		 * Filters edit order URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url Edit order URL.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_get_edit_order_url', $url, $this );
 	}
 
@@ -1309,6 +1435,13 @@ class Order extends AbstractOrder {
 	 * @return string The unescaped cancel-order URL.
 	 */
 	public function get_cancel_order_url_raw( $redirect = '' ) {
+		/**
+		 * Filters generated raw (unescaped) cancel-order URL for use by payment gateways.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The generated raw (unescaped) cancel-order URL for use by payment gateways.
+		 */
 		return apply_filters(
 			'masteriyo_get_cancel_order_url_raw',
 			add_query_arg(
@@ -1393,6 +1526,14 @@ class Order extends AbstractOrder {
 		$this->add_order_item_totals_refund_rows( $total_rows );
 		$this->add_order_item_totals_total_row( $total_rows );
 
+		/**
+		 * Filters totals for display on pages and in emails.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $totals The totals for display on pages and in emails.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_get_order_item_totals', $total_rows, $this );
 	}
 
@@ -1405,16 +1546,25 @@ class Order extends AbstractOrder {
 	 * @return string
 	 */
 	public function get_formatted_billing_address( $empty_content = '' ) {
+		/**
+		 * Filters formatted billing address.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $billing_address The formatted billing address.
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		$raw_address = apply_filters( 'masteriyo_order_formatted_billing_address', $this->get_address( 'billing' ), $this );
 		$address     = masteriyo( 'countries' )->get_formatted_address( $raw_address );
 
 		/**
-		 * Filter orders formatterd billing address.
+		 * Filter orders formatted billing address.
 		 *
 		 * @since 1.0.0
+		 *
 		 * @param string   $address     Formatted billing address string.
 		 * @param array    $raw_address Raw billing address.
-		 * @param Order $order       Order data. @since 1.0.0
+		 * @param Masteriyo\Models\Order\Order $order Order object.
 		 */
 		return apply_filters( 'masteriyo_order_get_formatted_billing_address', $address ? $address : $empty_content, $raw_address, $this );
 	}
@@ -1452,7 +1602,15 @@ class Order extends AbstractOrder {
 			$comment_author_email  = sanitize_email( $comment_author_email );
 		}
 
-		$commentdata = apply_filters(
+		/**
+		 * Filters new order note data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $new_order_note_data New order note data.
+		 * @param array $args Arguments.
+		 */
+		$comment_data = apply_filters(
 			'masteriyo_new_order_note_data',
 			array(
 				'comment_post_ID'      => $this->get_id(),
@@ -1471,7 +1629,7 @@ class Order extends AbstractOrder {
 			)
 		);
 
-		$comment_id = wp_insert_comment( $commentdata );
+		$comment_id = wp_insert_comment( $comment_data );
 
 		if ( $is_customer_note ) {
 			add_comment_meta( $comment_id, 'is_customer_note', 1 );
@@ -1480,7 +1638,7 @@ class Order extends AbstractOrder {
 				'masteriyo_new_customer_note',
 				array(
 					'order_id'      => $this->get_id(),
-					'customer_note' => $commentdata['comment_content'],
+					'customer_note' => $comment_data['comment_content'],
 				)
 			);
 		}

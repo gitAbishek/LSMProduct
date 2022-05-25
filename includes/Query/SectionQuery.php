@@ -46,11 +46,27 @@ class SectionQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Section objects
+	 * @return Masteriyo\Models\Section[] Section objects
 	 */
 	public function get_sections() {
+		/**
+		 * Filters section object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_section_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'section.store' )->query( $args );
+
+		/**
+		 * Filters section object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Section[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_section_object_query', $results, $args );
 	}
 }

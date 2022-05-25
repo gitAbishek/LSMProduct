@@ -83,6 +83,14 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		$id = wp_insert_user(
+			/**
+			 * Filters new user data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New user data.
+			 * @param Masteriyo\Models\User $user User object.
+			 */
 			apply_filters(
 				'masteriyo_new_user_data',
 				array(

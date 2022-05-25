@@ -424,6 +424,13 @@ class QuizesController extends PostsController {
 			$response = $this->save_quiz_attempts_in_session( $request );
 		}
 
+		/**
+		 * Filters start-quiz API response.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param WP_REST_Request $response The response object.
+		 */
 		return apply_filters( 'masteriyo_start_quiz_rest_response', rest_ensure_response( $response ) );
 	}
 
@@ -449,17 +456,38 @@ class QuizesController extends PostsController {
 			$attempts     = isset( $all_attempts[ $quiz->get_id() ] ) ? $all_attempts[ $quiz->get_id() ] : array();
 
 			$reached = 0 !== $quiz->get_attempts_allowed() && count( $attempts ) >= $quiz->get_attempts_allowed();
+
+			/**
+			 * Filters boolean: whether the attempt limit is reached or not, true if yes.
+			 *
+			 * @since 1.3.8
+			 *
+			 * @param boolean $bool Whether the attempt limit is reached or not, true if yes.
+			 * @param Masteriyo\models\Quiz $quiz Quiz object.
+			 * @param integer $user_id The user ID.
+			 */
 			$reached = apply_filters( 'masteriyo_is_quiz_attempt_limit_reached', $reached, $quiz, $session->get_user_id() );
 		}
 
+		/**
+		 * Filters boolean: whether the attempt limit is reached or not, true if yes.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param boolean $bool Whether the attempt limit is reached or not, true if yes.
+		 * @param Masteriyo\models\Quiz $quiz Quiz object.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuizesController $controller Quiz controller.
+		 */
 		return apply_filters( 'masteriyo_rest_is_quiz_attempt_limit_reached', $reached, $quiz, $this );
 	}
+
 	/**
 	 * Save quiz attempts in session.
 	 *
 	 * @since 1.3.8
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
+	 *
 	 * @return array
 	 */
 	protected function save_quiz_attempts_in_session( $request ) {
@@ -558,6 +586,15 @@ class QuizesController extends PostsController {
 			}
 		}
 
+		/**
+		 * Filters boolean: whether the quiz is started or not, true if yes.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param boolean $is_quiz_started Whether the quiz is started or not, true if yes.
+		 * @param integer $quiz_id Quiz ID.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuizesController $controller Quiz controller.
+		 */
 		return apply_filters( 'masteriyo_rest_is_quiz_started', $is_quiz_started, $quiz_id, $this );
 	}
 
@@ -607,6 +644,13 @@ class QuizesController extends PostsController {
 
 		$response = $this->prepare_quiz_attempts_for_response( $attempt_datas );
 
+		/**
+		 * Filters answer-check API response.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param WP_REST_Request $response The response object.
+		 */
 		return apply_filters( 'masteriyo_answer_check_rest_response', $response );
 	}
 
@@ -820,7 +864,7 @@ class QuizesController extends PostsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Model           $object  Model object.
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -843,7 +887,7 @@ class QuizesController extends PostsController {
 		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -854,7 +898,7 @@ class QuizesController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Quiz   $quiz Quiz instance.
+	 * @param Masteriyo\Models\Quiz   $quiz Quiz instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -863,6 +907,15 @@ class QuizesController extends PostsController {
 	protected function get_quiz_data( $quiz, $context = 'view' ) {
 		$section = masteriyo_get_section( $quiz->get_parent_id( $context ) );
 		$course  = masteriyo_get_course( $quiz->get_course_id( $context ) );
+
+		/**
+		 * Filters short description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $short_description The short description.
+		 */
+		$short_description = 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description();
 
 		$data = array(
 			'id'                                => $quiz->get_id(),
@@ -877,7 +930,7 @@ class QuizesController extends PostsController {
 			'parent_menu_order'                 => $section ? $section->get_menu_order( $context ) : 0,
 			'status'                            => $quiz->get_status( $context ),
 			'description'                       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
-			'short_description'                 => 'view' === $context ? apply_filters( 'masteriyo_short_description', $quiz->get_short_description() ) : $quiz->get_short_description( $context ),
+			'short_description'                 => $short_description,
 			'pass_mark'                         => $quiz->get_pass_mark( $context ),
 			'full_mark'                         => $quiz->get_full_mark( $context ),
 			'duration'                          => $quiz->get_duration( $context ),
@@ -1139,7 +1192,7 @@ class QuizesController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -1245,7 +1298,7 @@ class QuizesController extends PostsController {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model         $quiz  Object object.
+		 * @param Masteriyo\Database\Model $quiz Quiz object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

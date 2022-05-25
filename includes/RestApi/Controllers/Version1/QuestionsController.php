@@ -213,7 +213,10 @@ class QuestionsController extends PostsController {
 	/**
 	 * Check given answer if it's correct or not.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param WP_REST_Request $request Full details about the request.
+	 *
 	 * @return WP_Error|WP_REST_Response
 	 */
 	public function check_answer( $request ) {
@@ -232,6 +235,13 @@ class QuestionsController extends PostsController {
 			'message'    => $is_correct ? $correct_answer_msg : $incorrect_answer_msg,
 		);
 
+		/**
+		 * Filters answer check API response.
+		 *
+		 * @since 1.0.7
+		 *
+		 * @param WP_Error|WP_REST_Response $response Response object.
+		 */
 		return apply_filters( 'masteriyo_answer_check_rest_response', $response );
 	}
 
@@ -261,10 +271,19 @@ class QuestionsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
+		/**
+		 * Filters question types.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $question_types The question types.
+		 */
+		$question_types = apply_filters( 'masteriyo_question_types', $this->get_types() );
+
 		$params['type'] = array(
 			'description'       => __( 'Limit result set to questions assigned a specific type.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => apply_filters( 'masteriyo_question_types', $this->get_types() ),
+			'enum'              => $question_types,
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
@@ -319,7 +338,7 @@ class QuestionsController extends PostsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Model           $object  Model object.
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -342,7 +361,7 @@ class QuestionsController extends PostsController {
 		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->post_type}_object", $response, $object, $request );
@@ -353,19 +372,28 @@ class QuestionsController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Question $question Question instance.
+	 * @param Masteriyo\Models\Question\Question $question Question instance.
 	 * @param string   $context Request context.
 	 *                          Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
 	protected function get_question_data( $question, $context = 'view' ) {
+		/**
+		 * Filters question description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $description Question description.
+		 */
+		$description = 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description();
+
 		$data = array(
 			'id'                => $question->get_id(),
 			'name'              => wp_specialchars_decode( $question->get_name( $context ) ),
 			'permalink'         => $question->get_permalink(),
 			'status'            => $question->get_status( $context ),
-			'description'       => 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description( $context ),
+			'description'       => $description,
 			'type'              => $question->get_type( $context ),
 			'parent_id'         => $question->get_parent_id( $context ),
 			'course_id'         => $question->get_course_id( $context ),
@@ -484,6 +512,15 @@ class QuestionsController extends PostsController {
 	 * @return array
 	 */
 	public function get_item_schema() {
+		/**
+		 * Filters question types.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $question_types The question types.
+		 */
+		$question_types = apply_filters( 'masteriyo_question_types', $this->get_types() );
+
 		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
 			'title'      => $this->post_type,
@@ -571,7 +608,7 @@ class QuestionsController extends PostsController {
 				'type'              => array(
 					'description' => __( 'Question type.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => apply_filters( 'masteriyo_question_types', $this->get_types() ),
+					'enum'        => $question_types,
 					'context'     => array( 'view', 'edit' ),
 				),
 				'answer_required'   => array(
@@ -634,7 +671,7 @@ class QuestionsController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id       = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -746,7 +783,9 @@ class QuestionsController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->post_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $question  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $question Question object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

@@ -42,13 +42,21 @@ class OrderItemRepository extends AbstractRepository {
 	 * Create a new order item in the database.
 	 *
 	 * @since 1.0.0
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 */
 	public function create( &$item ) {
 		global $wpdb;
 
 		$is_success = $wpdb->insert(
 			$wpdb->prefix . 'masteriyo_order_items',
+			/**
+			 * Filters new order item data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New order item data.
+			 * @param Masteriyo\Models\Order\OrderItem item $order_item order item object.
+			 */
 			apply_filters(
 				'masteriyo_new_order_item',
 				array(

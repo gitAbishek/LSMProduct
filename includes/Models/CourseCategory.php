@@ -89,14 +89,22 @@ class CourseCategory extends Model {
 	*/
 
 	/**
-	 * Get the course category's title. For course categorys this is the course category name.
+	 * Get the course category's title. For course categories this is the course category name.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
 	public function get_title() {
-		return apply_filters( 'masteriyo_course_title', $this->get_name(), $this );
+		/**
+		 * Filters course category title.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string $title Course category title.
+		 * @param Masteriyo\Models\CourseCategory $category The course category object.
+		 */
+		return apply_filters( 'masteriyo_course_category_title', $this->get_name(), $this );
 	}
 
 	/**
@@ -316,6 +324,18 @@ class CourseCategory extends Model {
 			$image = masteriyo_placeholder_img( $size, $attr );
 		}
 
+		/**
+		 * Filters course category image html.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param string $image The course category image html.
+		 * @param Masteriyo\Models\CourseCategory $category Course category object.
+		 * @param string $size Image size.
+		 * @param array $attr Image attributes.
+		 * @param boolean $placeholder True to return $placeholder if no image is found, or false to return an empty string.
+		 * @param string $image The course category image html.
+		 */
 		return apply_filters( 'masteriyo_course_category_get_image', $image, $this, $size, $attr, $placeholder, $image );
 	}
 

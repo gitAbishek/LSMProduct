@@ -24,6 +24,14 @@ foreach ( $items as $item_id => $item ) :
 	$purchase_note = '';
 	$image         = '';
 
+	/**
+	 * Filters boolean: true if the given order item should be visible in orders table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if the given order item should be visible in orders table.
+	 * @param object $order_item The order item object.
+	 */
 	if ( ! apply_filters( 'masteriyo_order_item_visible', true, $item ) ) {
 		continue;
 	}
@@ -34,17 +42,45 @@ foreach ( $items as $item_id => $item ) :
 	}
 
 	?>
-	<tr class="<?php echo esc_attr( apply_filters( 'masteriyo_order_item_class', 'order_item', $item, $order ) ); ?>">
+	<tr class="
+	<?php
+	/**
+	 * Filters order item table row class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $class The order item table row class.
+	 * @param object $order_item Order item object.
+	 * @param Masteriyo\Models\Order\Order $order Order object.
+	 */
+	echo esc_attr( apply_filters( 'masteriyo_order_item_class', 'order_item', $item, $order ) );
+	?>
+	">
 		<td style="text-align:<?php echo esc_attr( $text_align ); ?>;">
 		<?php
 
 		// Show title/image etc.
 		if ( $show_image ) {
+			/**
+			 * Filters order item thumbnail image html.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $image The thumbnail image html.
+			 * @param object $order_item The order item object.
+			 */
 			echo wp_kses_post( apply_filters( 'masteriyo_order_item_thumbnail', $image, $item ) );
 		}
 
-		// Course name.
-		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item, false ) );
+		/**
+		 * Filters order item name to be displayed in order detail table.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $item_name The order item name.
+		 * @param object $order_item Order item object.
+		 */
+		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item ) );
 
 		// allow other plugins to add additional course information here.
 		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );
@@ -71,6 +107,14 @@ foreach ( $items as $item_id => $item ) :
 			} else {
 				$qty_display = esc_html( $qty );
 			}
+
+			/**
+			 * Filters order item quantity display html to show in email.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $qty_display The order item quantity display html to show in email.
+			 */
 			echo wp_kses_post( apply_filters( 'masteriyo_email_order_item_quantity', $qty_display, $item ) );
 			?>
 		</td>

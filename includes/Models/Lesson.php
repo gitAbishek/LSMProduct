@@ -105,6 +105,14 @@ class Lesson extends Model {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters lesson title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title Lesson title.
+		 * @param Masteriyo\Models\Lesson $lesson Lesson object.
+		 */
 		return apply_filters( 'masteriyo_lesson_title', $this->get_name(), $this );
 	}
 
@@ -166,6 +174,9 @@ class Lesson extends Model {
 		 * Lesson post preview link.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $link Preview link.
+		 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 		 */
 		return apply_filters( 'masteriyo_lesson_post_preview_link', $preview_link, $this );
 	}
@@ -190,6 +201,9 @@ class Lesson extends Model {
 		 * Lesson preview link for learn page.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $url Preview link.
+		 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 		 */
 		return apply_filters( 'masteriyo_lesson_preview_link', $preview_link, $this );
 	}

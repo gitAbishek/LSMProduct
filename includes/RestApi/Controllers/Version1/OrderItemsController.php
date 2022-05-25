@@ -193,8 +193,10 @@ class OrderItemsController extends PostsController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -212,8 +214,10 @@ class OrderItemsController extends PostsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -222,7 +226,7 @@ class OrderItemsController extends PostsController {
 	/**
 	 * Get order item data.
 	 *
-	 * @param Order  $order_item Order instance.
+	 * @param Masteriyo\Models\Order\OrderItem  $order_item Order instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -245,7 +249,7 @@ class OrderItemsController extends PostsController {
 		 * @since 1.4.10
 		 *
 		 * @param array $data Order Item data.
-		 * @param Masteriyo\Models\OrderItem $order_item Order item object.
+		 * @param Masteriyo\Models\Order\OrderItem $order_item Order item object.
 		 * @param string $context What the value is for. Valid values are view and edit.
 		 * @param Masteriyo\RestApi\Controllers\Version1\OrderItemsController $controller REST order items controller object.
 		 */
@@ -366,7 +370,7 @@ class OrderItemsController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -421,7 +425,9 @@ class OrderItemsController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $order_item  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $order_item Order item object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

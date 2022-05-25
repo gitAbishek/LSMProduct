@@ -472,16 +472,24 @@ class CourseQuestionAnswer extends Model {
 	}
 
 	/**
-	 * Retur user avatar url.
+	 * Return user avatar url.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return stirng
+	 * @return string
 	 */
 	public function get_avatar_url( $context = 'view' ) {
 		$avatar_url = get_avatar_url( $this->get_user_id( $context ) );
+
+		/**
+		 * Filters course QA avatar URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The avatar URL.
+		 */
 		return apply_filters( 'masteriyo_course_qa_avatar_url', $avatar_url );
 	}
 }

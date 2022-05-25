@@ -39,11 +39,27 @@ class CourseQuestionAnswerQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Course review objects
+	 * @return Masteriyo\Models\CourseQuestionAnswer[] Course review objects
 	 */
 	public function get_course_qas() {
+		/**
+		 * Filters course question-answer object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_course_qa_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'course-qa.store' )->query( $args );
+
+		/**
+		 * Filters course question-answer object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseQuestionAnswer[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_course_qa_object_query', $results, $args );
 	}
 }

@@ -53,6 +53,14 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new lesson data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New lesson data.
+			 * @param Masteriyo\Models\Lesson $lesson lesson object.
+			 */
 			apply_filters(
 				'masteriyo_new_lesson_data',
 				array(
@@ -409,6 +417,15 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for lesson post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param Masteriyo\Repository\LessonRepository $repository Lesson repository object.
+		 */
 		return apply_filters( 'masteriyo_lesson_data_store_cpt_get_lessons_query', $wp_query_args, $query_vars, $this );
 	}
 }

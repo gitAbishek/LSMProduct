@@ -23,7 +23,18 @@ do_action( 'masteriyo_before_password_reset_form' );
 <section class="masteriyo-reset">
 		<div class="masteriyo-reset--wrapper masteriyo-form-container">
 			<h3 class="masteriyo-reset--title"><?php echo esc_html__( 'New password', 'masteriyo' ); ?></h3>
-			<p class="masteriyo-reset--msg"><?php echo esc_html( apply_filters( 'masteriyo_reset_password_message', __( 'Enter a new password below.', 'masteriyo' ) ) ); ?></p>
+			<p class="masteriyo-reset--msg">
+				<?php
+				/**
+				 * Filters password reset form message.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $message The password reset form message.
+				 */
+				echo esc_html( apply_filters( 'masteriyo_reset_password_message', __( 'Enter a new password below.', 'masteriyo' ) ) );
+				?>
+			</p>
 
 			<form id="masteriyo-reset--form" class="masteriyo-reset--form" method="post">
 				<input type="hidden" name="remember" value="true">

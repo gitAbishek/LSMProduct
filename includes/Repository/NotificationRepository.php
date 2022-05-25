@@ -35,6 +35,14 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 
 		$result = $wpdb->insert(
 			"{$wpdb->prefix}masteriyo_notifications",
+			/**
+			 * Filters new notification data before creating.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param array $data New notification data.
+			 * @param Masteriyo\Models\Notification $notification Notification object.
+			 */
 			apply_filters(
 				'masteriyo_new_notification_data',
 				array(
@@ -234,7 +242,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	 * @param array $query_vars Query vars.
 	 * @param Masteriyo\Query\NotificationQuery $query Notification query object.
 	 *
-	 * @return Masteriyo\Models\Notification[]
+	 * @return \Masteriyo\Models\Notification[]
 	 */
 	public function query( $query_vars, $query ) {
 		global $wpdb;

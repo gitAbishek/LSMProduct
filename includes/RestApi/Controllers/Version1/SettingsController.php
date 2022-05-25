@@ -1058,8 +1058,10 @@ class SettingsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
-	 * @param  Model         $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -1080,7 +1082,7 @@ class SettingsController extends CrudController {
 		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model            $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -1126,7 +1128,7 @@ class SettingsController extends CrudController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$setting      = masteriyo( 'setting' );
@@ -1143,7 +1145,7 @@ class SettingsController extends CrudController {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model         $setting  Object object.
+		 * @param Masteriyo\Database\Model $setting Setting object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

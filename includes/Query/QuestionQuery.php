@@ -50,11 +50,27 @@ class QuestionQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Question objects
+	 * @return Masteriyo\Models\Question\Question[] Question objects
 	 */
 	public function get_questions() {
+		/**
+		 * Filters question object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_question_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'question.store' )->query( $args );
+
+		/**
+		 * Filters question object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Question\Question[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_question_object_query', $results, $args );
 	}
 }

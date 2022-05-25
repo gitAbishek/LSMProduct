@@ -28,5 +28,13 @@ function masteriyo_get_notification( $notification ) {
 		$notification_obj = null;
 	}
 
+	/**
+	 * Filters notification object.
+	 *
+	 * @since 1.4.1
+	 *
+	 * @param Masteriyo\Models\Notification $notification_obj The notification object.
+	 * @param int|Masteriyo\Models\Notification $notification Notification ID or object.
+	 */
 	return apply_filters( 'masteriyo_get_notification', $notification_obj, $notification );
 }

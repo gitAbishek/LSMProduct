@@ -49,6 +49,14 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		$id = wp_insert_comment(
+			/**
+			 * Filters new FAQ data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New FAQ data.
+			 * @param Masteriyo\Models\Faq $faq FAQ object.
+			 */
 			apply_filters(
 				'masteriyo_new_faq_data',
 				array(
@@ -302,6 +310,15 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for FAQ post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param \asteriyo\Repository\FaqRepository $repository FAQ repository object.
+		 */
 		return apply_filters( 'masteriyo_faq_wp_query_args', $wp_query_args, $query_vars, $this );
 	}
 

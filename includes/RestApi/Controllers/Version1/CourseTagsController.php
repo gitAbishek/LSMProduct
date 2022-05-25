@@ -196,8 +196,9 @@ class CourseTagsController extends RestTermsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Model           $object  Model object.
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -215,8 +216,10 @@ class CourseTagsController extends RestTermsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -227,7 +230,7 @@ class CourseTagsController extends RestTermsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param CourseTag $course_tag Course instance.
+	 * @param Masteriyo\Models\CourseTag $course_tag Course instance.
 	 * @param string    $context    Request context. Options: 'view' and 'edit'.
 	 *
 	 * @return array

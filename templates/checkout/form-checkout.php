@@ -13,6 +13,13 @@ do_action( 'masteriyo_before_checkout_form' );
 
 if ( ! is_user_logged_in() ) {
 	$message = sprintf(
+		/**
+		 * Filters message to show for requiring user to login for using checkout page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $message The message.
+		 */
 		apply_filters(
 			'masteriyo_checkout_must_be_logged_in_message',
 			// translators: %s: account page link

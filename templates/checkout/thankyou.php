@@ -22,6 +22,13 @@ if ( ! $order ) {
 	echo wp_kses_post(
 		sprintf(
 			'<p class = "masteriyo-notice masteriyo-notice--success masteriyo-thankyou-order-received">%s</p>',
+			/**
+			 * Filters order-received thank you message.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $message The thank you message.
+			 */
 			apply_filters( 'masteriyo_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'masteriyo' ), null )
 		)
 	);
@@ -64,7 +71,16 @@ if ( ! $order ) {
 	<?php else : ?>
 
 		<p class="masteriyo-notice masteriyo-notice--success masteriyo-thankyou-order-received">
-			<?php echo esc_html( apply_filters( 'masteriyo_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'masteriyo' ), $order ) ); ?>
+			<?php
+			/**
+			 * Filters order-received thank you message.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $message The thank you message.
+			 */
+			echo esc_html( apply_filters( 'masteriyo_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'masteriyo' ), $order ) );
+			?>
 		</p>
 
 		<ul class="masteriyo-order-overview masteriyo-thankyou-order-details order_details">

@@ -373,6 +373,13 @@ abstract class PostsController extends CrudController {
 	protected function prepare_objects_query( $request ) {
 		$args = parent::prepare_objects_query( $request );
 
+		/**
+		 * Filters list of object types to hide from instructor.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $object_types The list of object types to hide from instructor.
+		 */
 		$object_types = apply_filters(
 			'masteriyo_rest_hide_object_types_from_instructor',
 			array(

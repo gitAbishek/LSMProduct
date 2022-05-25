@@ -61,6 +61,15 @@ class MultipleChoice extends Question implements QuestionInterface {
 			$correct = $chosen_answers === $correct_answers;
 		}
 
+		/**
+		 * Filters boolean: true if the chosen answer is correct.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if the chosen answer is correct.
+		 * @param string $context Context.
+		 * @param Masteriyo\Models\Question\MultipleChoice $multi_choice Multiple choice question object.
+		 */
 		return apply_filters( "masteriyo_question_check_answer_{$this->type}", $correct, $context, $this );
 	}
 }

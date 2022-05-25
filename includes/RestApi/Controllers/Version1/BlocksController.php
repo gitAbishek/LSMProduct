@@ -135,6 +135,14 @@ class BlocksController extends CrudController {
 		$post_id = absint( $post['postId'] );
 
 		if ( $post_id ) {
+			/**
+			 * Filters blocks CSS before saving.
+			 *
+			 * @since 1.3.0
+			 *
+			 * @param string $css Blocks CSS.
+			 * @param integer $post_id Post ID.
+			 */
 			$css = apply_filters( 'masteriyo_before_save_blocks_css', $css, $post_id );
 
 			update_post_meta( $post_id, '_masteriyo_css', $css );
@@ -152,6 +160,14 @@ class BlocksController extends CrudController {
 				)
 			);
 		}
+
+		/**
+		 * Filters response data of save-blocks API.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param WP_REST_Response|WP_Error $response The response data of save-blocks API.
+		 */
 		return apply_filters( 'masteriyo_save_css_rest_response', $response );
 	}
 }

@@ -429,6 +429,15 @@ class Setting extends Model {
 		$value = masteriyo_array_get( $this->data, $prop );
 
 		if ( 'view' === $context ) {
+			/**
+			 * Filters setting value.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param mixed $value Setting value.
+			 * @param string $prop Setting name.
+			 * @param Masteriyo\Models\Setting $setting Setting object.
+			 */
 			$value = apply_filters( 'masteriyo_get_setting_value', $value, $prop, $this );
 		}
 

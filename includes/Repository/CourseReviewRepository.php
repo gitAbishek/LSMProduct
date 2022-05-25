@@ -78,6 +78,14 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		}
 
 		$id = wp_insert_comment(
+			/**
+			 * Filters new course review data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course review data.
+			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_review_data',
 				array(

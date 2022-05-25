@@ -46,6 +46,14 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 		$ids = wp_insert_term(
 			$course_tag->get_name(),
 			'course_tag',
+			/**
+			 * Filters new course tag data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course tag data.
+			 * @param Masteriyo\Models\CourseTag $course_tag Course tag object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_tag_data',
 				array(

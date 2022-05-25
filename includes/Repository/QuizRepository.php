@@ -59,6 +59,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new quiz data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New quiz data.
+			 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+			 */
 			apply_filters(
 				'masteriyo_new_quiz_data',
 				array(
@@ -390,6 +398,15 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for quiz post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param \Masteriyo\Repository\QuizRepository $repository Quiz repository object.
+		 */
 		return apply_filters( 'masteriyo_quiz_data_store_cpt_get_quizes_query', $wp_query_args, $query_vars, $this );
 	}
 

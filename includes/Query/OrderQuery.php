@@ -67,11 +67,27 @@ class OrderQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model order objects
+	 * @return Masteriyo\Models\Order\Orderp[] Order objects
 	 */
 	public function get_orders() {
+		/**
+		 * Filters order object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_order_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'order.store' )->query( $args );
+
+		/**
+		 * Filters order object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Order\Order[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_order_object_query', $results, $args );
 	}
 }

@@ -252,6 +252,13 @@ class UsersController extends PostsController {
 
 		);
 
+		/**
+		 * Filters the query params for collections of users.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $params The query params for collections of users.
+		 */
 		return apply_filters( 'masteriyo_user_collection_params', $params );
 	}
 
@@ -421,7 +428,7 @@ class UsersController extends PostsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Model           $object  Model object.
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -439,8 +446,10 @@ class UsersController extends PostsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -503,7 +512,7 @@ class UsersController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param User   $user User instance.
+	 * @param Masteriyo\Models\User $user User instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -866,7 +875,7 @@ class UsersController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id   = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -1040,7 +1049,9 @@ class UsersController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $user  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $user User object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

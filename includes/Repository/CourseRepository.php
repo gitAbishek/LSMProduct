@@ -69,6 +69,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new course data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course data.
+			 * @param Masteriyo\Models\Course $course Course object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_data',
 				array(
@@ -710,6 +718,15 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for course post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param \Masteriyo\Repository\CourseRepository $repository Course repository object.
+		 */
 		return apply_filters( 'masteriyo_course_data_store_cpt_get_courses_query', $wp_query_args, $query_vars, $this );
 	}
 

@@ -32,9 +32,18 @@ do_action( 'masteriyo_before_course_category_header' );
 
 ?>
 <header class="masteriyo-courses-header">
-	<?php if ( apply_filters( 'masteriyo_show_page_title', true ) ) : ?>
+	<?php
+	/**
+	 * Filters boolean: true if page title should be shown.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if page title should be shown.
+	 */
+	if ( apply_filters( 'masteriyo_show_page_title', true ) ) :
+		?>
 		<h1 class="masteriyo-courses-header__title page-title">
-			<?php masteriyo_page_title(); ?>
+		<?php masteriyo_page_title(); ?>
 		</h1>
 	<?php endif; ?>
 

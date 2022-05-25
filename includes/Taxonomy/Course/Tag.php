@@ -36,8 +36,15 @@ class Tag extends Taxonomy {
 
 		$permalinks = masteriyo_get_permalink_structure();
 
+		/**
+		 * Filters arguments for course tag taxonomy.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $args The arguments for course tag taxonomy.
+		 */
 		return apply_filters(
-			'masteriyo_taxonomy_args_course_cat',
+			'masteriyo_taxonomy_args_course_tag',
 			array(
 				'hierarchical'      => false,
 				'show_ui'           => true,

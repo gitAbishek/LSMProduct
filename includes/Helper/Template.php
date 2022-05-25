@@ -32,20 +32,38 @@ function masteriyo_template_redirect() {
 	}
 	// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
+	/**
+	 * Filters boolean: true if it should be redirected to a different page if cart is empty.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if it should be redirected to a different page if cart is empty.
+	 */
+	$redirect_empty_cart = apply_filters( 'masteriyo_checkout_redirect_empty_cart', true );
+
 	// When on the checkout with an empty cart, redirect to courses list page.
 	if (
 		is_page( masteriyo_get_page_id( 'checkout' ) ) && masteriyo_get_page_id( 'checkout' ) !== masteriyo_get_page_id( 'cart' )
 		&& masteriyo( 'cart' )->is_empty() && empty( $wp->query_vars['order-pay'] ) && ! isset( $wp->query_vars['order-received'] )
-		&& ! is_customize_preview() && apply_filters( 'masteriyo_checkout_redirect_empty_cart', true )
+		&& ! is_customize_preview() && $redirect_empty_cart
 	) {
 		wp_safe_redirect( masteriyo_get_courses_url() );
 		exit;
 	}
 
+	/**
+	 * Filters boolean: true if it should be redirected to the found course's detail page, if search result has only one item.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if it should be redirected to the found course's detail page, if search result has only one item.
+	 */
+	$redirect_single_search_result = apply_filters( 'masteriyo_redirect_single_search_result', true );
+
 	// Redirect to the course page if we have a single course.
 	if (
 		is_search() && is_post_type_archive( 'mto-course' )
-		&& apply_filters( 'masteriyo_redirect_single_search_result', true ) && 1 === absint( $wp_query->found_posts )
+		&& $redirect_single_search_result && 1 === absint( $wp_query->found_posts )
 	) {
 		$course = masteriyo_get_course( $wp_query->post );
 
@@ -111,6 +129,13 @@ if ( ! function_exists( 'masteriyo_course_loop_end' ) ) {
 
 		masteriyo_get_template( 'loop/loop-end.php' );
 
+		/**
+		 * Filters course loop end html.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $html The course loop end html.
+		 */
 		$loop_end = apply_filters( 'masteriyo_course_loop_end', ob_get_clean() );
 
 		if ( $echo ) {
@@ -157,6 +182,13 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 			$page_title      = get_the_title( $courses_page_id );
 		}
 
+		/**
+		 * Filters current page title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $page_title The current page title.
+		 */
 		$page_title = apply_filters( 'masteriyo_page_title', $page_title );
 
 		if ( $echo ) {
@@ -224,7 +256,8 @@ function masteriyo_reset_loop() {
 /**
  * Get the default columns setting - this is how many courses will be shown per row in loops.
  *
- * @since 0
+ * @since 1.0.0
+ *
  * @return int
  */
 function masteriyo_get_default_courses_per_row() {
@@ -243,6 +276,13 @@ function masteriyo_get_default_courses_per_row() {
 
 	$columns = max( 1, absint( $columns ) );
 
+	/**
+	 * Filters number of columns for a course loop.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $columns The number of columns for a course loop.
+	 */
 	return apply_filters( 'masteriyo_loop_courses_columns', $columns );
 }
 
@@ -301,7 +341,7 @@ function masteriyo_get_loop_prop( $prop, $default = '' ) {
  * When the_post is called, put course data into a global.
  *
  * @param mixed $post Post Object.
- * @return Course
+ * @return Masteriyo\Models\Course
  */
 function masteriyo_setup_course_data( $post ) {
 	unset( $GLOBALS['course'] );
@@ -536,9 +576,18 @@ if ( ! function_exists( 'masteriyo_account_view_order_endpoint' ) ) {
 			return;
 		}
 
-		$notes                 = $order->get_customer_order_notes();
-		$order_items           = $order->get_items( 'course' );
-		$show_purchase_note    = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( OrderStatus::COMPLETED, OrderStatus::PROCESSING ) ) );
+		$notes       = $order->get_customer_order_notes();
+		$order_items = $order->get_items( 'course' );
+
+		/**
+		 * Filters order status list for showing purchase note when they exist.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $statuses The order status list for showing purchase note when they exist.
+		 */
+		$show_purchase_note = $order->has_status( apply_filters( 'masteriyo_purchase_note_order_statuses', array( OrderStatus::COMPLETED, OrderStatus::PROCESSING ) ) );
+
 		$show_customer_details = masteriyo_is_current_user_admin() || ( is_user_logged_in() && $order->get_user_id() === get_current_user_id() );
 
 		masteriyo_get_template(
@@ -894,11 +943,9 @@ if ( ! function_exists( 'masteriyo_checkout_order_summary' ) ) {
 
 if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 	/**
-	 * Display checkout form payement.
+	 * Display checkout form payment.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @return void
 	 */
 	function masteriyo_checkout_payment() {
 		$available_gateways = array();
@@ -907,6 +954,13 @@ if ( ! function_exists( 'masteriyo_checkout_payment' ) ) {
 			$available_gateways = masteriyo( 'payment-gateways' )->get_available_payment_gateways();
 		}
 
+		/**
+		 * Filters order button text.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text The order button text.
+		 */
 		// translators: Cart total order
 		$order_button_text = apply_filters( 'masteriyo_order_button_text', __( 'Confirm Payment', 'masteriyo' ) );
 
@@ -955,6 +1009,15 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 			$html = $args['before'] . implode( $args['separator'], $strings ) . $args['after'];
 		}
 
+		/**
+		 * Filters order item meta html.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $html The order item meta html.
+		 * @param object $order_item Order item object.
+		 * @param array $args Arguments.
+		 */
 		$html = apply_filters( 'masteriyo_display_item_meta', $html, $item, $args );
 
 		if ( $args['echo'] ) {
@@ -976,6 +1039,7 @@ if ( ! function_exists( 'masteriyo_archive_navigation' ) ) {
 		masteriyo_get_template( 'course-pagination.php' );
 	}
 }
+
 if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 
 	/**
@@ -1009,6 +1073,13 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 			)
 		);
 
+		/**
+		 * Filters course search form html.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $html The course search form html.
+		 */
 		$search_form = apply_filters( 'masteriyo_get_course_search_search_form', ob_get_clean() );
 
 		if ( ! $echo ) {
@@ -1064,14 +1135,26 @@ if ( ! function_exists( 'masteriyo_email_order_meta' ) ) {
 	 * Show order metas.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param false|\Masteriyo\Models\Order $order Order object.
 	 */
 	function masteriyo_email_order_meta( $order = false ) {
+		/**
+		 * Filters order email meta fields.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $fields Meta fields.
+		 * @param false|\Masteriyo\Models\Order $order Order object.
+		 */
 		$fields = apply_filters( 'masteriyo_email_order_meta_fields', array(), $order );
 
 		/**
 		 * Deprecated masteriyo_email_order_meta_keys filter.
 		 *
-		 * @since 2.3.0
+		 * @since 1.0.0
+		 *
+		 * @param array $fields Meta fields.
 		 */
 		$_fields = apply_filters( 'masteriyo_email_order_meta_keys', array() );
 
@@ -1119,7 +1202,7 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 	/**
 	 * Get HTML for the order items to be shown in emails.
 	 *
-	 * @param Order $order Order object.
+	 * @param Masteriyo\Models\Order\Order $order Order object.
 	 * @param array $args Arguments.
 	 *
 	 *
@@ -1140,6 +1223,13 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 
 		masteriyo_get_template(
 			'emails/order-items.php',
+			/**
+			 * Filters order item args for email.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $args Order item args.
+			 */
 			apply_filters(
 				'masteriyo_email_order_items_args',
 				array(
@@ -1153,6 +1243,14 @@ if ( ! function_exists( 'masteriyo_get_email_order_items' ) ) {
 			)
 		);
 
+		/**
+		 * Filters order items table html for email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $html
+		 * @param Masteriyo\Models\Order\Order $order Order object.
+		 */
 		return apply_filters( 'masteriyo_email_order_items_table', ob_get_clean(), $order );
 	}
 }
@@ -1209,6 +1307,15 @@ if ( ! function_exists( 'masteriyo_display_item_meta' ) ) {
 			$html = $args['before'] . implode( $args['separator'], $strings ) . $args['after'];
 		}
 
+		/**
+		 * Filters html to display order item meta.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $html The html to display order item meta.
+		 * @param object $order_item Order item object.
+		 * @param array $args Arguments.
+		 */
 		$html = apply_filters( 'masteriyo_display_item_meta', $html, $item, $args );
 
 		if ( $args['echo'] ) {

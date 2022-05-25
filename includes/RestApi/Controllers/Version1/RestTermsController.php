@@ -348,6 +348,7 @@ abstract class RestTermsController extends CrudController {
 	 * are instead treated as a full query.
 	 *
 	 * @param WP_REST_Request $request       Full details about the request.
+	 *
 	 * @return array List of term objects. (Total count in `$this->total_terms`).
 	 */
 	protected function prepare_objects_query( $request ) {
@@ -374,6 +375,8 @@ abstract class RestTermsController extends CrudController {
 		 *
 		 * Enables adding extra arguments or setting defaults for a post
 		 * collection request.
+		 *
+		 * @since 1.0.0
 		 *
 		 * @param array           $args    Key value array of query var to query value.
 		 * @param WP_REST_Request $request The request used.

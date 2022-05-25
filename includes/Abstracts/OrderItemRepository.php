@@ -10,8 +10,8 @@
 
 namespace Masteriyo\Abstracts;
 
+use Masteriyo\Database\Model;
 use Masteriyo\Repository\AbstractRepository;
-use Masteriyo\Contracts\OrderItemRepository as OrderItemRepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ class OrderItemRepository extends AbstractRepository {
 	 * Create a new order item in the database.
 	 *
 	 * @since 1.0.0
-	 * @param \Masteriyo\Models\Order\OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 */
 	public function create( &$item ) {
 		global $wpdb;
@@ -84,7 +84,7 @@ class OrderItemRepository extends AbstractRepository {
 	 * Update a order item in the database.
 	 *
 	 * @since 1.0.0
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 */
 	public function update( Model &$item ) {
 		global $wpdb;
@@ -115,7 +115,7 @@ class OrderItemRepository extends AbstractRepository {
 	 * Remove an order item from the database.
 	 *
 	 * @since 1.0.0
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$item, $args = array() ) {
@@ -134,7 +134,7 @@ class OrderItemRepository extends AbstractRepository {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 *
 	 * @throws Exception If invalid order item.
 	 */
@@ -165,7 +165,7 @@ class OrderItemRepository extends AbstractRepository {
 	/**
 	 * Clear meta cache.
 	 *
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 */
 	public function clear_cache( &$item ) {
 		wp_cache_delete( 'item-' . $item->get_id(), 'masteriyo-order-items' );
@@ -179,7 +179,8 @@ class OrderItemRepository extends AbstractRepository {
 	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return OrderItem[]
+	 *
+	 * @return Masteriyo\Models\Order\OrderItem[]
 	 */
 	public function query( $query_vars ) {
 		global $wpdb;
@@ -220,7 +221,7 @@ class OrderItemRepository extends AbstractRepository {
 	 * @since 1.0.0
 	 *
 	 * @param stdClass $item Order item
-	 * @return OrderItem
+	 * @return Masteriyo\Models\Order\OrderItem
 	 */
 	public function get_order_item_object( $item ) {
 		$type = trim( $item->order_item_type );
@@ -247,7 +248,7 @@ class OrderItemRepository extends AbstractRepository {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param OrderItem $item Order item object.
+	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
 	 * @param stdClass $item List of all order item meta.
 	 *
 	 * @return

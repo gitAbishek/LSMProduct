@@ -220,7 +220,8 @@ class LessonsController extends PostsController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since   1.0.0
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
@@ -239,8 +240,10 @@ class LessonsController extends PostsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -251,7 +254,7 @@ class LessonsController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Lesson $lesson Lesson instance.
+	 * @param Masteriyo\Models\Lesson $lesson Lesson instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -261,6 +264,15 @@ class LessonsController extends PostsController {
 		$section = masteriyo_get_section( $lesson->get_parent_id() );
 		$course  = masteriyo_get_course( $lesson->get_course_id( $context ) );
 
+		/**
+		 * Filters lesson short description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $short_description Lesson short description.
+		 */
+		$short_description = 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description();
+
 		$data = array(
 			'id'                  => $lesson->get_id(),
 			'name'                => wp_specialchars_decode( $lesson->get_name( $context ) ),
@@ -269,7 +281,7 @@ class LessonsController extends PostsController {
 			'preview_link'        => $lesson->get_preview_link(),
 			'status'              => $lesson->get_status( $context ),
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
-			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),
+			'short_description'   => $short_description,
 			'menu_order'          => $lesson->get_menu_order( $context ),
 			'parent_menu_order'   => $section ? $section->get_menu_order( $context ) : 0,
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
@@ -540,7 +552,7 @@ class LessonsController extends PostsController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -649,7 +661,9 @@ class LessonsController extends PostsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $lesson  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $lesson Lesson object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
@@ -826,7 +840,7 @@ class LessonsController extends PostsController {
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param Lesson $lesson Lesson object.
+	 * @param Masteriyo\Models\Lesson $lesson Lesson object.
 	 * @param string $context Request context.
 	 *
 	 * @return array
@@ -868,7 +882,9 @@ class LessonsController extends PostsController {
 		 *
 		 * @since 1.3.2
 		 *
-		 * @return string[] Attachments array.
+		 * @param string[] Attachments array.
+		 * @param Masteriyo\Models\Lesson $lesson Lesson object.
+		 * @param string $context Context.
 		 */
 		return apply_filters( "masteriyo_rest_{$this->object_type}_attachments", $attachments, $lesson, $context );
 	}

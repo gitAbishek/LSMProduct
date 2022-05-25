@@ -364,7 +364,7 @@ abstract class CommentsController extends CrudController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
+	 * @param WP_REST_Request $request Full details about the request.
 	 *
 	 * @return array
 	 */
@@ -480,6 +480,8 @@ abstract class CommentsController extends CrudController {
 		 *
 		 * Allows adjusting of the default query vars that are made public.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param array  Array of allowed WP_Query query vars.
 		 */
 		$valid_vars = apply_filters( 'query_vars', $wp->public_query_vars );
@@ -499,7 +501,6 @@ abstract class CommentsController extends CrudController {
 			 * @since 1.0.0
 			 *
 			 * @param array $private_query_vars Array of allowed query vars for authorized users.
-			 * }
 			 */
 			$private    = apply_filters( 'masteriyo_rest_private_query_vars', $wp->private_query_vars );
 			$valid_vars = array_merge( $valid_vars, $private );

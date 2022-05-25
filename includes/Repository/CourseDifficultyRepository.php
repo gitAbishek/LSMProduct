@@ -46,6 +46,14 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 		$ids = wp_insert_term(
 			$course_difficulty->get_name(),
 			'course_difficulty',
+			/**
+			 * Filters new course difficulty data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course difficulty data.
+			 * @param Masteriyo\Models\CourseDifficulty $course_difficulty Course difficulty object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_difficulty_data',
 				array(

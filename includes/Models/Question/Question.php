@@ -108,11 +108,21 @@ class Question extends Model {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters question title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title The question title.
+		 * @param Masteriyo\Models\Question\Question $question The question object.
+		 */
 		return apply_filters( 'masteriyo_question_title', $this->get_name(), $this );
 	}
 
 	/**
 	 * Product permalink.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return string
 	 */

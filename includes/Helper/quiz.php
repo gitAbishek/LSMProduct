@@ -259,8 +259,8 @@ function masteriyo_get_quiz_attempt_count( $quiz_id, $user_id ) {
  *
  * @since 1.0.0
  *
- * @param int|Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
- * @return Quiz|null
+ * @param int|Masteriyo\Models\Quiz|WP_Post $quiz Quiz id or Quiz Model or Post.
+ * @return Masteriyo\Models\Quiz|null
  */
 function masteriyo_get_quiz( $quiz ) {
 	$quiz_obj   = masteriyo( 'quiz' );
@@ -282,5 +282,13 @@ function masteriyo_get_quiz( $quiz ) {
 		$quiz_obj = null;
 	}
 
+	/**
+	 * Filters quiz object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Quiz|null $quiz_obj The quiz object.
+	 * @param int|Masteriyo\Models\Quiz|WP_Post $quiz Quiz id or quiz Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_quiz', $quiz_obj, $quiz );
 }

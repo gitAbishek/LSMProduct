@@ -93,6 +93,14 @@ class CourseDifficulty extends Model {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters course difficulty title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title The course difficulty title.
+		 * @param Masteriyo\Models\CourseDifficulty $difficulty The course difficulty object.
+		 */
 		return apply_filters( 'masteriyo_course_difficulty_title', $this->get_name(), $this );
 	}
 

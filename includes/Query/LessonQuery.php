@@ -50,11 +50,27 @@ class LessonQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Lesson objects
+	 * @return Masteriyo\Models\Lesson[] Lesson objects
 	 */
 	public function get_lessons() {
+		/**
+		 * Filters lesson object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_lesson_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'lesson.store' )->query( $args );
+
+		/**
+		 * Filters lesson object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Lesson[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_lesson_object_query', $results, $args );
 	}
 }

@@ -57,8 +57,17 @@ class Session extends AbstractSession {
 	 */
 	public function __construct( SessionRepository $session_repository ) {
 		$this->repository = $session_repository;
-		$this->cookie     = apply_filters( 'masteriyo_cookie', 'wp_masteriyo_session_' . COOKIEHASH );
-		$this->table      = $GLOBALS['wpdb']->prefix . 'masteriyo_sessions';
+
+		/**
+		 * Filters cookie name used for the session.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $cookie The cookie name used for the session.
+		 */
+		$this->cookie = apply_filters( 'masteriyo_cookie', 'wp_masteriyo_session_' . COOKIEHASH );
+
+		$this->table = $GLOBALS['wpdb']->prefix . 'masteriyo_sessions';
 
 		$this->start();
 	}
@@ -88,6 +97,13 @@ class Session extends AbstractSession {
 	 * @return bool
 	 */
 	protected function use_securecookie() {
+		/**
+		 * Filters boolean: true if the session cookie should be secure.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if the session cookie should be secure.
+		 */
 		return apply_filters( 'masteriyo_session_use_securecookie', Utils::is_https_site() && is_ssl() );
 	}
 
@@ -223,7 +239,20 @@ class Session extends AbstractSession {
 	 */
 	public function set_cookie( $name, $value, $expire = 0, $secure = false, $httponly = false ) {
 		if ( ! headers_sent() ) {
-			setcookie( $name, $value, $expire, COOKIEPATH ? COOKIEPATH : '/', COOKIE_DOMAIN, $secure, apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure ) );
+			/**
+			 * Filters boolean: true if the cookie is only accessible over HTTP, not scripting languages like JavaScript.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $bool true if the cookie is only accessible over HTTP, not scripting languages like JavaScript.
+			 * @param string $name Name of the cookie being set.
+			 * @param string $value Value of the cookie.
+			 * @param integer $expire Expiry of the cookie.
+			 * @param boolean $secure Whether the cookie should be served only over https.
+			 */
+			$http_only = apply_filters( 'masteriyo_cookie_httponly', $httponly, $name, $value, $expire, $secure );
+
+			setcookie( $name, $value, $expire, COOKIEPATH ? COOKIEPATH : '/', COOKIE_DOMAIN, $secure, $http_only );
 		} elseif ( Constants::is_true( 'WP_DEBUG' ) ) {
 			headers_sent( $file, $line );
 			trigger_error( "{$name} cookie cannot be set - headers already sent by {$file} on line {$line}", E_USER_NOTICE ); // phpcs:ignore
@@ -247,7 +276,22 @@ class Session extends AbstractSession {
 	 * @since 1.0.0
 	 */
 	public function set_session_expiration() {
-		$this->expiring   = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
+		/**
+		 * Filters session expiry time.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $time The session expiry time.
+		 */
+		$this->expiring = time() + (int) apply_filters( 'masteriyo_session_expiring', 47 * HOUR_IN_SECONDS );
+
+		/**
+		 * Filters session due to expire timestamp.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $time The session due to expire timestamp.
+		 */
 		$this->expiration = time() + (int) apply_filters( 'masteriyo_session_expiration', 48 * HOUR_IN_SECONDS );
 
 		$this->set_prop( 'expiry', $this->expiration );

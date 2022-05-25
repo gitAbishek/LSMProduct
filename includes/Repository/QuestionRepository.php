@@ -61,6 +61,14 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		}
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new question data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New question data.
+			 * @param Masteriyo\Models\Question\Question $question Question object.
+			 */
 			apply_filters(
 				'masteriyo_new_question_data',
 				array(
@@ -370,6 +378,15 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for question post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param Masteriyo\Repository\QuestionRepository $repository Question repository object.
+		 */
 		return apply_filters( 'masteriyo_question_data_store_cpt_get_questions_query', $wp_query_args, $query_vars, $this );
 	}
 }

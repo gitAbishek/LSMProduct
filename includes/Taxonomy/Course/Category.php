@@ -35,6 +35,13 @@ class Category extends Taxonomy {
 
 		$permalinks = masteriyo_get_permalink_structure();
 
+		/**
+		 * Filters arguments for course category taxonomy.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args The arguments for course category taxonomy.
+		 */
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_cat',
 			array(

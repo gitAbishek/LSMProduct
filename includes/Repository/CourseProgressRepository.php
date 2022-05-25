@@ -106,6 +106,14 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 
 		$result = $wpdb->insert(
 			$course_progress->get_table_name(),
+			/**
+			 * Filters new course progress data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course progress data.
+			 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_progress_data',
 				array(

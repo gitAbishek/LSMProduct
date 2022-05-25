@@ -36,11 +36,27 @@ class CourseCategoryQuery extends ObjectQuery {
 	 *
 	 * @since 1.3.0
 	 *
-	 * @return \Masteriyo\Models\CourseCategory[] Course objects
+	 * @return Masteriyo\MOdels\CourseCategory[] Course category objects.
 	 */
 	public function get_categories() {
+		/**
+		 * Filters course category object query args.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_course_category_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'course_cat.store' )->query( $args );
+
+		/**
+		 * Filters course category object query results.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param Masteriyo\Models\CourseCategory[] $results Course category objects.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_course_category_object_query', $results, $args );
 	}
 }

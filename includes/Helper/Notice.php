@@ -14,6 +14,14 @@ function masteriyo_add_notice( $message, $notice_type = 'success', $data = array
 		Utils::doing_it_wrong( __FUNCTION__, __( 'This function should not be called before masteriyo_init.', 'masteriyo' ), '1.0.0' );
 		return;
 	}
+
+	/**
+	 * Filters notice message before adding.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $message Notice message.
+	 */
 	$message = apply_filters( 'masteriyo_add_notice_' . $notice_type, $message );
 
 	masteriyo( 'notice' )->add( $message, $notice_type, $data );

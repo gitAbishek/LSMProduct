@@ -31,6 +31,8 @@ class RegisterPostType {
 
 	/**
 	 * Register post types
+	 *
+	 * @since 1.0.0
 	 */
 	public function register() {
 		if ( ! is_blog_installed() ) {
@@ -39,6 +41,13 @@ class RegisterPostType {
 
 		do_action( 'masteriyo_register_post_type' );
 
+		/**
+		 * Filters post type classes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $post_types Post type classes.
+		 */
 		$post_types = apply_filters( 'masteriyo_register_post_types', $this->post_types );
 		foreach ( $post_types as $post_type => $class ) {
 			$post_type = new $class();

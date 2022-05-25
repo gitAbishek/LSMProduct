@@ -47,11 +47,27 @@ class NotificationQuery extends ObjectQuery {
 	 *
 	 * @since 1.4.1
 	 *
-	 * @return array|Model Course objects
+	 * @return Masteriyo\Models\Notification[] Notification objects
 	 */
 	public function get_notifications() {
+		/**
+		 * Filters notification object query args.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_notification_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'notification.store' )->query( $args, $this );
+
+		/**
+		 * Filters notification object query results.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param Masteriyo\Models\Notification[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_notification_object_query', $results, $args );
 	}
 }

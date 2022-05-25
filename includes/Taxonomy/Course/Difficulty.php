@@ -36,6 +36,13 @@ class Difficulty extends Taxonomy {
 
 		$permalinks = masteriyo_get_permalink_structure();
 
+		/**
+		 * Filters arguments for course difficulty taxonomy.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args The arguments for course difficulty taxonomy.
+		 */
 		return apply_filters(
 			'masteriyo_taxonomy_args_course_difficulty',
 			array(

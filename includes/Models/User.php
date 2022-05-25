@@ -132,6 +132,14 @@ class User extends Model {
 			$image_url = $this->get_avatar_url();
 		}
 
+		/**
+		 * Filters a user's profile image URL.
+		 *
+		 * @since 1.4.7
+		 *
+		 * @param string $image_url The user's profile image URL.
+		 * @param Masteriyo\Models\User $user User object.
+		 */
 		return apply_filters( 'masteriyo_profile_image_url', $image_url, $this );
 	}
 
@@ -1059,10 +1067,21 @@ class User extends Model {
 	/**
 	 * Return true if the user is active.
 	 *
+	 * @since 1.5.0
+	 *
 	 * @return boolean
 	 */
 	public function is_active() {
 		$is_active = UserStatus::ACTIVE === $this->get_prop( 'status' );
+
+		/**
+		 * Filters boolean: true if a user is active.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param boolean $is_active true if a user is active.
+		 * @param Masteriyo\Models\User $user User object.
+		 */
 		return apply_filters( 'masteriyo_is_user_active', $is_active, $this );
 	}
 }

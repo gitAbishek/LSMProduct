@@ -13,8 +13,9 @@ use Masteriyo\Enums\OrderStatus;
  *
  * @since 1.0.0
  *
- * @param int|Order|WP_Post $order Order id or Order Model or Post.
- * @return Order|null
+ * @param int|Masteriyo\Models\Order\Order|\WP_Post $order Order id or Order Model or Post.
+ *
+ * @return Masteriyo\Models\Order\Order|null
  */
 function masteriyo_get_order( $order ) {
 	$order_obj   = masteriyo( 'order' );
@@ -35,6 +36,15 @@ function masteriyo_get_order( $order ) {
 	} catch ( \Exception $e ) {
 		return null;
 	}
+
+	/**
+	 * Filters order object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Order\Order $order_obj The order object.
+	 * @param Masteriyo\Models\Order\Order|int|\WP_Post $order Order id or Order Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_order', $order_obj, $order );
 }
 
@@ -43,9 +53,9 @@ function masteriyo_get_order( $order ) {
  *
  * @since 1.0.0
  *
- * @param int|OrderItem $order Order id or Order Model or Post.
+ * @param int|WP_Post|Masteriyo\Models\Order\OrderItem $order Order id or Order Model or Post.
  *
- * @return OrderItem|null
+ * @return Masteriyo\Models\Order\OrderItem|null
  */
 function masteriyo_get_order_item( $order_item ) {
 	$order_item_obj   = masteriyo( 'order-item.course' );
@@ -66,6 +76,15 @@ function masteriyo_get_order_item( $order_item ) {
 	} catch ( \Exception $e ) {
 		return null;
 	}
+
+	/**
+	 * Filters order item object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Order\OrderItem $order_item_obj The order item object.
+	 * @param Masteriyo\Models\Order\OrderItem|int|\WP_Post $order_item Order item id or Order item Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_order_item', $order_item_obj, $order_item );
 }
 
@@ -135,6 +154,13 @@ function masteriyo_get_order_statuses() {
 		),
 	);
 
+	/**
+	 * Filters order statuses.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $order_statuses The order statuses and its parameters.
+	 */
 	return apply_filters( 'masteriyo_order_statuses', $order_statuses );
 }
 
@@ -158,6 +184,13 @@ function masteriyo_is_order_status( $maybe_status ) {
  * @return array
  */
 function masteriyo_get_is_paid_statuses() {
+	/**
+	 * Filters list of statuses which are considered 'paid'.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $statuses The list of statuses which are considered 'paid'.
+	 */
 	return apply_filters( 'masteriyo_order_is_paid_statuses', array( OrderStatus::PROCESSING, OrderStatus::COMPLETED ) );
 }
 
@@ -168,6 +201,13 @@ function masteriyo_get_is_paid_statuses() {
  * @return array
  */
 function masteriyo_get_is_pending_statuses() {
+	/**
+	 * Filters list of statuses which are considered 'pending payment'.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $statuses The list of statuses which are considered 'pending payment'.
+	 */
 	return apply_filters( 'masteriyo_order_is_pending_statuses', array( OrderStatus::PENDING ) );
 }
 
@@ -194,11 +234,19 @@ function masteriyo_get_order_status_name( $status ) {
  *
  * @param array $args Query arguments.
  *
- * @return object|array[Order]
+ * @return Masteriyo\Models\Order\Order|\Masteriyo\Models\Order\Order[]
  */
 function masteriyo_get_orders( $args = array() ) {
 	$orders = masteriyo( 'query.orders' )->set_args( $args )->get_orders();
 
+	/**
+	 * Filters queried order objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Order\Order|\Masteriyo\Models\Order\Order[] $orders The queried order objects.
+	 * @param array $query_args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_orders', $orders, $args );
 }
 
@@ -209,11 +257,19 @@ function masteriyo_get_orders( $args = array() ) {
  *
  * @param array $args Query arguments.
  *
- * @return object|array[OrderItem]
+ * @return Masteriyo\Models\Order\OrderItem|\Masteriyo\Models\Order\OrderItem[]
  */
 function masteriyo_get_order_items( $args = array() ) {
 	$order_items = masteriyo( 'query.order-items' )->set_args( $args )->get_order_items();
 
+	/**
+	 * Filters queried order item objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Order\OrderItem|\Masteriyo\Models\Order\OrderItem[] $order_items The queried order item objects.
+	 * @param array $query_args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_order_items', $order_items, $args );
 }
 
@@ -221,6 +277,7 @@ function masteriyo_get_order_items( $args = array() ) {
  * Generate an order key with prefix.
  *
  * @since 1.0.0
+ *
  * @param string $key Order key without a prefix. By default generates a 13 digit secret.
  * @return string The order key.
  */
@@ -228,7 +285,16 @@ function masteriyo_generate_order_key( $key = '' ) {
 	$key = trim( $key );
 	$key = empty( $key ) ? wp_generate_password( 13, false ) : $key;
 
-	return 'masteriyo_' . apply_filters( 'masteriyo_generate_order_key', 'order_' . $key );
+	/**
+	 * Filters generated order key.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $key The generated order key.
+	 */
+	$order_key = apply_filters( 'masteriyo_generate_order_key', 'order_' . $key );
+
+	return 'masteriyo_' . $order_key;
 }
 
 /**
@@ -253,6 +319,13 @@ function masteriyo_get_order_id_by_order_key( $order_key ) {
  * @return array
  */
 function masteriyo_get_account_orders_columns() {
+	/**
+	 * Filters columns for orders table in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $columns The columns for orders table in account page.
+	 */
 	$columns = apply_filters(
 		'masteriyo_account_orders_columns',
 		array(
@@ -263,6 +336,14 @@ function masteriyo_get_account_orders_columns() {
 			'order-actions' => __( 'Actions', 'masteriyo' ),
 		)
 	);
+
+	/**
+	 * Filters columns for orders table in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $columns The columns for orders table in account page.
+	 */
 	return apply_filters( 'masteriyo_my_account_my_orders_columns', $columns );
 }
 
@@ -271,7 +352,7 @@ function masteriyo_get_account_orders_columns() {
  *
  * @since 1.0.0
  *
- * @param  int|Order $order Order instance or ID.
+ * @param  int|Masteriyo\Models\Order\Order $order Order instance or ID.
  *
  * @return array
  */
@@ -302,9 +383,26 @@ function masteriyo_get_account_orders_actions( $order ) {
 		unset( $actions['pay'] );
 	}
 
-	if ( ! in_array( $order->get_status(), apply_filters( 'masteriyo_valid_order_statuses_for_cancel', array( OrderStatus::PENDING, OrderStatus::FAILED ), $order ), true ) ) {
+	/**
+	 * Filters list of statuses which are considered 'cancelled'.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $statuses The list of statuses which are considered 'cancelled'.
+	 */
+	$cancel_statuses = apply_filters( 'masteriyo_valid_order_statuses_for_cancel', array( OrderStatus::PENDING, OrderStatus::FAILED ), $order );
+
+	if ( ! in_array( $order->get_status(), $cancel_statuses, true ) ) {
 		unset( $actions['cancel'] );
 	}
 
+	/**
+	 * Filters actions for an order in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $actions The actions for an order in account page.
+	 * @param Masteriyo\Models\Order\Order $order Order object.
+	 */
 	return apply_filters( 'masteriyo_my_account_my_orders_actions', $actions, $order );
 }

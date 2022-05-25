@@ -271,8 +271,9 @@ class CourseBuilderController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  WP_REST_Request $request Full details about the request.
-	 * @return Model[]
+	 * @param WP_REST_Request $request Full details about the request.
+	 *
+	 * @return Masteriyo\Database\Model[]
 	 */
 	protected function get_course_contents( $request ) {
 		$sections = $this->get_objects(
@@ -298,6 +299,13 @@ class CourseBuilderController extends PostsController {
 			}
 		}
 
+		/**
+		 * Filters course contents(sections, lessons, quizzes) objects.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model[] $objects The course contents(sections, lessons, quizzes) objects.
+		 */
 		return apply_filters( "masteriyo_{$this->object_type}_objects", $objects );
 	}
 
@@ -341,8 +349,10 @@ class CourseBuilderController extends PostsController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
-	 * @param  Model         $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -362,7 +372,7 @@ class CourseBuilderController extends PostsController {
 		 * refers to object type being prepared for the response.
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );

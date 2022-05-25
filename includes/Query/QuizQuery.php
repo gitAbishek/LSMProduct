@@ -41,15 +41,31 @@ class QuizQuery extends ObjectQuery {
 	}
 
 	/**
-	 * Get quizes matching the current query vars.
+	 * Get quizzes matching the current query vars.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model quiz objects
+	 * @return Masteriyo\Models\Quiz[] quiz objects
 	 */
 	public function get_quizes() {
+		/**
+		 * Filters quiz object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_quiz_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'quiz.store' )->query( $args );
+
+		/**
+		 * Filters quiz object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Quiz[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_quiz_object_query', $results, $args );
 	}
 }

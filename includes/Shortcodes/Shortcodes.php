@@ -42,6 +42,13 @@ class Shortcodes {
 	protected function get_shortcodes() {
 		$namespace = '\\Masteriyo\\Shortcodes';
 
+		/**
+		 * Filters shortcode classes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $classes The shortcode classes.
+		 */
 		return apply_filters(
 			'masteriyo_shortcodes',
 			array(

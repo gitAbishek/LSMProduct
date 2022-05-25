@@ -208,14 +208,44 @@ class OrderItem extends Model {
 				continue;
 			}
 
+			/**
+			 * Filters order item display meta key.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $display_key Display key.
+			 * @param object $meta Meta object.
+			 * @param Masteriyo\Models\Order\OrderItem $order_item Order item object.
+			 */
+			$display_key = apply_filters( 'masteriyo_order_item_display_meta_key', $display_key, $meta, $this );
+
+			/**
+			 * Filters order item display meta value.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $display_value Display value.
+			 * @param object $meta Meta object.
+			 * @param Masteriyo\Models\Order\OrderItem $order_item Order item object.
+			 */
+			$display_value = apply_filters( 'masteriyo_order_item_display_meta_value', $display_value, $meta, $this );
+
 			$formatted_meta[ $meta->id ] = (object) array(
 				'key'           => $meta->key,
 				'value'         => $meta->value,
-				'display_key'   => apply_filters( 'masteriyo_order_item_display_meta_key', $display_key, $meta, $this ),
-				'display_value' => wpautop( make_clickable( apply_filters( 'masteriyo_order_item_display_meta_value', $display_value, $meta, $this ) ) ),
+				'display_key'   => $display_key,
+				'display_value' => wpautop( make_clickable( $display_value ) ),
 			);
 		}
 
+		/**
+		 * Filters order item formatted meta data.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $formatted_meta Order item formatted meta data
+		 * @param Masteriyo\Models\Order\OrderItem $order_item Order item object.
+		 */
 		return apply_filters( 'masteriyo_order_item_get_formatted_meta_data', $formatted_meta, $this );
 	}
 

@@ -77,12 +77,43 @@ endif;
 					continue;
 				}
 				?>
-				<tr class="<?php echo esc_attr( apply_filters( 'masteriyo_order_item_class', 'masteriyo-table__line-item order_item', $item, $order ) ); ?>">
+				<tr class="
+				<?php
+				/**
+				 * Filters order item table row class.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $class The order item table row class.
+				 * @param object $order_item Order item object.
+				 * @param Masteriyo\Models\Order\Order $order Order object.
+				 */
+				echo esc_attr( apply_filters( 'masteriyo_order_item_class', 'masteriyo-table__line-item order_item', $item, $order ) );
+				?>
+				">
 
 					<td>
 						<?php
+						/**
+						 * Filters order item permalink.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param string $url The order item permalink.
+						 * @param object $order_item Order item object.
+						 * @param Masteriyo\Models\Order\Order $order Order object.
+						 */
 						$course_permalink = apply_filters( 'masteriyo_order_item_permalink', $course->get_permalink( $item ), $item, $order );
 						$course_name      = $course_permalink ? sprintf( '<a href="%s">%s</a>', $course_permalink, $item->get_name() ) : $item->get_name();
+
+						/**
+						 * Filters order item name to be displayed in order detail table.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param string $item_name The order item name.
+						 * @param object $order_item Order item object.
+						 */
 						echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $course_name, $item ) );
 
 						$qty          = $item->get_quantity();
@@ -95,6 +126,14 @@ endif;
 						}
 
 						echo wp_kses_post(
+							/**
+							 * Filters order item quantity html to render.
+							 *
+							 * @since 1.0.0
+							 *
+							 * @param string $html The order item quantity html to render.
+							 * @param object $order_item Order item object.
+							 */
 							apply_filters(
 								'masteriyo_order_item_quantity_html',
 								' <strong class="course-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>',

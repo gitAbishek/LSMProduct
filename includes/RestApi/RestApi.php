@@ -53,6 +53,13 @@ class RestApi {
 	 * @return array List of Namespaces and Main controller classes.
 	 */
 	protected static function get_rest_namespaces() {
+		/**
+		 * Filters rest API controller classes.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $controllers API namespace to API controllers index array.
+		 */
 		return apply_filters(
 			'masteriyo_rest_api_get_rest_namespaces',
 			array(

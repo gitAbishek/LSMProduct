@@ -144,6 +144,14 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters course title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title Course title.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_title', $this->get_name(), $this );
 	}
 
@@ -189,6 +197,14 @@ class Course extends Model {
 
 		$preview_link .= '#course/' . $this->get_id();
 
+		/**
+		 * Filters course preview link.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param string $link Course preview link.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_preview_link', $preview_link, $this );
 	}
 
@@ -361,12 +377,28 @@ class Course extends Model {
 		$short_description = $this->get_short_description( $context );
 
 		if ( ! empty( $short_description ) ) {
+			/**
+			 * Filters course excerpt.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $excerpt Course excerpt.
+			 * @param Masteriyo\Models\Course $course Course object.
+			 */
 			return apply_filters( 'masteriyo_course_excerpt', $short_description, $this );
 		}
 
 		$description = $this->get_description( $context );
 
 		if ( empty( $description ) ) {
+			/**
+			 * Filters course excerpt.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $excerpt Course excerpt.
+			 * @param Masteriyo\Models\Course $course Course object.
+			 */
 			return apply_filters( 'masteriyo_course_excerpt', '', $this );
 		}
 
@@ -376,11 +408,36 @@ class Course extends Model {
 		/** This filter is documented in wp-includes/post-template.php */
 		$excerpt = apply_filters( 'the_content', $excerpt );
 
-		$excerpt        = str_replace( ']]>', ']]&gt;', $excerpt );
-		$excerpt_length = absint( apply_filters( 'masteriyo_course_excerpt_length', 35 ) );
-		$excerpt_more   = apply_filters( 'masteriyo_course_excerpt_more', '&hellip;' );
-		$excerpt        = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
+		$excerpt = str_replace( ']]>', ']]&gt;', $excerpt );
 
+		/**
+		 * Filters course excerpt length.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $length Course excerpt length.
+		 */
+		$excerpt_length = absint( apply_filters( 'masteriyo_course_excerpt_length', 35 ) );
+
+		/**
+		 * Filters course excerpt more symbol.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $symbol Course excerpt more symbol.
+		 */
+		$excerpt_more = apply_filters( 'masteriyo_course_excerpt_more', '&hellip;' );
+
+		$excerpt = wp_trim_words( $excerpt, $excerpt_length, $excerpt_more );
+
+		/**
+		 * Filters course excerpt.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $excerpt Course excerpt.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_excerpt', $excerpt, $this );
 	}
 
@@ -1167,6 +1224,15 @@ class Course extends Model {
 		} else {
 			$on_sale = false;
 		}
+
+		/**
+		 * Filters boolean: true if given course is on sale.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if given course is on sale.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return 'view' === $context ? apply_filters( 'masteriyo_course_is_on_sale', $on_sale, $this ) : $on_sale;
 	}
 
@@ -1178,6 +1244,14 @@ class Course extends Model {
 	 * @return bool
 	 */
 	public function is_purchasable() {
+		/**
+		 * Filters boolean: true if the course is purchasable.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if the course is purchasable.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters(
 			'masteriyo_is_purchasable',
 			( PostStatus::PUBLISH === $this->get_status() || current_user_can( 'edit_post', $this->get_id() ) ) && '' !== $this->get_price(),
@@ -1205,6 +1279,15 @@ class Course extends Model {
 	 */
 	public function is_visible() {
 		$visible = $this->is_visible_core();
+
+		/**
+		 * Filters boolean: true if the course is visible on catalog.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if the course is visible on catalog.
+		 * @param integer $course_id Course ID.
+		 */
 		return apply_filters( 'masteriyo_course_is_visible', $visible, $this->get_id() );
 	}
 
@@ -1234,7 +1317,7 @@ class Course extends Model {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array[CourseCategory]
+	 * @return Masteriyo\Models\CourseCategory[]
 	 */
 	public function get_categories() {
 		$cat_ids    = $this->get_category_ids();
@@ -1251,6 +1334,14 @@ class Course extends Model {
 			$cat_ids
 		);
 
+		/**
+		 * Filters categories of the course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseCategory[] $categories Categories of the course.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_categories_objects', $categories, $this );
 	}
 
@@ -1259,7 +1350,7 @@ class Course extends Model {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array[CourseTag]
+	 * @return Masteriyo\Models\CourseTag[]
 	 */
 	public function get_tags() {
 		$tag_ids = $this->get_tags_ids();
@@ -1276,6 +1367,14 @@ class Course extends Model {
 			$tag_ids
 		);
 
+		/**
+		 * Filters tags of the course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseTag[] $tags Tags of the course.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_categories_objects', $tags, $this );
 	}
 
@@ -1284,7 +1383,7 @@ class Course extends Model {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array[CourseDifficulties]
+	 * @return Masteriyo\Models\CourseDifficulty[]
 	 */
 	public function get_difficulties() {
 		$difficulty_id = $this->get_difficulty_id();
@@ -1294,7 +1393,15 @@ class Course extends Model {
 		$difficulty_obj->set_id( $difficulty_id );
 		$store->read( $difficulty_obj );
 
-		return apply_filters( 'masteriyo_course_categories_objects', $difficulty_obj, $this );
+		/**
+		 * Filters difficulties of the course.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param Masteriyo\Models\CourseDifficulty[] $difficulties Difficulties of the course.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
+		return apply_filters( 'masteriyo_course_difficulties_objects', $difficulty_obj, $this );
 	}
 
 	/**
@@ -1305,6 +1412,14 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_add_to_cart_text() {
+		/**
+		 * Filters add to cart button text for a course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text Add to cart button text.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Buy Now', 'masteriyo' ), $this );
 	}
 
@@ -1316,6 +1431,14 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_course_start_text() {
+		/**
+		 * Filters start course button text for a course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text Start course button text.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_single_course_start_text', __( 'Start Course', 'masteriyo' ), $this );
 	}
 
@@ -1327,6 +1450,14 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_course_continue_text() {
+		/**
+		 * Filters continue button text for a course.
+		 *
+		 * @since 1.3.11
+		 *
+		 * @param string $text Continue button text.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_single_course_continue_text', __( 'Continue', 'masteriyo' ), $this );
 	}
 
@@ -1338,6 +1469,14 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_course_completed_text() {
+		/**
+		 * Filters completed button text for a course.
+		 *
+		 * @since 1.3.11
+		 *
+		 * @param string $text Completed button text.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_single_course_completed_text', __( 'Completed', 'masteriyo' ), $this );
 	}
 
@@ -1405,6 +1544,14 @@ class Course extends Model {
 			);
 		}
 
+		/**
+		 * Filters add to cart URL for a course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url Add to cart URL.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_add_to_cart_url', $url, $this );
 	}
 
@@ -1419,9 +1566,17 @@ class Course extends Model {
 		$text = __( 'Read more', 'masteriyo' );
 
 		if ( $this->is_purchasable() ) {
-			$text = __( 'Add_to_cart Now', 'masteriyo' );
+			$text = __( 'Add to cart now', 'masteriyo' );
 		}
 
+		/**
+		 * Filters add to cart text for a course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text The add to cart text.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_add_to_cart_text', $text, $this );
 	}
 
@@ -1441,6 +1596,14 @@ class Course extends Model {
 			$text = __( 'Enroll &ldquo;%s&rdquo; course', 'masteriyo' );
 		}
 
+		/**
+		 * Filters add to cart button description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $description Add to cart button description - used in aria tags.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_course_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
 	}
 
@@ -1469,6 +1632,18 @@ class Course extends Model {
 			$image = masteriyo_placeholder_img( $size, $attr );
 		}
 
+		/**
+		 * Filters main product image html.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $image The main product image html.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 * @param string $size Image size.
+		 * @param array $attr Image attributes.
+		 * @param boolean $placeholder True to return $placeholder if no image is found, or false to return an empty string.
+		 * @param string $image The main product image html.
+		 */
 		return apply_filters( 'masteriyo_product_get_image', $image, $this, $size, $attr, $placeholder, $image );
 	}
 
@@ -1511,7 +1686,7 @@ class Course extends Model {
 	 *
 	 * @since 1.3.11
 	 *
-	 * @return null|Masteriyo\Models\Lesson
+	 * @return null|Masteriyo\Models\Lesson|Masteriyo\Models\Quiz
 	*/
 	public function get_first_lesson_or_quiz() {
 		$first_lesson_or_quiz = null;
@@ -1547,6 +1722,14 @@ class Course extends Model {
 			}
 		}
 
+		/**
+		 * Filters the first lesson or quiz of a course.
+		 *
+		 * @since 1.3.11
+		 *
+		 * @param null|Masteriyo\Models\Lesson|Masteriyo\Models\Quiz $first_lesson_or_quiz The first lesson or quiz of the course.
+		 * @param Masteriyo\Models\Course $course Course object.
+		 */
 		return apply_filters( 'masteriyo_single_course_get_first_lesson_or_quiz', $first_lesson_or_quiz, $this );
 	}
 }

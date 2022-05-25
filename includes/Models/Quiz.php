@@ -96,9 +96,19 @@ class Quiz extends Model {
 	/**
 	 * Get the product's title. For products this is the product name.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters quiz title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title Quiz title.
+		 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+		 */
 		return apply_filters( 'masteriyo_quiz_title', $this->get_name(), $this );
 	}
 
@@ -172,6 +182,9 @@ class Quiz extends Model {
 		 * Quiz post preview link.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $link Preview URL.
+		 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 		 */
 		return apply_filters( 'masteriyo_quiz_post_preview_link', $preview_link, $this );
 	}
@@ -196,6 +209,9 @@ class Quiz extends Model {
 		 * Quiz preview link for learn page.
 		 *
 		 * @since 1.4.1
+		 *
+		 * @param string $url Preview URL.
+		 * @param Masteriyo\Models\Quiz $quiz Quiz object.
 		 */
 		return apply_filters( 'masteriyo_quiz_preview_link', $preview_link, $this );
 	}

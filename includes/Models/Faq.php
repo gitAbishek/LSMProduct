@@ -115,6 +115,14 @@ class Faq extends Model {
 	 * @return string
 	 */
 	public function get_title( $context = 'view' ) {
+		/**
+		 * Filters FAQ title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title FAQ title.
+		 * @param Masteriyo\Models\Faq $faq FAQ object.
+		 */
 		return apply_filters( 'masteriyo_faq_title', $this->get_prop( 'title', $context ), $this );
 	}
 

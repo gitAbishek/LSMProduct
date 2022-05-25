@@ -196,8 +196,10 @@ class CartItemsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since   1.0.0
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -215,8 +217,10 @@ class CartItemsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -225,13 +229,24 @@ class CartItemsController extends CrudController {
 	/**
 	 * Get lesson data.
 	 *
-	 * @param Lesson $lesson Lesson instance.
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Lesson $lesson Lesson instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
 	protected function get_lesson_data( $lesson, $context = 'view' ) {
+		/**
+		 * Filters lesson short description.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $short_description Lesson short description.
+		 */
+		$short_description = 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description();
+
 		$data = array(
 			'id'                  => $lesson->get_id(),
 			'name'                => $lesson->get_name( $context ),
@@ -240,7 +255,7 @@ class CartItemsController extends CrudController {
 			'status'              => $lesson->get_status( $context ),
 			'featured'            => $lesson->get_featured( $context ),
 			'description'         => 'view' === $context ? wpautop( do_shortcode( $lesson->get_description() ) ) : $lesson->get_description( $context ),
-			'short_description'   => 'view' === $context ? apply_filters( 'masteriyo_short_description', $lesson->get_short_description() ) : $lesson->get_short_description( $context ),
+			'short_description'   => $short_description,
 			'menu_order'          => $lesson->get_menu_order( $context ),
 			'reviews_allowed'     => $lesson->get_reviews_allowed( $context ),
 			'parent_id'           => $lesson->get_parent_id( $context ),
@@ -562,7 +577,7 @@ class CartItemsController extends CrudController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		global $masteriyo_container;
@@ -659,7 +674,9 @@ class CartItemsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $lesson  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $lesson Lesson object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

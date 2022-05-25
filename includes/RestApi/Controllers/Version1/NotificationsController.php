@@ -448,8 +448,8 @@ class NotificationsController extends CrudController {
 	 * @since 1.4.1
 	 *
 	 * @param WP_REST_Request $request Request object.
-/
-	 * @return WP_Error|Model
+	 *
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id           = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -548,7 +548,7 @@ class NotificationsController extends CrudController {
 		 *
 		 * @since 1.4.1
 		 *
-		 * @param Model         $notification  Object object.
+		 * @param Masteriyo\Database\Model $notification Notification object.
 		 * @param WP_REST_Request $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $notification, $request, $creating );
@@ -558,8 +558,10 @@ class NotificationsController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.4.1
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -579,7 +581,7 @@ class NotificationsController extends CrudController {
 		 * @since 1.4.1
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -590,7 +592,7 @@ class NotificationsController extends CrudController {
 	 *
 	 * @since 1.4.1
 	 *
-	 * @param Notification $notification notification instance.
+	 * @param Masteriyo\Models\Notification $notification notification instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *

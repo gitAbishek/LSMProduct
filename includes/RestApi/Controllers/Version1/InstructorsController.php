@@ -85,6 +85,13 @@ class InstructorsController extends UsersController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
+		/**
+		 * Filters instructors collection query params.
+		 *
+		 * @since 1.3.0
+		 *
+		 * @param array $params The collection query params.
+		 */
 		return apply_filters( 'masteriyo_instructor_collection_params', $params );
 	}
 
@@ -210,7 +217,7 @@ class InstructorsController extends UsersController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id         = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -375,7 +382,9 @@ class InstructorsController extends UsersController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $instructor  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Database\Model $instructor Instructor object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

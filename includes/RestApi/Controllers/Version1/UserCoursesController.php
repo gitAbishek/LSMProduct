@@ -261,8 +261,10 @@ class UserCoursesController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.3.1
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -282,7 +284,7 @@ class UserCoursesController extends CrudController {
 		 * @since 1.3.1
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -293,7 +295,7 @@ class UserCoursesController extends CrudController {
 	 *
 	 * @since 1.3.1
 	 *
-	 * @param UserCourse  $user_course User course instance.
+	 * @param Masteriyo\Models\UserCourse  $user_course User course instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -343,7 +345,7 @@ class UserCoursesController extends CrudController {
 		 * @since 1.4.10
 		 *
 		 * @param array $data User course data.
-		 * @param Masteriyo\Models\Usercourse $user_course User Course object.
+		 * @param Masteriyo\Models\UserCourse $user_course User Course object.
 		 * @param string $context What the value is for. Valid values are view and edit.
 		 * @param Masteriyo\RestApi\Controllers\Version1\UserCoursesController $controller REST user courses controller object.
 		 */
@@ -485,7 +487,7 @@ class UserCoursesController extends CrudController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id          = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -532,7 +534,7 @@ class UserCoursesController extends CrudController {
 		 *
 		 * @since 1.3.1
 		 *
-		 * @param Model         $user_course  Object object.
+		 * @param Masteriyo\Database\Model $user_course User course object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */

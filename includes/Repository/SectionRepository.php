@@ -51,6 +51,14 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		}
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new section data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New section data.
+			 * @param Masteriyo\Models\Section $section Section object.
+			 */
 			apply_filters(
 				'masteriyo_new_section_data',
 				array(
@@ -378,6 +386,15 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for section post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param \Masteriyo\Repository\SectionRepository $repository Section repository object.
+		 */
 		return apply_filters( 'masteriyo_section_wp_query_args', $wp_query_args, $query_vars, $this );
 	}
 

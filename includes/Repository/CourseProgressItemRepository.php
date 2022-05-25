@@ -119,6 +119,14 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 			$result = $wpdb->insert(
 				$course_progress_item->get_table_name(),
+				/**
+				 * Filters new course progress item data before creating.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $data New course progress item data.
+				 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+				 */
 				apply_filters(
 					'masteriyo_new_course_progress_data',
 					array(

@@ -13,11 +13,19 @@
  *
  * @param array $args Query arguments.
  *
- * @return object|array[Question]
+ * @return Masteriyo\Models\Question[]
  */
 function masteriyo_get_questions( $args = array() ) {
 	$questions = masteriyo( 'query.questions' )->set_args( $args )->get_questions();
 
+	/**
+	 * Filters queried question objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Question[] $questions Queried question objects.
+	 * @param array $query_args Query args.
+	 */
 	return apply_filters( 'masteriyo_get_questions', $questions, $args );
 }
 
@@ -26,8 +34,9 @@ function masteriyo_get_questions( $args = array() ) {
  *
  * @since 1.0.0
  *
- * @param int|Question|WP_Post $question Question id or Question Model or Post.
- * @return Question|null
+ * @param int|Masteriyo\Models\Question|WP_Post $question Question id or Question Model or Post.
+ *
+ * @return Masteriyo\Models\Question|null
  */
 function masteriyo_get_question( $question ) {
 	if ( is_int( $question ) ) {
@@ -56,6 +65,14 @@ function masteriyo_get_question( $question ) {
 		return null;
 	}
 
+	/**
+	 * Filters question object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\Question|null $question_obj The question object.
+	 * @param int|Masteriyo\Models\Question|WP_Post $question Question id or Question Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_question', $question_obj, $question );
 }
 

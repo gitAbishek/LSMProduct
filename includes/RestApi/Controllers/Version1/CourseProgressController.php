@@ -270,8 +270,10 @@ class CourseProgressController extends CrudController {
 	 * Prepares the object for the REST response.
 	 *
 	 * @since  1.0.0
-	 * @param  Model           $object  Model object.
+	 *
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
+	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
@@ -291,7 +293,7 @@ class CourseProgressController extends CrudController {
 		 * @since 1.0.0
 		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -302,7 +304,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param CourseProgress  $course_progress User activity instance.
+	 * @param Masteriyo\Models\CourseProgress  $course_progress User activity instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -455,7 +457,7 @@ class CourseProgressController extends CrudController {
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Database\Model
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 		$id              = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
@@ -507,7 +509,7 @@ class CourseProgressController extends CrudController {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model         $course_progress  Object object.
+		 * @param Masteriyo\Database\Model $course_progress  Course progress object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
@@ -900,7 +902,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param CourseProgressItem  $course_progress_item Course progress item object.
+	 * @param Masteriyo\Models\CourseProgressItem  $course_progress_item Course progress item object.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
@@ -921,6 +923,15 @@ class CourseProgressController extends CrudController {
 			'video'      => ! empty( trim( $video ) ),
 		);
 
+		/**
+		 * Filters course progress item data.
+		 *
+		 * @since 1.0.3
+		 *
+		 * @param array $data The course progress item data.
+		 * @param Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+		 * @param string $context Context.
+		 */
 		return apply_filters( 'masteriyo_course_progress_item_data', $data, $course_progress_item, $context );
 	}
 
@@ -947,7 +958,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.3.8
 	 *
-	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 * @return array
 	 */
 	protected function get_course_progress_items_from_db( $course_progress ) {
@@ -981,7 +992,7 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.3.8
 	 *
-	 * @param \Masteriyo\Models\CourseProgress $course_progress Course progress object.
+	 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
 	 * @return array
 	 */
 	protected function get_course_progress_items_from_session( $course_progress ) {
@@ -1126,7 +1137,8 @@ class CourseProgressController extends CrudController {
 	 *
 	 * @since 1.3.8
 	 *
-	 * @param \WP_Post $lesson_quiz Either lesson or quiz post type.
+	 * @param WP_Post $lesson_quiz Either lesson or quiz post type.
+	 *
 	 * @return Masteriyo\Models\CourseProgressItem
 	 */
 	protected function get_course_progress_item( $lesson_quiz ) {
@@ -1154,6 +1166,15 @@ class CourseProgressController extends CrudController {
 			}
 		}
 
+		/**
+		 * Filters course progress item object.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param Masteriyo\Models\CourseProgressItem $object The course progress item object.
+		 * @param WP_Post $quiz Quiz post object.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseProgressController $controller Course progress API controller.
+		 */
 		return apply_filters( 'masteriyo_rest_get_course_progress_item', $course_progress_item, $lesson_quiz, $this );
 	}
 
@@ -1239,6 +1260,15 @@ class CourseProgressController extends CrudController {
 			$summary = $this->get_course_progress_summary_from_session( $course_progress );
 		}
 
+		/**
+		 * Filters course progress summary data.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param array $summary The course progress summary data.
+		 * @param Masteriyo\Models\CourseProgress $course_progress Course progress object.
+		 * @param Masteriyo\RestApi\Controllers\Version1\CourseProgressController $controller Course progress API controller.
+		 */
 		return apply_filters( "masteriyo_rest_{$this->object_type}_summary", $summary, $course_progress, $this );
 	}
 

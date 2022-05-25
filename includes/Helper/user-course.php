@@ -15,7 +15,7 @@ use Masteriyo\Query\UserCourseQuery;
  * @since 1.0.0
  *
  * @param int $user_course_id User course ID.
- * @return Masteriyo\Models\UserCourse|NULL
+ * @return Masteriyo\Models\UserCourse|null
  */
 function masteriyo_get_user_course( $user_course_id ) {
 	try {
@@ -45,6 +45,13 @@ function masteriyo_get_user_course_statuses() {
 		),
 	);
 
+	/**
+	 * Filters statuses for user course.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $statuses The statuses for user course.
+	 */
 	return apply_filters( 'masteriyo_user_course_statuses', $statuses );
 }
 
@@ -64,6 +71,15 @@ function masteriyo_count_enrolled_users( $course_id ) {
 	);
 	$enrolled_users_count = count( $query->get_user_courses() );
 
+	/**
+	 * Filters enrolled users count for a course.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $count The enrolled users count for the given course.
+	 * @param integer $course_id Course ID.
+	 * @param Masteriyo\Query\UserCourseQuery $query Query object.
+	 */
 	return apply_filters( 'masteriyo_count_enrolled_users', $enrolled_users_count, $course_id, $query );
 }
 
@@ -72,7 +88,7 @@ function masteriyo_count_enrolled_users( $course_id ) {
  *
  * @since 1.0.0
  *
- * @param \Masteriyo\Models\User|int $user User.
+ * @param Masteriyo\Models\User|int $user User.
  *
  * @return int
  */
@@ -97,6 +113,8 @@ function masteriyo_get_active_courses_count( $user ) {
  * Get the number of user courses.
  *
  * @since 1.0.0
+ *
+ * @param Masteriyo\Models\User|int $user User.
  *
  * @return int
  */

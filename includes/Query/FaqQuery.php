@@ -42,11 +42,27 @@ class FaqQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Faq objects
+	 * @return Masteriyo\Models\CourseFaq[] Faq objects
 	 */
 	public function get_faqs() {
+		/**
+		 * Filters FAQ object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_faq_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'faq.store' )->query( $args );
+
+		/**
+		 * Filters FAQ object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseFaq $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_faq_object_query', $results, $args );
 	}
 }

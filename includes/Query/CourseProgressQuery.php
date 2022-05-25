@@ -45,11 +45,27 @@ class CourseProgressQuery extends ObjectQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array|Model Course objects
+	 * @return Masteriyo\Models\CourseProgress[] Course objects
 	 */
 	public function get_course_progress() {
+		/**
+		 * Filters course progress object query args.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_args The object query args.
+		 */
 		$args    = apply_filters( 'masteriyo_course_progress_object_query_args', $this->get_query_vars() );
 		$results = masteriyo( 'course-progress.store' )->query( $args );
+
+		/**
+		 * Filters course progress object query results.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseProgress[] $results The query results.
+		 * @param array $query_args The object query args.
+		 */
 		return apply_filters( 'masteriyo_course_progress_object_query', $results, $args );
 	}
 }

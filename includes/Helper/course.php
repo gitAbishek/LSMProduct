@@ -8,10 +8,8 @@
  * @version 1.0.0
  */
 
-use Masteriyo\Constants;
 use Masteriyo\Activation;
 use Masteriyo\Enums\OrderStatus;
-use Masteriyo\Models\CourseCategory;
 use Masteriyo\Query\UserCourseQuery;
 
 /**
@@ -43,6 +41,15 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
 	$line_price   = $price * $qty;
 	$return_price = $line_price;
 
+	/**
+	 * Filters the course price with tax excluded, based on store settings.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param float $price The course price with tax excluded, based on store settings.
+	 * @param integer $qty Item quantity.
+	 * @param Masteriyo\Models\Course $course Course object.
+	 */
 	return apply_filters( 'masteriyo_get_price_excluding_tax', $return_price, $qty, $course );
 }
 
@@ -87,6 +94,15 @@ function masteriyo_can_start_course( $course, $user = null ) {
 		}
 	}
 
+	/**
+	 * Filters boolean: true if given user can start the given course.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $can_start_course true if given user can start the given course.
+	 * @param Masteriyo\Models\Course $course Course object.
+	 * @param Masteriyo\Models\User $user User object.
+	 */
 	return apply_filters( 'masteriyo_can_start_course', $can_start_course, $course, $user );
 }
 
@@ -97,6 +113,13 @@ function masteriyo_can_start_course( $course, $user = null ) {
  * @return string
  */
 function masteriyo_get_course_access_modes() {
+	/**
+	 * Filters course access modes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $access_modes Course access modes.
+	 */
 	return apply_filters(
 		'masteriyo_course_access_modes',
 		array(
@@ -142,6 +165,15 @@ function masteriyo_placeholder_img( $size = 'masteriyo_thumbnail', $attr = '' ) 
 		$attr
 	);
 
+	/**
+	 * Filters placeholder image html.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $image_html The placeholder image html.
+	 * @param string $size Image size.
+	 * @param array $dimensions Image dimensions.
+	 */
 	return apply_filters( 'masteriyo_placeholder_img', $image_html, $size, $dimensions );
 }
 
@@ -162,6 +194,13 @@ function masteriyo_placeholder_img_src( $size = 'masteriyo_thumbnail' ) {
 		$src = wp_get_attachment_image_url( $placeholder_image, $size );
 	}
 
+	/**
+	 * Filters placeholder image URL.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $src The placeholder image URL.
+	 */
 	return apply_filters( 'masteriyo_placeholder_img_src', $src );
 }
 
@@ -218,6 +257,15 @@ function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
 	if ( isset( $classes[ $difficulty ] ) ) {
 		$badge_class = $classes[ $difficulty ];
 	}
+
+	/**
+	 * Filters course difficulty badge CSS class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $badge_class CSS class for the badge.
+	 * @param string $difficulty Course difficulty.
+	 */
 	return apply_filters( 'masteriyo_difficulty_badge_css_class', $badge_class, $difficulty );
 }
 
@@ -232,6 +280,14 @@ function masteriyo_get_difficulty_badge_css_class( $difficulty ) {
  * @return string
  */
 function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
+	/**
+	 * Filters maximum number of course highlights limit.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $limit Highlights limit.
+	 * @param string $highlights Course highlights.
+	 */
 	$limit = apply_filters( 'masteriyo_course_highlights_limit', $limit, $highlights );
 
 	// Reference: https://www.regextester.com/27540
@@ -248,6 +304,15 @@ function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
 		$trimmed_highlights = '<ul>' . $matched_str . '</ul>';
 	}
 
+	/**
+	 * Filters the trimmed (with max number limit) course highlights.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $trimmed_highlights Trimmed course highlights.
+	 * @param integer $limit Highlights limit.
+	 * @param string $highlights Full list of course highlights.
+	 */
 	return apply_filters( 'masteriyo_trimmed_course_highlights', $trimmed_highlights, $limit, $highlights );
 }
 
@@ -299,6 +364,14 @@ function masteriyo_get_course_contents( $course_id ) {
 		}
 	}
 
+	/**
+	 * Filters course contents objects.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $objects Course contents objects.
+	 * @param integer $course_id Course ID.
+	 */
 	return apply_filters( 'masteriyo_course_contents', $objects, $course_id );
 }
 

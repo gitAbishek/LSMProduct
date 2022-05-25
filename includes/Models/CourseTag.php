@@ -93,6 +93,14 @@ class CourseTag extends Model {
 	 * @return string
 	 */
 	public function get_title() {
+		/**
+		 * Filters course tag title.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $title Course tag title.
+		 * @param Masteriyo\Models\CourseTag $tag Course tag object.
+		 */
 		return apply_filters( 'masteriyo_course_tag_title', $this->get_name(), $this );
 	}
 

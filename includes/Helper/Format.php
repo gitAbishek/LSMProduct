@@ -86,7 +86,7 @@ function masteriyo_timezone_offset() {
 /**
  * Convert mysql datetime to PHP timestamp, forcing UTC. Wrapper for strtotime.
  *
- * Based on masteriyos_strtotime_dark_knight() from MASTERIYO Subscriptions by Prospress.
+ * Based on wcs_strtotime_dark_knight() from WooCommerce Subscriptions by Prospress.
  *
  * @since  1.0.0
  * @param  string   $time_string    Time string.
@@ -213,7 +213,16 @@ function masteriyo_format_decimal( $number, $dp = false, $trim_zeros = false ) {
  */
 function masteriyo_get_price_thousand_separator() {
 	$separator = masteriyo_get_setting( 'payments.currency.thousand_separator' );
+
+	/**
+	 * Filters thousand separator for price.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $thousand_separator The thousand separator for price.
+	 */
 	$separator = apply_filters( 'masteriyo_get_price_thousand_separator', $separator );
+
 	return stripslashes( $separator );
 }
 
@@ -225,7 +234,16 @@ function masteriyo_get_price_thousand_separator() {
  */
 function masteriyo_get_price_decimal_separator() {
 	$separator = masteriyo_get_setting( 'payments.currency.decimal_separator' );
+
+	/**
+	 * Filters decimal separator for price.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $decimal_separator The decimal separator for price.
+	 */
 	$separator = apply_filters( 'masteriyo_get_price_decimal_separator', $separator );
+
 	return $separator ? stripslashes( $separator ) : '.';
 }
 
@@ -237,7 +255,16 @@ function masteriyo_get_price_decimal_separator() {
  */
 function masteriyo_get_price_decimals() {
 	$num_decimals = masteriyo_get_setting( 'payments.currency.number_of_decimals' );
+
+	/**
+	 * Filters the number of decimals after the decimal point.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $num_decimals The number of decimals after the decimal point.
+	 */
 	$num_decimals = apply_filters( 'masteriyo_get_price_decimals', $num_decimals );
+
 	return absint( $num_decimals );
 }
 
@@ -267,6 +294,13 @@ function masteriyo_get_price_decimals() {
  * @return string
  */
 function masteriyo_price( $price, $args = array() ) {
+	/**
+	 * Filters price arguments like currency, decimal separator etc.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args Price arguments like currency, decimal separator etc.
+	 */
 	$args = apply_filters(
 		'masteriyo_price_args',
 		wp_parse_args(
@@ -282,10 +316,38 @@ function masteriyo_price( $price, $args = array() ) {
 	);
 
 	$unformatted_price = $price;
-	$price             = apply_filters( 'masteriyo_raw_price', abs( $price ) );
-	$price             = number_format( $price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
-	$price             = apply_filters( 'masteriyo_formatted_price', $price, $unformatted_price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
 
+	/**
+	 * Filters raw price value.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $price Raw price value.
+	 */
+	$price = apply_filters( 'masteriyo_raw_price', abs( $price ) );
+
+	$price = number_format( $price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
+
+	/**
+	 * Filters formatted price value.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $price Formatted price value.
+	 * @param float $unformatted_price Unformatted price value.
+	 * @param integer $decimals The number of decimals after the decimal point.
+	 * @param string $decimal_separator Decimal separator.
+	 * @param string $thousand_separator Thousand separator.
+	 */
+	$price = apply_filters( 'masteriyo_formatted_price', $price, $unformatted_price, $args['decimals'], $args['decimal_separator'], $args['thousand_separator'] );
+
+	/**
+	 * Filters boolean: true if zeros should be trimmed from price.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param boolean $bool true if zeros should be trimmed from price.
+	 */
 	if ( apply_filters( 'masteriyo_price_trim_zeros', false ) && $args['decimals'] > 0 ) {
 		$price = masteriyo_trim_zeros( $price );
 	}
@@ -345,6 +407,14 @@ function masteriyo_get_price_format() {
 			break;
 	}
 
+	/**
+	 * Filters price format depending on the currency position.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $format The price format depending on the currency position
+	 * @param string $currency_pos Currency position: left, right, left_space or right_space.
+	 */
 	return apply_filters( 'masteriyo_price_format', $format, $currency_pos );
 }
 
@@ -407,6 +477,14 @@ function masteriyo_date_format() {
 		// Return default date format if the option is empty.
 		$date_format = 'F j, Y';
 	}
+
+	/**
+	 * Filters date format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $date_format Date format. Default is "F j, Y" if date_format option is empty.
+	 */
 	return apply_filters( 'masteriyo_date_format', $date_format );
 }
 
@@ -423,6 +501,14 @@ function masteriyo_time_format() {
 		// Return default time format if the option is empty.
 		$time_format = 'g:i a';
 	}
+
+	/**
+	 * Filters time format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $time_format Time format. Default is "g:i a" if time_format option is empty.
+	 */
 	return apply_filters( 'masteriyo_time_format', $time_format );
 }
 
@@ -483,6 +569,13 @@ function masteriyo_strtoupper( $string ) {
  * @return int|float
  */
 function masteriyo_stock_amount( $amount ) {
+	/**
+	 * Filters a stock amount formatted by running it through a filter.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int|float $amount The stock amount.
+	 */
 	return apply_filters( 'masteriyo_stock_amount', $amount );
 }
 
@@ -550,6 +643,14 @@ function masteriyo_format_postcode( $postcode, $country ) {
 			break;
 	}
 
+	/**
+	 * Filters the formatted postcode according to the country and its length.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $postcode The formatted postcode according to the country and its length.
+	 * @param string $country Country code.
+	 */
 	return apply_filters( 'masteriyo_format_postcode', trim( $postcode ), $country );
 }
 
@@ -595,7 +696,7 @@ function masteriyo_sanitize_phone_number( $phone ) {
 
 if ( ! function_exists( 'masteriyo_format_rating' ) ) {
 	/**
-	 * Format ratint to SVGs.
+	 * Format rating to SVGs.
 	 *
 	 * @since 1.0.0
 	 *
@@ -727,7 +828,7 @@ function masteriyo_format_datetime( $date, $format = '' ) {
  * See https://developer.wordpress.org/reference/functions/mysql_to_rfc3339/
  *
  * @since  1.0.0
- * @param  string|null|DateTime $date Date.
+ * @param  string|null|Masteriyo\DateTime $date Date.
  * @param  bool                    $utc  Send false to get local/offset time.
  * @return string|null ISO8601/RFC3339 formatted datetime.
  */

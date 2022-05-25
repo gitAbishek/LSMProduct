@@ -226,7 +226,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Model           $object  Model object.
+	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
@@ -245,8 +245,10 @@ class CourseQuestionAnswersController extends CommentsController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_REST_Response $response The response object.
-		 * @param Model          $object   Object data.
+		 * @param Masteriyo\Database\Model $object   Object data.
 		 * @param WP_REST_Request  $request  Request object.
 		 */
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
@@ -255,7 +257,7 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Get course question-answer data.
 	 *
-	 * @param CourseQuestionAnswer $course_qa Course question-answer instance.
+	 * @param Masteriyo\Models\CourseQuestionAnswer $course_qa Course question-answer instance.
 	 * @param string       $context Request context.
 	 *                             Options: 'view' and 'edit'.
 	 *
@@ -389,10 +391,12 @@ class CourseQuestionAnswersController extends CommentsController {
 	/**
 	 * Prepare a single course question-answer object for create or update.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param WP_REST_Request $request Request object.
 	 * @param bool            $creating If is creating a new object.
 	 *
-	 * @return WP_Error|Model
+	 * @return WP_Error|Masteriyo\Models\CourseQuestionAnswer
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
 
@@ -478,7 +482,9 @@ class CourseQuestionAnswersController extends CommentsController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @param Model         $comment  Object object.
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\CourseQuestionAnswer $comment  Course question-answer object.
 		 * @param WP_REST_Request $request  Request object.
 		 * @param bool            $creating If is creating a new object.
 		 */
@@ -487,6 +493,8 @@ class CourseQuestionAnswersController extends CommentsController {
 
 	/**
 	 * Check if a given request has access to read items.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

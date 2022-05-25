@@ -30,6 +30,13 @@ abstract class Taxonomy {
 	public function register() {
 		register_taxonomy(
 			$this->taxonomy,
+			/**
+			 * Filters post types belonging to a taxonomy.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $post_types The post types belonging to a taxonomy.
+			 */
 			apply_filters( "masteriyo_taxonomy_objects_{$this->taxonomy}", array( $this->post_type ) ),
 			$this->get_args()
 		);
@@ -47,7 +54,14 @@ abstract class Taxonomy {
 
 		$labels = isset( $args['labels'] ) ? $args['labels'] : array();
 
-		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_labels", $labels );
+		/**
+		 * Filters labels of a taxonomy.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $labels The labels of a taxonomy.
+		 */
+		return apply_filters( "masteriyo_taxonomy_{$this->taxonomy}_labels", $labels );
 	}
 
 	/**
@@ -64,7 +78,15 @@ abstract class Taxonomy {
 
 		$value = isset( $labels[ $label ] ) ? $value = $labels[ $label ] : '';
 
-		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_label", $value, $label );
+		/**
+		 * Filters a label of a taxonomy.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $value The label.
+		 * @param string $label The label name.
+		 */
+		return apply_filters( "masteriyo_taxonomy_{$this->taxonomy}_label", $value, $label );
 	}
 
 	/**
@@ -103,9 +125,17 @@ abstract class Taxonomy {
 	public function get_arg( $name ) {
 		$args = $this->get_args();
 
-		$value = ( isset( $arg[ $name ] ) ) ? $arg[ $name ] : null;
+		$value = ( isset( $args[ $name ] ) ) ? $args[ $name ] : null;
 
-		return apply_filters( "masteriyo_taxonomy_{$taxonomy}_arg", $value, $name );
+		/**
+		 * Filters a taxonomy argument.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed $value The taxonomy argument.
+		 * @param string $name The argument name.
+		 */
+		return apply_filters( "masteriyo_taxonomy_{$this->taxonomy}_arg", $value, $name );
 	}
 
 

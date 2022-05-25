@@ -54,7 +54,15 @@ class CoursesShortcode extends Shortcode {
 			'category' => empty( $attr['category'] ) ? array() : array( $attr['category'] ),
 		);
 		$course_query = new CourseQuery( $args );
-		$courses      = apply_filters( 'masteriyo_shortcode_courses_result', $course_query->get_courses() );
+
+		/**
+		 * Filters courses that will be displayed in courses shortcode.
+		 *
+		 * @since 1.0.6
+		 *
+		 * @param Masteriyo\Models\Course[] $courses The courses objects.
+		 */
+		$courses = apply_filters( 'masteriyo_shortcode_courses_result', $course_query->get_courses() );
 
 		masteriyo_set_loop_prop( 'columns', absint( $attr['columns'] ) );
 

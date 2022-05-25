@@ -104,7 +104,18 @@ do_action( 'masteriyo_before_account_orders', $orders );
 
 <?php else : ?>
 	<div class="masteriyo-message masteriyo-message--info masteriyo-Message masteriyo-Message--info masteriyo-info">
-		<a class="masteriyo-Button button" href="<?php echo esc_url( apply_filters( 'masteriyo_return_to_shop_redirect', masteriyo_get_page_permalink( 'courses' ) ) ); ?>"><?php esc_html_e( 'Browse courses', 'masteriyo' ); ?></a>
+		<a class="masteriyo-Button button" href="
+		<?php
+		/**
+		 * Filters return to shop URL.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $url The return to shop URL.
+		 */
+		echo esc_url( apply_filters( 'masteriyo_return_to_shop_redirect', masteriyo_get_page_permalink( 'courses' ) ) );
+		?>
+		"><?php esc_html_e( 'Browse courses', 'masteriyo' ); ?></a>
 		<?php esc_html_e( 'No order has been made yet.', 'masteriyo' ); ?>
 	</div>
 <?php endif; ?>

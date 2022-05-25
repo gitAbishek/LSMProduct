@@ -33,8 +33,15 @@ class Visibility extends Taxonomy {
 	 * @return array
 	 */
 	protected function get_args() {
+		/**
+		 * Filters arguments for course visibility taxonomy.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $args The arguments for course visibility taxonomy.
+		 */
 		return apply_filters(
-			'masteriyo_taxonomy_args_course_cat',
+			'masteriyo_taxonomy_args_course_visibility',
 			array(
 				'hierarchical' => false,
 				'show_ui'      => true,

@@ -36,6 +36,16 @@ class Permission {
 			$permission       = current_user_can( $post_type_object->cap->$cap, $object_id );
 		}
 
+		/**
+		 * Filters permission for a post.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $post_type Object's post type.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $post_type );
 	}
 
@@ -69,6 +79,16 @@ class Permission {
 			}
 		}
 
+		/**
+		 * Filters permission for a term.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $taxonomy Object's taxonomy.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $taxonomy );
 	}
 
@@ -98,12 +118,24 @@ class Permission {
 			$permission = get_current_user_id() === $user_id;
 		}
 
+		/**
+		 * Filters permission for a user data manipulation.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 */
 		$permission = apply_filters( 'masteriyo_rest_check_permissions', $permission, $context );
 
 		/**
 		 * Users check permission
 		 *
 		 * @since 1.3.6
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $user_id User ID which requires permission to be manipulated, if available.
 		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $user_id, 'users' );
 	}
@@ -118,6 +150,13 @@ class Permission {
 	public function rest_check_answer_check_permissions() {
 		$permission = current_user_can( 'publish_posts' );
 
+		/**
+		 * Filters permission for quiz answer.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission );
 	}
 
@@ -138,6 +177,16 @@ class Permission {
 
 		$permission = current_user_can( $objects[ $object ] );
 
+		/**
+		 * Filters permission for data object management.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object Data object type being managed.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, 0, $object );
 	}
 
@@ -163,6 +212,16 @@ class Permission {
 			$permission = current_user_can( $contexts[ $context ] );
 		}
 
+		/**
+		 * Filters permission for a course review.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object's type.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );
 	}
 
@@ -187,6 +246,16 @@ class Permission {
 			$permission = current_user_can( $contexts[ $context ] );
 		}
 
+		/**
+		 * Filters permission for an FAQ.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object's type.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'faq' );
 	}
 
@@ -212,6 +281,16 @@ class Permission {
 			$permission = current_user_can( $contexts[ $context ] );
 		}
 
+		/**
+		 * Filters permission for a comment.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object's type.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );
 	}
 
@@ -237,7 +316,17 @@ class Permission {
 			$permission = current_user_can( $contexts[ $context ], $object_id );
 		}
 
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_review' );
+		/**
+		 * Filters permission for a course question-answer.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object's type.
+		 */
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_qa' );
 	}
 
 	/**
@@ -268,6 +357,16 @@ class Permission {
 
 		$permission = current_user_can( $cap, $object_id );
 
+		/**
+		 * Filters permission for an order.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $post_type Object's post type.
+		 */
 		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, $post_type );
 	}
 
@@ -291,6 +390,15 @@ class Permission {
 		$cap        = $contexts[ $context ];
 		$permission = current_user_can( $cap, $object_id );
 
+		/**
+		 * Filters permission for a course progress.
+		 *
+		 * @since 1.3.1
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 */
 		return apply_filters( 'masteriyo_rest_check_course_progress_permissions', $permission, $context, $object_id );
 	}
 
@@ -314,6 +422,15 @@ class Permission {
 		$cap        = $contexts[ $context ];
 		$permission = current_user_can( $cap, $object_id );
 
+		/**
+		 * Filters permission for a user course.
+		 *
+		 * @since 1.3.1
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 */
 		return apply_filters( 'masteriyo_rest_check_user_course_permissions', $permission, $context, $object_id );
 	}
 }

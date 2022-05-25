@@ -32,12 +32,16 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Endpoint namespace.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @var string
 	 */
 	protected $namespace = 'masteriyo/v1';
 
 	/**
 	 * Route base.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @var string
 	 */
@@ -47,6 +51,8 @@ abstract class RestController extends \WP_REST_Controller {
 	 * Add the schema from additional fields to an schema array.
 	 *
 	 * The type of object is inferred from the passed schema.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param array $schema Schema array.
 	 *
@@ -72,6 +78,13 @@ abstract class RestController extends \WP_REST_Controller {
 			$schema['properties'][ $field_name ] = $field_options['schema'];
 		}
 
+		/**
+		 * Filters additional fields schema of a REST API.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $schema The additional fields schema.
+		 */
 		$schema['properties'] = apply_filters( 'masteriyo_rest_' . $object_type . '_schema', $schema['properties'] );
 
 		return $schema;
@@ -80,6 +93,8 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Compatibility functions for WP 5.5, since custom types are not supported anymore.
 	 * See @link https://core.trac.wordpress.org/changeset/48306
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $method Optional. HTTP method of the request.
 	 *
@@ -103,6 +118,8 @@ abstract class RestController extends \WP_REST_Controller {
 	 * See @link https://core.trac.wordpress.org/changeset/48306
 	 *
 	 * We still use the 'mixed' type, since if we convert to composite type everywhere, it won't work in 5.4 anymore because they require to define the full schema.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param array $endpoint_args Schema with datatype to convert.
 
@@ -149,6 +166,8 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Get normalized rest base.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string
 	 */
 	protected function get_normalized_rest_base() {
@@ -158,10 +177,20 @@ abstract class RestController extends \WP_REST_Controller {
 	/**
 	 * Check batch limit.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $items Request items.
 	 * @return bool|WP_Error
 	 */
 	protected function check_batch_limit( $items ) {
+		/**
+		 * Filters batch items limit.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $limit The items limit.
+		 * @param string $rest_base The normalized rest base.
+		 */
 		$limit = apply_filters( 'masteriyo_rest_batch_items_limit', 100, $this->get_normalized_rest_base() );
 		$total = 0;
 
@@ -185,10 +214,13 @@ abstract class RestController extends \WP_REST_Controller {
 		return true;
 	}
 
-		/**
+	/**
 	 * Bulk create, update and delete items.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param WP_REST_Request $request Full details about the request.
+	 *
 	 * @return array Of WP_Error or WP_REST_Response.
 	 */
 	public function batch_items( $request ) {
@@ -507,8 +539,10 @@ abstract class RestController extends \WP_REST_Controller {
 	 * Included fields are based on item schema and `_fields=` request argument.
 	 * Updated from WordPress 5.3, included into this class to support old versions.
 	 *
-	 * @since 3.5.0
+	 * @since 1.0.0
+	 *
 	 * @param WP_REST_Request $request Full details about the request.
+	 *
 	 * @return array Fields to be included in the response.
 	 */
 	public function get_fields_for_response( $request ) {

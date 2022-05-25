@@ -202,11 +202,19 @@ class OrderItemCourse extends OrderItem {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return Course|bool
+	 * @return Masteriyo\Models\Course|null
 	 */
 	public function get_course() {
 		$course = masteriyo_get_course( $this->get_course_id() );
 
+		/**
+		 * Filters course object of an order item.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param Masteriyo\Models\Course|null $course The course object of an order item.
+		 * @param Masteriyo\Models\Order\OrderItemCourse $order_item_course Order item course object.
+		 */
 		return apply_filters( 'masteriyo_order_item_course', $course, $this );
 	}
 
@@ -215,7 +223,7 @@ class OrderItemCourse extends OrderItem {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Course $course Course instance.
+	 * @param Masteriyo\Models\Course $course Course object.
 	 */
 	public function set_course( $course ) {
 		if ( ! is_a( $course, 'Masteriyo\Models\Course' ) ) {

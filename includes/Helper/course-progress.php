@@ -18,7 +18,7 @@ use Masteriyo\Query\CourseProgressQuery;
  *
  * @param Masteriyo\Models\CourseProgress|int $course_progress_id Course progress ID.
  *
- * @return Masteriyo\Models\CourseProgress\WP_Error
+ * @return Masteriyo\Models\CourseProgress|\WP_Error
  */
 function masteriyo_get_course_progress( $course_progress ) {
 	if ( is_a( $course_progress, 'Masteriyo\Database\Model' ) ) {
@@ -38,6 +38,14 @@ function masteriyo_get_course_progress( $course_progress ) {
 		return null;
 	}
 
+	/**
+	 * Filters course progress object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\CourseProgress $course_progress_obj course progress object.
+	 * @param int|Masteriyo\Models\CourseProgress|WP_Post $course_progress course progress id or course progress Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_course_progress', $course_progress_obj, $course_progress );
 }
 
@@ -46,9 +54,9 @@ function masteriyo_get_course_progress( $course_progress ) {
  *
  * @since 1.0.0
  *
- * @param int $course_progress_item Course progress ID.
+ * @param int|Masteriyo\Models\CourseProgressItem $course_progress_item Course progress ID.
  *
- * @return Masteriyo\Models\CourseProgress|WP_Error
+ * @return Masteriyo\Models\CourseProgressItem|WP_Error
  */
 function masteriyo_get_course_progress_item( $course_progress_item ) {
 	if ( is_a( $course_progress_item, 'Masteriyo\Database\Model' ) ) {
@@ -65,10 +73,18 @@ function masteriyo_get_course_progress_item( $course_progress_item ) {
 		$item_repo->read( $item );
 
 		return $item;
-	} catch ( \ModelException $e ) {
+	} catch ( ModelException $e ) {
 		$item = new \WP_Error( $e->getCode(), $e->getMessage(), $e->getErrorData() );
 	}
 
+	/**
+	 * Filters course progress item object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\CourseProgressItem $course_progress_item_obj course progress item object.
+	 * @param int|Masteriyo\Models\CourseProgressItem|WP_Post $course_progress_item course progress item id or course progress item Model or Post.
+	 */
 	return apply_filters( 'masteriyo_get_course_progress_item', $item, $course_progress_item );
 }
 
@@ -109,6 +125,14 @@ function masteriyo_get_course_progress_by_user_and_course( $user, $course ) {
 
 	$course_progress = current( $query->get_course_progress() );
 
+	/**
+	 * Filters course progress object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Masteriyo\Models\CourseProgress|WP_Error $course_progress Course progress object.
+	 * @param Masteriyo\Models\CourseProgress|WP_Error $course_progress Course progress object.
+	 */
 	return apply_filters( 'masteriyo_get_course_progress', $course_progress, $course_progress );
 }
 
@@ -156,5 +180,3 @@ function masteriyo_get_active_courses( $user ) {
 
 	return $active_courses;
 }
-
-

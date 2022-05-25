@@ -49,6 +49,14 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 		$ids = wp_insert_term(
 			$course_cat->get_name(),
 			'course_cat',
+			/**
+			 * Filters new course category data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New course category data.
+			 * @param Masteriyo\Models\CourseCategory $course_cat Course category object.
+			 */
 			apply_filters(
 				'masteriyo_new_course_cat_data',
 				array(

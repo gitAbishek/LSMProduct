@@ -174,14 +174,24 @@ abstract class AbstractRepository {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $model        Model object.
+	 * @param Masteriyo\Database\Model $model        Model object.
 	 * @param array   $raw_meta_data Array of std object of meta data to be filtered.
 	 *
-	 * @return mixed|void
+	 * @return array
 	 */
 	public function filter_raw_meta_data( &$model, $raw_meta_data ) {
 		$this->internal_meta_keys = array_merge( array_map( array( $this, 'prefix_key' ), $model->get_data_keys() ), $this->internal_meta_keys );
 		$meta_data                = array_filter( $raw_meta_data, array( $this, 'exclude_internal_meta_keys' ) );
+
+		/**
+		 * Filters raw meta data of a model.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $meta_data The raw meta data.
+		 * @param Masteriyo\Database\Model $model Model object.
+		 * @param Masteriyo\Repository\AbstractRepository $repository Repository object.
+		 */
 		return apply_filters( "masteriyo_repository_{$this->meta_type}_read_meta", $meta_data, $model, $this );
 	}
 

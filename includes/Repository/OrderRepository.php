@@ -80,6 +80,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$order->set_version( Constants::get( 'MASTERIYO_VERSION' ) );
 
 		$id = wp_insert_post(
+			/**
+			 * Filters new order data before creating.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $data New order data.
+			 * @param Masteriyo\Models\Order\Order $order Order object.
+			 */
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
@@ -437,6 +445,15 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$wp_query_args['orderby'] = 'post__in';
 		}
 
+		/**
+		 * Filters WP Query args for order post type query.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars Query vars.
+		 * @param Masteriyo\Repository\OrderRepository $repository Order repository object.
+		 */
 		return apply_filters( 'masteriyo_order_data_store_cpt_get_orders_query', $wp_query_args, $query_vars, $this );
 	}
 
@@ -582,7 +599,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Order $order Order object.
+	 * @param Masteriyo\Models\Order\Order $order Order object.
 	 */
 	public function create_or_update_user_course( $order ) {
 		// Filter order item courses.
@@ -623,6 +640,15 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );
 			$user_course->set_price( $order_item->get_total( 'edit' ) );
 
+			/**
+			 * Filters user course object before saving.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param Masteriyo\Models\UserCourse $user_course User course object.
+			 * @param object $order_item Order item object.
+			 * @param Masteriyo\Models\Order\Order $order Order object.
+			 */
 			$user_course = apply_filters( 'masteriyo_save_user_course', $user_course, $order_item, $order );
 
 			$user_course->save();

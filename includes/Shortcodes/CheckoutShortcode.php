@@ -63,8 +63,17 @@ class CheckoutShortcode extends Shortcode {
 			return;
 		}
 
+		/**
+		 * Filters boolean: true if it should be redirected to a different page if cart is empty.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $bool true if it should be redirected to a different page if cart is empty.
+		 */
+		$redirect_empty_cart = apply_filters( 'masteriyo_checkout_redirect_empty_cart', true );
+
 		// Check cart has contents.
-		if ( masteriyo( 'cart' )->is_empty() && ! is_customize_preview() && apply_filters( 'masteriyo_checkout_redirect_empty_cart', true ) ) {
+		if ( masteriyo( 'cart' )->is_empty() && ! is_customize_preview() && $redirect_empty_cart ) {
 			return;
 		}
 
@@ -104,10 +113,24 @@ class CheckoutShortcode extends Shortcode {
 	public function order_received( $order_id = 0 ) {
 		$order = false;
 
-		// Get the order.
+		/**
+		 * Filters order ID for thankyou message.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $order_id The order ID.
+		 */
 		$order_id = apply_filters( 'masteriyo_thankyou_order_id', absint( $order_id ) );
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$order_key = isset( $_GET['key'] ) && empty( $_GET['key'] ) ? '' : masteriyo_clean( wp_unslash( $_GET['key'] ) );
+
+		/**
+		 * Filters order key for thankyou message.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $order_key The order key.
+		 */
 		$order_key = apply_filters( 'masteriyo_thankyou_order_key', $order_key );
 
 		if ( $order_id > 0 ) {

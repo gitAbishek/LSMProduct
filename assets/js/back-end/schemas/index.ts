@@ -828,6 +828,7 @@ export interface QuizAttempt {
 		id: number;
 		name: string;
 		pass_mark: number;
+		duration: number;
 	};
 	user: {
 		id: number;

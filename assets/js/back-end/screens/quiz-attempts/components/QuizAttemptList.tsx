@@ -9,6 +9,7 @@ import {
 	Button,
 	ButtonGroup,
 	IconButton,
+	Link,
 	Menu,
 	MenuButton,
 	MenuItem,
@@ -23,7 +24,9 @@ import { __ } from '@wordpress/i18n';
 import React, { useRef } from 'react';
 import { BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
+import { Link as RouterLink } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
+import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import { QuizAttempt } from '../../../schemas';
 import API from '../../../utils/api';
@@ -86,9 +89,17 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 		<Tr>
 			<Td>
 				<Stack direction="column" spacing="2">
-					<Text fontWeight="bold" color="gray.600" fontSize="sm">
+					<Link
+						as={RouterLink}
+						to={routes.quiz_attempts.edit.replace(
+							':attemptId',
+							data?.id.toString()
+						)}
+						fontWeight="semibold"
+						fontSize="sm"
+						_hover={{ color: 'blue.500' }}>
 						#{data?.user?.id} {data?.user?.first_name} {data?.user?.last_name}
-					</Text>
+					</Link>
 					<Text color="gray.600" fontSize="xs">
 						{data?.user?.display_name} ({data?.user?.email})
 					</Text>
@@ -132,24 +143,35 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 				</VStack>
 			</Td>
 			<Td>
-				<Menu placement="bottom-end">
-					<MenuButton
-						as={IconButton}
-						icon={<BiDotsVerticalRounded />}
-						variant="outline"
-						rounded="sm"
-						fontSize="large"
-						size="xs"
-					/>
-					<MenuList>
-						<MenuItem
-							onClick={onOpen}
-							icon={<BiTrash />}
-							_hover={{ color: 'red.500' }}>
-							{__('Delete', 'masteriyo')}
-						</MenuItem>
-					</MenuList>
-				</Menu>
+				<ButtonGroup>
+					<RouterLink
+						to={routes.quiz_attempts.edit.replace(
+							':attemptId',
+							data?.id.toString()
+						)}>
+						<Button colorScheme="blue" size="xs">
+							{__('View', 'masteriyo')}
+						</Button>
+					</RouterLink>
+					<Menu placement="bottom-end">
+						<MenuButton
+							as={IconButton}
+							icon={<BiDotsVerticalRounded />}
+							variant="outline"
+							rounded="sm"
+							fontSize="large"
+							size="xs"
+						/>
+						<MenuList>
+							<MenuItem
+								onClick={onOpen}
+								icon={<BiTrash />}
+								_hover={{ color: 'red.500' }}>
+								{__('Delete', 'masteriyo')}
+							</MenuItem>
+						</MenuList>
+					</Menu>
+				</ButtonGroup>
 				<AlertDialog
 					isOpen={isOpen}
 					onClose={onClose}

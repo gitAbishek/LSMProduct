@@ -72,4 +72,25 @@ class MultipleChoice extends Question implements QuestionInterface {
 		 */
 		return apply_filters( "masteriyo_question_check_answer_{$this->type}", $correct, $context, $this );
 	}
+
+	/**
+	 * Get correct answers only.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return mixed
+	 */
+	public function get_correct_answers() {
+		$answers         = $this->get_answers( 'edit' );
+		$correct_answers = array_filter(
+			$answers,
+			function( $answer ) {
+				return isset( $answer->correct ) && $answer->correct;
+			}
+		);
+
+		$correct_answers = array_column( $correct_answers, 'name' );
+
+		return $correct_answers;
+	}
 }

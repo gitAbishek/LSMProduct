@@ -180,7 +180,7 @@ const EditOrder = () => {
 	if (orderQuery.isSuccess && orderItemsQuery.isSuccess) {
 		return (
 			<Stack direction="column" spacing="8" alignItems="center">
-				<Header showLinks>
+				<Header>
 					<List>
 						<ListItem>
 							<Link

@@ -18,5 +18,12 @@ export { default as CoursePerRow3Active } from '../../../svg/course-per-row-3-ac
 export { default as CoursePerRow3 } from '../../../svg/course-per-row-3.svg';
 export { default as CoursePerRow4Active } from '../../../svg/course-per-row-4-active.svg';
 export { default as CoursePerRow4 } from '../../../svg/course-per-row-4.svg';
+export { default as FillInTheBlanks } from '../../../svg/fill-in-the-blanks-tooltip-icon.svg';
 export { default as FullStar } from '../../../svg/full_star.svg';
+export { default as ImageMatching } from '../../../svg/image-matching-tooltip-icon.svg';
+export { default as MultiChoice } from '../../../svg/multi-choice-tooltip-icon.svg';
+export { default as OpenEndedEssay } from '../../../svg/open-ended-essay-tooltip-icon.svg';
 export { default as Ribbon } from '../../../svg/ribbon.svg';
+export { default as SingleChoice } from '../../../svg/single-choice-tooltip-icon.svg';
+export { default as Sortable } from '../../../svg/sortable-tooltip-icon.svg';
+export { default as TrueFalse } from '../../../svg/true-false-tooltip-icon.svg';

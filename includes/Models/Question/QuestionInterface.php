@@ -26,4 +26,13 @@ interface QuestionInterface {
 	 * @param string $context Options: 'edit', 'view'.
 	 */
 	public function check_answer( $chosen_answer, $context = 'edit' );
+
+	/**
+	 * Get correct answers only.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return mixed
+	 */
+	public function get_correct_answers();
 }

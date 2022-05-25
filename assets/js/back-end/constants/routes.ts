@@ -44,7 +44,7 @@ const routes = {
 	},
 	quiz_attempts: {
 		list: '/quiz-attempts',
-		edit: '/quiz-attempts/:quizId',
+		edit: '/quiz-attempts/:attemptId',
 	},
 	settings: '/settings',
 

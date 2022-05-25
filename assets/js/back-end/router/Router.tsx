@@ -69,6 +69,9 @@ const Router: React.FC = () => {
 				<Route path={routes.quiz_attempts.list} exact>
 					<screens.AllQuizAttempts />
 				</Route>
+				<Route path={routes.quiz_attempts.edit} exact>
+					<screens.ReviewQuizAttempt />
+				</Route>
 				<Route path={routes.settings} exact>
 					<screens.Settings />
 				</Route>

@@ -416,6 +416,56 @@ class QuizAttemptsController extends CrudController {
 	}
 
 	/**
+	 * Get quiz attempt question answers data.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param mixed $attempt_answers
+	 * @return array
+	 */
+	protected function get_answers_data( $attempt_answers ) {
+
+		if ( empty( $attempt_answers ) || ! is_array( $attempt_answers ) ) {
+			return null;
+		}
+
+		$new_attempt_answers = array();
+		foreach ( $attempt_answers as $question_id => $attempt_answer ) {
+			$question = masteriyo_get_question( $question_id );
+
+			if ( ! $question ) {
+				continue;
+			}
+
+			/**
+			 * For backward compatibility when attempt_answers was store in following format.
+			 * Old format: "answers" : [ '$question_id' => '$given_answered' ]
+			 * New format: "answers" : [ '$question_id' => [ 'answered' => '$given_answered', 'correct' => 'boolean' ]  ]
+			 */
+			$given_answers = isset( $attempt_answer['answered'] ) ? $attempt_answer['answered'] : $attempt_answer;
+
+			$new_attempt_answers[ $question_id ]['answered']       = $given_answers;
+			$new_attempt_answers[ $question_id ]['correct']        = $question->check_answer( $given_answers );
+			$new_attempt_answers[ $question_id ]['question']       = $question->get_name();
+			$new_attempt_answers[ $question_id ]['points']         = $question->get_points();
+			$new_attempt_answers[ $question_id ]['type']           = $question->get_type();
+			$new_attempt_answers[ $question_id ]['correct_answer'] = $question->get_correct_answers();
+
+		}
+
+		/**
+		 * Filter quiz attempt answers data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $new_attempt_answers New attempt answers.
+		 * @param mixed $attempt_answers Stored attempt answers.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuizAttemptsController $controller REST quiz attempts controller object.
+		 */
+		return apply_filters( 'masteriyo_quiz_attempt_answers', $new_attempt_answers, $attempt_answers, $this );
+	}
+
+	/**
 	 * Get quiz attempt data.
 	 *
 	 * @since 1.3.2
@@ -437,7 +487,7 @@ class QuizAttemptsController extends CrudController {
 			'total_correct_answers'    => $quiz_attempt->get_total_correct_answers( $context ),
 			'total_incorrect_answers'  => $quiz_attempt->get_total_incorrect_answers( $context ),
 			'earned_marks'             => $quiz_attempt->get_earned_marks( $context ),
-			'answers'                  => maybe_unserialize( $quiz_attempt->get_answers( $context ) ),
+			'answers'                  => $this->get_answers_data( maybe_unserialize( $quiz_attempt->get_answers( $context ) ) ),
 			'attempt_status'           => $quiz_attempt->get_attempt_status( $context ),
 			'attempt_started_at'       => masteriyo_rest_prepare_date_response( $quiz_attempt->get_attempt_started_at( $context ) ),
 			'attempt_ended_at'         => masteriyo_rest_prepare_date_response( $quiz_attempt->get_attempt_ended_at( $context ) ),
@@ -461,6 +511,7 @@ class QuizAttemptsController extends CrudController {
 				'id'        => $quiz->get_id(),
 				'name'      => $quiz->get_name(),
 				'pass_mark' => $quiz->get_pass_mark(),
+				'duration'  => $quiz->get_duration(),
 			);
 		} else {
 			$data['quiz'] = null;

@@ -21,3 +21,9 @@ export enum UserStatus {
 	Spam = 1,
 	Inactive = 1000,
 }
+
+export enum IconType {
+	TrueFalse = 'true-false',
+	SingleChoice = 'single-choice',
+	MultipleChoice = 'multiple-choice',
+}

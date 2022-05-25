@@ -13,6 +13,7 @@ export { default as AllOrders } from './orders/AllOrders';
 export { default as CreateNewOrder } from './orders/CreateNewOrder';
 export { default as EditOrder } from './orders/EditOrder';
 export { default as AllQuizAttempts } from './quiz-attempts/AllQuizAttempts';
+export { default as ReviewQuizAttempt } from './quiz-attempts/ReviewQuizAttempt';
 export { default as AllReviews } from './reviews/AllReviews';
 export { default as EditReview } from './reviews/EditReview';
 export { default as SectionBuilder } from './sections/SectionBuilder';

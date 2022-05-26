@@ -15,7 +15,7 @@ import React from 'react';
 import { BiChevronLeft } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, NavLink } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
 import Header from '../../components/common/Header';
 import FullScreenLoader from '../../components/layout/FullScreenLoader';
@@ -52,10 +52,10 @@ const ReviewQuizAttempt = () => {
 					<List d="flex">
 						<ListItem mb="0">
 							<Link
-								color="#73a2ff"
+								as={NavLink}
 								sx={navLinkStyles}
 								_activeLink={navActiveStyles}
-								_hover={{ color: 'blue.500' }}>
+								to="#">
 								{__('Quiz Details', 'masteriyo')}
 							</Link>
 						</ListItem>

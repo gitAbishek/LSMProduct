@@ -99,7 +99,7 @@ class CourseCategory extends Model {
 		/**
 		 * Filters course category title.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.1
 		 *
 		 * @param string $title Course category title.
 		 * @param Masteriyo\Models\CourseCategory $category The course category object.

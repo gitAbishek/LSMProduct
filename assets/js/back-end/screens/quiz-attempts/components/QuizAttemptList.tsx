@@ -89,17 +89,23 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 		<Tr>
 			<Td>
 				<Stack direction="column" spacing="2">
-					<Link
-						as={RouterLink}
-						to={routes.quiz_attempts.edit.replace(
-							':attemptId',
-							data?.id.toString()
-						)}
-						fontWeight="semibold"
-						fontSize="sm"
-						_hover={{ color: 'blue.500' }}>
-						#{data?.user?.id} {data?.user?.first_name} {data?.user?.last_name}
-					</Link>
+					{'attempt_ended' === data?.attempt_status ? (
+						<Link
+							as={RouterLink}
+							to={routes.quiz_attempts.edit.replace(
+								':attemptId',
+								data?.id.toString()
+							)}
+							fontWeight="semibold"
+							fontSize="sm"
+							_hover={{ color: 'blue.500' }}>
+							#{data?.id} {data?.user?.first_name} {data?.user?.last_name}
+						</Link>
+					) : (
+						<Text fontWeight="semibold" fontSize="sm">
+							#{data?.id} {data?.user?.first_name} {data?.user?.last_name}
+						</Text>
+					)}
 					<Text color="gray.600" fontSize="xs">
 						{data?.user?.display_name} ({data?.user?.email})
 					</Text>
@@ -127,51 +133,57 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 				</Stack>
 			</Td>
 			<Td>
-				<VStack align="flex-start">
-					<Text color="gray.600" fontSize="sm">
-						{Result(
-							parseFloat(data?.earned_marks),
-							parseFloat(data?.total_marks)
-						)}
-					</Text>
-					{!isNaN(parseFloat(data?.earned_marks)) &&
-						(parseFloat(data?.earned_marks) < data?.quiz?.pass_mark ? (
-							<Badge colorScheme="red">{__('Fail', 'masteriyo')}</Badge>
-						) : (
-							<Badge colorScheme="green">{__('Pass', 'masteriyo')}</Badge>
-						))}
-				</VStack>
+				{'attempt_ended' !== data?.attempt_status ? (
+					<Badge colorScheme="yellow">{__('In progress', 'masteriyo')}</Badge>
+				) : (
+					<VStack align="flex-start">
+						<Text color="gray.600" fontSize="sm">
+							{Result(
+								parseFloat(data?.earned_marks),
+								parseFloat(data?.total_marks)
+							)}
+						</Text>
+						{!isNaN(parseFloat(data?.earned_marks)) &&
+							(parseFloat(data?.earned_marks) < data?.quiz?.pass_mark ? (
+								<Badge colorScheme="red">{__('Fail', 'masteriyo')}</Badge>
+							) : (
+								<Badge colorScheme="green">{__('Pass', 'masteriyo')}</Badge>
+							))}
+					</VStack>
+				)}
 			</Td>
 			<Td>
-				<ButtonGroup>
-					<RouterLink
-						to={routes.quiz_attempts.edit.replace(
-							':attemptId',
-							data?.id.toString()
-						)}>
-						<Button colorScheme="blue" size="xs">
-							{__('View', 'masteriyo')}
-						</Button>
-					</RouterLink>
-					<Menu placement="bottom-end">
-						<MenuButton
-							as={IconButton}
-							icon={<BiDotsVerticalRounded />}
-							variant="outline"
-							rounded="sm"
-							fontSize="large"
-							size="xs"
-						/>
-						<MenuList>
-							<MenuItem
-								onClick={onOpen}
-								icon={<BiTrash />}
-								_hover={{ color: 'red.500' }}>
-								{__('Delete', 'masteriyo')}
-							</MenuItem>
-						</MenuList>
-					</Menu>
-				</ButtonGroup>
+				{'attempt_ended' === data?.attempt_status ? (
+					<ButtonGroup>
+						<RouterLink
+							to={routes.quiz_attempts.edit.replace(
+								':attemptId',
+								data?.id.toString()
+							)}>
+							<Button colorScheme="blue" size="xs">
+								{__('View', 'masteriyo')}
+							</Button>
+						</RouterLink>
+						<Menu placement="bottom-end">
+							<MenuButton
+								as={IconButton}
+								icon={<BiDotsVerticalRounded />}
+								variant="outline"
+								rounded="sm"
+								fontSize="large"
+								size="xs"
+							/>
+							<MenuList>
+								<MenuItem
+									onClick={onOpen}
+									icon={<BiTrash />}
+									_hover={{ color: 'red.500' }}>
+									{__('Delete', 'masteriyo')}
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</ButtonGroup>
+				) : null}
 				<AlertDialog
 					isOpen={isOpen}
 					onClose={onClose}

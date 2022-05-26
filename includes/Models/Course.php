@@ -1396,7 +1396,7 @@ class Course extends Model {
 		/**
 		 * Filters difficulties of the course.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.1
 		 *
 		 * @param Masteriyo\Models\CourseDifficulty[] $difficulties Difficulties of the course.
 		 * @param Masteriyo\Models\Course $course Course object.

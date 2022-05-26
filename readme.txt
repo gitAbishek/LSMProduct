@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 5.9.3
+Tested up to: 6.0
 Requires PHP: 7.0
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,14 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.1 - 26-05-2022 =
+- Enhancement - Admin can now view details of quiz attempts on the backend.
+- Enhancement - Filter courses, users and orders by ascending descending order on the backend page.
+- Fix - Font size of a website being overwritten by the plugin.
+- Fix - Load react account page js file only on the account page.
+- Fix - Addons submenu colour replicated to other submenus.
+- Fix - All courses count based on the draft and published courses on the backend course listing page.
 
 = 1.5.0 - 17-05-2022 =
 - Feature: Add a course review management page on the backend.

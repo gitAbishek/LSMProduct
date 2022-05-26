@@ -39,7 +39,7 @@ class Tag extends Taxonomy {
 		/**
 		 * Filters arguments for course tag taxonomy.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.1
 		 *
 		 * @param array $args The arguments for course tag taxonomy.
 		 */

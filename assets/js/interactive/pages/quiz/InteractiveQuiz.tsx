@@ -121,6 +121,7 @@ const InteractiveQuiz = () => {
 				setScoreBoardData(data);
 			},
 		});
+		methods.reset();
 	};
 
 	const onCompletePress = () => {

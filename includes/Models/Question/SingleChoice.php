@@ -71,7 +71,7 @@ class SingleChoice extends Question implements QuestionInterface {
 	/**
 	 * Get correct answers only.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.1
 	 *
 	 * @return mixed
 	 */

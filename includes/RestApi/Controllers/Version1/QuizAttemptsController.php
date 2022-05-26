@@ -418,7 +418,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Get quiz attempt question answers data.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.1
 	 *
 	 * @param mixed $attempt_answers
 	 * @return array
@@ -456,7 +456,7 @@ class QuizAttemptsController extends CrudController {
 		/**
 		 * Filter quiz attempt answers data.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.1
 		 *
 		 * @param array $new_attempt_answers New attempt answers.
 		 * @param mixed $attempt_answers Stored attempt answers.

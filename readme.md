@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 5.9.3
+**Tested up to**: 6.0
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.0
+**Stable tag**: 1.5.1
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,15 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.1 - 26-05-2022
+
+- Enhancement - Admin can now view details of quiz attempts on the backend.
+- Enhancement - Filter courses, users and orders by ascending descending order on the backend page.
+- Fix - Font size of a website being overwritten by the plugin.
+- Fix - Load react account page js file only on the account page.
+- Fix - Addons submenu colour replicated to other submenus.
+- Fix - All courses count based on the draft and published courses on the backend course listing page.
 
 ### 1.5.0 - 17-05-2022
 

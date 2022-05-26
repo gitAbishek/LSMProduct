@@ -122,7 +122,9 @@ const ReviewQuizAttempt = () => {
 											Object.keys(quizAttemptQuery?.data?.answers).map(
 												(questionId) => (
 													<QuizOverview
-														answersData={quizAttemptQuery?.data?.answers[questionId]}
+														answersData={
+															quizAttemptQuery?.data?.answers[questionId]
+														}
 														key={questionId}
 													/>
 												)

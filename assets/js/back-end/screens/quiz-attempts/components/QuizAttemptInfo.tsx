@@ -53,9 +53,14 @@ const QuizAttemptInfo: React.FC<Props> = (props) => {
 		attemptStarted = new Date(attemptStarted);
 		attemptEnded = new Date(attemptEnded);
 
-		const seconds = Math.floor((attemptEnded - attemptStarted) / 1000);
+		let seconds = Math.floor((attemptEnded - attemptStarted) / 1000);
+		const hours = Math.floor(seconds / (60 * 60));
+
+		seconds -= hours * 60 * 60;
+
 		const minutes = Math.floor(seconds / 60);
-		const hours = Math.floor(minutes / 60);
+
+		seconds -= minutes * 60;
 
 		return hours + ' hrs ' + minutes + ' min ' + seconds + ' sec';
 	};

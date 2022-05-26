@@ -69,6 +69,7 @@ const AddOns = () => {
 				width="100%"
 				h="auto"
 				py="4"
+				mt="6"
 				bg="linear-gradient(90.03deg, #4584FF 0.57%, #7761FF 99.97%)"
 				color="white">
 				<Container maxW="container.xl">
@@ -128,7 +129,7 @@ const AddOns = () => {
 				<Row>
 					<Col md={3}>
 						<AddonItem
-							addOnName={__('Stripe', 'masteriyo')}
+							addOnName={__('Stripe Payment Gateway', 'masteriyo')}
 							addOnDescription={__(
 								'Easily sell online courses and accept credit card payments via Stripe. It supports major cards like Visa, MasterCard, American Express, Discover, debit cards, etc.',
 								'masteriyo'
@@ -148,7 +149,7 @@ const AddOns = () => {
 					</Col>
 					<Col md={3}>
 						<AddonItem
-							addOnName={__('WooCommerce', 'masteriyo')}
+							addOnName={__('WooCommerce Integration', 'masteriyo')}
 							addOnDescription={__(
 								'WooCommerce Integration for Masteriyo allows to enroll users using WooCommerce checkout process and payment methods.',
 								'masteriyo'

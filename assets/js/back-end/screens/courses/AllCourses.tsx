@@ -167,7 +167,7 @@ const AllCourses = () => {
 	const courseStatusButton = (courseStatus: string, iconName: IconType) => {
 		const buttonText =
 			'any' === courseStatus
-				? 'All Courses'
+				? __('All Courses', 'masteriyo')
 				: courseStatus[0].toUpperCase() + courseStatus.slice(1); // Capitalize the first letter.
 		const courseCount = courseStatusCount[courseStatus];
 

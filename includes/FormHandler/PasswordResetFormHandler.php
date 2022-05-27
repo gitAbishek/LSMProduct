@@ -56,6 +56,16 @@ class PasswordResetFormHandler {
 			$user = $this->validate_reset_key();
 			$data = $this->get_form_data();
 
+			/**
+			 * Fires before the user’s password is reset.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @see https://developer.wordpress.org/reference/hooks/password_reset/
+			 *
+			 * @param \WP_User $user WP User object.
+			 * @param string $password New password submitted through form.
+			 */
 			do_action( 'password_reset', $user, $data['password'] );
 
 			wp_set_password( $data['password'], $user->ID );
@@ -73,6 +83,14 @@ class PasswordResetFormHandler {
 				wp_password_change_notification( $user );
 			}
 
+			/**
+			 * Fires after resetting a user's password.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \WP_User $user WP User object.
+			 * @param array $data Submitted data through form.
+			 */
 			do_action( 'masteriyo_user_password_reset', $user, $data );
 
 			wp_safe_redirect( add_query_arg( 'password-reset-complete', 'true', masteriyo_get_page_permalink( 'account' ) ) );
@@ -131,7 +149,7 @@ class PasswordResetFormHandler {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return User
+	 * @return \WP_User
 	 */
 	protected function validate_reset_key() {
 		$data = $this->get_form_data();
@@ -142,6 +160,17 @@ class PasswordResetFormHandler {
 		}
 
 		$validation_error = new \WP_Error();
+
+		/**
+		 * Fires before the password reset procedure is validated.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @see https://developer.wordpress.org/reference/hooks/validate_password_reset/
+		 *
+		 * @param \WP_Error $validation_error Password reset form data validation errors.
+		 * @param \WP_User $user WP User object.
+		 */
 		do_action( 'validate_password_reset', $validation_error, $user );
 
 		$validation_errors = $validation_error->get_error_messages();

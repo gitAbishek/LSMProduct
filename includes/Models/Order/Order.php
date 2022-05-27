@@ -152,6 +152,14 @@ class Order extends AbstractOrder {
 		}
 
 		try {
+			/**
+			 * Fires after order model's status transition.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id order ID.
+			 * @param \Masteriyo\Models\Order\Order $order The order object.
+			 */
 			do_action( 'masteriyo_order_status_' . $status_transition['to'], $this->get_id(), $this );
 
 			if ( ! empty( $status_transition['from'] ) ) {
@@ -165,7 +173,26 @@ class Order extends AbstractOrder {
 				// Note the transition occurred.
 				$this->add_status_transition_note( $transition_note, $status_transition );
 
+				/**
+				 * Fires after order model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id order ID.
+				 * @param \Masteriyo\Models\Order\Order $order The order object.
+				 */
 				do_action( 'masteriyo_order_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+
+				/**
+				 * Fires after order model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id order ID.
+				 * @param string $old_status Old status.
+				 * @param string $new_status New status.
+				 * @param \Masteriyo\Models\Order\Order $order The order object.
+				 */
 				do_action( 'masteriyo_order_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 
 				/**
@@ -187,8 +214,9 @@ class Order extends AbstractOrder {
 					 * Fires when the order progresses from a pending payment status to a paid one.
 					 *
 					 * @since 1.0.0
-					 * @param int Order ID
-					 * @param Order Order object
+					 *
+					 * @param integer Order ID
+					 * @param \Masteriyo\Models\Order\Order Order object
 					 */
 					do_action( 'masteriyo_order_payment_status_changed', $this->get_id(), $this );
 				}
@@ -1124,6 +1152,13 @@ class Order extends AbstractOrder {
 		}
 
 		try {
+			/**
+			 * Fires before payment of an order is complete.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id Order ID.
+			 */
 			do_action( 'masteriyo_pre_payment_complete', $this->get_id() );
 
 			if ( ! is_null( masteriyo( 'session' ) ) ) {
@@ -1169,8 +1204,22 @@ class Order extends AbstractOrder {
 				$this->set_status( $payment_status );
 				$this->save();
 
+				/**
+				 * Fires after payment of an order is complete.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Order ID.
+				 */
 				do_action( 'masteriyo_payment_complete', $this->get_id() );
 			} else {
+				/**
+				 * Fires after payment of an order is complete.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Order ID.
+				 */
 				do_action( 'masteriyo_payment_complete_order_status_' . $this->get_status(), $this->get_id() );
 			}
 		} catch ( \Exception $e ) {
@@ -1210,6 +1259,14 @@ class Order extends AbstractOrder {
 			);
 
 			if ( $manual_update ) {
+				/**
+				 * Fires after manual update of an order object's status.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Order ID.
+				 * @param string $status The new status.
+				 */
 				do_action( 'masteriyo_order_edit_status', $this->get_id(), $result['to'] );
 			}
 
@@ -1634,6 +1691,13 @@ class Order extends AbstractOrder {
 		if ( $is_customer_note ) {
 			add_comment_meta( $comment_id, 'is_customer_note', 1 );
 
+			/**
+			 * Fires after adding new customer note to an order.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $note The customer note data.
+			 */
 			do_action(
 				'masteriyo_new_customer_note',
 				array(
@@ -1646,10 +1710,10 @@ class Order extends AbstractOrder {
 		/**
 		 * Action hook fired after an order note is added.
 		 *
-		 * @param int      $order_note_id Order note ID.
-		 * @param Order $order         Order data.
-		 *
 		 * @since 1.0.0
+		 *
+		 * @param integer $order_note_id Order note ID.
+		 * @param \Masteriyo\Models\Order\Order $order Order data.
 		 */
 		do_action( 'masteriyo_order_note_added', $comment_id, $this );
 

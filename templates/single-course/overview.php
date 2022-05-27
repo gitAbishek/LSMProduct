@@ -17,7 +17,9 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
- * masteriyo_before_single_course_overview hook.
+ * Fires before rendering overview section in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_single_course_overview' );
 
@@ -28,6 +30,8 @@ do_action( 'masteriyo_before_single_course_overview' );
 <?php
 
 /**
- * masteriyo_after_single_course_overview hook.
+ * Fires after rendering overview section in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_single_course_overview' );

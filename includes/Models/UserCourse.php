@@ -343,6 +343,14 @@ class UserCourse extends Model {
 			);
 
 			if ( $manual_update ) {
+				/**
+				 * Fires after manual user course status update.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id User course ID.
+				 * @param string $new_status The new status.
+				 */
 				do_action( 'masteriyo_user_course_edit_status', $this->get_id(), $result['to'] );
 			}
 		}
@@ -447,10 +455,37 @@ class UserCourse extends Model {
 		}
 
 		try {
+			/**
+			 * Fires after user progress model's status transition.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id User progress ID.
+			 * @param \Masteriyo\Models\UserCourse $user_progress The user progress object.
+			 */
 			do_action( 'masteriyo_user_course_status_' . $status_transition['to'], $this->get_id(), $this );
 
 			if ( ! empty( $status_transition['from'] ) ) {
+				/**
+				 * Fires after user progress model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id User progress ID.
+				 * @param \Masteriyo\Models\UserCourse $user_progress The user progress object.
+				 */
 				do_action( 'masteriyo_user_course_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+
+				/**
+				 * Fires after user progress model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id User progress ID.
+				 * @param string $old_status Old status.
+				 * @param string $new_status New status.
+				 * @param \Masteriyo\Models\UserCourse $user_progress The user progress object.
+				 */
 				do_action( 'masteriyo_user_course_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 			}
 		} catch ( \Exception $e ) {

@@ -72,9 +72,26 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 			$course_tag->save_meta_data();
 			$course_tag->apply_changes();
 
+			/**
+			 * Fires after creating a course tag.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course tag ID.
+			 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+			 */
 			do_action( 'masteriyo_new_course_tag', $ids, $course_tag );
 		} elseif ( isset( $ids->error_data['term_exists'] ) ) {
 			$course_tag->set_id( $ids->error_data['term_exists'] );
+
+			/**
+			 * Fires after failing to create a course tag because of already existing data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course tag ID.
+			 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+			 */
 			do_action( 'masteriyo_old_course_tag', $ids, $course_tag );
 		}
 	}
@@ -111,6 +128,14 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 		$this->read_extra_data( $course_tag );
 		$course_tag->set_object_read( true );
 
+		/**
+		 * Fires after reading a course tag from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course tag ID.
+		 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+		 */
 		do_action( 'masteriyo_course_tag_read', $course_tag->get_id(), $course_tag );
 	}
 
@@ -167,6 +192,14 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 
 		$course_tag->apply_changes();
 
+		/**
+		 * Fires after updating a course tag in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course tag ID.
+		 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+		 */
 		do_action( 'masteriyo_update_course_tag', $course_tag->get_id(), $course_tag );
 	}
 
@@ -186,9 +219,27 @@ class CourseTagRepository extends AbstractRepository implements RepositoryInterf
 			return;
 		}
 
+		/**
+		 * Fires before deleting a course tag from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course tag ID.
+		 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_tag );
+
 		wp_delete_term( $id, $object_type );
 		$course_tag->set_id( 0 );
+
+		/**
+		 * Fires after deleting a course tag from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course tag ID.
+		 * @param \Masteriyo\Models\CourseTag $object The course tag object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_tag );
 
 	}

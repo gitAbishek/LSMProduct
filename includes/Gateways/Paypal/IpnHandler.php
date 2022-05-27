@@ -53,6 +53,13 @@ class IpnHandler extends Response {
 		if ( ! empty( $_POST ) && $this->validate_ipn() ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$posted = wp_unslash( $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
+			/**
+			 * Fires if PayPal IPN request is valid.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $posted Posted data.
+			 */
 			do_action( 'masteriyo_valid_paypal_standard_ipn_request', $posted );
 			exit;
 		}

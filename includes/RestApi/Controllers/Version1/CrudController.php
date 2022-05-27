@@ -173,7 +173,7 @@ abstract class CrudController extends RestController {
 	 *
 	 * @since 1.0.00
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param \WP_REST_Request $request Full details about the request.
 	 *
 	 * @return WP_Error|WP_REST_Response
 	 */
@@ -197,7 +197,7 @@ abstract class CrudController extends RestController {
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param Model         $object    Inserted object.
+			 * @param \Masteriyo\Database\Model $object Inserted object.
 			 * @param WP_REST_Request $request   Request object.
 			 * @param boolean         $creating  True when creating object, false when updating.
 			 */
@@ -224,7 +224,7 @@ abstract class CrudController extends RestController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param \WP_REST_Request $request Full details about the request.
 	 *
 	 * @return WP_Error|WP_REST_Response
 	 */
@@ -247,7 +247,7 @@ abstract class CrudController extends RestController {
 			/**
 			 * Fires after a single object is created or updated via the REST API.
 			 *
-			 * @param Model         $object    Inserted object.
+			 * @param \Masteriyo\Database\Model $object Inserted object.
 			 * @param WP_REST_Request $request   Request object.
 			 * @param boolean         $creating  True when creating object, false when updating.
 			 */
@@ -571,7 +571,7 @@ abstract class CrudController extends RestController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_REST_Request $request Full details about the request.
+	 * @param \WP_REST_Request $request Full details about the request.
 	 *
 	 * @return WP_REST_Response|WP_Error
 	 */
@@ -634,7 +634,7 @@ abstract class CrudController extends RestController {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model          $object   The deleted or trashed object.
+		 * @param \Masteriyo\Database\Model $object The deleted or trashed object.
 		 * @param WP_REST_Response $response The response data.
 		 * @param WP_REST_Request  $request  The request sent to the API.
 		 */

@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_login_form_content hook.
+ * Fires before rendering login form section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_login_form_content' );
 
@@ -71,6 +73,8 @@ do_action( 'masteriyo_before_login_form_content' );
 <?php
 
 /**
- * masteriyo_after_login_form_content hook.
+ * Fires after rendering login form section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_login_form_content' );

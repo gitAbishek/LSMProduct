@@ -55,7 +55,7 @@ class CheckoutShortcode extends Shortcode {
 	/**
 	 * Show the checkout.
 	 *
-	 * @return void
+	 * @since 1.0.0
 	 */
 	private function checkout() {
 		// Bail early if the checkout is in admin or REST API Request.
@@ -77,7 +77,11 @@ class CheckoutShortcode extends Shortcode {
 			return;
 		}
 
-		// Check cart contents for errors.
+		/**
+		 * Action for checking cart contents for errors.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_check_cart_items' );
 
 		// Calculate total.s

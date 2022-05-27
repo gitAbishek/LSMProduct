@@ -42,7 +42,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_review Course review object.
+	 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 	 */
 	public function create( Model &$course_review ) {
 		$current_user = wp_get_current_user();
@@ -125,7 +125,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			 * @since 1.0.0
 			 *
 			 * @param int $id Course review ID.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 			 */
 			do_action( 'masteriyo_new_course_review', $id, $course_review );
 		}
@@ -136,7 +136,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_review course review object.
+	 * @param \Masteriyo\Models\CourseReview $course_review course review object.
 	 *
 	 * @throws \Exception If invalid course review.
 	 */
@@ -183,7 +183,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		 * @since 1.0.0
 		 *
 		 * @param int $id Course review ID.
-		 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+		 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 		 */
 		do_action( 'masteriyo_course_review_read', $course_review->get_id(), $course_review );
 	}
@@ -193,7 +193,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_review course review object.
+	 * @param \Masteriyo\Models\CourseReview $course_review course review object.
 	 *
 	 * @return void
 	 */
@@ -239,7 +239,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		 * @since 1.0.0
 		 *
 		 * @param int $id Course review ID.
-		 * @param Masteriyo\Models\CourseReview Course review object.
+		 * @param \Masteriyo\Models\CourseReview Course review object.
 		 */
 		do_action( 'masteriyo_update_course_review', $course_review->get_id(), $course_review );
 	}
@@ -249,7 +249,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_review course review object.
+	 * @param \Masteriyo\Models\CourseReview $course_review course review object.
 	 * @param array $args Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$course_review, $args = array() ) {
@@ -282,7 +282,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			 * @since 1.0.0
 			 *
 			 * @param int $id Course review ID.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_review );
 
@@ -295,7 +295,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			 * @since 1.0.0
 			 *
 			 * @param int $id Course review ID.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_review );
 		} else {
@@ -305,7 +305,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			 * @since 1.0.0
 			 *
 			 * @param int $id Course review ID.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_review );
 
@@ -318,7 +318,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			 * @since 1.0.0
 			 *
 			 * @param int $id Course review ID.
-			 * @param Masteriyo\Models\CourseReview $course_review Course review object.
+			 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 			 */
 			do_action( 'masteriyo_after_trash_' . $object_type, $id, $course_review );
 		}

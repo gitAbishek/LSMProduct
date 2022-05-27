@@ -15,7 +15,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $setting Setting object.
+	 * @param \Masteriyo\Models\Setting $setting Setting object.
 	 */
 	public function create( Model &$setting ) {
 		$posted_setting = $setting->get_data();
@@ -49,6 +49,13 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		update_option( 'masteriyo_settings', $setting->get_data() );
 
+		/**
+		 * Fires after creating a setting.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Models\Setting $object The setting object.
+		 */
 		do_action( 'masteriyo_new_setting', $setting );
 	}
 
@@ -57,7 +64,7 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $setting Course object.
+	 * @param \Masteriyo\Models\Setting $setting Course object.
 	 * @param mixed $default Default value.
 	 *
 	 * @throws Exception If invalid setting.
@@ -75,6 +82,14 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 
 		$setting->set_object_read( true );
 
+		/**
+		 * Fires after reading setting from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id ID.
+		 * @param \Masteriyo\Models\Setting $object The setting object.
+		 */
 		do_action( 'masteriyo_setting_read', $setting->get_id(), $setting );
 	}
 
@@ -101,13 +116,20 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $setting Setting object.
+	 * @param \Masteriyo\Models\Setting $setting Setting object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$setting, $args = array() ) {
 		$setting_data = $setting->get_data();
 		update_option( 'masteriyo_settings', $setting_data );
 
+		/**
+		 * Fires after resetting setting from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Models\Setting $object The setting object.
+		 */
 		do_action( 'masteriyo_reset_setting', $setting );
 	}
 

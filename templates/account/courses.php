@@ -8,6 +8,14 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering courses section template in account page.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Course[] $all_courses All courses.
+ * @param \Masteriyo\Models\Course[] $active_courses Active courses.
+ */
 do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 ?>
 
@@ -102,7 +110,17 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 		</div>
 	<?php endif; ?>
 
-	<?php do_action( 'masteriyo_after_account_courses_enrolled_courses', $all_courses, $active_courses ); ?>
+	<?php
+	/**
+	 * Fires after rendering enrolled courses section template in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Course[] $all_courses All courses.
+	 * @param \Masteriyo\Models\Course[] $active_courses Active courses.
+	 */
+	do_action( 'masteriyo_after_account_courses_enrolled_courses', $all_courses, $active_courses );
+	?>
 
 	<h2 class="masteriyo-mycourses--title"><?php esc_html_e( 'All Courses', 'masteriyo' ); ?></h2>
 	<?php if ( count( $all_courses ) > 0 ) : ?>
@@ -175,4 +193,12 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 </div>
 
 <?php
+/**
+ * Fires after rendering courses section template in account page.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Course[] $all_courses All courses.
+ * @param \Masteriyo\Models\Course[] $active_courses Active courses.
+ */
 do_action( 'masteriyo_after_account_courses', $all_courses, $active_courses ); ?>

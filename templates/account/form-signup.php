@@ -11,7 +11,9 @@ defined( 'ABSPATH' ) || exit;
 $session = masteriyo( 'session' );
 
 /**
- * masteriyo_before_registration_form_content hook.
+ * Fires before rendering user registration form.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_registration_form_content' );
 
@@ -90,6 +92,8 @@ do_action( 'masteriyo_before_registration_form_content' );
 <?php
 
 /**
- * masteriyo_after_registration_form_content hook.
+ * Fires after rendering user registration form.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_registration_form_content' );

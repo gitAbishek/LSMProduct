@@ -27,7 +27,7 @@ get_header( 'courses' );
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
 /**
- * Hook: masteriyo_before_main_content.
+ * Fires before rendering header in course archive.
  *
  * @hooked masteriyo_course_search_form - 10
  * @hooked masteriyo_output_content_wrapper - 10 (outputs opening divs for the content)
@@ -56,13 +56,18 @@ do_action( 'masteriyo_before_main_content' );
 	<?php endif; ?>
 
 	<?php
+	/**
+	 * Action hook for rendering course archive description.
+	 *
+	 * @since 1.0.0
+	 */
 	do_action( 'masteriyo_archive_description' );
 	?>
 </header>
 
 <?php
 /**
- * Hook: masteriyo_after_archive_header.
+ * Fires after rendering header in course archive.
  *
  * @since 1.0.0
  */
@@ -76,6 +81,11 @@ do_action( 'masteriyo_after_archive_header' );
 <?php
 if ( masteriyo_course_loop() ) {
 
+	/**
+	 * Fires before course loop in course archive template.
+	 *
+	 * @since 1.0.0
+	 */
 	do_action( 'masteriyo_before_courses_loop' );
 
 	masteriyo_course_loop_start();
@@ -85,7 +95,9 @@ if ( masteriyo_course_loop() ) {
 			the_post();
 
 			/**
-			 * Hook: masteriyo_courses_loop.
+			 * Fires for each item in course loop before rendering its template.
+			 *
+			 * @since 1.0.0
 			 */
 			do_action( 'masteriyo_courses_loop' );
 
@@ -96,31 +108,39 @@ if ( masteriyo_course_loop() ) {
 	masteriyo_course_loop_end();
 
 	/**
-	 * Hook: masteriyo_after_courses_loop.
+	 * Fires after course loop in course archive template.
 	 *
 	 * @hooked masteriyo_pagination - 10
+	 *
+	 * @since 1.0.0
 	 */
 	do_action( 'masteriyo_after_courses_loop' );
 } else {
 	/**
-	 * Hook: masteriyo_no_courses_found.
+	 * Fires when there is not course to display in course archive.
 	 *
 	 * @hooked masteriyo_no_courses_found - 10
+	 *
+	 * @since 1.0.0
 	 */
 	do_action( 'masteriyo_no_courses_found' );
 }
 
 /**
- * Hook: masteriyo_after_main_content.
+ * Fires after rendering course archive main content.
  *
  * @hooked masteriyo_output_content_wrapper_end - 10 (outputs closing divs for the content)
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_main_content' );
 
 /**
- * Hook: masteriyo_sidebar.
+ * Action hook for rendering sidebar in course archive.
  *
  * @hooked masteriyo_get_sidebar - 10
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_sidebar' );
 

@@ -17,6 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Fires before rendering email header.
+ *
+ * @since 1.0.0
+ *
+ * @param string $email_heading Email header.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <?php /* translators: %s: Customer first name */ ?>
@@ -24,10 +32,41 @@ do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 <p><?php esc_html_e( 'We have finished processing your order.', 'masteriyo' ); ?></p>
 <?php
 
+/**
+ * Action hook for rendering order details in completed order email.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_order_details', $order, $email );
 
+/**
+ * Action hook for rendering order meta in completed order email.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_order_meta', $order, $email );
 
+/**
+ * Action hook for rendering customer details in completed order email.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_customer_details', $order, $email );
 
+/**
+ * Action hook fired in email's footer section.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_footer', $email );

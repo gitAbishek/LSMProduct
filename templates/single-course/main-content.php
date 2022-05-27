@@ -16,13 +16,18 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+/**
+ * Fires before rendering main content in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_single_course_content' );
 
 ?>
 <div class="masteriyo-single-course--main__content">
 	<?php
 	/**
-	 * Action Hook: masteriyo_single_course_main_content
+	 * Action hook for rendering single course page's main content.
 	 *
 	 * @hooked masteriyo_single_course_tab_handles - 10
 	 * @hooked masteriyo_single_course_overview - 20
@@ -36,4 +41,9 @@ do_action( 'masteriyo_before_single_course_content' );
 </div>
 <?php
 
+/**
+ * Fires after rendering main content in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_single_course_content' );

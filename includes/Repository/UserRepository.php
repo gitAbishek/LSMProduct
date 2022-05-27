@@ -70,7 +70,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 */
 	public function create( Model &$user ) {
 		global $wpdb;
@@ -146,7 +146,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			 * @since 1.0.0
 			 *
 			 * @param int $id User ID.
-			 * @param Masteriyo\Models\User $user User object.
+			 * @param \Masteriyo\Models\User $user User object.
 			 */
 			do_action( 'masteriyo_new_user', $id, $user );
 		}
@@ -157,7 +157,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 *
 	 * @throws ModelException If invalid user.
 	 */
@@ -197,7 +197,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		 * @since 1.0.0
 		 *
 		 * @param int $id User ID.
-		 * @param Masteriyo\Models\User $user User object.
+		 * @param \Masteriyo\Models\User $user User object.
 		 */
 		do_action( 'masteriyo_user_read', $user->get_id(), $user );
 	}
@@ -207,7 +207,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 *
 	 * @return void
 	 */
@@ -283,7 +283,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 		 * @since 1.0.0
 		 *
 		 * @param int $id User ID.
-		 * @param Masteriyo\Models\User $user User object.
+		 * @param \Masteriyo\Models\User $user User object.
 		 */
 		do_action( 'masteriyo_update_user', $user->get_id(), $user );
 	}
@@ -293,7 +293,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 * @param array $args Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$user, $args = array() ) {
@@ -347,7 +347,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param User $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 */
 	protected function read_user_data( &$user ) {
 		$id          = $user->get_id();
@@ -377,7 +377,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param User $user User object.
+	 * @param \Masteriyo\Models\User $user User object.
 	 */
 	protected function read_extra_data( &$user ) {
 		$meta_values = $this->read_meta( $user );
@@ -405,7 +405,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $model model object.
+	 * @param \Masteriyo\Models\User $model model object.
 	 * @param bool  $force Force update. Used during create.
 	 */
 	protected function update_user_meta( &$model, $force = false ) {
@@ -481,7 +481,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0 Added to prevent empty meta being stored unless required.
 	 *
-	 * @param Model $object The Model object
+	 * @param \Masteriyo\Models\User $object The Model object
 	 * @param string  $meta_key Meta key to update.
 	 * @param mixed   $meta_value Value to save.
 	 *

@@ -20,7 +20,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param Model $quiz_attempt Quiz attempt object.
+	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
 	 */
 	public function create( Model &$quiz_attempt ) {
 
@@ -31,7 +31,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param Model $quiz_attempt quiz attempt object.
+	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt quiz attempt object.
 	 *
 	 * @throws \Exception If invalid quiz attempt.
 	 */
@@ -75,7 +75,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param Model $quiz_attempt quiz attempt object.
+	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt quiz attempt object.
 	 *
 	 * @return void.
 	 */
@@ -88,7 +88,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 *
 	 * @since 1.3.2
 	 *
-	 * @param Model $quiz_attempt quiz attempt object.
+	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt quiz attempt object.
 	 * @param array $args Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$quiz_attempt, $args = array() ) {
@@ -104,7 +104,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		 *
 		 * @param string  $object_type The object type.
 		 * @param integer $quiz_id Quiz ID.
-		 * @param Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
+		 * @param \Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
 		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $quiz_id, $quiz_attempt );
 
@@ -127,7 +127,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		 *
 		 * @param string  $object_type The object type.
 		 * @param integer $quiz_id Quiz ID.
-		 * @param Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
+		 * @param \Masteriyo\Models\QuizAttempt   $quiz_attempt The quiz attempt object.
 		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $quiz_id, $quiz_attempt );
 	}

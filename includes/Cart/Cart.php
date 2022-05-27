@@ -174,6 +174,13 @@ class Cart {
 			}
 		}
 
+		/**
+		 * Fires after setting or un-setting cart cookies.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $set Should cookies be set (true) or unset.
+		 */
 		do_action( 'masteriyo_set_cart_cookies', $set );
 	}
 
@@ -183,6 +190,11 @@ class Cart {
 	 * @since 1.0.0
 	 */
 	public function get_cart_from_session() {
+		/**
+		 * Fires before loading cart from session.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_load_cart_from_session' );
 
 		$this->set_totals( $this->session->get( 'cart_totals', null ) );
@@ -230,6 +242,15 @@ class Cart {
 			 */
 			if ( apply_filters( 'masteriyo_pre_remove_cart_item_from_session', false, $key, $values ) ) {
 				$update_cart_session = true;
+
+				/**
+				 * Fires after removing cart item from session.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $key Cart item key.
+				 * @param array $values Cart item values e.g. quantity and product_id.
+				 */
 				do_action( 'masteriyo_remove_cart_item_from_session', $key, $values );
 
 			} elseif ( ! $course->is_purchasable() ) {
@@ -245,6 +266,15 @@ class Cart {
 				 */
 				$message = apply_filters( 'masteriyo_cart_item_removed_message', $message, $course );
 				$this->notice->add( $message, Notice::ERROR );
+
+				/**
+				 * Fires after removing cart item from session.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $key Cart item key.
+				 * @param array $values Cart item values e.g. quantity and product_id.
+				 */
 				do_action( 'masteriyo_remove_cart_item_from_session', $key, $values );
 
 			} elseif ( ! empty( $values['data_hash'] ) && ! hash_equals( $values['data_hash'], $this->get_cart_item_data_hash( $course ) ) ) { // phpcs:ignore PHPCompatibility.PHP.NewFunctions.hash_equalsFound
@@ -258,6 +288,15 @@ class Cart {
 					),
 					Notice::INFO
 				);
+
+				/**
+				 * Fires after removing cart item from session.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string $key Cart item key.
+				 * @param array $values Cart item values e.g. quantity and product_id.
+				 */
 				do_action( 'masteriyo_remove_cart_item_from_session', $key, $values );
 
 			} else {
@@ -297,6 +336,13 @@ class Cart {
 			$this->set_cart_contents( apply_filters( 'masteriyo_cart_contents_changed', $cart_contents ) );
 		}
 
+		/**
+		 * Fires after loading cart from session.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Cart\Cart $cart Cart object.
+		 */
 		do_action( 'masteriyo_cart_loaded_from_session', $this );
 
 		if ( $update_cart_session || is_null( $this->session->get( 'cart_totals', null ) ) ) {
@@ -370,7 +416,7 @@ class Cart {
 		}
 
 		$initial_cart_size = count( $cart );
-		$order_items      = $order->get_items();
+		$order_items       = $order->get_items();
 
 		foreach ( $order_items as $item ) {
 			/**
@@ -747,9 +793,16 @@ class Cart {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param bool $clear_persistent_cart Should the persistant cart be cleared too. Defaults to true.
+	 * @param bool $clear_persistent_cart Should the persistent cart be cleared too. Defaults to true.
 	 */
 	public function clear( $clear_persistent_cart = true ) {
+		/**
+		 * Fires before clearing cart.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $clear_persistent_cart Should the persistent cart be cleared too. Defaults to true.
+		 */
 		do_action( 'masteriyo_before_cart_emptied', $clear_persistent_cart );
 
 		$this->cart_contents         = array();
@@ -762,6 +815,13 @@ class Cart {
 
 		$this->fees_api->remove_all();
 
+		/**
+		 * Fires after clearing cart.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $clear_persistent_cart Should the persistent cart be cleared too. Defaults to true.
+		 */
 		do_action( 'masteriyo_cart_emptied', $clear_persistent_cart );
 	}
 
@@ -982,10 +1042,12 @@ class Cart {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @throws Exception Plugins can throw an exception to prevent adding to cart.
+	 * @throws \Exception Plugins can throw an exception to prevent adding to cart.
+	 *
 	 * @param int   $course_id contains the id of the course to add to the cart.
 	 * @param int   $quantity contains the quantity of the item to add.
 	 * @param array $cart_item_data extra cart item data we want to pass into the item.
+	 *
 	 * @return string|bool $cart_item_key
 	 */
 	public function add_to_cart( $course_id = 0, $quantity = 1, $cart_item_data = array() ) {
@@ -1098,6 +1160,16 @@ class Cart {
 			 */
 			$this->cart_contents = apply_filters( 'masteriyo_cart_contents_changed', $this->cart_contents );
 
+			/**
+			 * Fires after adding item to cart.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $cart_item_key Cart item key.
+			 * @param integer $course_id Course ID.
+			 * @param integer $quantity Item quantity.
+			 * @param array $cart_item_data Extra cart item data we want to pass into the item.
+			 */
 			do_action( 'masteriyo_add_to_cart', $cart_item_key, $course_id, $quantity, $cart_item_data );
 
 			return $cart_item_key;
@@ -1123,10 +1195,26 @@ class Cart {
 
 			unset( $this->removed_cart_contents[ $cart_item_key ]['data'] );
 
+			/**
+			 * Fires before removing cart item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $cart_item_key Cart item key to remove from the cart.
+			 * @param \Masteriyo\Cart\Cart $cart Cart object.
+			 */
 			do_action( 'masteriyo_remove_cart_item', $cart_item_key, $this );
 
 			unset( $this->cart_contents[ $cart_item_key ] );
 
+			/**
+			 * Fires after removing cart item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $cart_item_key Cart item key to remove from the cart.
+			 * @param \Masteriyo\Cart\Cart $cart Cart object.
+			 */
 			do_action( 'masteriyo_cart_item_removed', $cart_item_key, $this );
 
 			return true;
@@ -1149,10 +1237,26 @@ class Cart {
 			$this->cart_contents[ $cart_item_key ]         = $restore_item;
 			$this->cart_contents[ $cart_item_key ]['data'] = masteriyo_get_course( $restore_item['variation_id'] ? $restore_item['variation_id'] : $restore_item['course_id'] );
 
+			/**
+			 * Fires before restoring cart item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $cart_item_key Cart item key to remove from the cart.
+			 * @param \Masteriyo\Cart\Cart $cart Cart object.
+			 */
 			do_action( 'masteriyo_restore_cart_item', $cart_item_key, $this );
 
 			unset( $this->removed_cart_contents[ $cart_item_key ] );
 
+			/**
+			 * Fires after restoring cart item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $cart_item_key Cart item key to remove from the cart.
+			 * @param \Masteriyo\Cart\Cart $cart Cart object.
+			 */
 			do_action( 'masteriyo_cart_item_restored', $cart_item_key, $this );
 
 			return true;
@@ -1184,9 +1288,10 @@ class Cart {
 		 * Fired after qty has been changed.
 		 *
 		 * @since 1.0.0
+		 *
 		 * @param string  $cart_item_key contains the id of the cart item. This may be empty if the cart item does not exist any more.
 		 * @param int     $quantity contains the quantity of the item.
-		 * @param Masteriyo\Cart $this Cart class.
+		 * @param \Masteriyo\Cart\Cart $this Cart class.
 		 */
 		do_action( 'masteriyo_after_cart_item_quantity_update', $cart_item_key, $quantity, $old_quantity, $this );
 
@@ -1198,9 +1303,10 @@ class Cart {
 		 * Fired after total is calculated.
 		 *
 		 * @since 1.0.0
+		 *
 		 * @param string  $cart_item_key contains the id of the cart item. This may be empty if the cart item does not exist any more.
 		 * @param int     $quantity contains the quantity of the item.
-		 * @param Cart $this Cart class.
+		 * @param \Masteriyo\Cart\Cart $this Cart class.
 		 */
 		do_action( 'masteriyo_cart_item_set_quantity', $cart_item_key, $quantity, $this );
 
@@ -1237,7 +1343,7 @@ class Cart {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Masteriyo\Cart $this Cart object.
+		 * @param \Masteriyo\Cart\Cart $this Cart object.
 		 */
 		do_action( 'masteriyo_before_calculate_totals', $this );
 
@@ -1248,7 +1354,7 @@ class Cart {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Masteriyo\Cart $this Cart object.
+		 * @param \Masteriyo\Cart\Cart $this Cart object.
 		 */
 		do_action( 'masteriyo_after_calculate_totals', $this );
 	}
@@ -1267,7 +1373,7 @@ class Cart {
 		 * @since 1.0.0
 		 *
 		 * @param boolean $bool True if cart needs payment.
-		 * @param Cart $cart Cart object.
+		 * @param \Masteriyo\Cart\Cart $cart Cart object.
 		 */
 		return apply_filters( 'masteriyo_cart_needs_payment', 0 < $this->get_total( 'edit' ), $this );
 	}
@@ -1278,6 +1384,13 @@ class Cart {
 	 * @since 1.0.0
 	 */
 	public function calculate_fees() {
+		/**
+		 * This action is fired so that 3rd parties can add custom fees.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Cart\Cart $cart Cart object.
+		 */
 		do_action( 'masteriyo_cart_calculate_fees', $this );
 	}
 
@@ -1425,6 +1538,15 @@ class Cart {
 	private function reset_totals() {
 		$this->totals = $this->default_totals;
 		$this->fees_api->remove_all();
+
+		/**
+		 * Fires after cart totals are reset.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Cart\Cart $cart Cart object.
+		 * @param boolean $bool Boolean.
+		 */
 		do_action( 'masteriyo_cart_reset', $this, false );
 	}
 	/**

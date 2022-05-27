@@ -16,6 +16,11 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+/**
+ * Fires before rendering highlights section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_single_course_highlights' );
 
 ?>
@@ -38,4 +43,9 @@ do_action( 'masteriyo_before_single_course_highlights' );
 
 <?php
 
+/**
+ * Fires after rendering highlights section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_single_course_highlights' );

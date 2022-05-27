@@ -151,10 +151,30 @@ class Template implements TemplateInterface {
 			extract( $args ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 		}
 
+		/**
+		 * Fires before rendering template part.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template_name Template name.
+		 * @param string $template_path Template path.
+		 * @param string $located Absolute path of the template.
+		 * @param array $args Template part arguments.
+		 */
 		do_action( 'masteriyo_before_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 
 		include $action_args['located'];
 
+		/**
+		 * Fires after rendering template part.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $template_name Template name.
+		 * @param string $template_path Template path.
+		 * @param string $located Absolute path of the template.
+		 * @param array $args Template part arguments.
+		 */
 		do_action( 'masteriyo_after_template_part', $action_args['template_name'], $action_args['template_path'], $action_args['located'], $action_args['args'] );
 	}
 

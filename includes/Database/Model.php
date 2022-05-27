@@ -405,8 +405,8 @@ abstract class Model {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model                 $this       The object being saved.
-		 * @param RepositoryInterface   $repository The data store persisting the data.
+		 * @param \Masteriyo\Database\Model $this The object being saved.
+		 * @param \Masteriyo\Repository\RepositoryInterface $repository The data store persisting the data.
 		 */
 		do_action( 'masteriyo_before_' . $this->object_type . '_object_save', $this, $this->repository );
 
@@ -421,8 +421,8 @@ abstract class Model {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Model                 $this       The object being saved.
-		 * @param RepositoryInterface   $repository The repository persisting the data.
+		 * @param \Masteriyo\Database\Model $this The object being saved.
+		 * @param \Masteriyo\Repository\RepositoryInterface $repository The repository persisting the data.
 		 */
 		do_action( 'masteriyo_after_' . $this->object_type . '_object_save', $this, $this->repository );
 

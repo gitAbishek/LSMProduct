@@ -54,7 +54,16 @@ endif;
 
 ?>
 <section class="masteriyo-order-details">
-	<?php do_action( 'masteriyo_order_details_before_order_table', $order ); ?>
+	<?php
+	/**
+	 * Fires before rendering order details table in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Order\Order $order Order object.
+	 */
+	do_action( 'masteriyo_order_details_before_order_table', $order );
+	?>
 
 	<h2><?php esc_html_e( 'Order details', 'masteriyo' ); ?></h2>
 
@@ -68,6 +77,13 @@ endif;
 
 		<tbody>
 			<?php
+			/**
+			 * Fires before rendering order items in in account page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\Order\Order $order Order object.
+			 */
 			do_action( 'masteriyo_order_details_before_order_table_items', $order );
 
 			foreach ( $order_items as $item_id => $item ) {
@@ -141,11 +157,29 @@ endif;
 							)
 						);
 
-						do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, false );
+						/**
+						 * Fires before rendering order item meta in account page.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param integer $item_id Order item ID.
+						 * @param object $item Order item object.
+						 * @param \Masteriyo\Models\Order\Order $order Order object.
+						 */
+						do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order );
 
 						masteriyo_display_item_meta( $item );
 
-						do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order, false );
+						/**
+						 * Fires after rendering order item meta in account page.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param integer $item_id Order item ID.
+						 * @param object $item Order item object.
+						 * @param \Masteriyo\Models\Order\Order $order Order object.
+						 */
+						do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order );
 						?>
 					</td>
 
@@ -155,6 +189,13 @@ endif;
 				</tr>
 				<?php
 			}
+			/**
+			 * Fires after rendering order items in in account page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\Order\Order $order Order object.
+			 */
 			do_action( 'masteriyo_order_details_after_order_table_items', $order );
 			?>
 		</tbody>
@@ -169,7 +210,16 @@ endif;
 		</tfoot>
 	</table>
 
-	<?php do_action( 'masteriyo_order_details_after_order_table', $order ); ?>
+	<?php
+	/**
+	 * Fires after rendering order details table in account page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Masteriyo\Models\Order\Order $order Order object.
+	 */
+	do_action( 'masteriyo_order_details_after_order_table', $order );
+	?>
 </section>
 
 <?php
@@ -177,7 +227,8 @@ endif;
  * Action hook fired after the order details.
  *
  * @since 1.0.0
- * @param Order $order Order data.
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
  */
 do_action( 'masteriyo_after_order_details', $order );
 
@@ -199,7 +250,16 @@ if ( $show_customer_details ) {
 			<?php endif; ?>
 		</address>
 
-		<?php do_action( 'masteriyo_order_details_after_customer_details', $order ); ?>
+		<?php
+		/**
+		 * Fires after rendering customer details in order details section in account page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 */
+		do_action( 'masteriyo_order_details_after_customer_details', $order );
+		?>
 
 	</section>
 	<?php

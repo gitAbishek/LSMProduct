@@ -1156,7 +1156,7 @@ class OrdersController extends PostsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Order $order order object.
+	 * @param \Masteriyo\Models\Order\Order $order order object.
 	 * @param string   $item_type The item type.
 	 * @param array    $posted item provided in the request body.
 	 * @throws RestException If item ID is not associated with order.
@@ -1180,6 +1180,14 @@ class OrdersController extends PostsController {
 		// Prepare item data.
 		$item = $this->$method( $posted, $action, $item );
 
+		/**
+		 * Fires before setting an order item in an order object.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param mixed $item Order item.
+		 * @param mixed $posted Posted data from request.
+		 */
 		do_action( 'masteriyo_rest_set_order_item', $item, $posted );
 
 		// If creating the order, add the item to it.

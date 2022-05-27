@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_view_account_content hook.
+ * Fires before rendering account detail section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_view_account_content' );
 
@@ -53,6 +55,8 @@ do_action( 'masteriyo_before_view_account_content' );
 <?php
 
 /**
- * masteriyo_after_view_account_content hook.
+ * Fires after rendering account detail section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_view_account_content' );

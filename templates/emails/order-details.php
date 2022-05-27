@@ -17,6 +17,14 @@ defined( 'ABSPATH' ) || exit;
 
 $text_align = is_rtl() ? 'right' : 'left';
 
+/**
+ * Fires before rendering order table in email.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_before_order_table', $order, $email ); ?>
 
 <h2>
@@ -75,4 +83,13 @@ do_action( 'masteriyo_email_before_order_table', $order, $email ); ?>
 	</table>
 </div>
 
-<?php do_action( 'masteriyo_email_after_order_table', $order, $email ); ?>
+<?php
+/**
+ * Fires after rendering order table in email.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order $order Order object.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
+do_action( 'masteriyo_email_after_order_table', $order, $email );

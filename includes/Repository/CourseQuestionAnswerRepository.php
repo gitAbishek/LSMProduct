@@ -38,7 +38,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_qa Course question-answer object.
+	 * @param \Masteriyo\Models\CourseQuestionAnswer $course_qa Course question-answer object.
 	 */
 	public function create( Model &$course_qa ) {
 		$current_user = wp_get_current_user();
@@ -112,6 +112,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 			$course_qa->save_meta_data();
 			$course_qa->apply_changes();
 
+			/**
+			 * Fires after creating new course progress.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course progress ID.
+			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+			 */
 			do_action( 'masteriyo_new_course_qa', $id, $course_qa );
 		}
 	}
@@ -121,7 +129,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_qa course question-answer object.
+	 * @param \Masteriyo\Models\CourseQuestionAnswer $course_qa course question-answer object.
 	 *
 	 * @throws \Exception If invalid course question-answer.
 	 */
@@ -160,6 +168,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		$this->read_extra_data( $course_qa );
 		$course_qa->set_object_read( true );
 
+		/**
+		 * Fires after reading a course progress from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The new course progress ID.
+		 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+		 */
 		do_action( 'masteriyo_course_qa_read', $course_qa->get_id(), $course_qa );
 	}
 
@@ -168,7 +184,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_qa course question-answer object.
+	 * @param \Masteriyo\Models\CourseQuestionAnswer $course_qa course question-answer object.
 	 *
 	 * @return void
 	 */
@@ -205,6 +221,14 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		$this->update_comment_meta( $course_qa );
 		$course_qa->apply_changes();
 
+		/**
+		 * Fires after updating a course progress in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The new course progress ID.
+		 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+		 */
 		do_action( 'masteriyo_update_course_qa', $course_qa->get_id(), $course_qa );
 	}
 
@@ -213,7 +237,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_qa course question-answer object.
+	 * @param \Masteriyo\Models\CourseQuestionAnswer $course_qa course question-answer object.
 	 * @param array $args Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$course_qa, $args = array() ) {
@@ -231,15 +255,51 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting a course progress in database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course progress ID.
+			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_qa );
+
 			wp_delete_comment( $id, true );
 			$course_qa->set_id( 0 );
+
+			/**
+			 * Fires after deleting a course progress in database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course progress ID.
+			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_qa );
 		} else {
+			/**
+			 * Fires before moving a course progress to trash in database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course progress ID.
+			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_qa );
+
 			wp_trash_comment( $id );
 			$course_qa->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course_qa );
+
+			/**
+			 * Fires after moving a course progress to trash in database.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The new course progress ID.
+			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $course_qa );
 		}
 	}
 

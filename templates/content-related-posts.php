@@ -19,10 +19,20 @@ defined( 'ABSPATH' ) || exit;
 $related_courses = masteriyo_get_related_courses( $GLOBALS['course'] );
 
 if ( empty( $related_courses ) ) {
+	/**
+	 * Fires when there is no related posts (i.e. courses) to display.
+	 *
+	 * @since 1.0.0
+	 */
 	do_action( 'masteriyo_no_related_posts' );
 	return;
 }
 
+/**
+ * Fires before rendering related posts (i.e. courses).
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_related_posts_content' );
 
 ?>
@@ -108,7 +118,16 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="masteriyo-course-price">
 							<span class="current-amount"><?php echo wp_kses_post( masteriyo_price( $course->get_price() ) ); ?></span>
 						</div>
-						<?php do_action( 'masteriyo_template_enroll_button', $course ); ?>
+						<?php
+						/**
+						 * Action hook for rendering enroll button template.
+						 *
+						 * @since 1.0.0
+						 *
+						 * @param \Masteriyo\Models\Course $course Course object.
+						 */
+						do_action( 'masteriyo_template_enroll_button', $course );
+						?>
 					</div>
 				</div>
 			</div>
@@ -119,5 +138,10 @@ do_action( 'masteriyo_before_related_posts_content' );
 
 <?php
 
+/**
+ * Fires after rendering related posts (i.e. courses).
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_related_posts_content' );
 

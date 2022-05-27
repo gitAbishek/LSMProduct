@@ -9,6 +9,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering checkout form.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_checkout_form' );
 
 if ( ! is_user_logged_in() ) {
@@ -52,14 +57,34 @@ if ( ! is_user_logged_in() ) {
 		validate="novalidate">
 
 		<div class="masteriyo-checkout-wrapper">
-			<?php do_action( 'masteriyo_checkout_form' ); ?>
+			<?php
+			/**
+			 * Fires inside form element of checkout form.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( 'masteriyo_checkout_form' );
+			?>
 
 			<div class="masteriyo-checkout-summary">
-				<?php do_action( 'masteriyo_checkout_summary' ); ?>
+				<?php
+				/**
+				 * Action hook for rendering checkout summary in checkout form.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'masteriyo_checkout_summary' );
+				?>
 			</div>
 		</div>
 
 	</form>
 </div>
+
 <?php
-	do_action( 'masteriyo_after_checkout_form' );
+/**
+ * Fires after rendering checkout form.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_after_checkout_form' );

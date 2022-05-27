@@ -17,7 +17,6 @@ defined( 'ABSPATH' ) || exit;
 
 $text_align  = is_rtl() ? 'right' : 'left';
 $margin_side = is_rtl() ? 'left' : 'right';
-$plain_text  = '';
 
 foreach ( $items as $item_id => $item ) :
 	$course        = $item->get_course();
@@ -82,8 +81,16 @@ foreach ( $items as $item_id => $item ) :
 		 */
 		echo wp_kses_post( apply_filters( 'masteriyo_order_item_name', $item->get_name(), $item ) );
 
-		// allow other plugins to add additional course information here.
-		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order, $plain_text );
+		/**
+		 * Fires before rendering order item meta in order items section in email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $item_id Order item ID.
+		 * @param object $item Order item object.
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 */
+		do_action( 'masteriyo_order_item_meta_start', $item_id, $item, $order );
 
 		masteriyo_display_item_meta(
 			$item,
@@ -92,8 +99,16 @@ foreach ( $items as $item_id => $item ) :
 			)
 		);
 
-		// allow other plugins to add additional course information here.
-		do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order, $plain_text );
+		/**
+		 * Fires after rendering order item meta in order items section in email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $item_id Order item ID.
+		 * @param object $item Order item object.
+		 * @param \Masteriyo\Models\Order\Order $order Order object.
+		 */
+		do_action( 'masteriyo_order_item_meta_end', $item_id, $item, $order );
 
 		?>
 		</td>

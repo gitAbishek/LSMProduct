@@ -24,7 +24,7 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 }
 
 /**
- * Action Hook: masteriyo_before_single_course_content
+ * Fires before rendering single course page content.
  *
  * @since 1.0.0
  */
@@ -36,7 +36,7 @@ do_action( 'masteriyo_before_single_course_content' );
 		<div class="masteriyo-single-course--main masteriyo-course--content">
 			<?php
 			/**
-			 * Action Hook: masteriyo_single_course_content
+			 * Action hook for rendering single course page content.
 			 *
 			 * @hooked masteriyo_single_course_featured_image - 10
 			 * @hooked masteriyo_single_course_categories - 20
@@ -55,7 +55,7 @@ do_action( 'masteriyo_before_single_course_content' );
 		<aside class="masteriyo-single-course--aside masteriyo-course--content">
 			<?php
 			/**
-			 * Action Hook: masteriyo_single_course_sidebar_content
+			 * Action hook for rendering sidebar in single course page.
 			 *
 			 * @hooked masteriyo_single_course_price_and_enroll_button - 10
 			 * @hooked masteriyo_single_course_stats - 20
@@ -70,7 +70,7 @@ do_action( 'masteriyo_before_single_course_content' );
 </div>
 <?php
 /**
- * Action Hook: masteriyo_after_single_course_content
+ * Fires after rendering single course page content.
  *
  * @since 1.0.0
  */

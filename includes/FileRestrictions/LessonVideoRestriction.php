@@ -22,6 +22,11 @@ class LessonVideoRestriction extends FileRestriction {
 
 		$this->validate_lesson_video_url();
 
+		/**
+		 * Action for validating video lesson URL. Current request URL is the video lesson URL.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_validate_video_lesson_url' );
 
 		$course = masteriyo_get_course( $_GET['course_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -62,6 +67,13 @@ class LessonVideoRestriction extends FileRestriction {
 			return;
 		}
 
+		/**
+		 * Fires before sending lesson video file to client.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
+		 */
 		do_action( 'masteriyo_before_send_lesson_video_file', $lesson );
 
 		/**

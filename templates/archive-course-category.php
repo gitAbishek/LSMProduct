@@ -24,7 +24,7 @@ get_header( 'course-category' );
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
 /**
- * Hook: masteriyo_before_course_category_header.
+ * Fires before rendering course category archive header.
  *
  * @since 1.4.3
  */
@@ -49,7 +49,7 @@ do_action( 'masteriyo_before_course_category_header' );
 
 	<?php
 	/**
-	 * Hook: masteriyo_course_category_description.
+	 * Action hook for rendering course category description in course category archive.
 	 *
 	 * @hooked masteriyo_course_category_description - 10
 	 *
@@ -61,7 +61,7 @@ do_action( 'masteriyo_before_course_category_header' );
 
 <?php
 /**
- * Hook: masteriyo_after_course_category_header.
+ * Fires after rendering course category archive header.
  *
  * @since 1.4.3
  */
@@ -72,7 +72,7 @@ do_action( 'masteriyo_after_course_category_header' );
 if ( masteriyo_course_loop() ) {
 
 	/**
-	 * Hook: masteriyo_before_course_category_loop.
+	 * Fires before course category loop.
 	 *
 	 * @since 1.4.3
 	 */
@@ -85,7 +85,7 @@ if ( masteriyo_course_loop() ) {
 			the_post();
 
 			/**
-			 * Hook: masteriyo_course_category_loop.
+			 * Fires for each item in course category loop before rendering its template.
 			 *
 			 * @since 1.4.3
 			 */
@@ -98,7 +98,7 @@ if ( masteriyo_course_loop() ) {
 	masteriyo_course_loop_end();
 
 	/**
-	 * Hook: masteriyo_after_course_category_loop.
+	 * Fires after course category loop.
 	 *
 	 * @hooked masteriyo_pagination - 10
 	 *
@@ -107,7 +107,7 @@ if ( masteriyo_course_loop() ) {
 	do_action( 'masteriyo_after_course_category_loop' );
 } else {
 	/**
-	 * Hook: masteriyo_no_courses_found.
+	 * Fires when there is not courses to display in course category archive.
 	 *
 	 * @since 1.4.3
 	 */
@@ -115,7 +115,7 @@ if ( masteriyo_course_loop() ) {
 }
 
 /**
- * Hook: masteriyo_after_course_category_main_content.
+ * Fires after rendering course category archive main content.
  *
  * @since 1.4.3
  */

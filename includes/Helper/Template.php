@@ -614,6 +614,13 @@ if ( ! function_exists( 'masteriyo_account_main_content' ) ) {
 		$current_endpoint = $endpoint['endpoint'];
 
 		if ( has_action( 'masteriyo_account_' . $current_endpoint . '_endpoint' ) ) {
+			/**
+			 * Action for rendering content of an endpoint in account page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $arg Endpoint argument.
+			 */
 			do_action( 'masteriyo_account_' . $current_endpoint . '_endpoint', $endpoint['arg'] );
 			return;
 		}
@@ -1064,6 +1071,11 @@ if ( ! function_exists( 'masteriyo_get_course_search_form' ) ) {
 			$course_search_form_index = 0;
 		}
 
+		/**
+		 * Fires before rendering course search form.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'before_masteriyo_get_course_search_form' );
 
 		masteriyo_get_template(

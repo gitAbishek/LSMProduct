@@ -43,7 +43,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $question Question object.
+	 * @param \Masteriyo\Models\Question\Question $question Question object.
 	 */
 	public function create( Model &$question ) {
 		if ( ! $question->get_date_created( 'edit' ) ) {
@@ -97,6 +97,14 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			$question->save_meta_data();
 			$question->apply_changes();
 
+			/**
+			 * Fires after creating a question.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The question ID.
+			 * @param \Masteriyo\Models\Question\Question $object The question object.
+			 */
 			do_action( 'masteriyo_new_question', $id, $question );
 		}
 	}
@@ -106,8 +114,8 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $question Question object.
-	 * @throws Exception If invalid question.
+	 * @param \Masteriyo\Models\Question\Question $question Question object.
+	 * @throws \Exception If invalid question.
 	 */
 	public function read( Model &$question ) {
 		$question_post = get_post( $question->get_id() );
@@ -133,6 +141,14 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		$this->read_extra_data( $question );
 		$question->set_object_read( true );
 
+		/**
+		 * Fires after reading a question from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The question ID.
+		 * @param \Masteriyo\Models\Question\Question $object The question object.
+		 */
 		do_action( 'masteriyo_question_read', $question->get_id(), $question );
 	}
 
@@ -141,7 +157,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $question Question object.
+	 * @param \Masteriyo\Models\Question\Question $question Question object.
 	 *
 	 * @return void
 	 */
@@ -205,6 +221,14 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 
 		$question->apply_changes();
 
+		/**
+		 * Fires after updating a question in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The question ID.
+		 * @param \Masteriyo\Models\Question\Question $object The question object.
+		 */
 		do_action( 'masteriyo_update_question', $question->get_id(), $question );
 	}
 
@@ -213,7 +237,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $question Question object.
+	 * @param \Masteriyo\Models\Question\Question $question Question object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$question, $args = array() ) {
@@ -224,9 +248,27 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			return;
 		}
 
+		/**
+		 * Fires before deleting a question from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The question ID.
+		 * @param \Masteriyo\Models\Question\Question $object The question object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $question );
+
 		wp_delete_post( $id, true );
 		$question->set_id( 0 );
+
+		/**
+		 * Fires after deleting a question from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The question ID.
+		 * @param \Masteriyo\Models\Question\Question $object The question object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $question );
 	}
 

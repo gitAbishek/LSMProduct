@@ -17,26 +17,34 @@ get_header( 'masteriyo-course' );
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
 /**
- * masteriyo_before_single_course hook.
+ * Fires before rendering single course page template.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_single_course' );
 
 masteriyo_get_template_part( 'content', 'single-course' );
 
 /**
- * masteriyo_after_single_course hook.
+ * Fires after rendering single course page template.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_single_course' );
 
 /**
- * masteriyo_before_related_posts hook.
+ * Fires before rendering related courses template in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_related_posts' );
 
 masteriyo_get_template_part( 'content', 'related-posts' );
 
 /**
- * masteriyo_after_related_posts hook.
+ * Fires after rendering related courses template in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_related_posts' );
 

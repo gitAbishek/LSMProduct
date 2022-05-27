@@ -384,7 +384,7 @@ class FrontendQuery {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param WP_Query $q Query instance.
+	 * @param \WP_Query $q Query instance.
 	 */
 	public function course_query( $q ) {
 		if ( ! is_feed() ) {
@@ -438,6 +438,13 @@ class FrontendQuery {
 		// add_filter( 'posts_clauses', array( $this, 'price_filter_post_clauses' ), 10, 2 );
 		add_filter( 'the_posts', array( $this, 'handle_get_posts' ), 10, 2 );
 
+		/**
+		 * Fires after setting up frontend query object.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \WP_Query $query Query object.
+		 */
 		do_action( 'masteriyo_course_query', $q );
 	}
 

@@ -19,12 +19,28 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 ?>
 <div class="masteriyo-course-reviews-list">
 	<?php foreach ( $course_reviews as $course_review ) : ?>
-		<?php do_action( 'masteriyo_template_course_review', $course_review ); ?>
+		<?php
+		/**
+		 * Fires before rendering a course review in reviews list section in single course page.
+		 *
+		 * @since 1.0.5
+		 *
+		 * @param \Masteriyo\Models\CourseReview $course_review The course review object.
+		 */
+		do_action( 'masteriyo_template_course_review', $course_review );
+		?>
 
 		<?php if ( ! empty( $replies[ $course_review->get_id() ] ) ) : ?>
 			<div class="masteriyo-course-review-replies">
 				<?php
 				foreach ( $replies[ $course_review->get_id() ] as $reply ) {
+					/**
+					 * Action hook for rendering course review reply template.
+					 *
+					 * @since 1.0.5
+					 *
+					 * @param array $args Template args.
+					 */
 					do_action(
 						'masteriyo_template_course_review_reply',
 						array(

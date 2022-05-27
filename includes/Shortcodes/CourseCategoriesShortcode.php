@@ -61,6 +61,14 @@ class CourseCategoriesShortcode extends Shortcode {
 		$attrs['categories'] = $categories;
 
 		\ob_start();
+
+		/**
+		 * Action hook for rendering course categories template in shortcode.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param array $attr Shortcode attributes.
+		 */
 		do_action( 'masteriyo_template_shortcode_course_categories', $attrs );
 
 		return \ob_get_clean();

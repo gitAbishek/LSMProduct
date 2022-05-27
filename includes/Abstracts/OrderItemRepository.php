@@ -75,6 +75,15 @@ class OrderItemRepository extends AbstractRepository {
 			$item->apply_changes();
 			$this->clear_cache( $item );
 
+			/**
+			 * Fires after creating new order item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $order_item_id Order item ID.
+			 * @param \Masteriyo\Models\Order\OrderItem $order_item Order item object.
+			 * @param integer $order_id Order ID.
+			 */
 			do_action( 'masteriyo_new_order_item', $item->get_id(), $item, $item->get_order_id() );
 		}
 
@@ -84,9 +93,10 @@ class OrderItemRepository extends AbstractRepository {
 	 * Update a order item in the database.
 	 *
 	 * @since 1.0.0
-	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
+	 *
+	 * @param \Masteriyo\Models\Order\OrderItem $item Order item object.
 	 */
-	public function update( Model &$item ) {
+	public function update( \Masteriyo\Database\Model &$item ) {
 		global $wpdb;
 
 		$changes = $item->get_changes();
@@ -108,6 +118,15 @@ class OrderItemRepository extends AbstractRepository {
 		$item->apply_changes();
 		$this->clear_cache( $item );
 
+		/**
+		 * Fires after updating an order item.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $order_item_id Order item ID.
+		 * @param \Masteriyo\Models\Order\OrderItem $order_item Order item object.
+		 * @param integer $order_id Order ID.
+		 */
 		do_action( 'masteriyo_update_order_item', $item->get_id(), $item, $item->get_order_id() );
 	}
 
@@ -115,16 +134,35 @@ class OrderItemRepository extends AbstractRepository {
 	 * Remove an order item from the database.
 	 *
 	 * @since 1.0.0
-	 * @param Masteriyo\Models\Order\OrderItem $item Order item object.
-	 * @param array         $args Array of args to pass to the delete method.
+	 *
+	 * @param \Masteriyo\Models\Order\OrderItem $item Order item object.
+	 * @param array $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$item, $args = array() ) {
 		if ( $item->get_id() ) {
 			global $wpdb;
+
+			/**
+			 * Fires before deleting an order item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $order_item_id Order item ID.
+			 */
 			do_action( 'masteriyo_before_delete_order_item', $item->get_id() );
+
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_order_items', array( 'order_item_id' => $item->get_id() ) );
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_order_itemmeta', array( 'order_item_id' => $item->get_id() ) );
+
+			/**
+			 * Fires after deleting an order item.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $order_item_id Order item ID.
+			 */
 			do_action( 'masteriyo_delete_order_item', $item->get_id() );
+
 			$this->clear_cache( $item );
 		}
 	}

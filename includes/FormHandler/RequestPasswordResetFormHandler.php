@@ -73,6 +73,15 @@ class RequestPasswordResetFormHandler {
 			$user   = masteriyo_get_user( $wp_user );
 			$errors = new \WP_Error();
 
+			/**
+			 * Fires before errors are returned from a password reset request.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @see https://developer.wordpress.org/reference/hooks/lostpassword_post/
+			 *
+			 * @param \WP_Error $errors WP_Error object.
+			 */
 			do_action( 'lostpassword_post', $errors );
 
 			if ( $errors->get_error_code() ) {
@@ -83,6 +92,15 @@ class RequestPasswordResetFormHandler {
 				throw new \Exception( __( 'Invalid username or email', 'masteriyo' ) );
 			}
 
+			/**
+			 * Fires before a new password is retrieved.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @see https://developer.wordpress.org/reference/hooks/retrieve_password/
+			 *
+			 * @param string $username User's username.
+			 */
 			do_action( 'retrieve_password', $user->get_username() );
 
 			/**
@@ -106,6 +124,14 @@ class RequestPasswordResetFormHandler {
 
 			masteriyo( 'email.password-reset' )->trigger( $user->get_id(), $key );
 
+			/**
+			 * Fires after triggering password reset request email.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\User $user User object.
+			 * @param string $key The password reset key for the user.
+			 */
 			do_action( 'masteriyo_after_password_reset_email', $user, $key );
 
 			wp_safe_redirect( add_query_arg( 'reset-link-sent', 'true', masteriyo_get_account_endpoint_url( 'reset-password' ) ) );

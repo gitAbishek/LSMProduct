@@ -20,11 +20,13 @@ printf( '<div class="masteriyo-course-categories columns-%d">', esc_attr( $colum
 
 foreach ( $categories as $category ) {
 	/**
-	 * Hook: masteriyo_template_shortcode_course_category.
+	 * Action hook for rendering course category template in course categories shortcode.
 	 *
 	 * @hooked masteriyo_template_shortcode_course_category - 10
 	 *
 	 * @since 1.2.0
+	 *
+	 * @param array $args Template arguments.
 	 */
 	do_action(
 		'masteriyo_template_shortcode_course_category',

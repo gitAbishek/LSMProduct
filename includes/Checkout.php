@@ -105,7 +105,7 @@ class Checkout {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @throws Exception When validation fails.
+	 * @throws \Exception When validation fails.
 	 */
 	public function process_checkout() {
 		try {
@@ -120,6 +120,11 @@ class Checkout {
 			masteriyo_maybe_define_constant( 'MASTERIYO_CHECKOUT', true );
 			masteriyo_set_time_limit( 0 );
 
+			/**
+			 * Fires before checkout form is processed.
+			 *
+			 * @since 1.0.0
+			 */
 			do_action( 'masteriyo_before_checkout_process' );
 
 			if ( $this->cart->is_empty() ) {
@@ -132,6 +137,11 @@ class Checkout {
 				);
 			}
 
+			/**
+			 * Fires while processing checkout form.
+			 *
+			 * @@since 1.0.0
+			 */
 			do_action( 'masteriyo_checkout_process' );
 
 			$errors      = new \WP_Error();
@@ -163,6 +173,15 @@ class Checkout {
 					throw new \Exception( __( 'Unable to create order.', 'masteriyo' ) );
 				}
 
+				/**
+				 * Fires after checkout form have been processed.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $order_id Order ID.
+				 * @param array $posted_data The posted data from checkout form.
+				 * @param \Masteriyo\Models\Order\Order $order Order object.
+				 */
 				do_action( 'masteriyo_checkout_order_processed', $order_id, $posted_data, $order );
 
 				if ( $order->needs_payment() ) {
@@ -394,7 +413,7 @@ class Checkout {
 	 *
 	 * @since  1.0.0
 	 * @param  array    $data   An array of posted data.
-	 * @param  WP_Error $errors Validation errors.
+	 * @param  \WP_Error $errors Validation errors.
 	 */
 	protected function validate_checkout( &$data, &$errors ) {
 		masteriyo_clear_notices();
@@ -417,13 +436,28 @@ class Checkout {
 			}
 		}
 
+		/**
+		 * Fires after checkout form data validation.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data The checkout form data.
+		 * @param \WP_Error $errors The validation errors.
+		 */
 		do_action( 'masteriyo_after_checkout_validation', $data, $errors );
 	}
 
 	/**
 	 * When we process the checkout, lets ensure cart items are rechecked to prevent checkout.
+	 *
+	 * @since 1.0.0
 	 */
 	public function check_cart_items() {
+		/**
+		 * Fires when processing the checkout, for ensuring cart items are rechecked to prevent checkout.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_check_cart_items' );
 	}
 
@@ -554,7 +588,10 @@ class Checkout {
 	/**
 	 * Create a new user account if needed.
 	 *
-	 * @throws Exception When not able to create user.
+	 * @since 1.0.0
+	 *
+	 * @throws \Exception When not able to create user.
+	 *
 	 * @param array $data Posted data.
 	 */
 	protected function process_user( $data ) {
@@ -617,6 +654,14 @@ class Checkout {
 			$user->save();
 		}
 
+		/**
+		 * Fires after updating user data in checkout form.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $user_id User ID.
+		 * @param array $data User data.
+		 */
 		do_action( 'masteriyo_checkout_update_user_meta', $user_id, $data );
 	}
 
@@ -642,7 +687,7 @@ class Checkout {
 		 * @since 1.0.0
 		 *
 		 * @param mixed $order_id Order ID.
-		 * @param Masteriyo\Checkout $checkout_object Object of Checkout class.
+		 * @param \Masteriyo\Checkout $checkout_object Object of Checkout class.
 		 */
 		$order_id = apply_filters( 'masteriyo_create_order', null, $this );
 
@@ -663,7 +708,13 @@ class Checkout {
 			 * detect changes which is based on cart items + order total.
 			 */
 			if ( $order && $order->has_cart_hash( $cart_hash ) && $order->has_status( array( OrderStatus::PENDING, OrderStatus::FAILED ) ) ) {
-				// Action for 3rd parties.
+				/**
+				 * Fires before temporarily removing order items in checkout form.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $order_id Order ID.
+				 */
 				do_action( 'masteriyo_resume_order', $order_id );
 
 				// Remove all items - we will re-add them later.
@@ -704,6 +755,9 @@ class Checkout {
 			 * Action hook to adjust order before save.
 			 *
 			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\Order\Order $order Order object.
+			 * @param array $data Posted data from checkout form.
 			 */
 			do_action( 'masteriyo_checkout_create_order', $order, $data );
 
@@ -714,6 +768,9 @@ class Checkout {
 			 * Action hook fired after an order is created used to add custom meta to the order.
 			 *
 			 * @since 1.0.0
+			 *
+			 * @param integer $order_id Order ID.
+			 * @param array $data Posted data from checkout form.
 			 */
 			do_action( 'masteriyo_checkout_update_order_meta', $order_id, $data );
 
@@ -721,12 +778,21 @@ class Checkout {
 			 * Action hook fired after an order is created.
 			 *
 			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\Order\Order $order Order object.
 			 */
 			do_action( 'masteriyo_checkout_order_created', $order );
 
 			return $order_id;
 		} catch ( \Exception $e ) {
 			if ( $order && is_a( $order, 'Masteriyo\Models\Order' ) ) {
+				/**
+				 * Fires when exception occurs in checkout form processing.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param \Masteriyo\Models\Order\Order $order Order object.
+				 */
 				do_action( 'masteriyo_checkout_order_exception', $order );
 			}
 			return new \WP_Error( 'checkout-error', $e->getMessage() );
@@ -764,9 +830,9 @@ class Checkout {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Order $order Order object.
+	 * @param \Masteriyo\Models\Order\Order $order Order object.
 	 *
-	 * @throws Exception When unable to create order.
+	 * @throws \Exception When unable to create order.
 	 */
 	public function set_data_from_cart( &$order ) {
 		$order->set_total( $this->cart->get_total( 'edit' ) );
@@ -778,7 +844,7 @@ class Checkout {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Order $order Order instance.
+	 * @param \Masteriyo\Models\Order\Order $order Order instance.
 	 */
 	public function create_order_course_items( &$order ) {
 		foreach ( $this->cart->get_cart() as $cart_item_key => $values ) {
@@ -802,6 +868,16 @@ class Checkout {
 				);
 			}
 
+			/**
+			 * Fires before adding line item to order in checkout.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param object $order_item The line item.
+			 * @param string $cart_item_key Cart item key.
+			 * @param array $values Cart item values.
+			 * @param \Masteriyo\Models\Order\Order $order Order object.
+			 */
 			do_action( 'masteriyo_checkout_create_order_line_item', $item, $cart_item_key, $values, $order );
 
 			// Add item to order and save.

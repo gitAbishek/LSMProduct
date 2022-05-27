@@ -38,7 +38,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order_item Cource object.
+	 * @param \Masteriyo\Models\Order\OrderItemCourse $order_item Cource object.
 	 *
 	 * @throws \Exception If invalid order item.
 	 */
@@ -83,6 +83,14 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$this->read_extra_data( $order_item );
 		$order_item->set_object_read( true );
 
+		/**
+		 * Fires after creating a order item course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order item ID.
+		 * @param \Masteriyo\Models\Order\OrderItemCourse $object The order item object.
+		 */
 		do_action( 'masteriyo_order_item_read', $order_item->get_id(), $order_item );
 	}
 
@@ -91,7 +99,7 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order_item Order Item object.
+	 * @param \Masteriyo\Models\Order\OrderItemCourse $order_item Order Item object.
 	 *
 	 * @return void
 	 */
@@ -118,15 +126,23 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$order_item->apply_changes();
 		$this->clear_cache( $order_item );
 
+		/**
+		 * Fires after updating a order item course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order item ID.
+		 * @param \Masteriyo\Models\Order\OrderItemCourse $object The order item object.
+		 */
 		do_action( 'masteriyo_update_order_item', $order_item->get_id(), $order_item );
 	}
 
 	/**
-	 * Delete an order item from the database.
+	 * Delete an order item course from the database.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order_item Order Item object.
+	 * @param \Masteriyo\Models\Order\OrderItemCourse $order_item Order Item object.
 	 * @param  array $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$order_item, $args = array() ) {
@@ -137,6 +153,14 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			return;
 		}
 
+		/**
+		 * Fires before deleting a order item course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order item ID.
+		 * @param \Masteriyo\Models\Order\OrderItemCourse $object The order item object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $order_item );
 
 		/**
@@ -157,6 +181,14 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$this->clear_cache( $order_item );
 		$order_item->set_id( 0 );
 
+		/**
+		 * Fires after deleting a order item course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order item ID.
+		 * @param \Masteriyo\Models\Order\OrderItemCourse $object The order item object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $order_item );
 	}
 
@@ -305,7 +337,8 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return OrderItem[]
+	 *
+	 * @return \Masteriyo\Models\Order\OrderItemCourse[]
 	 */
 	public function delete_batch( $query_vars ) {
 		global $wpdb;
@@ -361,6 +394,13 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 		$order_item_ids = $wpdb->get_results( $wpdb->prepare( $sql, $where_values ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$order_item_ids = wp_list_pluck( $order_item_ids, 'order_item_id' );
 
+		/**
+		 * Fires before batch deleting order item courses.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_vars Query vars.
+		 */
 		do_action( 'masteriyo_before_batch_delete_' . $object_type, $query_vars );
 
 		/**
@@ -385,6 +425,14 @@ class OrderItemCourseRepository extends OrderItemRepository implements Repositor
 			masteriyo( 'cache' )->delete( $order_item_id, $this->meta_type . '_meta' );
 		}
 
+		/**
+		 * Fires after batch deleting order item courses.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $query_vars Query vars.
+		 * @param integer|false The number of rows updated, or false on error.
+		 */
 		do_action( 'masteriyo_after_batch_delete_' . $object_type, $query_vars, $result );
 	}
 }

@@ -92,6 +92,17 @@ class Utils {
 		$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
 		if ( \is_ajax() || self::is_rest_api_request() ) {
+			/**
+			 * Fires when the given function is being used incorrectly.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @see https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/
+			 *
+			 * @param string $function Function used.
+			 * @param string $message Message to log.
+			 * @param string $version Version the message was added in.
+			 */
 			do_action( 'doing_it_wrong_run', $function, $message, $version );
 			error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
 		} else {

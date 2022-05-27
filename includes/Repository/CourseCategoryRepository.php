@@ -42,7 +42,7 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_cat Course_cat object.
+	 * @param \Masteriyo\Models\CourseCategory $course_cat Course_cat object.
 	 */
 	public function create( Model &$course_cat ) {
 
@@ -76,9 +76,26 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 			$course_cat->save_meta_data();
 			$course_cat->apply_changes();
 
+			/**
+			 * Fires after creating new course category.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course category ID.
+			 * @param \Masteriyo\Models\CourseCategory $course_cat The new course category object.
+			 */
 			do_action( 'masteriyo_new_course_cat', $ids, $course_cat );
 		} elseif ( isset( $ids->error_data['term_exists'] ) ) {
 			$course_cat->set_id( $ids->error_data['term_exists'] );
+
+			/**
+			 * Fires after failing to create new course category because of already existing data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course category ID.
+			 * @param \Masteriyo\Models\CourseCategory $course_cat The old course category object.
+			 */
 			do_action( 'masteriyo_old_course_cat', $ids, $course_cat );
 		}
 
@@ -117,6 +134,14 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 		$this->read_extra_data( $course_cat );
 		$course_cat->set_object_read( true );
 
+		/**
+		 * Fires after reading a course category object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id Course category ID.
+		 * @param \Masteriyo\Models\CourseCategory $course_cat The read course category object.
+		 */
 		do_action( 'masteriyo_course_cat_read', $course_cat->get_id(), $course_cat );
 	}
 
@@ -175,6 +200,14 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 
 		$course_cat->apply_changes();
 
+		/**
+		 * Fires after updating a course category object in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id Course category ID.
+		 * @param \Masteriyo\Models\CourseCategory $course_cat The read course category object.
+		 */
 		do_action( 'masteriyo_update_course_cat', $course_cat->get_id(), $course_cat );
 	}
 
@@ -194,9 +227,27 @@ class CourseCategoryRepository extends AbstractRepository implements RepositoryI
 			return;
 		}
 
+		/**
+		 * Fires before deleting a course category object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id Course category ID.
+		 * @param \Masteriyo\Models\CourseCategory $course_cat The read course category object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_cat );
+
 		wp_delete_term( $id, $object_type );
 		$course_cat->set_id( 0 );
+
+		/**
+		 * Fires after deleting a course category object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id Course category ID.
+		 * @param \Masteriyo\Models\CourseCategory $course_cat The read course category object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_cat );
 
 	}

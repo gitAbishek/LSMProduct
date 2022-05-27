@@ -479,8 +479,8 @@ abstract class Order extends Model {
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param Model          $this The object being saved.
-			 * @param Repository $repository THe data store persisting the data.
+			 * @param \Masteriyo\Abstracts\Order $order The object being saved.
+			 * @param \Masteriyo\Repository\AbstractRepository $repository THe data store persisting the data.
 			 */
 			do_action( 'masteriyo_before_' . $this->object_type . '_object_save', $this, $this->repository );
 
@@ -497,8 +497,8 @@ abstract class Order extends Model {
 			 *
 			 * @since 1.0.0
 			 *
-			 * @param Model          $this The object being saved.
-			 * @param Repository $repository THe data store persisting the data.
+			 * @param \Masteriyo\Abstracts\Order $order The object being saved.
+			 * @param \Masteriyo\Repository\AbstractRepository $repository THe data store persisting the data.
 			 */
 			do_action( 'masteriyo_after_' . $this->object_type . '_object_save', $this, $this->repository );
 
@@ -815,6 +815,14 @@ abstract class Order extends Model {
 	 * @return float calculated grand total.
 	 */
 	public function calculate_totals( $and_taxes = true ) {
+		/**
+		 * Fires before calculating totals of an order.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $and_taxes If true, taxes will also be calculated.
+		 * @param \Masteriyo\Abstracts\Order $order Order object.
+		 */
 		do_action( 'masteriyo_order_before_calculate_totals', $and_taxes, $this );
 
 		$cart_subtotal = $this->get_cart_subtotal_for_order();
@@ -822,6 +830,14 @@ abstract class Order extends Model {
 
 		$this->set_total( masteriyo_round( $cart_total, masteriyo_get_price_decimals() ) );
 
+		/**
+		 * Fires after calculating totals of an order.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $and_taxes If true, taxes will also be calculated.
+		 * @param \Masteriyo\Abstracts\Order $order Order object.
+		 */
 		do_action( 'masteriyo_order_after_calculate_totals', $and_taxes, $this );
 
 		$this->save();

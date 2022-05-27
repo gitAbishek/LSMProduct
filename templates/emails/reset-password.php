@@ -17,6 +17,14 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 
+/**
+ * Fires before rendering email header.
+ *
+ * @since 1.0.0
+ *
+ * @param string $email_heading Email header.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_header', $email_heading, $email );
 
 ?>
@@ -56,4 +64,11 @@ if ( $additional_content ) {
 	echo wp_kses_post( wpautop( wptexturize( $additional_content ) ) );
 }
 
+/**
+ * Action hook fired in email's footer section.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_footer', $email );

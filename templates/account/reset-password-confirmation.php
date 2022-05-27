@@ -19,6 +19,11 @@ defined( 'ABSPATH' ) || exit;
 masteriyo_display_all_notices();
 
 
+/**
+ * Fires before rendering password reset request confirmation message.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_reset_password_request_confirmation_message' );
 
 ?>
@@ -38,5 +43,10 @@ do_action( 'masteriyo_before_reset_password_request_confirmation_message' );
 
 <?php
 
+/**
+ * Fires after rendering password reset request confirmation message.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_reset_password_request_confirmation_message' );
 

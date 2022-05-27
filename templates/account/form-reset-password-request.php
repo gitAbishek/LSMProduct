@@ -8,6 +8,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering password reset request form.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_password_reset_request_form' );
 
 ?>
@@ -45,4 +50,9 @@ do_action( 'masteriyo_before_password_reset_request_form' );
 
 <?php
 
+/**
+ * Fires after rendering password reset request form.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_password_reset_request_form' );

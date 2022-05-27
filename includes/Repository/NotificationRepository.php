@@ -20,7 +20,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.4.1
 	 *
-	 * @param Model $notification Notification object.
+	 * @param \Masteriyo\Models\Notification $notification Notification object.
 	 */
 	public function create( Model &$notification ) {
 		global $wpdb;
@@ -71,6 +71,14 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 			$notification->apply_changes();
 			$this->clear_cache( $notification );
 
+			/**
+			 * Fires after creating a notification.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The notification ID.
+			 * @param \Masteriyo\Models\Notification $object The notification object.
+			 */
 			do_action( 'masteriyo_new_notification', $notification->get_id(), $notification );
 		}
 	}
@@ -80,7 +88,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.4.1
 	 *
-	 * @param Model $notification notification object.
+	 * @param \Masteriyo\Models\Notification $notification notification object.
 	 *
 	 * @throws \Exception If invalid notification.
 	 */
@@ -127,7 +135,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 		 * @since 1.4.1
 		 *
 		 * @param int $id Notification ID.
-		 * @param Masteriyo\Models\Notification $notification Notification object.
+		 * @param \Masteriyo\Models\Notification $notification Notification object.
 		 */
 		do_action( 'masteriyo_notification_read', $notification->get_id(), $notification );
 	}
@@ -137,7 +145,7 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 	 *
 	 * @since 1.4.1
 	 *
-	 * @param Model $notification notification object.
+	 * @param \Masteriyo\Models\Notification $notification notification object.
 	 *
 	 * @return void.
 	 */
@@ -197,6 +205,14 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 		$notification->apply_changes();
 		$this->clear_cache( $notification );
 
+		/**
+		 * Fires after updating a notification.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param integer $id The notification ID.
+		 * @param \Masteriyo\Models\Notification $object The notification object.
+		 */
 		do_action( 'masteriyo_update_notification', $notification->get_id(), $notification );
 	}
 
@@ -212,10 +228,24 @@ class NotificationRepository extends AbstractRepository implements RepositoryInt
 		global $wpdb;
 
 		if ( $notification->get_id() ) {
+			/**
+			 * Fires before deleting a notification.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The notification ID.
+			 */
 			do_action( 'masteriyo_before_delete_notification', $notification->get_id() );
 
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_notifications', array( 'id' => $notification->get_id() ) );
 
+			/**
+			 * Fires after deleting a notification.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The notification ID.
+			 */
 			do_action( 'masteriyo_delete_notification', $notification->get_id() );
 
 			$this->clear_cache( $notification );

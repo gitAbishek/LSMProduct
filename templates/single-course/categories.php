@@ -20,6 +20,11 @@ if ( empty( $course->get_categories() ) ) {
 	return;
 }
 
+/**
+ * Fires before rendering categories section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_single_course_categories' );
 
 ?>
@@ -32,4 +37,9 @@ do_action( 'masteriyo_before_single_course_categories' );
 </div>
 <?php
 
+/**
+ * Fires after rendering categories section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_single_course_categories' );

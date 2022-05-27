@@ -8,14 +8,18 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_account hook.
+ * Fires before rendering account page template.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_account' );
 
 masteriyo_get_template_part( 'content', 'account' );
 
 /**
- * masteriyo_after_account hook.
+ * Fires after rendering account page template.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_account' );
 

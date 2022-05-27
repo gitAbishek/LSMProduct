@@ -41,7 +41,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $user_course UserCourse object.
+	 * @param \Masteriyo\Models\UserCourse $user_course UserCourse object.
 	 */
 	public function create( Model &$user_course ) {
 		global $wpdb;
@@ -95,6 +95,14 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 			$user_course->apply_changes();
 			$this->clear_cache( $user_course );
 
+			/**
+			 * Fires after creating a user course.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The user course ID.
+			 * @param \Masteriyo\Models\UserCourse $object The user course object.
+			 */
 			do_action( 'masteriyo_new_user_course', $user_course->get_id(), $user_course );
 		}
 
@@ -104,7 +112,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 * Update a user course item in the database.
 	 *
 	 * @since 1.0.0
-	 * @param UserCourse $user_course user course object.
+	 * @param \Masteriyo\Models\UserCourse $user_course user course object.
 	 */
 	public function update( Model &$user_course ) {
 		global $wpdb;
@@ -150,6 +158,14 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$user_course->apply_changes();
 		$this->clear_cache( $user_course );
 
+		/**
+		 * Fires after updating a user course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The user course ID.
+		 * @param \Masteriyo\Models\UserCourse $object The user course object.
+		 */
 		do_action( 'masteriyo_update_user_course', $user_course->get_id(), $user_course );
 	}
 
@@ -157,18 +173,32 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 * Remove an user course from the database.
 	 *
 	 * @since 1.0.0
-	 * @param UserCourse $user_course user course object.
+	 * @param \Masteriyo\Models\UserCourse $user_course user course object.
 	 * @param array         $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$user_course, $args = array() ) {
 		global $wpdb;
 
 		if ( $user_course->get_id() ) {
+			/**
+			 * Fires before deleting a user course.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The user course ID.
+			 */
 			do_action( 'masteriyo_before_delete_user_course', $user_course->get_id() );
 
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_items', array( 'id' => $user_course->get_id() ) );
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_itemmeta', array( 'user_item_id' => $user_course->get_id() ) );
 
+			/**
+			 * Fires after deleting a user course.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The user course ID.
+			 */
 			do_action( 'masteriyo_delete_user_course', $user_course->get_id() );
 
 			$user_course->set_status( 'trash' );
@@ -182,9 +212,9 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param UserCourse $user_course user course object.
+	 * @param \Masteriyo\Models\UserCourse $user_course user course object.
 	 *
-	 * @throws Exception If invalid user course object object.
+	 * @throws \Exception If invalid user course object object.
 	 */
 	public function read( &$user_course ) {
 		global $wpdb;
@@ -215,6 +245,14 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 		$this->read_user_course_data( $user_course );
 		$user_course->set_object_read( true );
 
+		/**
+		 * Fires after reading a user course from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The user course ID.
+		 * @param \Masteriyo\Models\UserCourse $object The user course object.
+		 */
 		do_action( 'masteriyo_user_course_read', $user_course->get_id(), $user_course );
 	}
 
@@ -223,7 +261,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\UserCourse $user_course User course object.
+	 * @param \Masteriyo\Models\UserCourse $user_course User course object.
 	 */
 	protected function read_user_course_data( &$user_course ) {
 		$id          = $user_course->get_id();
@@ -253,7 +291,7 @@ class UserCourseRepository extends AbstractRepository implements RepositoryInter
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\UserCourse $user_course User course object.
+	 * @param \Masteriyo\Models\UserCourse $user_course User course object.
 	 */
 	public function clear_cache( &$user_course ) {
 		wp_cache_delete( 'item' . $user_course->get_id(), 'masteriyo-user-course' );

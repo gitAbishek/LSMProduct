@@ -16,6 +16,11 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+/**
+ * Fires before rendering stats section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_single_course_stats' );
 
 ?>
@@ -61,4 +66,9 @@ do_action( 'masteriyo_before_single_course_stats' );
 </div>
 <?php
 
+/**
+ * Fires after rendering stats section in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_single_course_stats' );

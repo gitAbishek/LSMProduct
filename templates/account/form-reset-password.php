@@ -16,6 +16,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering password reset form.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_password_reset_form' );
 
 ?>
@@ -62,7 +67,14 @@ do_action( 'masteriyo_before_password_reset_form' );
 				<input type="hidden" name="reset_key" value="<?php echo esc_attr( $key ); ?>" />
 				<input type="hidden" name="reset_login" value="<?php echo esc_attr( $login ); ?>" />
 
-				<?php do_action( 'masteriyo_password_reset_form' ); ?>
+				<?php
+				/**
+				 * Fires after rendering password reset form's input fields.
+				 *
+				 * @since 1.0.0
+				 */
+				do_action( 'masteriyo_password_reset_form' );
+				?>
 
 				<?php wp_nonce_field( 'masteriyo-password-reset' ); ?>
 			</form>
@@ -73,5 +85,10 @@ do_action( 'masteriyo_before_password_reset_form' );
 
 <?php
 
+/**
+ * Fires after rendering password reset form.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_password_reset_form' );
 

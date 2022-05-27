@@ -8,9 +8,14 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-?>
 
-<?php do_action( 'masteriyo_checkout_before_payment_methods' ); ?>
+/**
+ * Fires before rendering payment methods in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_before_payment_methods' );
+?>
 
 <?php if ( masteriyo( 'cart' )->needs_payment() ) : ?>
 	<div id="masteriyo-payments" class="masteriyo-checkout-summary-payment-method">
@@ -39,9 +44,23 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 <?php endif; ?>
 
-<?php do_action( 'masteriyo_checkout_after_payment_methods' ); ?>
+<?php
+/**
+ * Fires after rendering payment methods in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_after_payment_methods' );
+?>
 
-<?php do_action( 'masteriyo_checkout_summary_before_submit' ); ?>
+<?php
+/**
+ * Fires before rendering submit button in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_summary_before_submit' );
+?>
 
 <button
 	type="submit"
@@ -52,6 +71,12 @@ defined( 'ABSPATH' ) || exit;
 </button>
 
 <?php
-	wp_nonce_field( 'masteriyo-process_checkout', 'masteriyo-process-checkout-nonce' );
-	do_action( 'masteriyo_checkout_summary_after_submit' );
+wp_nonce_field( 'masteriyo-process_checkout', 'masteriyo-process-checkout-nonce' );
+
+/**
+ * Fires after rendering submit button in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_summary_after_submit' );
 

@@ -39,7 +39,14 @@ if ( ! $order ) {
 ?>
 
 <div class="masteriyo-w-100 masteriyo-container masteriyo-order">
-<?php do_action( 'masteriyo_before_thankyou', $order->get_id() ); ?>
+<?php
+/**
+ * Fires before rendering thankyou message.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_before_thankyou', $order->get_id() );
+?>
 
 	<?php if ( $order->has_status( OrderStatus::FAILED ) ) : ?>
 
@@ -127,8 +134,26 @@ if ( ! $order ) {
 
 	<?php endif; ?>
 
-	<?php do_action( 'masteriyo_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
-	<?php do_action( 'masteriyo_thankyou', $order->get_id() ); ?>
+	<?php
+	/**
+	 * Fires after rendering thankyou message. Targets specific payment methods.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $id Order ID.
+	 */
+	do_action( 'masteriyo_thankyou_' . $order->get_payment_method(), $order->get_id() );
+	?>
+	<?php
+	/**
+	 * Fires before rendering thankyou message.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param integer $id Order ID.
+	 */
+	do_action( 'masteriyo_thankyou', $order->get_id() );
+	?>
 
 </div>
 <?php

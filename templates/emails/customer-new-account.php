@@ -23,6 +23,14 @@ if ( empty( $name ) ) {
 	$name = $user->get_username();
 }
 
+/**
+ * Fires before rendering email header.
+ *
+ * @since 1.0.0
+ *
+ * @param string $email_heading Email header.
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <p class="email-template--info">
@@ -43,4 +51,11 @@ do_action( 'masteriyo_email_header', $email_heading, $email ); ?>
 
 <?php
 
+/**
+ * Action hook fired in email's footer section.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Emails\Email $email Email object.
+ */
 do_action( 'masteriyo_email_footer', $email );

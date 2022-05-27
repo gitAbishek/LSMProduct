@@ -21,7 +21,7 @@ class SessionRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $session session object.
+	 * @param \Masteriyo\Session\Session $session session object.
 	 */
 	public function create( Model &$session ) {
 		global $wpdb;
@@ -46,9 +46,12 @@ class SessionRepository implements RepositoryInterface {
 		$session->apply_changes();
 
 		/**
-		 * Create session action.
+		 * Fires after creating a session in database.
 		 *
 		 * @since 1.3.8
+		 *
+		 * @param integer $integer Session ID.
+		 * @param \Masteriyo\Session\Session $session The session object.
 		 */
 		do_action( 'masteriyo_new_session', $session->get_id(), $session );
 	}
@@ -58,7 +61,7 @@ class SessionRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $session Session object.
+	 * @param \Masteriyo\Session\Session $session Session object.
 	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$session, $args = array() ) {
@@ -74,6 +77,9 @@ class SessionRepository implements RepositoryInterface {
 			 * Before session delete action.
 			 *
 			 * @since 1.3.8
+			 *
+			 * @param integer $integer Session ID.
+			 * @param \Masteriyo\Session\Session $session The session object.
 			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
 
@@ -82,9 +88,12 @@ class SessionRepository implements RepositoryInterface {
 			/**
 			 * After session delete action.
 			 *
-			 * @since 1.3.8
+			 * @since x.x.x
+			 *
+			 * @param integer $integer Session ID.
+			 * @param \Masteriyo\Session\Session $session The session object.
 			 */
-			do_action( 'masteriyo_before_delete_' . $object_type, $id, $session );
+			do_action( 'masteriyo_after_delete_' . $object_type, $id, $session );
 		}
 	}
 
@@ -93,7 +102,7 @@ class SessionRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $session Course object.
+	 * @param \Masteriyo\Session\Session $session Course object.
 	 * @throws Exception If invalid session.
 	 */
 	public function read( Model &$session ) {
@@ -122,6 +131,14 @@ class SessionRepository implements RepositoryInterface {
 			}
 		}
 
+		/**
+		 * Fires after reading a session object from database.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param integer $integer Session ID.
+		 * @param \Masteriyo\Session\Session $session The session object.
+		 */
 		do_action( 'masteriyo_session_read', $session->get_id(), $session );
 	}
 
@@ -130,7 +147,7 @@ class SessionRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $session Session object.
+	 * @param \Masteriyo\Session\Session $session Session object.
 	 *
 	 * @return void
 	 */
@@ -156,9 +173,12 @@ class SessionRepository implements RepositoryInterface {
 		}
 
 		/**
-		 * Update session action.
+		 * Fires after updating a session in database.
 		 *
 		 * @since 1.3.8
+		 *
+		 * @param integer $integer Session ID.
+		 * @param \Masteriyo\Session\Session $session The session object.
 		 */
 		do_action( 'masteriyo_update_session', $session->get_id(), $session );
 	}

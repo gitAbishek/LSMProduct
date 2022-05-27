@@ -35,7 +35,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Lesson object.
+	 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 	 */
 	public function create( Model &$lesson ) {
 		if ( ! $lesson->get_date_created( 'edit' ) ) {
@@ -91,6 +91,14 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			$lesson->save_meta_data();
 			$lesson->apply_changes();
 
+			/**
+			 * Fires after creating a lesson.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The lesson ID.
+			 * @param \Masteriyo\Models\Lesson $object The lesson object.
+			 */
 			do_action( 'masteriyo_new_lesson', $id, $lesson );
 		}
 
@@ -101,7 +109,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Lesson object.
+	 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 	 * @throws Exception If invalid lesson.
 	 */
 	public function read( Model &$lesson ) {
@@ -131,6 +139,14 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		$this->read_extra_data( $lesson );
 		$lesson->set_object_read( true );
 
+		/**
+		 * Fires after reading a lesson from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The lesson ID.
+		 * @param \Masteriyo\Models\Lesson $object The lesson object.
+		 */
 		do_action( 'masteriyo_lesson_read', $lesson->get_id(), $lesson );
 	}
 
@@ -139,7 +155,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Lesson object.
+	 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 	 *
 	 * @return void
 	 */
@@ -208,6 +224,14 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 
 		$lesson->apply_changes();
 
+		/**
+		 * Fires after updating a lesson in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The lesson ID.
+		 * @param \Masteriyo\Models\Lesson $object The lesson object.
+		 */
 		do_action( 'masteriyo_update_lesson', $lesson->get_id(), $lesson );
 	}
 
@@ -216,7 +240,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $lesson Lesson object.
+	 * @param \Masteriyo\Models\Lesson $lesson Lesson object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$lesson, $args = array() ) {
@@ -235,15 +259,51 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting a lesson from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The lesson ID.
+			 * @param \Masteriyo\Models\Lesson $object The lesson object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $lesson );
+
 			wp_delete_post( $id, true );
 			$lesson->set_id( 0 );
+
+			/**
+			 * Fires after deleting a lesson from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The lesson ID.
+			 * @param \Masteriyo\Models\Lesson $object The lesson object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $lesson );
 		} else {
+			/**
+			 * Fires after deleting a lesson from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The lesson ID.
+			 * @param \Masteriyo\Models\Lesson $object The lesson object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $lesson );
+
 			wp_trash_post( $id );
 			$lesson->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $lesson );
+
+			/**
+			 * Fires after deleting a lesson from database.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The lesson ID.
+			 * @param \Masteriyo\Models\Lesson $object The lesson object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $lesson );
 		}
 	}
 

@@ -73,7 +73,16 @@ class CoursesShortcode extends Shortcode {
 		if ( count( $courses ) > 0 ) {
 			$original_course = isset( $GLOBALS['course'] ) ? $GLOBALS['course'] : null;
 
+			/**
+			 * Fires before course loop in courses shortcode.
+			 *
+			 * @since 1.0.6
+			 *
+			 * @param array $attr Shortcode attributes.
+			 * @param \Masteriyo\Models\Course[] $courses The courses objects.
+			 */
 			do_action( 'masteriyo_shortcode_before_courses_loop', $attr, $courses );
+
 			masteriyo_course_loop_start();
 
 			foreach ( $courses as $course ) {
@@ -85,9 +94,24 @@ class CoursesShortcode extends Shortcode {
 			$GLOBALS['course'] = $original_course;
 
 			masteriyo_course_loop_end();
+
+			/**
+			 * Fires after course loop in courses shortcode.
+			 *
+			 * @since 1.0.6
+			 *
+			 * @param array $attr Shortcode attributes.
+			 * @param \Masteriyo\Models\Course[] $courses The courses objects.
+			 */
 			do_action( 'masteriyo_shortcode_after_courses_loop', $attr, $courses );
+
 			masteriyo_reset_loop();
 		} else {
+			/**
+			 * Fires when there is no course to display in courses shortcode.
+			 *
+			 * @since 1.0.6
+			 */
 			do_action( 'masteriyo_shortcode_no_courses_found' );
 		}
 

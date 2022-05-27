@@ -2303,6 +2303,15 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 		// Use WP_Error to handle registration errors.
 		$errors = new \WP_Error();
 
+		/**
+		 * Fires before creating a user.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $username Username.
+		 * @param string $email Email address.
+		 * @param \WP_Error $errors Validation errors.
+		 */
 		do_action( 'masteriyo_register_post', $username, $email, $errors );
 
 		/**
@@ -2342,6 +2351,14 @@ if ( ! function_exists( 'masteriyo_create_new_user' ) ) {
 			return new \WP_Error( 'registration-failure', __( 'Registration failed.', 'masteriyo' ) );
 		}
 
+		/**
+		 * Fires after creating a new user.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param \Masteriyo\Models\User $user User object.
+		 * @param string $password_generated The generated password.
+		 */
 		do_action( 'masteriyo_created_customer', $user, $password_generated );
 
 		return $user;
@@ -2810,6 +2827,7 @@ function masteriyo_get_currency_codes() {
  * Wrapper for _doing_it_wrong().
  *
  * @since  1.0.0
+ *
  * @param string $function Function used.
  * @param string $message Message to log.
  * @param string $version Version the message was added in.
@@ -2819,6 +2837,17 @@ function masteriyo_doing_it_wrong( $function, $message, $version ) {
 	$message .= ' Backtrace: ' . wp_debug_backtrace_summary();
 
 	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		/**
+		 * Fires when the given function is being used incorrectly.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @see https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/
+		 *
+		 * @param string $function Function used.
+		 * @param string $message Message to log.
+		 * @param string $version Version the message was added in.
+		 */
 		do_action( 'doing_it_wrong_run', $function, $message, $version );
 		error_log( "{$function} was called incorrectly. {$message}. This message was added in version {$version}." );
 	} else {
@@ -3651,6 +3680,17 @@ function masteriyo_do_deprecated_action( $tag, $args, $version, $replacement = n
 function masteriyo_deprecated_function( $function, $version, $replacement = null ) {
 	// @codingStandardsIgnoreStart
 	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		/**
+		 * Fires when a deprecated function is called.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @see https://developer.wordpress.org/reference/hooks/deprecated_function_run/
+		 *
+		 * @param string $function Function used.
+		 * @param string $replacement Replacement for the called function.
+		 * @param string $version Version the message was added in.
+		 */
 		do_action( 'deprecated_function_run', $function, $replacement, $version );
 		$log_string  = "The {$function} function is deprecated since version {$version}.";
 		$log_string .= $replacement ? " Replace with {$replacement}." : '';
@@ -3673,6 +3713,18 @@ function masteriyo_deprecated_function( $function, $version, $replacement = null
 function masteriyo_deprecated_hook( $hook, $version, $replacement = null, $message = null ) {
 	// @codingStandardsIgnoreStart
 	if ( masteriyo_is_ajax() || masteriyo_is_rest_api_request() ) {
+		/**
+		 * Fires when a deprecated hook is called.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @see https://developer.wordpress.org/reference/hooks/deprecated_hook_run/
+		 *
+		 * @param string $hook        The hook that was used.
+		 * @param string $replacement The hook that should have been used.
+		 * @param string $version     The version of WordPress that deprecated the hook.
+		 * @param string $message     A message regarding the change.
+		 */
 		do_action( 'deprecated_hook_run', $hook, $replacement, $version, $message );
 
 		$message    = empty( $message ) ? '' : ' ' . $message;

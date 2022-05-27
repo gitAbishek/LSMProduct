@@ -65,6 +65,8 @@ class Masteriyo {
 		 * @use Initialize addon using this hook.
 		 *
 		 * @since 1.4.0
+		 *
+		 * @param \Masteriyo\Masteriyo $masteriyo Masteriyo class object.
 		 */
 		do_action( 'masteriyo_before_init', $this );
 
@@ -98,6 +100,8 @@ class Masteriyo {
 		 * Fire after masteriyo is initialized.
 		 *
 		 * @since 1.4.0
+		 *
+		 * @param \Masteriyo\Masteriyo $masteriyo Masteriyo class object.
 		 */
 		do_action( 'masteriyo_after_init', $this );
 	}
@@ -150,6 +154,11 @@ class Masteriyo {
 
 		$this->handle_paypal_ipn();
 
+		/**
+		 * Fires in 'init' hook of WordPress.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_init' );
 	}
 
@@ -524,13 +533,19 @@ class Masteriyo {
 	/**
 	 * Handle Paypal IPN listener.
 	 *
-	 * @return void
+	 * @since 1.0.0
 	 */
 	public function handle_paypal_ipn() {
 		// phpcs:disable
 		if ( ( isset( $_POST['paypalListener'] ) && 'paypal_standard_IPN' === $_POST['paypalListener'] )
 			|| isset( $_POST['test_ipn'] ) && '1' === $_POST['test_ipn'] ) {
 			masteriyo( 'payment-gateways' )->get_available_payment_gateways();
+
+			/**
+			 * Fires in 'init' hook for handling paypal gateway.
+			 *
+			 * @since 1.0.0
+			 */
 			do_action( 'masteriyo_api_gateway_paypal' );
 		}
 		// phpcs:enable

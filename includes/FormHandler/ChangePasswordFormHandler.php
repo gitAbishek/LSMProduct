@@ -60,6 +60,14 @@ class ChangePasswordFormHandler {
 
 			masteriyo_add_notice( __( 'Your password was changed successfully.', 'masteriyo' ) );
 
+			/**
+			 * Fires after changing a user's password through the change password form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Models\User $user user object.
+			 * @param array $data Submitted form data.
+			 */
 			do_action( 'masteriyo_changed_password', $user, $data );
 
 		} catch ( \Exception $e ) {

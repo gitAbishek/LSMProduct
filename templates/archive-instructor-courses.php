@@ -24,7 +24,7 @@ get_header( 'instructor-courses' );
 echo '<div class="masteriyo-w-100 masteriyo-container">';
 
 /**
- * Hook: masteriyo_before_instructor_archive_header.
+ * Fires before rendering header in instructor's course archive template.
  *
  * @since 1.4.3
  */
@@ -49,7 +49,7 @@ do_action( 'masteriyo_before_instructor_archive_header' );
 
 	<?php
 	/**
-	 * Hook: masteriyo_instructor_archive_description.
+	 * Action hook for rendering description in instructor's course archive.
 	 *
 	 * @since 1.4.3
 	 */
@@ -59,7 +59,7 @@ do_action( 'masteriyo_before_instructor_archive_header' );
 
 <?php
 /**
- * Hook: masteriyo_after_instructor_archive_header.
+ * Fires after rendering header in instructor's course archive template.
  *
  * @since 1.4.3
  */
@@ -70,7 +70,7 @@ do_action( 'masteriyo_after_instructor_archive_header' );
 if ( masteriyo_course_loop() ) {
 
 	/**
-	 * Hook: masteriyo_before_instructor_archive_loop.
+	 * Fires before courses loop in instructor's course archive.
 	 *
 	 * @since 1.4.3
 	 */
@@ -83,7 +83,7 @@ if ( masteriyo_course_loop() ) {
 			the_post();
 
 			/**
-			 * Hook: masteriyo_instructor_archive_loop.
+			 * Fires for each item in course loop of instructor's course archive.
 			 *
 			 * @since 1.4.3
 			 */
@@ -96,7 +96,7 @@ if ( masteriyo_course_loop() ) {
 	masteriyo_course_loop_end();
 
 	/**
-	 * Hook: masteriyo_after_instructor_archive_loop.
+	 * Fires after course loop in instructor's course archive.
 	 *
 	 * @hooked masteriyo_pagination - 10
 	 *
@@ -105,7 +105,7 @@ if ( masteriyo_course_loop() ) {
 	do_action( 'masteriyo_after_instructor_archive_loop' );
 } else {
 	/**
-	 * Hook: masteriyo_no_courses_found.
+	 * Fires when there is no course to display in instructor's course archive.
 	 *
 	 * @since 1.4.3
 	 */
@@ -113,7 +113,7 @@ if ( masteriyo_course_loop() ) {
 }
 
 /**
- * Hook: masteriyo_after_instructor_archive_main_content.
+ * Fires after rendering main content in instructor's course archive.
  *
  * @since 1.4.3
  */

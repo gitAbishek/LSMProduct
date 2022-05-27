@@ -43,7 +43,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course_progress_item Course progress item object.
+	 * @param \Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
 	 */
 	public function create( Model &$course_progress_item ) {
 		global $wpdb;
@@ -153,6 +153,14 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 				$this->update_course_progress_status( $course_progress_item );
 
+				/**
+				 * Fires after creating new course progress item.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id The new course progress item ID.
+				 * @param \Masteriyo\Models\CourseProgressItem $object The new course progress item object.
+				 */
 				do_action( 'masteriyo_new_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
 
 			}
@@ -219,6 +227,14 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 
 		$this->update_course_progress_status( $course_progress_item );
 
+		/**
+		 * Fires after updating a course progress item in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course progress item ID.
+		 * @param \Masteriyo\Models\CourseProgressItem $object The course progress item object.
+		 */
 		do_action( 'masteriyo_update_course_progress_item', $course_progress_item->get_id(), $course_progress_item );
 	}
 
@@ -226,18 +242,33 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 * Remove an course progress item from the database.
 	 *
 	 * @since 1.0.0
-	 * @param CourseProgressItem $course_progress_item Course progress item object.
-	 * @param array         $args Array of args to pass to the delete method.
+	 *
+	 * @param \Masteriyo\Models\CourseProgressItem $course_progress_item Course progress item object.
+	 * @param array $args Array of args to pass to the delete method.
 	 */
 	public function delete( &$course_progress_item, $args = array() ) {
 		global $wpdb;
 
 		if ( $course_progress_item->get_id() ) {
+			/**
+			 * Fires before deleting a course progress item from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course progress item ID.
+			 */
 			do_action( 'masteriyo_before_delete_course_progress_item', $course_progress_item->get_id() );
 
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activities', array( 'id' => $course_progress_item->get_id() ) );
 			$wpdb->delete( $wpdb->prefix . 'masteriyo_user_activitymeta', array( 'user_activity_id' => $course_progress_item->get_id() ) );
 
+			/**
+			 * Fires after deleting a course progress item from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course progress item ID.
+			 */
 			do_action( 'masteriyo_delete_course_progress', $course_progress_item->get_id() );
 
 			$course_progress_item->set_status( 'trash' );
@@ -251,7 +282,7 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param CourseProgress $course_progress_item Course progress object.
+	 * @param \Masteriyo\Models\CourseProgressItem $course_progress_item Course progress object.
 	 *
 	 * @throws ModelException If invalid course progress object object.
 	 */
@@ -289,6 +320,14 @@ class CourseProgressItemRepository extends AbstractRepository implements Reposit
 		$course_progress_item->read_meta_data();
 		$course_progress_item->set_object_read( true );
 
+		/**
+		 * Fires after reading a course progress item from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course progress item ID.
+		 * @param \Masteriyo\Models\CourseProgressItem $object The course progress item object.
+		 */
 		do_action( 'masteriyo_course_progress_item_read', $course_progress_item->get_id(), $course_progress_item );
 	}
 

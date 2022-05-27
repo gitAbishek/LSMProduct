@@ -126,18 +126,24 @@ class Blocks {
 		\ob_start();
 
 		/**
-		 * Hook: masteriyo_blocks_before_course_categories.
+		 * Fires before rendering course categories in course-categories block.
 		 *
 		 * @since 1.3.0
+		 *
+		 * @param array $attr Block attributes.
+		 * @param \Masteriyo\Models\CourseCategory[] $categories The course categories objects.
 		 */
 		do_action( 'masteriyo_blocks_before_course_categories', $attr, $categories );
 
 		masteriyo_get_template( 'shortcodes/course-categories/list.php', $attr );
 
 		/**
-		 * Hook: masteriyo_blocks_after_course_categories.
+		 * Fires after rendering course categories in course-categories block.
 		 *
 		 * @since 1.3.0
+		 *
+		 * @param array $attr Block attributes.
+		 * @param \Masteriyo\Models\CourseCategory[] $categories The course categories objects.
 		 */
 		do_action( 'masteriyo_blocks_after_course_categories', $attr, $categories );
 		return \ob_get_clean();
@@ -256,9 +262,12 @@ class Blocks {
 			$original_course = isset( $GLOBALS['course'] ) ? $GLOBALS['course'] : null;
 
 			/**
-			 * Hook: masteriyo_blocks_before_courses_loop.
+			 * Fires before rendering courses in the courses block.
 			 *
 			 * @since 1.3.0
+			 *
+			 * @param array $attr The courses block attributes.
+			 * @param \Masteriyo\Models\Course[] $courses The course objects.
 			 */
 			do_action( 'masteriyo_blocks_before_courses_loop', $attr, $courses );
 			masteriyo_course_loop_start();
@@ -274,15 +283,18 @@ class Blocks {
 			masteriyo_course_loop_end();
 
 			/**
-			 * Hook: masteriyo_blocks_after_courses_loop.
+			 * Fires before rendering courses in the courses block.
 			 *
 			 * @since 1.3.0
+			 *
+			 * @param array $attr The courses block attributes.
+			 * @param \Masteriyo\Models\Course[] $courses The course objects.
 			 */
 			do_action( 'masteriyo_blocks_after_courses_loop', $attr, $courses );
 			masteriyo_reset_loop();
 		} else {
 			/**
-			 * Hook: masteriyo_blocks_no_courses_found.
+			 * Fires when there are no courses found in the courses block.
 			 *
 			 * @since 1.3.0
 			 */

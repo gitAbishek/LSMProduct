@@ -355,7 +355,7 @@ class Email {
 		 *
 		 * @param array $attachments Absolute paths of attachments.
 		 * @param string $headers Email object id.
-		 * @param Masteriyo\Emails\Email $email Email class object.
+		 * @param \Masteriyo\Emails\Email $email Email class object.
 		 */
 		return apply_filters( 'masteriyo_email_attachments', array(), $this->get_id(), $this );
 	}
@@ -416,6 +416,14 @@ class Email {
 		try {
 			$emogrifier = new Emogrifier( $content, $css );
 
+			/**
+			 * Fires before applying CSS into an email HTML.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Pelago\Emogrifier $emogrifier Object that provides functions for converting CSS styles into inline style attributes in your HTML code.
+			 * @param \Masteriyo\Emails\Email $email Email object.
+			 */
 			do_action( 'masteriyo_emogrifier', $emogrifier, $this );
 
 			$content    = $emogrifier->emogrify();

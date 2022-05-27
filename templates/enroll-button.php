@@ -14,6 +14,11 @@ if ( ! $course->is_purchasable() ) {
 	return;
 }
 
+/**
+ * Fires before rendering enroll/add-to-cart button.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_add_to_cart_button' );
 
 ?>
@@ -56,4 +61,9 @@ if ( 0 !== $course->get_enrollment_limit() && 0 === $course->get_available_seats
 	);
 }
 
+/**
+ * Fires after rendering enroll/add-to-cart button.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_add_to_cart_button' );

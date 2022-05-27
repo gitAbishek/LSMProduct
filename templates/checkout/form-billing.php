@@ -11,11 +11,14 @@
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Notice;
-use Masteriyo\Countries;
 
+/**
+ * Fires before rendering billing address form in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_before_billing' );
 ?>
-
-<?php do_action( 'masteriyo_checkout_before_billing' ); ?>
 
 <div class="masteriyo-checkout-main">
 	<h3 class="masteriyo-checkout--title">
@@ -89,4 +92,10 @@ use Masteriyo\Countries;
 		</div>
 	</form>
 </div>
-<?php do_action( 'masteriyo_checkout_after_billing' ); ?>
+<?php
+/**
+ * Fires after rendering billing address form in checkout page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_checkout_after_billing' );

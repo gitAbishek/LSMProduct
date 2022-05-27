@@ -72,9 +72,26 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 			$course_difficulty->save_meta_data();
 			$course_difficulty->apply_changes();
 
+			/**
+			 * Fires after creating new course difficulty.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course difficulty ID.
+			 * @param \Masteriyo\Models\CourseDifficulty $object The new course difficulty object.
+			 */
 			do_action( 'masteriyo_new_course_difficulty', $ids, $course_difficulty );
 		} elseif ( isset( $ids->error_data['term_exists'] ) ) {
 			$course_difficulty->set_id( $ids->error_data['term_exists'] );
+
+			/**
+			 * Fires after failing to create new course difficulty because of already existing data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The new course difficulty ID.
+			 * @param \Masteriyo\Models\CourseDifficulty $object The new course difficulty object.
+			 */
 			do_action( 'masteriyo_old_course_difficulty', $ids, $course_difficulty );
 		}
 	}
@@ -111,6 +128,14 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 		$this->read_extra_data( $course_difficulty );
 		$course_difficulty->set_object_read( true );
 
+		/**
+		 * Fires after reading a course difficulty object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $idd Course difficulty ID.
+		 * @param \Masteriyo\Models\CourseDifficulty $difficulty The course difficulty object.
+		 */
 		do_action( 'masteriyo_course_difficulty_read', $course_difficulty->get_id(), $course_difficulty );
 	}
 
@@ -167,6 +192,14 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 
 		$course_difficulty->apply_changes();
 
+		/**
+		 * Fires after updating a course difficulty object in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $idd Course difficulty ID.
+		 * @param \Masteriyo\Models\CourseDifficulty $difficulty The course difficulty object.
+		 */
 		do_action( 'masteriyo_update_course_difficulty', $course_difficulty->get_id(), $course_difficulty );
 	}
 
@@ -186,9 +219,27 @@ class CourseDifficultyRepository extends AbstractRepository implements Repositor
 			return;
 		}
 
+		/**
+		 * Fires before deleting a course difficulty object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $idd Course difficulty ID.
+		 * @param \Masteriyo\Models\CourseDifficulty $difficulty The course difficulty object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $course_difficulty );
+
 		wp_delete_term( $id, $object_type );
 		$course_difficulty->set_id( 0 );
+
+		/**
+		 * Fires after deleting a course difficulty object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $idd Course difficulty ID.
+		 * @param \Masteriyo\Models\CourseDifficulty $difficulty The course difficulty object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $course_difficulty );
 	}
 

@@ -17,7 +17,9 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
- * masteriyo_before_single_course_reviews hook.
+ * Fires before rendering reviews list section in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_single_course_reviews' );
 
@@ -25,7 +27,7 @@ do_action( 'masteriyo_before_single_course_reviews' );
 <div class="tab-content course-reviews masteriyo-hidden">
 	<?php
 	/**
-	 * Action Hook: masteriyo_course_reviews_content
+	 * Action hook for rendering course reviews list template.
 	 *
 	 * @hooked masteriyo_template_course_reviews_stats - 10
 	 * @hooked masteriyo_template_course_reviews_list - 20
@@ -39,6 +41,8 @@ do_action( 'masteriyo_before_single_course_reviews' );
 <?php
 
 /**
- * masteriyo_after_single_course_reviews hook.
+ * Fires after rendering reviews list section in single course page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_single_course_reviews' );

@@ -20,6 +20,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering order-history section in account page.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order[] $orders Orders objects.
+ */
 do_action( 'masteriyo_before_account_orders', $orders );
 
 ?>
@@ -41,7 +48,16 @@ do_action( 'masteriyo_before_account_orders', $orders );
 				<?php foreach ( masteriyo_get_account_orders_columns() as $column_id => $column_name ) : ?>
 					<td class="masteriyo-orders-table__cell-<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
 						<?php if ( has_action( 'masteriyo_my_account_my_orders_column_' . $column_id ) ) : ?>
-							<?php do_action( 'masteriyo_my_account_my_orders_column_' . $column_id, $order ); ?>
+							<?php
+							/**
+							 * Fires before rendering a column content in order history table in account page.
+							 *
+							 * @since 1.0.0
+							 *
+							 * @param \Masteriyo\Models\Order\Order $order Order object for current row.
+							 */
+							do_action( 'masteriyo_my_account_my_orders_column_' . $column_id, $order );
+							?>
 
 						<?php elseif ( 'order-number' === $column_id ) : ?>
 							<a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
@@ -122,4 +138,11 @@ do_action( 'masteriyo_before_account_orders', $orders );
 
 <?php
 
+/**
+ * Fires after rendering order-history section in account page.
+ *
+ * @since 1.0.0
+ *
+ * @param \Masteriyo\Models\Order\Order[] $orders Orders objects.
+ */
 do_action( 'masteriyo_after_account_orders', $orders );

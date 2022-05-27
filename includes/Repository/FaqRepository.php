@@ -41,7 +41,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $faq Faq object.
+	 * @param \Masteriyo\Models\Faq $faq Faq object.
 	 */
 	public function create( Model &$faq ) {
 		if ( ! $faq->get_created_at( 'edit' ) ) {
@@ -84,6 +84,14 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 			$faq->save_meta_data();
 			$faq->apply_changes();
 
+			/**
+			 * Fires after creating a FAQ.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The FAQ ID.
+			 * @param \Masteriyo\Models\Faq $object The FAQ object.
+			 */
 			do_action( 'masteriyo_new_faq', $id, $faq );
 		}
 
@@ -94,7 +102,7 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $faq Faq object.
+	 * @param \Masteriyo\Models\Faq $faq Faq object.
 	 * @throws \Exception If invalid FAQ.
 	 */
 	public function read( Model &$faq ) {
@@ -128,6 +136,14 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		$this->read_comment_meta_data( $faq );
 		$faq->set_object_read( true );
 
+		/**
+		 * Fires after reading a FAQ from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The FAQ ID.
+		 * @param \Masteriyo\Models\Faq $object The FAQ object.
+		 */
 		do_action( 'masteriyo_faq_read', $faq->get_id(), $faq );
 	}
 
@@ -178,6 +194,14 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 		$this->update_comment_meta( $faq );
 		$faq->apply_changes();
 
+		/**
+		 * Fires after updating a FAQ in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The FAQ ID.
+		 * @param \Masteriyo\Models\Faq $object The FAQ object.
+		 */
 		do_action( 'masteriyo_update_faq', $faq->get_id(), $faq );
 	}
 
@@ -197,9 +221,27 @@ class FaqRepository extends AbstractRepository implements RepositoryInterface {
 			return;
 		}
 
+		/**
+		 * Fires before deleting a FAQ from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The FAQ ID.
+		 * @param \Masteriyo\Models\Faq $object The FAQ object.
+		 */
 		do_action( 'masteriyo_before_delete_' . $object_type, $id, $faq );
+
 		wp_delete_comment( $id, true );
 		$faq->set_id( 0 );
+
+		/**
+		 * Fires after deleting a FAQ from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The FAQ ID.
+		 * @param \Masteriyo\Models\Faq $object The FAQ object.
+		 */
 		do_action( 'masteriyo_after_delete_' . $object_type, $id, $faq );
 	}
 

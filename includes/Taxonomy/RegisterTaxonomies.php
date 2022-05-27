@@ -20,6 +20,11 @@ class RegisterTaxonomies {
 			return;
 		}
 
+		/**
+		 * Fires before registering taxonomies.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_register_taxonomy' );
 
 		TaxonomyFactory::create( 'course_cat' )->register();
@@ -27,6 +32,11 @@ class RegisterTaxonomies {
 		TaxonomyFactory::create( 'course_difficulty' )->register();
 		TaxonomyFactory::create( 'course_visibility' )->register();
 
+		/**
+		 * Fires after registering taxonomies.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_after_register_taxonomy' );
 	}
 }

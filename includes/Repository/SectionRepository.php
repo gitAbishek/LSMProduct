@@ -33,7 +33,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $section Section object.
+	 * @param \Masteriyo\Models\Section $section Section object.
 	 */
 	public function create( Model &$section ) {
 		if ( ! $section->get_date_created( 'edit' ) ) {
@@ -86,6 +86,14 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			$section->save_meta_data();
 			$section->apply_changes();
 
+			/**
+			 * Fires after creating a section.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The section ID.
+			 * @param \Masteriyo\Models\Section $object The section object.
+			 */
 			do_action( 'masteriyo_new_section', $id, $section );
 		}
 
@@ -96,7 +104,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $section Section object.
+	 * @param \Masteriyo\Models\Section $section Section object.
 	 * @throws \Exception If invalid section.
 	 */
 	public function read( Model &$section ) {
@@ -121,6 +129,14 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		$this->read_extra_data( $section );
 		$section->set_object_read( true );
 
+		/**
+		 * Fires after reading a section from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The section ID.
+		 * @param \Masteriyo\Models\Section $object The section object.
+		 */
 		do_action( 'masteriyo_section_read', $section->get_id(), $section );
 	}
 
@@ -129,7 +145,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $section Section object.
+	 * @param \Masteriyo\Models\Section $section Section object.
 	 *
 	 * @return void
 	 */
@@ -191,6 +207,14 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		$section->apply_changes();
 
+		/**
+		 * Fires after updating a section.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The section ID.
+		 * @param \Masteriyo\Models\Section $object The section object.
+		 */
 		do_action( 'masteriyo_update_section', $section->get_id(), $section );
 	}
 
@@ -199,7 +223,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $section Section object.
+	 * @param \Masteriyo\Models\Section $section Section object.
 	 * @param array $args   Array of args to pass.alert-danger.
 	 */
 	public function delete( Model &$section, $args = array() ) {
@@ -223,15 +247,51 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting a section.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The section ID.
+			 * @param \Masteriyo\Models\Section $object The section object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $section );
+
 			wp_delete_post( $id, true );
 			$section->set_id( 0 );
+
+			/**
+			 * Fires after deleting a section.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The section ID.
+			 * @param \Masteriyo\Models\Section $object The section object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $section );
 		} else {
+			/**
+			 * Fires before moving a section to trash.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The section ID.
+			 * @param \Masteriyo\Models\Section $object The section object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
+
 			wp_trash_post( $id );
 			$section->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $section );
+
+			/**
+			 * Fires after moving a section to trash.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The section ID.
+			 * @param \Masteriyo\Models\Section $object The section object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $section );
 		}
 	}
 

@@ -65,7 +65,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order order object.
+	 * @param \Masteriyo\Models\Order\Order $order order object.
 	 */
 	public function create( Model &$order ) {
 		if ( ! $order->get_date_created( 'edit' ) ) {
@@ -117,6 +117,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 			$this->create_or_update_user_course( $order );
 
+			/**
+			 * Fires after creating an order.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The order ID.
+			 * @param \Masteriyo\Models\Order\Order $object The order object.
+			 */
 			do_action( 'masteriyo_new_order', $id, $order );
 		}
 	}
@@ -126,7 +134,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order Course object.
+	 * @param \Masteriyo\Models\Order\Order $order Course object.
 	 *
 	 * @throws \Exception If invalid order.
 	 */
@@ -150,6 +158,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		$this->read_extra_data( $order );
 		$order->set_object_read( true );
 
+		/**
+		 * Fires after reading an order object from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order ID.
+		 * @param \Masteriyo\Models\Order\Order $object The order object.
+		 */
 		do_action( 'masteriyo_order_read', $order->get_id(), $order );
 	}
 
@@ -158,7 +174,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order order object.
+	 * @param \Masteriyo\Models\Order\Order $order order object.
 	 *
 	 * @return void
 	 */
@@ -213,6 +229,14 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		$order->apply_changes();
 
+		/**
+		 * Fires after updating an order object in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The order ID.
+		 * @param \Masteriyo\Models\Order\Order $object The order object.
+		 */
 		do_action( 'masteriyo_update_order', $order->get_id(), $order );
 	}
 
@@ -221,7 +245,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $order order object.
+	 * @param \Masteriyo\Models\Order\Order $order order object.
 	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$order, $args = array() ) {
@@ -240,16 +264,52 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting an order object from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The order ID.
+			 * @param \Masteriyo\Models\Order\Order $object The order object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $order );
+
 			wp_delete_post( $id, true );
 			$this->delete_items( $order );
 			$order->set_id( 0 );
+
+			/**
+			 * Fires after deleting an order object from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The order ID.
+			 * @param \Masteriyo\Models\Order\Order $object The order object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $order );
 		} else {
+			/**
+			 * Fires before moving an order to trash.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The order ID.
+			 * @param \Masteriyo\Models\Order\Order $object The order object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
+
 			wp_trash_post( $id );
 			$order->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $order );
+
+			/**
+			 * Fires after moving an order to trash.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The order ID.
+			 * @param \Masteriyo\Models\Order\Order $object The order object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $order );
 		}
 	}
 

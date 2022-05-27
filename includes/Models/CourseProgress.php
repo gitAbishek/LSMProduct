@@ -277,6 +277,14 @@ class CourseProgress extends Model {
 			);
 
 			if ( $manual_update ) {
+				/**
+				 * Fires after manually updating course progress status.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Course progress ID.
+				 * @param string $new_status New status.
+				 */
 				do_action( 'masteriyo_course_progress_edit_status', $this->get_id(), $result['to'] );
 			}
 		}
@@ -393,10 +401,37 @@ class CourseProgress extends Model {
 		}
 
 		try {
+			/**
+			 * Fires after course progress model's status transition.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id Course progress ID.
+			 * @param \Masteriyo\Models\CourseProgress $course_progress The course progress object.
+			 */
 			do_action( 'masteriyo_course_progress_status_' . $status_transition['to'], $this->get_id(), $this );
 
 			if ( ! empty( $status_transition['from'] ) ) {
+				/**
+				 * Fires after course progress model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Course progress ID.
+				 * @param \Masteriyo\Models\CourseProgress $course_progress The course progress object.
+				 */
 				do_action( 'masteriyo_course_progress_status_' . $status_transition['from'] . '_to_' . $status_transition['to'], $this->get_id(), $this );
+
+				/**
+				 * Fires after course progress model's status transition.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id Course progress ID.
+				 * @param string $old_status Old status.
+				 * @param string $new_status New status.
+				 * @param \Masteriyo\Models\CourseProgress $course_progress The course progress object.
+				 */
 				do_action( 'masteriyo_course_progress_status_changed', $this->get_id(), $status_transition['from'], $status_transition['to'], $this );
 			}
 		} catch ( \Exception $e ) {

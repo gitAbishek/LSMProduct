@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_account_page_sidebar_content hook.
+ * Fires before rendering sidebar in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_account_page_sidebar_content' );
 
@@ -48,6 +50,8 @@ do_action( 'masteriyo_before_account_page_sidebar_content' );
 <?php
 
 /**
- * masteriyo_after_account_page_sidebar_content hook.
+ * Fires after rendering sidebar in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_account_page_sidebar_content' );

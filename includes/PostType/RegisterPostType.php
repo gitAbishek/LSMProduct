@@ -30,7 +30,7 @@ class RegisterPostType {
 	);
 
 	/**
-	 * Register post types
+	 * Register post types.
 	 *
 	 * @since 1.0.0
 	 */
@@ -39,6 +39,11 @@ class RegisterPostType {
 			return;
 		}
 
+		/**
+		 * Fires before registering post-types.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_register_post_type' );
 
 		/**
@@ -54,6 +59,11 @@ class RegisterPostType {
 			$post_type->register();
 		}
 
+		/**
+		 * Fires after registering post-types.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'masteriyo_after_register_post_type' );
 	}
 }

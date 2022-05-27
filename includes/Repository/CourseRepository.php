@@ -57,7 +57,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course Course object.
+	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
 	public function create( Model &$course ) {
 		if ( ! $course->get_date_created( 'edit' ) ) {
@@ -111,6 +111,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			$course->save_meta_data();
 			$course->apply_changes();
 
+			/**
+			 * Fires after creating a course.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course ID.
+			 * @param \Masteriyo\Models\Course $object The course object.
+			 */
 			do_action( 'masteriyo_new_course', $id, $course );
 		}
 
@@ -121,8 +129,9 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course Course object.
 	 * @throws Exception If invalid course.
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
 	public function read( Model &$course ) {
 		$course_post = get_post( $course->get_id() );
@@ -153,6 +162,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$this->read_extra_data( $course );
 		$course->set_object_read( true );
 
+		/**
+		 * Fires after reading a course from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course ID.
+		 * @param \Masteriyo\Models\Course $object The new course object.
+		 */
 		do_action( 'masteriyo_course_read', $course->get_id(), $course );
 	}
 
@@ -240,6 +257,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		$course->apply_changes();
 
+		/**
+		 * Fires after updating a course in database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The course ID.
+		 * @param \Masteriyo\Models\Course $object The new course object.
+		 */
 		do_action( 'masteriyo_update_course', $course->get_id(), $course );
 	}
 
@@ -290,7 +315,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Model $course Course object.
+	 * @param \Masteriyo\Models\Course $course Course object.
 	 * @param array $args   Array of args to pass.alert-danger
 	 */
 	public function delete( Model &$course, $args = array() ) {
@@ -313,15 +338,51 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting a course from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course ID.
+			 * @param \Masteriyo\Models\Course $object The new course object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $course );
+
 			wp_delete_post( $id, true );
 			$course->set_id( 0 );
+
+			/**
+			 * Fires after deleting a course from database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course ID.
+			 * @param \Masteriyo\Models\Course $object The new course object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $course );
 		} else {
+			/**
+			 * Fires before moving a course to trash in database.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The course ID.
+			 * @param \Masteriyo\Models\Course $object The new course object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+
 			wp_trash_post( $id );
 			$course->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $course );
+
+			/**
+			 * Fires after moving a course to trash in database.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The course ID.
+			 * @param \Masteriyo\Models\Course $object The new course object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $course );
 		}
 	}
 
@@ -445,6 +506,14 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			}
 
 			if ( ! is_wp_error( wp_set_post_terms( $course->get_id(), $terms, 'course_visibility', false ) ) ) {
+				/**
+				 * Fires after updating a course's visibility in database.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param integer $id The course ID.
+				 * @param string $visibility The course visibility.
+				 */
 				do_action( 'masteriyo_course_set_visibility', $course->get_id(), $course->get_catalog_visibility() );
 			}
 		}

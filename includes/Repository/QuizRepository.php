@@ -41,7 +41,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param \Masteriyo\Models\Quiz $quiz Quiz object.
 	 */
 	public function create( Model &$quiz ) {
 		if ( ! $quiz->get_date_created( 'edit' ) ) {
@@ -95,6 +95,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			$quiz->save_meta_data();
 			$quiz->apply_changes();
 
+			/**
+			 * Fires after creating a quiz.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param integer $id The quiz ID.
+			 * @param \Masteriyo\Models\Quiz $object The quiz object.
+			 */
 			do_action( 'masteriyo_new_quiz', $id, $quiz );
 		}
 
@@ -105,8 +113,8 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Quiz $quiz Course object.
-	 * @throws Exception If invalid quiz.
+	 * @param \Masteriyo\Models\Quiz $quiz Course object.
+	 * @throws \Exception If invalid quiz.
 	 */
 	public function read( Model &$quiz ) {
 		$quiz_post = get_post( $quiz->get_id() );
@@ -133,6 +141,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		$this->read_extra_data( $quiz );
 		$quiz->set_object_read( true );
 
+		/**
+		 * Fires after reading a quiz from database.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The quiz ID.
+		 * @param \Masteriyo\Models\Quiz $object The quiz object.
+		 */
 		do_action( 'masteriyo_quiz_read', $quiz->get_id(), $quiz );
 	}
 
@@ -141,7 +157,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param \Masteriyo\Models\Quiz $quiz Quiz object.
 	 *
 	 * @return void
 	 */
@@ -205,6 +221,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 		$quiz->apply_changes();
 
+		/**
+		 * Fires after updating a quiz.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param integer $id The quiz ID.
+		 * @param \Masteriyo\Models\Quiz $object The quiz object.
+		 */
 		do_action( 'masteriyo_update_quiz', $quiz->get_id(), $quiz );
 	}
 
@@ -213,7 +237,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Masteriyo\Models\Quiz $quiz Quiz object.
+	 * @param \Masteriyo\Models\Quiz $quiz Quiz object.
 	 * @param array $args   Array of args to pass.
 	 */
 	public function delete( Model &$quiz, $args = array() ) {
@@ -237,15 +261,51 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		}
 
 		if ( $args['force_delete'] ) {
+			/**
+			 * Fires before deleting a quiz from database.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The quiz ID.
+			 * @param \Masteriyo\Models\Quiz $object The quiz object.
+			 */
 			do_action( 'masteriyo_before_delete_' . $object_type, $id, $quiz );
+
 			wp_delete_post( $id, true );
 			$quiz->set_id( 0 );
+
+			/**
+			 * Fires after deleting a quiz from database.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The quiz ID.
+			 * @param \Masteriyo\Models\Quiz $object The quiz object.
+			 */
 			do_action( 'masteriyo_after_delete_' . $object_type, $id, $quiz );
 		} else {
+			/**
+			 * Fires before moving a quiz to trash.
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param integer $id The quiz ID.
+			 * @param \Masteriyo\Models\Quiz $object The quiz object.
+			 */
 			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
+
 			wp_trash_post( $id );
 			$quiz->set_status( 'trash' );
-			do_action( 'masteriyo_before_trash_' . $object_type, $id, $quiz );
+
+			/**
+			 * Fires after moving a quiz to trash.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The quiz ID.
+			 * @param \Masteriyo\Models\Quiz $object The quiz object.
+			 */
+			do_action( 'masteriyo_after_trash_' . $object_type, $id, $quiz );
 		}
 	}
 

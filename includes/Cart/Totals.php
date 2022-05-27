@@ -366,6 +366,13 @@ final class Totals {
 
 		// Allow plugins to hook and alter totals before final total is calculated.
 		if ( has_action( 'masteriyo_calculate_totals' ) ) {
+			/**
+			 * Fires before final total is calculated to allow plugins to hook and alter totals in a cart.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \Masteriyo\Cart\Cart $cart Cart object.
+			 */
 			do_action( 'masteriyo_calculate_totals', $this->cart );
 		}
 

@@ -8,7 +8,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * masteriyo_before_edit_account_tab_content hook.
+ * Fires before rendering edit-account section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_before_edit_account_tab_content' );
 
@@ -121,6 +123,8 @@ do_action( 'masteriyo_before_edit_account_tab_content' );
 <?php
 
 /**
- * masteriyo_after_edit_account_tab_content hook.
+ * Fires after rendering edit-account section in account page.
+ *
+ * @since 1.0.0
  */
 do_action( 'masteriyo_after_edit_account_tab_content' );

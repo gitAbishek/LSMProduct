@@ -16,6 +16,11 @@
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
+/**
+ * Fires before rendering review form in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_before_single_course_review_form' );
 
 ?>
@@ -72,4 +77,9 @@ do_action( 'masteriyo_before_single_course_review_form' );
 <?php endif; ?>
 <?php
 
+/**
+ * Fires after rendering review form in single course page.
+ *
+ * @since 1.0.0
+ */
 do_action( 'masteriyo_after_single_course_review_form' );

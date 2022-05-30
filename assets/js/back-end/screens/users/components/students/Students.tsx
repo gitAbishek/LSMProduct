@@ -29,8 +29,8 @@ interface FilterParams {
 const Students: React.FC = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
 		role: 'masteriyo_student',
-		order: 'asc',
-		orderby: 'name',
+		order: 'desc',
+		orderby: 'id',
 	});
 
 	const usersAPI = new API(urls.users);

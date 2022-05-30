@@ -40,8 +40,8 @@ interface FilterParams {
 
 const AllOrders = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
-		order: 'asc',
-		orderby: 'title',
+		order: 'desc',
+		orderby: 'id',
 	});
 	const ordersAPI = new API(urls.orders);
 	const ordersQuery = useQuery(

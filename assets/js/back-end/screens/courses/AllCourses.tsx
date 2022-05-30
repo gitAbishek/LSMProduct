@@ -64,8 +64,8 @@ const AllCourses = () => {
 	const history = useHistory();
 	const toast = useToast();
 	const [filterParams, setFilterParams] = useState<FilterParams>({
-		order: 'asc',
-		orderby: 'title',
+		order: 'desc',
+		orderby: 'id',
 	});
 	const [deleteCourseId, setDeleteCourseId] = useState<number>();
 	const queryClient = useQueryClient();

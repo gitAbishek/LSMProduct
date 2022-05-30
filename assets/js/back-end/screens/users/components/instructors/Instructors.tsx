@@ -28,8 +28,8 @@ interface FilterParams {
 }
 const Instructors: React.FC = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
-		order: 'asc',
-		orderby: 'name',
+		order: 'desc',
+		orderby: 'id',
 	});
 	const usersAPI = new API(urls.instructors);
 	const usersQuery = useQuery(

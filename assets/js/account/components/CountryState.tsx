@@ -63,7 +63,7 @@ const CountryState: React.FC<Props> = (props) => {
 							)
 						)
 					) : (
-						<option>{__('No state founds', 'masteriyo')}</option>
+						<option>{__('No state found', 'masteriyo')}</option>
 					)}
 				</Select>
 				{errors?.billing?.state && (

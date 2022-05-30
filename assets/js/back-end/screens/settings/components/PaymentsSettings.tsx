@@ -350,9 +350,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</FormLabel>
 										<Controller
 											name="payments.currency.number_of_decimals"
-											defaultValue={
-												paymentsData?.currency?.number_of_decimals || 2
-											}
+											defaultValue={paymentsData?.currency?.number_of_decimals}
 											rules={{
 												required: __(
 													'Number of decimals is required.',
@@ -363,9 +361,9 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Slider
 													{...field}
 													aria-label="course-per-page"
-													defaultValue={watchNoOfDecimals || 2}
-													max={10}
-													min={1}>
+													defaultValue={watchNoOfDecimals}
+													max={5}
+													min={0}>
 													<SliderTrack>
 														<SliderFilledTrack />
 													</SliderTrack>
@@ -374,7 +372,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 															fontSize="xs"
 															fontWeight="semibold"
 															color="white">
-															{watchNoOfDecimals || 2}
+															{watchNoOfDecimals}
 														</Text>
 													</SliderThumb>
 												</Slider>

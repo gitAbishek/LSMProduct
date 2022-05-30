@@ -300,7 +300,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			/**
 			 * Fires after moving a quiz to trash.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The quiz ID.
 			 * @param \Masteriyo\Models\Quiz $object The quiz object.

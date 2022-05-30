@@ -298,7 +298,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			/**
 			 * Fires after deleting a lesson from database.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The lesson ID.
 			 * @param \Masteriyo\Models\Lesson $object The lesson object.

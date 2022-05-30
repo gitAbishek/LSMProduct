@@ -377,7 +377,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			/**
 			 * Fires after moving a course to trash in database.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The course ID.
 			 * @param \Masteriyo\Models\Course $object The new course object.

@@ -294,7 +294,7 @@ class CourseQuestionAnswerRepository extends AbstractRepository implements Repos
 			/**
 			 * Fires after moving a course progress to trash in database.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The new course progress ID.
 			 * @param \Masteriyo\Models\CourseQuestionAnswer $object The new course progress object.

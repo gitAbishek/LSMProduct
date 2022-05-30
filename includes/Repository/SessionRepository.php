@@ -88,7 +88,7 @@ class SessionRepository implements RepositoryInterface {
 			/**
 			 * After session delete action.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $integer Session ID.
 			 * @param \Masteriyo\Session\Session $session The session object.

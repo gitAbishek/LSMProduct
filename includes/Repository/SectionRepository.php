@@ -286,7 +286,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			/**
 			 * Fires after moving a section to trash.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The section ID.
 			 * @param \Masteriyo\Models\Section $object The section object.

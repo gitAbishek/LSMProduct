@@ -304,7 +304,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			/**
 			 * Fires after moving an order to trash.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.2
 			 *
 			 * @param integer $id The order ID.
 			 * @param \Masteriyo\Models\Order\Order $object The order object.

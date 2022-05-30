@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.1
+**Stable tag**: 1.5.2
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.2 - 30-05-2022
+
+- Enhancement - Set minimum value to 0 and maximum to 5 on the number of decimals in a global setting.
+- Fix - Translation issue on course builder backend and account page.
+- Fix - Renamed "Publish" to "Published" on the course listing page tab on the backend.
+- Fix - Renamed "No state founds" to "No state found" on state option account page.
+- Fix - Backend courses, orders and users listing order by id on initial query.
 
 ### 1.5.1 - 26-05-2022
 

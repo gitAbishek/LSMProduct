@@ -40,6 +40,7 @@ import MasteriyoPagination from '../../components/common/MasteriyoPagination';
 import { navActiveStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { CourseStatus } from '../../enums/Enum';
 import { SkeletonCourseList } from '../../skeleton';
 import API from '../../utils/api';
 import { deepMerge, isEmpty } from '../../utils/utils';
@@ -165,10 +166,17 @@ const AllCourses = () => {
 	};
 
 	const courseStatusButton = (courseStatus: string, iconName: IconType) => {
-		const buttonText =
-			'any' === courseStatus
-				? __('All Courses', 'masteriyo')
-				: courseStatus[0].toUpperCase() + courseStatus.slice(1); // Capitalize the first letter.
+		const statusList = {
+			[CourseStatus.Any]: __('All Courses', 'masteriyo'),
+			[CourseStatus.Publish]: __('Published', 'masteriyo'),
+			[CourseStatus.Draft]: __('Draft', 'masteriyo'),
+			[CourseStatus.Trash]: __('Trash', 'masteriyo'),
+		};
+
+		let buttonText: string = statusList[courseStatus]
+			? statusList[courseStatus]
+			: courseStatus[0].toUpperCase() + courseStatus.slice(1);
+
 		const courseCount = courseStatusCount[courseStatus];
 
 		return (

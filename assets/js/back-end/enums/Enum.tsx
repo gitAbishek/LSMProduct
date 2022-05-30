@@ -15,6 +15,13 @@ export enum ReviewStatus {
 	trash = 'trash',
 }
 
+export enum CourseStatus {
+	Any = 'any',
+	Publish = 'publish',
+	Draft = 'draft',
+	Trash = 'trash',
+}
+
 export enum UserStatus {
 	Active = 0,
 	Ham = 0,

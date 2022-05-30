@@ -77,7 +77,7 @@ const Sidebar = () => {
 			spacing="4">
 			<ListIcon fontSize="md" mr="3" as={icon} />
 			<Text display={{ base: 'none', sm: 'none', md: 'block', lg: 'block' }}>
-				{__(text, 'masteriyo')}
+				{text}
 			</Text>
 		</Stack>
 	);
@@ -126,7 +126,7 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.dashboard}>
-						{navText('Dashboard', BiGrid)}
+						{navText(__('Dashboard', 'masteriyo'), BiGrid)}
 					</Link>
 				</ListItem>
 
@@ -136,12 +136,12 @@ const Sidebar = () => {
 						<Divider />
 						<ListItem>
 							<Link sx={navLinkStyles} href={localized.urls.addNewCourse}>
-								{navText('Add Course', BiPlus)}
+								{navText(__('Add Course', 'masteriyo'), BiPlus)}
 							</Link>
 						</ListItem>
 						<ListItem>
 							<Link sx={navLinkStyles} href={localized.urls.myCourses}>
-								{navText('My Courses', BiBookAlt)}
+								{navText(__('My Courses', 'masteriyo'), BiBookAlt)}
 							</Link>
 						</ListItem>
 						<Divider />
@@ -153,7 +153,7 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.courses}>
-						{navText('Enrolled Courses', BiBook)}
+						{navText(__('Enrolled Courses', 'masteriyo'), BiBook)}
 					</Link>
 				</ListItem>
 				<ListItem>
@@ -166,7 +166,7 @@ const Sidebar = () => {
 						}
 						_activeLink={navActiveStyles}
 						to={routes.user.profile}>
-						{navText('Profile', BiUser)}
+						{navText(__('Profile', 'masteriyo'), BiUser)}
 					</Link>
 				</ListItem>
 
@@ -176,13 +176,13 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.order.list}>
-						{navText('Order History', BiHistory)}
+						{navText(__('Order History','masteriyo'), BiHistory)}
 					</Link>
 				</ListItem>
 
 				<ListItem>
 					<Link sx={navLinkStyles} onClick={onOpen}>
-						{navText('Logout', BiLogOut)}
+						{navText(__('Logout','masteriyo'), BiLogOut)}
 					</Link>
 				</ListItem>
 

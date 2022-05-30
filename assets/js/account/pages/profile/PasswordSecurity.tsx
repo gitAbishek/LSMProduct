@@ -36,7 +36,7 @@ const PasswordSecurity = () => {
 	const userAPI = new API(urls.currentUser);
 	const toast = useToast();
 
-	const changePasword = useMutation(
+	const changePassword = useMutation(
 		(data: PasswordSchema) => userAPI.store(data),
 		{
 			onSuccess: () => {
@@ -61,7 +61,7 @@ const PasswordSecurity = () => {
 	);
 
 	const onSubmit = (data: PasswordSchema) => {
-		changePasword.mutate(data);
+		changePassword.mutate(data);
 	};
 
 	return (

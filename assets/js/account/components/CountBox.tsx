@@ -38,7 +38,7 @@ const CountBox: React.FC<Props> = (props) => {
 					</Center>
 					<Stack direction="column">
 						<Heading size="sm" color="gray.800">
-							{__(title, 'masteriyo')}
+							{title}
 						</Heading>
 						<Text color={`${colorScheme}.700`} fontWeight="bold" fontSize="md">
 							{count}

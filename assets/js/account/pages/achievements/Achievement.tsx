@@ -7,7 +7,7 @@ const Achievement = () => {
 		<Box>
 			<Stack spacing="8">
 				<Heading as="h1" size="xl">
-					{__('	My Achievements', 'masteriyo')}
+					{__('My Achievements', 'masteriyo')}
 				</Heading>
 				<Box>
 					<Alert colorScheme={'blue.200'} color={'blue.400'} borderRadius={5}>

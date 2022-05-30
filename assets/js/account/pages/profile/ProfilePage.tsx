@@ -61,10 +61,10 @@ const ProfilePage = () => {
 						</Text>
 
 						<Stack direction="column">
-							{userInfo('First Name', data?.first_name, true)}
-							{userInfo('Last Name', data?.last_name)}
-							{userInfo('Username', data?.username, true)}
-							{userInfo('Email', data?.email)}
+							{userInfo(__('First Name','masteriyo'), data?.first_name, true)}
+							{userInfo(__('Last Name','masteriyo'), data?.last_name)}
+							{userInfo(__('Username','masteriyo'), data?.username, true)}
+							{userInfo(__('Email','masteriyo'), data?.email)}
 						</Stack>
 
 						<Heading fontSize="lg" px="6">
@@ -72,17 +72,17 @@ const ProfilePage = () => {
 						</Heading>
 
 						<Stack direction="column">
-							{userInfo('First Name', data?.billing?.first_name, true)}
-							{userInfo('Last Name', data?.billing?.last_name)}
-							{userInfo('Contact Number', data?.billing?.phone, true)}
-							{userInfo('Country', data?.billing?.country)}
-							{userInfo('State', data?.billing?.state, true)}
-							{userInfo('City', data?.billing?.city)}
-							{userInfo('Zip Code', data?.billing?.postcode, true)}
-							{userInfo('Address 1', data?.billing?.address_1)}
-							{userInfo('Address 2', data?.billing?.address_2, true)}
-							{userInfo('Company Name', data?.billing?.company_name)}
-							{userInfo('Company VAT Number', data?.billing?.company_id, true)}
+							{userInfo(__('First Name','masteriyo'), data?.billing?.first_name, true)}
+							{userInfo(__('Last Name','masteriyo'), data?.billing?.last_name)}
+							{userInfo(__('Contact Number','masteriyo'), data?.billing?.phone, true)}
+							{userInfo(__('Country','masteriyo'), data?.billing?.country)}
+							{userInfo(__('State','masteriyo'), data?.billing?.state, true)}
+							{userInfo(__('City','masteriyo'), data?.billing?.city)}
+							{userInfo(__('Zip Code','masteriyo'), data?.billing?.postcode, true)}
+							{userInfo(__('Address 1','masteriyo'), data?.billing?.address_1)}
+							{userInfo(__('Address 2','masteriyo'), data?.billing?.address_2, true)}
+							{userInfo(__('Company Name','masteriyo'), data?.billing?.company_name)}
+							{userInfo(__('Company VAT Number','masteriyo'), data?.billing?.company_id, true)}
 						</Stack>
 					</Stack>
 				</Stack>

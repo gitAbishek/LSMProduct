@@ -110,19 +110,19 @@ class AdminMenu {
 
 		add_submenu_page(
 			'masteriyo',
-			esc_html__( 'Settings', 'masteriyo' ),
-			esc_html__( 'Settings', 'masteriyo' ),
+			esc_html__( 'Reviews', 'masteriyo' ),
+			esc_html__( 'Reviews', 'masteriyo' ),
 			'manage_masteriyo_settings',
-			'masteriyo#/settings',
+			'masteriyo#/reviews',
 			array( __CLASS__, 'display_main_page' )
 		);
 
 		add_submenu_page(
 			'masteriyo',
-			esc_html__( 'Reviews', 'masteriyo' ),
-			esc_html__( 'Reviews', 'masteriyo' ),
+			esc_html__( 'Settings', 'masteriyo' ),
+			esc_html__( 'Settings', 'masteriyo' ),
 			'manage_masteriyo_settings',
-			'masteriyo#/reviews',
+			'masteriyo#/settings',
 			array( __CLASS__, 'display_main_page' )
 		);
 

@@ -153,8 +153,8 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 				)}
 			</Td>
 			<Td>
-				{'attempt_ended' === data?.attempt_status ? (
-					<ButtonGroup>
+				<ButtonGroup>
+					{'attempt_ended' === data?.attempt_status ? (
 						<RouterLink
 							to={routes.quiz_attempts.edit.replace(
 								':attemptId',
@@ -164,26 +164,27 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 								{__('View', 'masteriyo')}
 							</Button>
 						</RouterLink>
-						<Menu placement="bottom-end">
-							<MenuButton
-								as={IconButton}
-								icon={<BiDotsVerticalRounded />}
-								variant="outline"
-								rounded="sm"
-								fontSize="large"
-								size="xs"
-							/>
-							<MenuList>
-								<MenuItem
-									onClick={onOpen}
-									icon={<BiTrash />}
-									_hover={{ color: 'red.500' }}>
-									{__('Delete', 'masteriyo')}
-								</MenuItem>
-							</MenuList>
-						</Menu>
-					</ButtonGroup>
-				) : null}
+					) : null}
+					<Menu placement="bottom-end">
+						<MenuButton
+							as={IconButton}
+							icon={<BiDotsVerticalRounded />}
+							variant="outline"
+							rounded="sm"
+							fontSize="large"
+							size="xs"
+						/>
+						<MenuList>
+							<MenuItem
+								onClick={onOpen}
+								icon={<BiTrash />}
+								_hover={{ color: 'red.500' }}>
+								{__('Delete', 'masteriyo')}
+							</MenuItem>
+						</MenuList>
+					</Menu>
+				</ButtonGroup>
+
 				<AlertDialog
 					isOpen={isOpen}
 					onClose={onClose}

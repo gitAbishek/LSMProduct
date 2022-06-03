@@ -8,6 +8,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\QuestionType;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 
@@ -61,13 +62,15 @@ class QuestionsController extends PostsController {
 	/**
 	 * Question types.
 	 *
+	 * @since 1.0.0
+	 * @deprecated x.x.x
+	 *
 	 * @var array
 	 */
 	protected $types = array(
 		'true-false',
 		'single-choice',
 		'multiple-choice',
-		'short-answer',
 	);
 
 	/**
@@ -271,19 +274,10 @@ class QuestionsController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
-		/**
-		 * Filters question types.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string[] $question_types The question types.
-		 */
-		$question_types = apply_filters( 'masteriyo_question_types', $this->get_types() );
-
 		$params['type'] = array(
 			'description'       => __( 'Limit result set to questions assigned a specific type.', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => $question_types,
+			'enum'              => QuestionType::all(),
 			'sanitize_callback' => 'sanitize_key',
 			'validate_callback' => 'rest_validate_request_arg',
 		);
@@ -512,15 +506,6 @@ class QuestionsController extends PostsController {
 	 * @return array
 	 */
 	public function get_item_schema() {
-		/**
-		 * Filters question types.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string[] $question_types The question types.
-		 */
-		$question_types = apply_filters( 'masteriyo_question_types', $this->get_types() );
-
 		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
 			'title'      => $this->post_type,
@@ -608,7 +593,7 @@ class QuestionsController extends PostsController {
 				'type'              => array(
 					'description' => __( 'Question type.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => $question_types,
+					'enum'        => QuestionType::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'answer_required'   => array(
@@ -821,6 +806,7 @@ class QuestionsController extends PostsController {
 	 * Get question types.
 	 *
 	 * @since 1.0.0
+	 * @deprecated x.x.x
 	 *
 	 * @return array
 	 */

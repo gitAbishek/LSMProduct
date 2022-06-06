@@ -8,6 +8,7 @@ import {
 	Switch,
 	Text,
 } from '@chakra-ui/react';
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { BiLock } from 'react-icons/bi';
 
@@ -31,6 +32,7 @@ const AddonItem: React.FC<Props> = (props) => {
 				src={thumbnailSrc}
 				borderTopRightRadius="sm"
 				borderTopLeftRadius="sm"
+				w="full"
 			/>
 			<Box
 				position="absolute"
@@ -41,12 +43,16 @@ const AddonItem: React.FC<Props> = (props) => {
 				px="1"
 				textAlign="center">
 				<Text color="white" fontSize="xs" p="1">
-					Pro
+					{__('Pro', 'masteriyo')}
 				</Text>
 			</Box>
 			<Box p="6">
 				<Stack direction="column" spacing="4">
-					<Stack direction="row" justify="space-between" align="center">
+					<Stack
+						display={['flex', 'flex', 'block', 'flex']}
+						direction={['row', 'row', 'column', 'row']}
+						justify="space-between"
+						align="center">
 						<Heading fontSize="sm" fontWeight="semibold" color="gray.700">
 							{addOnName}
 						</Heading>

@@ -68,66 +68,72 @@ const AddOns = () => {
 			<Stack
 				width="100%"
 				h="auto"
-				py="4"
+				p="4"
 				mt="6"
 				bg="linear-gradient(90.03deg, #4584FF 0.57%, #7761FF 99.97%)"
 				color="white">
-				<Container maxW="container.xl">
-					<Stack direction="row" justifyContent="space-between">
-						<Stack direction="row" spacing="4">
-							<Box pos="relative" w="300px">
-								<Heading
-									pos="absolute"
-									fontSize="md"
-									color="white"
-									left="16px"
-									top="10px">
-									{__('SPECIAL INTRODUCTORY OFFER', 'masteriyo')}
-								</Heading>
-								<Ribbon />
-							</Box>
-
+				<Stack
+					direction={['column', 'column', 'column', 'row']}
+					justifyContent="space-between">
+					<Stack
+						alignItems="center"
+						direction={['column', 'column', 'column', 'row']}
+						spacing="4">
+						<Box pos="relative" w="250px">
+							<Heading
+								pos="absolute"
+								fontSize="xs"
+								color="white"
+								left="24px"
+								top="10px">
+								{__('SPECIAL INTRODUCTORY OFFER', 'masteriyo')}
+							</Heading>
+							<Ribbon />
+						</Box>
+						<Stack display="flex" direction="row" alignItems="center">
 							<Text fontSize="15px" fontWeight="400">
 								{__('We are giving', 'masteriyo')}
-								<Center
-									d="inline-flex"
-									w="40px"
-									h="40px"
-									bg="rgba(255,255,255, 0.5)"
-									fontWeight="bold"
-									rounded="full">
-									75
-									<Text as="span" fontSize="xx-small">
-										%
-									</Text>
-								</Center>
+							</Text>
+							<Center
+								d="inline-flex"
+								w="40px"
+								h="40px"
+								bg="rgba(255,255,255, 0.5)"
+								fontWeight="bold"
+								rounded="full">
+								75
+								<Text as="span" fontSize="xx-small">
+									%
+								</Text>
+							</Center>
+							<Text fontSize="15px" fontWeight="400">
 								{__('off on all our premium plans.', 'masteriyo')}
 							</Text>
 						</Stack>
-						<Stack direction="row" spacing="5">
-							<Link
-								href="https://masteriyo.com/wordpress-lms/pricing/"
-								target="_blank">
-								<Button color="black">{__('Buy now', 'masteriyo')}</Button>
-							</Link>
-							<Link
-								href="https://masteriyo.com/wordpress-lms/contact/"
-								target="_blank">
-								<Button
-									variant="unstyled"
-									textDecor="underline"
-									color="rgba(255,255,255,0.8)"
-									_hover={{ color: 'white' }}>
-									{__('Any Queries?', 'masteriyo')}
-								</Button>
-							</Link>
-						</Stack>
 					</Stack>
-				</Container>
+					<Stack direction="row" spacing="5" justifyContent="center">
+						<Link
+							href="https://masteriyo.com/wordpress-lms/pricing/"
+							target="_blank">
+							<Button color="black">{__('Buy now', 'masteriyo')}</Button>
+						</Link>
+						<Link
+							href="https://masteriyo.com/wordpress-lms/contact/"
+							target="_blank">
+							<Button
+								variant="unstyled"
+								textDecor="underline"
+								color="rgba(255,255,255,0.8)"
+								_hover={{ color: 'white' }}>
+								{__('Any Queries?', 'masteriyo')}
+							</Button>
+						</Link>
+					</Stack>
+				</Stack>
 			</Stack>
-			<Stack width="container.xl" ml="auto" mr="auto" mt="10">
-				<Row>
-					<Col md={3}>
+			<Stack ml="auto" mr="auto" mt="10">
+				<Row style={{ margin: 'auto', justifyContent: 'center' }}>
+					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('Stripe Payment Gateway', 'masteriyo')}
 							addOnDescription={__(
@@ -137,7 +143,7 @@ const AddOns = () => {
 							thumbnailSrc={Stripe}
 						/>
 					</Col>
-					<Col md={3}>
+					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('Download Materials', 'masteriyo')}
 							addOnDescription={__(
@@ -147,7 +153,7 @@ const AddOns = () => {
 							thumbnailSrc={DownloadMaterial}
 						/>
 					</Col>
-					<Col md={3}>
+					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('WooCommerce Integration', 'masteriyo')}
 							addOnDescription={__(

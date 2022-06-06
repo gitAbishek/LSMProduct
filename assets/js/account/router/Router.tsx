@@ -16,7 +16,8 @@ import localized from '../utils/global';
 const Router: React.FC = () => {
 	return (
 		<>
-			{'no' === localized.isInstructorActive ? (
+			{'yes' === localized.isCurrentUserInstructor &&
+			'no' === localized.isInstructorActive ? (
 				<InstructorApprovalInfo />
 			) : null}
 			<Box bg="white" sx={accountStyles}>

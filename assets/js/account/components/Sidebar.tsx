@@ -176,13 +176,13 @@ const Sidebar = () => {
 						sx={navLinkStyles}
 						_activeLink={navActiveStyles}
 						to={routes.order.list}>
-						{navText(__('Order History','masteriyo'), BiHistory)}
+						{navText(__('Order History', 'masteriyo'), BiHistory)}
 					</Link>
 				</ListItem>
 
 				<ListItem>
 					<Link sx={navLinkStyles} onClick={onOpen}>
-						{navText(__('Logout','masteriyo'), BiLogOut)}
+						{navText(__('Logout', 'masteriyo'), BiLogOut)}
 					</Link>
 				</ListItem>
 

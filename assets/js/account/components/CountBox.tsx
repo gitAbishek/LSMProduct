@@ -6,7 +6,6 @@ import {
 	Text,
 	ThemingProps,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
 import React, { ReactNode } from 'react';
 
 interface Props {

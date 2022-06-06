@@ -133,6 +133,8 @@ class Masteriyo {
 		add_action( 'cli_init', array( 'Masteriyo\Cli\Cli', 'register' ) );
 
 		add_filter( 'wp_kses_allowed_html', array( $this, 'register_custom_kses_allowed_html' ), 10, 2 );
+
+		add_filter( 'woocommerce_prevent_admin_access', array( $this, 'prevent_admin_access' ) );
 	}
 
 	/**
@@ -148,7 +150,7 @@ class Masteriyo {
 		Shortcodes::instance()->register_shortcodes();
 		Install::init();
 
-		// $this->restrict_wp_dashboard_and_admin_bar();
+		$this->restrict_wp_dashboard_and_admin_bar();
 		$this->register_order_status();
 		$this->setup_wizard();
 
@@ -568,18 +570,15 @@ class Masteriyo {
 	 * @since 1.0.0
 	 */
 	public function restrict_wp_dashboard_and_admin_bar() {
-		if (
-			masteriyo_is_current_user_student() &&
-			! masteriyo_is_current_user_admin() &&
-			! masteriyo_is_current_user_manager() &&
-			! masteriyo_is_current_user_instructor()
-		) {
+		if ( masteriyo_is_current_user_student() ) {
 			add_filter( 'show_admin_bar', '__return_false' );
 
 			if ( ! is_admin() || defined( 'DOING_AJAX' ) ) {
 				return;
 			}
+
 			wp_safe_redirect( home_url() );
+
 			exit;
 		}
 	}
@@ -695,5 +694,25 @@ class Masteriyo {
 		}
 
 		return masteriyo_locate_template( 'learn.php' );
+	}
+
+	/**
+	 * Allow admin access to approved instructor.
+	 *
+	 * Compatibility with WooCommerce
+	 *
+	 * @since x.x.x
+	 *
+	 * @param boolean $prevent_access
+	 * @return boolean
+	 */
+	public function prevent_admin_access( $prevent_access ) {
+		$instructor = masteriyo_get_current_instructor();
+
+		if ( $instructor ) {
+			$prevent_access = $instructor->is_active() ? false : true;
+		}
+
+		return $prevent_access;
 	}
 }

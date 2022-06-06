@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\UserCourseStatus;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Query\UserCourseQuery;
@@ -196,8 +197,9 @@ class UserCoursesController extends CrudController {
 			'description'       => __( 'User course status', 'masteriyo' ),
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
+			'default'           => 'active',
 			'validate_callback' => 'rest_validate_request_arg',
-			'enum'              => masteriyo_get_user_course_statuses(),
+			'enum'              => UserCourseStatus::all(),
 		);
 
 		$params['started_at'] = array(

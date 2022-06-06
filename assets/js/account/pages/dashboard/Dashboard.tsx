@@ -41,8 +41,6 @@ const Dashboard: React.FC = () => {
 		courseProgressAPI.list({ user_id: localized?.current_user_id })
 	);
 
-	const enrolledCoursesCount = courseProgressQuery?.data?.length;
-
 	const inProgressCoursesCount = courseProgressQuery?.data?.filter(
 		(course: CourseProgressSchema) => course.status === 'progress'
 	).length;
@@ -66,6 +64,8 @@ const Dashboard: React.FC = () => {
 		dashboardCourseQuery?.data?.data?.filter((course: MyCoursesSchema) =>
 			validCoursesIds?.includes(course.course.id)
 		);
+
+	const enrolledCoursesCount = dashboardCourseQuery?.data?.data?.length;
 
 	let direction: 'row' | 'column' | undefined = 'row';
 	let gap: number = 2;

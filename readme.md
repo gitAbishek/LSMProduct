@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.2
+**Stable tag**: 1.5.3
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,16 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.3 - 07-06-2022
+
+- Feature - Implemented drag and drop feature on quiz question builder.
+- Enhancement - Show delete action for a quiz in progress on quiz attempts listing page.
+- Enhancement - Make addons listing page responsive.
+- Enhancement - Replace fullscreen loader (Spinner) with skeleton loader in backend pages.
+- Fix - Show approval notice for instructors only on the account page.
+- Fix - Enrolled course count on the account page.
+- Fix - Instructor unable to access add new course page when WooCommerce is enabled.
 
 ### 1.5.2 - 30-05-2022
 

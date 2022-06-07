@@ -35,7 +35,7 @@ function masteriyo_get_user_course( $user_course_id ) {
  * Get list of status for user course.
  *
  * @since 1.0.0
- * @deprecated x.x.x
+ * @deprecated 1.5.3
  *
  * @return array
  */

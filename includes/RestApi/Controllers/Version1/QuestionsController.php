@@ -63,7 +63,7 @@ class QuestionsController extends PostsController {
 	 * Question types.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.3
 	 *
 	 * @var array
 	 */
@@ -806,7 +806,7 @@ class QuestionsController extends PostsController {
 	 * Get question types.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.3
 	 *
 	 * @return array
 	 */

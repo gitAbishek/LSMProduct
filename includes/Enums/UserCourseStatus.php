@@ -2,7 +2,7 @@
 /**
  * User Course status enums.
  *
- * @since x.x.x
+ * @since 1.5.3
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * User course status enum class.
  *
- * @since x.x.x
+ * @since 1.5.3
  */
 class UserCourseStatus {
 	/**
 	 * User course any status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const ANY = 'any';
@@ -27,7 +27,7 @@ class UserCourseStatus {
 	/**
 	 * User course enrolled status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const ENROLLED = 'enrolled';
@@ -35,7 +35,7 @@ class UserCourseStatus {
 	/**
 	 * User course active status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const ACTIVE = 'active';
@@ -43,7 +43,7 @@ class UserCourseStatus {
 	/**
 	 * User course inactive status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const INACTIVE = 'inactive';
@@ -51,7 +51,7 @@ class UserCourseStatus {
 	/**
 	 * Return user course statuses.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 *
 	 * @return array
 	 */

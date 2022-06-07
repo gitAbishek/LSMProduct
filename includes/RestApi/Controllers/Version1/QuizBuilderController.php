@@ -296,7 +296,7 @@ class QuizBuilderController extends PostsController {
 	 * Get quiz child data.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.3
 	 *
 	 * @param Model $quiz_item Quiz instance.
 	 * @param string     $context Request context.
@@ -320,7 +320,7 @@ class QuizBuilderController extends PostsController {
 	/**
 	 * Get quiz child data.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 *
 	 * @param \Masteriyo\Models\Question $question Question object.
 	 * @param string     $context Request context.
@@ -332,7 +332,7 @@ class QuizBuilderController extends PostsController {
 		/**
 		 * Filters question description.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.3
 		 *
 		 * @param string $description Question description.
 		 */
@@ -360,7 +360,7 @@ class QuizBuilderController extends PostsController {
 		/**
 		 * Filter question rest response data.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.3
 		 *
 		 * @param array $data Question data.
 		 * @param Masteriyo\Models\Question $question Question object.
@@ -374,7 +374,7 @@ class QuizBuilderController extends PostsController {
 	 * Format the quiz items according to the builder format.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.3
 	 *
 	 * @param \Masteriyo\Models\Question[] $questions Questions
 	 * @return array

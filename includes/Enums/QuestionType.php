@@ -2,7 +2,7 @@
 /**
  * Question type enums.
  *
- * @since x.x.x
+ * @since 1.5.3
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Question type enum class.
  *
- * @since x.x.x
+ * @since 1.5.3
  */
 class QuestionType {
 	/**
 	 * True False question type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const TRUE_FALSE = 'true-false';
@@ -27,7 +27,7 @@ class QuestionType {
 	/**
 	 * Single Choice question type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const SINGLE_CHOICE = 'single-choice';
@@ -35,7 +35,7 @@ class QuestionType {
 	/**
 	 * Multiple Choice question type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @var string
 	 */
 	const MULTIPLE_CHOICE = 'multiple-choice';
@@ -43,7 +43,7 @@ class QuestionType {
 	/**
 	 * Get all question types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.3
 	 * @static
 	 *
 	 * @return array

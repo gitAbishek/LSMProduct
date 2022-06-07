@@ -701,6 +701,8 @@ class Masteriyo {
 	 *
 	 * Compatibility with WooCommerce
 	 *
+	 * @see https://github.com/woocommerce/woocommerce/blob/f04e0761a6c200e57e8a9df45c62b5e76b2f058a/plugins/woocommerce/includes/admin/class-wc-admin.php#L157
+	 *
 	 * @since x.x.x
 	 *
 	 * @param boolean $prevent_access

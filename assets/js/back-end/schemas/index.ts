@@ -85,6 +85,7 @@ export interface MultipleChoiceSchema {
 
 export interface QuestionSchema {
 	id: number;
+	answer_required: boolean;
 	name: string;
 	slug: string;
 	permalink?: string;

@@ -8,8 +8,10 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import AddNewButton from '../../../../components/common/AddNewButton';
+import { whileDraggingStyles } from '../../../../config/styles';
 import urls from '../../../../constants/urls';
 import QuestionProvider from '../../../../context/QuestionProvider';
 import { QuestionSchema } from '../../../../schemas';
@@ -19,19 +21,24 @@ import Question from './Question';
 interface Props {
 	quizId: number;
 	courseId: number;
+	questionList: QuestionSchema[];
+	setQuestionList: any;
 }
 
 const Questions: React.FC<Props> = (props) => {
-	const { quizId, courseId } = props;
+	const { quizId, courseId, questionList, setQuestionList } = props;
 
 	const questionsAPI = new API(urls.questions);
-
+	const quizBuilder = new API(urls.quizBuilder);
 	const queryClient = useQueryClient();
 
-	const questionQuery = useQuery(
+	const questionQuery = useQuery<QuestionSchema[]>(
 		[`questions${quizId}`, quizId],
-		() => questionsAPI.list({ parent: quizId, order: 'asc' }),
+		() => quizBuilder.get(quizId),
 		{
+			onSuccess: (data: QuestionSchema[]) => {
+				setQuestionList(data);
+			},
 			enabled: !!quizId,
 		}
 	);
@@ -64,6 +71,24 @@ const Questions: React.FC<Props> = (props) => {
 		});
 	};
 
+	const onDrapEnd = (result: DropResult) => {
+		if (!result.destination) {
+			return;
+		}
+
+		if (
+			result.destination.droppableId === result.source.droppableId &&
+			result.destination.index === result.source.index
+		) {
+			return;
+		}
+
+		const items = Array.from(questionList);
+		const [reorderedItem] = items.splice(result.source.index, 1);
+		items.splice(result.destination.index, 0, reorderedItem);
+		setQuestionList(items);
+	};
+
 	return (
 		<QuestionProvider>
 			<Stack direction="column" spacing="6" py="8">
@@ -80,11 +105,29 @@ const Questions: React.FC<Props> = (props) => {
 								{__('No questions found.', 'masteriyo')}
 							</Alert>
 						) : (
-							<Accordion allowToggle>
-								{questionQuery.data.map((question: any) => (
-									<Question key={question.id} questionData={question} />
-								))}
-							</Accordion>
+							<DragDropContext onDragEnd={onDrapEnd}>
+								<Droppable droppableId="quiz-question" type="question">
+									{(droppableProvided, snapshot) => (
+										<Accordion
+											allowToggle
+											sx={snapshot.isDraggingOver ? whileDraggingStyles : {}}
+											p="3"
+											ref={droppableProvided.innerRef}
+											{...droppableProvided.droppableProps}>
+											{questionList.map(
+												(question: QuestionSchema, index: number) => (
+													<Question
+														key={question.id}
+														questionData={question}
+														index={index}
+													/>
+												)
+											)}
+											{droppableProvided.placeholder}
+										</Accordion>
+									)}
+								</Droppable>
+							</DragDropContext>
 						)}
 						<Center>
 							<AddNewButton

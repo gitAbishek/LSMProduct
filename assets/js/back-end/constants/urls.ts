@@ -29,6 +29,7 @@ const urls = {
 	userLogout: base + 'users/logout',
 	profileImage: base + 'users/account/profile-image',
 	reviews: base + 'courses/reviews',
+	quizBuilder: base + 'quizbuilder',
 };
 
 export default urls;

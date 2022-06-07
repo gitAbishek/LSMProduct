@@ -18,7 +18,7 @@ import { __ } from '@wordpress/i18n';
 import queryString from 'query-string';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
@@ -26,7 +26,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import useCourse from '../../hooks/useCourse';
-import { QuizSchema as QuizSchemaOld } from '../../schemas';
+import { QuestionSchema, QuizSchema as QuizSchemaOld } from '../../schemas';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -38,6 +38,7 @@ import QuizSettings from './components/QuizSettings';
 interface QuizSchema extends QuizSchemaOld {
 	duration_hour?: number;
 	duration_minute?: number;
+	questions: string;
 }
 
 const EditQuiz: React.FC = () => {
@@ -50,9 +51,13 @@ const EditQuiz: React.FC = () => {
 	const toast = useToast();
 	const quizAPI = new API(urls.quizes);
 	const courseAPI = new API(urls.courses);
+	const quizBuilder = new API(urls.quizBuilder);
+	const queryClient = useQueryClient();
+
 	const [tabIndex, setTabIndex] = useState<number>(
 		page === 'questions' ? 1 : 0
 	);
+	const [questions, setQuestions] = useState<QuestionSchema[]>([]);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -82,11 +87,16 @@ const EditQuiz: React.FC = () => {
 					isClosable: true,
 					status: 'success',
 				});
-				// methods.reset(data, {
-				// 	keepDirty: false,
-				// 	keepValues: true,
-				// });
 				courseQuery.refetch();
+			},
+		}
+	);
+
+	const updateQuizBuilder = useMutation(
+		(data: { questions: number[] }) => quizBuilder.update(quizId, data),
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries(`questions${quizId}`);
 			},
 		}
 	);
@@ -99,7 +109,7 @@ const EditQuiz: React.FC = () => {
 		};
 		status === 'draft' && draftCourse.mutate(courseId);
 		status === 'publish' && publishCourse.mutate(courseId);
-
+		updateQuizBuilder.mutate({ questions: questions.map((x) => x.id) });
 		updateQuiz.mutate(deepClean(deepMerge(data, newData)));
 	};
 
@@ -180,6 +190,8 @@ const EditQuiz: React.FC = () => {
 												<Questions
 													courseId={quizQuery?.data?.course_id}
 													quizId={quizId}
+													questionList={questions}
+													setQuestionList={setQuestions}
 												/>
 											</TabPanel>
 											<TabPanel sx={tabPanelStyles}></TabPanel>
@@ -203,33 +215,26 @@ const EditQuiz: React.FC = () => {
 												<QuizSettings quizData={quizQuery?.data} />
 											)}
 
-											{tabIndex !== 1 && (
-												<>
-													<Box py="3">
-														<Divider />
-													</Box>
-													<ButtonGroup>
-														<Button
-															colorScheme="blue"
-															type="submit"
-															isLoading={updateQuiz.isLoading}>
-															{__('Update', 'masteriyo')}
-														</Button>
-														<Button
-															variant="outline"
-															onClick={() =>
-																history.push(
-																	routes.courses.edit.replace(
-																		':courseId',
-																		courseId
-																	)
-																)
-															}>
-															{__('Cancel', 'masteriyo')}
-														</Button>
-													</ButtonGroup>
-												</>
-											)}
+											<Box py="3">
+												<Divider />
+											</Box>
+											<ButtonGroup>
+												<Button
+													colorScheme="blue"
+													type="submit"
+													isLoading={updateQuiz.isLoading}>
+													{__('Update', 'masteriyo')}
+												</Button>
+												<Button
+													variant="outline"
+													onClick={() =>
+														history.push(
+															routes.courses.edit.replace(':courseId', courseId)
+														)
+													}>
+													{__('Cancel', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
 										</Stack>
 									</form>
 								</Stack>

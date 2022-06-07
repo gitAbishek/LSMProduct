@@ -421,8 +421,10 @@ class QuestionsController extends PostsController {
 	/**
 	 * Process answers based on user roles.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param mixed    $answers Available answer(s).
-	 * @param Question $question Question object.
+	 * @param \Masteriyo\Models\Question\Question $question Question object.
 	 */
 	protected function process_answers( $answers, $question ) {
 		return $answers;
@@ -711,8 +713,6 @@ class QuestionsController extends PostsController {
 			);
 
 			$question->set_menu_order( $query->found_posts );
-		} else {
-			$question->set_menu_order( $request['menu_order'] );
 		}
 
 		// Post type.

@@ -205,7 +205,7 @@ class QuizBuilderController extends PostsController {
 			$response[] = $this->prepare_response_for_collection( $data );
 		}
 
-		return $this->process_objects_collection( $response );
+		return $response;
 	}
 
 	/**
@@ -218,10 +218,13 @@ class QuizBuilderController extends PostsController {
 	 * @return Masteriyo\Models\Question\Question[]
 	 */
 	protected function get_quiz_contents( $request ) {
-		$questions = $this->get_objects(
+		$results = $this->get_objects(
 			array(
-				'post_parent' => $request['id'],
-				'post_type'   => 'mto-question',
+				'post_parent'    => $request['id'],
+				'post_type'      => 'mto-question',
+				'orderby'        => 'menu_order',
+				'order'          => 'asc',
+				'posts_per_page' => -1,
 			)
 		);
 
@@ -232,22 +235,7 @@ class QuizBuilderController extends PostsController {
 		 *
 		 * @param Masteriyo\Models\Question\Question[] $questions Quiz contents objects.
 		 */
-		return apply_filters( "masteriyo_{$this->object_type}_objects", $questions );
-	}
-
-	/**
-	 * Get objects(sections, quizzes, lessons, etc.).
-	 *
-	 * @since 1.0.0
-	 * @param string[] $query_args WP_Query args.
-	 *
-	 * @return Model[]
-	 */
-	protected function get_objects( $query_args ) {
-		$query_args['posts_per_page'] = -1;
-		$query                        = new \WP_Query( $query_args );
-
-		return array_map( array( $this, 'get_object' ), $query->posts );
+		return apply_filters( "masteriyo_{$this->object_type}_objects", $results['objects'] );
 	}
 
 	/**
@@ -276,14 +264,14 @@ class QuizBuilderController extends PostsController {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  Masteriyo\Database\Model $object  Model object.
+	 * @param  \Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
 	 *
 	 * @return WP_Error|WP_REST_Response Response object on success, or WP_Error object on failure.
 	 */
 	protected function prepare_object_for_response( $object, $request ) {
 		$context = ! empty( $request['context'] ) ? $request['context'] : 'view';
-		$data    = $this->get_quiz_child_data( $object, $context );
+		$data    = $this->get_question_data( $object, $context );
 
 		$data     = $this->add_additional_fields_to_object( $data, $request );
 		$data     = $this->filter_response_by_context( $data, $context );
@@ -304,9 +292,11 @@ class QuizBuilderController extends PostsController {
 		return apply_filters( "masteriyo_rest_prepare_{$this->object_type}_object", $response, $object, $request );
 	}
 
-
 	/**
 	 * Get quiz child data.
+	 *
+	 * @since 1.0.0
+	 * @deprecated x.x.x
 	 *
 	 * @param Model $quiz_item Quiz instance.
 	 * @param string     $context Request context.
@@ -328,27 +318,69 @@ class QuizBuilderController extends PostsController {
 	}
 
 	/**
+	 * Get quiz child data.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \Masteriyo\Models\Question $question Question object.
+	 * @param string     $context Request context.
+	 *                            Options: 'view' and 'edit'.
+	 *
+	 * @return array
+	 */
+	protected function get_question_data( $question, $context = 'view' ) {
+		/**
+		 * Filters question description.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string $description Question description.
+		 */
+		$description = 'view' === $context ? apply_filters( 'masteriyo_description', $question->get_description() ) : $question->get_description();
+
+		$data = array(
+			'id'                => $question->get_id(),
+			'name'              => wp_specialchars_decode( $question->get_name( $context ) ),
+			'permalink'         => $question->get_permalink(),
+			'status'            => $question->get_status( $context ),
+			'description'       => $description,
+			'type'              => $question->get_type( $context ),
+			'parent_id'         => $question->get_parent_id( $context ),
+			'course_id'         => $question->get_course_id( $context ),
+			'menu_order'        => $question->get_menu_order( $context ),
+			'answer_required'   => $question->get_answer_required( $context ),
+			'randomize'         => $question->get_randomize( $context ),
+			'points'            => $question->get_points( $context ),
+			'positive_feedback' => $question->get_positive_feedback( $context ),
+			'negative_feedback' => $question->get_negative_feedback( $context ),
+			'feedback'          => $question->get_feedback( $context ),
+			'answers'           => $question->get_answers( $context ),
+		);
+
+		/**
+		 * Filter question rest response data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $data Question data.
+		 * @param Masteriyo\Models\Question $question Question object.
+		 * @param string $context What the value is for. Valid values are view and edit.
+		 * @param Masteriyo\RestApi\Controllers\Version1\QuestionsController $controller REST Questions controller object.
+		 */
+		return apply_filters( "masteriyo_rest_response_{$this->object_type}_data", $data, $question, $context, $this );
+	}
+
+	/**
 	 * Format the quiz items according to the builder format.
 	 *
 	 * @since 1.0.0
+	 * @deprecated x.x.x
 	 *
-	 * @param Masteriyo\Models\Question[] $questions$objects Questions
+	 * @param \Masteriyo\Models\Question[] $questions Questions
 	 * @return array
 	 */
 	protected function process_objects_collection( $questions ) {
-		$results['questions'] = $questions;
-
-		usort(
-			$questions,
-			function( $a, $b ) {
-				if ( $a['menu_order'] === $b['menu_order'] ) {
-					return 0;
-				}
-
-				return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
-			}
-		);
-
+		$results['questions']      = $questions;
 		$question_ids              = wp_list_pluck( $questions, 'id' );
 		$results['question_order'] = $question_ids;
 

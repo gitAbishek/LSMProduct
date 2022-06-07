@@ -54,7 +54,13 @@ const QuizFields: React.FC<Props> = (props) => {
 
 	const questionQuery = useQuery(
 		[`interactiveQuestions${quizId}`, quizId, filterParams],
-		() => questionsAPI.list({ parent: quizId, order: 'asc', ...filterParams }),
+		() =>
+			questionsAPI.list({
+				parent: quizId,
+				order: 'asc',
+				orderby: 'menu_order',
+				...filterParams,
+			}),
 		{
 			enabled: !!quizId,
 		}

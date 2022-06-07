@@ -1,6 +1,7 @@
 import {
 	Container,
 	Icon,
+	Skeleton,
 	Stack,
 	Tab,
 	TabList,
@@ -18,9 +19,9 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import AddCategoryModal from '../../components/common/AddCategoryModal';
 import Header from '../../components/common/Header';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import CourseSkeleton from '../../skeleton/CourseSkeleton';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -76,6 +77,7 @@ const Builder: React.FC = () => {
 			onSuccess: (data) => {
 				setBuilderData(data);
 			},
+			enabled: tabIndex === 1,
 		}
 	);
 
@@ -156,84 +158,97 @@ const Builder: React.FC = () => {
 		}
 	};
 
-	if (courseQuery.isSuccess && builderQuery.isSuccess) {
-		return (
-			<>
-				<FormProvider {...methods}>
-					<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
-						<Stack direction="column" spacing="8" align="center">
-							<Header
-								showCourseName
-								showPreview
-								course={{
-									name: courseQuery.data.name,
-									id: courseQuery.data.id,
-									previewUrl: courseQuery.data.permalink,
-								}}
-								secondBtn={{
-									label: isDrafted()
-										? __('Save To Draft', 'masteriyo')
-										: __('Switch To Draft', 'masteriyo'),
-									action: methods.handleSubmit((data) => onSave(data, 'draft')),
-									isLoading: draftCourse.isLoading,
-								}}
-								thirdBtn={{
-									label: isPublished()
-										? __('Update', 'masteriyo')
-										: __('Publish', 'masteriyo'),
-									action: methods.handleSubmit((data) =>
-										onSave(data, 'publish')
-									),
-									isLoading: updateCourse.isLoading,
-								}}>
-								<TabList borderBottom="none" bg="white">
-									<Tab
-										sx={tabStyles}
-										onClick={() => {
-											history.push(
-												routes.courses.edit.replace(':courseId', courseId)
-											);
-										}}>
-										<Icon as={BiBook} sx={iconStyles} />
-										{__('Course', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										onClick={() => {
-											history.push({
-												pathname: routes.courses.edit.replace(
-													':courseId',
-													courseId
-												),
-												search: '?page=builder',
-											});
-										}}>
-										<Icon as={BiEdit} sx={iconStyles} />
-										{__('Builder', 'masteriyo')}
-									</Tab>
-									<Tab
-										sx={tabStyles}
-										onClick={() => {
-											history.push({
-												pathname: routes.courses.edit.replace(
-													':courseId',
-													courseId
-												),
-												search: '?page=settings',
-											});
-										}}>
-										<Icon as={BiCog} sx={iconStyles} />
-										{__('Settings', 'masteriyo')}
-									</Tab>
-								</TabList>
-							</Header>
-							<Container maxW="container.xl">
-								<Stack direction="column" spacing="2">
-									<TabPanels>
-										<TabPanel sx={tabPanelStyles}>
-											<EditCourse courseData={courseQuery.data} />
-										</TabPanel>
-										<TabPanel sx={tabPanelStyles}>
+	return (
+		<>
+			<FormProvider {...methods}>
+				<Tabs index={tabIndex} onChange={(index) => setTabIndex(index)}>
+					<Stack direction="column" spacing="8" align="center">
+						<Header
+							showCourseName
+							showPreview
+							course={
+								courseQuery.isSuccess
+									? {
+											name: courseQuery.data.name,
+											id: courseQuery.data.id,
+											previewUrl: courseQuery.data.permalink,
+									  }
+									: {
+											name: <Skeleton width="100px" height="25px" />,
+											id: 0,
+											previewUrl: '',
+									  }
+							}
+							secondBtn={{
+								label: isDrafted()
+									? __('Save To Draft', 'masteriyo')
+									: __('Switch To Draft', 'masteriyo'),
+								action: methods.handleSubmit((data) => onSave(data, 'draft')),
+								isLoading: draftCourse.isLoading,
+							}}
+							thirdBtn={{
+								label: isPublished()
+									? __('Update', 'masteriyo')
+									: __('Publish', 'masteriyo'),
+								action: methods.handleSubmit((data) => onSave(data, 'publish')),
+								isLoading: updateCourse.isLoading,
+							}}>
+							<TabList borderBottom="none" bg="white">
+								<Tab
+									sx={tabStyles}
+									onClick={() => {
+										history.push(
+											routes.courses.edit.replace(':courseId', courseId)
+										);
+									}}>
+									<Icon as={BiBook} sx={iconStyles} />
+									{__('Course', 'masteriyo')}
+								</Tab>
+								<Tab
+									sx={tabStyles}
+									onClick={() => {
+										history.push({
+											pathname: routes.courses.edit.replace(
+												':courseId',
+												courseId
+											),
+											search: '?page=builder',
+										});
+									}}>
+									<Icon as={BiEdit} sx={iconStyles} />
+									{__('Builder', 'masteriyo')}
+								</Tab>
+								<Tab
+									sx={tabStyles}
+									onClick={() => {
+										history.push({
+											pathname: routes.courses.edit.replace(
+												':courseId',
+												courseId
+											),
+											search: '?page=settings',
+										});
+									}}>
+									<Icon as={BiCog} sx={iconStyles} />
+									{__('Settings', 'masteriyo')}
+								</Tab>
+							</TabList>
+						</Header>
+						<Container maxW="container.xl">
+							<Stack direction="column" spacing="2">
+								<TabPanels>
+									<TabPanel sx={tabPanelStyles}>
+										{courseQuery.isSuccess ? (
+											<EditCourse
+												courseData={courseQuery.data}
+												tabIndex={tabIndex === 0}
+											/>
+										) : (
+											<CourseSkeleton page={tabIndex} />
+										)}
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										{courseQuery.isSuccess && builderQuery.isSuccess ? (
 											<SectionBuilder
 												courseId={courseQuery.data.id}
 												builderData={
@@ -241,21 +256,29 @@ const Builder: React.FC = () => {
 												}
 												setBuilderData={setBuilderData}
 											/>
-										</TabPanel>
-										<TabPanel sx={tabPanelStyles}>
-											<CourseSetting courseData={courseQuery.data} />
-										</TabPanel>
-									</TabPanels>
-								</Stack>
-							</Container>
-						</Stack>
-					</Tabs>
-				</FormProvider>
-				<AddCategoryModal />
-			</>
-		);
-	}
-	return <FullScreenLoader />;
+										) : (
+											<CourseSkeleton page={tabIndex} />
+										)}
+									</TabPanel>
+									<TabPanel sx={tabPanelStyles}>
+										{courseQuery.isSuccess ? (
+											<CourseSetting
+												courseData={courseQuery.data}
+												tabIndex={tabIndex === 2}
+											/>
+										) : (
+											<CourseSkeleton page={tabIndex} />
+										)}
+									</TabPanel>
+								</TabPanels>
+							</Stack>
+						</Container>
+					</Stack>
+				</Tabs>
+			</FormProvider>
+			<AddCategoryModal />
+		</>
+	);
 };
 
 export default Builder;

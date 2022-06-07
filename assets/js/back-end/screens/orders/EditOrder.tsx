@@ -39,11 +39,11 @@ import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import PriceWithSymbol from '../../components/common/PriceWithSymbol';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { OrderItemSchema, OrderSchema } from '../../schemas';
+import OrderSkeleton from '../../skeleton/OrderSkeleton';
 import API from '../../utils/api';
 import { deepClean, getLocalTime } from '../../utils/utils';
 
@@ -177,35 +177,35 @@ const EditOrder = () => {
 		setDeleteModalOpen(false);
 	};
 
-	if (orderQuery.isSuccess && orderItemsQuery.isSuccess) {
-		return (
-			<Stack direction="column" spacing="8" alignItems="center">
-				<Header>
-					<List>
-						<ListItem>
-							<Link
-								as={NavLink}
-								sx={navLinkStyles}
-								_activeLink={navActiveStyles}
-								to={routes.orders.list}>
-								{__('Edit Order', 'masteriyo')}
-							</Link>
-						</ListItem>
-					</List>
-				</Header>
-				<Container maxW="container.xl" marginTop="6">
-					<Stack direction="column" spacing="6">
-						<ButtonGroup>
-							<RouterLink to={routes.orders.list}>
-								<Button
-									variant="link"
-									_hover={{ color: 'blue.500' }}
-									leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
-									{__('Back to Orders', 'masteriyo')}
-								</Button>
-							</RouterLink>
-						</ButtonGroup>
-						<Box bg="white" p="10" shadow="box">
+	return (
+		<Stack direction="column" spacing="8" alignItems="center">
+			<Header showLinks>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.orders.list}>
+							{__('Edit Order', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
+			<Container maxW="container.xl" marginTop="6">
+				<Stack direction="column" spacing="6">
+					<ButtonGroup>
+						<RouterLink to={routes.orders.list}>
+							<Button
+								variant="link"
+								_hover={{ color: 'blue.500' }}
+								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								{__('Back to Orders', 'masteriyo')}
+							</Button>
+						</RouterLink>
+					</ButtonGroup>
+					<Box bg="white" p="10" shadow="box">
+						{orderQuery.isSuccess && orderItemsQuery.isSuccess ? (
 							<Stack direction="column" spacing="8">
 								<Flex aling="center" justify="space-between">
 									<Heading as="h1" fontSize="x-large">
@@ -427,49 +427,50 @@ const EditOrder = () => {
 									</form>
 								</FormProvider>
 							</Stack>
-						</Box>
-						<AlertDialog
-							isOpen={isDeleteModalOpen}
-							onClose={onDeleteModalClose}
-							isCentered
-							leastDestructiveRef={cancelRef}>
-							<AlertDialogOverlay>
-								<AlertDialogContent>
-									<AlertDialogHeader>
-										{__('Delete Order', 'masteriyo')} {name}
-									</AlertDialogHeader>
+						) : (
+							<OrderSkeleton />
+						)}
+					</Box>
+					<AlertDialog
+						isOpen={isDeleteModalOpen}
+						onClose={onDeleteModalClose}
+						isCentered
+						leastDestructiveRef={cancelRef}>
+						<AlertDialogOverlay>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									{__('Delete Order', 'masteriyo')} {name}
+								</AlertDialogHeader>
 
-									<AlertDialogBody>
-										{__(
-											'Are you sure? You can’t restore after deleting.',
-											'masteriyo'
-										)}
-									</AlertDialogBody>
-									<AlertDialogFooter>
-										<ButtonGroup>
-											<Button
-												ref={cancelRef}
-												onClick={onDeleteModalClose}
-												variant="outline">
-												{__('Cancel', 'masteriyo')}
-											</Button>
-											<Button
-												colorScheme="red"
-												onClick={onDeleteConfirm}
-												isLoading={deleteOrder.isLoading}>
-												{__('Delete', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
-									</AlertDialogFooter>
-								</AlertDialogContent>
-							</AlertDialogOverlay>
-						</AlertDialog>
-					</Stack>
-				</Container>
-			</Stack>
-		);
-	}
-	return <FullScreenLoader />;
+								<AlertDialogBody>
+									{__(
+										'Are you sure? You can’t restore after deleting.',
+										'masteriyo'
+									)}
+								</AlertDialogBody>
+								<AlertDialogFooter>
+									<ButtonGroup>
+										<Button
+											ref={cancelRef}
+											onClick={onDeleteModalClose}
+											variant="outline">
+											{__('Cancel', 'masteriyo')}
+										</Button>
+										<Button
+											colorScheme="red"
+											onClick={onDeleteConfirm}
+											isLoading={deleteOrder.isLoading}>
+											{__('Delete', 'masteriyo')}
+										</Button>
+									</ButtonGroup>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialogOverlay>
+					</AlertDialog>
+				</Stack>
+			</Container>
+		</Stack>
+	);
 };
 
 export default EditOrder;

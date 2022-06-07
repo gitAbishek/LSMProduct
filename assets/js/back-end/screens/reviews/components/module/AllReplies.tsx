@@ -90,7 +90,7 @@ const AllReplies: React.FC<Props> = (props) => {
 						m="auto"
 						onClick={() => fetchNextPage()}
 						variant="outline">
-						Load More
+						{__('Load More', 'masteriyo')}
 					</Button>
 				) : null}
 			</Box>

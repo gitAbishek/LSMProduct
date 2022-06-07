@@ -32,10 +32,10 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import CategorySkeleton from '../../skeleton/CategorySkeleton';
 import API from '../../utils/api';
 import { makeSlug } from '../../utils/categories';
 import { deepClean } from '../../utils/utils';
@@ -143,10 +143,6 @@ const EditCourseCategory: React.FC = () => {
 		setDeleteModalOpen(false);
 	};
 
-	if (categoryQuery.isLoading) {
-		return <FullScreenLoader />;
-	}
-
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header showLinks>
@@ -175,68 +171,72 @@ const EditCourseCategory: React.FC = () => {
 						</RouterLink>
 					</ButtonGroup>
 					<FormProvider {...methods}>
-						<Box bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="8">
-								<Flex aling="center" justify="space-between">
-									<Heading as="h1" fontSize="x-large">
-										{__('Edit Category', 'masteriyo')}
-									</Heading>
-									<Menu placement="bottom-end">
-										<MenuButton
-											as={IconButton}
-											icon={<BiDotsVerticalRounded />}
-											variant="outline"
-											rounded="sm"
-											fontSize="large"
-										/>
-										<MenuList>
-											<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-												{__('Delete', 'masteriyo')}
-											</MenuItem>
-										</MenuList>
-									</Menu>
-								</Flex>
-
-								<form onSubmit={methods.handleSubmit(onSubmit)}>
-									<Stack direction="column" spacing="6">
-										<NameInput defaultValue={categoryQuery.data.name} />
-										<SlugInput
-											defaultValue={categoryQuery?.data?.slug}
-											defaultNameValue={categoryQuery?.data?.name}
-										/>
-										<ParentCategory
-											defaultValue={categoryQuery.data.parent_id}
-										/>
-										<DescriptionInput
-											defaultValue={categoryQuery.data.description}
-										/>
-										<FeaturedImage
-											defaultValue={categoryQuery.data?.featured_image}
-										/>
-
-										<Box py="3">
-											<Divider />
-										</Box>
-
-										<ButtonGroup>
-											<Button
-												colorScheme="blue"
-												type="submit"
-												isLoading={updateCategoryMutation.isLoading}>
-												{__('Update', 'masteriyo')}
-											</Button>
-											<Button
+						{categoryQuery.isLoading ? (
+							<CategorySkeleton />
+						) : (
+							<Box bg="white" p="10" shadow="box">
+								<Stack direction="column" spacing="8">
+									<Flex aling="center" justify="space-between">
+										<Heading as="h1" fontSize="x-large">
+											{__('Edit Category', 'masteriyo')}
+										</Heading>
+										<Menu placement="bottom-end">
+											<MenuButton
+												as={IconButton}
+												icon={<BiDotsVerticalRounded />}
 												variant="outline"
-												onClick={() =>
-													history.push(routes.course_categories.list)
-												}>
-												{__('Cancel', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
-									</Stack>
-								</form>
-							</Stack>
-						</Box>
+												rounded="sm"
+												fontSize="large"
+											/>
+											<MenuList>
+												<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
+													{__('Delete', 'masteriyo')}
+												</MenuItem>
+											</MenuList>
+										</Menu>
+									</Flex>
+
+									<form onSubmit={methods.handleSubmit(onSubmit)}>
+										<Stack direction="column" spacing="6">
+											<NameInput defaultValue={categoryQuery.data.name} />
+											<SlugInput
+												defaultValue={categoryQuery?.data?.slug}
+												defaultNameValue={categoryQuery?.data?.name}
+											/>
+											<ParentCategory
+												defaultValue={categoryQuery.data.parent_id}
+											/>
+											<DescriptionInput
+												defaultValue={categoryQuery.data.description}
+											/>
+											<FeaturedImage
+												defaultValue={categoryQuery.data?.featured_image}
+											/>
+
+											<Box py="3">
+												<Divider />
+											</Box>
+
+											<ButtonGroup>
+												<Button
+													colorScheme="blue"
+													type="submit"
+													isLoading={updateCategoryMutation.isLoading}>
+													{__('Update', 'masteriyo')}
+												</Button>
+												<Button
+													variant="outline"
+													onClick={() =>
+														history.push(routes.course_categories.list)
+													}>
+													{__('Cancel', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
+									</form>
+								</Stack>
+							</Box>
+						)}
 						<AlertDialog
 							isOpen={isDeleteModalOpen}
 							onClose={onDeleteModalClose}

@@ -1,6 +1,5 @@
 import {
 	Box,
-	Center,
 	Collapse,
 	FormControl,
 	FormErrorMessage,
@@ -16,7 +15,7 @@ import {
 	Radio,
 	RadioGroup,
 	Select,
-	Spinner,
+	Skeleton,
 	Stack,
 	Tab,
 	TabList,
@@ -38,10 +37,11 @@ import ChangeInstructorSetting from './ChangeInstructorSetting';
 
 interface Props {
 	courseData?: CourseDataMap | any;
+	tabIndex?: boolean;
 }
 
 const CourseSetting: React.FC<Props> = (props) => {
-	const { courseData } = props;
+	const { courseData, tabIndex } = props;
 
 	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
@@ -64,8 +64,12 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setValue,
 	} = useFormContext();
 
-	const diffultiesQuery = useQuery('difficulties', () =>
-		difficultiesAPI.list()
+	const diffultiesQuery = useQuery(
+		'difficulties',
+		() => difficultiesAPI.list(),
+		{
+			enabled: tabIndex,
+		}
 	);
 
 	const renderDifficultiesOption = () => {
@@ -121,133 +125,130 @@ const CourseSetting: React.FC<Props> = (props) => {
 						</TabList>
 						<TabPanels flex="1">
 							<TabPanel>
-								{diffultiesQuery?.isLoading ? (
-									<Center>
-										<Spinner />
-									</Center>
-								) : (
-									<Stack direction="column" spacing="8">
-										<ChangeInstructorSetting courseData={courseData} />
+								<Stack direction="column" spacing="8">
+									<ChangeInstructorSetting
+										courseData={courseData}
+										tabIndex={tabIndex}
+									/>
 
-										<FormControl>
-											<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
+									<FormControl>
+										<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
+										{diffultiesQuery?.isLoading ? (
+											<Skeleton height="40px" />
+										) : (
 											<Select
 												placeholder={__('Choose Course Level', 'masteriyo')}
 												defaultValue={courseData?.difficulty?.id}
 												{...register('difficulty.id')}>
 												{renderDifficultiesOption()}
 											</Select>
-										</FormControl>
-										<Stack direction="column" spacing="0">
-											<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
-											<Stack direction="row">
-												<FormControl isInvalid={!!errors?.duration_hour}>
-													<Controller
-														name="duration_hour"
-														defaultValue={hours || 0}
-														rules={{
-															required: __('Hours is required.', 'masteriyo'),
-															min: 0,
-														}}
-														render={({ field }) => (
-															<InputGroup>
-																<NumberInput {...field} w="sm" min={0}>
-																	<NumberInputField rounded="sm" />
-																	<NumberInputStepper>
-																		<NumberIncrementStepper />
-																		<NumberDecrementStepper />
-																	</NumberInputStepper>
-																</NumberInput>
-																<InputRightAddon>
-																	{__('Hours', 'masteriyo')}
-																</InputRightAddon>
-															</InputGroup>
-														)}
-													/>
-													<FormErrorMessage>
-														{errors?.duration_hour &&
-															errors?.duration_hour?.message}
-													</FormErrorMessage>
-												</FormControl>
+										)}
+									</FormControl>
+									<Stack direction="column" spacing="0">
+										<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
+										<Stack direction="row">
+											<FormControl isInvalid={!!errors?.duration_hour}>
+												<Controller
+													name="duration_hour"
+													defaultValue={hours || 0}
+													rules={{
+														required: __('Hours is required.', 'masteriyo'),
+														min: 0,
+													}}
+													render={({ field }) => (
+														<InputGroup>
+															<NumberInput {...field} w="sm" min={0}>
+																<NumberInputField rounded="sm" />
+																<NumberInputStepper>
+																	<NumberIncrementStepper />
+																	<NumberDecrementStepper />
+																</NumberInputStepper>
+															</NumberInput>
+															<InputRightAddon>
+																{__('Hours', 'masteriyo')}
+															</InputRightAddon>
+														</InputGroup>
+													)}
+												/>
+												<FormErrorMessage>
+													{errors?.duration_hour &&
+														errors?.duration_hour?.message}
+												</FormErrorMessage>
+											</FormControl>
 
-												<FormControl isInvalid={!!errors?.duration_minute}>
-													<Controller
-														name="duration_minute"
-														defaultValue={minutes || 0}
-														rules={{
-															required: __('Minutes is required.', 'masteriyo'),
-															min: 0,
-															max: 59,
-														}}
-														render={({ field }) => (
-															<InputGroup>
-																<NumberInput {...field} w="sm" min={0} max={59}>
-																	<NumberInputField rounded="sm" />
-																	<NumberInputStepper>
-																		<NumberIncrementStepper />
-																		<NumberDecrementStepper />
-																	</NumberInputStepper>
-																</NumberInput>
-																<InputRightAddon>
-																	{__('Minutes', 'masteriyo')}
-																</InputRightAddon>
-															</InputGroup>
-														)}
-													/>
-													<FormErrorMessage>
-														{errors?.duration_minute &&
-															errors?.duration_minute?.message}
-													</FormErrorMessage>
-												</FormControl>
-											</Stack>
+											<FormControl isInvalid={!!errors?.duration_minute}>
+												<Controller
+													name="duration_minute"
+													defaultValue={minutes || 0}
+													rules={{
+														required: __('Minutes is required.', 'masteriyo'),
+														min: 0,
+														max: 59,
+													}}
+													render={({ field }) => (
+														<InputGroup>
+															<NumberInput {...field} w="sm" min={0} max={59}>
+																<NumberInputField rounded="sm" />
+																<NumberInputStepper>
+																	<NumberIncrementStepper />
+																	<NumberDecrementStepper />
+																</NumberInputStepper>
+															</NumberInput>
+															<InputRightAddon>
+																{__('Minutes', 'masteriyo')}
+															</InputRightAddon>
+														</InputGroup>
+													)}
+												/>
+												<FormErrorMessage>
+													{errors?.duration_minute &&
+														errors?.duration_minute?.message}
+												</FormErrorMessage>
+											</FormControl>
 										</Stack>
-										<FormControl>
-											<FormLabel>
-												{__('Maximum Students', 'masteriyo')}
-											</FormLabel>
-											<RadioGroup
-												onChange={setEnrollDisplayValue}
-												value={enrollDisplayValue}>
-												<Stack direction="column" spacing="4">
-													<Stack direction="row" spacing="8" align="flex-start">
-														<Radio
-															onChange={(e: any) =>
-																setValue('enrollment_limit', e.target.value)
-															}
-															value="0">
-															{__('No limit', 'masteriyo')}
-														</Radio>
-
-														<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
-													</Stack>
-													<Collapse
-														in={enrollDisplayValue != '0'}
-														animateOpacity>
-														<FormControl>
-															<FormLabel>
-																{__('Number of Students', 'masteriyo')}
-															</FormLabel>
-															<Controller
-																name="enrollment_limit"
-																render={({ field }) => (
-																	<NumberInput
-																		{...field}
-																		defaultValue={courseData?.enrollment_limit}>
-																		<NumberInputField />
-																		<NumberInputStepper>
-																			<NumberIncrementStepper />
-																			<NumberDecrementStepper />
-																		</NumberInputStepper>
-																	</NumberInput>
-																)}
-															/>
-														</FormControl>
-													</Collapse>
-												</Stack>
-											</RadioGroup>
-										</FormControl>
 									</Stack>
-								)}
+									<FormControl>
+										<FormLabel>{__('Maximum Students', 'masteriyo')}</FormLabel>
+										<RadioGroup
+											onChange={setEnrollDisplayValue}
+											value={enrollDisplayValue}>
+											<Stack direction="column" spacing="4">
+												<Stack direction="row" spacing="8" align="flex-start">
+													<Radio
+														onChange={(e: any) =>
+															setValue('enrollment_limit', e.target.value)
+														}
+														value="0">
+														{__('No limit', 'masteriyo')}
+													</Radio>
+
+													<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
+												</Stack>
+												<Collapse in={enrollDisplayValue != '0'} animateOpacity>
+													<FormControl>
+														<FormLabel>
+															{__('Number of Students', 'masteriyo')}
+														</FormLabel>
+														<Controller
+															name="enrollment_limit"
+															render={({ field }) => (
+																<NumberInput
+																	{...field}
+																	defaultValue={courseData?.enrollment_limit}>
+																	<NumberInputField />
+																	<NumberInputStepper>
+																		<NumberIncrementStepper />
+																		<NumberDecrementStepper />
+																	</NumberInputStepper>
+																</NumberInput>
+															)}
+														/>
+													</FormControl>
+												</Collapse>
+											</Stack>
+										</RadioGroup>
+									</FormControl>
+								</Stack>
 							</TabPanel>
 
 							<TabPanel>

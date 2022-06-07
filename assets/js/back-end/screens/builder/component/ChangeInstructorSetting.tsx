@@ -1,4 +1,11 @@
-import { Avatar, Box, FormControl, FormLabel, HStack } from '@chakra-ui/react';
+import {
+	Avatar,
+	Box,
+	FormControl,
+	FormLabel,
+	HStack,
+	Skeleton,
+} from '@chakra-ui/react';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -15,6 +22,7 @@ import { isEmpty } from '../../../utils/utils';
 
 interface Props {
 	courseData?: CourseDataMap | any;
+	tabIndex?: boolean;
 }
 
 interface AsyncSelectOption {
@@ -72,24 +80,29 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 				avatar_url: currentUser?.avatar_urls['24'],
 		  };
 
-	const { courseData } = props;
+	const { courseData, tabIndex } = props;
 	const { setValue } = useFormContext();
 
 	const usersAPI = new API(urls.users);
 
-	const usersQuery = useQuery<UsersApiResponse>('users', () =>
-		usersAPI.list({
-			roles: 'administrator,masteriyo_instructor',
-			orderby: 'display_name',
-			order: 'asc',
-			per_page: 10,
-		})
+	const usersQuery = useQuery<UsersApiResponse>(
+		'users',
+		() =>
+			usersAPI.list({
+				roles: 'administrator,masteriyo_instructor',
+				orderby: 'display_name',
+				order: 'asc',
+				per_page: 10,
+			}),
+		{
+			enabled: tabIndex,
+		}
 	);
 
-	if (!usersQuery.isLoading && canEditUsers === true && defaultInstructor) {
-		return (
-			<FormControl>
-				<FormLabel>{__('Instructor', 'masteriyo')}</FormLabel>
+	return (
+		<FormControl>
+			<FormLabel>{__('Instructor', 'masteriyo')}</FormLabel>
+			{!usersQuery.isLoading && canEditUsers === true && defaultInstructor ? (
 				<AsyncSelect
 					components={{ Control, Option }}
 					styles={reactSelectStyles}
@@ -147,10 +160,11 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 							});
 					}}
 				/>
-			</FormControl>
-		);
-	}
-	return null;
+			) : (
+				<Skeleton height="40px" />
+			)}
+		</FormControl>
+	);
 };
 
 export default ChangeInstructorSetting;

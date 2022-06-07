@@ -114,7 +114,7 @@ const QuizAttemptInfo: React.FC<Props> = (props) => {
 					</Stack>
 				</Stack>
 			</Td>
-			<Td colSpan="2">
+			<Td>
 				<Stack direction="column" spacing="2">
 					<HStack>
 						{!isNaN(parseFloat(quizAttemptData?.earned_marks)) &&
@@ -161,6 +161,7 @@ const QuizAttemptInfo: React.FC<Props> = (props) => {
 					</Stack>
 				</Stack>
 			</Td>
+			<Td></Td>
 		</Tr>
 	);
 };

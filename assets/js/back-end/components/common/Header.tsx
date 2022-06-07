@@ -22,6 +22,12 @@ import { Logo } from '../../constants/images';
 import routes from '../../constants/routes';
 import ReviewNotice from './ReviewNotice';
 
+interface Course {
+	name: string | React.ReactNode;
+	id: number;
+	previewUrl: string;
+}
+
 interface Props {
 	firstBtn?: {
 		label: string;
@@ -43,11 +49,7 @@ interface Props {
 		isLoading?: boolean;
 		icon?: ReactElement;
 	};
-	course?: {
-		name: string;
-		id: number;
-		previewUrl: string;
-	};
+	course?: Course;
 	showLinks?: boolean;
 	showPreview?: boolean;
 	showCourseName?: boolean;

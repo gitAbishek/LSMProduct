@@ -26,7 +26,6 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
 import Header from '../../../../components/common/Header';
-import FullScreenLoader from '../../../../components/layout/FullScreenLoader';
 import {
 	infoIconStyles,
 	navActiveStyles,
@@ -36,6 +35,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { UserStatus } from '../../../../enums/Enum';
 import { UserSchema } from '../../../../schemas';
+import UserSkeleton from '../../../../skeleton/UserSkeleton';
 import API from '../../../../utils/api';
 import { deepClean, deepMerge } from '../../../../utils/utils';
 
@@ -98,36 +98,36 @@ const EditInstructor: React.FC = () => {
 		);
 	};
 
-	if (userQuery.isSuccess) {
-		return (
-			<Stack direction="column" spacing="8" alignItems="center">
-				<Header showLinks>
-					<List>
-						<ListItem>
-							<Link
-								as={NavLink}
-								sx={navLinkStyles}
-								isActive={() => location.hash.includes('/users/')}
-								_activeLink={navActiveStyles}
-								to={routes.users.instructors.list}>
-								{__('Edit Instructor', 'masteriyo')}
-							</Link>
-						</ListItem>
-					</List>
-				</Header>
-				<Container maxW="container.xl" mt="6">
-					<Stack direction="column" spacing="6">
-						<ButtonGroup>
-							<RouterLink to={routes.users.instructors.list}>
-								<Button
-									variant="link"
-									_hover={{ color: 'blue.500' }}
-									leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
-									{__('Back to Instructors', 'masteriyo')}
-								</Button>
-							</RouterLink>
-						</ButtonGroup>
-						<Box bg="white" p="10" shadow="box">
+	return (
+		<Stack direction="column" spacing="8" alignItems="center">
+			<Header showLinks>
+				<List>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							isActive={() => location.hash.includes('/users/')}
+							_activeLink={navActiveStyles}
+							to={routes.users.instructors.list}>
+							{__('Edit Instructor', 'masteriyo')}
+						</Link>
+					</ListItem>
+				</List>
+			</Header>
+			<Container maxW="container.xl" mt="6">
+				<Stack direction="column" spacing="6">
+					<ButtonGroup>
+						<RouterLink to={routes.users.instructors.list}>
+							<Button
+								variant="link"
+								_hover={{ color: 'blue.500' }}
+								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								{__('Back to Instructors', 'masteriyo')}
+							</Button>
+						</RouterLink>
+					</ButtonGroup>
+					<Box bg="white" p="10" shadow="box">
+						{userQuery.isSuccess ? (
 							<FormProvider {...formMethods}>
 								<form onSubmit={handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
@@ -278,13 +278,14 @@ const EditInstructor: React.FC = () => {
 									</Stack>
 								</form>
 							</FormProvider>
-						</Box>
-					</Stack>
-				</Container>
-			</Stack>
-		);
-	}
-	return <FullScreenLoader />;
+						) : (
+							<UserSkeleton />
+						)}
+					</Box>
+				</Stack>
+			</Container>
+		</Stack>
+	);
 };
 
 export default EditInstructor;

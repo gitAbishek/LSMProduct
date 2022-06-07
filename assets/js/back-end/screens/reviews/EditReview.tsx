@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import { CourseReviewSchema } from '../../schemas';
+import ReviewSkeleton from '../../skeleton/ReviewSkeleton';
 import API from '../../utils/api';
 import AllReplies from './components/module/AllReplies';
 import ReviewForm from './components/template/ReviewForm';
@@ -33,7 +33,7 @@ const EditReview: React.FC = () => {
 			</>
 		);
 	}
-	return <FullScreenLoader />;
+	return <ReviewSkeleton />;
 };
 
 export default EditReview;

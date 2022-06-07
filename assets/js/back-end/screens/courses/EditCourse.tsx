@@ -9,6 +9,7 @@ import Name from './components/Name';
 
 interface Props {
 	courseData: CourseDataMap;
+	tabIndex: boolean;
 }
 
 const EditCourse: React.FC<Props> = (props) => {

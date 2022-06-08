@@ -118,8 +118,8 @@ class FrontendQuery {
 	public function get_endpoints_mask() {
 		if ( 'page' === get_option( 'show_on_front' ) ) {
 			$page_on_front    = get_option( 'page_on_front' );
-			$account_page_id  = masteriyo_get_setting( 'advance.pages.account_page_id' );
-			$checkout_page_id = masteriyo_get_setting( 'advance.pages.checkout_page_id' );
+			$account_page_id  = masteriyo_get_setting( 'general.pages.account_page_id' );
+			$checkout_page_id = masteriyo_get_setting( 'general.pages.checkout_page_id' );
 
 			if ( in_array( $page_on_front, array( $account_page_id, $checkout_page_id, 7 ), true ) ) {
 				return EP_ROOT | EP_PAGES;

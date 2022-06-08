@@ -36,6 +36,15 @@ class Setting extends Model {
 	 * @var string
 	 */
 	protected $sanitize_callbacks = array(
+		'general'        => array(
+			'pages' => array(
+				'account_page_id'                 => 'absint',
+				'courses_page_id'                 => 'absint',
+				'checkout_page_id'                => 'absint',
+				'learn_page_id'                   => 'absint',
+				'instructor_registration_page_id' => 'absint',
+			),
+		),
 		'payments'       => array(
 			'currency' => array(
 				'number_of_decimals' => 'absint',
@@ -63,12 +72,7 @@ class Setting extends Model {
 				'single_quiz_permalink'    => 'sanitize_title',
 				'single_section_permalink' => 'sanitize_title',
 			),
-			'pages'      => array(
-				'account_page_id'                 => 'absint',
-				'courses_page_id'                 => 'absint',
-				'checkout_page_id'                => 'absint',
-				'instructor_registration_page_id' => 'absint',
-			),
+
 			'checkout'   => array(
 				'pay'                        => 'sanitize_title',
 				'order_received'             => 'sanitize_title',
@@ -151,6 +155,13 @@ class Setting extends Model {
 				'theme'         => 'minimum',
 			),
 			'widgets_css' => '',
+			'pages'       => array(
+				'courses_page_id'                 => '',
+				'account_page_id'                 => '',
+				'checkout_page_id'                => '',
+				'learn_page_id'                   => '',
+				'instructor_registration_page_id' => '',
+			),
 		),
 		'course_archive' => array(
 			'display' => array(
@@ -285,13 +296,7 @@ class Setting extends Model {
 			),
 		),
 		'advance'        => array(
-			'pages'      => array(
-				'courses_page_id'                 => '',
-				'account_page_id'                 => '',
-				'checkout_page_id'                => '',
-				'learn_page_id'                   => '',
-				'instructor_registration_page_id' => '',
-			),
+
 			'permalinks' => array(
 				'category_base'            => 'course-category',
 				'tag_base'                 => 'course-tag',

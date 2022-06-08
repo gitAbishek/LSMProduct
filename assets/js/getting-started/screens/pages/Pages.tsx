@@ -89,10 +89,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.courses_page_id
+											settingsQuery?.data?.general?.pages?.courses_page_id
 										}
 										w="md"
-										{...register('advance.pages.courses_page_id')}>
+										{...register('general.pages.courses_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -116,10 +116,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.learn_page_id
+											settingsQuery?.data?.general?.pages?.learn_page_id
 										}
 										w="md"
-										{...register('advance.pages.learn_page_id')}>
+										{...register('general.pages.learn_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -143,10 +143,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.account_page_id
+											settingsQuery?.data?.general?.pages?.account_page_id
 										}
 										w="md"
-										{...register('advance.pages.account_page_id')}>
+										{...register('general.pages.account_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>
@@ -170,10 +170,10 @@ const Pages: React.FC<Props> = (props) => {
 									</FormLabel>
 									<Select
 										defaultValue={
-											settingsQuery?.data?.advance?.pages?.checkout_page_id
+											settingsQuery?.data?.general?.pages?.checkout_page_id
 										}
 										w="md"
-										{...register('advance.pages.checkout_page_id')}>
+										{...register('general.pages.checkout_page_id')}>
 										{renderPagesOption()}
 									</Select>
 								</Flex>

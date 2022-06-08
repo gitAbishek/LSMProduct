@@ -3,6 +3,13 @@ export interface GeneralSettingsMap {
 		primary_color: string;
 		theme: string;
 	};
+	pages: {
+		courses_page_id: number;
+		learn_page_id: number;
+		account_page_id: number;
+		checkout_page_id: number;
+		instructor_registration_page_id: number;
+	};
 }
 
 export interface CourseArchiveSettingsMap {
@@ -138,13 +145,6 @@ export interface EmailsSetttingsMap {
 }
 
 export interface AdvancedSettingsMap {
-	pages: {
-		courses_page_id: number;
-		learn_page_id: number;
-		account_page_id: number;
-		checkout_page_id: number;
-		instructor_registration_page_id: number;
-	};
 	permalinks: {
 		category_base: string;
 		tag_base: string;

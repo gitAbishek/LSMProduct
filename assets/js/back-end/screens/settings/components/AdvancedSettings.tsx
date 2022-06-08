@@ -2,7 +2,6 @@ import {
 	Alert,
 	AlertIcon,
 	Box,
-	Center,
 	Code,
 	Flex,
 	FormControl,
@@ -11,8 +10,6 @@ import {
 	Input,
 	Radio,
 	RadioGroup,
-	Select,
-	Spinner,
 	Stack,
 	Switch,
 	Tab,
@@ -27,7 +24,6 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
-import { useQuery } from 'react-query';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -35,7 +31,6 @@ import {
 } from '../../../config/styles';
 import { AdvancedSettingsMap, SetttingsMap } from '../../../types';
 import localized from '../../../utils/global';
-import PagesAPI from '../../../utils/pages';
 
 interface Props {
 	advanceData?: AdvancedSettingsMap;
@@ -44,8 +39,6 @@ interface Props {
 const AdvancedSettings: React.FC<Props> = (props) => {
 	const { advanceData } = props;
 	const { register } = useFormContext();
-	const pageAPI = new PagesAPI();
-	const pagesQuery = useQuery('pages', () => pageAPI.list());
 
 	const watchPermalinkData = useWatch<SetttingsMap>({
 		name: 'advance.permalinks',
@@ -55,159 +48,16 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 		},
 	});
 
-	const renderPagesOption = () => {
-		try {
-			return pagesQuery?.data?.map(
-				(page: { id: number; title: { rendered: string } }) => (
-					<option value={page.id} key={page.id}>
-						{page.title.rendered}
-					</option>
-				)
-			);
-		} catch (error) {
-			return;
-		}
-	};
-
 	return (
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
-					<Tab sx={tabStyles}>{__('Pages Setup', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Permalinks', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Account Endpoints', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Checkout Endpoints', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Debug', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
-					<TabPanel>
-						{pagesQuery.isLoading ? (
-							<Center h="20">
-								<Spinner />
-							</Center>
-						) : (
-							<Stack direction="column" spacing="8">
-								<FormControl>
-									<FormLabel>
-										{__('Courses Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Select a page to be set as courses page. This page will show all available courses.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										placeholder={__('Select a Page', 'masteriyo')}
-										{...register('advance.pages.courses_page_id')}
-										defaultValue={advanceData?.pages?.courses_page_id}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
-
-								<FormControl>
-									<FormLabel>
-										{__('Learn Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Select a page to be set as learning page. This page runs the distraction free course learning page for any course.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										placeholder={__('Select a Page', 'masteriyo')}
-										{...register('advance.pages.learn_page_id')}
-										defaultValue={advanceData?.pages?.learn_page_id}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
-
-								<FormControl>
-									<FormLabel>
-										{__('Account Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Select a page to be set as account page. This page shows the account of both student or instructor. The page should contain shortcode [masteriyo_account].',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										{...register('advance.pages.account_page_id')}
-										defaultValue={advanceData?.pages?.account_page_id}
-										placeholder={__('Select a Page', 'masteriyo')}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
-
-								<FormControl>
-									<FormLabel>
-										{__('Checkout Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Select a page to be set as checkout page. This page shows the checkout page while purchasing any course. The page should contain shortcode [masteriyo_checkout].',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										placeholder={__('Select a Page', 'masteriyo')}
-										defaultValue={advanceData?.pages?.checkout_page_id}
-										{...register('advance.pages.checkout_page_id')}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
-
-								<FormControl>
-									<FormLabel>
-										{__('Instructor Registration Page', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Select a page to be set as instructor registration page. This page shows the signup form to apply as an instructor. The page should contain shortcode [masteriyo_instructor_registration].',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Select
-										placeholder={__('Select a Page', 'masteriyo')}
-										defaultValue={
-											advanceData?.pages?.instructor_registration_page_id
-										}
-										{...register(
-											'advance.pages.instructor_registration_page_id'
-										)}>
-										{renderPagesOption()}
-									</Select>
-								</FormControl>
-							</Stack>
-						)}
-					</TabPanel>
 					<TabPanel>
 						<Stack direction="column" spacing="8">
 							<FormControl>

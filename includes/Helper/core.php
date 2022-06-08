@@ -615,7 +615,7 @@ function masteriyo_locate_template( $template_name, $template_path = '', $defaul
  */
 function masteriyo_get_page_id( $page ) {
 	$page    = str_replace( '-', '_', $page );
-	$page_id = masteriyo_get_setting( "advance.pages.{$page}_page_id" );
+	$page_id = masteriyo_get_setting( "general.pages.{$page}_page_id" );
 
 	/**
 	 * Filters page id - used for pages like courses, account etc.
@@ -2471,7 +2471,7 @@ function masteriyo_get_password_reset_link( $reset_key, $user_id ) {
 function masteriyo_create_page( $slug, $setting_name = '', $page_title = '', $page_content = '', $post_parent = 0 ) {
 	global $wpdb;
 
-	$previous_value = masteriyo_get_setting( "advance.pages.{$setting_name}" );
+	$previous_value = masteriyo_get_setting( "general.pages.{$setting_name}" );
 
 	if ( $previous_value > 0 ) {
 		$page_object = get_post( $previous_value );

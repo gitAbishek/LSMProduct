@@ -127,6 +127,13 @@ class LessonsController extends PostsController {
 					'methods'             => \WP_REST_Server::DELETABLE,
 					'callback'            => array( $this, 'delete_item' ),
 					'permission_callback' => array( $this, 'delete_item_permissions_check' ),
+					'args'                => array(
+						'force' => array(
+							'default'     => false,
+							'description' => __( 'Whether to bypass trash and force deletion.', 'masteriyo' ),
+							'type'        => 'boolean',
+						),
+					),
 				),
 				'schema' => array( $this, 'get_public_item_schema' ),
 			)

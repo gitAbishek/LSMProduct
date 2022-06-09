@@ -20,6 +20,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import {
 	BiCalendar,
@@ -36,7 +37,6 @@ import routes from '../../../constants/routes';
 import urls from '../../../constants/urls';
 import { OrderStatus } from '../../../enums/Enum';
 import API from '../../../utils/api';
-import { getLocalTime } from '../../../utils/utils';
 const makeOrderNumberLabel = (order: any) => {
 	if (order.billing.first_name || order.billing.last_name) {
 		return `#${order.id} ${order.billing.first_name} ${order.billing.last_name}`.trim();
@@ -194,7 +194,7 @@ const OrderRow: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" fontWeight="medium">
-						{getLocalTime(data?.date_created).toLocaleString()}
+						{dayjs(data?.date_created).format('MM/DD/YYYY, hh:mm:ss A')}
 					</Text>
 				</Stack>
 			</Td>

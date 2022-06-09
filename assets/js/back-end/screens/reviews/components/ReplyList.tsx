@@ -27,6 +27,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
@@ -35,7 +36,7 @@ import { Td, Tr } from 'react-super-responsive-table';
 import urls from '../../../constants/urls';
 import { CourseReviewSchema } from '../../../schemas';
 import API from '../../../utils/api';
-import { deepClean, getLocalTime } from '../../../utils/utils';
+import { deepClean } from '../../../utils/utils';
 
 interface Props {
 	reply: CourseReviewSchema;
@@ -121,7 +122,7 @@ const ReplyList: React.FC<Props> = (props) => {
 						</Text>
 					</Tooltip>
 				</Td>
-				<Td>{getLocalTime(date_created).toLocaleString()}</Td>
+				<Td>{dayjs(date_created).format('MM/DD/YYYY, hh:mm:ss A')}</Td>
 				<Td>
 					<ButtonGroup>
 						<Button

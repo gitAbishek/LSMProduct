@@ -10,6 +10,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -18,7 +19,7 @@ import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoad
 import urls from '../../../back-end/constants/urls';
 import { QuizSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
-import { deepClean, getLocalTime } from '../../../back-end/utils/utils';
+import { deepClean } from '../../../back-end/utils/utils';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
@@ -106,7 +107,7 @@ const InteractiveQuiz = () => {
 
 		startQuiz.mutate(quizId, {
 			onSuccess: (data: any) => {
-				setQuizStartedOn(getLocalTime(data.attempt_started_at));
+				setQuizStartedOn(dayjs(data.attempt_started_at).format());
 				setScoreBoardData(null);
 			},
 		});

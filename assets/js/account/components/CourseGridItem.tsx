@@ -11,12 +11,13 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import { getLocalTime, humanizeTime } from '../../back-end/utils/utils';
+import { humanizeTime } from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 
@@ -131,7 +132,7 @@ const CourseGridItem: React.FC<Props> = (props) => {
 						{started_at && (
 							<Text color="gray.500" fontSize="xs">
 								{__('Started on ', 'masteriyo')}
-								{getLocalTime(started_at).toLocaleString().split(', ')[0]}
+								{dayjs(started_at).format('MM/DD/YYYY')}
 							</Text>
 						)}
 					</Stack>

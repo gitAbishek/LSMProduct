@@ -13,17 +13,14 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React from 'react';
 import { BiTime } from 'react-icons/bi';
 import { IoMdStar, IoMdStarOutline } from 'react-icons/io';
 import { useQuery } from 'react-query';
 import urls from '../../back-end/constants/urls';
 import API from '../../back-end/utils/api';
-import {
-	getLocalTime,
-	humanizeTime,
-	isNumber,
-} from '../../back-end/utils/utils';
+import { humanizeTime, isNumber } from '../../back-end/utils/utils';
 import { CourseProgressMap } from '../../interactive/schemas';
 import { MyCoursesSchema } from '../schemas';
 import { calculatePercentage } from '../utils/percentage';
@@ -179,9 +176,7 @@ const CourseItem: React.FC<Props> = (props) => {
 							color="gray.500"
 							fontSize="xs">
 							{started_at && (
-								<Text>
-									{getLocalTime(started_at).toLocaleString().split(', ')[0]}
-								</Text>
+								<Text>{dayjs(started_at).format('MM/DD/YYYY')}</Text>
 							)}
 							<Link href={course?.start_course_url}>
 								<Button

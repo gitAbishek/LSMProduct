@@ -1,10 +1,10 @@
 import { Badge, Icon, Link, Stack, Text } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 import React from 'react';
 import { BiCalendar } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
 import PriceWithSymbol from '../../back-end/components/common/PriceWithSymbol';
-import { getLocalTime } from '../../back-end/utils/utils';
 import routes from '../constants/routes';
 
 interface BillingAddress {
@@ -75,7 +75,7 @@ const OrderList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" fontWeight="medium">
-						{getLocalTime(data?.date_created).toLocaleString()}
+						{dayjs(data?.date_created).format('MM/DD/YYYY, hh:mm:ss A')}
 					</Text>
 				</Stack>
 			</Td>

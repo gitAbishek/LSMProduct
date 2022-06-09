@@ -25,6 +25,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import {
 	BiCalendar,
@@ -42,7 +43,6 @@ import urls from '../../../../constants/urls';
 import { UserStatus } from '../../../../enums/Enum';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { getLocalTime } from '../../../../utils/utils';
 
 interface Props {
 	data: UserSchema;
@@ -173,7 +173,7 @@ const InstructorList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" color="gray.600">
-						{getLocalTime(data?.date_created).toLocaleString()}
+						{dayjs(data?.date_created).format('MM/DD/YYYY, hh:mm:ss A')}
 					</Text>
 				</Stack>
 			</Td>

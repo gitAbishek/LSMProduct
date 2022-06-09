@@ -14,6 +14,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React from 'react';
 import {
 	BiCalendar,
@@ -30,7 +31,6 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { Td, Tr } from 'react-super-responsive-table';
 import routes from '../../../constants/routes';
 import { ReviewStatus } from '../../../enums/Enum';
-import { getLocalTime } from '../../../utils/utils';
 
 interface Props {
 	id: number;
@@ -143,7 +143,7 @@ const ReviewList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="xs" fontWeight="medium">
-						{getLocalTime(createdAt).toLocaleString()}
+						{dayjs(createdAt).format('MM/DD/YYYY, hh:mm:ss A')}
 					</Text>
 				</Stack>
 			</Td>

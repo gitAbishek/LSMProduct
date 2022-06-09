@@ -10,6 +10,7 @@ import {
 	Link,
 	Stack,
 	Text,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -50,6 +51,7 @@ const Sidebar: React.FC<Props> = (props) => {
 	const { courseId }: any = useParams();
 
 	const [currentTab, setCurrentTab] = useState<number>(1);
+	const [largerThan768] = useMediaQuery('(min-width: 768px)');
 
 	const hasAdminBar = document.body.classList.contains('admin-bar');
 
@@ -86,12 +88,28 @@ const Sidebar: React.FC<Props> = (props) => {
 		}
 	};
 
+	let sideBarWidth: '300px' | '100%' = '300px';
+	let positionRight: '0px' | '-35px' = '-35px';
+
+	if (largerThan768 && isOpen) {
+		sideBarWidth = '300px';
+		positionRight = '-35px';
+	} else {
+		if (isOpen) {
+			positionRight = '0px';
+		} else {
+			positionRight = '-35px';
+		}
+		sideBarWidth = '100%';
+	}
+
 	return (
 		<Box
 			pos="fixed"
 			top={sidebarTop()}
 			left="0"
-			w="300px"
+			w={sideBarWidth}
+			maxW={largerThan768 ? '300px' : '100%'}
 			bg="white"
 			zIndex="99"
 			bottom="0"
@@ -105,7 +123,7 @@ const Sidebar: React.FC<Props> = (props) => {
 					justifyContent="center"
 					position="absolute"
 					top="9px"
-					right="-35px"
+					right={positionRight}
 					fontSize="x-large"
 					icon={isOpen ? <BiX /> : <BiMenu />}
 					bgSize="cover"

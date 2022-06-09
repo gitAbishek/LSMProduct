@@ -106,7 +106,10 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				</ListItem>
 			</List>
 
-			<ButtonGroup>
+			<ButtonGroup
+				display="flex"
+				gap="3"
+				flexDirection={['column', 'column', 'row', 'row']}>
 				<Button
 					colorScheme="green"
 					rounded="full"

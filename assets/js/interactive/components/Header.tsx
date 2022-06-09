@@ -24,6 +24,7 @@ import {
 	Stack,
 	Text,
 	useDisclosure,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -42,6 +43,7 @@ interface Props {
 
 const Header: React.FC<Props> = (props) => {
 	const { summary, isOpen, onToggle } = props;
+	const [isLargerThan782] = useMediaQuery('(min-width: 782px)');
 
 	const {
 		onOpen: onProgressOpen,
@@ -72,7 +74,10 @@ const Header: React.FC<Props> = (props) => {
 				<Slide
 					direction="top"
 					in={isOpen}
-					style={{ zIndex: 999 }}
+					style={{
+						zIndex: 999,
+						height: !isOpen && isLargerThan782 ? '65px' : '54px',
+					}}
 					className="masteriyo-interactive-header">
 					<Box position="relative" shadow="box" bg="white">
 						<IconButton
@@ -309,13 +314,13 @@ const Header: React.FC<Props> = (props) => {
 						mt="4"
 						mb="-1.5">
 						<Stack
-							direction="row"
-							align="center"
+							direction={['column', 'column', 'row', 'row']}
+							align={['left', 'left', 'center', 'center']}
 							justify="space-between"
 							w="full">
-							<Stack direction="row">
-								<AlertIcon />
-								<AlertTitle mr={2}>
+							<Stack direction={['column', 'column', 'column', 'row']}>
+								<AlertTitle mr={2} display="flex" flexDir="row">
+									<AlertIcon />
 									{__('Congratulations!', 'masteriyo')}
 								</AlertTitle>
 								<AlertDescription>

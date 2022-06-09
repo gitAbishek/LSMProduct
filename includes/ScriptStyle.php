@@ -602,6 +602,16 @@ class ScriptStyle {
 			}
 		";
 		wp_add_inline_style( 'masteriyo-public', $custom_css );
+
+		// Fixes adminbar issue on learn page. @see https://wordpress.org/support/topic/course-lesson-page-mobile-responsiveness/
+		$custom_css="
+			@media screen and (max-width: 600px){
+				.masteriyo-interactive-page #wpadminbar {
+					position: fixed;
+				}
+			}
+		";
+		wp_add_inline_style( 'admin-bar', $custom_css );
 	}
 
 	/**

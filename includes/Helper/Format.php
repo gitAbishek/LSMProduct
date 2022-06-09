@@ -846,7 +846,7 @@ function masteriyo_rest_prepare_date_response( $date, $utc = true ) {
 	}
 
 	// Get timestamp before changing timezone to UTC.
-	return gmdate( 'Y-m-d\TH:i:s', $utc ? $date->getTimestamp() : $date->getOffsetTimestamp() );
+	return gmdate( 'Y-m-d\TH:i:s\Z', $utc ? $date->getTimestamp() : $date->getOffsetTimestamp() );
 }
 
 /**

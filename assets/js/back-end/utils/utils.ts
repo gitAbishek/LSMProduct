@@ -252,6 +252,19 @@ export const decodeEntity = (html: string) => {
 	return txt.value;
 };
 
+export const getLocalTime = (date: string) => {
+	let formatString: string;
+	if (date.indexOf(' ') >= 0) {
+		formatString = date.replace(' ', 'T') + 'Z';
+	} else if (date.indexOf('Z') === 0) {
+		formatString = date + 'Z';
+	} else {
+		formatString = date;
+	}
+	const localDate = new Date(formatString);
+	return localDate;
+};
+
 export const getFileNameFromURL = (url: string) => {
 	const fileNameWithType = url.substring(url.lastIndexOf('/') + 1);
 	return fileNameWithType;

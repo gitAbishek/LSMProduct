@@ -34,6 +34,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
+import { getLocalTime } from '../../../../utils/utils';
 
 interface Props {
 	data: UserSchema;
@@ -102,7 +103,9 @@ const StudentList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="sm" color="gray.600">
-						{dayjs(data?.date_created).format('MM/DD/YYYY, hh:mm:ss A')}
+						{dayjs(getLocalTime(data?.date_created)).format(
+							'MM/DD/YYYY, hh:mm:ss A'
+						)}
 					</Text>
 				</Stack>
 			</Td>

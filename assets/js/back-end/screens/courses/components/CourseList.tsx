@@ -14,6 +14,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
+import dayjs from 'dayjs';
 import React from 'react';
 import {
 	BiCalendar,
@@ -131,7 +132,7 @@ const CourseList: React.FC<Props> = (props) => {
 				<Stack direction="row" spacing="2" alignItems="center" color="gray.600">
 					<Icon as={BiCalendar} />
 					<Text fontSize="xs" fontWeight="medium">
-						{createdOnDate}
+						{dayjs(createdOnDate).format('YYYY-MM-DD, hh:mm:ss A')}
 					</Text>
 				</Stack>
 			</Td>

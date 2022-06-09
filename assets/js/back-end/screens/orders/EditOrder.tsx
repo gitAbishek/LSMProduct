@@ -31,7 +31,6 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiChevronLeft, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
@@ -46,7 +45,7 @@ import urls from '../../constants/urls';
 import { OrderItemSchema, OrderSchema } from '../../schemas';
 import OrderSkeleton from '../../skeleton/OrderSkeleton';
 import API from '../../utils/api';
-import { deepClean } from '../../utils/utils';
+import { deepClean, getLocalTime } from '../../utils/utils';
 
 const orderStatusList = [
 	{
@@ -242,7 +241,7 @@ const EditOrder = () => {
 															{__('Date created', 'masteriyo')}
 														</FormLabel>
 														<Input
-															defaultValue={dayjs(
+															defaultValue={getLocalTime(
 																orderQuery.data.date_created
 															).toString()}
 															disabled

@@ -380,7 +380,7 @@ class CoursesController extends PostsController {
 			'parent_id'         => $course->get_parent_id( $context ),
 			'menu_order'        => $course->get_menu_order( $context ),
 			'author'            => $author,
-			'date_created'      => $course->get_date_created( $context ),
+			'date_created'      => masteriyo_rest_prepare_date_response($course->get_date_created( $context )),
 			'date_modified'     => $course->get_date_modified( $context ),
 			'featured'          => $course->get_featured( $context ),
 			'price'             => $course->get_price( $context ),

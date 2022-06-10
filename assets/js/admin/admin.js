@@ -4,21 +4,37 @@
 (function ($) {
 	var $topLevelMenu = $('#toplevel_page_masteriyo');
 
+	if (!$topLevelMenu.length) {
+		return;
+	}
+
 	function makeCurrentSubmenuActive() {
-		if (!$topLevelMenu.length) {
-			return;
+		var hash = window.location.hash;
+
+		// Fix for when user goes to instructors tab and reloads.
+		if ('#/users/instructors' === hash) {
+			hash = '#/users/students';
 		}
 
 		$topLevelMenu.find('li').removeClass('current');
-
 		$topLevelMenu
-			.find('a[href$="' + window.location.hash + '"]')
+			.find('a[href$="' + hash + '"]')
 			.parent('li')
 			.addClass('current');
 	}
 
 	makeCurrentSubmenuActive();
 
-	// Handle change of URL.
-	window.addEventListener('popstate', makeCurrentSubmenuActive);
+	// Handle when URL changes.
+	window.addEventListener('popstate', () => {
+		if ('#/courses' === window.location.hash) {
+			makeCurrentSubmenuActive();
+		}
+	});
+
+	// Handle when user clicks on admin menu.
+	$topLevelMenu.on('click', '.wp-submenu li', function (e) {
+		$topLevelMenu.find('li').removeClass('current');
+		$(this).addClass('current');
+	});
 })(jQuery);

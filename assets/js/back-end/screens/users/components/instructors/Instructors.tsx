@@ -44,7 +44,7 @@ const Instructors: React.FC = () => {
 	const filterInstructorsBy = (order: 'asc' | 'desc', orderBy: string) =>
 		setFilterParams(
 			deepMerge({
-				filterParams,
+				...filterParams,
 				order: order,
 				orderby: orderBy,
 			})

@@ -46,7 +46,7 @@ const Students: React.FC = () => {
 	const filterStudentsBy = (order: 'asc' | 'desc', orderBy: string) =>
 		setFilterParams(
 			deepMerge({
-				filterParams,
+				...filterParams,
 				order: order,
 				orderby: orderBy,
 			})

@@ -164,23 +164,6 @@
 			.title {
 				margin-bottom: $spacing_14px;
 			}
-
-			ul {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-
-				li {
-					p {
-						margin: 0;
-						padding-left: $spacing_8px;
-					}
-				}
-
-				li::before {
-					content: ("\2713");
-				}
-			}
 		}
 
 		// course stats

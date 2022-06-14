@@ -195,13 +195,13 @@ class ScriptStyle {
 				),
 				'admin'           => array(
 					'src'      => $admin_src,
-					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor' ) ),
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor', 'wp-rich-text', 'wp-format-library' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),
 				'backend'         => array(
 					'src'      => $backend_src,
-					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor' ) ),
+					'deps'     => array_merge( self::get_asset_deps( 'masteriyo-backend' ), array( 'wp-core-data', 'wp-components', 'wp-element', 'wp-editor', 'wp-rich-text', 'wp-format-library' ) ),
 					'context'  => 'admin',
 					'callback' => 'masteriyo_is_admin_page',
 				),

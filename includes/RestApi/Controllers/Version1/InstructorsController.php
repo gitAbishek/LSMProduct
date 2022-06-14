@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\UserStatus;
 use Masteriyo\Helper\Permission;
 use Masteriyo\RestApi\Controllers\Version1\UsersController;
 
@@ -138,27 +139,9 @@ class InstructorsController extends UsersController {
 
 		if ( isset( $request['approved'] ) ) {
 			if ( true === $request['approved'] ) {
-				$args['meta_query'] = array(
-					'relation' => 'AND',
-					array(
-						'key'     => '_approved',
-						'value'   => $request['approved'],
-						'compare' => '=',
-					),
-				);
+				$args['user_status'] = UserStatus::ACTIVE;
 			} else {
-				$args['meta_query'] = array(
-					'relation' => 'OR',
-					array(
-						'key'     => '_approved',
-						'value'   => $request['approved'],
-						'compare' => '=',
-					),
-					array(
-						'key'     => '_approved',
-						'compare' => 'NOT EXISTS',
-					),
-				);
+				$args['user_status'] = UserStatus::INACTIVE;
 			}
 		}
 

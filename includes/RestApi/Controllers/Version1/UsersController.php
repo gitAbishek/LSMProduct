@@ -14,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
 use WP_HTTP_Response;
 use Masteriyo\Enums\UserStatus;
 use Masteriyo\Helper\Permission;
+use Masteriyo\Query\WPUserQuery;
 
 /**
  * UsersController class.
@@ -297,14 +298,14 @@ class UsersController extends PostsController {
 	 * @return array
 	 */
 	protected function get_objects( $query_args ) {
-		$users  = new \WP_User_Query( $query_args );
+		$users  = new WPUserQuery( $query_args );
 		$result = $users->get_results();
 
 		$total_users = $users->total_users;
 		if ( $total_users < 1 ) {
 			// Out-of-bounds, run the query again without LIMIT for total count.
 			unset( $query_args['paged'] );
-			$count_users = new \WP_User_Query( $query_args );
+			$count_users = new WPUserQuery( $query_args );
 			$count_users->get_results();
 			$total_users = $count_users->total_users;
 		}

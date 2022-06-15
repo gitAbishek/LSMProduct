@@ -85,17 +85,20 @@ const Question: React.FC<Props> = (props) => {
 		}
 	);
 
-	const deleteQuestion = useMutation((id: number) => questionAPI.delete(id), {
-		onSuccess: (data: QuestionSchema) => {
-			toast({
-				title: __('Question Deleted', 'masteriyo'),
-				isClosable: true,
-				status: 'error',
-			});
-			queryClient.invalidateQueries(`questions${data.parent_id}`);
-			setDeleteModalOpen(false);
-		},
-	});
+	const deleteQuestion = useMutation(
+		(id: number) => questionAPI.delete(id, { force: true }),
+		{
+			onSuccess: (data: QuestionSchema) => {
+				toast({
+					title: __('Question Deleted', 'masteriyo'),
+					isClosable: true,
+					status: 'error',
+				});
+				queryClient.invalidateQueries(`questions${data.parent_id}`);
+				setDeleteModalOpen(false);
+			},
+		}
+	);
 
 	const onDuplicatePress = () => {
 		const data = {

@@ -31,7 +31,7 @@ import OrdersFilter from './components/OrdersFilter';
 interface FilterParams {
 	per_page?: number;
 	page?: number;
-	status?: string;
+	status: string;
 	after?: string;
 	before?: string;
 	orderby: string;
@@ -40,6 +40,7 @@ interface FilterParams {
 
 const AllOrders = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
+		status: 'any',
 		order: 'desc',
 		orderby: 'id',
 	});
@@ -56,7 +57,7 @@ const AllOrders = () => {
 	const filterOrderBy = (order: 'asc' | 'desc', orderBy: string) =>
 		setFilterParams(
 			deepMerge({
-				filterParams,
+				...filterParams,
 				order: order,
 				orderby: orderBy,
 			})
@@ -146,6 +147,7 @@ const AllOrders = () => {
 				{ordersQuery.isSuccess && !isEmpty(ordersQuery?.data?.data) && (
 					<MasteriyoPagination
 						extraFilterParams={{
+							status: filterParams?.status,
 							order: filterParams?.order,
 							orderby: filterParams?.orderby,
 						}}

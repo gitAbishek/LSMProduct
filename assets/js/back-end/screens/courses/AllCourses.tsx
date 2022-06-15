@@ -203,7 +203,7 @@ const AllCourses = () => {
 	const filterCoursesBy = (order: 'asc' | 'desc', orderBy: string) =>
 		setFilterParams(
 			deepMerge({
-				filterParams,
+				...filterParams,
 				order: order,
 				orderby: orderBy,
 			})

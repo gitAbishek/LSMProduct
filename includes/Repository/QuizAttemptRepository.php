@@ -16,14 +16,53 @@ use Masteriyo\Database\Model;
  */
 class QuizAttemptRepository extends AbstractRepository implements RepositoryInterface {
 	/**
-	 * create quiz attempt in database.
+	 * Create quiz attempt in database.
 	 *
-	 * @since 1.3.2
+	 * @since x.x.x
 	 *
 	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
 	 */
 	public function create( Model &$quiz_attempt ) {
+		global $wpdb;
 
+		$result = $wpdb->insert(
+			$wpdb->prefix . 'masteriyo_quiz_attempts',
+			apply_filters(
+				'masteriyo_new_quiz_attempt_data',
+				array(
+					'course_id'                => $quiz_attempt->get_course_id(),
+					'quiz_id'                  => $quiz_attempt->get_quiz_id(),
+					'user_id'                  => $quiz_attempt->get_user_id(),
+					'total_questions'          => $quiz_attempt->get_total_questions(),
+					'total_answered_questions' => $quiz_attempt->get_total_answered_questions(),
+					'total_marks'              => $quiz_attempt->get_total_marks(),
+					'total_attempts'           => $quiz_attempt->get_total_attempts(),
+					'total_correct_answers'    => $quiz_attempt->get_total_correct_answers(),
+					'total_incorrect_answers'  => $quiz_attempt->get_total_incorrect_answers(),
+					'earned_marks'             => $quiz_attempt->get_earned_marks(),
+					'answers'                  => maybe_serialize( $quiz_attempt->get_answers() ),
+					'attempt_status'           => $quiz_attempt->get_attempt_status(),
+					'attempt_started_at'       => $quiz_attempt->get_attempt_started_at(),
+					'attempt_ended_at'         => $quiz_attempt->get_attempt_ended_at(),
+				)
+			)
+		);
+
+		if ( ! $result ) {
+			return;
+		}
+
+		$quiz_attempt->set_id( $wpdb->insert_id );
+
+		/**
+		 * Fires after creating a quiz attempt.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param integer $id The quiz attempt ID.
+		 * @param \Masteriyo\Models\QuizAttempt $object The quiz attempt object.
+		 */
+		do_action( 'masteriyo_create_quiz_attempt', $quiz_attempt->get_id(), $quiz_attempt );
 	}
 
 	/**
@@ -80,7 +119,48 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	 * @return void.
 	 */
 	public function update( Model &$quiz_attempt ) {
+		global $wpdb;
 
+		$changes = $quiz_attempt->get_changes();
+
+		if ( ! empty( $changes ) ) {
+			$result = $wpdb->update(
+				$wpdb->prefix . 'masteriyo_quiz_attempts',
+				array(
+					'course_id'                => $quiz_attempt->get_course_id(),
+					'quiz_id'                  => $quiz_attempt->get_quiz_id(),
+					'user_id'                  => $quiz_attempt->get_user_id(),
+					'total_questions'          => $quiz_attempt->get_total_questions(),
+					'total_answered_questions' => $quiz_attempt->get_total_answered_questions(),
+					'total_marks'              => $quiz_attempt->get_total_marks(),
+					'total_attempts'           => $quiz_attempt->get_total_attempts(),
+					'total_correct_answers'    => $quiz_attempt->get_total_correct_answers(),
+					'total_incorrect_answers'  => $quiz_attempt->get_total_incorrect_answers(),
+					'earned_marks'             => $quiz_attempt->get_earned_marks(),
+					'answers'                  => maybe_serialize( $quiz_attempt->get_answers() ),
+					'attempt_status'           => $quiz_attempt->get_attempt_status(),
+					'attempt_started_at'       => $quiz_attempt->get_attempt_started_at(),
+					'attempt_ended_at'         => $quiz_attempt->get_attempt_ended_at(),
+				),
+				array( 'id' => $quiz_attempt->get_id() )
+			);
+
+			if ( ! $result ) {
+				return;
+			}
+
+			$quiz_attempt->apply_changes();
+
+			/**
+			 * Fires after updating a quiz attempt.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param integer $id The quiz attempt ID.
+			 * @param \Masteriyo\Models\QuizAttempt $object The quiz attempt object.
+			 */
+			do_action( 'masteriyo_update_quiz_attempt', $quiz_attempt->get_id(), $quiz_attempt );
+		}
 	}
 
 	/**

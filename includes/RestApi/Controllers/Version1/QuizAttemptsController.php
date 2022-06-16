@@ -72,6 +72,12 @@ class QuizAttemptsController extends CrudController {
 					},
 					'args'                => $this->get_collection_params(),
 				),
+				array(
+					'methods'             => \WP_REST_Server::CREATABLE,
+					'callback'            => array( $this, 'create_item' ),
+					'permission_callback' => array( $this, 'create_item_permissions_check' ),
+					'args'                => $this->get_endpoint_args_for_item_schema( \WP_REST_Server::CREATABLE ),
+				),
 			)
 		);
 
@@ -96,6 +102,12 @@ class QuizAttemptsController extends CrudController {
 							)
 						),
 					),
+				),
+				array(
+					'methods'             => \WP_REST_Server::EDITABLE,
+					'callback'            => array( $this, 'update_item' ),
+					'permission_callback' => array( $this, 'update_item_permissions_check' ),
+					'args'                => $this->get_endpoint_args_for_item_schema( \WP_REST_Server::EDITABLE ),
 				),
 				array(
 					'methods'             => \WP_REST_Server::DELETABLE,
@@ -175,12 +187,107 @@ class QuizAttemptsController extends CrudController {
 	}
 
 	/**
+	 * Get the item schema, conforming to JSON Schema.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public function get_item_schema() {
+		$schema = array(
+			'$schema'    => 'http://json-schema.org/draft-04/schema#',
+			'title'      => $this->object_type,
+			'type'       => 'object',
+			'properties' => array(
+				'id'                       => array(
+					'description' => __( 'Unique identifier for the resource.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+					'readonly'    => true,
+				),
+				'course_id'                => array(
+					'description' => __( 'Course ID', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'quiz_id'                  => array(
+					'description' => __( 'Quiz ID', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'user_id'                  => array(
+					'description' => __( 'User ID', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_questions'          => array(
+					'description' => __( 'Number of questions.', 'masteriyo' ),
+					'type'        => 'number',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_answered_questions' => array(
+					'description' => __( 'Number of answered questions.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_marks'              => array(
+					'description' => __( 'Total marks.', 'masteriyo' ),
+					'type'        => 'number',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_attempts'           => array(
+					'description' => __( 'Number of attempts.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_correct_answers'    => array(
+					'description' => __( 'Number of correct answers.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'total_incorrect_answers'  => array(
+					'description' => __( 'Number of incorrect answers.', 'masteriyo' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'earned_marks'             => array(
+					'description' => __( 'Total earned marks/points.', 'masteriyo' ),
+					'type'        => 'number',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'answers'                  => array(
+					'description' => __( 'Answers given by user.', 'masteriyo' ),
+					'type'        => 'array',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'attempt_status'           => array(
+					'description' => __( 'Quiz attempt status.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'attempt_started_at'       => array(
+					'description' => __( 'Quiz attempt started time.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+				'attempt_ended_at'         => array(
+					'description' => __( 'Quiz attempt ended time.', 'masteriyo' ),
+					'type'        => 'string',
+					'context'     => array( 'view', 'edit' ),
+				),
+			),
+		);
+
+		return $schema;
+	}
+
+	/**
 	 * Get object.
 	 *
 	 * @since 1.3.2
 	 *
 	 * @param  int $id Object ID.
-	 * @return QuizAttempt|false Model object or false.
+	 * @return \Masteriyo\Models\QuizAttempt|false Model object or false.
 	 */
 	protected function get_object( $id ) {
 		try {
@@ -543,6 +650,97 @@ class QuizAttemptsController extends CrudController {
 	}
 
 	/**
+	 * Prepare a single quiz attempt object for create or update.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \WP_REST_Request $request Request object.
+	 * @param boolean $creating If is creating a new object.
+	 *
+	 * @return \WP_Error|\Masteriyo\Models\QuizAttempt
+	 */
+	protected function prepare_object_for_database( $request, $creating = false ) {
+		$id           = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
+		$quiz_attempt = masteriyo( 'quiz-attempt' );
+
+		if ( 0 !== $id ) {
+			$quiz_attempt->set_id( $id );
+			$quiz_attempt_repo = masteriyo( 'quiz-attempt.store' );
+			$quiz_attempt_repo->read( $quiz_attempt );
+		}
+
+		if ( isset( $request['course_id'] ) ) {
+			$quiz_attempt->set_course_id( $request['course_id'] );
+		}
+
+		if ( isset( $request['quiz_id'] ) ) {
+			$quiz_attempt->set_quiz_id( $request['quiz_id'] );
+		}
+
+		if ( isset( $request['user_id'] ) ) {
+			$quiz_attempt->set_user_id( $request['user_id'] );
+		}
+
+		if ( isset( $request['total_questions'] ) ) {
+			$quiz_attempt->set_total_questions( $request['total_questions'] );
+		}
+
+		if ( isset( $request['total_answered_questions'] ) ) {
+			$quiz_attempt->set_total_answered_questions( $request['total_answered_questions'] );
+		}
+
+		if ( isset( $request['total_marks'] ) ) {
+			$quiz_attempt->set_total_marks( $request['total_marks'] );
+		}
+
+		if ( isset( $request['total_attempts'] ) ) {
+			$quiz_attempt->set_total_attempts( $request['total_attempts'] );
+		}
+
+		if ( isset( $request['total_correct_answers'] ) ) {
+			$quiz_attempt->set_total_correct_answers( $request['total_correct_answers'] );
+		}
+
+		if ( isset( $request['total_incorrect_answers'] ) ) {
+			$quiz_attempt->set_total_incorrect_answers( $request['total_incorrect_answers'] );
+		}
+
+		if ( isset( $request['earned_marks'] ) ) {
+			$quiz_attempt->set_earned_marks( $request['earned_marks'] );
+		}
+
+		if ( isset( $request['answers'] ) ) {
+			$quiz_attempt->set_answers( $request['answers'] );
+		}
+
+		if ( isset( $request['attempt_status'] ) ) {
+			$quiz_attempt->set_attempt_status( $request['attempt_status'] );
+		}
+
+		if ( isset( $request['attempt_started_at'] ) ) {
+			$quiz_attempt->set_attempt_started_at( $request['attempt_started_at'] );
+		}
+
+		if ( isset( $request['attempt_ended_at'] ) ) {
+			$quiz_attempt->set_attempt_ended_at( $request['attempt_ended_at'] );
+		}
+
+		/**
+		 * Filters an object before it is inserted via the REST API.
+		 *
+		 * The dynamic portion of the hook name, `$this->object_type`,
+		 * refers to the object type slug.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
+		 * @param WP_REST_Request $request Request object.
+		 * @param boolean $creating If is creating a new object.
+		 */
+		return apply_filters( "masteriyo_rest_pre_insert_{$this->object_type}_object", $quiz_attempt, $request, $creating );
+	}
+
+	/**
 	 * Check if a given request has access to delete an item.
 	 *
 	 * @since 1.4.7
@@ -551,13 +749,6 @@ class QuizAttemptsController extends CrudController {
 	 * @return WP_Error|boolean
 	 */
 	public function delete_item_permissions_check( $request ) {
-		if ( is_null( $this->permission ) ) {
-			return new \WP_Error(
-				'masteriyo_null_permission',
-				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
-			);
-		}
-
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
 		}
@@ -606,5 +797,129 @@ class QuizAttemptsController extends CrudController {
 				'status' => rest_authorization_required_code(),
 			)
 		);
+	}
+
+	/**
+	 * Check if a given request has access to update an item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param  \WP_REST_Request $request Full details about the request.
+	 *
+	 * @return \WP_Error|boolean
+	 */
+	public function update_item_permissions_check( $request ) {
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$quiz_attempt = $this->get_object( absint( $request['id'] ) );
+
+		if ( ! is_object( $quiz_attempt ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_id',
+				__( 'Invalid ID', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		$instructor = masteriyo_get_current_instructor();
+
+		if ( $instructor && ! $instructor->is_active() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, your account has not been approved.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		if ( ! masteriyo_is_current_user_post_author( $quiz_attempt->get_course_id() ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_update',
+				__( 'Sorry, you are not allowed to update this resource.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check if a given request has access to create an item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param  \WP_REST_Request $request Full details about the request.
+	 *
+	 * @return \WP_Error|boolean
+	 */
+	public function create_item_permissions_check( $request ) {
+		$quiz = masteriyo_get_quiz( absint( $request['quiz_id'] ) );
+
+		if ( is_null( $quiz ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_id',
+				__( 'Quiz does not exist.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
+			);
+		}
+
+		$course = masteriyo_get_course( $quiz->get_course_id() );
+
+		if ( is_null( $course ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_id',
+				__( 'Course does not exist.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
+			);
+		}
+
+		if ( ! empty( $request['course_id'] ) && $quiz->get_course_id() !== absint( $request['course_id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_id',
+				__( 'Invalid course ID.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
+		}
+
+		$instructor = masteriyo_get_current_instructor();
+
+		if ( $instructor && ! $instructor->is_active() ) {
+			return new \WP_Error(
+				'masteriyo_rest_user_not_approved',
+				__( 'Sorry, your account has not been approved.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		if ( ! masteriyo_is_current_user_post_author( $quiz->get_course_id() ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, you are not allowed to create resource for others.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
 	}
 }

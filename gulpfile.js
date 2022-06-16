@@ -9,7 +9,7 @@ const { exec } = require('child_process');
 const zip = require('gulp-zip');
 const { sass } = require('@mr-hope/gulp-sass');
 const browserSync = require('browser-sync').create();
-const uglify = require('gulp-uglify');
+const terser = require('gulp-terser');
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 
@@ -123,7 +123,7 @@ function copyAdminJs() {
 
 function minifyJs() {
 	return src(paths.js.src)
-		.pipe(uglify())
+		.pipe(terser())
 		.pipe(rename({ suffix: `.min` }))
 		.pipe(dest(paths.js.dest));
 }

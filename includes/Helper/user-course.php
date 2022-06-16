@@ -134,3 +134,23 @@ function masteriyo_get_user_courses_count_by_course( $course ) {
 
 	return $count;
 }
+
+/**
+ * Get user/enrolled course by user ID and course ID.
+ *
+ * @since x.x.x
+ *
+ * @param int $user_id User ID.
+ * @param int $course_id Course ID.
+ * @return Masteriyo\Models\UserCourse
+ */
+function masteriyo_get_user_course_by_user_and_course( $user_id, $course_id ) {
+	$query = new UserCourseQuery(
+		array(
+			'course_id' => $course_id,
+			'user_id'   => $user_id,
+		)
+	);
+
+	return current( $query->get_user_courses() );
+}

@@ -12,10 +12,10 @@ namespace Masteriyo;
 use Masteriyo\AdminMenu;
 use Masteriyo\ScriptStyle;
 use Masteriyo\Capabilities;
-use Masteriyo\Database\Migrator;
 use Masteriyo\Setup\Onboard;
 use Masteriyo\RestApi\RestApi;
 use Masteriyo\Emails\EmailHooks;
+use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Enums\UserCourseStatus;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Shortcodes\Shortcodes;
@@ -23,7 +23,6 @@ use Masteriyo\FormHandler\FormHandlers;
 use Masteriyo\PostType\RegisterPostType;
 use Masteriyo\Taxonomy\RegisterTaxonomies;
 use Masteriyo\FileRestrictions\FileRestrictions;
-use Masteriyo\Models\UserCourse;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -137,6 +136,8 @@ class Masteriyo {
 		add_filter( 'wp_kses_allowed_html', array( $this, 'register_custom_kses_allowed_html' ), 10, 2 );
 
 		add_filter( 'woocommerce_prevent_admin_access', array( $this, 'prevent_admin_access' ) );
+
+		add_action( 'masteriyo_order_status_changed', array( $this, 'update_user_course_status' ), 10, 4 );
 	}
 
 	/**
@@ -718,5 +719,28 @@ class Masteriyo {
 		}
 
 		return $prevent_access;
+	}
+
+	/**
+	 * Update user course status.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param integer $id order ID.
+	 * @param string $old_status Old status.
+	 * @param string $new_status New status.
+	 * @param \Masteriyo\Models\Order\Order $order The order object.
+	 */
+	public function update_user_course_status( $order_id, $from, $to, $order ) {
+
+		foreach ( $order->get_items() as $order_item ) {
+			$user_course = masteriyo_get_user_course_by_user_and_course( $order->get_customer_id(), $order_item->get_course_id() );
+
+			if ( $user_course ) {
+				$status = OrderStatus::COMPLETED === $order->get_status() ? UserCourseStatus::ACTIVE : UserCourseStatus::INACTIVE;
+				$user_course->set_status( $status );
+				$user_course->save();
+			}
+		}
 	}
 }

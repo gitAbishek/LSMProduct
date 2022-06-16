@@ -12,6 +12,7 @@ namespace Masteriyo\Models;
 use Masteriyo\Database\Model;
 use Masteriyo\Repository\RepositoryInterface;
 use Masteriyo\Cache\CacheInterface;
+use Masteriyo\Enums\UserCourseStatus;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -319,12 +320,12 @@ class UserCourse extends Model {
 		if ( true === $this->object_read ) {
 			// Only allow valid new status.
 			if ( ! in_array( $new_status, $this->get_valid_statuses(), true ) ) {
-				$new_status = 'active';
+				$new_status = UserCourseStatus::ACTIVE;
 			}
 
 			// If the old status is set but unknown (e.g. active) assume its active for action usage.
 			if ( $old_status && ! in_array( $old_status, $this->get_valid_statuses(), true ) ) {
-				$old_status = 'active';
+				$old_status = UserCourseStatus::ACTIVE;
 			}
 		}
 
@@ -501,6 +502,6 @@ class UserCourse extends Model {
 	 * @return array Internal status keys e.g. ('active', 'enrolled )
 	 */
 	protected function get_valid_statuses() {
-		return array_keys( masteriyo_get_user_course_statuses() );
+		return UserCourseStatus::all();
 	}
 }

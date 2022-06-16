@@ -16,12 +16,14 @@ use Masteriyo\Database\Migrator;
 use Masteriyo\Setup\Onboard;
 use Masteriyo\RestApi\RestApi;
 use Masteriyo\Emails\EmailHooks;
+use Masteriyo\Enums\UserCourseStatus;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Shortcodes\Shortcodes;
 use Masteriyo\FormHandler\FormHandlers;
 use Masteriyo\PostType\RegisterPostType;
 use Masteriyo\Taxonomy\RegisterTaxonomies;
 use Masteriyo\FileRestrictions\FileRestrictions;
+use Masteriyo\Models\UserCourse;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -679,7 +681,7 @@ class Masteriyo {
 
 			if ( empty( $user_courses ) && 'open' === $course->get_access_mode() ) {
 				$user_courses = masteriyo( 'user-course' );
-				$user_courses->set_status( 'active' );
+				$user_courses->set_status( UserCourseStatus::ACTIVE );
 				$user_courses->set_course_id( $course_id );
 				$user_courses->set_user_id( get_current_user_id() );
 				$user_courses->set_date_start( current_time( 'mysql', true ) );

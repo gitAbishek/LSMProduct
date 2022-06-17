@@ -282,9 +282,7 @@ const AllReviews = () => {
 								<Tbody>
 									{reviewQuery.isLoading && <SkeletonReviewsList />}
 									{reviewQuery.isSuccess && isEmpty(reviewQuery?.data?.data) ? (
-										<EmptyInfo
-											message={__('No reviewes found.', 'masteriyo')}
-										/>
+										<EmptyInfo message={__('No reviews found.', 'masteriyo')} />
 									) : (
 										reviewQuery?.data?.data?.map(
 											(review: CourseReviewSchema) => (

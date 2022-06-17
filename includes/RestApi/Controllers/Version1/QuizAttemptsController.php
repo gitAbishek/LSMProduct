@@ -189,7 +189,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Get the item schema, conforming to JSON Schema.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @return array
 	 */
@@ -652,7 +652,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Prepare a single quiz attempt object for create or update.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param \WP_REST_Request $request Request object.
 	 * @param boolean $creating If is creating a new object.
@@ -731,7 +731,7 @@ class QuizAttemptsController extends CrudController {
 		 * The dynamic portion of the hook name, `$this->object_type`,
 		 * refers to the object type slug.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.4
 		 *
 		 * @param Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
 		 * @param WP_REST_Request $request Request object.
@@ -802,7 +802,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Check if a given request has access to update an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param  \WP_REST_Request $request Full details about the request.
 	 *
@@ -853,7 +853,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Check if a given request has access to create an item.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param  \WP_REST_Request $request Full details about the request.
 	 *

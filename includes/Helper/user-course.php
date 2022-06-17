@@ -138,7 +138,7 @@ function masteriyo_get_user_courses_count_by_course( $course ) {
 /**
  * Get user/enrolled course by user ID and course ID.
  *
- * @since x.x.x
+ * @since 1.5.4
  *
  * @param int $user_id User ID.
  * @param int $course_id Course ID.

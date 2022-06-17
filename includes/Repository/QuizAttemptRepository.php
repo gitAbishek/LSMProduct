@@ -18,7 +18,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 	/**
 	 * Create quiz attempt in database.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param \Masteriyo\Models\QuizAttempt $quiz_attempt Quiz attempt object.
 	 */
@@ -57,7 +57,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 		/**
 		 * Fires after creating a quiz attempt.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.4
 		 *
 		 * @param integer $id The quiz attempt ID.
 		 * @param \Masteriyo\Models\QuizAttempt $object The quiz attempt object.
@@ -154,7 +154,7 @@ class QuizAttemptRepository extends AbstractRepository implements RepositoryInte
 			/**
 			 * Fires after updating a quiz attempt.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.4
 			 *
 			 * @param integer $id The quiz attempt ID.
 			 * @param \Masteriyo\Models\QuizAttempt $object The quiz attempt object.

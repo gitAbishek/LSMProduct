@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.3
+**Stable tag**: 1.5.4
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,22 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.4 - 17-06-2022
+
+- Enhancement - Moved pages tab from advance to general tab in global settings.
+- Enhancement - Added order status tab on the orders list page.
+- Enhancement - Make learn page responsive.
+- Enhancement - Add formatting feature using keyboard shortcuts (CTRL+B to bold, CTRL+I to italic and CTRL+U to underline) in course highlights.
+- Fix - Course highlights design issues on the single course page.
+- Fix - Quiz options flickering issue on live server.
+- Fix - Users admin menu not being highlighted when going to instructors tab.
+- Fix - Students and Instructors lists filtering by order issue.
+- Fix - Courses lists filtering by order issue.
+- Fix - Approval status filter not working in instructors listing page.
+- Fix - Question not being permanently deleted.
+- Fix - Enrolled courses count when the order status is updated.
+- Fix - Typo 'No reviewes found.' to 'No reviews found.'.
 
 ### 1.5.3 - 07-06-2022
 

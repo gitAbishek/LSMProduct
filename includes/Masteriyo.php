@@ -724,7 +724,7 @@ class Masteriyo {
 	/**
 	 * Update user course status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param integer $id order ID.
 	 * @param string $old_status Old status.

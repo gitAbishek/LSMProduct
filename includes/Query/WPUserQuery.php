@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Query
  *
- * @since x.x.x
+ * @since 1.5.4
  */
 
 namespace Masteriyo\Query;
@@ -16,7 +16,7 @@ class WPUserQuery extends \WP_User_Query {
 	/**
 	 * Prepares the query variables.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.4
 	 *
 	 * @param array $query WP_User_Query args.
 	 */

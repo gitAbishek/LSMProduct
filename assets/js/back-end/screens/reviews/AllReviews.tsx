@@ -246,7 +246,13 @@ const AllReviews = () => {
 										{reviewStatusCount[button.status]}
 									</Badge>
 								) : (
-									<SkeletonCircle size="4" ml="1" mb="1" />
+									<SkeletonCircle
+										size="3"
+										w="17px"
+										ml="1"
+										mb="1"
+										rounded="sm"
+									/>
 								)}
 							</Button>
 						</ListItem>

@@ -14,7 +14,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import { useQuery } from 'react-query';
-import ReactSelect from 'react-select';
 import AsyncSelect from 'react-select/async';
 import DesktopHidden from '../../../components/common/DesktopHidden';
 import MobileHidden from '../../../components/common/MobileHidden';
@@ -23,37 +22,6 @@ import urls from '../../../constants/urls';
 import { UsersApiResponse } from '../../../types/users';
 import API from '../../../utils/api';
 import { deepClean, deepMerge, isEmpty } from '../../../utils/utils';
-
-const orderStatusList = [
-	{
-		label: __('Pending', 'masteriyo'),
-		value: 'pending',
-	},
-	{
-		label: __('On-hold', 'masteriyo'),
-		value: 'on-hold',
-	},
-	{
-		label: __('Completed', 'masteriyo'),
-		value: 'completed',
-	},
-	{
-		label: __('Cancelled', 'masteriyo'),
-		value: 'cancelled',
-	},
-	{
-		label: __('Refunded', 'masteriyo'),
-		value: 'refunded',
-	},
-	{
-		label: __('Failed', 'masteriyo'),
-		value: 'failed',
-	},
-	{
-		label: __('Trash', 'masteriyo'),
-		value: 'trash',
-	},
-];
 
 interface FilterParams {
 	status?: {
@@ -99,8 +67,12 @@ const OrdersFilter: React.FC<Props> = (props) => {
 
 	const orderFilterForm = (
 		<form onChange={handleSubmit(onChange)}>
-			<Stack direction={['column', null, 'row']} spacing="4" mt={[6, null, 0]}>
-				<Box>
+			<Stack
+				direction={['column', null, 'row']}
+				spacing="4"
+				mt={[6, null, 0]}
+				alignItems="center">
+				<Stack w="100%">
 					<Controller
 						control={control}
 						name="after"
@@ -118,8 +90,8 @@ const OrdersFilter: React.FC<Props> = (props) => {
 							/>
 						)}
 					/>
-				</Box>
-				<Box>
+				</Stack>
+				<Stack w="100%">
 					<Controller
 						control={control}
 						name="before"
@@ -137,70 +109,53 @@ const OrdersFilter: React.FC<Props> = (props) => {
 							/>
 						)}
 					/>
-				</Box>
-				<AsyncSelect
-					styles={reactSelectStyles}
-					cacheOptions={true}
-					loadingMessage={() => __('Searching...', 'masteriyo')}
-					noOptionsMessage={({ inputValue }) =>
-						!isEmpty(inputValue)
-							? __('Users not found.', 'masteriyo')
-							: usersQuery.isLoading
-							? __('Loading...', 'masteriyo')
-							: __('Please enter one or more characters.', 'masteriyo')
-					}
-					isClearable={true}
-					placeholder={__('Search by customer', 'masteriyo')}
-					onChange={(selectedOption: any) => {
-						setValue('customer', selectedOption?.value);
-						handleSubmit(onChange)();
-					}}
-					defaultOptions={
-						usersQuery.isSuccess
-							? usersQuery.data?.data?.map((user) => {
-									return {
-										value: user.id,
-										label: `${user.display_name} (#${user.id} - ${user.email})`,
-										avatar_url: user.avatar_url,
-									};
-							  })
-							: []
-					}
-					loadOptions={(searchValue, callback) => {
-						if (isEmpty(searchValue)) {
-							return callback([]);
+				</Stack>
+				<Stack w="100%">
+					<AsyncSelect
+						styles={reactSelectStyles}
+						cacheOptions={true}
+						loadingMessage={() => __('Searching...', 'masteriyo')}
+						noOptionsMessage={({ inputValue }) =>
+							!isEmpty(inputValue)
+								? __('Users not found.', 'masteriyo')
+								: usersQuery.isLoading
+								? __('Loading...', 'masteriyo')
+								: __('Please enter one or more characters.', 'masteriyo')
 						}
-						usersAPI.list({ search: searchValue }).then((data) => {
-							callback(
-								data.data.map((user: any) => {
-									return {
-										value: user.id,
-										label: `${user.display_name} (#${user.id} - ${user.email})`,
-									};
-								})
-							);
-						});
-					}}
-				/>
-				<Box flex="1">
-					<Controller
-						name="status"
-						control={control}
-						render={({ field: { onChange: onChangeValue, value } }) => (
-							<ReactSelect
-								onChange={(...args: any[]) => {
-									onChangeValue(...args);
-									handleSubmit(onChange)();
-								}}
-								value={value}
-								styles={reactSelectStyles}
-								options={orderStatusList}
-								placeholder={__('All Status', 'masteriyo')}
-								isClearable
-							/>
-						)}
+						isClearable={true}
+						placeholder={__('Search by customer', 'masteriyo')}
+						onChange={(selectedOption: any) => {
+							setValue('customer', selectedOption?.value);
+							handleSubmit(onChange)();
+						}}
+						defaultOptions={
+							usersQuery.isSuccess
+								? usersQuery.data?.data?.map((user) => {
+										return {
+											value: user.id,
+											label: `${user.display_name} (#${user.id} - ${user.email})`,
+											avatar_url: user.avatar_url,
+										};
+								  })
+								: []
+						}
+						loadOptions={(searchValue, callback) => {
+							if (isEmpty(searchValue)) {
+								return callback([]);
+							}
+							usersAPI.list({ search: searchValue }).then((data) => {
+								callback(
+									data.data.map((user: any) => {
+										return {
+											value: user.id,
+											label: `${user.display_name} (#${user.id} - ${user.email})`,
+										};
+									})
+								);
+							});
+						}}
 					/>
-				</Box>
+				</Stack>
 			</Stack>
 		</form>
 	);

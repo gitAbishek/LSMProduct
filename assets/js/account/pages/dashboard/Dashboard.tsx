@@ -88,7 +88,8 @@ const Dashboard: React.FC = () => {
 					gutterWidth={30}
 					justify="between"
 					direction={direction}
-					style={{ gap }}>
+					style={{ gap }}
+					className="mto-dashboard-courses-stats">
 					<Col lg={4} md={12} sm={12}>
 						<CountBox
 							title={__('Enrolled Courses', 'masteriyo')}
@@ -117,7 +118,10 @@ const Dashboard: React.FC = () => {
 						/>
 					</Col>
 				</Row>
-				<Stack direction="column" spacing="8">
+				<Stack
+					direction="column"
+					spacing="8"
+					className="mto-dashboard-courses-progress">
 					<Stack
 						direction={{ base: 'column', sm: 'row', md: 'row', lg: 'row' }}
 						spacing="4"

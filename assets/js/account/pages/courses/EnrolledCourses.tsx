@@ -24,11 +24,17 @@ const EnrolledCourses: React.FC = () => {
 
 	if (myCourseQuery.isSuccess) {
 		return (
-			<Stack direction="column" spacing="8">
+			<Stack
+				direction="column"
+				spacing="8"
+				className="mto-enrolled-courses-wrapper">
 				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 					{__('Enrolled Courses', 'masteriyo')}
 				</Heading>
-				<SimpleGrid columns={{ base: 1, sm: 1, md: 2, lg: 3 }} spacing="6">
+				<SimpleGrid
+					columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
+					spacing="6"
+					className="mto-enrolled-courses-list">
 					{myCourseQuery?.data?.data?.map((myCourse: MyCoursesSchema) => {
 						return <CourseItem key={myCourse.id} courseData={myCourse} />;
 					})}

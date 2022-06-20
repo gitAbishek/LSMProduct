@@ -38,7 +38,11 @@ const CourseGridItem: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<Box p="5" border="1px" borderColor="gray.100">
+		<Box
+			p="5"
+			border="1px"
+			borderColor="gray.100"
+			className="mto-continue-course">
 			<Stack
 				direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
 				spacing="10"

@@ -163,7 +163,7 @@ const EditProfile: React.FC = () => {
 	) {
 		return (
 			<FormProvider {...methods}>
-				<Stack spacing="8">
+				<Stack spacing="8" className="mto-edit-profile-wrapper">
 					<Tabs>
 						<Stack spacing="8">
 							<TabList>
@@ -185,7 +185,7 @@ const EditProfile: React.FC = () => {
 							</TabList>
 
 							<TabPanels>
-								<TabPanel sx={tabPanelStyles}>
+								<TabPanel sx={tabPanelStyles} className="mto-edit-profile-tab">
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<Stack direction="column" spacing="6">
 											<Center pos="relative">
@@ -497,7 +497,9 @@ const EditProfile: React.FC = () => {
 									</form>
 								</TabPanel>
 
-								<TabPanel sx={tabPanelStyles}>
+								<TabPanel
+									sx={tabPanelStyles}
+									className="mto-password-security-tab">
 									<PasswordSecurity />
 								</TabPanel>
 							</TabPanels>

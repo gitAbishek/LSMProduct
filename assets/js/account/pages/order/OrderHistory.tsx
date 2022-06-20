@@ -26,7 +26,11 @@ const OrderHistory: React.FC = () => {
 	);
 
 	return (
-		<Stack direction="column" spacing="8" width="full">
+		<Stack
+			direction="column"
+			spacing="8"
+			width="full"
+			className="mto-orders-wrapper">
 			<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 				{__('Order History', 'masteriyo')}
 			</Heading>

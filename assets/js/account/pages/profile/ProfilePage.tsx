@@ -31,7 +31,11 @@ const ProfilePage = () => {
 
 	if (isSuccess) {
 		return (
-			<Stack direction="column" spacing="8" width="full">
+			<Stack
+				direction="column"
+				spacing="8"
+				width="full"
+				className="mto-profile-wrapper">
 				<Flex justify={'space-between'}>
 					<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 						{__('Profile', 'masteriyo')}
@@ -49,6 +53,7 @@ const ProfilePage = () => {
 					</Link>
 				</Flex>
 				<Stack
+					className="mto-profile-details"
 					direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
 					spacing="6">
 					<Avatar src={data?.profile_image?.url} size="2xl" />

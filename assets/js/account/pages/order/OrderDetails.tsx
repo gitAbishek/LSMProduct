@@ -47,7 +47,11 @@ const OrderDetails: React.FC = () => {
 	);
 	if (orderQuery.isSuccess) {
 		return (
-			<Stack direction="column" spacing="8" width="full">
+			<Stack
+				direction="column"
+				spacing="8"
+				width="full"
+				className="mto-orders-detail-wrapper">
 				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
 					{sprintf(__('Order #%s', 'masteriyo'), orderQuery?.data?.id)}
 				</Heading>

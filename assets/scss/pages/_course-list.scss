@@ -223,6 +223,7 @@
 			font-size: 12px;
 			font-weight: 500;
 			align-items: center;
+			color: var(--masteriyo-color-text);
 
 			svg {
 				fill: var(--masteriyo-color-golden);
@@ -240,6 +241,7 @@
 	// Course description.
 	&__description {
 		margin-bottom: $spacing_16px;
+		color: var(--masteriyo-color-text);
 
 		.title {
 			margin-bottom: $spacing_14px;

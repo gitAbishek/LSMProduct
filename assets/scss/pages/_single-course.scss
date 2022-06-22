@@ -28,6 +28,7 @@
 
 			.course-overview {
 				padding: 0 $spacing_32px $spacing_32px;
+				color: var(--masteriyo-color-text);
 
 				ul li p,
 				ol li p {
@@ -320,6 +321,7 @@
 	flex-direction: row;
 	border-top: 1px solid var(--masteriyo-color-border);
 	border-bottom: 2px solid var(--masteriyo-color-border);
+	color: var(--masteriyo-color-text);
 	font-size: 18px;
 	font-weight: 600;
 	margin-top: $spacing_12px;
@@ -412,6 +414,7 @@
 			flex-wrap: wrap;
 			align-items: center;
 			justify-content: space-between;
+			color: var(--masteriyo-color-text);
 
 			.title-container {
 				display: flex;
@@ -477,6 +480,7 @@
 
 		.masteriyo-stab--citems {
 			cursor: pointer;
+			color: var(--masteriyo-color-text);
 
 			&:first-of-type {
 				border-top-width: 2px;
@@ -667,10 +671,12 @@
 
 		.masteriyo-rnumber {
 			margin-left: $spacing_8px;
+			color: var(--masteriyo-color-text);
 		}
 	}
 
 	&--turating {
+		color: var(--masteriyo-color-text);
 		text-align: center;
 		margin-bottom: $spacing_30px;
 	}

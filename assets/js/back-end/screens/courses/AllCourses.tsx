@@ -191,10 +191,10 @@ const AllCourses = () => {
 				onClick={() => onChangeCourseStatus(courseStatus)}>
 				<ListIcon as={iconName} />
 				{buttonText}
-				{courseCount !== null ? (
-					<Badge color="inherit">{courseCount}</Badge>
-				) : (
+				{courseQuery.isFetching || courseCount === null ? (
 					<SkeletonCircle size="3" w="17px" ml="1" mb="1" rounded="sm" />
+				) : (
+					<Badge color="inherit">{courseCount}</Badge>
 				)}
 			</Button>
 		);
@@ -279,8 +279,9 @@ const AllCourses = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{courseQuery.isLoading && <SkeletonCourseList />}
-									{courseQuery.isSuccess && isEmpty(courseQuery?.data?.data) ? (
+									{courseQuery.isLoading || courseQuery.isFetching ? (
+										<SkeletonCourseList />
+									) : courseQuery.isSuccess && isEmpty(courseQuery?.data?.data) ? (
 										<EmptyInfo message={__('No courses found.', 'masteriyo')} />
 									) : (
 										courseQuery?.data?.data?.map((course: any) => (
@@ -301,6 +302,7 @@ const AllCourses = () => {
 											/>
 										))
 									)}
+									
 								</Tbody>
 							</Table>
 						</Stack>

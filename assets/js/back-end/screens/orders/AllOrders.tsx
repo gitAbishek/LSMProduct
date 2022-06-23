@@ -217,15 +217,10 @@ const AllOrders = () => {
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
-								{Object.values(orderStatusCount).every(
-									(x) => x !== undefined
+								{ordersQuery.isFetching ||
+								Object.values(orderStatusCount).every(
+									(x) => x === undefined
 								) ? (
-									<Badge color="inherit">
-										{button.status === OrderStatus.OnHold
-											? orderStatusCount.hold
-											: orderStatusCount[button.status]}
-									</Badge>
-								) : (
 									<SkeletonCircle
 										size="3"
 										w="17px"
@@ -233,6 +228,12 @@ const AllOrders = () => {
 										mb="1"
 										rounded="sm"
 									/>
+								) : (
+									<Badge color="inherit">
+										{button.status === OrderStatus.OnHold
+											? orderStatusCount.hold
+											: orderStatusCount[button.status]}
+									</Badge>
 								)}
 							</Button>
 						</ListItem>
@@ -323,8 +324,10 @@ const AllOrders = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{ordersQuery.isLoading && <SkeletonOrdersList />}
-									{ordersQuery.isSuccess && isEmpty(ordersQuery?.data?.data) ? (
+									{ordersQuery.isLoading || ordersQuery.isFetching ? (
+										<SkeletonOrdersList />
+									) : ordersQuery.isSuccess &&
+									  isEmpty(ordersQuery?.data?.data) ? (
 										<NoOrdersNotice />
 									) : (
 										ordersQuery?.data?.data?.map((order: any) => (

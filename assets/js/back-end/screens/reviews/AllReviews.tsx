@@ -241,18 +241,13 @@ const AllReviews = () => {
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
-								{reviewStatusCount[button.status] !== undefined ? (
+								{reviewQuery.isFetching ||
+								reviewStatusCount[button.status] === undefined ? (
+									<SkeletonCircle size="4" ml="1" mb="1" />
+								) : (
 									<Badge color="inherit">
 										{reviewStatusCount[button.status]}
 									</Badge>
-								) : (
-									<SkeletonCircle
-										size="3"
-										w="17px"
-										ml="1"
-										mb="1"
-										rounded="sm"
-									/>
 								)}
 							</Button>
 						</ListItem>
@@ -280,8 +275,10 @@ const AllReviews = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{reviewQuery.isLoading && <SkeletonReviewsList />}
-									{reviewQuery.isSuccess && isEmpty(reviewQuery?.data?.data) ? (
+									{reviewQuery.isLoading || reviewQuery.isFetching ? (
+										<SkeletonReviewsList />
+									) : reviewQuery.isSuccess &&
+									  isEmpty(reviewQuery?.data?.data) ? (
 										<EmptyInfo message={__('No reviews found.', 'masteriyo')} />
 									) : (
 										reviewQuery?.data?.data?.map(

@@ -48,7 +48,7 @@ export type CourseProgressMap = {
 	name: string;
 	user_id: number;
 	course_id: 9;
-	status: 'begin' | 'complete';
+	status: 'started' | 'progress' | 'completed';
 	started_at: string;
 	modified_at: string;
 	completed_at: string | any;

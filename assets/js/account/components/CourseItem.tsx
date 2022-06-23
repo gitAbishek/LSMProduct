@@ -64,7 +64,9 @@ const CourseItem: React.FC<Props> = (props) => {
 		const completed: any = courseProgressQuery?.data?.summary?.total?.completed;
 		const pending: any = courseProgressQuery?.data?.summary?.total?.pending;
 
-		if (isNumber(completed) && isNumber(pending)) {
+		if (completed === 0 && pending === 0) {
+			return 0;
+		} else if (isNumber(completed) && isNumber(pending)) {
 			return calculatePercentage(completed, pending + completed);
 		} else {
 			return 0;
@@ -183,10 +185,14 @@ const CourseItem: React.FC<Props> = (props) => {
 									colorScheme="blue"
 									size="sm"
 									borderRadius="full"
-									isDisabled={progress >= 100}>
-									{progress >= 100
+									isDisabled={
+										courseProgressQuery?.data?.status === 'completed'
+									}>
+									{courseProgressQuery?.data?.status === 'completed'
 										? __('Completed', 'masteriyo')
-										: __('Continue', 'masteriyo')}
+										: courseProgressQuery?.data?.status === 'progress'
+										? __('Continue', 'masteriyo')
+										: __('Start Course', 'masteriyo')}
 								</Button>
 							</Link>
 						</Stack>

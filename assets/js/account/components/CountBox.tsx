@@ -13,14 +13,13 @@ interface Props {
 	title: string;
 	colorScheme: ThemingProps['colorScheme'];
 	icon: ReactNode;
-	w: 'xs' | 'sm' | 'md' | 'lg' | '100%';
 }
 
 const CountBox: React.FC<Props> = (props) => {
-	const { title, count, colorScheme, icon, w } = props;
+	const { title, count, colorScheme, icon } = props;
 
 	return (
-		<Box w={w} borderWidth="1px" borderColor="gray.100">
+		<Box borderWidth="1px" borderColor="gray.100">
 			<Stack direction="row" spacing="4" p="6">
 				<Stack
 					direction="row"
@@ -47,10 +46,6 @@ const CountBox: React.FC<Props> = (props) => {
 			</Stack>
 		</Box>
 	);
-};
-
-CountBox.defaultProps = {
-	w: 'xs',
 };
 
 export default CountBox;

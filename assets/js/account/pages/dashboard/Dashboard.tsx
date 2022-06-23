@@ -65,7 +65,7 @@ const Dashboard: React.FC = () => {
 			validCoursesIds?.includes(course.course.id)
 		);
 
-	const enrolledCoursesCount = dashboardCourseQuery?.data?.data?.length;
+	const enrolledCoursesCount = dashboardCourseQuery?.data?.meta?.total;
 
 	let direction: 'row' | 'column' | undefined = 'row';
 	let gap: number = 2;
@@ -96,7 +96,6 @@ const Dashboard: React.FC = () => {
 							count={enrolledCoursesCount}
 							icon={<Icon as={BsBook} fontSize="xl" />}
 							colorScheme="cyan"
-							w={width}
 						/>
 					</Col>
 					<Col lg={4} md={12} sm={12}>
@@ -105,7 +104,6 @@ const Dashboard: React.FC = () => {
 							count={inProgressCoursesCount}
 							icon={<Icon as={BsBookHalf} fontSize="xl" />}
 							colorScheme="blue"
-							w={width}
 						/>
 					</Col>
 					<Col lg={4} md={12} sm={12}>
@@ -114,7 +112,6 @@ const Dashboard: React.FC = () => {
 							count={completedCoursesCount}
 							icon={<Icon as={HiAcademicCap} fontSize="2xl" />}
 							colorScheme="green"
-							w={width}
 						/>
 					</Col>
 				</Row>

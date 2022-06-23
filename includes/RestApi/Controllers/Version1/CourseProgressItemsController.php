@@ -438,7 +438,7 @@ class CourseProgressItemsController extends CrudController {
 			),
 		);
 
-		return $schema;
+		return $this->add_additional_fields_schema( $schema );
 	}
 
 	/**

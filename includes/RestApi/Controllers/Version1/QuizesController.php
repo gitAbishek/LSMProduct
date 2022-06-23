@@ -1181,7 +1181,7 @@ class QuizesController extends PostsController {
 			),
 		);
 
-		return $schema;
+		return $this->add_additional_fields_schema( $schema );
 	}
 
 	/**

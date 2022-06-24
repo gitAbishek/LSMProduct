@@ -42,7 +42,8 @@
       "includes/Helper/quiz.php",
       "includes/Helper/course-qa.php",
       "includes/Helper/notification.php",
-      "includes/Helper/comments.php"
+      "includes/Helper/comments.php",
+      "includes/Helper/http.php"
     ],
     "psr-4": {
       "Masteriyo\\": "includes/"

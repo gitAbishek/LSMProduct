@@ -593,4 +593,78 @@ abstract class CommentsController extends CrudController {
 
 		return $post_count;
 	}
+
+	/**
+	 * Clone comment.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	 */
+	public function clone_item( $request ) {
+		$old_comment = get_comment( (int) $request['id'] );
+
+		if ( ! $old_comment ) {
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
+		}
+
+		$new_comment = array(
+			'comment_agent'        => $old_comment->comment_agent,
+			'comment_approved'     => $old_comment->comment_approved,
+			'comment_author'       => $old_comment->comment_author,
+			'comment_author_email' => $old_comment->comment_author_email,
+			'comment_author_IP'    => $old_comment->comment_author_IP,
+			'comment_author_url'   => $old_comment->comment_author_url,
+			'comment_content'      => $old_comment->comment_content,
+			'comment_date'         => $old_comment->comment_date,
+			'comment_date_gmt'     => $old_comment->comment_date_gmt,
+			'comment_karma'        => $old_comment->comment_karma,
+			'comment_parent'       => $old_comment->comment_parent,
+			'comment_post_ID'      => $old_comment->comment_post_ID,
+			'comment_type'         => $old_comment->comment_type,
+			'user_id'              => $old_comment->user_id,
+		);
+
+		$new_comment_id = wp_insert_comment( $new_comment );
+
+		if ( ! $new_comment_id ) {
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_cannot_clone", __( 'Unable to clone', 'masteriyo' ), array( 'status' => 400 ) );
+		}
+
+		// Clone all the meta data.
+		$meta_data = get_comment_meta( absint( $request['id'] ) );
+		foreach ( $meta_data as $meta_key => $meta_value ) {
+			update_comment_meta( $new_comment_id, $meta_key, maybe_unserialize( $meta_value[0] ) );
+		}
+
+		// Read the new comment.
+		$object = $this->get_object( $new_comment_id );
+
+		if ( ! $object || 0 === $object->get_id() ) {
+			return new \WP_Error( "masteriyo_rest_{$this->object_type}_invalid_id", __( 'Invalid ID', 'masteriyo' ), array( 'status' => 404 ) );
+		}
+
+		$data     = $this->prepare_object_for_response( $object, $request );
+		$response = rest_ensure_response( $data );
+
+		if ( $this->public ) {
+			$response->link_header( 'alternate', $this->get_permalink( $object ), array( 'type' => 'text/html' ) );
+		}
+
+		/**
+		 * Filter the data for a response.
+		 *
+		 * The dynamic portion of the hook name, $this->object_type,
+		 * refers to object type being prepared for the response.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param WP_REST_Response $response The response object.
+		 * @param WP_Comment          $old_comment Old comment.
+		 * @param WP_Comment          $new_comment New comment.
+		 * @param WP_REST_Request  $request  Request object.
+		 */
+		return apply_filters( "masteriyo_rest_clone_prepare_{$this->object_type}_object", $response, $old_comment, $new_comment, $request );
+	}
 }

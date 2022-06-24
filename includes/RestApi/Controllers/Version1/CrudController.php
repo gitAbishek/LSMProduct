@@ -797,4 +797,18 @@ abstract class CrudController extends RestController {
 		 */
 		return apply_filters( "rest_{$this->object_type}_collection_params", $params, $this->object_type );
 	}
+
+	/**
+	 * Clone item.
+	 *
+	 * @since  x.x.x
+	 *
+	 * @param  WP_REST_Request $request Request object.
+	 *
+	 * @return WP_Error|Model The prepared item, or WP_Error object on failure.
+	 */
+	protected function clone_item( $request ) {
+		// translators: %s: Class method name.
+		return new \WP_Error( 'invalid-method', sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ), array( 'status' => 405 ) );
+	}
 }

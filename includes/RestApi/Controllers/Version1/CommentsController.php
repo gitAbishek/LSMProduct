@@ -597,7 +597,7 @@ abstract class CommentsController extends CrudController {
 	/**
 	 * Clone comment.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.5
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
@@ -658,7 +658,7 @@ abstract class CommentsController extends CrudController {
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.5
 		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param WP_Comment          $old_comment Old comment.

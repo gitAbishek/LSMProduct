@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.4
+**Stable tag**: 1.5.5
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.5 - 27-06-2022
+
+- Enhancement - Added class names on the account page.
+- Enhancement - Show skeleton loader when changing status in courses, orders and reviews page backend.
+- Fix - Edit lesson page throwing 505 error when lesson video deleted from the media library.
+- Fix - Text colour in courses page being affected by theme customizer.
+- Fix - Enrolled courses count and start button in the account page.
 
 ### 1.5.4 - 17-06-2022
 

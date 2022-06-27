@@ -2,7 +2,7 @@
 /**
  * HTTP helper functions.
  *
- * @since x.x.x
+ * @since 1.5.5
  * @package Masteriyo\Helper
  */
 
@@ -10,7 +10,7 @@ if ( ! function_exists( 'masteriyo_current_http_request' ) ) {
 	/**
 	 * Return current HTTP request.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.5
 	 *
 	 * @return WP_HTTP_Request
 	 */

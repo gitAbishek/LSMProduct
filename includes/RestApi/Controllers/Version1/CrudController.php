@@ -801,7 +801,7 @@ abstract class CrudController extends RestController {
 	/**
 	 * Clone item.
 	 *
-	 * @since  x.x.x
+	 * @since  1.5.5
 	 *
 	 * @param  WP_REST_Request $request Request object.
 	 *

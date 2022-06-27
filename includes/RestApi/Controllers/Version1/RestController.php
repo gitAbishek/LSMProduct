@@ -82,7 +82,7 @@ abstract class RestController extends \WP_REST_Controller {
 		 * Filters additional fields schema of a REST API.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added $this parameter which stores the current REST Controller
+		 * @since 1.5.5 Added $this parameter which stores the current REST Controller
 		 *
 		 * @param array $schema The additional fields schema.
 		 */

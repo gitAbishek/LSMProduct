@@ -217,8 +217,7 @@ const AllOrders = () => {
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
-								{ordersQuery.isFetching ||
-								Object.values(orderStatusCount).every(
+								{Object.values(orderStatusCount).every(
 									(x) => x === undefined
 								) ? (
 									<SkeletonCircle

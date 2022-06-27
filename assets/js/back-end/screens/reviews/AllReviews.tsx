@@ -241,9 +241,14 @@ const AllReviews = () => {
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
-								{reviewQuery.isFetching ||
-								reviewStatusCount[button.status] === undefined ? (
-									<SkeletonCircle size="4" ml="1" mb="1" />
+								{reviewStatusCount[button.status] === undefined ? (
+									<SkeletonCircle
+										size="3"
+										w="17px"
+										ml="1"
+										mb="1"
+										rounded="sm"
+									/>
 								) : (
 									<Badge color="inherit">
 										{reviewStatusCount[button.status]}

@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	AspectRatio,
 	Button,
 	ButtonGroup,
@@ -10,6 +12,7 @@ import {
 	Select,
 	Spinner,
 	Stack,
+	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
@@ -34,6 +37,7 @@ const VideoSource: React.FC<Props> = (props) => {
 		formState: { errors },
 		setValue,
 	} = useFormContext();
+	const toast = useToast();
 
 	const imageAPi = new MediaAPI();
 
@@ -41,12 +45,12 @@ const VideoSource: React.FC<Props> = (props) => {
 		setVideoId(defaultSourceID || null);
 	}, [defaultSourceID]);
 
-	const mediaQuery = useQuery<MediaSchema>(
+	const mediaQuery = useQuery<MediaSchema, any>(
 		[`videoSource${videoId}`, videoId],
 		() => imageAPi.get(videoId),
 		{
 			enabled: !!videoId,
-			refetchOnWindowFocus: true,
+			useErrorBoundary: false,
 		}
 	);
 
@@ -106,6 +110,14 @@ const VideoSource: React.FC<Props> = (props) => {
 							<Spinner />
 						</Center>
 					)}
+					{mediaQuery.isError ? (
+						<Alert status="warning" mb={3}>
+							<AlertIcon />
+							{mediaQuery.error?.data?.status === 404
+								? __('The video does not exist', 'masteriyo')
+								: __('Failed to fetch video URL', 'masteriyo')}
+						</Alert>
+					) : null}
 					{mediaQuery.isSuccess && (
 						<AspectRatio ratio={16 / 9} mb="4">
 							<ReactPlayer

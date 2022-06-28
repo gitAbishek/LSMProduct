@@ -17,7 +17,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { sprintf, __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -48,18 +48,15 @@ const QuizFields: React.FC<Props> = (props) => {
 		0 === quizData?.questions_display_per_page
 			? quizData?.questions_display_per_page_global
 			: quizData?.questions_display_per_page;
-	const [filterParams, setFilterParams] = useState<FilterParams>({
-		per_page: perPage,
-	});
 
 	const questionQuery = useQuery(
-		[`interactiveQuestions${quizId}`, quizId, filterParams],
+		[`interactiveQuestions${quizId}`, quizId],
 		() =>
 			questionsAPI.list({
 				parent: quizId,
 				order: 'asc',
 				orderby: 'menu_order',
-				...filterParams,
+				per_page: -1,
 			}),
 		{
 			enabled: !!quizId,
@@ -80,11 +77,13 @@ const QuizFields: React.FC<Props> = (props) => {
 			},
 		});
 
+	const paginatedQuestionsData = useMemo(() => {
+		const firstPageIndex = (currentPage - 1) * pageSize;
+		const lastPageIndex = firstPageIndex + pageSize;
+		return questionQuery?.data?.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, pageSize, questionQuery?.data]);
+
 	const handlePageChange = (nextPage: number): void => {
-		setFilterParams({
-			page: nextPage,
-			per_page: pageSize,
-		});
 		setCurrentPage(nextPage);
 	};
 
@@ -98,6 +97,10 @@ const QuizFields: React.FC<Props> = (props) => {
 	const displayCurrentPageHighest =
 		currentPage === pagesCount ? quizData?.questions_count : currentPageHighest;
 
+	if (questionQuery.isFetching) {
+		return <SkeletonText noOfLines={4} />;
+	}
+
 	if (questionQuery.isSuccess) {
 		return (
 			<>
@@ -108,7 +111,7 @@ const QuizFields: React.FC<Props> = (props) => {
 							{__('Your quiz time is about to expire!', 'masteriyo')}
 						</Alert>
 					)}
-					{questionQuery.data.map((question: QuestionSchema) => (
+					{paginatedQuestionsData?.map((question: QuestionSchema) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Heading fontSize="lg">{question.name}</Heading>
 

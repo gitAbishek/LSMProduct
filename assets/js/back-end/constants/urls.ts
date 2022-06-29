@@ -7,7 +7,7 @@ const urls = {
 	tags: base + 'courses/tags',
 	difficulties: base + 'courses/difficulties',
 	lessons: base + 'lessons',
-	questions: base + 'questions',
+	questions: 'masteriyo/v1/questions',
 	quizes: base + 'quizes',
 	quizesAttempts: base + 'quizes/attempts',
 	sections: base + 'sections',

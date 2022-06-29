@@ -21,9 +21,10 @@ import React, { useMemo } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import axios from 'redaxios';
 import urls from '../../../../back-end/constants/urls';
 import { QuestionSchema, QuizSchema } from '../../../../back-end/schemas';
-import API from '../../../../back-end/utils/api';
+import localized from '../../../../back-end/utils/global';
 import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
@@ -42,7 +43,6 @@ interface FilterParams {
 const QuizFields: React.FC<Props> = (props) => {
 	const { quizAboutToExpire, quizData } = props;
 	const { quizId }: any = useParams();
-	const questionsAPI = new API(urls.questions);
 	// If individual quiz questions_display_per_page is 0 then set global settings value.
 	const perPage =
 		0 === quizData?.questions_display_per_page
@@ -52,12 +52,21 @@ const QuizFields: React.FC<Props> = (props) => {
 	const questionQuery = useQuery(
 		[`interactiveQuestions${quizId}`, quizId],
 		() =>
-			questionsAPI.list({
-				parent: quizId,
-				order: 'asc',
-				orderby: 'menu_order',
-				per_page: -1,
-			}),
+			axios
+				.get(localized.rootApiUrl + urls.questions, {
+					headers: {
+						'Content-Type': 'application/json',
+						'X-WP-Nonce': localized.nonce,
+					},
+
+					params: {
+						parent: quizId,
+						order: 'asc',
+						orderby: 'menu_order',
+						per_page: -1,
+					},
+				})
+				.then((res: any) => res.data),
 		{
 			enabled: !!quizId,
 		}

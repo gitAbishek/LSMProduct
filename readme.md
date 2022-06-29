@@ -53,7 +53,7 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 ### 1.5.6 - 29-06-2022
 
-- Enhancement - Displaying quiz on learn page.
+- Enhancement - Load all the questions of the quiz in the learn page for faster pagination.
 - Fix - Quiz timer expires issue.
 
 ### 1.5.5 - 27-06-2022

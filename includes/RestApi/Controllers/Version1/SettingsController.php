@@ -244,6 +244,30 @@ class SettingsController extends CrudController {
 							'type'        => 'string',
 							'context'     => array( 'view', 'edit' ),
 						),
+						'pages'       => array(
+							'description' => __( 'Pages Setting', 'masteriyo' ),
+							'type'        => 'object',
+							'context'     => array( 'view', 'edit' ),
+							'items'       => array(
+								'type'             => 'object',
+								'account_page_id'  => array(
+									'description' => __( 'Account page ID', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'courses_page_id'  => array(
+									'description' => __( 'Archive course page ID', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+								'checkout_page_id' => array(
+									'description' => __( 'Checkout page ID', 'masteriyo' ),
+									'type'        => 'integer',
+									'context'     => array( 'view', 'edit' ),
+								),
+
+							),
+						),
 					),
 				),
 				'course_archive' => array(

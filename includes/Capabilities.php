@@ -232,7 +232,6 @@ class Capabilities {
 			'read_lessons'                  => true,
 			'read_quizzes'                  => true,
 			'read_questions'                => true,
-			'read_faqs'                     => true,
 			'read_orders'                   => true,
 			'read_users'                    => true,
 			'read_course_reviews'           => true,

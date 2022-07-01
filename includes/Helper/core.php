@@ -5,21 +5,14 @@
  * @since 1.0.0
  */
 
-use Joli\JoliNotif\Notifier;
 use Masteriyo\Constants;
-use Masteriyo\Models\Faq;
 use Masteriyo\Geolocation;
 use Masteriyo\Models\User;
 use Masteriyo\Models\Course;
 use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
-use Masteriyo\Enums\NotificationLevel;
-use Masteriyo\Enums\NotificationStatus;
-use Masteriyo\Enums\NotificationType;
-use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Enums\PostStatus;
-use Masteriyo\Models\Notification;
 
 /**
  * Get course.
@@ -140,46 +133,6 @@ function masteriyo_get_section( $section ) {
 }
 
 /**
- * Get Faq.
- *
- * @since 1.0.0
- *
- * @param int|Faq|WP_Post $faq Faq id or Faq Model or Post.
- *
- * @return Faq|null
- */
-function masteriyo_get_faq( $faq ) {
-	$faq_obj   = masteriyo( 'faq' );
-	$faq_store = masteriyo( 'faq.store' );
-
-	if ( is_a( $faq, 'Masteriyo\Models\Faq' ) ) {
-		$id = $faq->get_id();
-	} elseif ( is_a( $faq, 'WP_Post' ) ) {
-		$id = $faq->ID;
-	} else {
-		$id = $faq;
-	}
-
-	try {
-		$id = absint( $id );
-		$faq_obj->set_id( $id );
-		$faq_store->read( $faq_obj );
-	} catch ( \Exception $e ) {
-		return null;
-	}
-
-	/**
-	 * Filters faq object.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param \Masteriyo\Models\Faq $faq_obj faq object.
-	 * @param int|\Masteriyo\Models\Faq|WP_Post $faq faq id or faq Model or Post.
-	 */
-	return apply_filters( 'masteriyo_get_faq', $faq_obj, $faq );
-}
-
-/**
  * Get sections.
  *
  * @since 1.0.0
@@ -246,29 +199,6 @@ function masteriyo_get_quizes( $args = array() ) {
 	 * @param array $args Query args.
 	 */
 	return apply_filters( 'masteriyo_get_quizes', $quizes, $args );
-}
-
-/**
- * Get Faqs
- *
- * @since 1.0.0
- *
- * @param array $args Query arguments.
- *
- * @return object|array[Faq]
- */
-function masteriyo_get_faqs( $args = array() ) {
-	$faqs = masteriyo( 'query.faqs' )->set_args( $args )->get_faqs();
-
-	/**
-	 * Filters queried faq objects.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param \Masteriyo\Models\Faq|\Masteriyo\Models\Faq[] $faqs Queried faqs.
-	 * @param array $args Query args.
-	 */
-	return apply_filters( 'masteriyo_get_faqs', $faqs, $args );
 }
 
 /**

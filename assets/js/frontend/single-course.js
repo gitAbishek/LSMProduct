@@ -140,7 +140,6 @@
 				masteriyo.init_sticky_sidebar();
 				masteriyo.init_rating_widget();
 				masteriyo.init_course_reviews_menu();
-				masteriyo.init_faqs_accordions_handler();
 				masteriyo.init_curriculum_accordions_handler();
 				masteriyo.init_create_reviews_handler();
 				masteriyo.init_edit_reviews_handler();
@@ -514,15 +513,6 @@
 					}
 				});
 			}
-		},
-		init_faqs_accordions_handler: function () {
-			// FAQs accordions handler.
-			$(document.body).on('click', '.masteriyo-faq--item-header', function () {
-				$(this)
-					.siblings('.masteriyo-faq--item-body')
-					.first()
-					.slideToggle('swing');
-			});
 		},
 		init_curriculum_accordions_handler: function () {
 			// Curriculum Tab

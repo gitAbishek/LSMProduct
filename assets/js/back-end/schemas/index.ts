@@ -308,18 +308,6 @@ export interface CourseSchema {
 	};
 }
 
-export interface FaqSchema {
-	id: number;
-	title: string;
-	date_created: string;
-	date_created_gmt: string;
-	date_modified: string;
-	date_modified_gmt: string;
-	content: string;
-	course_id: number;
-	sort_order: number;
-}
-
 export interface LessonSchema {
 	id: number;
 	name: string;

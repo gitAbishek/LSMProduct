@@ -80,7 +80,6 @@ class Masteriyo {
 		FileRestrictions::init();
 		CourseReviews::init();
 		CourseQuestionAnswers::init();
-		Faqs::init();
 		EmailHooks::init();
 		RestApi::init();
 		AdminMenu::init();

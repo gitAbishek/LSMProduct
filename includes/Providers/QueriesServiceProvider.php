@@ -10,7 +10,6 @@ defined( 'ABSPATH' ) || exit;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use Masteriyo\Query\CourseQuestionAnswerQuery;
 use Masteriyo\Query\CourseReviewQuery;
-use Masteriyo\Query\FaqQuery;
 use Masteriyo\Query\LessonQuery;
 use Masteriyo\Query\OrderItemQuery;
 use Masteriyo\Query\OrderQuery;
@@ -35,7 +34,6 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'query.lessons',
 		'query.quizes',
 		'query.questions',
-		'query.faqs',
 		'query.orders',
 		'query.order-items',
 		'query.course-reviews',
@@ -45,7 +43,6 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		'\Masteriyo\Query\LessonQuery',
 		'\Masteriyo\Query\QuizQuery',
 		'\Masteriyo\Query\QuestionQuery',
-		'\Masteriyo\Query\FaqQuery',
 		'\Masteriyo\Query\OrderQuery',
 		'\Masteriyo\Query\OrderItemQuery',
 		'\Masteriyo\Query\CourseReviewQuery',
@@ -65,7 +62,6 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( 'query.lessons', LessonQuery::class );
 		$this->getContainer()->add( 'query.quizes', QuizQuery::class );
 		$this->getContainer()->add( 'query.questions', QuestionQuery::class );
-		$this->getContainer()->add( 'query.faqs', FaqQuery::class );
 		$this->getContainer()->add( 'query.orders', OrderQuery::class );
 		$this->getContainer()->add( 'query.order-items', OrderItemQuery::class );
 		$this->getContainer()->add( 'query.course-reviews', CourseReviewQuery::class );
@@ -75,7 +71,6 @@ class QueriesServiceProvider extends AbstractServiceProvider {
 		$this->getContainer()->add( '\Masteriyo\Query\LessonQuery' );
 		$this->getContainer()->add( '\Masteriyo\Query\QuizQuery' );
 		$this->getContainer()->add( '\Masteriyo\Query\QuestionQuery' );
-		$this->getContainer()->add( '\Masteriyo\Query\FaqQuery' );
 		$this->getContainer()->add( '\Masteriyo\Query\OrderQuery' );
 		$this->getContainer()->add( '\Masteriyo\Query\OrderItemQuery' );
 		$this->getContainer()->add( '\Masteriyo\Query\CourseReviewQuery' );

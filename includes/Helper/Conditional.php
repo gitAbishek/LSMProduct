@@ -1041,22 +1041,3 @@ function masteriyo_is_view_account_page() {
 function masteriyo_is_edit_account_page() {
 	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
 }
-
-/**
- * See if a course has FAQs.
- *
- * @since 1.0.0
- *
- * @param integer $course_id
- *
- * @return boolean
- */
-function masteriyo_course_has_faqs( $course_id ) {
-	$faqs = masteriyo_get_faqs(
-		array(
-			'parent_id' => $course_id,
-		)
-	);
-
-	return count( $faqs ) > 0;
-}

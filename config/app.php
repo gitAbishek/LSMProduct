@@ -34,7 +34,6 @@ return array_unique(
 			'Masteriyo\Providers\ShortcodesServiceProvider',
 			'Masteriyo\Providers\SettingsServiceProvider',
 			'Masteriyo\Providers\QueriesServiceProvider',
-			'Masteriyo\Providers\FaqServiceProvider',
 			'Masteriyo\Providers\EmailsServiceProvider',
 			'Masteriyo\Providers\CourseReviewServiceProvider',
 			'Masteriyo\Providers\CourseQuestionAnswerServiceProvider',

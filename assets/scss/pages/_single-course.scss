@@ -211,7 +211,7 @@
 			margin: 0 0 $spacing_14px 0;
 
 			&::before {
-				content: "";
+				content: '';
 				display: none;
 			}
 
@@ -389,7 +389,7 @@
 			}
 
 			&::before {
-				content: "";
+				content: '';
 				background: var(--masteriyo-color-grey-dark);
 				display: inline-block;
 				width: 0.3em;
@@ -453,7 +453,7 @@
 			}
 
 			&::before {
-				content: "";
+				content: '';
 				background: var(--masteriyo-color-grey-dark);
 				display: inline-block;
 				width: 0.3em;
@@ -617,32 +617,6 @@
 		.masteriyo-lesson-list--btn {
 			border-radius: $border_radius_100;
 			text-transform: uppercase;
-		}
-	}
-
-	// Faq Tab
-	&--faq {
-		.masteriyo-faq--item-header {
-			overflow: hidden;
-			border-bottom: 1px solid var(--masteriyo-color-border);
-			padding: $spacing_16px $spacing_30px;
-			font-size: 16px;
-			font-weight: 600;
-			cursor: pointer;
-
-			&:last-of-type {
-				border-bottom: 0;
-			}
-		}
-
-		.masteriyo-faq--item-body {
-			display: none;
-			border-bottom: 1px solid var(--masteriyo-color-border);
-			padding: $spacing_16px $spacing_30px;
-
-			.content {
-				margin: inherit;
-			}
 		}
 	}
 

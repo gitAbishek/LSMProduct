@@ -226,40 +226,6 @@ class Permission {
 	}
 
 	/**
-	 * Check FAQ permissions on REST API.
-	 *
-	 * @since 1.0.0
-	 * @param string $context   Request context.
-	 * @param string $object_id Object ID.
-	 * @return bool
-	 */
-	public function rest_check_faqs_permissions( $context = 'read', $object_id = 0 ) {
-		$permission = false;
-		$contexts   = array(
-			'read'   => 'read_faqs',
-			'create' => 'publish_faqs',
-			'edit'   => 'edit_faqs',
-			'delete' => 'delete_faqs',
-		);
-
-		if ( isset( $contexts[ $context ] ) ) {
-			$permission = current_user_can( $contexts[ $context ] );
-		}
-
-		/**
-		 * Filters permission for an FAQ.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param boolean $permission True if permission granted.
-		 * @param string $context Permission context.
-		 * @param integer $object_id Object ID which requires permission, if available.
-		 * @param string $object_type Object's type.
-		 */
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'faq' );
-	}
-
-	/**
 	 * Check course question-answer permissions on REST API.
 	 *
 	 * @since 1.0.0

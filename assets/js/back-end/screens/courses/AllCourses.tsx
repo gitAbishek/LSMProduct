@@ -279,7 +279,7 @@ const AllCourses = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{courseQuery.isLoading || courseQuery.isFetching ? (
+									{courseQuery.isLoading || !courseQuery.isFetched ? (
 										<SkeletonCourseList />
 									) : courseQuery.isSuccess &&
 									  isEmpty(courseQuery?.data?.data) ? (

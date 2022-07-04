@@ -280,7 +280,7 @@ const AllReviews = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{reviewQuery.isLoading || reviewQuery.isFetching ? (
+									{reviewQuery.isLoading || !reviewQuery.isFetched ? (
 										<SkeletonReviewsList />
 									) : reviewQuery.isSuccess &&
 									  isEmpty(reviewQuery?.data?.data) ? (

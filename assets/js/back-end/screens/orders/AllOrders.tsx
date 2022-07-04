@@ -323,7 +323,7 @@ const AllOrders = () => {
 									</Tr>
 								</Thead>
 								<Tbody>
-									{ordersQuery.isLoading || ordersQuery.isFetching ? (
+									{ordersQuery.isLoading || !ordersQuery.isFetched ? (
 										<SkeletonOrdersList />
 									) : ordersQuery.isSuccess &&
 									  isEmpty(ordersQuery?.data?.data) ? (

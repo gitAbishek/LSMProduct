@@ -53,9 +53,23 @@ class AdminMenu {
 		}
 		// phpcs:enable
 
+		/**
+		 * Filter admin menu title.
+		 *
+		 * @since x.x.x
+		 */
+		$admin_menu_title = apply_filters( 'masteriyo_admin_menu_title', __( 'Masteriyo', 'masteriyo' ) );
+
+		/**
+		 * Filter admin menu icon.
+		 *
+		 * @since x.x.x
+		 */
+		$dashicon = apply_filters( 'masteriyo_admin_menu_icon', $dashicon );
+
 		add_menu_page(
-			esc_html__( 'Masteriyo', 'masteriyo' ),
-			esc_html__( 'Masteriyo', 'masteriyo' ),
+			$admin_menu_title,
+			$admin_menu_title,
 			'edit_courses',
 			'masteriyo',
 			array( __CLASS__, 'display_main_page' ),

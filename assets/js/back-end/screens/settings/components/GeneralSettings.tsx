@@ -64,37 +64,10 @@ const GeneralSettings: React.FC<Props> = (props) => {
 		<Tabs orientation="vertical">
 			<Stack direction="row" flex="1">
 				<TabList sx={tabListStyles}>
-					<Tab sx={tabStyles}>{__('Styling', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Pages', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Styling', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
-					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<FormLabel>
-									{__('Primary Color', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Choose a color to match your brand or site. This color reflects on buttons, links, and few other elements.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<input
-									type="hidden"
-									{...register('general.styling.primary_color')}
-									defaultValue={generalData?.styling?.primary_color}
-								/>
-
-								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
-							</FormControl>
-						</Stack>
-					</TabPanel>
 					<TabPanel>
 						{pagesQuery.isLoading ? (
 							<Center h="20">
@@ -222,6 +195,33 @@ const GeneralSettings: React.FC<Props> = (props) => {
 								</FormControl>
 							</Stack>
 						)}
+					</TabPanel>
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<FormControl>
+								<FormLabel>
+									{__('Primary Color', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Choose a color to match your brand or site. This color reflects on buttons, links, and few other elements.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
+								</FormLabel>
+								<input
+									type="hidden"
+									{...register('general.styling.primary_color')}
+									defaultValue={generalData?.styling?.primary_color}
+								/>
+
+								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
+							</FormControl>
+						</Stack>
 					</TabPanel>
 				</TabPanels>
 			</Stack>

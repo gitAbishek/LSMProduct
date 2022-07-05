@@ -48,8 +48,22 @@ class AdminMenu {
 		// phpcs:disable
 		if ( isset( $_GET['page'] ) && 'masteriyo' === $_GET['page'] ) {
 			$dashicon = 'data:image/svg+xml;base64,' . base64_encode( masteriyo_get_svg( 'dashicon-white' ) );
+
+			/**
+			 * Filter active admin menu icon.
+			 *
+			 * @since x.x.x
+			 */
+			$dashicon = apply_filters( 'masteriyo_active_admin_menu_icon', $dashicon );
 		} else {
 			$dashicon = 'data:image/svg+xml;base64,' . base64_encode( masteriyo_get_svg( 'dashicon-grey' ) );
+
+			/**
+			 * Filter inactive admin menu icon.
+			 *
+			 * @since x.x.x
+			 */
+			$dashicon = apply_filters( 'masteriyo_inactive_admin_menu_icon', $dashicon );
 		}
 		// phpcs:enable
 
@@ -59,13 +73,6 @@ class AdminMenu {
 		 * @since x.x.x
 		 */
 		$admin_menu_title = apply_filters( 'masteriyo_admin_menu_title', __( 'Masteriyo', 'masteriyo' ) );
-
-		/**
-		 * Filter admin menu icon.
-		 *
-		 * @since x.x.x
-		 */
-		$dashicon = apply_filters( 'masteriyo_admin_menu_icon', $dashicon );
 
 		add_menu_page(
 			$admin_menu_title,

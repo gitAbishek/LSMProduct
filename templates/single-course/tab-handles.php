@@ -31,3 +31,12 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 </div>
 
 <?php
+	/**
+	 * Hooks for single course page tabs
+	 *
+	 * @since 1.5.7
+	 */
+	do_action( 'masteriyo_single_course_main_content_tab', $course );
+?>
+
+<?php

@@ -40,36 +40,35 @@ const AddOns = () => {
 
 	return (
 		<Tabs>
-			<Stack direction="column" spacing="8" align="center">
-				<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
-					<Container maxW="container.xl">
+			<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
+				<Container maxW="container.xl">
+					<Stack
+						direction={['column', 'row']}
+						justifyContent="space-between"
+						align="center">
 						<Stack
-							direction={['column', 'row']}
-							justifyContent="space-between"
-							align="center">
-							<Stack
-								direction={['column', null, 'row']}
-								spacing={['3', null, '8']}
-								align="center"
-								minHeight="16">
-								<Box d={['none', null, 'block']}>
-									<Image src={Logo} w="36px" />
-								</Box>
-								<TabList borderBottom="none" bg="white">
-									<Tab sx={tabStyles} onClick={() => setStatus('any')}>
-										{__('All Addons', 'masteriyo')}
-									</Tab>
-								</TabList>
-							</Stack>
+							direction={['column', null, 'row']}
+							spacing={['3', null, '8']}
+							align="center"
+							minHeight="16">
+							<Box d={['none', null, 'block']}>
+								<Image src={Logo} w="36px" />
+							</Box>
+							<TabList borderBottom="none" bg="white">
+								<Tab sx={tabStyles} onClick={() => setStatus('any')}>
+									{__('All Addons', 'masteriyo')}
+								</Tab>
+							</TabList>
 						</Stack>
-					</Container>
-				</Box>
-			</Stack>
+					</Stack>
+				</Container>
+			</Box>
 			<Stack
 				width="100%"
 				h="auto"
 				p="4"
 				mt="6"
+				mb="6"
 				bg="linear-gradient(90.03deg, #4584FF 0.57%, #7761FF 99.97%)"
 				color="white">
 				<Stack
@@ -131,8 +130,8 @@ const AddOns = () => {
 					</Stack>
 				</Stack>
 			</Stack>
-			<Stack ml="auto" mr="auto" mt="10">
-				<Row style={{ margin: 'auto', justifyContent: 'center' }}>
+			<Container maxW="container.xl">
+				<Row>
 					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('Stripe Payment Gateway', 'masteriyo')}
@@ -164,7 +163,7 @@ const AddOns = () => {
 						/>
 					</Col>
 				</Row>
-			</Stack>
+			</Container>
 		</Tabs>
 	);
 };

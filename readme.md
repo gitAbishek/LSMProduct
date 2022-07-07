@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.6
+**Stable tag**: 1.5.7
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.7 - 07-07-2022
+
+- Enhancement - Shift pages on top of general global settings.
+- Enhancement - Added filters for admin menu and icon.
+- Fix - Alignment issue on the addons page.
+- Fix - Eliminate unnecessary loading in backend pages.
 
 ### 1.5.6 - 29-06-2022
 

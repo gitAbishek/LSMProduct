@@ -52,7 +52,7 @@ class AdminMenu {
 			/**
 			 * Filter active admin menu icon.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.7
 			 */
 			$dashicon = apply_filters( 'masteriyo_active_admin_menu_icon', $dashicon );
 		} else {
@@ -61,7 +61,7 @@ class AdminMenu {
 			/**
 			 * Filter inactive admin menu icon.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.7
 			 */
 			$dashicon = apply_filters( 'masteriyo_inactive_admin_menu_icon', $dashicon );
 		}
@@ -70,7 +70,7 @@ class AdminMenu {
 		/**
 		 * Filter admin menu title.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.7
 		 */
 		$admin_menu_title = apply_filters( 'masteriyo_admin_menu_title', __( 'Masteriyo', 'masteriyo' ) );
 

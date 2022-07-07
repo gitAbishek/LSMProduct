@@ -38,6 +38,9 @@ if ( ! function_exists( 'masteriyo_current_http_request' ) ) {
 		$request->set_headers( $wp_rest_server->get_headers( wp_unslash( $_SERVER ) ) );
 		$request->set_body( \WP_REST_Server::get_raw_data() );
 
+		// Initialize json params properly.g
+		$request->get_json_params();
+
 		/*
 		 * HTTP method override for clients that can't use PUT/PATCH/DELETE. First, we check
 		 * $_GET['_method']. If that is not set, we check for the HTTP_X_HTTP_METHOD_OVERRIDE

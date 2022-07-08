@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Button,
 	ButtonGroup,
 	Center,
@@ -31,12 +33,12 @@ const FeaturedImage: React.FC<Props> = (props) => {
 		setImageId(defaultValue || null);
 	}, [defaultValue]);
 
-	const imageQuery = useQuery<MediaSchema>(
+	const imageQuery = useQuery<MediaSchema, any>(
 		[`featuredImage${imageId}`, imageId],
 		() => imageAPi.get(imageId),
 		{
 			enabled: !!imageId,
-			refetchOnWindowFocus: true,
+			useErrorBoundary: false,
 		}
 	);
 
@@ -69,6 +71,14 @@ const FeaturedImage: React.FC<Props> = (props) => {
 					mb="4"
 				/>
 			)}
+			{imageQuery.isError ? (
+				<Alert status="warning" mb={3}>
+					<AlertIcon />
+					{imageQuery.error?.data?.status === 404
+						? __('The image does not exist.', 'masteriyo')
+						: __('Failed to fetch image URL.', 'masteriyo')}
+				</Alert>
+			) : null}
 			<ButtonGroup d="flex" justifyContent="space-between">
 				{imageId && (
 					<Button variant="outline" onClick={onDelete} colorScheme="red">

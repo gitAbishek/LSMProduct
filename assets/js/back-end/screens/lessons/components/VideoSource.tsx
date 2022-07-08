@@ -114,8 +114,8 @@ const VideoSource: React.FC<Props> = (props) => {
 						<Alert status="warning" mb={3}>
 							<AlertIcon />
 							{mediaQuery.error?.data?.status === 404
-								? __('The video does not exist', 'masteriyo')
-								: __('Failed to fetch video URL', 'masteriyo')}
+								? __('The video does not exist.', 'masteriyo')
+								: __('Failed to fetch video URL.', 'masteriyo')}
 						</Alert>
 					) : null}
 					{mediaQuery.isSuccess && (

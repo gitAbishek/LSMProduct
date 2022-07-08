@@ -32,6 +32,8 @@ import Name from './components/Name';
 
 interface AddNewCourseForm extends CourseSchema {
 	featuredImage?: number;
+	duration_hour?: number;
+	duration_minute?: number;
 }
 
 const AddNewCourse: React.FC = () => {
@@ -67,6 +69,7 @@ const AddNewCourse: React.FC = () => {
 					id: category.value,
 				})),
 			}),
+			duration: (data?.duration_hour || 0) * 60 + +(data?.duration_minute || 0),
 			regular_price: `${data.regular_price}`,
 			status: 'draft',
 			featured_image: data.featuredImage,

@@ -77,7 +77,9 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 		: {
 				value: currentUser?.id,
 				label: currentUser?.name,
-				avatar_url: currentUser?.avatar_urls['24'],
+				avatar_url: !isEmpty(currentUser?.avatar_urls)
+					? currentUser?.avatar_urls['24']
+					: '',
 		  };
 
 	const { courseData, tabIndex } = props;

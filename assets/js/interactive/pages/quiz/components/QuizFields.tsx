@@ -17,14 +17,13 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { sprintf, __ } from '@wordpress/i18n';
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import axios from 'redaxios';
 import urls from '../../../../back-end/constants/urls';
 import { QuestionSchema, QuizSchema } from '../../../../back-end/schemas';
-import localized from '../../../../back-end/utils/global';
+import API from '../../../../back-end/utils/api';
 import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
@@ -43,30 +42,25 @@ interface FilterParams {
 const QuizFields: React.FC<Props> = (props) => {
 	const { quizAboutToExpire, quizData } = props;
 	const { quizId }: any = useParams();
+	const questionsAPI = new API(urls.questions);
 	// If individual quiz questions_display_per_page is 0 then set global settings value.
 	const perPage =
 		0 === quizData?.questions_display_per_page
 			? quizData?.questions_display_per_page_global
 			: quizData?.questions_display_per_page;
+	const [filterParams, setFilterParams] = useState<FilterParams>({
+		per_page: perPage,
+	});
 
 	const questionQuery = useQuery(
-		[`interactiveQuestions${quizId}`, quizId],
+		[`interactiveQuestions${quizId}`, quizId, filterParams],
 		() =>
-			axios
-				.get(localized.rootApiUrl + urls.questions, {
-					headers: {
-						'Content-Type': 'application/json',
-						'X-WP-Nonce': localized.nonce,
-					},
-
-					params: {
-						parent: quizId,
-						order: 'asc',
-						orderby: 'menu_order',
-						per_page: -1,
-					},
-				})
-				.then((res: any) => res.data),
+			questionsAPI.list({
+				parent: quizId,
+				order: 'asc',
+				orderby: 'menu_order',
+				...filterParams,
+			}),
 		{
 			enabled: !!quizId,
 		}
@@ -86,13 +80,11 @@ const QuizFields: React.FC<Props> = (props) => {
 			},
 		});
 
-	const paginatedQuestionsData = useMemo(() => {
-		const firstPageIndex = (currentPage - 1) * pageSize;
-		const lastPageIndex = firstPageIndex + pageSize;
-		return questionQuery?.data?.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, pageSize, questionQuery?.data]);
-
 	const handlePageChange = (nextPage: number): void => {
+		setFilterParams({
+			page: nextPage,
+			per_page: pageSize,
+		});
 		setCurrentPage(nextPage);
 	};
 
@@ -106,10 +98,6 @@ const QuizFields: React.FC<Props> = (props) => {
 	const displayCurrentPageHighest =
 		currentPage === pagesCount ? quizData?.questions_count : currentPageHighest;
 
-	if (questionQuery.isFetching) {
-		return <SkeletonText noOfLines={4} />;
-	}
-
 	if (questionQuery.isSuccess) {
 		return (
 			<>
@@ -120,7 +108,7 @@ const QuizFields: React.FC<Props> = (props) => {
 							{__('Your quiz time is about to expire!', 'masteriyo')}
 						</Alert>
 					)}
-					{paginatedQuestionsData?.map((question: QuestionSchema) => (
+					{questionQuery?.data?.map((question: QuestionSchema) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Heading fontSize="lg">{question.name}</Heading>
 

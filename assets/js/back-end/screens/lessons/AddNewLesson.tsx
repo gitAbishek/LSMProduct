@@ -3,7 +3,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Divider,
 	Flex,
 	Heading,
 	IconButton,
@@ -142,76 +141,79 @@ const AddNewLesson: React.FC = () => {
 					<Stack direction="column" spacing="6">
 						<BackToBuilder />
 						<FormProvider {...methods}>
-							<Box bg="white" p="10" shadow="box">
-								<Stack direction="column" spacing="8">
-									<Flex aling="center" justify="space-between">
-										<Heading as="h1" fontSize="x-large">
-											{__('Add New Lesson', 'masteriyo')}
-										</Heading>
-										<Menu placement="bottom-end">
-											<MenuButton
-												as={IconButton}
-												icon={<BiDotsVerticalRounded />}
-												variant="outline"
-												rounded="sm"
-												fontSize="large"
-											/>
-											<MenuList>
-												<MenuItem icon={<BiEdit />}>
-													{__('Edit', 'masteriyo')}
-												</MenuItem>
-												<MenuItem icon={<BiTrash />}>
-													{__('Delete', 'masteriyo')}
-												</MenuItem>
-											</MenuList>
-										</Menu>
-									</Flex>
+							<form
+								onSubmit={methods.handleSubmit((data: AddLessonFormData) =>
+									onSubmit(data)
+								)}>
+								<Stack direction="row" spacing="8">
+									<Box
+										flex="1"
+										bg="white"
+										p="10"
+										shadow="box"
+										d="flex"
+										flexDirection="column"
+										justifyContent="space-between">
+										<Stack direction="column" spacing="8">
+											<Flex aling="center" justify="space-between">
+												<Heading as="h1" fontSize="x-large">
+													{__('Add New Lesson', 'masteriyo')}
+												</Heading>
+												<Menu placement="bottom-end">
+													<MenuButton
+														as={IconButton}
+														icon={<BiDotsVerticalRounded />}
+														variant="outline"
+														rounded="sm"
+														fontSize="large"
+													/>
+													<MenuList>
+														<MenuItem icon={<BiEdit />}>
+															{__('Edit', 'masteriyo')}
+														</MenuItem>
+														<MenuItem icon={<BiTrash />}>
+															{__('Delete', 'masteriyo')}
+														</MenuItem>
+													</MenuList>
+												</Menu>
+											</Flex>
 
-									<form
-										onSubmit={methods.handleSubmit((data: AddLessonFormData) =>
-											onSubmit(data)
-										)}>
+											<Stack direction="column" spacing="6">
+												<Name />
+												<Description />
+
+												<ButtonGroup>
+													<Button
+														colorScheme="blue"
+														type="submit"
+														isLoading={addLesson.isLoading}>
+														{__('Add New Lesson', 'masteriyo')}
+													</Button>
+													<Button
+														variant="outline"
+														onClick={() =>
+															history.push({
+																pathname: routes.courses.edit.replace(
+																	':courseId',
+																	courseId
+																),
+																search: '?page=builder&view=' + sectionId,
+															})
+														}>
+														{__('Cancel', 'masteriyo')}
+													</Button>
+												</ButtonGroup>
+											</Stack>
+										</Stack>
+									</Box>
+									<Box w="400px" bg="white" p="10" shadow="box">
 										<Stack direction="column" spacing="6">
-											<Name />
-											<Description />
 											<FeaturedImage size="masteriyo_single" />
 											<VideoSource />
-
-											{/* <Box py="3">
-												<Divider />
-											</Box>
-
-											<Attachment /> */}
-
-											<Box py="3">
-												<Divider />
-											</Box>
-
-											<ButtonGroup>
-												<Button
-													colorScheme="blue"
-													type="submit"
-													isLoading={addLesson.isLoading}>
-													{__('Add New Lesson', 'masteriyo')}
-												</Button>
-												<Button
-													variant="outline"
-													onClick={() =>
-														history.push({
-															pathname: routes.courses.edit.replace(
-																':courseId',
-																courseId
-															),
-															search: '?page=builder&view=' + sectionId,
-														})
-													}>
-													{__('Cancel', 'masteriyo')}
-												</Button>
-											</ButtonGroup>
 										</Stack>
-									</form>
+									</Box>
 								</Stack>
-							</Box>
+							</form>
 						</FormProvider>
 					</Stack>
 				</Container>

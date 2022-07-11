@@ -9,7 +9,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Divider,
 	Flex,
 	Heading,
 	IconButton,
@@ -178,37 +177,74 @@ const EditLesson = () => {
 					<Stack direction="column" spacing="6">
 						<BackToBuilder />
 						<FormProvider {...methods}>
-							<Box bg="white" p="10" shadow="box">
-								<Stack direction="column" spacing="8">
-									<Flex aling="center" justify="space-between">
-										<Heading as="h1" fontSize="x-large">
-											{__('Edit Lesson', 'masteriyo')}
-										</Heading>
-										<Menu placement="bottom-end">
-											<MenuButton
-												as={IconButton}
-												icon={<BiDotsVerticalRounded />}
-												variant="outline"
-												rounded="sm"
-												fontSize="large"
-											/>
-											<MenuList>
-												<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-													{__('Delete', 'masteriyo')}
-												</MenuItem>
-											</MenuList>
-										</Menu>
-									</Flex>
+							<form
+								onSubmit={methods.handleSubmit((data: EditLessonFormData) =>
+									onSubmit(data)
+								)}>
+								<Stack direction="row" spacing="8">
+									<Box
+										flex="1"
+										bg="white"
+										p="10"
+										shadow="box"
+										d="flex"
+										flexDirection="column"
+										justifyContent="space-between">
+										<Stack direction="column" spacing="8">
+											<Flex aling="center" justify="space-between">
+												<Heading as="h1" fontSize="x-large">
+													{__('Edit Lesson', 'masteriyo')}
+												</Heading>
+												<Menu placement="bottom-end">
+													<MenuButton
+														as={IconButton}
+														icon={<BiDotsVerticalRounded />}
+														variant="outline"
+														rounded="sm"
+														fontSize="large"
+													/>
+													<MenuList>
+														<MenuItem
+															icon={<BiTrash />}
+															onClick={onDeletePress}>
+															{__('Delete', 'masteriyo')}
+														</MenuItem>
+													</MenuList>
+												</Menu>
+											</Flex>
 
-									<form
-										onSubmit={methods.handleSubmit((data: EditLessonFormData) =>
-											onSubmit(data)
-										)}>
+											<Stack direction="column" spacing="6">
+												<Name defaultValue={lessonQuery.data.name} />
+												<Description
+													defaultValue={lessonQuery.data.description}
+												/>
+
+												<ButtonGroup>
+													<Button
+														colorScheme="blue"
+														type="submit"
+														isLoading={updateLesson.isLoading}>
+														{__('Update Lesson', 'masteriyo')}
+													</Button>
+													<Button
+														variant="outline"
+														onClick={() =>
+															history.push({
+																pathname: routes.courses.edit.replace(
+																	':courseId',
+																	courseId
+																),
+																search: '?page=builder',
+															})
+														}>
+														{__('Cancel', 'masteriyo')}
+													</Button>
+												</ButtonGroup>
+											</Stack>
+										</Stack>
+									</Box>
+									<Box w="400px" bg="white" p="10" shadow="box">
 										<Stack direction="column" spacing="6">
-											<Name defaultValue={lessonQuery.data.name} />
-											<Description
-												defaultValue={lessonQuery.data.description}
-											/>
 											<FeaturedImage
 												defaultValue={lessonQuery.data.featured_image}
 												size="masteriyo_single"
@@ -218,36 +254,10 @@ const EditLesson = () => {
 												defaultSourceUrl={lessonQuery.data.video_source_url}
 												defaultSourceID={lessonQuery.data.video_source_id}
 											/>
-
-											<Box py="3">
-												<Divider />
-											</Box>
-
-											<ButtonGroup>
-												<Button
-													colorScheme="blue"
-													type="submit"
-													isLoading={updateLesson.isLoading}>
-													{__('Update Lesson', 'masteriyo')}
-												</Button>
-												<Button
-													variant="outline"
-													onClick={() =>
-														history.push({
-															pathname: routes.courses.edit.replace(
-																':courseId',
-																courseId
-															),
-															search: '?page=builder',
-														})
-													}>
-													{__('Cancel', 'masteriyo')}
-												</Button>
-											</ButtonGroup>
 										</Stack>
-									</form>
+									</Box>
 								</Stack>
-							</Box>
+							</form>
 							<AlertDialog
 								isOpen={isDeleteModalOpen}
 								onClose={onDeleteModalClose}

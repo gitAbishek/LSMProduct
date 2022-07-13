@@ -16,6 +16,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Fires before rendering related courses template in single course page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_before_related_posts' );
+
 $related_courses = masteriyo_get_related_courses( $GLOBALS['course'] );
 
 if ( empty( $related_courses ) ) {
@@ -133,14 +140,19 @@ do_action( 'masteriyo_before_related_posts_content' );
 			</div>
 		</div>
 		<?php } ?>
+	</div>
 </div>
-</div>
-
 <?php
-
 /**
  * Fires after rendering related posts (i.e. courses).
  *
  * @since 1.0.0
  */
 do_action( 'masteriyo_after_related_posts_content' );
+
+/**
+ * Fires after rendering related courses template in single course page.
+ *
+ * @since 1.0.0
+ */
+do_action( 'masteriyo_after_related_posts' );

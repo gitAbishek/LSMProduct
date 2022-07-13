@@ -24,6 +24,9 @@ export interface SingleCourseSettingsMap {
 	display: {
 		enable_review: boolean;
 	};
+	related_courses: {
+		enable: boolean;
+	};
 }
 
 export interface LearningPageSettingsMap {

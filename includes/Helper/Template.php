@@ -1515,3 +1515,17 @@ if ( ! function_exists( 'masteriyo_template_single_course_see_more_reviews_butto
 		}
 	}
 }
+
+if ( ! function_exists( 'masteriyo_template_single_course_related_courses' ) ) {
+
+	/**
+	 * Display related courses in single course page.
+	 *
+	 * @since x.x.x
+	 */
+	function masteriyo_template_single_course_related_courses() {
+		if ( masteriyo_get_setting( 'single_course.related_courses.enable' ) ) {
+			masteriyo_get_template_part( 'content', 'related-posts' );
+		}
+	}
+}

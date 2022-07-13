@@ -58,8 +58,11 @@ class Setting extends Model {
 			),
 		),
 		'single_course'  => array(
-			'display' => array(
+			'display'         => array(
 				'enable_review' => 'masteriyo_string_to_bool',
+			),
+			'related_courses' => array(
+				'enable' => 'masteriyo_string_to_bool',
 			),
 		),
 		'advance'        => array(
@@ -172,8 +175,11 @@ class Setting extends Model {
 			),
 		),
 		'single_course'  => array(
-			'display' => array(
+			'display'         => array(
 				'enable_review' => true,
+			),
+			'related_courses' => array(
+				'enable' => true,
 			),
 		),
 		'learn_page'     => array(

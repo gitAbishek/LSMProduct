@@ -736,29 +736,31 @@ function masteriyo_render_stars( $rating, $classes = '', $echo = true ) {
  *
  * @since 1.0.0
  *
- * @param Course $course
+ * @param \Masteriyo\Models\Course $course Course object.
  *
- * @return array[Course]
+ * @return \Masteriyo\Models\Course[]
  */
 function masteriyo_get_related_courses( $course ) {
-	$max_related_posts = get_option( 'masteriyo_max_related_posts_count', 3 );
-
 	/**
 	 * Filters max related posts count, which is used to limit the number of related courses shown in course detail page.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Add the $course parameter.
 	 *
 	 * @param integer $max_related_posts Maximum related posts to be shown.
+	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
-	$max_related_posts = apply_filters( 'masteriyo_max_related_posts_count', $max_related_posts );
-
+	$max_related_posts = apply_filters(
+		'masteriyo_max_related_posts_count',
+		3,
+		$course
+	);
 	$max_related_posts = absint( $max_related_posts );
-	$max_related_posts = max( $max_related_posts, 5 );
 
 	/**
 	 * Ref: https://www.wpbeginner.com/wp-tutorials/how-to-display-related-posts-in-wordpress/
 	 */
-	$args            = array(
+	$args = array(
 		'tax_query'      => array(
 			'relation' => 'AND',
 			array(
@@ -770,6 +772,7 @@ function masteriyo_get_related_courses( $course ) {
 		'posts_per_page' => $max_related_posts,
 		'post_type'      => 'mto-course',
 	);
+
 	$query           = new WP_Query( $args );
 	$related_courses = array_map( 'masteriyo_get_course', $query->posts );
 
@@ -777,11 +780,13 @@ function masteriyo_get_related_courses( $course ) {
 	 * Filters related course objects.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Add the $course parameter.
 	 *
-	 * @param \Masteriyo\Models\Course|\Masteriyo\Models\Course[] $courses Related courses.
+	 * @param \Masteriyo\Models\Course[] $courses Related courses.
 	 * @param \WP_Query $query Query object.
+	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
-	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query );
+	return apply_filters( 'masteriyo_get_related_courses', $related_courses, $query, $course );
 }
 
 /**

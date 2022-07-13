@@ -45,9 +45,10 @@ add_action( 'masteriyo_single_course_main_content', 'masteriyo_single_course_tab
 add_action( 'masteriyo_single_course_main_content', 'masteriyo_single_course_overview', 20 );
 add_action( 'masteriyo_single_course_main_content', 'masteriyo_single_course_curriculum', 30 );
 add_action( 'masteriyo_single_course_main_content', 'masteriyo_single_course_reviews', 40 );
-add_action( 'masteriyo_after_single_course', 'masteriyo_single_course_modals' );
+add_action( 'masteriyo_after_single_course', 'masteriyo_single_course_modals', 10 );
+add_action( 'masteriyo_after_single_course', 'masteriyo_template_single_course_related_courses', 20 );
 add_action( 'masteriyo_template_course_review', 'masteriyo_template_course_review', 10, 2 );
-add_action( 'masteriyo_template_course_review', 'masteriyo_template_single_course_review_replies', 10, 2 );
+add_action( 'masteriyo_template_course_review', 'masteriyo_template_single_course_review_replies', 20, 2 );
 add_action( 'masteriyo_template_course_review_reply', 'masteriyo_template_course_review_reply' );
 add_action( 'masteriyo_course_reviews_content', 'masteriyo_template_course_reviews_stats', 10, 3 );
 add_action( 'masteriyo_course_reviews_content', 'masteriyo_template_course_reviews_list', 20, 3 );

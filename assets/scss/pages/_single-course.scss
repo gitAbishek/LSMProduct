@@ -43,6 +43,7 @@
 		font-weight: 700;
 		margin-bottom: $spacing_16px;
 		padding: 0 $spacing_32px;
+		color: var(--masteriyo-color-heading);
 	}
 
 	&--title-tag {
@@ -116,6 +117,7 @@
 				font-weight: bold;
 				font-size: 16px;
 				line-height: 120%;
+				color: var(--masteriyo-color-heading);
 			}
 		}
 
@@ -362,6 +364,7 @@
 					font-size: 24px;
 					line-height: 28px;
 					margin-bottom: $spacing_12px;
+					color: var(--masteriyo-color-heading);
 				}
 			}
 		}
@@ -426,6 +429,7 @@
 					font-size: 24px;
 					line-height: 28px;
 					margin-bottom: $spacing_12px;
+					color: var(--masteriyo-color-heading);
 				}
 			}
 		}
@@ -789,6 +793,7 @@
 		font-size: 24px;
 		font-weight: 500;
 		display: inline-block;
+		color: var(--masteriyo-color-heading);
 	}
 
 	.masteriyo-input {

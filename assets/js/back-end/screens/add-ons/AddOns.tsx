@@ -21,6 +21,7 @@ import {
 	Ribbon,
 	Stripe,
 	Woocommerce,
+	courseFAQ
 } from '../../constants/images';
 import AddonItem from './components/AddonItem';
 
@@ -160,6 +161,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={Woocommerce}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('Course FAQ', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to add course FAQ.',
+								'masteriyo'
+							)}
+							thumbnailSrc={courseFAQ}
 						/>
 					</Col>
 				</Row>

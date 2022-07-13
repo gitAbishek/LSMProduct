@@ -6,6 +6,8 @@
  */
 
 use Masteriyo\Constants;
+use Masteriyo\Enums\CommentStatus;
+use Masteriyo\Models\Faq;
 use Masteriyo\Geolocation;
 use Masteriyo\Models\User;
 use Masteriyo\Models\Course;
@@ -3050,12 +3052,16 @@ function masteriyo_get_course_review_author_pp_placeholder() {
  * Get course reviews and replies.
  *
  * @since 1.0.0
+ * @since x.x.x Added parameter $page.
+ * @since x.x.x Added parameter $per_page.
  *
- * @param integer|string|Course|WP_Post $course_id
+ * @param integer|string|\Masteriyo\Models\Course|\WP_Post $course_id Course ID or object.
+ * @param integer $page Page number if paginating. Default 1.
+ * @param integer|string $per_page Items per page if paginating. Default empty string, gets all items.
  *
  * @return array
  */
-function masteriyo_get_course_reviews_and_replies( $course_id ) {
+function masteriyo_get_course_reviews_and_replies( $course_id, $page = 1, $per_page = '' ) {
 	$course = masteriyo_get_course( $course_id );
 
 	if ( is_null( $course ) ) {
@@ -3065,54 +3071,63 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		);
 	}
 
-	$course_reviews     = masteriyo_get_course_reviews(
+	$result             = masteriyo_get_course_reviews(
 		array(
 			'course_id' => $course->get_id(),
 			'status'    => array( 'approve', 'trash' ),
+			'per_page'  => $per_page,
+			'page'      => $page,
+			'paginate'  => true,
+			'parent'    => 0,
 		)
 	);
+	$course_reviews     = $result->course_review;
 	$filtered_reviews   = array();
-	$sorted_reviews     = array();
-	$replies            = array();
+	$indexed_replies    = array();
 	$reply_counts       = array();
 	$trash_reply_counts = array();
+	$course_review_ids  = array();
 
 	foreach ( $course_reviews as $review ) {
-		if ( ! $review->is_reply() ) {
-			$sorted_reviews[] = $review;
+		$course_review_ids[] = $review->get_id();
+	}
+
+	$all_replies = masteriyo_get_replies_of_course_reviews( $course_review_ids );
+
+	// Count replies.
+	foreach ( $all_replies as $reply ) {
+		$review_id = $reply->get_parent();
+
+		if ( ! isset( $trash_reply_counts[ $review_id ] ) ) {
+			$trash_reply_counts[ $review_id ] = 0;
+		}
+		if ( CommentStatus::TRASH === $reply->get_status() ) {
+			$trash_reply_counts[ $review_id ] += 1;
+		}
+		if ( ! isset( $reply_counts[ $review_id ] ) ) {
+			$reply_counts[ $review_id ] = 0;
+		}
+
+		$reply_counts[ $review_id ] += 1;
+
+		if ( ! isset( $indexed_replies[ $review_id ] ) ) {
+			$indexed_replies[ $review_id ] = array();
+		}
+
+		if ( CommentStatus::TRASH === $reply->get_status() ) {
 			continue;
 		}
-		$key       = $review->get_parent();
-		$review_id = $review->get_id();
 
-		if ( ! isset( $trash_reply_counts[ $key ] ) ) {
-			$trash_reply_counts[ $key ] = 0;
-		}
-		if ( 'trash' === $review->get_status() ) {
-			$trash_reply_counts[ $key ] += 1;
-		}
-		if ( ! isset( $replies[ $key ] ) ) {
-			$replies[ $key ] = array();
-		}
-		if ( ! isset( $reply_counts[ $key ] ) ) {
-			$reply_counts[ $key ] = 0;
-		}
-		$reply_counts[ $key ] += 1;
-
-		if ( 'trash' === $review->get_status() ) {
-			continue;
-		}
-
-		$replies[ $key ][] = $review;
+		$indexed_replies[ $review_id ][] = $reply;
 	}
 
 	// Remove unnecessary items.
-	foreach ( $sorted_reviews as $review ) {
+	foreach ( $course_reviews as $review ) {
 		$review_id = $review->get_id();
 
-		if ( 'trash' === $review->get_status() ) {
+		if ( CommentStatus::TRASH === $review->get_status() ) {
 			if (
-				! isset( $replies[ $review_id ] ) ||
+				! isset( $indexed_replies[ $review_id ] ) ||
 				$reply_counts[ $review_id ] === $trash_reply_counts[ $review_id ]
 			) {
 				continue;
@@ -3120,14 +3135,14 @@ function masteriyo_get_course_reviews_and_replies( $course_id ) {
 		}
 		$filtered_reviews[] = $review;
 
-		if ( isset( $replies[ $review_id ] ) && $reply_counts[ $review_id ] === $trash_reply_counts[ $review_id ] ) {
-			unset( $replies[ $review_id ] );
+		if ( isset( $indexed_replies[ $review_id ] ) && $reply_counts[ $review_id ] === $trash_reply_counts[ $review_id ] ) {
+			unset( $indexed_replies[ $review_id ] );
 		}
 	}
 
 	return array(
 		'reviews' => $filtered_reviews,
-		'replies' => $replies,
+		'replies' => $indexed_replies,
 	);
 }
 

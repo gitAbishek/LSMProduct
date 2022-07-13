@@ -60,7 +60,7 @@
 
 // Fields
 .masteriyo-input {
-	padding: $spacing_16px;
+	padding: $spacing_8px $spacing_16px;
 	outline: none;
 	width: 100%;
 	@include masteriyo-default-border(2);

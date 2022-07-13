@@ -211,9 +211,9 @@ class CourseReviewsController extends CommentsController {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  int|WP_Comment|Model $object Object ID or WP_Comment or Model.
+	 * @param int|\WP_Comment|\Masteriyo\Models\CourseReview $object Object ID or WP_Comment or Model.
 	 *
-	 * @return object Model object or WP_Error object.
+	 * @return \Masteriyo\Models\CourseReview Model object or WP_Error object.
 	 */
 	protected function get_object( $object ) {
 		try {
@@ -461,6 +461,7 @@ class CourseReviewsController extends CommentsController {
 					'description' => __( 'Course Review rating.', 'masteriyo' ),
 					'type'        => 'integer',
 					'context'     => array( 'view', 'edit' ),
+					'required'    => true,
 				),
 				'status'       => array(
 					'description' => __( 'Course Review Status.', 'masteriyo' ),
@@ -717,6 +718,18 @@ class CourseReviewsController extends CommentsController {
 			);
 		}
 
+		$rating = absint( $request['rating'] );
+
+		if ( empty( $request['parent'] ) && $rating <= 0 ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, rating cannot be zero or less.', 'masteriyo' ),
+				array(
+					'status' => 400,
+				)
+			);
+		}
+
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
 			return true;
 		}
@@ -847,10 +860,6 @@ class CourseReviewsController extends CommentsController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
 		$review = $this->get_object( absint( $request['id'] ) );
 
 		if ( ! is_object( $review ) ) {
@@ -861,6 +870,22 @@ class CourseReviewsController extends CommentsController {
 					'status' => rest_authorization_required_code(),
 				)
 			);
+		}
+
+		$rating = absint( $request['rating'] );
+
+		if ( ! $review->is_reply() && $rating <= 0 ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_create',
+				__( 'Sorry, rating cannot be zero or less.', 'masteriyo' ),
+				array(
+					'status' => 400,
+				)
+			);
+		}
+
+		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
+			return true;
 		}
 
 		if ( get_current_user_id() !== $review->get_author_id() ) {

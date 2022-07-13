@@ -98,8 +98,7 @@ const Sidebar = () => {
 				fontSize="sm"
 				fontWeight="medium"
 				color="gray.600"
-				className="mto-account-sidebar"
-				>
+				className="mto-account-sidebar">
 				<ListItem>
 					<Stack direction="row" align="center" spacing="3">
 						<Avatar

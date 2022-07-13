@@ -667,6 +667,7 @@
 
 .course-reviews {
 	padding: 0 $spacing_32px $spacing_32px;
+	color: var(--masteriyo-color-text);
 
 	.masteriyo-course-reviews-list {
 		.masteriyo-course-review__content {
@@ -762,6 +763,22 @@
 	.masteriyo-link-login {
 		margin: 0 $spacing_4px;
 	}
+
+	.masteriyo-load-more {
+		width: 100%;
+		margin-top: $spacing_24px;
+		padding: $spacing_4px;
+		font-size: 14px;
+		background-color: transparent;
+		border: 1px solid var(--masteriyo-color-primary);
+		color: var(--masteriyo-color-primary);
+		border-radius: $border_radius_4;
+
+		&:hover {
+			border: 1px solid var(--masteriyo-color-btn-blue-hover);
+			color: var(--masteriyo-color-btn-blue-hover);
+		}
+	}
 }
 
 // Review form.
@@ -772,6 +789,10 @@
 		font-size: 24px;
 		font-weight: 500;
 		display: inline-block;
+	}
+
+	.masteriyo-input {
+		border-radius: $border_radius_4;
 	}
 
 	.masteriyo-rating {

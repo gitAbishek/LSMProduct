@@ -1354,6 +1354,8 @@ if ( ! function_exists( 'masteriyo_template_course_review' ) ) {
 	 * Print course review item.
 	 *
 	 * @since 1.0.5
+	 *
+	 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 	 */
 	function masteriyo_template_course_review( $course_review ) {
 		if ( 'trash' === $course_review->get_status() ) {
@@ -1400,9 +1402,20 @@ if ( ! function_exists( 'masteriyo_template_course_reviews_list' ) ) {
 	 * Print course reviews list.
 	 *
 	 * @since 1.0.5
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 * @param \Masteriyo\Models\CourseReview[] $course_reviews Course reviews.
+	 * @param \Masteriyo\Models\CourseReview[] $replies Replies to the course review.
 	 */
 	function masteriyo_template_course_reviews_list( $course, $course_reviews, $replies ) {
-		masteriyo_get_template( 'single-course/reviews-list.php', compact( 'course', 'course_reviews', 'replies' ) );
+		masteriyo_get_template(
+			'single-course/reviews-list.php',
+			array(
+				'course'         => $course,
+				'course_reviews' => $course_reviews,
+				'replies'        => $replies,
+			)
+		);
 	}
 }
 
@@ -1458,5 +1471,47 @@ if ( ! function_exists( 'masteriyo_course_category_description' ) ) {
 		$html .= '</p>';
 
 		echo wp_kses_post( $html );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_single_course_review_replies' ) ) {
+	/**
+	 * Display review replies in single course page's reviews list section.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
+	 * @param \Masteriyo\Models\CourseReview[] $replies Replies to the course review.
+	 */
+	function masteriyo_template_single_course_review_replies( $course_review, $replies ) {
+		if ( ! empty( $replies ) ) {
+			masteriyo_get_template(
+				'single-course/review-replies.php',
+				array(
+					'course_review' => $course_review,
+					'replies'       => $replies,
+				)
+			);
+		}
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_single_course_see_more_reviews_button' ) ) {
+	/**
+	 * Display see more reviews button in single course page's reviews list section.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 */
+	function masteriyo_template_single_course_see_more_reviews_button( $course ) {
+		if ( masteriyo_get_course_reviews_infinite_loading_pages_count( $course ) > 1 ) {
+			masteriyo_get_template(
+				'single-course/see-more-reviews-button.php',
+				array(
+					'course' => $course,
+				)
+			);
+		}
 	}
 }

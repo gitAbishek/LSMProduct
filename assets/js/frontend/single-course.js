@@ -48,6 +48,22 @@
 				complete: options.onComplete,
 			});
 		},
+		getCourseReviewsPageHtml: function (data, options) {
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					action: 'masteriyo_course_reviews_infinite_loading',
+					nonce: mto_data.reviews_listing_nonce,
+					page: data.page,
+					course_id: mto_data.course_id,
+				},
+				url: mto_data.ajaxURL,
+				success: options.onSuccess,
+				error: options.onError,
+				complete: options.onComplete,
+			});
+		},
 	};
 	var masteriyo_utils = {
 		getErrorNotice: function (message) {
@@ -145,6 +161,7 @@
 				masteriyo.init_edit_reviews_handler();
 				masteriyo.init_delete_reviews_handler();
 				masteriyo.init_reply_btn_handler();
+				masteriyo.init_course_reviews_loader();
 			});
 		},
 		init_course_reviews_menu: function () {
@@ -557,6 +574,58 @@
 				$('.masteriyo-expand-collape-all').text('Expand All');
 				isCollapsedAll = true;
 			}
+		},
+		init_course_reviews_loader: function () {
+			var isLoadingReviews = false;
+			var currentPage = 1;
+
+			$('button.masteriyo-load-more').on('click', function () {
+				if (isLoadingReviews) {
+					return;
+				}
+				var $button = $(this);
+
+				isLoadingReviews = true;
+				$button.text(mto_data.labels.loading);
+
+				masteriyo_api.getCourseReviewsPageHtml(
+					{ page: currentPage + 1 },
+					{
+						onSuccess: function (res) {
+							if (res.success) {
+								currentPage += 1;
+
+								if (currentPage >= mto_data.course_review_pages) {
+									$button.remove();
+								}
+								$('.masteriyo-course-reviews-list').append(res.data.html);
+								$('.course-reviews .masteriyo-danger-msg').remove();
+							}
+						},
+						onError: function (xhr, status, error) {
+							var message = error;
+
+							if (
+								xhr.responseJSON &&
+								xhr.responseJSON.data &&
+								xhr.responseJSON.data.message
+							) {
+								message = xhr.responseJSON.data.message;
+							}
+
+							if (!message) {
+								message = mto_data.labels.see_more_reviews;
+							}
+
+							$button.after(masteriyo_utils.getErrorNotice(message));
+						},
+						onComplete: function () {
+							isLoadingReviews = false;
+							$button.text(mto_data.labels.see_more_reviews);
+						},
+					}
+				);
+			});
 		},
 	};
 

@@ -604,13 +604,13 @@ class ScriptStyle {
 		wp_add_inline_style( 'masteriyo-public', $custom_css );
 
 		// Fixes adminbar issue on learn page. @see https://wordpress.org/support/topic/course-lesson-page-mobile-responsiveness/
-		$custom_css="
+		$custom_css = '
 			@media screen and (max-width: 600px){
 				.masteriyo-interactive-page #wpadminbar {
 					position: fixed;
 				}
 			}
-		";
+		';
 		wp_add_inline_style( 'admin-bar', $custom_css );
 	}
 
@@ -915,24 +915,31 @@ class ScriptStyle {
 					'data' => array(
 						'rootApiUrl'              => esc_url_raw( rest_url() ),
 						'nonce'                   => wp_create_nonce( 'wp_rest' ),
+						'reviews_listing_nonce'   => wp_create_nonce( 'masteriyo_course_reviews_infinite_loading_nonce' ),
 						'rating_indicator_markup' => masteriyo_get_rating_indicators_markup( 'masteriyo-rating-input-icon' ),
 						'max_course_rating'       => masteriyo_get_max_course_rating(),
 						'review_deleted_notice'   => masteriyo_get_template_html( 'notices/review-deleted.php' ),
 						'labels'                  => array(
-							'type_confirm'   => __( 'Type CONFIRM to proceed.', 'masteriyo' ),
-							'try_again'      => __( 'Try again', 'masteriyo' ),
-							'submit'         => __( 'Submit', 'masteriyo' ),
-							'update'         => __( 'Update', 'masteriyo' ),
-							'delete'         => __( 'Delete', 'masteriyo' ),
-							'submitting'     => __( 'Submitting...', 'masteriyo' ),
-							'deleting'       => __( 'Deleting...', 'masteriyo' ),
-							'reply_to'       => __( 'Reply to', 'masteriyo' ),
-							'edit_reply'     => __( 'Edit reply', 'masteriyo' ),
-							'edit_review'    => __( 'Edit review', 'masteriyo' ),
-							'submit_success' => __( 'Submitted successfully.', 'masteriyo' ),
-							'update_success' => __( 'Updated successfully.', 'masteriyo' ),
-							'delete_success' => __( 'Deleted successfully.', 'masteriyo' ),
+							'type_confirm'             => __( 'Type CONFIRM to proceed.', 'masteriyo' ),
+							'try_again'                => __( 'Try again', 'masteriyo' ),
+							'submit'                   => __( 'Submit', 'masteriyo' ),
+							'update'                   => __( 'Update', 'masteriyo' ),
+							'delete'                   => __( 'Delete', 'masteriyo' ),
+							'submitting'               => __( 'Submitting...', 'masteriyo' ),
+							'deleting'                 => __( 'Deleting...', 'masteriyo' ),
+							'reply_to'                 => __( 'Reply to', 'masteriyo' ),
+							'edit_reply'               => __( 'Edit reply', 'masteriyo' ),
+							'edit_review'              => __( 'Edit review', 'masteriyo' ),
+							'submit_success'           => __( 'Submitted successfully.', 'masteriyo' ),
+							'update_success'           => __( 'Updated successfully.', 'masteriyo' ),
+							'delete_success'           => __( 'Deleted successfully.', 'masteriyo' ),
+							'loading'                  => __( 'Loading...', 'masteriyo' ),
+							'load_more_reviews_failed' => __( 'Failed to load more reviews', 'masteriyo' ),
+							'see_more_reviews'         => __( 'See more reviews', 'masteriyo' ),
 						),
+						'ajaxURL'                 => admin_url( 'admin-ajax.php' ),
+						'course_id'               => isset( $GLOBALS['course'] ) ? $GLOBALS['course']->get_id() : 0,
+						'course_review_pages'     => isset( $GLOBALS['course'] ) ? masteriyo_get_course_reviews_infinite_loading_pages_count( $GLOBALS['course'] ) : 0,
 					),
 				),
 				'checkout'      => array(

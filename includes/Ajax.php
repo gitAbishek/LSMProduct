@@ -74,6 +74,7 @@ class Ajax {
 					"{$namespace}\\LoginAjaxHandler",
 					"{$namespace}\\CheckoutAjaxHandler",
 					"{$namespace}\\ReviewNoticeAjaxHandler",
+					"{$namespace}\\CourseReviewsInfiniteLoadingAjaxHandler",
 				)
 			)
 		);

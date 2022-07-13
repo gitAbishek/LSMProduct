@@ -1,8 +1,8 @@
 <?php
 /**
- * The Template for displaying course reviews list in single course page
+ * The Template for displaying see more reviews button in single course page.
  *
- * This template can be overridden by copying it to yourtheme/masteriyo/single-course/reviews-list.php.
+ * This template can be overridden by copying it to yourtheme/masteriyo/single-course/see-more-reviews-button.php.
  *
  * HOWEVER, on occasion Masteriyo will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -17,7 +17,7 @@
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 ?>
-<div class="masteriyo-course-reviews-list">
-	<?php masteriyo_get_course_reviews_infinite_loading_page_html( $course, 1, true ); ?>
-</div>
+<button class="masteriyo-load-more masteriyo-load-more-course-review">
+	<?php esc_html_e( 'See more reviews', 'masteriyo' ); ?>
+</button>
 <?php

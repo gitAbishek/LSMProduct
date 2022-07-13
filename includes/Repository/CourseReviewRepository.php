@@ -380,27 +380,105 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	}
 
 	/**
+	 * Get valid \WP_Comment_Query args from a ObjectQuery's query variables.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $query_vars Query vars from a ObjectQuery.
+	 *
+	 * @return array
+	 */
+	protected function get_wp_query_args( $query_vars ) {
+		$skipped_values = array( '', array(), null );
+		$wp_query_args  = array(
+			'errors'     => array(),
+			'meta_query' => array(), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		);
+
+		foreach ( $query_vars as $key => $value ) {
+			if ( in_array( $value, $skipped_values, true ) || 'meta_query' === $key ) {
+				continue;
+			}
+
+			// Build meta queries out of vars that are stored in internal meta keys.
+			if ( in_array( '_' . $key, $this->internal_meta_keys, true ) ) {
+				// Check for existing values if wildcard is used.
+				if ( '*' === $value ) {
+					$wp_query_args['meta_query'][] = array(
+						array(
+							'key'     => '_' . $key,
+							'compare' => 'EXISTS',
+						),
+						array(
+							'key'     => '_' . $key,
+							'value'   => '',
+							'compare' => '!=',
+						),
+					);
+				} else {
+					$wp_query_args['meta_query'][] = array(
+						'key'     => '_' . $key,
+						'value'   => $value,
+						'compare' => is_array( $value ) ? 'IN' : '=',
+					);
+				}
+			} else { // Other vars get mapped to wp_query args or just left alone.
+				$key_mapping = array(
+					'course_id'      => 'post_id',
+					'status'         => 'status',
+					'page'           => 'paged',
+					'per_page'       => 'number',
+					'include'        => 'comment__in',
+					'exclude'        => 'comment__not_in',
+					'parent'         => 'parent',
+					'parent_include' => 'parent__in',
+					'parent_exclude' => 'parent__not_in',
+					'type'           => 'type',
+					'return'         => 'fields',
+				);
+
+				if ( isset( $key_mapping[ $key ] ) ) {
+					$wp_query_args[ $key_mapping[ $key ] ] = $value;
+				} else {
+					$wp_query_args[ $key ] = $value;
+				}
+			}
+		}
+
+		/**
+		 * Filter WP query vars.
+		 *
+		 * @since 1.0.0
+		 * @since 1.4.9 Added third parameter $repository.
+		 *
+		 * @param array $wp_query_args WP Query args.
+		 * @param array $query_vars query vars from a ObjectQuery.
+		 * @param \Masteriyo\Repository\AbstractRepository $repository AbstractRepository object.
+		 *
+		 * @return array WP Query args.
+		 */
+		return apply_filters( 'masteriyo_get_wp_query_args', $wp_query_args, $query_vars, $this );
+	}
+
+	/**
 	 * Fetch courses reviews.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $query_vars Query vars.
-	 * @return CourseReview[]
+	 *
+	 * @return array
 	 */
 	public function query( $query_vars ) {
-		$status = $query_vars['status'];
-
-		unset( $query_vars['status'] );
-
-		$args           = $this->get_wp_query_args( $query_vars );
-		$args['status'] = $status;
+		$args = $this->get_wp_query_args( $query_vars );
 
 		// Fetching review of comment_type 'course_review', 'type' already map to 'post_type' so need to add 'type' as 'comment_type' here.
 		$args = array_merge( $args, array( 'type' => 'mto_course_review' ) );
 
-		if ( isset( $query_vars['course_id'] ) ) {
-			$args['post_id'] = $query_vars['course_id'];
+		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
+			$args['no_found_rows'] = false;
 		}
+
 		if ( ! empty( $args['errors'] ) ) {
 			$query = (object) array(
 				'posts'         => array(),
@@ -425,7 +503,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 		if ( isset( $query_vars['paginate'] ) && $query_vars['paginate'] ) {
 			return (object) array(
 				'course_review' => $course_review,
-				'total'         => $query->found_posts,
+				'total'         => $query->found_comments,
 				'max_num_pages' => $query->max_num_pages,
 			);
 		}

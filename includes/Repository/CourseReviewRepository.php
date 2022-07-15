@@ -65,7 +65,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 			}
 
 			if ( ! $course_review->get_author_id( 'edit' ) ) {
-				$course_review->get_author_id( $current_user->ID );
+				$course_review->set_author_id( $current_user->ID );
 			}
 
 			if ( ! $course_review->get_author_name( 'edit' ) ) {

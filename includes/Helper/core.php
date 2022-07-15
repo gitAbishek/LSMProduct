@@ -745,7 +745,7 @@ function masteriyo_get_related_courses( $course ) {
 	 * Filters max related posts count, which is used to limit the number of related courses shown in course detail page.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Add the $course parameter.
+	 * @since 1.5.9 Add the $course parameter.
 	 *
 	 * @param integer $max_related_posts Maximum related posts to be shown.
 	 * @param \Masteriyo\Models\Course $course Course object.
@@ -780,7 +780,7 @@ function masteriyo_get_related_courses( $course ) {
 	 * Filters related course objects.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Add the $course parameter.
+	 * @since 1.5.9 Add the $course parameter.
 	 *
 	 * @param \Masteriyo\Models\Course[] $courses Related courses.
 	 * @param \WP_Query $query Query object.
@@ -3057,8 +3057,8 @@ function masteriyo_get_course_review_author_pp_placeholder() {
  * Get course reviews and replies.
  *
  * @since 1.0.0
- * @since x.x.x Added parameter $page.
- * @since x.x.x Added parameter $per_page.
+ * @since 1.5.9 Added parameter $page.
+ * @since 1.5.9 Added parameter $per_page.
  *
  * @param integer|string|\Masteriyo\Models\Course|\WP_Post $course_id Course ID or object.
  * @param integer $page Page number if paginating. Default 1.

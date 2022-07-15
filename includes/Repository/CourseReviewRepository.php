@@ -382,7 +382,7 @@ class CourseReviewRepository extends AbstractRepository implements RepositoryInt
 	/**
 	 * Get valid \WP_Comment_Query args from a ObjectQuery's query variables.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param array $query_vars Query vars from a ObjectQuery.
 	 *

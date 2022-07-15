@@ -1478,7 +1478,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_review_replies' ) ) {
 	/**
 	 * Display review replies in single course page's reviews list section.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param \Masteriyo\Models\CourseReview $course_review Course review object.
 	 * @param \Masteriyo\Models\CourseReview[] $replies Replies to the course review.
@@ -1500,7 +1500,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_see_more_reviews_butto
 	/**
 	 * Display see more reviews button in single course page's reviews list section.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
@@ -1521,7 +1521,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_related_courses' ) ) {
 	/**
 	 * Display related courses in single course page.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 */
 	function masteriyo_template_single_course_related_courses() {
 		if ( masteriyo_get_setting( 'single_course.related_courses.enable' ) ) {

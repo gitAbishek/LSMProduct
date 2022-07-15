@@ -2,7 +2,7 @@
 /**
  * Helper functions for course reviews.
  *
- * @since x.x.x
+ * @since 1.5.9
  */
 
 use Masteriyo\Enums\CommentStatus;
@@ -11,7 +11,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_pages_cou
 	/**
 	 * Get count of pages for course reviews infinite loading.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param integer|string|\Masteriyo\Models\Course|\WP_Post $course_id Course ID or object.
 	 *
@@ -21,7 +21,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_pages_cou
 		/**
 		 * Filters maximum course reviews per page.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.9
 		 *
 		 * @param integer $per_page Course reviews per page.
 		 */
@@ -32,7 +32,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_pages_cou
 			/**
 			 * Filters the count of pages for course reviews infinite loading.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.9
 			 *
 			 * @param integer $count The count.
 			 */
@@ -53,7 +53,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_pages_cou
 		/**
 		 * Filters the count of pages for course reviews infinite loading.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.9
 		 *
 		 * @param integer $count The count.
 		 */
@@ -65,7 +65,7 @@ if ( ! function_exists( 'masteriyo_get_replies_of_course_reviews' ) ) {
 	/**
 	 * Get replies of course reviews.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param integer[] $review_ids Review Ids.
 	 *
@@ -82,7 +82,7 @@ if ( ! function_exists( 'masteriyo_get_replies_of_course_reviews' ) ) {
 		/**
 		 * Filters replies of course reviews.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.9
 		 *
 		 * @param \Masteriyo\Models\CourseReview $replies Replies for the given course reviews.
 		 * @param integer[] $review_ids Course review IDs.
@@ -95,7 +95,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_page_html
 	/**
 	 * Get html for a list of course reviews equivalent to one page for infinite loading.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @param integer|\Masteriyo\Models\Course|\WP_Post $course_id Course ID.
 	 * @param integer $page Page number.
@@ -107,7 +107,7 @@ if ( ! function_exists( 'masteriyo_get_course_reviews_infinite_loading_page_html
 		/**
 		 * Filters maximum course reviews per page.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.9
 		 *
 		 * @param integer $per_page Course reviews per page.
 		 */

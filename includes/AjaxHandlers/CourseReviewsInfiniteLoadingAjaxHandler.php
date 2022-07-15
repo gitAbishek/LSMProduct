@@ -2,7 +2,7 @@
 /**
  * Ajax handler for infinite loading course reviews.
  *
- * @since x.x.x
+ * @since 1.5.9
  * @package Masteriyo\AjaxHandlers
  */
 
@@ -15,7 +15,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 	/**
 	 * Ajax action name.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 *
 	 * @var string
 	 */
@@ -24,7 +24,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 	/**
 	 * Register ajax handler.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 */
 	public function register() {
 		add_action( "wp_ajax_nopriv_{$this->action}", array( $this, 'process' ) );
@@ -34,7 +34,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 	/**
 	 * Process ajax request.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 */
 	public function process() {
 		if ( ! isset( $_REQUEST['nonce'] ) ) {
@@ -60,7 +60,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 			/**
 			 * Filters course reviews list html for a page while infinite loading.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.9
 			 *
 			 * @param string $html The course reviews html.
 			 * @param integer $course_id Course ID.
@@ -91,7 +91,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 	/**
 	 * Validate ajax request.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.9
 	 */
 	protected function validate_request() {
 		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'masteriyo_course_reviews_infinite_loading_nonce' ) ) {
@@ -114,7 +114,7 @@ class CourseReviewsInfiniteLoadingAjaxHandler extends AjaxHandler {
 		 * Filters validation result for course reviews infinite loading ajax request.
 		 * Return true for valid. Return \Throwable instance for error.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.9
 		 *
 		 * @param boolean $is_valid True for valid. Return \Throwable instance for error.
 		 */

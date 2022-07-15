@@ -60,6 +60,7 @@ const AddCategoryModal = () => {
 					status: 'success',
 				});
 				queryClient.invalidateQueries('categoryLists');
+				queryClient.invalidateQueries('allCategories');
 				setIsCreateCatModalOpen(false);
 				methods.reset();
 			},

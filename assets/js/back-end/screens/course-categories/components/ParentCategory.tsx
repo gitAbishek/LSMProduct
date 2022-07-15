@@ -30,7 +30,7 @@ const ParentCategory: React.FC<Props> = (props) => {
 	const [categories, setCategories] = useState<CategoryOption[]>([]);
 
 	const categoriesQuery = useQuery<CourseCategoriesResponse>(
-		'categoryLists',
+		'allCategories',
 		() => categoryAPI.list({ per_page: 100 }),
 		{
 			onSuccess: (response) => {

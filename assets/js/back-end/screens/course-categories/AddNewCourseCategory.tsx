@@ -63,6 +63,7 @@ const AddNewCourseCategory: React.FC = () => {
 				history.push(routes.course_categories.list);
 				queryClient.invalidateQueries('courseCategoriesList');
 				queryClient.invalidateQueries('categoryLists');
+				queryClient.invalidateQueries('allCategories');
 			},
 			onError: (error: any) => {
 				toast({

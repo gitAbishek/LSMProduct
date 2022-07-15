@@ -114,6 +114,7 @@ class Cart {
 	 */
 	protected function init_hooks() {
 		add_action( 'masteriyo_add_to_cart', array( $this, 'calculate_totals' ), 20, 0 );
+		add_action( 'masteriyo_cart_emptied', array( $this, 'destroy_cart_session' ) );
 		add_action( 'masteriyo_cart_item_removed', array( $this, 'calculate_totals' ), 20, 0 );
 		add_action( 'masteriyo_cart_item_restored', array( $this, 'calculate_totals' ), 20, 0 );
 		add_action( 'masteriyo_check_cart_items', array( $this, 'check_cart_items' ), 1 );
@@ -1633,5 +1634,6 @@ class Cart {
 		$this->session->put( 'cart_totals', null );
 		$this->session->put( 'removed_cart_contents', null );
 		$this->session->put( 'order_awaiting_payment', null );
+		$this->session->save_data();
 	}
 }

@@ -116,7 +116,7 @@ final class Totals {
 	 * Get default blank set of props used per item.
 	 *
 	 * @since  1.0.0
-	 * @return array
+	 * @return stdClass
 	 */
 	protected function get_default_item_props() {
 		return (object) array(
@@ -141,7 +141,7 @@ final class Totals {
 	}
 
 	/**
-	 * Handles a cart or order object passed in for calculation. Normalises data
+	 * Handles a cart or order object passed in for calculation. Normalizes data
 	 * into the same format for use by this class.
 	 *
 	 * Each item is made up of the following props, in addition to those returned by get_default_item_props() for totals.
@@ -161,7 +161,7 @@ final class Totals {
 			$item->key                     = $cart_item_key;
 			$item->object                  = $cart_item;
 			$item->quantity                = $cart_item['quantity'];
-			$item->price                   = masteriyo_add_number_precision_deep( $cart_item['data']->get_price() * $cart_item['quantity'] );
+			$item->price                   = masteriyo_add_number_precision_deep( floatval( $cart_item['data']->get_price() ) * $cart_item['quantity'] );
 			$item->product                 = $cart_item['data'];
 			$this->items[ $cart_item_key ] = $item;
 		}

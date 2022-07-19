@@ -31,7 +31,6 @@ class Onboard {
 	 * @return void
 	 */
 	public function init() {
-
 		$wizard_ran = get_option( 'masteriyo_first_time_activation_flag', false );
 
 		// If Wizard was ran already, then do not proceed to Wizard page again,

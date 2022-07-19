@@ -16,12 +16,13 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
 import {
+	courseFAQ,
 	DownloadMaterial,
 	Logo,
 	Ribbon,
 	Stripe,
 	Woocommerce,
-	courseFAQ
+	whiteLabel
 } from '../../constants/images';
 import AddonItem from './components/AddonItem';
 
@@ -166,11 +167,15 @@ const AddOns = () => {
 					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('Course FAQ', 'masteriyo')}
-							addOnDescription={__(
-								'Allows to add course FAQ.',
-								'masteriyo'
-							)}
+							addOnDescription={__('Allows to add course FAQ.', 'masteriyo')}
 							thumbnailSrc={courseFAQ}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('White Label', 'masteriyo')}
+							addOnDescription={__('Allows to add White Label.', 'masteriyo')}
+							thumbnailSrc={whiteLabel}
 						/>
 					</Col>
 				</Row>

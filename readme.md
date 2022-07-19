@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.10
+**Stable tag**: 1.5.9
 
 **License: GNU** General Public License v3.0
 
@@ -51,17 +51,14 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
-### 1.5.10 - 19-07-2022
-
-- Fix - request_filesystem_credentials not exists.
-- Fix - Syntax token error while loading global settings.
-
-### 1.5.9 - 15-07-2022
+### 1.5.9 - 19-07-2022
 
 - Enhancement - Add load more button in course reviews listing on the single course page.
 - Fix - Heading text colour.
 - Fix - Redundant courses in the cart when the order is uncompleted.
 - Fix - Categories list disappearing after opening the add new category modal.
+- Fix - request_filesystem_credentials not exists.
+- Fix - Syntax token error while loading global settings.
 
 ### 1.5.8 - 11-07-2022
 

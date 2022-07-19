@@ -2,7 +2,7 @@
 /**
  * Pages controller class.
  *
- * @since 1.5.10
+ * @since 1.5.9
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;
@@ -15,7 +15,7 @@ class PagesController extends CrudController {
 	/**
 	 * Endpoint namespace.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @var string
 	 */
@@ -24,7 +24,7 @@ class PagesController extends CrudController {
 	/**
 	 * Route base.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @var string
 	 */
@@ -33,7 +33,7 @@ class PagesController extends CrudController {
 	/**
 	 * Post type.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @var string
 	 */
@@ -42,7 +42,7 @@ class PagesController extends CrudController {
 	/**
 	 * Post type.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @var string
 	 */
@@ -58,7 +58,7 @@ class PagesController extends CrudController {
 	/**
 	 * Permission class.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @var Masteriyo\Helper\Permission;
 	 */
@@ -67,7 +67,7 @@ class PagesController extends CrudController {
 	/**
 	 * Constructor.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param Permission $permission
 	 */
@@ -78,7 +78,7 @@ class PagesController extends CrudController {
 	/**
 	 * Register routes.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 */
 	public function register_routes() {
 		register_rest_route(
@@ -98,7 +98,7 @@ class PagesController extends CrudController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
@@ -110,7 +110,7 @@ class PagesController extends CrudController {
 	/**
 	 * Get object.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param  \WP_Post $post Post.
 	 * @return \WP_Post WP_Post object or WP_Error object.
@@ -194,7 +194,7 @@ class PagesController extends CrudController {
 	/**
 	 * Prepares the object for the REST response.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param  Masteriyo\Database\Model $object  Model object.
 	 * @param  WP_REST_Request $request Request object.
@@ -212,7 +212,7 @@ class PagesController extends CrudController {
 		/**
 		 * Filter the data for a response.
 		 *
-		 * @since 1.5.10
+		 * @since 1.5.9
 		 *
 		 * The dynamic portion of the hook name, $this->object_type,
 		 * refers to object type being prepared for the response.
@@ -227,7 +227,7 @@ class PagesController extends CrudController {
 	/**
 	 * Process objects collection.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param array $objects Pages data.
 	 * @param array $query_args Query arguments.
@@ -250,7 +250,7 @@ class PagesController extends CrudController {
 	/**
 	 * Get post data.
 	 *
-	 * @since 1.5.10
+	 * @since 1.5.9
 	 *
 	 * @param \WP_Post $post Post instance.
 	 * @param string $context Request context.
@@ -267,7 +267,7 @@ class PagesController extends CrudController {
 		/**
 		 * Filter post rest response data.
 		 *
-		 * @since 1.5.10
+		 * @since 1.5.9
 		 *
 		 * @param array $data post data.
 		 * @param \WP_Post $post post object.

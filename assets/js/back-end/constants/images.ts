@@ -9,6 +9,7 @@ export { default as onboardCover } from '../../../img/onboard-cover.png';
 export { default as onboardFinishCover } from '../../../img/onboard-finish-cover.png';
 export { default as Polygon } from '../../../img/polygon.png';
 export { default as Stripe } from '../../../img/stripe.png';
+export { default as whiteLabel } from '../../../img/white-label.png';
 export { default as Woocommerce } from '../../../img/woocommerce.png';
 export { default as Five0Five } from '../../../svg/505.svg';
 export { default as CoursePerRow1Active } from '../../../svg/course-per-row-1-active.svg';

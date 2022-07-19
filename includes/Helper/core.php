@@ -1960,6 +1960,10 @@ function masteriyo_logout_url( $redirect = '' ) {
 function masteriyo_get_svg( $name, $echo = false ) {
 	global $wp_filesystem;
 
+	if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+		require_once ABSPATH . '/wp-admin/includes/file.php';
+	}
+
 	$credentials = request_filesystem_credentials( '', 'direct' );
 
 	// Bail early if the credentials is wrong.

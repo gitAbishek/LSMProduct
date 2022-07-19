@@ -6,12 +6,12 @@ class PagesAPI {
 	uri: string;
 
 	constructor() {
-		this.uri = `${urls.wpPages}`;
+		this.uri = `${urls.pages}`;
 	}
 
 	async list(
 		query: any = {
-			per_page: -1,
+			per_page: 100,
 		}
 	) {
 		return http({

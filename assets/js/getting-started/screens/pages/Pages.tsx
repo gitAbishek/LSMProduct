@@ -43,10 +43,10 @@ const Pages: React.FC<Props> = (props) => {
 			return (
 				<>
 					<option value="">{__('Select a page.', 'masteriyo')}</option>
-					{pagesQuery?.data?.map(
-						(page: { id: number; title: { rendered: string } }) => (
+					{pagesQuery?.data?.data?.map(
+						(page: { id: number; title: string }) => (
 							<option value={page.id} key={page.id}>
-								{page.title.rendered}
+								{page.title}
 							</option>
 						)
 					)}

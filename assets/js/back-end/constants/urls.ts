@@ -2,6 +2,7 @@ const base = '/masteriyo/v1/';
 const urls = {
 	wpMedia: '/wp/v2/media',
 	wpPages: '/wp/v2/pages',
+	pages: base + 'pages',
 	courses: base + 'courses',
 	categories: base + 'courses/categories',
 	tags: base + 'courses/tags',

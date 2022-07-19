@@ -106,6 +106,7 @@ class RestApi {
 			'instructors'           => "{$namespace}\\InstructorsController",
 			'users.courses'         => "{$namespace}\\UserCoursesController",
 			'notifications'         => "{$namespace}\\NotificationsController",
+			'pages'                 => "{$namespace}\\PagesController",
 		);
 	}
 

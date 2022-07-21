@@ -1,4 +1,6 @@
 import {
+	Alert,
+	AlertIcon,
 	Box,
 	Button,
 	ButtonGroup,
@@ -45,12 +47,12 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 
 	const imageAPi = new MediaAPI();
 
-	const imageQuery = useQuery<MediaSchema>(
+	const imageQuery = useQuery<MediaSchema, any>(
 		[`learnPageLogo${imageId}`, imageId],
 		() => imageAPi.get(imageId),
 		{
 			enabled: !!imageId,
-			refetchOnWindowFocus: true,
+			useErrorBoundary: false,
 		}
 	);
 
@@ -96,6 +98,14 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 										mb="4"
 									/>
 								)}
+								{imageQuery.isError ? (
+									<Alert status="warning" mb={3}>
+										<AlertIcon />
+										{imageQuery.error?.data?.status === 404
+											? __('The image does not exist.', 'masteriyo')
+											: __('Failed to fetch image URL.', 'masteriyo')}
+									</Alert>
+								) : null}
 								<ButtonGroup d="flex" justifyContent="space-between" w="40">
 									{imageId && (
 										<Button

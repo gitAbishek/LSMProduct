@@ -119,19 +119,10 @@ class Permission {
 		}
 
 		/**
-		 * Filters permission for a user data manipulation.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param boolean $permission True if permission granted.
-		 * @param string $context Permission context.
-		 */
-		$permission = apply_filters( 'masteriyo_rest_check_permissions', $permission, $context );
-
-		/**
 		 * Users check permission
 		 *
-		 * @since 1.3.6
+		 * @since 1.0.0
+		 * @since 1.3.6 Added $user_id and 'users' parameter.
 		 *
 		 * @param boolean $permission True if permission granted.
 		 * @param string $context Permission context.
@@ -154,10 +145,11 @@ class Permission {
 		 * Filters permission for quiz answer.
 		 *
 		 * @since 1.0.0
+		 * @since x.x.x Added second, third and fourth parameter.
 		 *
 		 * @param boolean $permission True if permission granted.
 		 */
-		return apply_filters( 'masteriyo_rest_check_permissions', $permission );
+		return apply_filters( 'masteriyo_rest_check_permissions', $permission, '', 0, 'check_answer' );
 	}
 
 	/**
@@ -357,6 +349,18 @@ class Permission {
 		$permission = current_user_can( $cap, $object_id );
 
 		/**
+		 * Filters permission for an course progress.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object type.
+		 */
+		$permission =  apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_progress' );
+
+		/**
 		 * Filters permission for a course progress.
 		 *
 		 * @since 1.3.1
@@ -387,6 +391,18 @@ class Permission {
 
 		$cap        = $contexts[ $context ];
 		$permission = current_user_can( $cap, $object_id );
+
+		/**
+		 * Filters permission for an user course.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param boolean $permission True if permission granted.
+		 * @param string $context Permission context.
+		 * @param integer $object_id Object ID which requires permission, if available.
+		 * @param string $object_type Object type.
+		 */
+		$permission = apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'user_course' );
 
 		/**
 		 * Filters permission for a user course.

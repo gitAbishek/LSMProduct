@@ -31,6 +31,18 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 		<?php /* translators: %s: Username */ ?>
 		<span class="masteriyo-course-author--name"><?php echo esc_attr( sprintf( __( 'by %s', 'masteriyo' ), $author->get_display_name() ) ); ?></span>
 	</div>
+
+		<?php
+		/**
+		 * Fire after masteriyo course author.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param \Masteriyo\Models\Course $course Course object.
+		 */
+		do_action( 'masteriyo_after_course_author', $course );
+		?>
+
 	<?php endif; ?>
 	<span class="masteriyo-icon-svg masteriyo-rating">
 		<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( masteriyo_format_decimal( $course->get_average_rating(), 1, true ) ); ?> (<?php echo esc_html( $course->get_review_count() ); ?>)

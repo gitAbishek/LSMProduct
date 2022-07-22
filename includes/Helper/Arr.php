@@ -697,3 +697,28 @@ function masteriyo_array_random( $array, $number = null, $preserve_keys = false 
 function masteriyo_value( $value, ...$args ) {
 	return $value instanceof \Closure ? $value( ...$args ) : $value;
 }
+
+/**
+ * wp_parse_args() for multi dimensional arrays.
+ *
+ * @since x.x.x
+ *
+ * @param array|stdClass $a
+ * @param array|stdClass $b
+ * @return array
+ */
+function masteriyo_parse_args( &$a, $b ) {
+	$a      = (array) $a;
+	$b      = (array) $b;
+	$result = $b;
+
+	foreach ( $a as $k => &$v ) {
+		if ( is_array( $v ) && isset( $result[ $k ] ) ) {
+			$result[ $k ] = masteriyo_parse_args( $v, $result[ $k ] );
+		} else {
+			$result[ $k ] = $v;
+		}
+	}
+
+	return $result;
+}

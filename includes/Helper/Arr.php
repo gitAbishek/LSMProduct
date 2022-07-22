@@ -722,3 +722,16 @@ function masteriyo_parse_args( &$a, $b ) {
 
 	return $result;
 }
+
+
+/**
+ * Convert array keys from snake to camel and return it.
+ *
+ * @since x.x.x
+ *
+ * @param  array $arr
+ * @return array
+ */
+function masteriyo_array_snake_to_camel( $arr ) {
+	return array_combine( array_map( 'masteriyo_snake_to_camel', array_keys( $arr ) ), array_values( $arr ) );
+}

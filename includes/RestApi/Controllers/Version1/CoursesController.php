@@ -833,7 +833,6 @@ class CoursesController extends PostsController {
 	 * @return WP_Error|Masteriyo\Models\Course
 	 */
 	protected function prepare_object_for_database( $request, $creating = false ) {
-
 		$id     = isset( $request['id'] ) ? absint( $request['id'] ) : 0;
 		$course = masteriyo( 'course' );
 

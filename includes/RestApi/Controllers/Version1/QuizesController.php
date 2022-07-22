@@ -1353,16 +1353,6 @@ class QuizesController extends PostsController {
 			return $result;
 		}
 
-		if ( get_current_user_id() !== absint( $course->post_author ) ) {
-			return new \WP_Error(
-				'masteriyo_rest_cannot_create',
-				__( 'Sorry, you are not allowed to create quiz for others course.', 'masteriyo' ),
-				array(
-					'status' => rest_authorization_required_code(),
-				)
-			);
-		}
-
 		return true;
 	}
 }

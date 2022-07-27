@@ -733,6 +733,7 @@ if ( ! function_exists( 'masteriyo_is_instructor_registration_page' ) ) {
 	function masteriyo_is_instructor_registration_page() {
 		global $post;
 
+		$page_id = 0;
 		$is_page = isset( $GLOBALS['wp']->query_vars['instructor-registration'] );
 
 		if ( $post instanceof \WP_Post ) {

@@ -24,11 +24,11 @@ import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
 import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import useCourse from '../../hooks/useCourse';
 import { QuizSchema as QuizSchemaOld, SectionSchema } from '../../schemas';
+import QuizSKeleton from '../../skeleton/QuizSkeleton';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -233,7 +233,7 @@ const AddNewQuiz: React.FC = () => {
 		);
 	}
 
-	return <FullScreenLoader />;
+	return <QuizSKeleton />;
 };
 
 export default AddNewQuiz;

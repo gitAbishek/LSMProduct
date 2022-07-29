@@ -21,8 +21,8 @@ import {
 	Logo,
 	Ribbon,
 	Stripe,
+	whiteLabel,
 	Woocommerce,
-	whiteLabel
 } from '../../constants/images';
 import AddonItem from './components/AddonItem';
 

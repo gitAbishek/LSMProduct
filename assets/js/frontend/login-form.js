@@ -9,11 +9,6 @@
 		e.preventDefault();
 
 		const $form = $(this);
-		const userData = {
-			username: $(this).find('#username-email-address').val(),
-			password: $(this).find('#password').val(),
-			remember: $(this).find('#remember_me').is(':checked') ? 'yes' : 'no',
-		};
 
 		$form
 			.find('button[type=submit]')
@@ -28,11 +23,7 @@
 			type: 'post',
 			dataType: 'json',
 			url: masteriyo_data.ajax_url,
-			data: {
-				action: 'masteriyo_login',
-				nonce: masteriyo_data.nonce,
-				payload: userData,
-			},
+			data: $form.serializeArray(),
 			success: function (res) {
 				if (res.success) {
 					window.location.reload();

@@ -40,7 +40,7 @@ class LoginAjaxHandler extends AjaxHandler {
 	 */
 	public function login() {
 		// Bail early if there no nonce.
-		if ( ! isset( $_POST['nonce'] ) ) {
+		if ( ! isset( $_POST['_wpnonce'] ) ) {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Nonce is required.', 'masteriyo' ),
@@ -49,31 +49,29 @@ class LoginAjaxHandler extends AjaxHandler {
 		}
 
 		try {
-			if ( ! wp_verify_nonce( $_POST['nonce'], 'masteriyo_login_nonce' ) ) {
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'masteriyo_login_nonce' ) ) {
 				throw new \Exception( __( 'Invalid nonce. Maybe you should reload the page.', 'masteriyo' ) );
 			}
 
-			if ( ! isset( $_POST['payload'] ) || ! is_array( $_POST['payload'] ) ) {
-				throw new \Exception( __( 'Missing login credentials.', 'masteriyo' ) );
-			}
-
-			$username = isset( $_POST['payload']['username'] ) ? sanitize_text_field( $_POST['payload']['username'] ) : '';
-			$password = isset( $_POST['payload']['password'] ) ? sanitize_text_field( $_POST['payload']['password'] ) : '';
-			$remember = isset( $_POST['payload']['remember'] ) ? sanitize_text_field( $_POST['payload']['remember'] ) : 'no';
-
-			if ( empty( $username ) ) {
-				throw new \Exception( __( 'Username cannot be empty.', 'masteriyo' ) );
-			}
-
-			if ( empty( $password ) ) {
-				throw new \Exception( __( 'Password cannot be empty.', 'masteriyo' ) );
-			}
+			$username = isset( $_POST['username'] ) ? sanitize_text_field( $_POST['username'] ) : '';
+			$password = isset( $_POST['password'] ) ? sanitize_text_field( $_POST['password'] ) : '';
+			$remember = isset( $_POST['remember_me'] ) ? sanitize_text_field( $_POST['remember_me'] ) : 'no';
 
 			$credentials = array(
 				'user_login'    => $username,
 				'user_password' => $password,
 				'remember'      => 'yes' === $remember,
 			);
+
+			$validate = $this->validate_form( $credentials );
+
+			if ( $validate->has_errors() ) {
+				wp_send_json_error(
+					array(
+						'message' => $validate->get_error_message(),
+					)
+				);
+			}
 
 			if ( is_email( $username ) ) {
 				$user = get_user_by( 'email', $username );
@@ -107,5 +105,38 @@ class LoginAjaxHandler extends AjaxHandler {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Validate the submitted form.
+	 *
+	 * @param array $data Form data.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return WP_Error
+	 */
+	protected function validate_form( $data ) {
+		$error = new \WP_Error();
+
+		if ( empty( $data['user_login'] ) ) {
+			$error->add( 'empty_username', __( 'Username cannot be empty.', 'masteriyo' ) );
+		}
+
+		if ( empty( $data['user_password'] ) ) {
+			$error->add( 'empty_password', __( 'Password cannot be empty.', 'masteriyo' ) );
+		}
+
+		/**
+		 * Validate user login form data.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param \WP_Error $validation_error Error object which should contain validation errors if there is any.
+		 * @param array $data Submitted form data.
+		 */
+		$error = apply_filters( 'masteriyo_validate_login_form_data', $error, $data );
+
+		return $error;
 	}
 }

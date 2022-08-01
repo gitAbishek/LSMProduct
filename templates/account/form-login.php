@@ -21,10 +21,13 @@ do_action( 'masteriyo_before_login_form_content' );
 			<h3 class="masteriyo-login--title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
 
 			<form id="masteriyo-login--form" class="masteriyo-login--form" method="post">
-				<input type="hidden" name="remember" value="true">
+				<input type="hidden" name="action" value="masteriyo_login">
+
+				<?php wp_nonce_field( 'masteriyo_login_nonce' ); ?>
+
 				<div class="masteriyo-username">
 					<label for="username-email-address" class="masteriyo-label"><?php echo esc_html__( 'Username or Email', 'masteriyo' ); ?></label>
-					<input id="username-email-address" name="text" type="text" required class="masteriyo-input" placeholder="">
+					<input id="username-email-address" name="username" type="text" required class="masteriyo-input" placeholder="">
 				</div>
 
 				<div class="masteriyo-password">
@@ -46,6 +49,16 @@ do_action( 'masteriyo_before_login_form_content' );
 						</a>
 					</div>
 				</div>
+
+
+				<?php
+				/**
+				 * Fires before render of login button in login form.
+				 *
+				 * @since x.x.x
+				 */
+				do_action( 'masteriyo_login_form_before_submit_button' );
+				?>
 
 				<div class="masteriyo-btn-wrapper">
 					<button type="submit" class="masteriyo-login-btn masteriyo-btn masteriyo-primary">

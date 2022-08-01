@@ -1042,3 +1042,14 @@ function masteriyo_is_view_account_page() {
 function masteriyo_is_edit_account_page() {
 	return masteriyo_is_account_page() && isset( $GLOBALS['wp']->query_vars['edit-account'] );
 }
+
+/**
+ * Check if the current page is sign in page.
+ *
+ * @since x.x.x
+ *
+ * @return boolean
+ */
+function masteriyo_is_signin_page() {
+	return masteriyo_is_account_page() && ! is_user_logged_in() && isset( $GLOBALS['wp']->query_vars['page'] ) && empty( $GLOBALS['wp']->query_vars['page'] );
+}

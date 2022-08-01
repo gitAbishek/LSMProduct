@@ -27,7 +27,7 @@ const QuizOverview = (props: any) => {
 					<Tooltip label={answersData?.type}>
 						<Box>{getQuestionTypeIcon(answersData?.type)}</Box>
 					</Tooltip>
-					<Text>{answersData?.question}</Text>
+					<Text wordBreak="break-word">{answersData?.question}</Text>
 				</Stack>
 			</Td>
 			<Td>
@@ -36,7 +36,7 @@ const QuizOverview = (props: any) => {
 						<Text color="gray.600" fontSize="xs">
 							Correct:
 						</Text>
-						<Text color="gray.600" fontSize="xs">
+						<Text color="gray.600" fontSize="xs" wordBreak="break-word">
 							{'multiple-choice' === answersData?.type
 								? answersData?.correct_answer.join(', ')
 								: answersData?.correct_answer}
@@ -46,7 +46,7 @@ const QuizOverview = (props: any) => {
 						<Text color="gray.600" fontSize="xs">
 							Given:
 						</Text>
-						<Text color="gray.600" fontSize="xs">
+						<Text color="gray.600" fontSize="xs" wordBreak="break-word">
 							{'multiple-choice' === answersData?.type
 								? answersData?.answered.join(', ')
 								: answersData?.answered}

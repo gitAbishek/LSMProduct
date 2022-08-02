@@ -9,6 +9,7 @@
 
 namespace Masteriyo;
 
+use Masteriyo\Constants;
 use Masteriyo\Query\CourseCategoryQuery;
 
 defined( 'ABSPATH' ) || exit;
@@ -900,7 +901,7 @@ class ScriptStyle {
 					),
 				),
 				'login-form'    => array(
-					'name' => 'masteriyo_data',
+					'name' => '_MASTERIYO_',
 					'data' => array(
 						'ajax_url' => admin_url( 'admin-ajax.php' ),
 						'nonce'    => wp_create_nonce( 'masteriyo_login_nonce' ),

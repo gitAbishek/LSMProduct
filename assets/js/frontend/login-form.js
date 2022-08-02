@@ -1,7 +1,7 @@
 /**
- * global masteriyo_data
+ * global _MASTERIYO_
  */
-(function ($, masteriyo_data) {
+(function ($, _MASTERIYO_) {
 	/**
 	 * Login form submission handler.
 	 */
@@ -9,10 +9,15 @@
 		e.preventDefault();
 
 		const $form = $(this);
+		const userData = {
+			username: $(this).find('#username-email-address').val(),
+			password: $(this).find('#password').val(),
+			remember: $(this).find('#remember_me').is(':checked') ? 'yes' : 'no',
+		};
 
 		$form
 			.find('button[type=submit]')
-			.text(masteriyo_data.labels.signing_in)
+			.text(_MASTERIYO_.labels.signing_in)
 			.siblings('.masteriyo-notify-message')
 			.first()
 			.remove();
@@ -22,8 +27,12 @@
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
-			url: masteriyo_data.ajax_url,
-			data: $form.serializeArray(),
+			url: _MASTERIYO_.ajax_url,
+			data: {
+				action: 'masteriyo_login',
+				nonce: _MASTERIYO_.nonce,
+				payload: userData,
+			},
 			success: function (res) {
 				if (res.success) {
 					window.location.reload();
@@ -39,8 +48,8 @@
 				$('#masteriyo-login-error-msg').show().html(message);
 			},
 			complete: function () {
-				$form.find('button[type=submit]').text(masteriyo_data.labels.sign_in);
+				$form.find('button[type=submit]').text(_MASTERIYO_.labels.sign_in);
 			},
 		});
 	});
-})(jQuery, window.masteriyo_data);
+})(jQuery, window._MASTERIYO_);

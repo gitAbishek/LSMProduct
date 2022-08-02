@@ -695,6 +695,15 @@ class Masteriyo {
 			}
 		}
 
+		/**
+		 * Fires at the end of learn page handle.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param \Masteriyo\Models\Course $course Course object.
+		 */
+		do_action( 'masteriyo_after_learn_page_process', $course );
+
 		return masteriyo_locate_template( 'learn.php' );
 	}
 

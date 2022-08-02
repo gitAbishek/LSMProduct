@@ -64,26 +64,44 @@ const LessonSkeleton: React.FC = () => {
 			<Container maxW="container.xl">
 				<Stack direction="column" spacing="6">
 					<BackToBuilder />
-					<Box bg="white" p="10" shadow="box">
-						<Stack direction="column" spacing="8">
-							<Flex align="center" justify="space-between">
-								<Heading as="h1" fontSize="x-large">
-									<Skeleton height="30px" width="100px" />
-								</Heading>
-							</Flex>
-							<Stack mt="12px" direction="column" spacing="6">
-								<Stack direction="column" spacing="3">
-									<Skeleton height="40px" />
-									<Skeleton height="400px" />
-									<Skeleton height="40px" />
-								</Stack>
-								<Stack direction="row">
-									<Skeleton height="40px" w="100%" />
-									<Skeleton height="40px" w="100%" />
+					<Stack direction={['column', 'column', 'column', 'row']} spacing="6">
+						<Box bg="white" p="10" shadow="box" flex="1">
+							<Stack direction="column" spacing="8">
+								<Flex align="center" justify="space-between">
+									<Heading as="h1" fontSize="x-large">
+										<Skeleton height="30px" width="100px" />
+									</Heading>
+								</Flex>
+								<Stack mt="12px" direction="column" spacing="6">
+									<Stack direction="column" spacing="3">
+										<Skeleton height="40px" />
+										<Skeleton height="400px" />
+										<Skeleton height="40px" />
+									</Stack>
+									<Stack direction="row">
+										<Skeleton height="40px" w="100%" />
+										<Skeleton height="40px" w="100%" />
+									</Stack>
 								</Stack>
 							</Stack>
-						</Stack>
-					</Box>
+						</Box>
+						<Box bg="white" p="10" shadow="box" flex="0.5">
+							<Stack direction="column" spacing="10">
+								<Stack>
+									<Skeleton height="10px" width="30%" />
+									<Skeleton height="40px" />
+								</Stack>
+								<Stack>
+									<Skeleton height="10px" width="30%" />
+									<Skeleton height="40px" />
+								</Stack>
+								<Stack>
+									<Skeleton height="10px" width="30%" />
+									<Skeleton height="40px" />
+								</Stack>
+							</Stack>
+						</Box>
+					</Stack>
 				</Stack>
 			</Container>
 		</Stack>

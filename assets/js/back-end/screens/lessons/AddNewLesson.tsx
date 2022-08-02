@@ -21,11 +21,11 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import BackToBuilder from '../../components/common/BackToBuilder';
 import Header from '../../components/common/Header';
-import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
 import useCourse from '../../hooks/useCourse';
 import { LessonSchema, SectionSchema } from '../../schemas';
+import LessonSkeleton from '../../skeleton/LessonSkeleton';
 import { CourseDataMap } from '../../types/course';
 import API from '../../utils/api';
 import { deepClean, deepMerge } from '../../utils/utils';
@@ -221,7 +221,7 @@ const AddNewLesson: React.FC = () => {
 		);
 	}
 
-	return <FullScreenLoader />;
+	return <LessonSkeleton />;
 };
 
 export default AddNewLesson;

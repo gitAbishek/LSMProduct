@@ -701,7 +701,7 @@ function masteriyo_value( $value, ...$args ) {
 /**
  * wp_parse_args() for multi dimensional arrays.
  *
- * @since x.x.x
+ * @since 1.5.10
  *
  * @param array|stdClass $a
  * @param array|stdClass $b
@@ -727,7 +727,7 @@ function masteriyo_parse_args( &$a, $b ) {
 /**
  * Convert array keys from snake to camel and return it.
  *
- * @since x.x.x
+ * @since 1.5.10
  *
  * @param  array $arr
  * @return array

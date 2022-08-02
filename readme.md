@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.9
+**Stable tag**: 1.5.10
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.10 - 02-08-2022
+
+- Enhancement - Added skeleton loader in add new quiz page skeleton loader.
+- Enhancement - Added skeleton loader in add new lesson and lesson edit page.
+- Fix - Question and answer overflow in quiz attempt detail page
+- Fix - Backend throwing 505 if missing learn page logo image.
+- Fix - Undefined variable page_id.
 
 ### 1.5.9 - 19-07-2022
 

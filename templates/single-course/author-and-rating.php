@@ -36,7 +36,7 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 		/**
 		 * Fire after masteriyo course author.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.10
 		 *
 		 * @param \Masteriyo\Models\Course $course Course object.
 		 */

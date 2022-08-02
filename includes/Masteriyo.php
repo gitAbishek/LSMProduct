@@ -698,7 +698,7 @@ class Masteriyo {
 		/**
 		 * Fires at the end of learn page handle.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.10
 		 *
 		 * @param \Masteriyo\Models\Course $course Course object.
 		 */

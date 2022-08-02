@@ -55,7 +55,7 @@ do_action( 'masteriyo_before_login_form_content' );
 				/**
 				 * Fires before render of login button in login form.
 				 *
-				 * @since x.x.x
+				 * @since 1.5.10
 				 */
 				do_action( 'masteriyo_login_form_before_submit_button' );
 				?>

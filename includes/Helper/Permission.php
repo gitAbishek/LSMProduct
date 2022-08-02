@@ -145,7 +145,7 @@ class Permission {
 		 * Filters permission for quiz answer.
 		 *
 		 * @since 1.0.0
-		 * @since x.x.x Added second, third and fourth parameter.
+		 * @since 1.5.10 Added second, third and fourth parameter.
 		 *
 		 * @param boolean $permission True if permission granted.
 		 */
@@ -358,7 +358,7 @@ class Permission {
 		 * @param integer $object_id Object ID which requires permission, if available.
 		 * @param string $object_type Object type.
 		 */
-		$permission =  apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_progress' );
+		$permission = apply_filters( 'masteriyo_rest_check_permissions', $permission, $context, $object_id, 'course_progress' );
 
 		/**
 		 * Filters permission for a course progress.

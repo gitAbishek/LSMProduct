@@ -85,7 +85,7 @@ $categories = $course->get_categories( 'name' );
 				/**
 				 * Fire after masteriyo course author.
 				 *
-				 * @since x.x.x
+				 * @since 1.5.10
 				 *
 				 * @param \Masteriyo\Models\Course $course Course object.
 				 */

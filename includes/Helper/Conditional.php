@@ -1046,7 +1046,7 @@ function masteriyo_is_edit_account_page() {
 /**
  * Check if the current page is sign in page.
  *
- * @since x.x.x
+ * @since 1.5.10
  *
  * @return boolean
  */

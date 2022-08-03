@@ -76,6 +76,14 @@ do_action( 'masteriyo_before_instructor_registration_form_content' );
 					<input id="confirm-password" class="masteriyo-input" name="confirm-password" type="password" autocomplete="current-password" >
 				</div>
 
+				<?php
+				/**
+				 * Fires before render of submit button in instructor registration form.
+				 *
+				 * @since x.x.x
+				 */
+				do_action( 'masteriyo_instructor_registration_form_before_submit_button' );
+				?>
 				<button type="submit" name="masteriyo-instructor-registration" value="yes" class="masteriyo-btn-signup masteriyo-btn masteriyo-btn-primary">
 					<?php echo esc_html__( 'Register', 'masteriyo' ); ?>
 				</button>

@@ -19,6 +19,7 @@ import {
 	courseFAQ,
 	DownloadMaterial,
 	Logo,
+	PasswordStrength,
 	Ribbon,
 	Stripe,
 	whiteLabel,
@@ -176,6 +177,16 @@ const AddOns = () => {
 							addOnName={__('White Label', 'masteriyo')}
 							addOnDescription={__('Allows to add White Label.', 'masteriyo')}
 							thumbnailSrc={whiteLabel}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('Password Strength', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to add Password Strength in registration forms.',
+								'masteriyo'
+							)}
+							thumbnailSrc={PasswordStrength}
 						/>
 					</Col>
 				</Row>

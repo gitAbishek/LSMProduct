@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
 import {
+	CourseAttachment,
 	courseFAQ,
 	DownloadMaterial,
 	Logo,
@@ -187,6 +188,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={PasswordStrength}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('Course Attachments.', 'masteriyo')}
+							addOnDescription={__(
+								'Allows you to add course attachments.',
+								'masteriyo'
+							)}
+							thumbnailSrc={CourseAttachment}
 						/>
 					</Col>
 				</Row>

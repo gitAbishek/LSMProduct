@@ -1,5 +1,6 @@
 export { default as NotFound } from '../../../img/404.png';
 export { default as CloseCone } from '../../../img/close-cone.png';
+export { default as CourseAttachment } from '../../../img/course-attachment.png';
 export { default as CourseCategoriesBlockGridDesign } from '../../../img/course-categories-block-grid-design.png';
 export { default as courseFAQ } from '../../../img/course-faq.png';
 export { default as CoursesBlockGridDesign } from '../../../img/courses-block-grid-design.png';

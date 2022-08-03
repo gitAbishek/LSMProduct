@@ -985,19 +985,26 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
  * Check if the current page is the account page.
  *
  * @since 1.0.0
+ * @since x.x.x Added $page_id parameter.
+ *
+ * @param int $page_id Optional. Page ID.
  *
  * @return boolean
  */
-function masteriyo_is_account_page() {
+function masteriyo_is_account_page( $page_id = null ) {
 	global $post;
 
-	if ( $post instanceof \WP_Post ) {
-		$page_id = masteriyo_get_page_id( 'account' );
+	$account_page_id = masteriyo_get_page_id( 'account' );
 
-		return $post->ID === $page_id;
+	if ( ! is_null( $page_id ) && ! empty( $account_page_id ) ) {
+		return $page_id === $account_page_id;
+	} elseif ( $post instanceof \WP_Post ) {
+		return $post->ID === $account_page_id;
 	}
+
 	return false;
 }
+
 
 /**
  * Check if the current page is password reset page.

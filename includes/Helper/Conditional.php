@@ -739,7 +739,7 @@ if ( ! function_exists( 'masteriyo_is_instructor_registration_page' ) ) {
 		if ( $post instanceof \WP_Post ) {
 			$page_id = masteriyo_get_page_id( 'instructor-registration' );
 
-			$is_page = $is_page && $post->ID === $page_id;
+			$is_page = $post->ID === $page_id;
 		}
 
 		/**

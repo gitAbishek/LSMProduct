@@ -985,7 +985,7 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
  * Check if the current page is the account page.
  *
  * @since 1.0.0
- * @since x.x.x Added $page_id parameter.
+ * @since 1.5.10 Added $page_id parameter.
  *
  * @param int $page_id Optional. Page ID.
  *
@@ -1054,7 +1054,6 @@ function masteriyo_is_edit_account_page() {
  * Check if the current page is sign in page.
  *
  * @since 1.5.10
- * @since x.x.x
  *
  * @param int $page_id Page ID.
  *

@@ -22,7 +22,7 @@
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
-			url: masteriyo_data.ajax_url,
+			url: _MASTERIYO_.ajax_url,
 			data: $form.serializeArray(),
 			success: function (res) {
 				if (res.success) {

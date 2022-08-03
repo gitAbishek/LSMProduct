@@ -112,7 +112,7 @@ class LoginAjaxHandler extends AjaxHandler {
 	 *
 	 * @param array $data Form data.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.10
 	 *
 	 * @return WP_Error
 	 */
@@ -130,7 +130,7 @@ class LoginAjaxHandler extends AjaxHandler {
 		/**
 		 * Validate user login form data.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.10
 		 *
 		 * @param \WP_Error $validation_error Error object which should contain validation errors if there is any.
 		 * @param array $data Submitted form data.

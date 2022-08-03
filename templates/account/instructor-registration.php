@@ -80,7 +80,7 @@ do_action( 'masteriyo_before_instructor_registration_form_content' );
 				/**
 				 * Fires before render of submit button in instructor registration form.
 				 *
-				 * @since x.x.x
+				 * @since 1.5.10
 				 */
 				do_action( 'masteriyo_instructor_registration_form_before_submit_button' );
 				?>

@@ -51,7 +51,7 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
-### 1.5.10 - 02-08-2022
+### 1.5.10 - 03-08-2022
 
 - Enhancement - Added skeleton loader in add new quiz page skeleton loader.
 - Enhancement - Added skeleton loader in add new lesson and lesson edit page.

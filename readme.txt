@@ -201,7 +201,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.5.10 - 02-08-2022 =
+= 1.5.10 - 03-08-2022 =
 - Enhancement - Added skeleton loader in add new quiz page skeleton loader.
 - Enhancement - Added skeleton loader in add new lesson and lesson edit page.
 - Fix - Question and answer overflow in quiz attempt detail page

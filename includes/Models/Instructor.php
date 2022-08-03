@@ -46,7 +46,7 @@ class Instructor extends User {
 	 * Get whether the instructor is approved by the manager/administrator or not.
 	 *
 	 * @since 1.3.0
-	 * @deprecated x.x.
+	 * @deprecated 1.5.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
 	 * @return boolean

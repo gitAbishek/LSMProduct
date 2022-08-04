@@ -65,7 +65,7 @@ class Offline extends PaymentGateway implements PaymentGatewayInterface {
 		$this->method_description = __( 'Have your customers pay with cash (or by other means) upon delivery.', 'masteriyo' );
 		$this->has_fields         = false;
 
-		$this->set_order_button_text( 'Confirm Payment' );
+		$this->set_order_button_text( __( 'Confirm Payment', 'masteriyo' ) );
 
 		$this->title        = $this->get_option( 'title' );
 		$this->description  = $this->get_option( 'description' );

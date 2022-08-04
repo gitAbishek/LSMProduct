@@ -203,7 +203,7 @@ const QuestionList: React.FC = () => {
 								<Input
 									type="text"
 									fontSize="xs"
-									placeholder="What is your question?"
+									placeholder={__('What is your question?', 'masteriyo')}
 									disabled={addNewQuestion.isLoading}
 									{...register('content', {
 										required: __('Please write your message.', 'masteriyo'),

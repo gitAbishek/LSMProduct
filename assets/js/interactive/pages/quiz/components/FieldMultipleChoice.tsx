@@ -43,7 +43,9 @@ const FieldMultipleChoice: React.FC<Props> = (props) => {
 										px="4"
 										shadow="input">
 										<Checkbox value={answer.name} width="full">
-											<Text fontSize="sm">{answer.name}</Text>
+											<Text fontSize="sm" wordBreak="break-all">
+												{answer.name}
+											</Text>
 										</Checkbox>
 									</Flex>
 								))}

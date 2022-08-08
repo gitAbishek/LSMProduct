@@ -48,7 +48,7 @@ const EditableAnswer: React.FC<Props> = (props) => {
 			value={editableValue}
 			onChange={(value) => onChange(value)}
 			onSubmit={(value) => onSubmit(index, value)}>
-			<EditablePreview minW="sm" />
+			<EditablePreview minW="sm" wordBreak="break-all" />
 			<EditableInput />
 		</Editable>
 	);

@@ -124,7 +124,7 @@ const AllOrders = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
 		status: 'any',
 		order: 'desc',
-		orderby: 'id',
+		orderby: 'date',
 	});
 	const [orderStatus, setOrderStatus] = useState<string>('any');
 
@@ -287,36 +287,65 @@ const AllOrders = () => {
 									<Tr>
 										<Th>
 											<Stack direction="row" alignItems="center">
-												<Text>{__('Order', 'masteriyo')}</Text>
+												<Text fontSize="xs">{__('Order', 'masteriyo')}</Text>
 												<Stack direction="column">
-													{filterParams?.order === 'desc' ? (
-														<Icon
-															as={MdOutlineArrowDropUp}
-															h={6}
-															w={6}
-															cursor="pointer"
-															color="lightgray"
-															transition="1s"
-															_hover={{ color: 'black' }}
-															onClick={() => filterOrderBy('asc', 'id')}
-														/>
-													) : (
-														<Icon
-															as={MdOutlineArrowDropDown}
-															h={6}
-															w={6}
-															cursor="pointer"
-															color="lightgray"
-															transition="1s"
-															_hover={{ color: 'black' }}
-															onClick={() => filterOrderBy('desc', 'id')}
-														/>
-													)}
+													<Icon
+														as={
+															filterParams?.order === 'desc'
+																? MdOutlineArrowDropDown
+																: MdOutlineArrowDropUp
+														}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color={
+															filterParams?.orderby === 'id'
+																? 'black'
+																: 'lightgray'
+														}
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() =>
+															filterOrderBy(
+																filterParams?.order === 'desc' ? 'asc' : 'desc',
+																'id'
+															)
+														}
+													/>
 												</Stack>
 											</Stack>
 										</Th>
 										<Th>{__('Course', 'masteriyo')}</Th>
-										<Th>{__('Date', 'masteriyo')}</Th>
+										<Th>
+											<Stack direction="row" alignItems="center">
+												<Text fontSize="xs">{__('Date', 'masteriyo')}</Text>
+												<Stack direction="column">
+													<Icon
+														as={
+															filterParams?.order === 'desc'
+																? MdOutlineArrowDropDown
+																: MdOutlineArrowDropUp
+														}
+														h={6}
+														w={6}
+														cursor="pointer"
+														color={
+															filterParams?.orderby === 'date'
+																? 'black'
+																: 'lightgray'
+														}
+														transition="1s"
+														_hover={{ color: 'black' }}
+														onClick={() =>
+															filterOrderBy(
+																filterParams?.order === 'desc' ? 'asc' : 'desc',
+																'date'
+															)
+														}
+													/>
+												</Stack>
+											</Stack>
+										</Th>
 										<Th>{__('Status', 'masteriyo')}</Th>
 										<Th>{__('Total', 'masteriyo')}</Th>
 										<Th>{__('Actions', 'masteriyo')}</Th>

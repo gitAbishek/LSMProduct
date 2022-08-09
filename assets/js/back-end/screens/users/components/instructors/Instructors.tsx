@@ -29,7 +29,7 @@ interface FilterParams {
 const Instructors: React.FC = () => {
 	const [filterParams, setFilterParams] = useState<FilterParams>({
 		order: 'desc',
-		orderby: 'id',
+		orderby: 'registered',
 	});
 	const usersAPI = new API(urls.instructors);
 	const usersQuery = useQuery(
@@ -71,36 +71,67 @@ const Instructors: React.FC = () => {
 								<Tr>
 									<Th>
 										<Stack direction="row" alignItems="center">
-											<Text>{__('Name', 'masteriyo')}</Text>
+											<Text fontSize="xs">{__('Name', 'masteriyo')}</Text>
 											<Stack direction="column">
-												{filterParams?.order === 'desc' ? (
-													<Icon
-														as={MdOutlineArrowDropUp}
-														h={6}
-														w={6}
-														cursor="pointer"
-														color="lightgray"
-														transition="1s"
-														_hover={{ color: 'black' }}
-														onClick={() => filterInstructorsBy('asc', 'name')}
-													/>
-												) : (
-													<Icon
-														as={MdOutlineArrowDropDown}
-														h={6}
-														w={6}
-														cursor="pointer"
-														color="lightgray"
-														transition="1s"
-														_hover={{ color: 'black' }}
-														onClick={() => filterInstructorsBy('desc', 'name')}
-													/>
-												)}
+												<Icon
+													as={
+														filterParams?.order === 'desc'
+															? MdOutlineArrowDropDown
+															: MdOutlineArrowDropUp
+													}
+													h={6}
+													w={6}
+													cursor="pointer"
+													color={
+														filterParams?.orderby === 'name'
+															? 'black'
+															: 'lightgray'
+													}
+													transition="1s"
+													_hover={{ color: 'black' }}
+													onClick={() =>
+														filterInstructorsBy(
+															filterParams?.order === 'desc' ? 'asc' : 'desc',
+															'name'
+														)
+													}
+												/>
 											</Stack>
 										</Stack>
 									</Th>
 									<Th>{__('Email', 'masteriyo')}</Th>
-									<Th>{__('Registered On', 'masteriyo')}</Th>
+									<Th>
+										<Stack direction="row" alignItems="center">
+											<Text fontSize="xs">
+												{__('Registered On', 'masteriyo')}
+											</Text>
+											<Stack direction="column">
+												<Icon
+													as={
+														filterParams?.order === 'desc'
+															? MdOutlineArrowDropDown
+															: MdOutlineArrowDropUp
+													}
+													h={6}
+													w={6}
+													cursor="pointer"
+													color={
+														filterParams?.orderby === 'registered'
+															? 'black'
+															: 'lightgray'
+													}
+													transition="1s"
+													_hover={{ color: 'black' }}
+													onClick={() =>
+														filterInstructorsBy(
+															filterParams?.order === 'desc' ? 'asc' : 'desc',
+															'registered'
+														)
+													}
+												/>
+											</Stack>
+										</Stack>
+									</Th>
 									<Th>{__('Actions', 'masteriyo')}</Th>
 								</Tr>
 							</Thead>

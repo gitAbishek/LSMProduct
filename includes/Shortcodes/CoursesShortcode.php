@@ -41,7 +41,7 @@ class CoursesShortcode extends Shortcode {
 	/**
 	 * Get shortcode content.
 	 *
-	 * @since  1.0.6
+	 * @since 1.0.6
 	 *
 	 * @return string
 	 */
@@ -51,7 +51,7 @@ class CoursesShortcode extends Shortcode {
 			'limit'    => absint( $attr['count'] ),
 			'order'    => 'DESC',
 			'orderby'  => 'date',
-			'category' => empty( $attr['category'] ) ? array() : array( $attr['category'] ),
+			'category' => empty( $attr['category'] ) ? array() : $this->parse_categories_attribute( $attr['category'] ),
 		);
 		$course_query = new CourseQuery( $args );
 
@@ -118,5 +118,18 @@ class CoursesShortcode extends Shortcode {
 		echo '</div>';
 
 		return \ob_get_clean();
+	}
+
+	/**
+	 * Parse and clean multiple categories separated by comma in a string.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $value
+	 *
+	 * @return string[]
+	 */
+	protected function parse_categories_attribute( $value ) {
+		return array_filter( array_map( 'trim', explode( ',', $value ) ) );
 	}
 }

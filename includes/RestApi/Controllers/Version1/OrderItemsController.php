@@ -558,10 +558,6 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
-			return true;
-		}
-
 		$order_id = isset( $request['order_id'] ) ? absint( $request['order_id'] ) : 0;
 		$order    = masteriyo_get_order( $order_id );
 
@@ -575,9 +571,7 @@ class OrderItemsController extends PostsController {
 			);
 		}
 
-		$cap = masteriyo_is_current_user_post_author( $request['order_id'] ) ? 'read_orders' : 'read_others_orders';
-
-		if ( ! $this->permission->rest_check_order_permissions( $cap, $request['order_id'] ) ) {
+		if ( ! $this->permission->rest_check_order_permissions( 'read', $order->get_id() ) ) {
 			return new \WP_Error(
 				'masteriyo_rest_cannot_read',
 				__( 'Sorry, you cannot list resources.', 'masteriyo' ),

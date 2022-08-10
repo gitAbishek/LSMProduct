@@ -340,4 +340,28 @@ class Session extends AbstractSession {
 	public function get_table() {
 		return $this->table;
 	}
+
+	/**
+	 * Destroy all  session data.
+	 *
+	 * @since x.x.x
+	 */
+	public function destroy_session() {
+		$this->repository->delete_by_key( $this );
+		$this->forget_session();
+	}
+
+	/**
+	 * Forget all session data without destroying it.
+	 *
+	 * @since x.x.x
+	 */
+	public function forget_session() {
+		$this->set_cookie( $this->cookie, '', time() - YEAR_IN_SECONDS, $this->use_securecookie(), true );
+
+		masteriyo( 'cart' )->clear();
+
+		$this->set_data( array() );
+		$this->user_id = $this->generate_user_id();
+	}
 }

@@ -184,6 +184,25 @@ class SessionRepository implements RepositoryInterface {
 	}
 
 	/**
+	 * Delete session from the database by session key.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param string $key
+	 */
+	public function delete_by_key( $session ) {
+		global $wpdb;
+
+		$wpdb->delete(
+			$session->get_table(),
+			array(
+				'session_key' => $session->get_key(),
+			),
+			array( '%s' )
+		);
+	}
+
+	/**
 	 * Returns an array of meta for an object.
 	 *
 	 * @since 1.0.0

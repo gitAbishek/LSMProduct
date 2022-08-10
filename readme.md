@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 6.0
+**Tested up to**: 6.0.1
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.10
+**Stable tag**: 1.5.11
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,16 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.11 - 10-08-2022
+
+- Enhancement - Add multiple categories support to courses shortcode.
+- Enhancement - Login form design updated.
+- Fix - Translation issue.
+- Fix - Long single word overflows in quiz question's answers.
+- Fix - Sorting in backend pages.
+- Fix - Order items listing permission issue causing 505 error in the account page order history.
+- Fix - Logout issue due to undefined callback destroy_session.
 
 ### 1.5.10 - 03-08-2022
 

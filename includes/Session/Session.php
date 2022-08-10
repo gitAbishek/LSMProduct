@@ -344,7 +344,7 @@ class Session extends AbstractSession {
 	/**
 	 * Destroy all  session data.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.11
 	 */
 	public function destroy_session() {
 		$this->repository->delete_by_key( $this );
@@ -354,7 +354,7 @@ class Session extends AbstractSession {
 	/**
 	 * Forget all session data without destroying it.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.11
 	 */
 	public function forget_session() {
 		$this->set_cookie( $this->cookie, '', time() - YEAR_IN_SECONDS, $this->use_securecookie(), true );

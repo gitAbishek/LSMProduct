@@ -186,7 +186,7 @@ class SessionRepository implements RepositoryInterface {
 	/**
 	 * Delete session from the database by session key.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.11
 	 *
 	 * @param string $key
 	 */

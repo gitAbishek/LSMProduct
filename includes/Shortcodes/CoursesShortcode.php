@@ -123,7 +123,7 @@ class CoursesShortcode extends Shortcode {
 	/**
 	 * Parse and clean multiple categories separated by comma in a string.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.11
 	 *
 	 * @param string $value
 	 *

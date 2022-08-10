@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 6.0
+Tested up to: 6.0.1
 Requires PHP: 7.0
-Stable tag: 1.5.10
+Stable tag: 1.5.11
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,15 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.11 - 10-08-2022 =
+- Enhancement - Add multiple categories support to courses shortcode.
+- Enhancement - Login form design updated.
+- Fix - Translation issue.
+- Fix - Long single word overflows in quiz question's answers.
+- Fix - Sorting in backend pages.
+- Fix - Order items listing permission issue causing 505 error in the account page order history.
+- Fix - Logout issue due to undefined callback destroy_session.
 
 = 1.5.10 - 03-08-2022 =
 - Enhancement - Added skeleton loader in add new quiz page skeleton loader.

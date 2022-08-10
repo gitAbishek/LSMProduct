@@ -186,12 +186,14 @@
 }
 
 // Links
-.masteriyo-link-primary {
-	color: var(--masteriyo-color-primary);
-	font-weight: 500;
-	text-decoration: underline;
+.masteriyo {
+	.masteriyo-link-primary {
+		color: var(--masteriyo-color-primary);
+		font-weight: 500;
+		text-decoration: underline;
 
-	&:hover {
-		color: var(--masteriyo-color-primary-a80);
+		&:hover {
+			color: var(--masteriyo-color-primary-a80);
+		}
 	}
 }

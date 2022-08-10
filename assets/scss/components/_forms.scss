@@ -62,7 +62,7 @@
 .masteriyo-input {
 	padding: $spacing_8px $spacing_16px;
 	outline: none;
-	width: 100%;
+	width: calc(100% - $spacing_32px);
 	@include masteriyo-default-border(2);
 	@include masteriyo-border-radius;
 

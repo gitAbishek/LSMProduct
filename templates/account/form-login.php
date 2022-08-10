@@ -2,9 +2,17 @@
 /**
  * Login form template content.
  *
- * @version 1.0.0
+ * This template can be overridden by copying it to yourtheme/masteriyo/account/form-login.php.
+ *
+ * HOWEVER, on occasion Masteriyo will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @package Masteriyo\Templates\Account
+ * @version x.x.x
  */
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -15,10 +23,11 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'masteriyo_before_login_form_content' );
 
 ?>
-<!-- re -->
-<section class="masteriyo-login">
-		<div class="masteriyo-login--wrapper masteriyo-form-container">
-			<h3 class="masteriyo-login--title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
+
+<div class="masteriyo-login-form-wrapper">
+	<section class="masteriyo-login">
+		<div class="masteriyo-login--wrapper">
+			<h3 class="masteriyo-title"><?php echo esc_html__( 'Sign In', 'masteriyo' ); ?></h3>
 
 			<form id="masteriyo-login--form" class="masteriyo-login--form" method="post">
 				<input type="hidden" name="action" value="masteriyo_login">
@@ -50,7 +59,6 @@ do_action( 'masteriyo_before_login_form_content' );
 					</div>
 				</div>
 
-
 				<?php
 				/**
 				 * Fires before render of login button in login form.
@@ -61,19 +69,9 @@ do_action( 'masteriyo_before_login_form_content' );
 				?>
 
 				<div class="masteriyo-btn-wrapper">
-					<button type="submit" class="masteriyo-login-btn masteriyo-btn masteriyo-primary">
-						<?php echo esc_html__( 'Sign in', 'masteriyo' ); ?>
+					<button type="submit" class="masteriyo-btn masteriyo-btn-primary masteriyo-login-btn">
+						<?php esc_html_e( 'Sign in', 'masteriyo' ); ?>
 					</button>
-
-					<div class="masteriyo-login-signup">
-						<span><?php echo esc_html__( 'Don\'t have an account?', 'masteriyo' ); ?></span>
-						<a
-							href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"
-							class="masteriyo-link-primary"
-						>
-							<?php echo esc_html__( 'Sign Up Now', 'masteriyo' ); ?>
-						</a>
-					</div>
 				</div>
 
 				<div id="masteriyo-login-error-msg" class="masteriyo-hidden masteriyo-notify-message masteriyo-alert masteriyo-danger-msg"></div>
@@ -81,7 +79,18 @@ do_action( 'masteriyo_before_login_form_content' );
 			<?php masteriyo_display_all_notices(); ?>
 
 		</div>
-</section>
+	</section>
+	<section class="masteriyo-signup">
+		<h3 class="masteriyo-title"><?php esc_html_e( 'Register', 'masteriyo' ); ?></h3>
+		<span><?php esc_html_e( "Don't have an account?", 'masteriyo' ); ?></span>
+		<a
+			href="<?php echo esc_url( masteriyo_get_account_endpoint_url( 'signup' ) ); ?>"
+			class="masteriyo-btn masteriyo-btn-primary"
+		>
+			<?php esc_html_e( 'Register as Student', 'masteriyo' ); ?>
+		</a>
+	</section>
+</div>
 
 <?php
 

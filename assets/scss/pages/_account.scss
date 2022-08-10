@@ -38,3 +38,47 @@
 		}
 	}
 }
+
+.masteriyo .masteriyo-login-form-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin-right: auto;
+	margin-left: auto;
+	background: var(--masteriyo-color-white);
+	@include masteriyo-default-border;
+	color: var(--masteriyo-color-black);
+}
+
+.masteriyo-login-form-wrapper {
+	.masteriyo-signup {
+		gap: $spacing_20px;
+		flex: 1;
+		flex-direction: column;
+		background-color: var(--masteriyo-color-primary-lightest);
+		border-left: 1px solid var(--masteriyo-color-border);
+		padding-top: $spacing_48px;
+		padding-bottom: $spacing_48px;
+
+		.masteriyo-title {
+			margin: 0;
+			color: var(--masteriyo-color-heading);
+		}
+
+		a {
+			width: 60%;
+			text-decoration: none;
+
+			&:hover {
+				color: var(--masteriyo-color-white);
+			}
+		}
+	}
+}
+
+.masteriyo
+	.entry-content
+	> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+	max-width: 1060px;
+}

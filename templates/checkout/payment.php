@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Templates;
  * @since 1.0.0
- * @version 1.0.0
+ * @version x.x.x
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -64,7 +64,7 @@ do_action( 'masteriyo_checkout_summary_before_submit' );
 
 <button
 	type="submit"
-	class="masteriyo-checkout--btn masteriyo-button masteriyo-btn-primary alt"
+	class="masteriyo-checkout--btn masteriyo-btn masteriyo-btn-primary alt"
 	id="masteriyo-place-order"
 	name="masteriyo_checkout_place_order">
 	<?php echo esc_html( $order_button_text ); ?>
@@ -79,4 +79,3 @@ wp_nonce_field( 'masteriyo-process_checkout', 'masteriyo-process-checkout-nonce'
  * @since 1.0.0
  */
 do_action( 'masteriyo_checkout_summary_after_submit' );
-

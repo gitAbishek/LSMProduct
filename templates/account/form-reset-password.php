@@ -11,7 +11,7 @@
  * the readme will list any important changes.
  *
  * @package Masteriyo\Templates\Account
- * @version 1.0.0
+ * @version x.x.x
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -53,7 +53,7 @@ do_action( 'masteriyo_before_password_reset_form' );
 					</div>
 
 				<div class="masteriyo-btn-wrapper">
-					<button type="submit" name="masteriyo-password-reset" value="yes" class="masteriyo-reset-btn masteriyo-btn masteriyo-primary">
+					<button type="submit" name="masteriyo-password-reset" value="yes" class="masteriyo-reset-btn masteriyo-btn masteriyo-btn-primary">
 						<?php echo esc_html__( 'Reset', 'masteriyo' ); ?>
 					</button>
 
@@ -91,4 +91,3 @@ do_action( 'masteriyo_before_password_reset_form' );
  * @since 1.0.0
  */
 do_action( 'masteriyo_after_password_reset_form' );
-

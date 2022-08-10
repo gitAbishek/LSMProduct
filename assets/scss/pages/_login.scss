@@ -1,26 +1,32 @@
 .masteriyo-login {
-	width: 100%;
+	width: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding: $spacing_48px;
 
 	&--wrapper {
-		background: var(--masteriyo-color-white);
+		flex: 1;
 	}
 
-	&--title {
+	&-btn {
+		width: 100%;
+	}
+
+	.masteriyo-title {
 		margin-bottom: $spacing_30px;
+		color: var(--masteriyo-color-heading);
 	}
 
 	.masteriyo-input {
 		margin-bottom: $spacing_24px;
 	}
 
-	.masteriyo-btn-wrapper,
 	.masteriyo-remember-forgot {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
 	.masteriyo-remember-forgot {

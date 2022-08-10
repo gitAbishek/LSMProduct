@@ -193,7 +193,6 @@ class OrderItem extends Model {
 			$meta->key     = rawurldecode( (string) $meta->key );
 			$meta->value   = rawurldecode( (string) $meta->value );
 			$attribute_key = str_replace( 'attribute_', '', $meta->key );
-			$display_key   = masteriyo_attribute_label( $attribute_key, $course );
 			$display_value = wp_kses_post( $meta->value );
 
 			if ( taxonomy_exists( $attribute_key ) ) {
@@ -204,20 +203,9 @@ class OrderItem extends Model {
 			}
 
 			// Skip items with values already in the course details area of the course name.
-			if ( ! $include_all && $course && $course->is_type( 'variation' ) && masteriyo_is_attribute_in_course_name( $display_value, $order_item_name ) ) {
+			if ( ! $include_all && $course ) {
 				continue;
 			}
-
-			/**
-			 * Filters order item display meta key.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $display_key Display key.
-			 * @param object $meta Meta object.
-			 * @param Masteriyo\Models\Order\OrderItem $order_item Order item object.
-			 */
-			$display_key = apply_filters( 'masteriyo_order_item_display_meta_key', $display_key, $meta, $this );
 
 			/**
 			 * Filters order item display meta value.
@@ -233,7 +221,6 @@ class OrderItem extends Model {
 			$formatted_meta[ $meta->id ] = (object) array(
 				'key'           => $meta->key,
 				'value'         => $meta->value,
-				'display_key'   => $display_key,
 				'display_value' => wpautop( make_clickable( $display_value ) ),
 			);
 		}

@@ -131,7 +131,9 @@ const EditInstructor: React.FC = () => {
 							<FormProvider {...formMethods}>
 								<form onSubmit={handleSubmit(onSubmit)}>
 									<Stack direction="column" spacing="6">
-										<Stack direction="row" spacing="6">
+										<Stack
+											direction={['column', 'column', 'row', 'row']}
+											spacing="6">
 											<Box flexGrow={1} py={3}>
 												<Heading as="h2" fontSize="lg">
 													{__('Name', 'masteriyo')}

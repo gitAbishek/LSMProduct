@@ -1,3 +1,4 @@
+import { Stack } from '@chakra-ui/react';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
@@ -27,10 +28,10 @@ const EditReview: React.FC = () => {
 
 	if (reviewQuery.isSuccess) {
 		return (
-			<>
+			<Stack w="100%">
 				<ReviewForm editMode reviewQueryData={reviewQuery.data} />
 				<AllReplies reviewId={reviewId} />
-			</>
+			</Stack>
 		);
 	}
 	return <ReviewSkeleton />;

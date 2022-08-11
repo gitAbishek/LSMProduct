@@ -212,6 +212,7 @@ const theme = extendTheme({
 						},
 						'.responsiveTable td': { display: 'block' },
 						'.responsiveTable tr': {
+							marginTop: '10px',
 							display: 'block',
 						},
 						'.responsiveTable thead tr': {

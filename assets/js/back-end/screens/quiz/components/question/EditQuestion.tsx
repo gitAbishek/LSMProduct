@@ -76,7 +76,7 @@ const EditQuestion: React.FC<Props> = (props) => {
 					{__('Question', 'masteriyo')}
 				</Heading>
 			</Flex>
-			<Stack direction="row" spacing="6">
+			<Stack direction={['column', 'column', 'column', 'row']} spacing="6">
 				<FormControl isInvalid={!!errors?.name}>
 					<FormLabel>{__('Question Name', 'masteriyo')}</FormLabel>
 					<Input
@@ -101,7 +101,14 @@ const EditQuestion: React.FC<Props> = (props) => {
 							<Select
 								value={value}
 								options={questionType}
-								styles={reactSelectStyles}
+								styles={{
+									...reactSelectStyles,
+									control: (provided: any) => ({
+										...provided,
+										...reactSelectStyles.control,
+										minWidth: 0,
+									}),
+								}}
 								components={ReactSelectComponent()}
 								onChange={(data: any) => {
 									onChange(data);

@@ -114,7 +114,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 					<TabPanels flex="1">
 						<TabPanel>
 							<Stack direction="column" spacing="6">
-								<Stack direction="row" spacing="8">
+								<Stack direction={['column', 'column', 'row']} spacing="8">
 									<FormControl>
 										<FormLabel>{__('Country', 'masteriyo')}</FormLabel>
 
@@ -148,7 +148,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 								</Stack>
-								<Stack direction="row" spacing="8">
+								<Stack direction={['column', 'row']} spacing="8">
 									<FormControl>
 										<FormLabel>{__('City', 'masteriyo')}</FormLabel>
 
@@ -179,7 +179,9 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 						</TabPanel>
 						<TabPanel>
 							<Stack direction="column" spacing="6">
-								<Stack direction="row" spacing="8">
+								<Stack
+									direction={['column', 'column', 'row', 'row']}
+									spacing="8">
 									<FormControl>
 										<FormLabel>
 											{__('Currency', 'masteriyo')}
@@ -237,7 +239,9 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 										</Select>
 									</FormControl>
 								</Stack>
-								<Stack direction="row" spacing="8">
+								<Stack
+									direction={['column', 'column', 'row', 'row']}
+									spacing="8">
 									<FormControl
 										isInvalid={
 											!!errors?.payments?.currency?.thousand_separator

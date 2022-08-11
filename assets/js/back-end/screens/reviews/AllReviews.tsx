@@ -10,6 +10,7 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
+	Icon,
 	List,
 	ListIcon,
 	ListItem,
@@ -228,7 +229,7 @@ const AllReviews = () => {
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header>
-				<List d="flex">
+				<List d={['none', 'none', 'flex']} flexDirection="row">
 					{statusList.map((button: Status) => (
 						<ListItem key={button.status} mb="0">
 							<Button
@@ -258,6 +259,32 @@ const AllReviews = () => {
 						</ListItem>
 					))}
 				</List>
+				{/* Start Mobile View */}
+				<Stack direction="column" display={{ md: 'none' }}>
+					{statusList.map((button: Status) => (
+						<Stack key={button.status}>
+							<Button
+								color="gray.600"
+								variant="link"
+								sx={reviewStatusBtnStyles}
+								_active={navActiveStyles}
+								isActive={button.status === reviewStatus}
+								_hover={{ color: 'blue.500' }}
+								onClick={() => onReviewStatusChange(button.status)}>
+								<Icon as={button.icon} />
+								{button.name}
+								{reviewStatusCount[button.status] !== undefined ? (
+									<Badge color="inherit">
+										{reviewStatusCount[button.status]}
+									</Badge>
+								) : (
+									<SkeletonCircle size="4" ml="1" mb="1" />
+								)}
+							</Button>
+						</Stack>
+					))}
+				</Stack>
+				{/* End Mobile View */}
 			</Header>
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">

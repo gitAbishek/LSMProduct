@@ -144,7 +144,7 @@ const ReviewForm: React.FC<Props> = (props) => {
 										<Stack direction="column" spacing="6">
 											<Title />
 											<Content />
-											<Stack direction="row" spacing="12">
+											<Stack direction={['column', 'column', 'row']}>
 												<Courses
 													defaultValue={
 														editMode && reviewQueryData

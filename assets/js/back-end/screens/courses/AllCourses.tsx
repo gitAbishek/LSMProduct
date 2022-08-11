@@ -12,12 +12,12 @@ import {
 	Container,
 	Icon,
 	List,
-	ListIcon,
 	ListItem,
 	SkeletonCircle,
 	Stack,
 	Text,
 	useDisclosure,
+	useMediaQuery,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -46,7 +46,6 @@ import API from '../../utils/api';
 import { deepMerge, isEmpty } from '../../utils/utils';
 import CourseFilter from './components/CourseFilter';
 import CourseList from './components/CourseList';
-
 interface FilterParams {
 	category?: string | number;
 	search?: string;
@@ -77,6 +76,7 @@ const AllCourses = () => {
 		draft: null,
 		trash: null,
 	});
+	const [isMobile] = useMediaQuery('(min-width: 48em)');
 
 	const courseQuery = useQuery(
 		['courseList', filterParams],
@@ -189,12 +189,12 @@ const AllCourses = () => {
 				isActive={active === courseStatus}
 				_hover={{ color: 'blue.500' }}
 				onClick={() => onChangeCourseStatus(courseStatus)}>
-				<ListIcon as={iconName} />
+				<Icon as={iconName} />
 				{buttonText}
-				{courseCount === null ? (
-					<SkeletonCircle size="3" w="17px" ml="1" mb="1" rounded="sm" />
-				) : (
+				{courseCount !== null ? (
 					<Badge color="inherit">{courseCount}</Badge>
+				) : (
+					<SkeletonCircle size="3" w="17px" ml="1" mb="1" rounded="sm" />
 				)}
 			</Button>
 		);
@@ -217,7 +217,9 @@ const AllCourses = () => {
 					action: () => history.push(routes.courses.add),
 					icon: <Icon as={BiPlus} fontSize="md" />,
 				}}>
-				<List d="flex">
+				<List
+					d={['none', 'flex', 'flex']}
+					flexDirection={['column', 'row', 'row', 'row']}>
 					<ListItem mb="0">{courseStatusButton('any', BiBook)}</ListItem>
 					<ListItem mb="0">
 						{courseStatusButton('publish', BiBookOpen)}
@@ -227,6 +229,18 @@ const AllCourses = () => {
 					</ListItem>
 					<ListItem mb="0">{courseStatusButton('trash', BiTrash)}</ListItem>
 				</List>
+				{/* Start Mobile View */}
+				<Stack direction="column" display={{ sm: 'none' }}>
+					<Stack direction="row" gap="6">
+						<Stack w="50%">{courseStatusButton('any', BiBook)}</Stack>
+						<Stack w="50%">{courseStatusButton('publish', BiBookOpen)}</Stack>
+					</Stack>
+					<Stack direction="row" gap="6">
+						<Stack w="50%">{courseStatusButton('draft', BiBookBookmark)}</Stack>
+						<Stack w="50%">{courseStatusButton('trash', BiTrash)}</Stack>
+					</Stack>
+				</Stack>
+				{/* End Mobile View */}
 			</Header>
 			<Container maxW="container.xl">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">
@@ -236,8 +250,15 @@ const AllCourses = () => {
 							filterParams={filterParams}
 							courseStatus={active}
 						/>
-
-						<Stack direction="column" spacing="8">
+						<Stack
+							direction="column"
+							spacing="8"
+							mt={{
+								base: '15px !important',
+								sm: '15px !important',
+								md: '2.5rem !important',
+								lg: '2.5rem !important',
+							}}>
 							<Table>
 								<Thead>
 									<Tr>

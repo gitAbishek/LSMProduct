@@ -115,13 +115,14 @@ const SingleChoice: React.FC<Props> = (props) => {
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (
-							<Flex
+							<Stack
 								key={index}
+								direction={['column', 'column', 'row']}
 								border="1px"
 								borderColor={answer?.correct ? 'green.200' : 'gray.100'}
 								rounded="sm"
 								mb="4"
-								align="center"
+								alignItems="center"
 								justify="space-between"
 								px="2"
 								py="1">
@@ -134,31 +135,30 @@ const SingleChoice: React.FC<Props> = (props) => {
 										setAnswers={setAnswers}
 									/>
 								</Stack>
-								<Stack direction="row" spacing="4">
+								<Stack direction={'row'} spacing="4">
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}
 										onChange={() => onCheckPress(index)}
 									/>
-									<Stack direction="row" spacing="2">
-										<IconButton
-											variant="unstyled"
-											sx={iconStyles}
-											aria-label={__('Duplicate', 'masteriyo')}
-											onClick={() => onDuplicatePress(answer.name)}
-											icon={<BiCopy />}
-										/>
-										<IconButton
-											variant="unstyled"
-											sx={iconStyles}
-											aria-label={__('Delete', 'masteriyo')}
-											icon={<BiTrash />}
-											minW="auto"
-											onClick={() => onDeletePress(index)}
-										/>
-									</Stack>
+
+									<IconButton
+										variant="unstyled"
+										sx={iconStyles}
+										aria-label={__('Duplicate', 'masteriyo')}
+										onClick={() => onDuplicatePress(answer.name)}
+										icon={<BiCopy />}
+									/>
+									<IconButton
+										variant="unstyled"
+										sx={iconStyles}
+										aria-label={__('Delete', 'masteriyo')}
+										icon={<BiTrash />}
+										minW="auto"
+										onClick={() => onDeletePress(index)}
+									/>
 								</Stack>
-							</Flex>
+							</Stack>
 						)
 					)}
 			</Box>

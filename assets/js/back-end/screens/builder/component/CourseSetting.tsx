@@ -1,5 +1,6 @@
 import {
 	Box,
+	Center,
 	Collapse,
 	FormControl,
 	FormErrorMessage,
@@ -15,13 +16,15 @@ import {
 	Radio,
 	RadioGroup,
 	Select,
-	Skeleton,
+	Spinner,
 	Stack,
 	Tab,
 	TabList,
 	TabPanel,
 	TabPanels,
 	Tabs,
+	Text,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -37,11 +40,10 @@ import ChangeInstructorSetting from './ChangeInstructorSetting';
 
 interface Props {
 	courseData?: CourseDataMap | any;
-	tabIndex?: boolean;
 }
 
 const CourseSetting: React.FC<Props> = (props) => {
-	const { courseData, tabIndex } = props;
+	const { courseData } = props;
 
 	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
@@ -50,6 +52,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 	const [pricingDisplayValue, setPricingDisplayValue] = useState(
 		courseData?.price_type || 'free'
 	);
+
+	const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
 	const [accessModeType, setAccessModeType] = useState(
 		courseData?.access_mode || 'open'
@@ -64,12 +68,8 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setValue,
 	} = useFormContext();
 
-	const diffultiesQuery = useQuery(
-		'difficulties',
-		() => difficultiesAPI.list(),
-		{
-			enabled: tabIndex,
-		}
+	const diffultiesQuery = useQuery('difficulties', () =>
+		difficultiesAPI.list()
 	);
 
 	const renderDifficultiesOption = () => {
@@ -88,9 +88,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 	const tabStyles = {
 		justifyContent: 'flex-start',
-		w: '150px',
+		w: ['60px', '60px', '150px', '150px'],
 		borderLeft: 0,
-		borderRight: '2px solid',
+		borderRight: ['none', 'none', '2px solid #E2E8F0'],
 		borderRightColor: 'transparent',
 		marginLeft: 0,
 		marginRight: '-2px',
@@ -101,8 +101,9 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 	const tabListStyles = {
 		borderLeft: 0,
-		borderRight: '2px solid',
-		borderRightColor: 'gray.200',
+		borderRight: ['none', 'none', '2px solid #E2E8F0'],
+		justifyContent: ['center', 'center', 'left', 'left'],
+		gap: ['3', '3', 0, 0],
 	};
 
 	const currencyCode = localized.currency.code;
@@ -113,11 +114,18 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setValue('price_type', priceType);
 	};
 
+	let tabOrientation: 'vertical' | 'horizontal' = 'vertical';
+	if (isLargerThan768) {
+		tabOrientation = 'vertical';
+	} else {
+		tabOrientation = 'horizontal';
+	}
+
 	return (
 		<Box bg="white" p="10" shadow="box">
 			<form>
-				<Tabs orientation="vertical">
-					<Stack direction="row" flex="1">
+				<Tabs orientation={tabOrientation}>
+					<Stack direction={['column', 'column', 'row', 'row']}>
 						<TabList sx={tabListStyles}>
 							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
 							<Tab sx={tabStyles}>{__('Display', 'masteriyo')}</Tab>
@@ -125,130 +133,133 @@ const CourseSetting: React.FC<Props> = (props) => {
 						</TabList>
 						<TabPanels flex="1">
 							<TabPanel>
-								<Stack direction="column" spacing="8">
-									<ChangeInstructorSetting
-										courseData={courseData}
-										tabIndex={tabIndex}
-									/>
+								{diffultiesQuery?.isLoading ? (
+									<Center>
+										<Spinner />
+									</Center>
+								) : (
+									<Stack direction="column" spacing="8">
+										<ChangeInstructorSetting courseData={courseData} />
 
-									<FormControl>
-										<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
-										{diffultiesQuery?.isLoading ? (
-											<Skeleton height="40px" />
-										) : (
+										<FormControl>
+											<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
 											<Select
 												placeholder={__('Choose Course Level', 'masteriyo')}
 												defaultValue={courseData?.difficulty?.id}
 												{...register('difficulty.id')}>
 												{renderDifficultiesOption()}
 											</Select>
-										)}
-									</FormControl>
-									<Stack direction="column" spacing="0">
-										<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
-										<Stack direction="row">
-											<FormControl isInvalid={!!errors?.duration_hour}>
-												<Controller
-													name="duration_hour"
-													defaultValue={hours || 0}
-													rules={{
-														required: __('Hours is required.', 'masteriyo'),
-														min: 0,
-													}}
-													render={({ field }) => (
-														<InputGroup>
-															<NumberInput {...field} w="sm" min={0}>
-																<NumberInputField rounded="sm" />
-																<NumberInputStepper>
-																	<NumberIncrementStepper />
-																	<NumberDecrementStepper />
-																</NumberInputStepper>
-															</NumberInput>
-															<InputRightAddon>
-																{__('Hours', 'masteriyo')}
-															</InputRightAddon>
-														</InputGroup>
-													)}
-												/>
-												<FormErrorMessage>
-													{errors?.duration_hour &&
-														errors?.duration_hour?.message}
-												</FormErrorMessage>
-											</FormControl>
-
-											<FormControl isInvalid={!!errors?.duration_minute}>
-												<Controller
-													name="duration_minute"
-													defaultValue={minutes || 0}
-													rules={{
-														required: __('Minutes is required.', 'masteriyo'),
-														min: 0,
-														max: 59,
-													}}
-													render={({ field }) => (
-														<InputGroup>
-															<NumberInput {...field} w="sm" min={0} max={59}>
-																<NumberInputField rounded="sm" />
-																<NumberInputStepper>
-																	<NumberIncrementStepper />
-																	<NumberDecrementStepper />
-																</NumberInputStepper>
-															</NumberInput>
-															<InputRightAddon>
-																{__('Minutes', 'masteriyo')}
-															</InputRightAddon>
-														</InputGroup>
-													)}
-												/>
-												<FormErrorMessage>
-													{errors?.duration_minute &&
-														errors?.duration_minute?.message}
-												</FormErrorMessage>
-											</FormControl>
-										</Stack>
-									</Stack>
-									<FormControl>
-										<FormLabel>{__('Maximum Students', 'masteriyo')}</FormLabel>
-										<RadioGroup
-											onChange={setEnrollDisplayValue}
-											value={enrollDisplayValue}>
-											<Stack direction="column" spacing="4">
-												<Stack direction="row" spacing="8" align="flex-start">
-													<Radio
-														onChange={(e: any) =>
-															setValue('enrollment_limit', e.target.value)
-														}
-														value="0">
-														{__('No limit', 'masteriyo')}
-													</Radio>
-
-													<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
-												</Stack>
-												<Collapse in={enrollDisplayValue != '0'} animateOpacity>
-													<FormControl>
-														<FormLabel>
-															{__('Number of Students', 'masteriyo')}
-														</FormLabel>
-														<Controller
-															name="enrollment_limit"
-															render={({ field }) => (
-																<NumberInput
-																	{...field}
-																	defaultValue={courseData?.enrollment_limit}>
-																	<NumberInputField />
+										</FormControl>
+										<Stack direction="column" spacing="0">
+											<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
+											<Stack direction={['column', 'column', 'row']}>
+												<FormControl isInvalid={!!errors?.duration_hour}>
+													<Controller
+														name="duration_hour"
+														defaultValue={hours || 0}
+														rules={{
+															required: __('Hours is required.', 'masteriyo'),
+															min: 0,
+														}}
+														render={({ field }) => (
+															<InputGroup display="flex" flexDirection="row">
+																<NumberInput {...field} w="100%">
+																	<NumberInputField rounded="sm" />
 																	<NumberInputStepper>
 																		<NumberIncrementStepper />
 																		<NumberDecrementStepper />
 																	</NumberInputStepper>
 																</NumberInput>
-															)}
-														/>
-													</FormControl>
-												</Collapse>
+																<InputRightAddon>
+																	{__('Hours', 'masteriyo')}
+																</InputRightAddon>
+															</InputGroup>
+														)}
+													/>
+													<FormErrorMessage>
+														{errors?.duration_hour &&
+															errors?.duration_hour?.message}
+													</FormErrorMessage>
+												</FormControl>
+
+												<FormControl isInvalid={!!errors?.duration_minute}>
+													<Controller
+														name="duration_minute"
+														defaultValue={minutes || 0}
+														rules={{
+															required: __('Minutes is required.', 'masteriyo'),
+															min: 0,
+															max: 59,
+														}}
+														render={({ field }) => (
+															<InputGroup display="flex" flexDirection="row">
+																<NumberInput {...field} w="100%">
+																	<NumberInputField rounded="sm" />
+																	<NumberInputStepper>
+																		<NumberIncrementStepper />
+																		<NumberDecrementStepper />
+																	</NumberInputStepper>
+																</NumberInput>
+																<InputRightAddon>
+																	{__('Minutes', 'masteriyo')}
+																</InputRightAddon>
+															</InputGroup>
+														)}
+													/>
+													<FormErrorMessage>
+														{errors?.duration_minute &&
+															errors?.duration_minute?.message}
+													</FormErrorMessage>
+												</FormControl>
 											</Stack>
-										</RadioGroup>
-									</FormControl>
-								</Stack>
+										</Stack>
+										<FormControl>
+											<FormLabel>
+												{__('Maximum Students', 'masteriyo')}
+											</FormLabel>
+											<RadioGroup
+												onChange={setEnrollDisplayValue}
+												value={enrollDisplayValue}>
+												<Stack direction="column" spacing="4">
+													<Stack direction="row" spacing="8" align="flex-start">
+														<Radio
+															onChange={(e: any) =>
+																setValue('enrollment_limit', e.target.value)
+															}
+															value="0">
+															{__('No limit', 'masteriyo')}
+														</Radio>
+
+														<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
+													</Stack>
+													<Collapse
+														in={enrollDisplayValue != '0'}
+														animateOpacity>
+														<FormControl>
+															<FormLabel>
+																{__('Number of Students', 'masteriyo')}
+															</FormLabel>
+															<Controller
+																name="enrollment_limit"
+																render={({ field }) => (
+																	<NumberInput
+																		{...field}
+																		defaultValue={courseData?.enrollment_limit}>
+																		<NumberInputField />
+																		<NumberInputStepper>
+																			<NumberIncrementStepper />
+																			<NumberDecrementStepper />
+																		</NumberInputStepper>
+																	</NumberInput>
+																)}
+															/>
+														</FormControl>
+													</Collapse>
+												</Stack>
+											</RadioGroup>
+										</FormControl>
+									</Stack>
+								)}
 							</TabPanel>
 
 							<TabPanel>
@@ -263,12 +274,24 @@ const CourseSetting: React.FC<Props> = (props) => {
 											}
 											onChange={(value) => setValue('show_curriculum', value)}>
 											<Stack direction="row" spacing="8">
-												<Radio value="true">
-													{__('Always Visible', 'masteriyo')}
-												</Radio>
-												<Radio value="false">
-													{__('Only Visible to Enrollers', 'masteriyo')}
-												</Radio>
+												<Stack
+													direction={{ base: 'column', sm: 'row' }}
+													justifyContent="center"
+													alignItems="center">
+													<Radio value="true" />
+													<Text textAlign="center">
+														{__('Always Visible', 'masteriyo')}
+													</Text>
+												</Stack>
+												<Stack
+													direction={{ base: 'column', sm: 'row' }}
+													justifyContent="center"
+													alignItems="center">
+													<Radio value="false" />
+													<Text textAlign="center">
+														{__('Only Visible to Enrollers', 'masteriyo')}
+													</Text>
+												</Stack>
 											</Stack>
 										</RadioGroup>
 									</FormControl>

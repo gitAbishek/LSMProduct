@@ -11,6 +11,7 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
+	useMediaQuery,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -48,6 +49,7 @@ const AddNewLesson: React.FC = () => {
 	const lessonAPI = new API(urls.lessons);
 	const sectionsAPI = new API(urls.sections);
 	const courseAPI = new API(urls.courses);
+	const [isLargerThan992] = useMediaQuery('(min-width: 992px)');
 
 	const courseQuery = useQuery<CourseDataMap>(
 		[`course${courseId}`, courseId],
@@ -102,6 +104,24 @@ const AddNewLesson: React.FC = () => {
 		}
 	};
 
+	const FormButton = () => (
+		<ButtonGroup>
+			<Button colorScheme="blue" type="submit" isLoading={addLesson.isLoading}>
+				{__('Add New Lesson', 'masteriyo')}
+			</Button>
+			<Button
+				variant="outline"
+				onClick={() =>
+					history.push({
+						pathname: routes.courses.edit.replace(':courseId', courseId),
+						search: '?page=builder&view=' + sectionId,
+					})
+				}>
+				{__('Cancel', 'masteriyo')}
+			</Button>
+		</ButtonGroup>
+	);
+
 	if (
 		sectionQuery.isSuccess &&
 		courseQuery.isSuccess &&
@@ -145,7 +165,9 @@ const AddNewLesson: React.FC = () => {
 								onSubmit={methods.handleSubmit((data: AddLessonFormData) =>
 									onSubmit(data)
 								)}>
-								<Stack direction="row" spacing="8">
+								<Stack
+									direction={['column', 'column', 'column', 'row']}
+									spacing="8">
 									<Box
 										flex="1"
 										bg="white"
@@ -182,34 +204,15 @@ const AddNewLesson: React.FC = () => {
 												<Name />
 												<Description />
 
-												<ButtonGroup>
-													<Button
-														colorScheme="blue"
-														type="submit"
-														isLoading={addLesson.isLoading}>
-														{__('Add New Lesson', 'masteriyo')}
-													</Button>
-													<Button
-														variant="outline"
-														onClick={() =>
-															history.push({
-																pathname: routes.courses.edit.replace(
-																	':courseId',
-																	courseId
-																),
-																search: '?page=builder&view=' + sectionId,
-															})
-														}>
-														{__('Cancel', 'masteriyo')}
-													</Button>
-												</ButtonGroup>
+												{isLargerThan992 ? <FormButton /> : null}
 											</Stack>
 										</Stack>
 									</Box>
-									<Box w="400px" bg="white" p="10" shadow="box">
+									<Box w={{ lg: '400px' }} bg="white" p="10" shadow="box">
 										<Stack direction="column" spacing="6">
 											<FeaturedImage size="masteriyo_single" />
 											<VideoSource />
+											{!isLargerThan992 ? <FormButton /> : null}
 										</Stack>
 									</Box>
 								</Stack>

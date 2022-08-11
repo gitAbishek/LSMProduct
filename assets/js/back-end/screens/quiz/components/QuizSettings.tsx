@@ -115,7 +115,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 
 							<Stack direction="column" spacing="0">
 								<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
-								<Stack direction="row">
+								<Stack direction={['column', 'column', 'row', 'row']}>
 									<FormControl isInvalid={!!errors?.duration_hour}>
 										<Controller
 											name="duration_hour"

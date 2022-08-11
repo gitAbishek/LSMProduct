@@ -3,7 +3,6 @@ import {
 	AlertDescription,
 	AlertIcon,
 	AlertTitle,
-	Box,
 	Button,
 	ButtonGroup,
 	Checkbox,
@@ -86,7 +85,7 @@ const TrueFalse: React.FC<Props> = (props) => {
 				</Heading>
 			</Flex>
 			<Input type="hidden" {...register('answers')} />
-			<Box>
+			<Stack>
 				{duplicateObject('name', answers) && (
 					<Alert status="error" mb="4" fontSize="xs" p="2">
 						<AlertIcon />
@@ -99,17 +98,19 @@ const TrueFalse: React.FC<Props> = (props) => {
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (
-							<Flex
+							<Stack
 								key={index}
+								direction="row"
 								border="1px"
 								borderColor={answer?.correct ? 'green.200' : 'gray.100'}
 								rounded="sm"
 								mb="4"
 								align="center"
 								justify="space-between"
+								position="relative"
 								px="2"
 								py="1">
-								<Stack direction="row" spacing="2" align="center" flex="1">
+								<Stack direction="row" spacing="2" align="center">
 									<Icon as={Sortable} fontSize="lg" color="gray.500" />
 									<EditableAnswer
 										answers={answers}
@@ -119,7 +120,11 @@ const TrueFalse: React.FC<Props> = (props) => {
 									/>
 								</Stack>
 
-								<Stack direction="row" spacing="4">
+								<Stack
+									direction="row"
+									spacing="4"
+									position="absolute"
+									right="10px">
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}
@@ -136,10 +141,10 @@ const TrueFalse: React.FC<Props> = (props) => {
 										/>
 									</Stack>
 								</Stack>
-							</Flex>
+							</Stack>
 						)
 					)}
-			</Box>
+			</Stack>
 			<ButtonGroup>
 				<Button
 					leftIcon={<Icon as={BiPlus} fontSize="xl" />}

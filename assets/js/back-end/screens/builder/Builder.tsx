@@ -54,6 +54,7 @@ const Builder: React.FC = () => {
 		mx: 4,
 		_hover: {
 			color: 'blue.500',
+			borderBottom: [0, 0, '2px solid'],
 		},
 	};
 
@@ -193,7 +194,15 @@ const Builder: React.FC = () => {
 								action: methods.handleSubmit((data) => onSave(data, 'publish')),
 								isLoading: updateCourse.isLoading,
 							}}>
-							<TabList borderBottom="none" bg="white">
+							<TabList
+								borderBottom="none"
+								bg="white"
+								ml={[
+									'-13px !important',
+									'-13px !important',
+									'32px !important',
+									'32px !important',
+								]}>
 								<Tab
 									sx={tabStyles}
 									onClick={() => {
@@ -262,10 +271,7 @@ const Builder: React.FC = () => {
 									</TabPanel>
 									<TabPanel sx={tabPanelStyles}>
 										{courseQuery.isSuccess ? (
-											<CourseSetting
-												courseData={courseQuery.data}
-												tabIndex={tabIndex === 2}
-											/>
+											<CourseSetting courseData={courseQuery.data} />
 										) : (
 											<CourseSkeleton page={tabIndex} />
 										)}

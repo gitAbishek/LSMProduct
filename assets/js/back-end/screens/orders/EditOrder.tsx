@@ -230,7 +230,9 @@ const EditOrder = () => {
 								<FormProvider {...formMethods}>
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<Stack direction="column" spacing="6">
-											<Stack direction="row" spacing="6">
+											<Stack
+												direction={['column', 'column', 'column', 'row']}
+												spacing="6">
 												<Box flexGrow={1} py="3">
 													<Heading as="h2" fontSize="medium">
 														{__('General', 'masteriyo')}
@@ -319,7 +321,10 @@ const EditOrder = () => {
 														{__('Billing', 'masteriyo')}
 													</Heading>
 
-													<Stack direction="row" spacing="8" py="3">
+													<Stack
+														direction={['column', 'column', 'row', 'row']}
+														spacing="8"
+														py="3">
 														<FormControl
 															isInvalid={!!errors?.billing?.first_name}>
 															<FormLabel>

@@ -6,6 +6,7 @@ import {
 	AlertDialogHeader,
 	AlertDialogOverlay,
 	Avatar,
+	Box,
 	Button,
 	ButtonGroup,
 	Collapse,
@@ -208,22 +209,20 @@ const ReplyList: React.FC<Props> = (props) => {
 										{errors && errors.content && errors.content.message}
 									</FormErrorMessage>
 								</FormControl>
-								<Divider />
-								<Stack direction={'row'} mt={4}>
+								<Box py="2">
+									<Divider />
+								</Box>
+								<ButtonGroup>
 									<Button
 										type="submit"
-										w="18%"
 										colorScheme="blue"
 										isLoading={updateReview.isLoading}>
 										{__('Update Reply', 'masteriyo')}
 									</Button>
-									<Button
-										w="18%"
-										variant="outline"
-										onClick={() => setOpen(false)}>
+									<Button variant="outline" onClick={() => setOpen(false)}>
 										{__('Cancel', 'masteriyo')}
 									</Button>
-								</Stack>
+								</ButtonGroup>
 							</form>
 						</Stack>
 					</Collapse>

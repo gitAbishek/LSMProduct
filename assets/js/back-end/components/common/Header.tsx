@@ -28,6 +28,9 @@ interface Course {
 	previewUrl: string;
 }
 
+type HeaderDirection = 'row' | 'column';
+type HeaderAlign = 'center' | 'left' | 'right';
+
 interface Props {
 	firstBtn?: {
 		label: string;
@@ -53,6 +56,8 @@ interface Props {
 	showLinks?: boolean;
 	showPreview?: boolean;
 	showCourseName?: boolean;
+	direction?: HeaderDirection[];
+	align?: HeaderAlign[];
 }
 
 const Header: React.FC<Props> = (props) => {
@@ -65,6 +70,8 @@ const Header: React.FC<Props> = (props) => {
 		showLinks,
 		showPreview,
 		showCourseName,
+		direction = ['column', 'column', 'row', 'row'],
+		align = ['left', 'left', 'center', 'center'],
 	} = props;
 
 	const location = useLocation();
@@ -73,31 +80,36 @@ const Header: React.FC<Props> = (props) => {
 	const [isDesktop] = useMediaQuery('(min-width: 48em)');
 	return (
 		<>
-			<Box bg="white" w="full" shadow="header" pb={['3', 0, 0]}>
+			<Box bg="white" w="full" shadow="header" pb={['3', '3', 0]}>
 				<Container maxW="container.xl">
 					<Stack
-						direction={['column', 'row']}
+						direction={direction}
 						justifyContent="space-between"
-						align="center">
+						align={align}>
 						<Stack
-							direction={['column', null, 'row']}
+							direction={['column', 'column', 'row', 'row']}
 							spacing={['3', null, '8']}
-							align="center"
+							align={['left', 'left', 'center', 'center']}
 							minHeight="16">
-							<Box d={['none', null, 'block']}>
+							<Stack
+								direction={['row', 'row', 'column', 'row']}
+								alignItems="center"
+								textAlign="center"
+								spacing="4">
 								<NavLink to={routes.courses.list}>
-									<Image src={Logo} w="36px" />
+									<Image src={Logo} w="36px" minW="36px" />
 								</NavLink>
-							</Box>
-							{showCourseName && (
-								<>
-									{course && (
-										<Heading fontSize="md" fontWeight="medium">
-											{course.name}
-										</Heading>
-									)}
-								</>
-							)}
+								{showCourseName && (
+									<>
+										{course && (
+											<Heading fontSize="md" fontWeight="medium">
+												{course.name}
+											</Heading>
+										)}
+									</>
+								)}
+							</Stack>
+
 							{children}
 							{showLinks && courseId && (
 								<List d="flex">

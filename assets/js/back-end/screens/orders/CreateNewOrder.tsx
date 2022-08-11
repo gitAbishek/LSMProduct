@@ -138,7 +138,9 @@ const CreateNewOrder: React.FC = () => {
 						<FormProvider {...formMethods}>
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<Stack direction="column" spacing="6">
-									<Stack direction="row" spacing="6">
+									<Stack
+										direction={['column', 'column', 'row', 'row']}
+										spacing="6">
 										<Box flex="1" py="2">
 											<Heading as="h2" fontSize="medium">
 												{__('General', 'masteriyo')}

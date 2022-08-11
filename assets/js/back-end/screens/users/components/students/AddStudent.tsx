@@ -103,7 +103,9 @@ const AddStudent: React.FC = () => {
 						<FormProvider {...formMethods}>
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<Stack direction="column" spacing="6">
-									<Stack direction="row" spacing="6">
+									<Stack
+										direction={['column', 'column', 'row', 'row']}
+										spacing="6">
 										<Stack py="3" spacing="3" flex="1">
 											<Heading as="h2" fontSize="lg">
 												{__('Name', 'masteriyo')}

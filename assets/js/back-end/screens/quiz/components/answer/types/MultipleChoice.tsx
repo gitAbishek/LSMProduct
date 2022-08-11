@@ -109,13 +109,14 @@ const MultipleChoice: React.FC<Props> = (props) => {
 				{answers &&
 					answers.map(
 						(answer: { name: string; correct: boolean }, index: number) => (
-							<Flex
+							<Stack
 								key={index}
 								border="1px"
+								direction={['column', 'column', 'row']}
 								borderColor={answer?.correct ? 'green.200' : 'gray.100'}
 								rounded="sm"
 								mb="4"
-								align="center"
+								alignItems="center"
 								justify="space-between"
 								px="2"
 								py="1">
@@ -128,13 +129,13 @@ const MultipleChoice: React.FC<Props> = (props) => {
 										setAnswers={setAnswers}
 									/>
 								</Stack>
-								<Stack direction="row" spacing="4" flexWrap="wrap">
+								<Stack direction={'row'} spacing="4">
 									<Checkbox
 										colorScheme="green"
 										isChecked={answer?.correct}
 										onChange={(e) => onCheckPress(index, e.target.checked)}
 									/>
-									<Stack direction="row" spacing="2">
+									<Stack direction="row" spacing="2" right="10px">
 										<IconButton
 											variant="unstyled"
 											sx={iconStyles}
@@ -152,7 +153,7 @@ const MultipleChoice: React.FC<Props> = (props) => {
 										/>
 									</Stack>
 								</Stack>
-							</Flex>
+							</Stack>
 						)
 					)}
 			</Box>

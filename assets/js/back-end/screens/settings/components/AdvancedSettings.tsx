@@ -93,7 +93,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<FormControl>
-								<Stack direction="row">
+								<Stack direction="column">
 									<FormLabel>
 										{__('Single Course Permalink', 'masteriyo')}
 									</FormLabel>
@@ -107,8 +107,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 												}>
 												<Stack spacing={3} direction="column">
 													<Radio value="course" w="100%">
-														<Flex>
-															<Text fontSize="sm" w="150px">
+														<Flex flexDirection="column">
+															<Text fontSize="sm">
 																{__('Default', 'masteriyo')}
 															</Text>
 															<Code flex="1">
@@ -119,8 +119,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 													</Radio>
 													{/** TS */}
 													<Radio value={localized.pageSlugs.courses}>
-														<Flex>
-															<Text fontSize="sm" w="150px">
+														<Flex flexDirection="column">
+															<Text fontSize="sm">
 																{__('Courses page base', 'masteriyo')}
 															</Text>
 															<Code flex="1">
@@ -134,8 +134,8 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 														value={
 															localized.pageSlugs.courses + '/%course_cat%/'
 														}>
-														<Flex>
-															<Text fontSize="sm" w="150px">
+														<Flex flexDirection="column">
+															<Text fontSize="sm">
 																{__(
 																	'Courses page base with category',
 																	'masteriyo'
@@ -447,7 +447,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 					<TabPanel>
 						<Stack direction="column" spacing="6">
 							<Stack direction="column" spacing="8">
-								<Alert status="warning">
+								<Alert status="warning" display={['none', 'flex', 'flex']}>
 									<AlertIcon />
 									{__(
 										"This section is for development and testing purpose only. It's not recommended to be used in a live site.",
@@ -455,7 +455,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									)}
 								</Alert>
 								<FormControl>
-									<Stack direction="row">
+									<Stack direction={['column', 'row', 'row']}>
 										<FormLabel minW="3xs">
 											{__('Template Debug', 'masteriyo')}
 											<Tooltip
@@ -484,7 +484,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								</FormControl>
 
 								<FormControl>
-									<Stack direction="row">
+									<Stack direction={['column', 'row', 'row']}>
 										<FormLabel minW="3xs">
 											{__('Debug', 'masteriyo')}
 											<Tooltip

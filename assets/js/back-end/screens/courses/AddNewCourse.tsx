@@ -122,7 +122,9 @@ const AddNewCourse: React.FC = () => {
 								<TabPanels>
 									<TabPanel sx={tabPanelStyles}>
 										<form>
-											<Stack direction="row" spacing="8">
+											<Stack
+												direction={['column', 'column', 'row', 'row']}
+												spacing="8">
 												<Box
 													flex="1"
 													bg="white"
@@ -136,7 +138,7 @@ const AddNewCourse: React.FC = () => {
 														<Description />
 													</Stack>
 												</Box>
-												<Box w="400px" bg="white" p="10" shadow="box">
+												<Box bg="white" p="10" shadow="box">
 													<Stack direction="column" spacing="6">
 														<Highlights />
 														<Categories />

@@ -3,7 +3,6 @@ import {
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
-	HStack,
 	Icon,
 	Slider,
 	SliderFilledTrack,
@@ -181,7 +180,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 										</Box>
 									</Tooltip>
 								</FormLabel>
-								<HStack {...group}>
+								<Stack {...group} display="flex" direction={['column', 'row']}>
 									<RadioCard
 										radioProps={getRadioProps({ value: '1' })}
 										normalComponent={<CoursePerRow1 />}
@@ -202,7 +201,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 										normalComponent={<CoursePerRow4 />}
 										activeComponent={<CoursePerRow4Active />}
 									/>
-								</HStack>
+								</Stack>
 								<FormErrorMessage>
 									{errors?.course_archive?.display?.per_row &&
 										errors?.course_archive?.display?.per_row.message}

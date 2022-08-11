@@ -3,9 +3,10 @@ import {
 	Box,
 	Button,
 	Container,
+	Grid,
+	GridItem,
 	Icon,
 	IconButton,
-	List,
 	ListIcon,
 	ListItem,
 	Menu,
@@ -15,6 +16,7 @@ import {
 	SkeletonCircle,
 	Stack,
 	Text,
+	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
@@ -138,6 +140,8 @@ const AllOrders = () => {
 		failed: undefined,
 		trash: undefined,
 	});
+	const [isLargerThan1028] = useMediaQuery('(min-width: 1028px)');
+
 	const ordersAPI = new API(urls.orders);
 	const ordersQuery = useQuery(
 		['ordersList', filterParams],
@@ -172,7 +176,7 @@ const AllOrders = () => {
 			})
 		);
 
-	const onReviewStatusChange = (status: string) => {
+	const onOrderStatusChange = (status: string) => {
 		setOrderStatus(status);
 		setFilterParams(
 			deepMerge(filterParams, {
@@ -181,13 +185,15 @@ const AllOrders = () => {
 		);
 	};
 
-	const reviewStatusBtnStyles = {
+	const orderStatusButtonStyles = {
 		mr: '10',
 		py: '6',
 		d: 'flex',
 		gap: 1,
-		fontSize: 'sm',
+		justifyContent: 'flex-start',
+		alignItems: 'center',
 		fontWeight: 'medium',
+		fontSize: ['xs', null, 'sm'],
 	};
 
 	const hiddenStatus = statusList.slice(4);
@@ -199,23 +205,28 @@ const AllOrders = () => {
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header
 				showLinks
+				direction={['column', 'column', 'column', 'row', 'row']}
+				align={['left', 'left', 'left', 'center', 'center']}
 				thirdBtn={{
 					label: __('Create New Order', 'masteriyo'),
 					action: () => history.push(routes.orders.add),
 					icon: <Icon as={BiPlus} fontSize="md" />,
 				}}>
-				<List d="flex" alignItems={'center'}>
+				<Grid
+					templateColumns="repeat(5, 1fr)"
+					alignItems="center"
+					display={['none', 'none', 'flex', 'flex']}>
 					{statusList.slice(0, 4).map((button: Status) => (
-						<ListItem key={button.status} mb="0">
+						<GridItem key={button.status} mb="0">
 							<Button
 								color="gray.600"
 								variant="link"
-								sx={reviewStatusBtnStyles}
+								sx={orderStatusButtonStyles}
 								_active={navActiveStyles}
 								isActive={button.status === orderStatus}
 								_hover={{ color: 'blue.500' }}
-								onClick={() => onReviewStatusChange(button.status)}>
-								<ListIcon as={button.icon} />
+								onClick={() => onOrderStatusChange(button.status)}>
+								<Icon as={button.icon} />
 								{button.name}
 								{Object.values(orderStatusCount).every(
 									(x) => x === undefined
@@ -235,14 +246,14 @@ const AllOrders = () => {
 									</Badge>
 								)}
 							</Button>
-						</ListItem>
+						</GridItem>
 					))}
 					{selectedHiddenStatus ? (
 						<ListItem mb="0">
 							<Button
 								color="gray.600"
 								variant="link"
-								sx={reviewStatusBtnStyles}
+								sx={orderStatusButtonStyles}
 								_active={navActiveStyles}
 								isActive={true}
 								_hover={{ color: 'blue.500' }}>
@@ -265,7 +276,7 @@ const AllOrders = () => {
 							{hiddenStatus.map((button: Status) => (
 								<MenuItem
 									key={button.status}
-									onClick={() => onReviewStatusChange(button.status)}
+									onClick={() => onOrderStatusChange(button.status)}
 									icon={<button.icon />}>
 									{button.name}{' '}
 									<Badge color="inherit">
@@ -275,7 +286,44 @@ const AllOrders = () => {
 							))}
 						</MenuList>
 					</Menu>
-				</List>
+				</Grid>
+				{/* Start Mobile View */}
+				<Stack
+					gridTemplateColumns={{ base: 'repeat(2,1fr)', sm: 'repeat(3, 1fr)' }}
+					display={{ base: 'grid', sm: 'grid', md: 'none' }}>
+					{statusList.map((button: Status) => (
+						<Stack key={button.status}>
+							<Button
+								color="gray.600"
+								variant="link"
+								sx={orderStatusButtonStyles}
+								_active={navActiveStyles}
+								isActive={button.status === orderStatus}
+								_hover={{ color: 'blue.500' }}
+								onClick={() => onOrderStatusChange(button.status)}>
+								<Icon as={button.icon} />
+								{button.name}
+								{Object.values(orderStatusCount).every(
+									(x) => x === undefined
+								) ? (
+									<SkeletonCircle
+										size="3"
+										w="17px"
+										ml="1"
+										mb="1"
+										rounded="sm"
+									/>
+								) : (
+									<Badge color="inherit">
+										{button.status === OrderStatus.OnHold
+											? orderStatusCount.hold
+											: orderStatusCount[button.status]}
+									</Badge>
+								)}
+							</Button>
+						</Stack>
+					))}
+				</Stack>
 			</Header>
 			<Container maxW="container.xl" marginTop="6">
 				<Box bg="white" py={{ base: 6, md: 12 }} shadow="box" mx="auto">

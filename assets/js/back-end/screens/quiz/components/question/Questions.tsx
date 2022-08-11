@@ -111,7 +111,8 @@ const Questions: React.FC<Props> = (props) => {
 										<Accordion
 											allowToggle
 											sx={snapshot.isDraggingOver ? whileDraggingStyles : {}}
-											p="3"
+											p={['0', '0', '3']}
+											w="100%"
 											ref={droppableProvided.innerRef}
 											{...droppableProvided.droppableProps}>
 											{questionList.map(

@@ -84,79 +84,121 @@ class AdminMenu {
 			3
 		);
 
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Courses', 'masteriyo' ),
-			esc_html__( 'Courses', 'masteriyo' ),
-			'edit_courses',
-			'masteriyo#/courses',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Categories', 'masteriyo' ),
-			esc_html__( 'Categories', 'masteriyo' ),
-			'manage_course_categories',
-			'masteriyo#/courses/categories',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Orders', 'masteriyo' ),
-			esc_html__( 'Orders', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/orders',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Quiz Attempts', 'masteriyo' ),
-			esc_html__( 'Quiz Attempts', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/quiz-attempts',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Users', 'masteriyo' ),
-			esc_html__( 'Users', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/users/students',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Reviews', 'masteriyo' ),
-			esc_html__( 'Reviews', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/reviews',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'Settings', 'masteriyo' ),
-			esc_html__( 'Settings', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/settings',
-			array( __CLASS__, 'display_main_page' )
-		);
-
-		add_submenu_page(
-			'masteriyo',
-			esc_html__( 'More Features', 'masteriyo' ),
-			__( '<span class="dashicons dashicons-megaphone"></span> More Features', 'masteriyo' ),
-			'manage_masteriyo_settings',
-			'masteriyo#/add-ons',
-			array( __CLASS__, 'display_main_page' )
-		);
+		self::register_submenus();
 
 		remove_submenu_page( 'masteriyo', 'masteriyo' );
+	}
+
+	/**
+	 * Register submenus.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return void
+	 */
+	public static function register_submenus() {
+		$submenus = self::get_submenus();
+
+		uasort(
+			$submenus,
+			function( $a, $b ) {
+				if ( $a['position'] === $b['position'] ) {
+					return 0;
+				}
+
+				return ( $a['position'] < $b['position'] ) ? -1 : 1;
+			}
+		);
+
+		foreach ( $submenus as $slug => $submenu ) {
+			$menu_slug = "masteriyo#/{$slug}";
+
+			$submenu = wp_parse_args(
+				$submenu,
+				array(
+					'page_title'  => '',
+					'menu_title'  => '',
+					'parent_slug' => 'masteriyo',
+					'capability'  => 'manage_masteriyo_settings',
+					'position'    => 1000,
+					'function'    => array( __CLASS__, 'display_main_page' ),
+				)
+			);
+
+			add_submenu_page(
+				$submenu['parent_slug'],
+				$submenu['page_title'],
+				$submenu['menu_title'],
+				$submenu['capability'],
+				$menu_slug,
+				$submenu['function'],
+				$submenu['position']
+			);
+
+		}
+	}
+
+	/**
+	 * Returns an array of submenus.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public static function get_submenus() {
+		$submenus = array(
+			'courses'            => array(
+				'page_title' => __( 'Courses', 'masteriyo' ),
+				'menu_title' => __( 'Courses', 'masteriyo' ),
+				'capability' => 'edit_courses',
+				'position'   => 10,
+			),
+			'courses/categories' => array(
+				'page_title' => __( 'Categories', 'masteriyo' ),
+				'menu_title' => __( 'Categories', 'masteriyo' ),
+				'capability' => 'manage_course_categories',
+				'position'   => 20,
+			),
+			'orders'             => array(
+				'page_title' => __( 'Orders', 'masteriyo' ),
+				'menu_title' => __( 'Orders', 'masteriyo' ),
+				'position'   => 30,
+			),
+			'quiz-attempts'      => array(
+				'page_title' => __( 'Quiz Attempts', 'masteriyo' ),
+				'menu_title' => __( 'Quiz Attempts', 'masteriyo' ),
+				'capability' => 'edit_courses',
+				'position'   => 40,
+			),
+			'users/students'     => array(
+				'page_title' => __( 'Users', 'masteriyo' ),
+				'menu_title' => __( 'Users', 'masteriyo' ),
+				'position'   => 50,
+			),
+			'reviews'            => array(
+				'page_title' => __( 'Reviews', 'masteriyo' ),
+				'menu_title' => __( 'Reviews', 'masteriyo' ),
+				'capability' => 'edit_courses',
+				'position'   => 60,
+			),
+			'settings'           => array(
+				'page_title' => __( 'Settings', 'masteriyo' ),
+				'menu_title' => __( 'Settings', 'masteriyo' ),
+				'position'   => 70,
+			),
+			'add-ons'            => array(
+				'page_title' => esc_html__( 'More Features', 'masteriyo' ),
+				'menu_title' => __( '<span class="dashicons dashicons-megaphone"></span> More Features', 'masteriyo' ),
+				'position'   => 80,
+			),
+		);
+
+		/**
+		 * Filter admin submenus.
+		 *
+		 * @since x.x.x
+		 */
+		return apply_filters( 'masteriyo_admin_submenus', $submenus );
 	}
 
 	/**

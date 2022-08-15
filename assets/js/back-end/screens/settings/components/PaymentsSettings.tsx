@@ -526,7 +526,7 @@ const PaymentsSettings: React.FC<Props> = (props) => {
 												<Tooltip
 													textAlign="center"
 													label={__(
-														'If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests. If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.',
+														'If your main PayPal email differs from the PayPal email entered above, input your main receiver email for your PayPal account here. This is used to validate IPN requests.',
 														'masteriyo'
 													)}
 													hasArrow

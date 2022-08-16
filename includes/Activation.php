@@ -148,26 +148,6 @@ class Activation {
 	 * @return void
 	 */
 	public static function attach_placeholder_image() {
-		$img_file = masteriyo_get_plugin_dir() . '/assets/img/placeholder.jpg';
-		$filename = basename( $img_file );
-
-		// Return if image already exists.
-		$prev_attachment_id = get_option( 'masteriyo_placeholder_image', 0 );
-
-		if ( wp_attachment_is_image( $prev_attachment_id ) ) {
-			return;
-		}
-
-		// Get upload directory.
-		$upload_dir = wp_upload_dir();
-		// Making masteriyo directory on uploads folder.
-		$upload_masteriyo_dir = $upload_dir['basedir'] . '/masteriyo';
-
-		if ( ! file_exists( $upload_masteriyo_dir ) ) {
-			wp_mkdir_p( $upload_masteriyo_dir );
-		}
-		$attach_file = $upload_masteriyo_dir . '/' . sanitize_file_name( $filename );
-
 		include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
 		include_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 
@@ -176,7 +156,27 @@ class Activation {
 		}
 
 		$wp_filesystem = new \WP_Filesystem_Direct( null );
-		$upload        = $wp_filesystem->copy( $img_file, $attach_file, true );
+
+		// Get upload directory.
+		$upload_dir = wp_upload_dir();
+		// Making masteriyo directory on uploads folder.
+		$upload_masteriyo_dir = $upload_dir['basedir'] . '/masteriyo';
+
+		$img_file           = masteriyo_get_plugin_dir() . '/assets/img/placeholder.jpg';
+		$filename           = basename( $img_file );
+		$prev_attachment_id = get_option( 'masteriyo_placeholder_image', 0 );
+		$attach_file        = $upload_masteriyo_dir . '/' . sanitize_file_name( $filename );
+
+		// Return if image already exists.
+		if ( $wp_filesystem->exists( $attach_file ) && wp_attachment_is_image( $prev_attachment_id ) ) {
+			return;
+		}
+
+		if ( ! file_exists( $upload_masteriyo_dir ) ) {
+			wp_mkdir_p( $upload_masteriyo_dir );
+		}
+
+		$upload = $wp_filesystem->copy( $img_file, $attach_file, true );
 
 		if ( $upload ) {
 			$wp_filetype = wp_check_filetype( $filename, null );

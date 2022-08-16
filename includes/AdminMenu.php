@@ -121,7 +121,7 @@ class AdminMenu {
 					'parent_slug' => 'masteriyo',
 					'capability'  => 'manage_masteriyo_settings',
 					'position'    => 1000,
-					'function'    => array( __CLASS__, 'display_main_page' ),
+					'callback'    => array( __CLASS__, 'display_main_page' ),
 				)
 			);
 
@@ -131,7 +131,7 @@ class AdminMenu {
 				$submenu['menu_title'],
 				$submenu['capability'],
 				$menu_slug,
-				$submenu['function'],
+				$submenu['callback'],
 				$submenu['position']
 			);
 

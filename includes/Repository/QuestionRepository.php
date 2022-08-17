@@ -76,7 +76,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 					'post_status'   => $question->get_status() ? $question->get_status() : PostStatus::PUBLISH,
 					'post_author'   => $question->get_author_id( 'edit' ),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
-					'post_content'  => wp_json_encode( $question->get_answers() ),
+					'post_content'  => wp_json_encode( $question->get_answers(), JSON_UNESCAPED_UNICODE ),
 					'post_excerpt'  => $question->get_description(),
 					'post_parent'   => $question->get_parent_id(),
 					'ping_status'   => 'closed',
@@ -177,7 +177,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 		// Only update the post when the post data changes.
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
-				'post_content' => wp_json_encode( $question->get_answers( 'edit' ) ),
+				'post_content' => wp_json_encode( $question->get_answers( 'edit' ), JSON_UNESCAPED_UNICODE ),
 				'post_excerpt' => $question->get_description( 'edit' ),
 				'post_title'   => $question->get_name( 'edit' ),
 				'post_status'  => $question->get_status( 'edit' ) ? $question->get_status( 'edit' ) : PostStatus::PUBLISH,

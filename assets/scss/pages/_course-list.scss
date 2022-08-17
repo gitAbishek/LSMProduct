@@ -102,6 +102,7 @@
 
 		img {
 			width: 100%;
+			height: auto;
 			border-top-left-radius: $border_radius_8;
 			border-top-right-radius: $border_radius_8;
 			margin-bottom: 0;
@@ -166,7 +167,7 @@
 		padding-bottom: 0;
 
 		&::before {
-			content: "";
+			content: '';
 			display: none;
 		}
 	}
@@ -256,7 +257,7 @@
 		padding-inline-start: $spacing_16px;
 
 		li {
-			list-style-type: ("\2713");
+			list-style-type: ('\2713');
 			padding-inline-start: $spacing_4px;
 			word-break: break-all;
 

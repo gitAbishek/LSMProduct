@@ -83,7 +83,7 @@ export const reactSelectStyles = {
 
 	multiValue: (provided: any) => ({
 		...provided,
-		backgroundColor: theme.colors.blue[50],
+		backgroundColor: theme.colors.blue[100],
 	}),
 
 	menu: (provided: any) => ({

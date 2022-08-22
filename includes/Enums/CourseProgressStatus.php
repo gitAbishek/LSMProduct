@@ -17,6 +17,14 @@ defined( 'ABSPATH' ) || exit;
  */
 class CourseProgressStatus {
 	/**
+	 * Course progress any status.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const ANY = 'any';
+
+	/**
 	 * Course progress started status.
 	 *
 	 * @since 1.4.6
@@ -59,6 +67,7 @@ class CourseProgressStatus {
 			apply_filters(
 				'masteriyo_course_progress_statuses',
 				array(
+					self::ANY,
 					self::STARTED,
 					self::PROGRESS,
 					self::COMPLETED,

@@ -70,7 +70,7 @@
 	// Accent Buttons
 	&-accent {
 		background-color: var(--masteriyo-color-accent);
-		-colorborder: var(--masteriyo-color-accent);
+		border-color: var(--masteriyo-color-accent);
 		color: var(--masteriyo-color-white);
 
 		&:hover {

@@ -7,8 +7,9 @@
  */
 
 use Masteriyo\Enums\OrderStatus;
-use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Enums\CourseProgressStatus;
 
 if ( ! ( function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) ) {
 	return;
@@ -440,11 +441,42 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 
 		$progress = current( $query->get_course_progress() );
 
+		$class = array(
+			'masteriyo-btn',
+			'masteriyo-btn-primary',
+			'masteriyo-single-course--btn',
+			'mb-0',
+		);
+
+		if ( masteriyo_can_start_course( $course ) ) {
+			if ( $progress && CourseProgressStatus::COMPLETED === $progress->get_status() ) {
+				$class[] = 'masteriyo-btn-complete';
+			} elseif ( $progress && CourseProgressStatus::COMPLETED === $progress->get_status() ) {
+				$class[] = 'masteriyo-btn-continue';
+			} else {
+				$class[] = 'masteriyo-btn-start-course';
+			}
+		} else {
+			$class[] = 'masteriyo-course--btn';
+		}
+
+		/**
+		 * Filters enroll button class.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param string[] $class An array of class names.
+		 * @param \Masteriyo\Models\Course $course Course object.
+		 * @param \Masteriyo\Models\CourseProgress $progress Course progress object.
+		 */
+		$class = apply_filters( 'masteriyo_enroll_button_class', $class, $course, $progress );
+
 		masteriyo_get_template(
 			'enroll-button.php',
 			array(
 				'course'   => $course,
 				'progress' => $progress,
+				'class'    => join( ' ', $class ),
 			)
 		);
 	}

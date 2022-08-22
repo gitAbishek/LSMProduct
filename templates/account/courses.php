@@ -25,7 +25,8 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 		<div class="masteriyo-mycourses--list">
 			<?php foreach ( $active_courses as $active_course ) : ?>
 				<div class="masteriyo-mycourses--card">
-					<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
+					<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>"
+						title="<?php echo esc_attr( $active_course->get_name() ); ?>">
 						<div class="masteriyo-mycourses--thumbnail">
 							<?php echo wp_kses_post( $active_course->get_image( 'masteriyo_thumbnail' ) ); ?>
 						</div>
@@ -36,7 +37,8 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 							<?php if ( ! empty( $active_course->get_categories() ) ) : ?>
 								<div class="masteriyo-course--content__category">
 									<?php foreach ( $active_course->get_categories() as $category ) : ?>
-										<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
+										<a href="<?php echo esc_url( $category->get_permalink() ); ?>"
+											alt="<?php echo esc_attr( $category->get_name() ); ?>">
 											<span class="masteriyo-course--content__category-items">
 												<?php echo esc_html( $category->get_name() ); ?>
 											</span>

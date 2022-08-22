@@ -334,8 +334,12 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			$search_criteria[] = $wpdb->prepare( 'item_id = %d', $query_vars['course_id'] );
 		}
 
-		if ( ! empty( $query_vars['status'] ) && 'any' !== $query_vars['status'] ) {
+		if ( ! empty( $query_vars['status'] ) && CourseProgressStatus::ANY !== $query_vars['status'] ) {
 			$search_criteria[] = $this->create_sql_in_query( 'activity_status', $query_vars['status'] );
+		}
+
+		if ( ! empty( $query_vars['courses'] ) ) {
+			$search_criteria[] = $this->create_sql_in_query( 'item_id', $query_vars['courses'] );
 		}
 
 		if ( 1 <= count( $search_criteria ) ) {

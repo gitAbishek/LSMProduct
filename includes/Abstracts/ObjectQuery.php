@@ -126,6 +126,7 @@ abstract class ObjectQuery {
 			'name'           => '',
 			'parent'         => '',
 			'parent_exclude' => '',
+			'include'        => '',
 			'exclude'        => '',
 			'per_page'       => get_option( 'posts_per_page' ),
 			'limit'          => get_option( 'posts_per_page' ),

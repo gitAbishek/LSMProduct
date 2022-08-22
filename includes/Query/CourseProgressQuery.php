@@ -36,6 +36,7 @@ class CourseProgressQuery extends ObjectQuery {
 				'modified_at'  => null,
 				'completed_at' => null,
 				'orderby'      => 'id',
+				'courses'      => '',
 			)
 		);
 	}

@@ -198,6 +198,7 @@ class CourseProgressController extends CrudController {
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
 			'validate_callback' => 'rest_validate_request_arg',
+			'default'           => CourseProgressStatus::ANY,
 			'enum'              => CourseProgressStatus::all(),
 		);
 

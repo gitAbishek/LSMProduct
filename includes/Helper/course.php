@@ -9,6 +9,7 @@
  */
 
 use Masteriyo\Activation;
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Query\UserCourseQuery;
 
@@ -68,14 +69,9 @@ function masteriyo_can_start_course( $course, $user = null ) {
 	$user             = is_null( $user ) ? masteriyo_get_current_user() : $user;
 	$course_id        = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
 	$user_id          = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
+	$course           = masteriyo_get_course( $course_id );
 
-	$course = masteriyo_get_course( $course_id );
-
-	if ( ! is_null( $course ) ) {
-		$can_start_course = 'open' === $course->get_access_mode() ? true : false;
-	}
-
-	if ( ! is_null( $user_id ) ) {
+	if ( $user_id ) {
 		$query = new UserCourseQuery(
 			array(
 				'course_id' => $course_id,
@@ -84,13 +80,21 @@ function masteriyo_can_start_course( $course, $user = null ) {
 			)
 		);
 
-		if ( ! is_null( $course ) && 'open' !== $course->get_access_mode() ) {
+		if ( $course && ! in_array( $course->get_access_mode(), array( CourseAccessMode::OPEN, CourseAccessMode::NEED_REGISTRATION ), true ) ) {
 			$user_course = current( $query->get_user_courses() );
 
 			if ( $user_course ) {
 				$order            = $user_course->get_order();
 				$can_start_course = $order ? OrderStatus::COMPLETED === $order->get_status() : false;
 			}
+		}
+	}
+
+	if ( $course ) {
+		if ( CourseAccessMode::OPEN === $course->get_access_mode() ) {
+			$can_start_course = true;
+		} elseif ( is_user_logged_in() && CourseAccessMode::NEED_REGISTRATION === $course->get_access_mode() ) {
+			$can_start_course = true;
 		}
 	}
 
@@ -104,32 +108,6 @@ function masteriyo_can_start_course( $course, $user = null ) {
 	 * @param Masteriyo\Models\User $user User object.
 	 */
 	return apply_filters( 'masteriyo_can_start_course', $can_start_course, $course, $user );
-}
-
-/**
- * Get masteriyo access modes.
- *
- * @since 1.0.0
- * @return string
- */
-function masteriyo_get_course_access_modes() {
-	/**
-	 * Filters course access modes.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string[] $access_modes Course access modes.
-	 */
-	return apply_filters(
-		'masteriyo_course_access_modes',
-		array(
-			'open',
-			'need_registration',
-			'one_time',
-			'recurring',
-			'close',
-		)
-	);
 }
 
 /**

@@ -25,6 +25,7 @@
   },
   "autoload": {
     "files": [
+      "includes/Helper/depreciated.php",
       "includes/Helper/Arr.php",
       "includes/Helper/core.php",
       "includes/Helper/Term.php",

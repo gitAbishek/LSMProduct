@@ -7,6 +7,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
@@ -244,7 +245,7 @@ class QuizesController extends PostsController {
 			);
 		}
 
-		if ( ! is_user_logged_in() && 'open' !== $course->get_access_mode() ) {
+		if ( ! is_user_logged_in() && CourseAccessMode::OPEN !== $course->get_access_mode() ) {
 			return new \WP_Error(
 				'masteriyo_rest_user_not_logged_in',
 				__( 'Please sign in to start the quiz.', 'masteriyo' ),

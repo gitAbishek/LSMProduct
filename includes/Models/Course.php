@@ -11,6 +11,8 @@ namespace Masteriyo\Models;
 
 use Masteriyo\Helper\Utils;
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Query\SectionQuery;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Repository\RepositoryInterface;
@@ -78,7 +80,7 @@ class Course extends Model {
 		'price'              => '',
 		'regular_price'      => '',
 		'sale_price'         => '',
-		'price_type'         => 'free',
+		'price_type'         => CoursePriceType::FREE,
 		'category_ids'       => array(),
 		'tag_ids'            => array(),
 		'difficulty_id'      => 0,
@@ -88,7 +90,7 @@ class Course extends Model {
 		'review_count'       => 0,
 		'enrollment_limit'   => 0,
 		'duration'           => 0,
-		'access_mode'        => 'open',
+		'access_mode'        => CourseAccessMode::OPEN,
 		'billing_cycle'      => '',
 		'show_curriculum'    => true,
 		'purchase_note'      => '',
@@ -1412,6 +1414,12 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function single_add_to_cart_text() {
+		$text = __( 'Buy Now', 'masteriyo' );
+
+		if ( CourseAccessMode::NEED_REGISTRATION === $this->get_access_mode() ) {
+			$text = __( 'Need Registration', 'masteriyo' );
+		}
+
 		/**
 		 * Filters add to cart button text for a course.
 		 *
@@ -1420,7 +1428,7 @@ class Course extends Model {
 		 * @param string $text Add to cart button text.
 		 * @param Masteriyo\Models\Course $course Course object.
 		 */
-		return apply_filters( 'masteriyo_single_course_add_to_cart_text', __( 'Buy Now', 'masteriyo' ), $this );
+		return apply_filters( 'masteriyo_single_course_add_to_cart_text', $text, $this );
 	}
 
 	/**
@@ -1544,6 +1552,10 @@ class Course extends Model {
 			);
 		}
 
+		if ( CourseAccessMode::NEED_REGISTRATION === $this->get_access_mode() ) {
+			$url = masteriyo_get_page_permalink( 'account', $url );
+		}
+
 		/**
 		 * Filters add to cart URL for a course.
 		 *
@@ -1556,7 +1568,7 @@ class Course extends Model {
 	}
 
 	/**
-	 * Get add_to_cart text.
+	 * Get add to cart text.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1566,8 +1578,21 @@ class Course extends Model {
 		$text = __( 'Read more', 'masteriyo' );
 
 		if ( $this->is_purchasable() ) {
-			$text = __( 'Add to cart now', 'masteriyo' );
+			$text = __( 'Buy Now', 'masteriyo' );
 		}
+
+		if ( CourseAccessMode::NEED_REGISTRATION === $this->get_access_mode() ) {
+			$text = __( 'Register Now', 'masteriyo' );
+		}
+
+		/**
+		 * Filters add to cart button text.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $text The add to cart button text.
+		 */
+		$text = apply_filters( 'masteriyo_add_to_cart_text', $text );
 
 		/**
 		 * Filters add to cart text for a course.

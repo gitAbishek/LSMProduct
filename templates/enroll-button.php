@@ -42,16 +42,7 @@ do_action( 'masteriyo_before_add_to_cart_button', $course );
 	<?php endif; ?>
 <?php else : ?>
 	<a href="<?php echo esc_url( $course->add_to_cart_url() ); ?>" class="<?php echo esc_attr( $class ); ?>">
-		<?php
-		/**
-		 * Filters add to cart button text.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param string $text The add to cart button text.
-		 */
-		echo wp_kses_post( apply_filters( 'masteriyo_add_to_cart_text', __( 'Buy Now', 'masteriyo' ) ) );
-		?>
+		<?php echo wp_kses_post( $course->add_to_cart_text() ); ?>
 	</a>
 <?php endif; ?>
 <?php

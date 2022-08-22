@@ -11,6 +11,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
@@ -600,7 +601,7 @@ class CourseProgressController extends CrudController {
 		}
 
 		$course = masteriyo_get_course( $request['course_id'] );
-		if ( ! is_null( $course ) && 'open' === $course->get_access_mode() ) {
+		if ( ! is_null( $course ) && CourseAccessMode::OPEN === $course->get_access_mode() ) {
 			return true;
 		}
 

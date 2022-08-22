@@ -8,6 +8,7 @@
 
 namespace Masteriyo\RestApi\Controllers\Version1;
 
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\PostStatus;
 
 defined( 'ABSPATH' ) || exit;
@@ -50,7 +51,7 @@ abstract class PostsController extends CrudController {
 			$course_id = get_post_meta( $post->ID, '_course_id', true );
 			$course    = masteriyo_get_course( $course_id );
 
-			if ( $course && 'open' === $course->get_access_mode() ) {
+			if ( $course && CourseAccessMode::OPEN === $course->get_access_mode() ) {
 				return true;
 			}
 		}

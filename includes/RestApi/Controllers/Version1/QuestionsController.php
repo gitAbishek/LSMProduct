@@ -7,6 +7,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Enums\QuestionType;
 use Masteriyo\Helper\Utils;
@@ -986,7 +987,7 @@ class QuestionsController extends PostsController {
 		$all_open_courses = array_reduce(
 			$courses,
 			function( $result, $course ) {
-				return $result && 'open' === $course->get_access_mode();
+				return $result && CourseAccessMode::OPEN === $course->get_access_mode();
 			},
 			true
 		);
@@ -1023,7 +1024,7 @@ class QuestionsController extends PostsController {
 		$course_id = get_post_meta( $object_id, '_course_id', true );
 		$course    = masteriyo_get_course( $course_id );
 
-		if ( $course && 'open' === $course->get_access_mode() ) {
+		if ( $course && CourseAccessMode::OPEN === $course->get_access_mode() ) {
 			return true;
 		}
 

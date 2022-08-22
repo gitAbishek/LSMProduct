@@ -15,6 +15,7 @@ use Masteriyo\Capabilities;
 use Masteriyo\Setup\Onboard;
 use Masteriyo\RestApi\RestApi;
 use Masteriyo\Emails\EmailHooks;
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Enums\UserCourseStatus;
 use Masteriyo\Query\UserCourseQuery;
@@ -667,7 +668,7 @@ class Masteriyo {
 			exit();
 		}
 
-		if ( 'open' === $course->get_access_mode() && ! is_user_logged_in() ) {
+		if ( CourseAccessMode::OPEN === $course->get_access_mode() && ! is_user_logged_in() ) {
 			masteriyo( 'session' )->set_user_session_cookie( true );
 		} else {
 			$query = new UserCourseQuery(
@@ -679,7 +680,7 @@ class Masteriyo {
 
 			$user_courses = $query->get_user_courses();
 
-			if ( empty( $user_courses ) && 'open' === $course->get_access_mode() ) {
+			if ( empty( $user_courses ) && in_array( $course->get_access_mode(), array( CourseAccessMode::OPEN, CourseAccessMode::NEED_REGISTRATION ), true ) ) {
 				$user_courses = masteriyo( 'user-course' );
 				$user_courses->set_status( UserCourseStatus::ACTIVE );
 				$user_courses->set_course_id( $course_id );

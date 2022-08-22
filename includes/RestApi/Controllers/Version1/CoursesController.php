@@ -9,6 +9,8 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
@@ -212,7 +214,7 @@ class CoursesController extends PostsController {
 		$params['price_type'] = array(
 			'description'       => __( 'List courses with specific price type (free or paid).', 'masteriyo' ),
 			'type'              => 'string',
-			'enum'              => array( 'free', 'paid' ),
+			'enum'              => CoursePriceType::all(),
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
@@ -768,8 +770,8 @@ class CoursesController extends PostsController {
 				'access_mode'        => array(
 					'description' => __( 'Course access mode', 'masteriyo' ),
 					'type'        => 'string',
-					'default'     => 'open',
-					'enum'        => masteriyo_get_course_access_modes(),
+					'default'     => CourseAccessMode::OPEN,
+					'enum'        => CourseAccessMode::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'billing_cycle'      => array(

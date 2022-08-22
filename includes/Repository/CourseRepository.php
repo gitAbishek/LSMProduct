@@ -12,6 +12,8 @@ namespace Masteriyo\Repository;
 use Masteriyo\Helper\Number;
 use Masteriyo\Models\Course;
 use Masteriyo\Database\Model;
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\UserCourseQuery;
@@ -442,7 +444,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		}
 
 		// Update the prices according to the access mode.
-		if ( in_array( $course->get_access_mode( 'edit' ), array( 'open', 'need_registration' ), true ) ) {
+		if ( in_array( $course->get_access_mode( 'edit' ), array( CourseAccessMode::OPEN, CourseAccessMode::NEED_REGISTRATION ), true ) ) {
 			update_post_meta( $course->get_id(), '_price', '0' );
 			update_post_meta( $course->get_id(), '_regular_price', '0' );
 			update_post_meta( $course->get_id(), '_sale_price', '' );
@@ -454,12 +456,12 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		// Update the price type according to the access mode.
 		$access_mode = $course->get_access_mode( 'edit' );
-		if ( in_array( $access_mode, array( 'open', 'need_registration' ), true ) ) {
-			$course->set_price_type( 'free' );
-		} elseif ( in_array( $access_mode, array( 'one_time', 'recurring' ), true ) && '0' === $course->get_price( 'edit' ) ) {
-			$course->set_price_type( 'free' );
+		if ( in_array( $access_mode, array( CourseAccessMode::OPEN, CourseAccessMode::NEED_REGISTRATION ), true ) ) {
+			$course->set_price_type( CoursePriceType::FREE );
+		} elseif ( in_array( $access_mode, array( CourseAccessMode::ONE_TIME, CourseAccessMode::RECURRING ), true ) && '0' === $course->get_price( 'edit' ) ) {
+			$course->set_price_type( CoursePriceType::FREE );
 		} else {
-			$course->set_price_type( 'paid' );
+			$course->set_price_type( CoursePriceType::PAID );
 		}
 	}
 
@@ -625,7 +627,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$featured        = in_array( 'featured', $term_names, true );
 		$exclude_search  = in_array( 'exclude-from-search', $term_names, true );
 		$exclude_catalog = in_array( 'exclude-from-catalog', $term_names, true );
-		$price_type      = in_array( 'free', $term_names, true ) ? 'free' : 'paid';
+		$price_type      = in_array( CoursePriceType::FREE, $term_names, true ) ? CoursePriceType::FREE : CoursePriceType::PAID;
 
 		if ( $exclude_search && $exclude_catalog ) {
 			$catalog_visibility = 'hidden';

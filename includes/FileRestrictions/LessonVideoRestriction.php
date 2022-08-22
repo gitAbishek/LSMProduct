@@ -8,6 +8,7 @@
 namespace Masteriyo\FileRestrictions;
 
 use Masteriyo\Abstracts\FileRestriction;
+use Masteriyo\Enums\CourseAccessMode;
 
 class LessonVideoRestriction extends FileRestriction {
 	/**
@@ -31,7 +32,7 @@ class LessonVideoRestriction extends FileRestriction {
 
 		$course = masteriyo_get_course( $_GET['course_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-		if ( 'open' === $course->get_access_mode() ) {
+		if ( CourseAccessMode::OPEN === $course->get_access_mode() ) {
 			$this->send_lesson_video_file();
 		}
 

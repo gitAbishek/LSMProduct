@@ -18,7 +18,7 @@ if ( ! $course->is_purchasable() ) {
  * Fires before rendering enroll/add-to-cart button.
  *
  * @since 1.0.0
- * @since x.x.x Added $course parameter.
+ * @since 1.5.12 Added $course parameter.
  *
  * @param \Masteriyo\Models\Course $course Course object.
  */
@@ -58,7 +58,7 @@ if ( 0 !== $course->get_enrollment_limit() && 0 === $course->get_available_seats
  * Fires after rendering enroll/add-to-cart button.
  *
  * @since 1.0.0
- * @since x.x.x Added $course parameter.
+ * @since 1.5.12 Added $course parameter.
  *
  * @param \Masteriyo\Models\Course $course Course object.
  */

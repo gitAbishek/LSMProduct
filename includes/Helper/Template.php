@@ -463,7 +463,7 @@ if ( ! function_exists( 'masteriyo_template_enroll_button' ) ) {
 		/**
 		 * Filters enroll button class.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.12
 		 *
 		 * @param string[] $class An array of class names.
 		 * @param \Masteriyo\Models\Course $course Course object.

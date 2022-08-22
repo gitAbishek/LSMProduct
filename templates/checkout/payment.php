@@ -4,7 +4,7 @@
  *
  * @package Masteriyo\Templates;
  * @since 1.0.0
- * @version x.x.x
+ * @version 1.5.12
  */
 
 defined( 'ABSPATH' ) || exit;

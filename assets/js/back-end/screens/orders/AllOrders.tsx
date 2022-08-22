@@ -7,6 +7,7 @@ import {
 	GridItem,
 	Icon,
 	IconButton,
+	List,
 	ListIcon,
 	ListItem,
 	Menu,
@@ -249,21 +250,23 @@ const AllOrders = () => {
 						</GridItem>
 					))}
 					{selectedHiddenStatus ? (
-						<ListItem mb="0">
-							<Button
-								color="gray.600"
-								variant="link"
-								sx={orderStatusButtonStyles}
-								_active={navActiveStyles}
-								isActive={true}
-								_hover={{ color: 'blue.500' }}>
-								<ListIcon as={selectedHiddenStatus.icon} />
-								{selectedHiddenStatus.name}
-								<Badge color="inherit">
-									{orderStatusCount[selectedHiddenStatus.status]}
-								</Badge>
-							</Button>
-						</ListItem>
+						<List>
+							<ListItem mb="0">
+								<Button
+									color="gray.600"
+									variant="link"
+									sx={orderStatusButtonStyles}
+									_active={navActiveStyles}
+									isActive={true}
+									_hover={{ color: 'blue.500' }}>
+									<ListIcon as={selectedHiddenStatus.icon} />
+									{selectedHiddenStatus.name}
+									<Badge color="inherit">
+										{orderStatusCount[selectedHiddenStatus.status]}
+									</Badge>
+								</Button>
+							</ListItem>
+						</List>
 					) : null}
 					<Menu>
 						<MenuButton

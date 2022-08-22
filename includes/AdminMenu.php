@@ -92,7 +92,7 @@ class AdminMenu {
 	/**
 	 * Register submenus.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 *
 	 * @return void
 	 */
@@ -141,7 +141,7 @@ class AdminMenu {
 	/**
 	 * Returns an array of submenus.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 *
 	 * @return array
 	 */
@@ -196,7 +196,7 @@ class AdminMenu {
 		/**
 		 * Filter admin submenus.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.12
 		 */
 		return apply_filters( 'masteriyo_admin_submenus', $submenus );
 	}

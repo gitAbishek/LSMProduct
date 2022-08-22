@@ -20,7 +20,9 @@ import {
 	courseFAQ,
 	DownloadMaterial,
 	Logo,
+	MultipleInstructors,
 	PasswordStrength,
+	Prerequisites,
 	Ribbon,
 	Stripe,
 	whiteLabel,
@@ -192,12 +194,32 @@ const AddOns = () => {
 					</Col>
 					<Col md={3.3}>
 						<AddonItem
-							addOnName={__('Course Attachments.', 'masteriyo')}
+							addOnName={__('Course Attachments', 'masteriyo')}
 							addOnDescription={__(
 								'Allows you to add course attachments.',
 								'masteriyo'
 							)}
 							thumbnailSrc={CourseAttachment}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('Prerequisites', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to add prerequisites to a courses.',
+								'masteriyo'
+							)}
+							thumbnailSrc={Prerequisites}
+						/>
+					</Col>
+					<Col md={3.3}>
+						<AddonItem
+							addOnName={__('Multiple Instructors', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to assign multiple instructors to a course.',
+								'masteriyo'
+							)}
+							thumbnailSrc={MultipleInstructors}
 						/>
 					</Col>
 				</Row>

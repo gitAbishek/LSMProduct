@@ -19,7 +19,7 @@ class CourseProgressStatus {
 	/**
 	 * Course progress any status.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const ANY = 'any';

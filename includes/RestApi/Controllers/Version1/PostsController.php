@@ -421,7 +421,7 @@ abstract class PostsController extends CrudController {
 		/**
 		 * Filters the post counts.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.12
 		 *
 		 * @param array $post_count Posts count.
 		 * @param \Masteriyo\RestApi\Controllers\Version1\PostsController $controller Posts Controller.

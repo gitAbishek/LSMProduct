@@ -405,7 +405,7 @@ abstract class PostsController extends CrudController {
 	 * @since 1.4.12
 	 * @since 1.5.0 Filter post counts by post authors.
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	protected function get_posts_count() {
 		if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() ) {
@@ -417,7 +417,14 @@ abstract class PostsController extends CrudController {
 		$post_count        = array_map( 'absint', $post_count );
 		$post_count['any'] = array_sum( masteriyo_array_except( $post_count, PostStatus::TRASH ) );
 
-		return $post_count;
+		/**
+		 * Filters the post counts.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $post_count Posts count.
+		 * @param \Masteriyo\RestApi\Controllers\Version1\PostsController $controller Posts Controller.
+		 */
+		return apply_filters( "masteriyo_rest_{$this->object_type}_count", $post_count, $this );
 	}
-
 }

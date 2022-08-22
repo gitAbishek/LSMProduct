@@ -454,7 +454,7 @@ class User extends Model {
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function get_roles( $context = 'view' ) {
 		return $this->get_prop( 'roles', $context );

@@ -1,6 +1,8 @@
 <?php
 /**
  * Courses controller class.
+ *
+ * @since 1.0.0
  */
 
 namespace Masteriyo\RestApi\Controllers\Version1;

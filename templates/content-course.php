@@ -15,8 +15,6 @@
  * @version 1.5.9
  */
 
-use Masteriyo\Enums\VideoSource;
-
 defined( 'ABSPATH' ) || exit;
 
 global $course;
@@ -26,61 +24,30 @@ if ( empty( $course ) || ! $course->is_visible() ) {
 	return;
 }
 
-$author                = masteriyo_get_user( $course->get_author_id() );
-$difficulty            = $course->get_difficulty();
-$categories            = $course->get_categories( 'name' );
-$featured_video_source = $course->get_featured_video_source();
+$author     = masteriyo_get_user( $course->get_author_id() );
+$difficulty = $course->get_difficulty();
+$categories = $course->get_categories( 'name' );
 
 ?>
 <div class="masteriyo-col">
 	<div class="masteriyo-course-item--wrapper masteriyo-course--card">
 		<div class="masteriyo-course--img-wrap">
-			<?php if ( $course->is_featured() ) : ?>
-				<div class="course-featured"><?php esc_html_e( 'Featured', 'masteriyo' ); ?></div>
+		<a href="<?php echo esc_attr( $course->get_permalink() ); ?>">
+
+			<!-- Difficulty Badge -->
+			<?php if ( $difficulty ) : ?>
+			<div class="difficulty-badge">
+				<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
+			</div>
 			<?php endif; ?>
 
-			<?php if ( empty( $course->get_featured_image() ) && $course->has_featured_video() ) : ?>
-				<?php
-				if ( VideoSource::SELF_HOSTED === $featured_video_source ) {
-					masteriyo_get_video_html(
-						array(
-							'width'    => '100%',
-							'src'      => esc_attr( $course->get_featured_video_embed_url() ),
-							'controls' => true,
-						),
-						true
-					);
-				} else {
-					masteriyo_get_iframe_html(
-						array(
-							'width'           => '100%',
-							'style'           => 'min-height: 230px;',
-							'src'             => esc_attr( $course->get_featured_video_embed_url() ),
-							'allowFullScreen' => true,
-						),
-						true
-					);
-				}
-				?>
-			<?php else : ?>
-				<?php if ( $difficulty ) : ?>
-					<div class="difficulty-badge">
-						<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
-					</div>
-				<?php endif; ?>
-
-				<div class="masteriyo-feature-img">
-					<?php echo wp_kses( $course->get_image( 'masteriyo_single' ), 'masteriyo_image' ); ?>
-					<?php if ( $course->has_featured_video() ) : ?>
-						<div class="masteriyo-play-featured-video-btn masteriyo-sm">
-							<?php masteriyo_get_svg( 'play', true ); ?>
-						</div>
-					<?php endif; ?>
-				</div>
-			<?php endif; ?>
+			<!-- Featured Image -->
+			<?php echo wp_kses( $course->get_image( 'masteriyo_thumbnail' ), 'masteriyo_image' ); ?>
+		</a>
 		</div>
 
 		<div class="masteriyo-course--content">
+
 			<!-- Course category -->
 			<?php if ( ! empty( $categories ) ) : ?>
 				<div class="masteriyo-course--content__category">
@@ -172,35 +139,6 @@ $featured_video_source = $course->get_featured_video_source();
 			</div>
 		</div>
 	</div>
-
-	<?php if ( $course->has_featured_video() ) : ?>
-		<div class="masteriyo-overlay masteriyo-featured-video-modal" style="display:none;">
-			<div class="masteriyo--modal masteriyo-modal-featured-video masteriyo-transparent width-lg">
-				<?php
-				if ( VideoSource::SELF_HOSTED === $featured_video_source ) {
-					masteriyo_get_video_html(
-						array(
-							'width'    => '100%',
-							'data-src' => esc_attr( $course->get_featured_video_embed_url() ),
-							'controls' => true,
-						),
-						true
-					);
-				} else {
-					masteriyo_get_iframe_html(
-						array(
-							'width'           => '100%',
-							'style'           => 'height: calc(9 * 800px / 16);',
-							'data-src'        => esc_attr( $course->get_featured_video_embed_url() ),
-							'allowFullScreen' => true,
-						),
-						true
-					);
-				}
-				?>
-			</div>
-		</div>
-	<?php endif; ?>
 </div>
 
 <?php

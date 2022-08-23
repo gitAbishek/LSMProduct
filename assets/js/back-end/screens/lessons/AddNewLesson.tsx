@@ -5,11 +5,6 @@ import {
 	Container,
 	Flex,
 	Heading,
-	IconButton,
-	Menu,
-	MenuButton,
-	MenuItem,
-	MenuList,
 	Stack,
 	useMediaQuery,
 	useToast,
@@ -17,7 +12,6 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiDotsVerticalRounded, BiEdit, BiTrash } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import BackToBuilder from '../../components/common/BackToBuilder';
@@ -181,23 +175,6 @@ const AddNewLesson: React.FC = () => {
 												<Heading as="h1" fontSize="x-large">
 													{__('Add New Lesson', 'masteriyo')}
 												</Heading>
-												<Menu placement="bottom-end">
-													<MenuButton
-														as={IconButton}
-														icon={<BiDotsVerticalRounded />}
-														variant="outline"
-														rounded="sm"
-														fontSize="large"
-													/>
-													<MenuList>
-														<MenuItem icon={<BiEdit />}>
-															{__('Edit', 'masteriyo')}
-														</MenuItem>
-														<MenuItem icon={<BiTrash />}>
-															{__('Delete', 'masteriyo')}
-														</MenuItem>
-													</MenuList>
-												</Menu>
 											</Flex>
 
 											<Stack direction="column" spacing="6">

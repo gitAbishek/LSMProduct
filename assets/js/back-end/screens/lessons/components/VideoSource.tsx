@@ -72,7 +72,7 @@ const VideoSource: React.FC<Props> = (props) => {
 	};
 
 	return (
-		<Stack direction={['column', 'column', 'row', 'row']} spacing="6">
+		<Stack direction="column" spacing="6">
 			<FormControl>
 				<FormLabel>{__('Video Source', 'masteriyo')}</FormLabel>
 				<Select {...register('video_source')} defaultValue={defaultSource}>

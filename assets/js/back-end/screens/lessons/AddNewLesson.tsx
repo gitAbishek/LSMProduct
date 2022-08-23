@@ -177,7 +177,7 @@ const AddNewLesson: React.FC = () => {
 										flexDirection="column"
 										justifyContent="space-between">
 										<Stack direction="column" spacing="8">
-											<Flex aling="center" justify="space-between">
+											<Flex align="center" justify="space-between">
 												<Heading as="h1" fontSize="x-large">
 													{__('Add New Lesson', 'masteriyo')}
 												</Heading>

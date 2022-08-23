@@ -152,7 +152,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Download Materials', 'masteriyo')}
 							addOnDescription={__(
-								'Attach unlimited lesson materials such as PDF, Doc, etc. Provide students with quick and easy access to download materials, and preview without download.',
+								'Attach unlimited lesson materials like PDF, Doc, etc to your course lessons. Previewing the materials is also supported.',
 								'masteriyo'
 							)}
 							thumbnailSrc={DownloadMaterial}
@@ -171,14 +171,20 @@ const AddOns = () => {
 					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('Course FAQ', 'masteriyo')}
-							addOnDescription={__('Allows to add course FAQ.', 'masteriyo')}
+							addOnDescription={__(
+								'If you have a lot of frequently asked questions for your courses, this feature will come handy. It introduces new FAQ tab in the course page.',
+								'masteriyo'
+							)}
 							thumbnailSrc={courseFAQ}
 						/>
 					</Col>
 					<Col md={3.3}>
 						<AddonItem
 							addOnName={__('White Label', 'masteriyo')}
-							addOnDescription={__('Allows to add White Label.', 'masteriyo')}
+							addOnDescription={__(
+								'Present Masteriyo as your own. You can hide the images & name of the plugin with this feature and use your brand name instead.',
+								'masteriyo'
+							)}
 							thumbnailSrc={whiteLabel}
 						/>
 					</Col>
@@ -186,7 +192,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Password Strength', 'masteriyo')}
 							addOnDescription={__(
-								'Allows to add Password Strength in registration forms.',
+								'Use this feature to make your users use strong password with combination of numbers, capital letters and unique symbols while signing up.',
 								'masteriyo'
 							)}
 							thumbnailSrc={PasswordStrength}
@@ -196,7 +202,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Course Attachments', 'masteriyo')}
 							addOnDescription={__(
-								'Allows you to add course attachments.',
+								'If you need to add some materials for your courses that visitors need to download then this feature will come handy.',
 								'masteriyo'
 							)}
 							thumbnailSrc={CourseAttachment}
@@ -206,7 +212,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Prerequisites', 'masteriyo')}
 							addOnDescription={__(
-								'Allows to add prerequisites to a courses.',
+								'Require students to complete one or more courses before enrolling a certain course.',
 								'masteriyo'
 							)}
 							thumbnailSrc={Prerequisites}
@@ -216,7 +222,7 @@ const AddOns = () => {
 						<AddonItem
 							addOnName={__('Multiple Instructors', 'masteriyo')}
 							addOnDescription={__(
-								'Allows to assign multiple instructors to a course.',
+								'Allow more than one instructors to take control of the course content.',
 								'masteriyo'
 							)}
 							thumbnailSrc={MultipleInstructors}

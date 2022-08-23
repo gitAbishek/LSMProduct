@@ -201,7 +201,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.5.12 - 22-08-2022 =
+= 1.5.12 - 23-08-2022 =
 - Enhancement - Made Masteriyo backend pages responsive.
 - Enhancement - Support non-english characters in single choice answers option.
 - Enhancement - If the course pricing type is 'Need Registration', a logged-in user can now directly access the course.

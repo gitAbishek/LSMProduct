@@ -51,7 +51,7 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
-### 1.5.12 - 22-08-2022
+### 1.5.12 - 23-08-2022
 
 - Enhancement - Made Masteriyo backend pages responsive.
 - Enhancement - Support non-english characters in single choice answers option.

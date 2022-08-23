@@ -2,7 +2,7 @@
 /**
  * Course price type enums.
  *
- * @since x.x.x
+ * @since 1.5.12
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course price type enum class.
  *
- * @since x.x.x
+ * @since 1.5.12
  */
 class CoursePriceType {
 	/**
 	 * Free price type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const FREE = 'free';
@@ -27,7 +27,7 @@ class CoursePriceType {
 	/**
 	 * Paid price type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const PAID = 'paid';
@@ -35,7 +35,7 @@ class CoursePriceType {
 	/**
 	 * Get all course price types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @static
 	 *
 	 * @return array
@@ -44,7 +44,7 @@ class CoursePriceType {
 		/**
 		 * Filters course price types.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.12
 		 *
 		 * @param string[] $price_types Course price types.
 		 */

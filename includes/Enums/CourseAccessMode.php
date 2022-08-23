@@ -2,7 +2,7 @@
 /**
  * Course access mode enums.
  *
- * @since x.x.x
+ * @since 1.5.12
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course access mode enum class.
  *
- * @since x.x.x
+ * @since 1.5.12
  */
 class CourseAccessMode {
 	/**
 	 * Open access mode.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const OPEN = 'open';
@@ -27,7 +27,7 @@ class CourseAccessMode {
 	/**
 	 * Need Registration access mode.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const NEED_REGISTRATION = 'need_registration';
@@ -35,7 +35,7 @@ class CourseAccessMode {
 	/**
 	 * One time access mode.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const ONE_TIME = 'one_time';
@@ -43,7 +43,7 @@ class CourseAccessMode {
 	/**
 	 * Recurring access mode.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const RECURRING = 'recurring';
@@ -51,7 +51,7 @@ class CourseAccessMode {
 	/**
 	 * Close access mode.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @var string
 	 */
 	const CLOSE = 'close';
@@ -59,7 +59,7 @@ class CourseAccessMode {
 	/**
 	 * Get all course access modes.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.12
 	 * @static
 	 *
 	 * @return array

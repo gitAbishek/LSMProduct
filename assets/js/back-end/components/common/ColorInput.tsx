@@ -3,7 +3,6 @@ import {
 	Popover,
 	PopoverArrow,
 	PopoverBody,
-	PopoverCloseButton,
 	PopoverContent,
 	PopoverTrigger,
 } from '@chakra-ui/react';
@@ -49,9 +48,8 @@ const ColorInput: React.FC<Props> = (props) => {
 						/>
 					</Box>
 				</PopoverTrigger>
-				<PopoverContent>
+				<PopoverContent w={'none'}>
 					<PopoverArrow />
-					<PopoverCloseButton />
 					<PopoverBody>
 						<HexColorPicker onChange={setColor} color={color} />
 					</PopoverBody>

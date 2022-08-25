@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class RegistrationFormHandler {
 	public function __construct() {
-		add_action( 'wp_loaded', array( $this, 'process' ), 20 );
+		add_action( 'template_redirect', array( $this, 'process' ), 20 );
 	}
 
 	/**

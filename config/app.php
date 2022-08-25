@@ -51,6 +51,7 @@ return array_unique(
 			'Masteriyo\Providers\NotificationServiceProvider',
 			'Masteriyo\Providers\RewriteServiceProvider',
 			'Masteriyo\Providers\AjaxServiceProvider',
+			'Masteriyo\Providers\ApiServiceProvider',
 		)
 	)
 );

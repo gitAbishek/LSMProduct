@@ -91,6 +91,7 @@ class Masteriyo {
 		masteriyo( 'order-notes' );
 		masteriyo( 'query.frontend' );
 		masteriyo( 'rewrite' )->init();
+		masteriyo( 'api' )->init();
 
 		$this->define_tables();
 

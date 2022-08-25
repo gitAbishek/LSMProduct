@@ -60,7 +60,7 @@ class Request {
 	 */
 	public function __construct( $gateway ) {
 		$this->gateway    = $gateway;
-		$this->notify_url = masteriyo_api_request_url( 'paypal' );
+		$this->notify_url = masteriyo_api_request_url( 'gateway_paypal' );
 	}
 
 	/**

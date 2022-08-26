@@ -962,11 +962,7 @@ if ( ! function_exists( 'masteriyo_is_course_previewable' ) ) {
 		$course  = masteriyo_get_course( $course );
 
 		if ( $course ) {
-			if ( masteriyo_is_current_user_admin() || masteriyo_is_current_user_manager() || masteriyo_is_current_user_super_admin() ) {
-				$preview = true;
-			} else {
-				$preview = get_current_user() === $course->get_author_id();
-			}
+			$preview = current_user_can( 'manage_masteriyo_settings' ) || current_user_can( 'edit_course', $course->get_id() );
 		}
 
 		/**

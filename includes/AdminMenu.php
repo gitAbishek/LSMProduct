@@ -181,6 +181,13 @@ class AdminMenu {
 			),
 		);
 
+		/**
+		 * Filter admin submenus.
+		 *
+		 * @since 1.5.12
+		 */
+		$submenus = apply_filters( 'masteriyo_admin_submenus', $submenus );
+
 		$submenus = array_map(
 			function( $submenu ) {
 				return wp_parse_args(
@@ -198,12 +205,7 @@ class AdminMenu {
 			$submenus
 		);
 
-		/**
-		 * Filter admin submenus.
-		 *
-		 * @since 1.5.12
-		 */
-		return apply_filters( 'masteriyo_admin_submenus', $submenus );
+		return $submenus;
 	}
 
 	/**

@@ -158,16 +158,29 @@ if ( ! function_exists( 'masteriyo_page_title' ) ) {
 	 * @return string
 	 */
 	function masteriyo_page_title( $echo = true ) {
+		$page_title = '';
+
 		if ( is_author() ) {
-			// Queue the first post to know the archive author.
-			the_post();
+			global $wp_query;
 
-			$author = get_the_author();
-			/* translators: %s: Author */
-			$page_title = sprintf( __( 'Instructor | %s', 'masteriyo' ), esc_html( $author ) );
+			if ( have_posts() ) {
+				// Queue the first post to know the archive author.
+				the_post();
 
-			// Since we called the_post() above, we need to rewind the loop back.
-			rewind_posts();
+				$author = get_the_author();
+				/* translators: %s: Author */
+				$page_title = sprintf( __( 'Instructor | %s', 'masteriyo' ), esc_html( $author ) );
+
+				// Since we called the_post() above, we need to rewind the loop back.
+				rewind_posts();
+			} elseif ( isset( $wp_query->query['author_name'] ) ) {
+				$user = get_user_by( 'slug', $wp_query->query['author_name'] );
+
+				if ( $user ) {
+					/* translators: %s: Author */
+					$page_title = sprintf( __( 'Instructor | %s', 'masteriyo' ), esc_html( $user->data->display_name ) );
+				}
+			}
 		} elseif ( is_search() ) {
 			/* translators: %s: search query */
 			$page_title = sprintf( __( 'Search results: &ldquo;%s&rdquo;', 'masteriyo' ), get_search_query() );

@@ -113,18 +113,6 @@ class AdminMenu {
 		foreach ( $submenus as $slug => $submenu ) {
 			$menu_slug = "masteriyo#/{$slug}";
 
-			$submenu = wp_parse_args(
-				$submenu,
-				array(
-					'page_title'  => '',
-					'menu_title'  => '',
-					'parent_slug' => 'masteriyo',
-					'capability'  => 'manage_masteriyo_settings',
-					'position'    => 1000,
-					'callback'    => array( __CLASS__, 'display_main_page' ),
-				)
-			);
-
 			add_submenu_page(
 				$submenu['parent_slug'],
 				$submenu['page_title'],
@@ -191,6 +179,23 @@ class AdminMenu {
 				'menu_title' => __( '<span class="dashicons dashicons-megaphone"></span> More Features', 'masteriyo' ),
 				'position'   => 80,
 			),
+		);
+
+		$submenus = array_map(
+			function( $submenu ) {
+				return wp_parse_args(
+					$submenu,
+					array(
+						'page_title'  => '',
+						'menu_title'  => '',
+						'parent_slug' => 'masteriyo',
+						'capability'  => 'manage_masteriyo_settings',
+						'position'    => 1000,
+						'callback'    => array( __CLASS__, 'display_main_page' ),
+					)
+				);
+			},
+			$submenus
 		);
 
 		/**

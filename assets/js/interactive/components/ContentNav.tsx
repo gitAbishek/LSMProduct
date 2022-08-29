@@ -43,7 +43,7 @@ const ContentNav: React.FC<Props> = (props) => {
 	const cirlceStyles = {
 		w: '30px',
 		h: '30px',
-		bg: 'blue.500',
+		bg: 'primary.500',
 		color: 'white',
 		fontSize: 'xx-large',
 		rounded: 'full',
@@ -95,7 +95,6 @@ const ContentNav: React.FC<Props> = (props) => {
 							onClick={onCompletePress}
 							isLoading={isButtonLoading}
 							isDisabled={isButtonDisabled}
-							colorScheme="blue"
 							rounded="full"
 							fontWeight="bold"
 							leftIcon={

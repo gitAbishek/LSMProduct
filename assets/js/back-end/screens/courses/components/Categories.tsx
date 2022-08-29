@@ -111,7 +111,7 @@ const Categories: React.FC<Props> = (props) => {
 						variant="link"
 						leftIcon={<Icon fontSize="xl" as={BiPlus} />}
 						onClick={() => setIsCreateCatModalOpen(true)}
-						_hover={{ color: 'blue.500' }}>
+						_hover={{ color: 'primary.500' }}>
 						{__('Add New Category', 'masteriyo')}
 					</Button>
 				</ButtonGroup>

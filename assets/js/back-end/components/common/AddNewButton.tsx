@@ -16,7 +16,7 @@ const AddNewButton = forwardRef<HTMLButtonElement, ButtonProps>(
 						fontSize: 'lg',
 						rounded: 'full',
 						shadow: 'xs',
-						bg: 'blue.500',
+						bg: 'primary.500',
 						color: 'white',
 						h: '26px',
 						w: '26px',

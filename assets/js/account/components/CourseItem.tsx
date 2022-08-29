@@ -91,7 +91,7 @@ const CourseItem: React.FC<Props> = (props) => {
 							pos="absolute"
 							top="3"
 							left="3"
-							bg="blue.500"
+							bg="primary.500"
 							color="white"
 							borderRadius="full"
 							fontWeight="medium"
@@ -110,7 +110,6 @@ const CourseItem: React.FC<Props> = (props) => {
 											key={category.id}
 											size="sm"
 											borderRadius="full"
-											colorScheme="blue"
 											border="1px"
 											borderColor="gray.200">
 											<TagLabel>{category?.name}</TagLabel>
@@ -182,7 +181,6 @@ const CourseItem: React.FC<Props> = (props) => {
 							)}
 							<Link href={course?.start_course_url}>
 								<Button
-									colorScheme="blue"
 									size="sm"
 									borderRadius="full"
 									isDisabled={

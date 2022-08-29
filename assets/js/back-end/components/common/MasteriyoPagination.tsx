@@ -144,10 +144,10 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 										key={`pagination_page_${page}`}
 										page={page}
 										_hover={{
-											bg: 'blue.400',
+											bg: 'primary.400',
 										}}
 										_current={{
-											bg: 'blue.400',
+											bg: 'primary.400',
 											fontSize: 'sm',
 											color: 'white',
 										}}

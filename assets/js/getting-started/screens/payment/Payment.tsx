@@ -94,11 +94,7 @@ const Payment: React.FC<Props> = (props) => {
 							</FormControl>
 
 							<Flex justify="space-between" align="center">
-								<Button
-									onClick={prevStep}
-									rounded="3px"
-									colorScheme="blue"
-									variant="outline">
+								<Button onClick={prevStep} rounded="3px" variant="outline">
 									{__('Back', 'masteriyo')}
 								</Button>
 								<ButtonGroup>
@@ -111,8 +107,7 @@ const Payment: React.FC<Props> = (props) => {
 										type="submit"
 										isLoading={isButtonLoading}
 										isDisabled={!!errors?.general}
-										rounded="3px"
-										colorScheme="blue">
+										rounded="3px">
 										{__('Finish', 'masteriyo')}
 									</Button>
 								</ButtonGroup>

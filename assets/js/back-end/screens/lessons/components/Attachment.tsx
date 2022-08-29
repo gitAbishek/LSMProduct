@@ -60,7 +60,7 @@ const Attachment: React.FC<Props> = (props) => {
 
 				{mediaQuery.isSuccess && (
 					<Stack direction="row" align="center">
-						<Icon color="blue.500" as={FaFileAlt} />
+						<Icon color="primary.500" as={FaFileAlt} />
 						<Text color="gray.600" fontSize="md">
 							{getFileNameFromURL(mediaQuery?.data?.source_url)}
 						</Text>

@@ -100,7 +100,7 @@ const AddNewLesson: React.FC = () => {
 
 	const FormButton = () => (
 		<ButtonGroup>
-			<Button colorScheme="blue" type="submit" isLoading={addLesson.isLoading}>
+			<Button type="submit" isLoading={addLesson.isLoading}>
 				{__('Add New Lesson', 'masteriyo')}
 			</Button>
 			<Button

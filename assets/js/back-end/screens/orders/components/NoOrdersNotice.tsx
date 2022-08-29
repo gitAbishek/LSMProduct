@@ -9,7 +9,7 @@ const NoOrdersNotice: React.FC = () => {
 		<Tr>
 			<Td>
 				<Stack direction="row" spacing="1" align="center">
-					<Icon as={BiInfoCircle} color="blue.400" />
+					<Icon as={BiInfoCircle} color="primary.400" />
 					<Text as="span" fontWeight="medium" color="gray.600" fontSize="sm">
 						{__('No orders found.', 'masteriyo')}
 					</Text>

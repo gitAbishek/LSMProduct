@@ -135,7 +135,7 @@ const Question: React.FC<Props> = (props) => {
 		fontSize: 'x-large',
 		color: 'gray.500',
 		minW: 'auto',
-		_hover: { color: 'blue.500' },
+		_hover: { color: 'primary.500' },
 	};
 
 	return (
@@ -191,7 +191,6 @@ const Question: React.FC<Props> = (props) => {
 										<Divider />
 										<ButtonGroup>
 											<Button
-												colorScheme="blue"
 												type="submit"
 												isDisabled={submitQuestionDisabled}
 												isLoading={updateQuestion.isLoading}>

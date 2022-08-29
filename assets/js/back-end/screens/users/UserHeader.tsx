@@ -75,7 +75,7 @@ const UserHeader: React.FC<PropsType> = (props) => {
 						isActive={location.pathname.includes('/students')}
 						_active={navActiveStyles}
 						rounded="none"
-						_hover={{ color: 'blue.500' }}
+						_hover={{ color: 'primary.500' }}
 						onClick={() => history.push(routes.users.students.list)}>
 						<Icon as={FaUserFriends} />
 						{__('Students', 'masteriyo')}
@@ -89,7 +89,7 @@ const UserHeader: React.FC<PropsType> = (props) => {
 						_active={navActiveStyles}
 						isActive={location.pathname.includes('/instructors')}
 						rounded="none"
-						_hover={{ color: 'blue.500' }}
+						_hover={{ color: 'primary.500' }}
 						onClick={() => history.push(routes.users.instructors.list)}>
 						<Icon as={FaUserTie} />
 						{__('Instructors', 'masteriyo')}

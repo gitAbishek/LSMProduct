@@ -71,7 +71,6 @@ const CourseGridItem: React.FC<Props> = (props) => {
 										key={category.id}
 										size="sm"
 										borderRadius="full"
-										colorScheme="blue"
 										border="1px"
 										borderColor="gray.200">
 										<TagLabel>{category?.name}</TagLabel>
@@ -144,7 +143,6 @@ const CourseGridItem: React.FC<Props> = (props) => {
 						href={course?.start_course_url}
 						style={{ width: 'fit-content' }}>
 						<Button
-							colorScheme="blue"
 							boxShadow="none"
 							size="sm"
 							borderRadius="full"

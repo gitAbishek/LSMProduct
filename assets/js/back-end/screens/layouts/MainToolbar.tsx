@@ -31,8 +31,8 @@ const MainToolbar = () => {
 
 	const navActiveStyles = {
 		borderBottom: '2px',
-		borderColor: 'blue.500',
-		color: 'blue.500',
+		borderColor: 'primary.500',
+		color: 'primary.500',
 	};
 
 	return (
@@ -87,7 +87,7 @@ const MainToolbar = () => {
 							variant="outline">
 							{__('Preview', 'masteriyo')}
 						</Button>
-						<Button colorScheme="blue">{__('Save', 'masteriyo')}</Button>
+						<Button>{__('Save', 'masteriyo')}</Button>
 					</ButtonGroup>
 				</Flex>
 			</Container>

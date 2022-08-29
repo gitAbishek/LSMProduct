@@ -186,7 +186,6 @@ const Header: React.FC<Props> = (props) => {
 								<Button
 									size={buttonSize}
 									variant="outline"
-									colorScheme="blue"
 									onClick={secondBtn.action}
 									leftIcon={secondBtn.icon}
 									isDisabled={secondBtn.isDisabled}
@@ -198,7 +197,6 @@ const Header: React.FC<Props> = (props) => {
 							{thirdBtn && (
 								<Button
 									size={buttonSize}
-									colorScheme="blue"
 									onClick={thirdBtn.action}
 									isDisabled={thirdBtn.isDisabled}
 									leftIcon={isDesktop ? thirdBtn.icon : <></>}

@@ -28,7 +28,7 @@ const EnrolledCourses: React.FC = () => {
 				direction="column"
 				spacing="8"
 				className="mto-enrolled-courses-wrapper">
-				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
+				<Heading as="h4" size="md" fontWeight="bold" color="primary.900">
 					{__('Enrolled Courses', 'masteriyo')}
 				</Heading>
 				<SimpleGrid

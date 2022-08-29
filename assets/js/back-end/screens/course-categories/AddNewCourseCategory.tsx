@@ -108,7 +108,7 @@ const AddNewCourseCategory: React.FC = () => {
 						<RouterLink to={routes.course_categories.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Categories', 'masteriyo')}
 							</Button>
@@ -131,7 +131,6 @@ const AddNewCourseCategory: React.FC = () => {
 
 										<ButtonGroup>
 											<Button
-												colorScheme="blue"
 												type="submit"
 												isLoading={createCategory.isLoading}>
 												{__('Create', 'masteriyo')}

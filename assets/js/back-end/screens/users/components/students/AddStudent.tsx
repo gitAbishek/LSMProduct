@@ -93,7 +93,7 @@ const AddStudent: React.FC = () => {
 						<RouterLink to={routes.users.students.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Students', 'masteriyo')}
 							</Button>
@@ -209,10 +209,7 @@ const AddStudent: React.FC = () => {
 									</Box>
 
 									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											type="submit"
-											isLoading={createUser.isLoading}>
+										<Button type="submit" isLoading={createUser.isLoading}>
 											{__('Add Student', 'masteriyo')}
 										</Button>
 										<Button

@@ -68,7 +68,7 @@ const Sidebar: React.FC<Props> = (props) => {
 		_active: {
 			borderColor: 'transparent',
 			bg: 'white',
-			color: 'blue.500',
+			color: 'primary.500',
 		},
 	};
 
@@ -120,6 +120,13 @@ const Sidebar: React.FC<Props> = (props) => {
 					variant="unstyled"
 					color="white"
 					d="flex"
+					sx={{
+						backgroundColor: 'primary.500',
+						'-webkit-mask': `url(${CloseCone}) no-repeat 100% 100%`,
+						mask: `url(${CloseCone}) no-repeat 100% 100%`,
+						'-webkit-mask-size': 'cover',
+						maskSize: 'cover',
+					}}
 					justifyContent="center"
 					position="absolute"
 					top="9px"
@@ -131,7 +138,6 @@ const Sidebar: React.FC<Props> = (props) => {
 					w="36px"
 					p="0"
 					h="60px"
-					bgImage={`url(${CloseCone})`}
 					onClick={onToggle}
 					aria-label="open sidebar"
 				/>
@@ -141,7 +147,7 @@ const Sidebar: React.FC<Props> = (props) => {
 							direction="column"
 							spacing="1"
 							px="4"
-							bg="blue.500"
+							bg="primary.500"
 							minH="20"
 							justify="center"
 							color="white">

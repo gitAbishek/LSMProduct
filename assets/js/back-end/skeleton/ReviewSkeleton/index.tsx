@@ -41,7 +41,7 @@ const ReviewSkeleton: React.FC = () => {
 						<RouterLink to={routes.reviews.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Reviews', 'masteriyo')}
 							</Button>

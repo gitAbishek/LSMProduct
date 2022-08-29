@@ -123,7 +123,7 @@ const ReviewForm: React.FC<Props> = (props) => {
 						<RouterLink to={routes.reviews.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Reviews', 'masteriyo')}
 							</Button>
@@ -163,7 +163,6 @@ const ReviewForm: React.FC<Props> = (props) => {
 											</Box>
 											<ButtonGroup>
 												<Button
-													colorScheme="blue"
 													type="submit"
 													isLoading={
 														addReviewMutation.isLoading ||

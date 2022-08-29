@@ -37,7 +37,7 @@ const ProfilePage = () => {
 				width="full"
 				className="mto-profile-wrapper">
 				<Flex justify={'space-between'}>
-					<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
+					<Heading as="h4" size="md" fontWeight="bold" color="primary.900">
 						{__('Profile', 'masteriyo')}
 					</Heading>
 					<Link to={routes.user.edit}>

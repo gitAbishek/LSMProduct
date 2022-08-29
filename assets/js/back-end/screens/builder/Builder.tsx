@@ -53,7 +53,7 @@ const Builder: React.FC = () => {
 		px: 0,
 		mx: 4,
 		_hover: {
-			color: 'blue.500',
+			color: 'primary.500',
 			borderBottom: [0, 0, '2px solid'],
 		},
 	};

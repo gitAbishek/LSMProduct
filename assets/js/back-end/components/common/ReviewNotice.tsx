@@ -89,7 +89,6 @@ const ReviewNotice: React.FC = () => {
 							<Button
 								size="sm"
 								variant="solid"
-								colorScheme="blue"
 								onClick={() => handleNotice('review_received')}>
 								{__("Sure, I'd love to", 'masteriyo')}
 							</Button>

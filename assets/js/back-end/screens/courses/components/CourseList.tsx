@@ -75,10 +75,10 @@ const CourseList: React.FC<Props> = (props) => {
 						as={RouterLink}
 						to={routes.courses.edit.replace(':courseId', id.toString())}
 						fontWeight="semibold"
-						_hover={{ color: 'blue.500' }}>
+						_hover={{ color: 'primary.500' }}>
 						{name}
 						{status === 'draft' ? (
-							<Badge bg="blue.200" fontSize="10px" ml="2" mt="-2">
+							<Badge bg="primary.200" fontSize="10px" ml="2" mt="-2">
 								{__('Draft', 'masteriyo')}
 							</Badge>
 						) : null}
@@ -151,7 +151,7 @@ const CourseList: React.FC<Props> = (props) => {
 							<MenuItem
 								onClick={() => onRestorePress(id)}
 								icon={<BiShow />}
-								_hover={{ color: 'blue.500' }}>
+								_hover={{ color: 'primary.500' }}>
 								{__('Restore', 'masteriyo')}
 							</MenuItem>
 							<MenuItem
@@ -166,7 +166,7 @@ const CourseList: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						<RouterLink
 							to={routes.courses.edit.replace(':courseId', id.toString())}>
-							<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+							<Button leftIcon={<BiEdit />} size="xs">
 								{__('Edit', 'masteriyo')}
 							</Button>
 						</RouterLink>

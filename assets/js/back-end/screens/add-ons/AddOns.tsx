@@ -40,7 +40,7 @@ const AddOns = () => {
 		px: 0,
 		mx: 4,
 		_hover: {
-			color: 'blue.500',
+			color: 'primary.500',
 		},
 	};
 

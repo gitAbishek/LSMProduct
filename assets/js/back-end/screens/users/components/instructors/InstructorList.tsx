@@ -136,7 +136,7 @@ const InstructorList: React.FC<Props> = (props) => {
 							)}
 							fontWeight="semibold"
 							fontSize="sm"
-							_hover={{ color: 'blue.500' }}>
+							_hover={{ color: 'primary.500' }}>
 							{`#${data?.id} ${data?.first_name} ${data?.last_name}`}{' '}
 						</Link>
 						{UserStatus.Active === data?.status ? (
@@ -187,7 +187,7 @@ const InstructorList: React.FC<Props> = (props) => {
 							':userId',
 							data?.id.toString()
 						)}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+						<Button leftIcon={<BiEdit />} size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>

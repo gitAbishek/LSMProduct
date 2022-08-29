@@ -98,7 +98,7 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 							)}
 							fontWeight="semibold"
 							fontSize="sm"
-							_hover={{ color: 'blue.500' }}>
+							_hover={{ color: 'primary.500' }}>
 							#{data?.id} {data?.user?.first_name} {data?.user?.last_name}
 						</Link>
 					) : (
@@ -160,9 +160,7 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 								':attemptId',
 								data?.id.toString()
 							)}>
-							<Button colorScheme="blue" size="xs">
-								{__('View', 'masteriyo')}
-							</Button>
+							<Button size="xs">{__('View', 'masteriyo')}</Button>
 						</RouterLink>
 					) : null}
 					<Menu placement="bottom-end">

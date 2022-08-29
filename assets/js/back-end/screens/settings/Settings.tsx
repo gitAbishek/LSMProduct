@@ -16,7 +16,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React from 'react';
+import React, { useContext } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCog } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -26,6 +26,7 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
+import { ThemeContext } from '../../context/ThemeProvider';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
@@ -47,6 +48,8 @@ const Settings = () => {
 	const toast = useToast();
 	const queryClient = useQueryClient();
 
+	const [_, dispatchColor] = useContext(ThemeContext);
+
 	const tabStyles = {
 		fontWeight: 'medium',
 		py: ['2', '4'],
@@ -66,16 +69,22 @@ const Settings = () => {
 	const updateSettings = useMutation(
 		(data: SetttingsMap) => settingsApi.store(data),
 		{
-			onSuccess: () => {
+			onSuccess: (data) => {
 				toast({
 					title: __('Settings Updated.', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
 				});
+				dispatchColor({
+					type: 'CHANGE_COLOR',
+					payload: data?.general?.styling?.primary_color,
+				});
+
 				queryClient.invalidateQueries(`settings`);
 			},
 		}
 	);
+
 	const onSubmit = (data: SetttingsMap) => {
 		try {
 			updateSettings.mutate(deepClean(data));
@@ -93,7 +102,7 @@ const Settings = () => {
 									as={NavLink}
 									sx={navLinkStyles}
 									_activeLink={navActiveStyles}
-									_hover={{ color: 'blue.500' }}
+									_hover={{ color: 'primary.500' }}
 									to={routes.settings}>
 									<ListIcon as={BiCog} />
 									{__('Settings', 'masteriyo')}
@@ -161,10 +170,7 @@ const Settings = () => {
 										</TabPanel>
 									</TabPanels>
 									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											type="submit"
-											isLoading={updateSettings.isLoading}>
+										<Button type="submit" isLoading={updateSettings.isLoading}>
 											{__('Save Settings', 'masteriyo')}
 										</Button>
 									</ButtonGroup>

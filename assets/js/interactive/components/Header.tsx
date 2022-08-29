@@ -207,8 +207,7 @@ const Header: React.FC<Props> = (props) => {
 																			value={lessonProgress}
 																			size="54px"
 																			capIsRound
-																			trackColor="blue.100"
-																			color="blue.500">
+																			color="primary.500">
 																			<CircularProgressLabel fontWeight="bold">
 																				{lessonProgress + __('%', 'masteriyo')}
 																			</CircularProgressLabel>
@@ -224,7 +223,7 @@ const Header: React.FC<Props> = (props) => {
 																			<Text
 																				fontSize="x-small"
 																				fontWeight="bold"
-																				color="blue.500">
+																				color="primary.500">
 																				{summary.lesson.completed}
 																				{__(' Completed', 'masteriyo')}
 																			</Text>
@@ -245,7 +244,7 @@ const Header: React.FC<Props> = (props) => {
 																			size="54px"
 																			capIsRound
 																			trackColor="gray.100"
-																			color="blue.500">
+																			color="primary.500">
 																			<CircularProgressLabel fontWeight="bold">
 																				{quizProgress + __('%', 'masteriyo')}
 																			</CircularProgressLabel>
@@ -261,7 +260,7 @@ const Header: React.FC<Props> = (props) => {
 																			<Text
 																				fontSize="x-small"
 																				fontWeight="bold"
-																				color="blue.500">
+																				color="primary.500">
 																				{summary.quiz.completed}
 																				{__(' Completed', 'masteriyo')}
 																			</Text>

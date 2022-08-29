@@ -55,12 +55,12 @@ const Sidebar = () => {
 		fontWeight: 'medium',
 		textDecoration: 'none',
 		_hover: {
-			color: 'blue.500',
+			color: 'primary.500',
 		},
 	};
 	const navActiveStyles = {
-		borderColor: 'blue.500',
-		color: 'blue.500',
+		borderColor: 'primary.500',
+		color: 'primary.500',
 	};
 
 	const redirectLogoutUser = () => {

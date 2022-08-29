@@ -102,7 +102,7 @@ class WPEditor extends React.Component<PropsWithChildren<any>, any> {
 								},
 
 								'&.mce-active': {
-									bg: 'blue.500',
+									bg: 'primary.500',
 									color: 'white',
 								},
 							},

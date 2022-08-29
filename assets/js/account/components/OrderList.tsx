@@ -58,7 +58,7 @@ const OrderList: React.FC<Props> = (props) => {
 						to={routes.order.view.replace(':orderId', id.toString())}
 						fontWeight="semibold"
 						fontSize="sm"
-						_hover={{ color: 'blue.500' }}>
+						_hover={{ color: 'primary.500' }}>
 						{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
 					</Link>
 					<Text fontSize="xs" color="gray.600">

@@ -100,7 +100,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 										sx={
 											isActive(content.item_type, content.item_id)
 												? {
-														bg: 'blue.500',
+														bg: 'primary.500',
 														color: 'white',
 														p: {
 															color: 'white',
@@ -132,7 +132,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 															content.item_type,
 															content.video
 														)}
-														color="blue.500"
+														color="primary.500"
 														fontSize="xl"
 													/>
 													<Text

@@ -219,10 +219,7 @@ const EditQuiz: React.FC = () => {
 												<Divider />
 											</Box>
 											<ButtonGroup>
-												<Button
-													colorScheme="blue"
-													type="submit"
-													isLoading={updateQuiz.isLoading}>
+												<Button type="submit" isLoading={updateQuiz.isLoading}>
 													{__('Update', 'masteriyo')}
 												</Button>
 												<Button

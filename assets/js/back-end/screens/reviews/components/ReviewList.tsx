@@ -110,7 +110,7 @@ const ReviewList: React.FC<Props> = (props) => {
 						as={RouterLink}
 						to={editReviewLink}
 						fontWeight="semibold"
-						_hover={{ color: 'blue.500' }}>
+						_hover={{ color: 'primary.500' }}>
 						{title}
 					</Link>
 				)}
@@ -171,7 +171,7 @@ const ReviewList: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						<RouterLink
 							to={routes.reviews.edit.replace(':reviewId', id.toString())}>
-							<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+							<Button leftIcon={<BiEdit />} size="xs">
 								{__('Edit', 'masteriyo')}
 							</Button>
 						</RouterLink>

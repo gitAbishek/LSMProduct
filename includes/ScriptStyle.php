@@ -839,6 +839,7 @@ class ScriptStyle {
 						),
 						'show_review_notice'  => masteriyo_bool_to_string( masteriyo_is_show_review_notice() ),
 						'total_posts'         => count_user_posts( get_current_user_id() ),
+						'settings'=>masteriyo_get_setting('general'),
 					),
 				),
 				'ask-review' => array(
@@ -898,6 +899,7 @@ class ScriptStyle {
 						),
 						'isCurrentUserInstructor' => masteriyo_bool_to_string( masteriyo_is_current_user_instructor() ),
 						'isInstructorActive'      => masteriyo_bool_to_string( masteriyo_is_instructor_active() ),
+						'settings'=>masteriyo_get_setting('general'),
 					),
 				),
 				'login-form'    => array(
@@ -969,6 +971,7 @@ class ScriptStyle {
 						'userAvatar'     => get_avatar_url( get_current_user_id() ),
 						'qaEnable'       => masteriyo_get_setting( 'learn_page.display.enable_questions_answers' ),
 						'isUserLoggedIn' => is_user_logged_in(),
+						'settings'=>masteriyo_get_setting('general'),
 					),
 				),
 			)

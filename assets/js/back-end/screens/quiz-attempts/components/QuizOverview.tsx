@@ -64,7 +64,7 @@ const QuizOverview = (props: any) => {
 						</Text>
 					</Badge>
 					{/* <Menu>
-								<MenuButton color="blue.500">
+								<MenuButton color="primary.500">
 									<BiEdit size="16" />
 								</MenuButton>
 								<MenuList>

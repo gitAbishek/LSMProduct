@@ -202,10 +202,7 @@ const AddNewQuiz: React.FC = () => {
 											</Tabs>
 
 											<ButtonGroup>
-												<Button
-													colorScheme="blue"
-													type="submit"
-													isLoading={addQuiz.isLoading}>
+												<Button type="submit" isLoading={addQuiz.isLoading}>
 													{__('Add New Quiz', 'masteriyo')}
 												</Button>
 												<Button

@@ -231,4 +231,10 @@ export type MasteriyoLocalized = {
 		addNewCourse: string;
 	};
 	show_review_notice: 'yes' | 'no';
+	settings: {
+		styling: {
+			primary_color: string;
+			theme: string;
+		};
+	};
 };

@@ -12,4 +12,10 @@ export interface MasteriyoLocalized {
 		home: string;
 	};
 	isUserLoggedIn: boolean;
+	settings: {
+		styling: {
+			primary_color: string;
+			theme: string;
+		};
+	};
 }

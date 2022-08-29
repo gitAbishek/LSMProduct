@@ -3,7 +3,7 @@ import { StepsStyleConfig as Steps } from 'chakra-ui-steps';
 
 const theme = extendTheme({
 	colors: {
-		blue: {
+		primary: {
 			10: '#ecf3ff',
 			50: '#FFFFFF',
 			100: '#ecf3ff',
@@ -36,7 +36,7 @@ const theme = extendTheme({
 				},
 			},
 
-			'#masteriyo, #masteriyo-onboarding, #masteriyo-interactive-course, #masteriyo-account-page':
+			'#masteriyo, #masteriyo-onboarding, #masteriyo-interactive-course, #masteriyo-account-page, .masteriyo-alert-content':
 				{
 					'input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], select, textarea, #rfs-btn':
 						{
@@ -51,7 +51,7 @@ const theme = extendTheme({
 							},
 
 							_focus: {
-								borderColor: 'blue.300',
+								borderColor: 'primary.300',
 							},
 						},
 					ul: {
@@ -59,6 +59,19 @@ const theme = extendTheme({
 							marginBottom: 0,
 						},
 					},
+					'.chakra-tabs__tab[aria-selected=true]': {
+						color: 'primary.600',
+					},
+					'.chakra-switch__track[data-checked],.chakra-radio__control[data-checked]':
+						{
+							background: 'primary.500',
+						},
+
+					// Slider and Progress Bar
+					'.chakra-slider__filled-track,.css-1jrtelv': {
+						background: 'primary.500',
+					},
+
 					'.ProseMirror, .masteriyo-interactive-description': {
 						'h1, h2, h3, h4, h5, h6': {
 							lineHeight: '1.1',
@@ -93,7 +106,7 @@ const theme = extendTheme({
 						},
 						a: {
 							textDecoration: 'underline',
-							color: 'blue.500',
+							color: 'primary.500',
 							cursor: 'pointer',
 						},
 						blockquote: {
@@ -212,7 +225,6 @@ const theme = extendTheme({
 						},
 						'.responsiveTable td': { display: 'block' },
 						'.responsiveTable tr': {
-							marginTop: '10px',
 							display: 'block',
 						},
 						'.responsiveTable thead tr': {
@@ -250,7 +262,7 @@ const theme = extendTheme({
 
 					'.react-datepicker__header': {
 						borderRadius: '0',
-						background: 'blue.100',
+						background: 'primary.100',
 					},
 
 					'.react-datepicker__navigation': {
@@ -304,6 +316,9 @@ const theme = extendTheme({
 			},
 		},
 		Button: {
+			defaultProps: {
+				colorScheme: 'primary',
+			},
 			baseStyle: {
 				borderRadius: 'sm',
 			},

@@ -128,7 +128,7 @@ const CreateNewOrder: React.FC = () => {
 						<RouterLink to={routes.orders.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Orders', 'masteriyo')}
 							</Button>
@@ -305,10 +305,7 @@ const CreateNewOrder: React.FC = () => {
 									</Box>
 
 									<ButtonGroup>
-										<Button
-											colorScheme="blue"
-											type="submit"
-											isLoading={addOrder.isLoading}>
+										<Button type="submit" isLoading={addOrder.isLoading}>
 											{__('Create Order', 'masteriyo')}
 										</Button>
 										<Button

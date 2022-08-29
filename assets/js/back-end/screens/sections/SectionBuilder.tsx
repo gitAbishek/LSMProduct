@@ -104,9 +104,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 													)}
 												</Text>
 												<ButtonGroup justifyContent="center">
-													<Button
-														colorScheme="blue"
-														onClick={onAddNewSectionPress}>
+													<Button onClick={onAddNewSectionPress}>
 														{__('Add New Section', 'masteriyo')}
 													</Button>
 												</ButtonGroup>

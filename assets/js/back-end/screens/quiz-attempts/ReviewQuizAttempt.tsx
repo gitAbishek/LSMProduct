@@ -70,7 +70,7 @@ const ReviewQuizAttempt = () => {
 							<RouterLink to={routes.quiz_attempts.list}>
 								<Button
 									variant="link"
-									_hover={{ color: 'blue.500' }}
+									_hover={{ color: 'primary.500' }}
 									leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 									{__('Back', 'masteriyo')}
 								</Button>

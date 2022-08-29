@@ -98,7 +98,7 @@ const EditProfile: React.FC = () => {
 		px: 0,
 		mr: 4,
 		_hover: {
-			color: 'blue.500',
+			color: 'primary.500',
 		},
 	};
 
@@ -205,7 +205,7 @@ const EditProfile: React.FC = () => {
 																	border="4px solid"
 																	borderColor="white"
 																	_hover={{
-																		bg: 'blue.500',
+																		bg: 'primary.500',
 																		color: 'white',
 																	}}
 																	as={IconButton}
@@ -485,7 +485,6 @@ const EditProfile: React.FC = () => {
 											<Spacer />
 											<ButtonGroup>
 												<Button
-													colorScheme="blue"
 													isLoading={updateUser?.isLoading}
 													rounded="full"
 													type="submit"

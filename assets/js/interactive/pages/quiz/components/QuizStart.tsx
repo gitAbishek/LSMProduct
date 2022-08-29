@@ -46,7 +46,7 @@ const QuizStart: React.FC<Props> = (props) => {
 	return (
 		<Stack direction="column" spacing="8">
 			<List
-				bg="blue.500"
+				bg="primary.500"
 				rounded="sm"
 				d="flex"
 				flexDirection={['column', null, 'row']}
@@ -85,7 +85,6 @@ const QuizStart: React.FC<Props> = (props) => {
 					onClick={onStartPress}
 					isLoading={isButtonLoading}
 					isDisabled={isDisabled}
-					colorScheme="blue"
 					rounded="full"
 					fontWeight="bold"
 					rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}

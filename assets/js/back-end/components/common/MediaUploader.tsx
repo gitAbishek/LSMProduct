@@ -70,7 +70,6 @@ const MediaUploader: React.FC<Props> = (props) => {
 			size={size}
 			variant="outline"
 			isFullWidth={isFullWidth}
-			colorScheme="blue"
 			onClick={handleButtonClick}>
 			{buttonLabel}
 		</Button>

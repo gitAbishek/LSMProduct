@@ -52,7 +52,7 @@ const OrderDetails: React.FC = () => {
 				spacing="8"
 				width="full"
 				className="mto-orders-detail-wrapper">
-				<Heading as="h4" size="md" fontWeight="bold" color="blue.900">
+				<Heading as="h4" size="md" fontWeight="bold" color="primary.900">
 					{sprintf(__('Order #%s', 'masteriyo'), orderQuery?.data?.id)}
 				</Heading>
 				<Row gutterWidth={30}>

@@ -50,7 +50,7 @@ const FloatingTimer: React.FC<Props> = (props) => {
 				value={quizCounterTime}
 				max={duration * 60}
 				capIsRound
-				color={quizCounterTime <= 30 ? 'red.500' : 'blue.500'}
+				color={quizCounterTime <= 30 ? 'red.500' : 'primary.500'}
 				size="140px"
 				trackColor="transparent"
 				thickness="5px">

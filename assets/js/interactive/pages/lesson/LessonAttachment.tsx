@@ -30,9 +30,9 @@ const LessonAttachment: React.FC<Props> = (props) => {
 			{lessonQuery?.attachments?.map((attachment: AttachmentSchema) => {
 				return (
 					<Stack key={attachment?.id} direction="row" align="center">
-						<Icon color="blue.400" as={FaFileDownload} />
+						<Icon color="primary.400" as={FaFileDownload} />
 						<Link href={attachment?.url} title={attachment?.title}>
-							<Text color="blue.500">
+							<Text color="primary.500">
 								{getFileNameFromURL(attachment?.url)}
 							</Text>
 						</Link>

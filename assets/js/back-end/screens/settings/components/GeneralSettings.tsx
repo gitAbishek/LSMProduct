@@ -42,6 +42,10 @@ const GeneralSettings: React.FC<Props> = (props) => {
 		generalData?.styling?.primary_color || '#787DFF'
 	);
 
+	useEffect(() => {
+		setValue('general.styling.primary_color', primaryColor);
+	}, [primaryColor, setValue]);
+
 	const renderPagesOption = () => {
 		try {
 			return (
@@ -60,10 +64,6 @@ const GeneralSettings: React.FC<Props> = (props) => {
 			return;
 		}
 	};
-
-	useEffect(() => {
-		setValue('general.styling.primary_color', primaryColor);
-	}, [primaryColor, setValue]);
 
 	return (
 		<Tabs orientation="vertical">

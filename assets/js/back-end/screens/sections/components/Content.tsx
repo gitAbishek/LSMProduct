@@ -149,11 +149,7 @@ const Content: React.FC<Props> = (props) => {
 								borderColor="gray.200">
 								<Icon as={Sortable} fontSize="lg" color="gray.500" />
 							</Box>
-							<Icon
-								color="blue.400"
-								as={getContentIcon(type, hasVideo)}
-								fontSize="xl"
-							/>
+							<Icon as={getContentIcon(type, hasVideo)} fontSize="xl" />
 							<Text fontSize="sm" onClick={onEditPress}>
 								{name}
 							</Text>

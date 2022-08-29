@@ -81,9 +81,7 @@ const EditSection: React.FC<EditSectionProps> = (props) => {
 					</FormControl>
 					<Divider />
 					<ButtonGroup>
-						<Button colorScheme="blue" type="submit">
-							{__('Save', 'masteriyo')}
-						</Button>
+						<Button type="submit">{__('Save', 'masteriyo')}</Button>
 						<Button variant="outline" onClick={() => onCancel()}>
 							{__('Cancel', 'masteriyo')}
 						</Button>

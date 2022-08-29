@@ -56,7 +56,6 @@ const SetupWizard: React.FC = () => {
 			<Container maxW="container.md">
 				<form onSubmit={methods.handleSubmit(onSubmit)}>
 					<Steps
-						colorScheme="blue"
 						size="sm"
 						mb={5}
 						activeStep={activeStep}

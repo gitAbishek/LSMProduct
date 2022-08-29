@@ -221,7 +221,6 @@ const EditLesson = () => {
 
 												<ButtonGroup>
 													<Button
-														colorScheme="blue"
 														type="submit"
 														isLoading={updateLesson.isLoading}>
 														{__('Update Lesson', 'masteriyo')}

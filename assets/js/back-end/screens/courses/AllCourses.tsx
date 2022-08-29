@@ -187,7 +187,7 @@ const AllCourses = () => {
 				_active={navActiveStyles}
 				rounded="none"
 				isActive={active === courseStatus}
-				_hover={{ color: 'blue.500' }}
+				_hover={{ color: 'primary.500' }}
 				onClick={() => onChangeCourseStatus(courseStatus)}>
 				<Icon as={iconName} />
 				{buttonText}

@@ -40,7 +40,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 						id.toString()
 					)}
 					fontWeight="semibold"
-					_hover={{ color: 'blue.500' }}>
+					_hover={{ color: 'primary.500' }}>
 					{name}
 				</Link>
 			</Td>
@@ -57,7 +57,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 							':categoryId',
 							id.toString()
 						)}>
-						<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+						<Button leftIcon={<BiEdit />} size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>

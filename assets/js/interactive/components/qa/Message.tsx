@@ -18,7 +18,7 @@ const Message: React.FC<Props> = (props) => {
 				borderBottomRightRadius: 'lg',
 				borderBottomLeftRadius: 'lg',
 				borderTopLeftRadius: 'lg',
-				bg: 'blue.400',
+				bg: 'primary.400',
 				color: 'white',
 		  }
 		: {
@@ -46,7 +46,7 @@ const Message: React.FC<Props> = (props) => {
 						</Text>
 						<Icon
 							as={sender === 'instructor' ? BiBadgeCheck : BiUser}
-							color={sender === 'instructor' ? 'blue.400' : 'pink.400'}
+							color={sender === 'instructor' ? 'primary.400' : 'pink.400'}
 						/>
 					</Stack>
 					<Text fontSize="x-small" color="gray.400">

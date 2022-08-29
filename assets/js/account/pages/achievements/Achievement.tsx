@@ -10,7 +10,10 @@ const Achievement = () => {
 					{__('My Achievements', 'masteriyo')}
 				</Heading>
 				<Box>
-					<Alert colorScheme={'blue.200'} color={'blue.400'} borderRadius={5}>
+					<Alert
+						colorScheme={'primary.200'}
+						color={'primary.400'}
+						borderRadius={5}>
 						{__(
 							'You have no achievements yet. Enroll in course to get an achievements',
 							'masteriyo'

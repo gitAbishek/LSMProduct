@@ -131,11 +131,7 @@ const QaChat: React.FC<Props> = (props) => {
 								disabled={addNewChat.isLoading}
 							/>
 						</FormControl>
-						<Button
-							colorScheme="blue"
-							type="submit"
-							isFullWidth
-							isLoading={addNewChat.isLoading}>
+						<Button type="submit" isFullWidth isLoading={addNewChat.isLoading}>
 							{__('Send', 'masteriyo')}
 						</Button>
 					</Stack>
@@ -148,7 +144,7 @@ const QaChat: React.FC<Props> = (props) => {
 		<Center h="full">
 			<Spinner
 				size="lg"
-				color="blue.500"
+				color="primary.500"
 				emptyColor="gray.200"
 				thickness="3px"
 			/>

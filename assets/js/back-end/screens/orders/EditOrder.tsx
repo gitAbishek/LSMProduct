@@ -198,7 +198,7 @@ const EditOrder = () => {
 						<RouterLink to={routes.orders.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Orders', 'masteriyo')}
 							</Button>
@@ -416,10 +416,7 @@ const EditOrder = () => {
 											</Box>
 
 											<ButtonGroup>
-												<Button
-													colorScheme="blue"
-													type="submit"
-													isLoading={updateOrder.isLoading}>
+												<Button type="submit" isLoading={updateOrder.isLoading}>
 													{__('Update Order', 'masteriyo')}
 												</Button>
 												<Button

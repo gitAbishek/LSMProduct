@@ -28,9 +28,7 @@ const FourOFour = () => {
 							{__('We cannot find the page you are looking for.', 'masteriyo')}
 						</Text>
 						<Link to={routes.courses.list}>
-							<Button colorScheme="blue">
-								{__('Back to Courses', 'masteriyo')}
-							</Button>
+							<Button>{__('Back to Courses', 'masteriyo')}</Button>
 						</Link>
 					</VStack>
 				</VStack>

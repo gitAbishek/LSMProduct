@@ -148,8 +148,8 @@ const QuestionList: React.FC = () => {
 										key={index}
 										_hover={{
 											textDecor: 'none',
-											bg: 'blue.50',
-											color: 'blue.500',
+											bg: 'primary.50',
+											color: 'primary.500',
 											'.chakra-icon': {
 												transform: 'translateX(5px)',
 											},
@@ -214,7 +214,6 @@ const QuestionList: React.FC = () => {
 								</FormErrorMessage>
 							</FormControl>
 							<Button
-								colorScheme="blue"
 								type="submit"
 								isFullWidth
 								isLoading={addNewQuestion.isLoading}>
@@ -244,7 +243,7 @@ const QuestionList: React.FC = () => {
 						'You must be logged in to ask question. You can register from',
 						'masteriyo'
 					)}
-					<Link isExternal color="blue.500" href={localized.urls.account}>
+					<Link isExternal color="primary.500" href={localized.urls.account}>
 						{__(' here.', 'masteriyo')}
 					</Link>
 				</Text>
@@ -256,7 +255,7 @@ const QuestionList: React.FC = () => {
 		<Center h="full">
 			<Spinner
 				size="lg"
-				color="blue.500"
+				color="primary.500"
 				emptyColor="gray.200"
 				thickness="3px"
 			/>

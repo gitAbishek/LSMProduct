@@ -125,7 +125,6 @@ const ScoreBoard: React.FC<Props> = (props) => {
 				</Button>
 				<Button
 					onClick={onStartPress}
-					colorScheme="blue"
 					isLoading={isButtonLoading}
 					isDisabled={limitReached}
 					rounded="full"

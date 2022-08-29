@@ -32,7 +32,6 @@ const PageNav: React.FC<Props> = (props) => {
 	return (
 		<Breadcrumb
 			fontWeight="medium"
-			colorScheme="blue"
 			fontSize="sm"
 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
 			<BreadcrumbItem>
@@ -93,7 +92,7 @@ const PageNav: React.FC<Props> = (props) => {
 				</BreadcrumbItem>
 			)}
 			<BreadcrumbItem isCurrentPage>
-				<BreadcrumbLink color="blue.600">{currentTitle}</BreadcrumbLink>
+				<BreadcrumbLink color="primary.600">{currentTitle}</BreadcrumbLink>
 			</BreadcrumbItem>
 		</Breadcrumb>
 	);

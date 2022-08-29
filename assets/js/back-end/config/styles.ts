@@ -42,7 +42,7 @@ export const reactSelectStyles = {
 		borderColor: state.isDisabled
 			? theme.colors.gray[200]
 			: state.isFocused
-			? theme.colors.blue
+			? theme.colors.primary
 			: 'inherit',
 		transition: 'all 0.35s ease-in-out',
 		backgroundColor: theme.colors.white,
@@ -74,16 +74,16 @@ export const reactSelectStyles = {
 	option: (provided: any, state: any) => ({
 		...provided,
 		backgroundColor: state.isSelected
-			? theme.colors.blue[300]
+			? theme.colors.primary[300]
 			: state.isFocused
-			? theme.colors.blue[10]
+			? theme.colors.primary[10]
 			: 'transparent',
 		color: state.data?.isDisabled ? '#1a202c' : provided.color,
 	}),
 
 	multiValue: (provided: any) => ({
 		...provided,
-		backgroundColor: theme.colors.blue[100],
+		backgroundColor: theme.colors.primary[50],
 	}),
 
 	menu: (provided: any) => ({
@@ -137,8 +137,8 @@ export const navLinkStyles = {
 
 export const navActiveStyles = {
 	borderBottom: '2px',
-	borderColor: 'blue.500',
-	color: 'blue.500',
+	borderColor: 'primary.500',
+	color: 'primary.500',
 };
 
 export const tabStyles = {
@@ -171,10 +171,10 @@ export const accountStyles = {
 					textDecoration: 'none',
 					color: 'gray.700',
 					':hover': {
-						color: 'blue.500',
+						color: 'primary.500',
 					},
 					'&.active': {
-						color: 'blue.500',
+						color: 'primary.500',
 					},
 				},
 			},

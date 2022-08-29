@@ -120,7 +120,7 @@ const EditInstructor: React.FC = () => {
 						<RouterLink to={routes.users.instructors.list}>
 							<Button
 								variant="link"
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
 								{__('Back to Instructors', 'masteriyo')}
 							</Button>
@@ -262,10 +262,7 @@ const EditInstructor: React.FC = () => {
 										</Box>
 
 										<ButtonGroup>
-											<Button
-												colorScheme="blue"
-												type="submit"
-												isLoading={updateUser.isLoading}>
+											<Button type="submit" isLoading={updateUser.isLoading}>
 												{__('Update', 'masteriyo')}
 											</Button>
 											<Button

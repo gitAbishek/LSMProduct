@@ -22,4 +22,10 @@ export interface MasteriyoLocalized {
 	};
 	isInstructorActive: string;
 	isCurrentUserInstructor: string;
+	settings: {
+		styling: {
+			primary_color: string;
+			theme: string;
+		};
+	};
 }

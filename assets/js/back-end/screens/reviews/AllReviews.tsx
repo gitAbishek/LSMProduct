@@ -238,7 +238,7 @@ const AllReviews = () => {
 								sx={reviewStatusBtnStyles}
 								_active={navActiveStyles}
 								isActive={button.status === reviewStatus}
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								onClick={() => onReviewStatusChange(button.status)}>
 								<ListIcon as={button.icon} />
 								{button.name}
@@ -269,7 +269,7 @@ const AllReviews = () => {
 								sx={reviewStatusBtnStyles}
 								_active={navActiveStyles}
 								isActive={button.status === reviewStatus}
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								onClick={() => onReviewStatusChange(button.status)}>
 								<Icon as={button.icon} />
 								{button.name}

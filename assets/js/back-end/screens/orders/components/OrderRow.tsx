@@ -176,7 +176,7 @@ const OrderRow: React.FC<Props> = (props) => {
 							to={routes.orders.edit.replace(':orderId', id.toString())}
 							fontWeight="semibold"
 							fontSize="sm"
-							_hover={{ color: 'blue.500' }}>
+							_hover={{ color: 'primary.500' }}>
 							{`#${id} ${data?.billing?.first_name} ${data?.billing?.last_name}`}
 						</Link>
 					)}
@@ -217,7 +217,7 @@ const OrderRow: React.FC<Props> = (props) => {
 							<MenuItem
 								onClick={() => onRestorePress()}
 								icon={<BiShow />}
-								_hover={{ color: 'blue.500' }}>
+								_hover={{ color: 'primary.500' }}>
 								{__('Restore', 'masteriyo')}
 							</MenuItem>
 							<MenuItem
@@ -232,7 +232,7 @@ const OrderRow: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						<RouterLink
 							to={routes.orders.edit.replace(':orderId', id.toString())}>
-							<Button leftIcon={<BiEdit />} colorScheme="blue" size="xs">
+							<Button leftIcon={<BiEdit />} size="xs">
 								{__('Edit', 'masteriyo')}
 							</Button>
 						</RouterLink>
@@ -297,9 +297,7 @@ const OrderRow: React.FC<Props> = (props) => {
 									<Link
 										as={RouterLink}
 										to={routes.orders.edit.replace(':orderId', id.toString())}>
-										<Button colorScheme="blue">
-											{__('Edit', 'masteriyo')}
-										</Button>
+										<Button>{__('Edit', 'masteriyo')}</Button>
 									</Link>
 								</ButtonGroup>
 							</AlertDialogFooter>

@@ -76,7 +76,7 @@ const Quiz: React.FC<Props> = (props) => {
 											<SliderTrack>
 												<SliderFilledTrack />
 											</SliderTrack>
-											<SliderThumb boxSize="6" bgColor="blue.500">
+											<SliderThumb boxSize="6" bgColor="primary.500">
 												<Text fontSize="xs" fontWeight="semibold" color="white">
 													{watchDisplayPerPage}
 												</Text>
@@ -93,11 +93,7 @@ const Quiz: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<Flex justify="space-between" align="center">
-						<Button
-							onClick={prevStep}
-							rounded="3px"
-							colorScheme="blue"
-							variant="outline">
+						<Button onClick={prevStep} rounded="3px" variant="outline">
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
@@ -106,7 +102,7 @@ const Quiz: React.FC<Props> = (props) => {
 									{__('Skip to Dashboard', 'masteriyo')}
 								</Button>
 							</Link>
-							<Button onClick={nextStep} rounded="3px" colorScheme="blue">
+							<Button onClick={nextStep} rounded="3px">
 								{__('Next', 'masteriyo')}
 							</Button>
 						</ButtonGroup>

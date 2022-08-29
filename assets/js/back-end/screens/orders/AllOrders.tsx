@@ -225,7 +225,7 @@ const AllOrders = () => {
 								sx={orderStatusButtonStyles}
 								_active={navActiveStyles}
 								isActive={button.status === orderStatus}
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								onClick={() => onOrderStatusChange(button.status)}>
 								<Icon as={button.icon} />
 								{button.name}
@@ -258,7 +258,7 @@ const AllOrders = () => {
 									sx={orderStatusButtonStyles}
 									_active={navActiveStyles}
 									isActive={true}
-									_hover={{ color: 'blue.500' }}>
+									_hover={{ color: 'primary.500' }}>
 									<ListIcon as={selectedHiddenStatus.icon} />
 									{selectedHiddenStatus.name}
 									<Badge color="inherit">
@@ -302,7 +302,7 @@ const AllOrders = () => {
 								sx={orderStatusButtonStyles}
 								_active={navActiveStyles}
 								isActive={button.status === orderStatus}
-								_hover={{ color: 'blue.500' }}
+								_hover={{ color: 'primary.500' }}
 								onClick={() => onOrderStatusChange(button.status)}>
 								<Icon as={button.icon} />
 								{button.name}

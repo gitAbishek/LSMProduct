@@ -17,6 +17,7 @@ import {
 	MenuItem,
 	MenuList,
 	Stack,
+	useMediaQuery,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -55,6 +56,7 @@ const EditLesson = () => {
 	const courseAPI = new API(urls.courses);
 	const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 	const queryClient = useQueryClient();
+	const [isLargerThan992] = useMediaQuery('(min-width: 992px)');
 
 	const courseQuery = useQuery<CourseDataMap>(
 		[`course${courseId}`, courseId],
@@ -138,6 +140,27 @@ const EditLesson = () => {
 		}
 	};
 
+	const FormButton = () => (
+		<ButtonGroup>
+			<Button
+				colorScheme="blue"
+				type="submit"
+				isLoading={updateLesson.isLoading}>
+				{__('Update Lesson', 'masteriyo')}
+			</Button>
+			<Button
+				variant="outline"
+				onClick={() =>
+					history.push({
+						pathname: routes.courses.edit.replace(':courseId', courseId),
+						search: '?page=builder',
+					})
+				}>
+				{__('Cancel', 'masteriyo')}
+			</Button>
+		</ButtonGroup>
+	);
+
 	if (
 		lessonQuery.isSuccess &&
 		courseQuery.isSuccess &&
@@ -181,7 +204,9 @@ const EditLesson = () => {
 								onSubmit={methods.handleSubmit((data: EditLessonFormData) =>
 									onSubmit(data)
 								)}>
-								<Stack direction="row" spacing="8">
+								<Stack
+									direction={['column', 'column', 'column', 'row']}
+									spacing="8">
 									<Box
 										flex="1"
 										bg="white"
@@ -219,30 +244,11 @@ const EditLesson = () => {
 													defaultValue={lessonQuery.data.description}
 												/>
 
-												<ButtonGroup>
-													<Button
-														type="submit"
-														isLoading={updateLesson.isLoading}>
-														{__('Update Lesson', 'masteriyo')}
-													</Button>
-													<Button
-														variant="outline"
-														onClick={() =>
-															history.push({
-																pathname: routes.courses.edit.replace(
-																	':courseId',
-																	courseId
-																),
-																search: '?page=builder',
-															})
-														}>
-														{__('Cancel', 'masteriyo')}
-													</Button>
-												</ButtonGroup>
+												{isLargerThan992 ? <FormButton /> : null}
 											</Stack>
 										</Stack>
 									</Box>
-									<Box w="400px" bg="white" p="10" shadow="box">
+									<Box w={{ lg: '400px' }} bg="white" p="10" shadow="box">
 										<Stack direction="column" spacing="6">
 											<FeaturedImage
 												defaultValue={lessonQuery.data.featured_image}
@@ -253,6 +259,7 @@ const EditLesson = () => {
 												defaultSourceUrl={lessonQuery.data.video_source_url}
 												defaultSourceID={lessonQuery.data.video_source_id}
 											/>
+											{!isLargerThan992 ? <FormButton /> : null}
 										</Stack>
 									</Box>
 								</Stack>

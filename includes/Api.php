@@ -5,7 +5,7 @@
  * This handles API related functionality in Masteriyo.
  *
  * @package Masteriyo
- * @since   x.x.x
+ * @since   1.5.13
  */
 
 namespace Masteriyo;
@@ -21,7 +21,7 @@ class Api {
 	/**
 	 * Init the API by setting up action and filter hooks.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.13
 	 */
 	public function init() {
 		add_action( 'init', array( $this, 'add_endpoint' ), 0 );
@@ -32,7 +32,7 @@ class Api {
 	/**
 	 * Add new query vars.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.13
 	 * @param array $vars Query vars.
 	 * @return string[]
 	 */
@@ -44,7 +44,7 @@ class Api {
 	/**
 	 * Masteriyo API for payment gateway IPNs, etc.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.13
 	 */
 	public static function add_endpoint() {
 		add_rewrite_endpoint( 'masteriyo-api', EP_ALL );
@@ -53,8 +53,8 @@ class Api {
 	/**
 	 * API request - Trigger any API requests.
 	 *
-	 * @since   x.x.x
-	 * @version x.x.x
+	 * @since   1.5.13
+	 * @version 1.5.13
 	 */
 	public function handle_api_requests() {
 		global $wp;

@@ -2,7 +2,7 @@
 /**
  * Api service provider.
  *
- * @since x.x.x
+ * @since 1.5.13
  */
 
 namespace Masteriyo\Providers;
@@ -16,7 +16,7 @@ use Masteriyo\Api;
 /**
  * Api service provider.
  *
- * @since x.x.x
+ * @since 1.5.13
  */
 class ApiServiceProvider extends AbstractServiceProvider {
 	/**
@@ -26,7 +26,7 @@ class ApiServiceProvider extends AbstractServiceProvider {
 	 * this service provider must have an alias added
 	 * to this array or it will be ignored
 	 *
-	 * @since x.x.x
+	 * @since 1.5.13
 	 *
 	 * @var array
 	 */
@@ -41,7 +41,7 @@ class ApiServiceProvider extends AbstractServiceProvider {
 	 * that you need to, but remember, every alias registered
 	 * within this method must be declared in the `$provides` array.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.13
 	 */
 	public function register() {
 		$this->getContainer()->add( 'api', Api::class, true );

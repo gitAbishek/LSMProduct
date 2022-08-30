@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.12
+**Stable tag**: 1.5.13
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.13 - 30-08-2022
+
+- Enhancement - Primary colour now reflects on learn page also.
+- Fix - Paypal lives payment issue.
+- Fix - Responsive issue on Edit Lesson.
+- Fix - The instructor's course archive page throws an error when there are no author courses.
+- Fix - Lesson preview issue.
 
 ### 1.5.12 - 23-08-2022
 

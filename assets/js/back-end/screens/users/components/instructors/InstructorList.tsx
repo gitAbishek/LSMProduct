@@ -187,7 +187,7 @@ const InstructorList: React.FC<Props> = (props) => {
 							':userId',
 							data?.id.toString()
 						)}>
-						<Button leftIcon={<BiEdit />} size="xs">
+						<Button colorScheme="primary" leftIcon={<BiEdit />} size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>

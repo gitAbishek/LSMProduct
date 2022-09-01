@@ -232,7 +232,7 @@ const OrderRow: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						<RouterLink
 							to={routes.orders.edit.replace(':orderId', id.toString())}>
-							<Button leftIcon={<BiEdit />} size="xs">
+							<Button colorScheme="primary" leftIcon={<BiEdit />} size="xs">
 								{__('Edit', 'masteriyo')}
 							</Button>
 						</RouterLink>
@@ -297,7 +297,9 @@ const OrderRow: React.FC<Props> = (props) => {
 									<Link
 										as={RouterLink}
 										to={routes.orders.edit.replace(':orderId', id.toString())}>
-										<Button>{__('Edit', 'masteriyo')}</Button>
+										<Button colorScheme="primary">
+											{__('Edit', 'masteriyo')}
+										</Button>
 									</Link>
 								</ButtonGroup>
 							</AlertDialogFooter>

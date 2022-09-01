@@ -109,6 +109,7 @@ const AddCategoryModal = () => {
 
 						<ModalFooter>
 							<Button
+								colorScheme="primary"
 								type="submit"
 								isFullWidth
 								isLoading={createCategory.isLoading}>

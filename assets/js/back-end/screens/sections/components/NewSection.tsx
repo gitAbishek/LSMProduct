@@ -78,7 +78,10 @@ const NewSection: React.FC<NewSectionProps> = (props) => {
 						</FormControl>
 						<Divider />
 						<ButtonGroup>
-							<Button type="submit" isLoading={addSection.isLoading}>
+							<Button
+								colorScheme="primary"
+								type="submit"
+								isLoading={addSection.isLoading}>
 								{__('Add', 'masteriyo')}
 							</Button>
 							{!addSection.isLoading && (

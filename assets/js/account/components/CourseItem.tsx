@@ -108,6 +108,7 @@ const CourseItem: React.FC<Props> = (props) => {
 									(category: { id: number; name: string; slug: string }) => (
 										<Tag
 											key={category.id}
+											colorScheme="primary"
 											size="sm"
 											borderRadius="full"
 											border="1px"
@@ -183,6 +184,7 @@ const CourseItem: React.FC<Props> = (props) => {
 								<Button
 									size="sm"
 									borderRadius="full"
+									colorScheme="primary"
 									isDisabled={
 										courseProgressQuery?.data?.status === 'completed'
 									}>

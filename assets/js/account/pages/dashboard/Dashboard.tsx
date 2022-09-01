@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
 							title={__('In Progress Courses', 'masteriyo')}
 							count={inProgressCoursesCount}
 							icon={<Icon as={BsBookHalf} fontSize="xl" />}
-							colorScheme="green"
+							colorScheme="primary"
 						/>
 					</Col>
 					<Col lg={4} md={12} sm={12}>

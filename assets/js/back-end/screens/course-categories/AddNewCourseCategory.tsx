@@ -131,6 +131,7 @@ const AddNewCourseCategory: React.FC = () => {
 
 										<ButtonGroup>
 											<Button
+												colorScheme="primary"
 												type="submit"
 												isLoading={createCategory.isLoading}>
 												{__('Create', 'masteriyo')}

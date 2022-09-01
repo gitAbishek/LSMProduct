@@ -238,7 +238,10 @@ const AddInstructor: React.FC = () => {
 									</Box>
 
 									<ButtonGroup>
-										<Button type="submit" isLoading={createUser.isLoading}>
+										<Button
+											colorScheme="primary"
+											type="submit"
+											isLoading={createUser.isLoading}>
 											{__('Add Instructor', 'masteriyo')}
 										</Button>
 										<Button

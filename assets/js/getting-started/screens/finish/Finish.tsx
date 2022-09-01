@@ -69,13 +69,13 @@ const Welcome: React.FC<Props> = (props) => {
 					</Stack>
 					<Flex justify="space-between" align="center">
 						<Link href={dashboardURL ? dashboardURL : '#'}>
-							<Button rounded="3px" variant="outline">
+							<Button rounded="3px" colorScheme="primary" variant="outline">
 								{__('Back to dashboard', 'masteriyo')}
 							</Button>
 						</Link>
 
 						<Link href={pageBuilderURL ? pageBuilderURL : '#'}>
-							<Button rounded="3px">
+							<Button rounded="3px" colorScheme="primary">
 								{__('Create a new course', 'masteriyo')}
 							</Button>
 						</Link>

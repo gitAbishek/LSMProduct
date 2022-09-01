@@ -262,7 +262,10 @@ const EditInstructor: React.FC = () => {
 										</Box>
 
 										<ButtonGroup>
-											<Button type="submit" isLoading={updateUser.isLoading}>
+											<Button
+												colorScheme="primary"
+												type="submit"
+												isLoading={updateUser.isLoading}>
 												{__('Update', 'masteriyo')}
 											</Button>
 											<Button

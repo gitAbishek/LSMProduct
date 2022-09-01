@@ -316,9 +316,6 @@ const theme = extendTheme({
 			},
 		},
 		Button: {
-			defaultProps: {
-				colorScheme: 'primary',
-			},
 			baseStyle: {
 				borderRadius: 'sm',
 			},

@@ -105,6 +105,7 @@ const Payment: React.FC<Props> = (props) => {
 									</Link>
 									<Button
 										type="submit"
+										colorScheme="primary"
 										isLoading={isButtonLoading}
 										isDisabled={!!errors?.general}
 										rounded="3px">

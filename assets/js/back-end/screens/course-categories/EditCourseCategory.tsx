@@ -219,6 +219,7 @@ const EditCourseCategory: React.FC = () => {
 
 											<ButtonGroup>
 												<Button
+													colorScheme="primary"
 													type="submit"
 													isLoading={updateCategoryMutation.isLoading}>
 													{__('Update', 'masteriyo')}

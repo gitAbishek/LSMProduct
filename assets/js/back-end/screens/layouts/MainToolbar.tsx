@@ -87,7 +87,7 @@ const MainToolbar = () => {
 							variant="outline">
 							{__('Preview', 'masteriyo')}
 						</Button>
-						<Button>{__('Save', 'masteriyo')}</Button>
+						<Button colorScheme="primary">{__('Save', 'masteriyo')}</Button>
 					</ButtonGroup>
 				</Flex>
 			</Container>

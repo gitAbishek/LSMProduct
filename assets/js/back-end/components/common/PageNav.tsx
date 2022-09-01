@@ -32,6 +32,7 @@ const PageNav: React.FC<Props> = (props) => {
 	return (
 		<Breadcrumb
 			fontWeight="medium"
+			colorScheme="primary"
 			fontSize="sm"
 			separator={<Icon as={BiChevronRight} color="gray.500" />}>
 			<BreadcrumbItem>

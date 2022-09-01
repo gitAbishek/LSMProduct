@@ -209,7 +209,10 @@ const AddStudent: React.FC = () => {
 									</Box>
 
 									<ButtonGroup>
-										<Button type="submit" isLoading={createUser.isLoading}>
+										<Button
+											colorScheme="primary"
+											type="submit"
+											isLoading={createUser.isLoading}>
 											{__('Add Student', 'masteriyo')}
 										</Button>
 										<Button

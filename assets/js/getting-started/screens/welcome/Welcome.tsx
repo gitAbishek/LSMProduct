@@ -38,7 +38,9 @@ const Welcome: React.FC<Props> = (props) => {
 							)}
 						</Text>
 						<ButtonGroup>
-							<Button onClick={nextStep}>{__('Start Now', 'masteriyo')}</Button>
+							<Button onClick={nextStep} colorScheme="primary">
+								{__('Start Now', 'masteriyo')}
+							</Button>
 							<Link href={dashboardURL ? dashboardURL : '#'}>
 								<Button variant="ghost">
 									{__('Skip to Dashboard', 'masteriyo')}

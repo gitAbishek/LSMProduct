@@ -214,6 +214,7 @@ const QuestionList: React.FC = () => {
 								</FormErrorMessage>
 							</FormControl>
 							<Button
+								colorScheme="primary"
 								type="submit"
 								isFullWidth
 								isLoading={addNewQuestion.isLoading}>

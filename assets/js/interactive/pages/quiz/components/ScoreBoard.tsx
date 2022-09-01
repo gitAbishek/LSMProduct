@@ -129,6 +129,7 @@ const ScoreBoard: React.FC<Props> = (props) => {
 					isDisabled={limitReached}
 					rounded="full"
 					fontWeight="bold"
+					colorScheme="primary"
 					leftIcon={<Icon as={BiRefresh} fontSize="xl" />}
 					textTransform="uppercase">
 					{__('Start Quiz Again', 'masteriyo')}

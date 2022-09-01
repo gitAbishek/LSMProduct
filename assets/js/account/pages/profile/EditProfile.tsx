@@ -485,6 +485,7 @@ const EditProfile: React.FC = () => {
 											<Spacer />
 											<ButtonGroup>
 												<Button
+													colorScheme="primary"
 													isLoading={updateUser?.isLoading}
 													rounded="full"
 													type="submit"

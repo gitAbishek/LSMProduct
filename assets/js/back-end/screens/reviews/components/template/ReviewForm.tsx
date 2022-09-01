@@ -163,6 +163,7 @@ const ReviewForm: React.FC<Props> = (props) => {
 											</Box>
 											<ButtonGroup>
 												<Button
+													colorScheme="primary"
 													type="submit"
 													isLoading={
 														addReviewMutation.isLoading ||

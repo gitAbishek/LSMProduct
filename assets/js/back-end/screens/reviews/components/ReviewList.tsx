@@ -171,7 +171,7 @@ const ReviewList: React.FC<Props> = (props) => {
 					<ButtonGroup>
 						<RouterLink
 							to={routes.reviews.edit.replace(':reviewId', id.toString())}>
-							<Button leftIcon={<BiEdit />} size="xs">
+							<Button colorScheme="primary" leftIcon={<BiEdit />} size="xs">
 								{__('Edit', 'masteriyo')}
 							</Button>
 						</RouterLink>

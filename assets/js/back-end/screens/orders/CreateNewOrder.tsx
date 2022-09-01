@@ -305,7 +305,10 @@ const CreateNewOrder: React.FC = () => {
 									</Box>
 
 									<ButtonGroup>
-										<Button type="submit" isLoading={addOrder.isLoading}>
+										<Button
+											colorScheme="primary"
+											type="submit"
+											isLoading={addOrder.isLoading}>
 											{__('Create Order', 'masteriyo')}
 										</Button>
 										<Button

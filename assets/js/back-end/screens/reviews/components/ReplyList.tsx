@@ -127,6 +127,7 @@ const ReplyList: React.FC<Props> = (props) => {
 				<Td>
 					<ButtonGroup>
 						<Button
+							colorScheme="primary"
 							leftIcon={<BiEdit />}
 							size="xs"
 							onClick={() => setOpen(true)}>
@@ -212,7 +213,10 @@ const ReplyList: React.FC<Props> = (props) => {
 									<Divider />
 								</Box>
 								<ButtonGroup>
-									<Button type="submit" isLoading={updateReview.isLoading}>
+									<Button
+										colorScheme="primary"
+										type="submit"
+										isLoading={updateReview.isLoading}>
 										{__('Update Reply', 'masteriyo')}
 									</Button>
 									<Button variant="outline" onClick={() => setOpen(false)}>

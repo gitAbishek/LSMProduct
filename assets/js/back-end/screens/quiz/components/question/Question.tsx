@@ -191,6 +191,7 @@ const Question: React.FC<Props> = (props) => {
 										<Divider />
 										<ButtonGroup>
 											<Button
+												colorScheme="primary"
 												type="submit"
 												isDisabled={submitQuestionDisabled}
 												isLoading={updateQuestion.isLoading}>

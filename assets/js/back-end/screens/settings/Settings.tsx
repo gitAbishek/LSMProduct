@@ -170,7 +170,10 @@ const Settings = () => {
 										</TabPanel>
 									</TabPanels>
 									<ButtonGroup>
-										<Button type="submit" isLoading={updateSettings.isLoading}>
+										<Button
+											colorScheme="primary"
+											type="submit"
+											isLoading={updateSettings.isLoading}>
 											{__('Save Settings', 'masteriyo')}
 										</Button>
 									</ButtonGroup>

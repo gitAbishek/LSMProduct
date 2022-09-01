@@ -123,6 +123,7 @@ const PasswordSecurity = () => {
 			<Stack py="10">
 				<ButtonGroup>
 					<Button
+						colorScheme="primary"
 						rounded="full"
 						type="submit"
 						px="19"

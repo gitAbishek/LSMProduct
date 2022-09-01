@@ -67,6 +67,7 @@ const MediaUploader: React.FC<Props> = (props) => {
 		<Icon onClick={handleButtonClick} as={icon.name} />
 	) : (
 		<Button
+			colorScheme="primary"
 			size={size}
 			variant="outline"
 			isFullWidth={isFullWidth}

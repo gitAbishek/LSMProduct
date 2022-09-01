@@ -93,7 +93,11 @@ const Quiz: React.FC<Props> = (props) => {
 					</FormControl>
 
 					<Flex justify="space-between" align="center">
-						<Button onClick={prevStep} rounded="3px" variant="outline">
+						<Button
+							onClick={prevStep}
+							colorScheme="primary"
+							rounded="3px"
+							variant="outline">
 							{__('Back', 'masteriyo')}
 						</Button>
 						<ButtonGroup>
@@ -102,7 +106,7 @@ const Quiz: React.FC<Props> = (props) => {
 									{__('Skip to Dashboard', 'masteriyo')}
 								</Button>
 							</Link>
-							<Button onClick={nextStep} rounded="3px">
+							<Button onClick={nextStep} colorScheme="primary" rounded="3px">
 								{__('Next', 'masteriyo')}
 							</Button>
 						</ButtonGroup>

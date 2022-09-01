@@ -160,7 +160,9 @@ const QuizAttemptList: React.FC<Props> = (props) => {
 								':attemptId',
 								data?.id.toString()
 							)}>
-							<Button size="xs">{__('View', 'masteriyo')}</Button>
+							<Button colorScheme="primary" size="xs">
+								{__('View', 'masteriyo')}
+							</Button>
 						</RouterLink>
 					) : null}
 					<Menu placement="bottom-end">

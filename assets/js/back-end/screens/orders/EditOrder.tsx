@@ -416,7 +416,10 @@ const EditOrder = () => {
 											</Box>
 
 											<ButtonGroup>
-												<Button type="submit" isLoading={updateOrder.isLoading}>
+												<Button
+													colorScheme="primary"
+													type="submit"
+													isLoading={updateOrder.isLoading}>
 													{__('Update Order', 'masteriyo')}
 												</Button>
 												<Button

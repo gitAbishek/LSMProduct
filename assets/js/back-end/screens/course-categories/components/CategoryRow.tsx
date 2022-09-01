@@ -57,7 +57,7 @@ const CategoryRow: React.FC<Props> = (props) => {
 							':categoryId',
 							id.toString()
 						)}>
-						<Button leftIcon={<BiEdit />} size="xs">
+						<Button colorScheme="primary" leftIcon={<BiEdit />} size="xs">
 							{__('Edit', 'masteriyo')}
 						</Button>
 					</RouterLink>

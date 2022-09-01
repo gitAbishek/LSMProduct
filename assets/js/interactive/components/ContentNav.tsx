@@ -97,6 +97,7 @@ const ContentNav: React.FC<Props> = (props) => {
 							isDisabled={isButtonDisabled}
 							rounded="full"
 							fontWeight="bold"
+							colorScheme="primary"
 							leftIcon={
 								<Icon
 									fontSize="xl"

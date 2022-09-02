@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8a69f7f49e714f91f5a85b153926f04",
+    "content-hash": "e8040fd788484ba260ae7c3ef1681175",
     "packages": [
         {
             "name": "league/container",
@@ -2695,36 +2695,29 @@
         },
         {
             "name": "roots/wordpress",
-            "version": "5.9.3",
+            "version": "5.9.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/WordPress/WordPress.git",
-                "reference": "5.9.3"
+                "url": "https://github.com/roots/wordpress.git",
+                "reference": "41ff6e23ccbc3a1691406d69fe8c211a225514e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.9.3",
-                "reference": "5.9.3"
+                "url": "https://api.github.com/repos/roots/wordpress/zipball/41ff6e23ccbc3a1691406d69fe8c211a225514e2",
+                "reference": "41ff6e23ccbc3a1691406d69fe8c211a225514e2",
+                "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2",
-                "roots/wordpress-core-installer": ">=1.0.0"
+                "roots/wordpress-core-installer": "^1.0.0",
+                "roots/wordpress-no-content": "self.version"
             },
-            "provide": {
-                "wordpress/core-implementation": "5.9.3"
-            },
-            "type": "wordpress-core",
+            "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+                "MIT",
                 "GPL-2.0-or-later"
             ],
-            "authors": [
-                {
-                    "name": "WordPress Community",
-                    "homepage": "https://wordpress.org/about/"
-                }
-            ],
-            "description": "WordPress is web software you can use to create a beautiful website or blog.",
+            "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
             "homepage": "https://wordpress.org/",
             "keywords": [
                 "blog",
@@ -2741,7 +2734,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-04-06T02:26:36+00:00"
+            "time": "2022-06-01T16:54:37+00:00"
         },
         {
             "name": "roots/wordpress-core-installer",
@@ -2809,6 +2802,67 @@
                 }
             ],
             "time": "2020-08-20T00:27:30+00:00"
+        },
+        {
+            "name": "roots/wordpress-no-content",
+            "version": "5.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WordPress/WordPress.git",
+                "reference": "5.9.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/release/wordpress-5.9.4-no-content.zip",
+                "shasum": "04ec65f371535d517c42329d0253f38f1fd2e94e"
+            },
+            "require": {
+                "php": ">= 5.6.20"
+            },
+            "provide": {
+                "wordpress/core-implementation": "5.9.4"
+            },
+            "suggest": {
+                "ext-curl": "Performs remote request operations.",
+                "ext-dom": "Used to validate Text Widget content and to automatically configuring IIS7+.",
+                "ext-exif": "Works with metadata stored in images.",
+                "ext-fileinfo": "Used to detect mimetype of file uploads.",
+                "ext-hash": "Used for hashing, including passwords and update packages.",
+                "ext-imagick": "Provides better image quality for media uploads.",
+                "ext-json": "Used for communications with other servers.",
+                "ext-libsodium": "Validates Signatures and provides securely random bytes.",
+                "ext-mbstring": "Used to properly handle UTF8 text.",
+                "ext-mysqli": "Connects to MySQL for database interactions.",
+                "ext-openssl": "Permits SSL-based connections to other hosts.",
+                "ext-pcre": "Increases performance of pattern matching in code searches.",
+                "ext-xml": "Used for XML parsing, such as from a third-party site.",
+                "ext-zip": "Used for decompressing Plugins, Themes, and WordPress update packages."
+            },
+            "type": "wordpress-core",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "WordPress Community",
+                    "homepage": "https://wordpress.org/about/"
+                }
+            ],
+            "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
+            "homepage": "https://wordpress.org/",
+            "keywords": [
+                "blog",
+                "cms",
+                "wordpress"
+            ],
+            "funding": [
+                {
+                    "url": "https://wordpressfoundation.org/donate/",
+                    "type": "other"
+                }
+            ],
+            "time": "2022-08-30T19:24:28+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -4967,16 +5021,16 @@
         },
         {
             "name": "wp-phpunit/wp-phpunit",
-            "version": "5.9.3",
+            "version": "5.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-phpunit/wp-phpunit.git",
-                "reference": "ceece1ed4f2d0732c4a4f2603f4376d85547a50f"
+                "reference": "f9b5b3a44d3677c7d4803074d81ad3cd12b0eeea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-phpunit/wp-phpunit/zipball/ceece1ed4f2d0732c4a4f2603f4376d85547a50f",
-                "reference": "ceece1ed4f2d0732c4a4f2603f4376d85547a50f",
+                "url": "https://api.github.com/repos/wp-phpunit/wp-phpunit/zipball/f9b5b3a44d3677c7d4803074d81ad3cd12b0eeea",
+                "reference": "f9b5b3a44d3677c7d4803074d81ad3cd12b0eeea",
                 "shasum": ""
             },
             "type": "library",
@@ -5006,7 +5060,7 @@
                 "test",
                 "wordpress"
             ],
-            "time": "2022-02-22T20:53:17+00:00"
+            "time": "2022-08-30T21:14:52+00:00"
         },
         {
             "name": "yoast/phpunit-polyfills",

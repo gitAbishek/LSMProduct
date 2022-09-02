@@ -39,7 +39,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 	const pagesQuery = useQuery('pages', () => pageAPI.list());
 
 	const [primaryColor, setPrimaryColor] = useState(
-		generalData?.styling?.primary_color || '#787DFF'
+		generalData?.styling?.primary_color
 	);
 
 	useEffect(() => {

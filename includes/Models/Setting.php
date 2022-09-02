@@ -154,7 +154,7 @@ class Setting extends Model {
 	protected $data = array(
 		'general'        => array(
 			'styling'     => array(
-				'primary_color' => '',
+				'primary_color' => '#4584FF',
 				'theme'         => 'minimum',
 			),
 			'widgets_css' => '',

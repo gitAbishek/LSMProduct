@@ -1,9 +1,9 @@
 import { ChakraProvider } from '@chakra-ui/react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { ThemeContext } from '../back-end/context/ThemeProvider';
 import ErrorBoundary from '../back-end/errors/ErrorBoundary';
+import theme from '../back-end/theme/theme';
 import { isProduction } from '../back-end/utils/utils';
 import Router from './router/Router';
 
@@ -17,8 +17,6 @@ const App = () => {
 			},
 		},
 	});
-
-	const [theme] = useContext(ThemeContext);
 
 	return (
 		<ErrorBoundary>

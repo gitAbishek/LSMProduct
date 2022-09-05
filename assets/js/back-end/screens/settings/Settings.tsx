@@ -16,7 +16,7 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useContext } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { BiCog } from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -26,7 +26,6 @@ import FullScreenLoader from '../../components/layout/FullScreenLoader';
 import { navActiveStyles, navLinkStyles } from '../../config/styles';
 import routes from '../../constants/routes';
 import urls from '../../constants/urls';
-import { ThemeContext } from '../../context/ThemeProvider';
 import { SetttingsMap } from '../../types';
 import API from '../../utils/api';
 import { deepClean } from '../../utils/utils';
@@ -47,8 +46,6 @@ const Settings = () => {
 	});
 	const toast = useToast();
 	const queryClient = useQueryClient();
-
-	const [_, dispatchColor] = useContext(ThemeContext);
 
 	const tabStyles = {
 		fontWeight: 'medium',
@@ -74,10 +71,6 @@ const Settings = () => {
 					title: __('Settings Updated.', 'masteriyo'),
 					status: 'success',
 					isClosable: true,
-				});
-				dispatchColor({
-					type: 'CHANGE_COLOR',
-					payload: data?.general?.styling?.primary_color,
 				});
 
 				queryClient.invalidateQueries(`settings`);

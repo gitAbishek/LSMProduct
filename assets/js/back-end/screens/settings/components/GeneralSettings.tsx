@@ -15,7 +15,7 @@ import {
 	Tooltip,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useQuery } from 'react-query';
@@ -34,17 +34,9 @@ interface Props {
 
 const GeneralSettings: React.FC<Props> = (props) => {
 	const { generalData } = props;
-	const { register, setValue } = useFormContext();
+	const { register } = useFormContext();
 	const pageAPI = new PagesAPI();
 	const pagesQuery = useQuery('pages', () => pageAPI.list());
-
-	const [primaryColor, setPrimaryColor] = useState(
-		generalData?.styling?.primary_color
-	);
-
-	useEffect(() => {
-		setValue('general.styling.primary_color', primaryColor);
-	}, [primaryColor, setValue]);
 
 	const renderPagesOption = () => {
 		try {
@@ -202,30 +194,16 @@ const GeneralSettings: React.FC<Props> = (props) => {
 						)}
 					</TabPanel>
 					<TabPanel>
-						<Stack direction="column" spacing="6">
-							<FormControl>
-								<FormLabel>
-									{__('Primary Color', 'masteriyo')}
-									<Tooltip
-										label={__(
-											'Choose a color to match your brand or site. This color reflects on buttons, links, and few other elements.',
-											'masteriyo'
-										)}
-										hasArrow
-										fontSize="xs">
-										<Box as="span" sx={infoIconStyles}>
-											<Icon as={BiInfoCircle} />
-										</Box>
-									</Tooltip>
-								</FormLabel>
-								<input
-									type="hidden"
-									{...register('general.styling.primary_color')}
-									defaultValue={generalData?.styling?.primary_color}
-								/>
-
-								<ColorInput color={primaryColor} setColor={setPrimaryColor} />
-							</FormControl>
+						<Stack direction={['column', 'column', 'row', 'row']} spacing="6">
+							<ColorInput
+								name="general.styling.primary_color"
+								defaultColor={generalData?.styling?.primary_color}
+								label={__('Primary Color', 'masteriyo')}
+								description={__(
+									'Choose a color to match your brand or site.',
+									'masteriyo'
+								)}
+							/>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

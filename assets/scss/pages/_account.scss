@@ -77,8 +77,13 @@
 	}
 }
 
-.masteriyo
+//twentytwentytheme
+
+.theme-twentytwentytwo,
+.theme-twentytwentyone,
+.theme-twentytwenty {
 	.entry-content
-	> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
-	max-width: 1060px;
+		> *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
+		max-width: 1060px;
+	}
 }

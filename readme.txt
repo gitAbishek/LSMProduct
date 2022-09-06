@@ -201,9 +201,9 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.5.13 - 30-08-2022 =
-- Enhancement - Primary colour now reflects on learn page also.
+= 1.5.13 - 06-09-2022 =
 - Fix - Paypal lives payment issue.
+- Fix - Width issue in Astra Theme.
 - Fix - Responsive issue on Edit Lesson.
 - Fix - The instructor's course archive page throws an error when there are no author courses.
 - Fix - Lesson preview issue.

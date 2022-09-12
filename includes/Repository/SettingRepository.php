@@ -173,13 +173,6 @@ class SettingRepository extends AbstractRepository implements RepositoryInterfac
 			ARRAY_FILTER_USE_KEY
 		);
 
-		$setting_dot_arr = array_filter(
-			$setting_dot_arr,
-			function( $setting ) {
-				return ! empty( $setting );
-			}
-		);
-
 		return masteriyo_array_undot( $setting_dot_arr );
 	}
 }

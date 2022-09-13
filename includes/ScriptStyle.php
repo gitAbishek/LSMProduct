@@ -613,6 +613,16 @@ class ScriptStyle {
 			}
 		';
 		wp_add_inline_style( 'admin-bar', $custom_css );
+
+		// Fixes adminbar issue on user account page.
+		$custom_css = '
+			@media screen and (max-width: 600px){
+				.masteriyo-account-page #wpadminbar {
+					position: fixed;
+				}
+			}
+		';
+		wp_add_inline_style( 'admin-bar', $custom_css );
 	}
 
 	/**

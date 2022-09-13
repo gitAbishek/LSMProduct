@@ -26,6 +26,7 @@ import {
 	Ribbon,
 	Stripe,
 	whiteLabel,
+	Wishlist,
 	Woocommerce,
 } from '../../constants/images';
 import AddonItem from './components/AddonItem';
@@ -138,7 +139,7 @@ const AddOns = () => {
 			</Stack>
 			<Container maxW="container.xl">
 				<Row>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Stripe Payment Gateway', 'masteriyo')}
 							addOnDescription={__(
@@ -148,7 +149,7 @@ const AddOns = () => {
 							thumbnailSrc={Stripe}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Download Materials', 'masteriyo')}
 							addOnDescription={__(
@@ -158,7 +159,7 @@ const AddOns = () => {
 							thumbnailSrc={DownloadMaterial}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('WooCommerce Integration', 'masteriyo')}
 							addOnDescription={__(
@@ -168,7 +169,7 @@ const AddOns = () => {
 							thumbnailSrc={Woocommerce}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Course FAQ', 'masteriyo')}
 							addOnDescription={__(
@@ -178,7 +179,7 @@ const AddOns = () => {
 							thumbnailSrc={courseFAQ}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('White Label', 'masteriyo')}
 							addOnDescription={__(
@@ -188,7 +189,7 @@ const AddOns = () => {
 							thumbnailSrc={whiteLabel}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Password Strength', 'masteriyo')}
 							addOnDescription={__(
@@ -198,7 +199,7 @@ const AddOns = () => {
 							thumbnailSrc={PasswordStrength}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Course Attachments', 'masteriyo')}
 							addOnDescription={__(
@@ -208,7 +209,7 @@ const AddOns = () => {
 							thumbnailSrc={CourseAttachment}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Prerequisites', 'masteriyo')}
 							addOnDescription={__(
@@ -218,7 +219,7 @@ const AddOns = () => {
 							thumbnailSrc={Prerequisites}
 						/>
 					</Col>
-					<Col md={3.3}>
+					<Col md={3}>
 						<AddonItem
 							addOnName={__('Multiple Instructors', 'masteriyo')}
 							addOnDescription={__(
@@ -226,6 +227,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={MultipleInstructors}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Wishlist', 'masteriyo')}
+							addOnDescription={__(
+								'Add courses to your wishlist.',
+								'masteriyo'
+							)}
+							thumbnailSrc={Wishlist}
 						/>
 					</Col>
 				</Row>

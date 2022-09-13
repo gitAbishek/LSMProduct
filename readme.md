@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 6.0.1
+**Tested up to**: 6.0.2
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.13
+**Stable tag**: 1.5.14
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,11 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.14 - 13-09-2022
+
+- Fix - Currency decimals not being set to zero.
+- Fix - Responsive issue in the account page.
 
 ### 1.5.13 - 06-09-2022
 

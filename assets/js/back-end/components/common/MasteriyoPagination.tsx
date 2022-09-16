@@ -27,6 +27,7 @@ interface Props {
 	outerLimits?: number;
 	innerLimits?: number;
 	extraFilterParams?: any;
+	showPerPage?: boolean;
 }
 
 const MasteriyoPagination: React.FC<Props> = (props) => {
@@ -37,6 +38,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 		outerLimits = 2,
 		innerLimits = 2,
 		extraFilterParams,
+		showPerPage = true,
 	} = props;
 
 	const {
@@ -107,20 +109,24 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 				)}
 			</Text>
 			<HStack>
-				<Text color="gray.500">{perPageText}</Text>
-				<Select
-					size="sm"
-					defaultValue={metaData?.per_page}
-					ml={3}
-					onChange={handlePageSizeChange}
-					w={20}>
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="40">40</option>
-					<option value="50">50</option>
-				</Select>
+				{showPerPage ? (
+					<>
+						<Text color="gray.500">{perPageText}</Text>
+						<Select
+							size="sm"
+							defaultValue={metaData?.per_page}
+							ml={3}
+							onChange={handlePageSizeChange}
+							w={20}>
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</Select>
+					</>
+				) : null}
 				<Pagination
 					pagesCount={pagesCount}
 					currentPage={currentPage}

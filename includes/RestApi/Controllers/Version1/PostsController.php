@@ -397,7 +397,6 @@ abstract class PostsController extends CrudController {
 		}
 
 		return $args;
-
 	}
 
 	/**

@@ -1,11 +1,4 @@
-import {
-	Avatar,
-	Box,
-	FormControl,
-	FormLabel,
-	HStack,
-	Skeleton,
-} from '@chakra-ui/react';
+import { Avatar, Box, FormLabel, HStack, Skeleton } from '@chakra-ui/react';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -13,6 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { components, ControlProps, OptionProps } from 'react-select';
 import AsyncSelect from 'react-select/async';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
@@ -102,7 +96,7 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<FormControl>
+		<FormControlTwoCol>
 			<FormLabel>{__('Instructor', 'masteriyo')}</FormLabel>
 			{!usersQuery.isLoading && canEditUsers === true && defaultInstructor ? (
 				<AsyncSelect
@@ -163,9 +157,9 @@ const ChangeInstructorSetting: React.FC<Props> = (props) => {
 					}}
 				/>
 			) : (
-				<Skeleton height="40px" />
+				<Skeleton height="40px" width="100%" />
 			)}
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

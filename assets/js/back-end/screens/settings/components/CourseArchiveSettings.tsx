@@ -1,6 +1,5 @@
 import {
 	Box,
-	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Icon,
@@ -35,6 +34,7 @@ import {
 	CoursePerRow4,
 	CoursePerRow4Active,
 } from '../../../../back-end/constants/images';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -101,7 +101,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
+							<FormControlTwoCol>
 								<Stack direction="row" spacing="4">
 									<FormLabel>
 										{__('Show Search', 'masteriyo')}
@@ -119,9 +119,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 										defaultChecked={courseArchiveData?.display?.enable_search}
 									/>
 								</Stack>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl
+							<FormControlTwoCol
 								isInvalid={!!errors?.course_archive?.display?.per_page}>
 								<FormLabel>
 									{__('Courses Per Page', 'masteriyo')}
@@ -162,9 +162,9 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									{errors?.course_archive?.display?.per_page &&
 										errors?.course_archive?.display?.per_page.message}
 								</FormErrorMessage>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl
+							<FormControlTwoCol
 								isInvalid={!!errors?.course_archive?.display?.per_row}>
 								<FormLabel>
 									{__('Courses Per Row', 'masteriyo')}
@@ -206,7 +206,7 @@ const CourseArchiveSettings: React.FC<Props> = (props) => {
 									{errors?.course_archive?.display?.per_row &&
 										errors?.course_archive?.display?.per_row.message}
 								</FormErrorMessage>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

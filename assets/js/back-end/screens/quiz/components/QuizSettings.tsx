@@ -22,6 +22,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import { tabListStyles, tabStyles } from '../../../config/styles';
 import { QuizSchema as QuizSchemaOld } from '../../../schemas';
 import { convertMinutesToHours } from '../../../utils/math';
@@ -61,7 +62,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="6">
-							<FormControl isInvalid={!!errors?.full_mark}>
+							<FormControlTwoCol isInvalid={!!errors?.full_mark}>
 								<FormLabel>{__('Full Points', 'masteriyo')}</FormLabel>
 								<Controller
 									name="full_mark"
@@ -85,9 +86,9 @@ const QuizSettings: React.FC<Props> = (props) => {
 								<FormErrorMessage>
 									{errors?.full_mark && errors?.full_mark?.message}
 								</FormErrorMessage>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl isInvalid={!!errors?.pass_mark}>
+							<FormControlTwoCol isInvalid={!!errors?.pass_mark}>
 								<FormLabel>{__('Pass Points', 'masteriyo')}</FormLabel>
 								<Controller
 									name="pass_mark"
@@ -111,11 +112,11 @@ const QuizSettings: React.FC<Props> = (props) => {
 								<FormErrorMessage>
 									{errors?.pass_mark && errors?.pass_mark?.message}
 								</FormErrorMessage>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<Stack direction="column" spacing="0">
+							<FormControlTwoCol>
 								<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
-								<Stack direction={['column', 'column', 'row', 'row']}>
+								<Stack direction={['column', 'column', 'column', 'row']}>
 									<FormControl isInvalid={!!errors?.duration_hour}>
 										<Controller
 											name="duration_hour"
@@ -174,8 +175,8 @@ const QuizSettings: React.FC<Props> = (props) => {
 										</FormErrorMessage>
 									</FormControl>
 								</Stack>
-							</Stack>
-							<FormControl>
+							</FormControlTwoCol>
+							<FormControlTwoCol>
 								<FormLabel>{__('Attempts Allowed', 'masteriyo')}</FormLabel>
 								<RadioGroup
 									onChange={setAttemptsDisplayValue}
@@ -202,7 +203,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 											</Radio>
 										</Stack>
 										<Collapse in={attemptsDisplayValue != '0'} animateOpacity>
-											<FormControl isInvalid={!!errors?.attempts_allowed}>
+											<FormControlTwoCol isInvalid={!!errors?.attempts_allowed}>
 												<FormLabel>
 													{__('Number of Attempts', 'masteriyo')}
 												</FormLabel>
@@ -235,16 +236,16 @@ const QuizSettings: React.FC<Props> = (props) => {
 													{errors?.attempts_allowed &&
 														errors?.attempts_allowed?.message}
 												</FormErrorMessage>
-											</FormControl>
+											</FormControlTwoCol>
 										</Collapse>
 									</Stack>
 								</RadioGroup>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
 						<Stack direction="column" spacing="6">
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>{__('Questions Per Page', 'masteriyo')}</FormLabel>
 								<RadioGroup onChange={setDisplayValue} value={displayValue}>
 									<Stack direction="column" spacing="4">
@@ -312,7 +313,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 										</Collapse>
 									</Stack>
 								</RadioGroup>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

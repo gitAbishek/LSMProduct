@@ -5,7 +5,6 @@ import {
 	Button,
 	ButtonGroup,
 	Center,
-	FormControl,
 	FormLabel,
 	Icon,
 	Image,
@@ -22,8 +21,9 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { BiInfoCircle } from 'react-icons/bi';
+import { BiInfoCircle, BiTrash, BiUpload } from 'react-icons/bi';
 import { useQuery } from 'react-query';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import MediaUploader from '../../../components/common/MediaUploader';
 import {
 	infoIconStyles,
@@ -76,89 +76,90 @@ const LearningPageSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>{__('Logo', 'masteriyo')}</FormLabel>
-								{imageQuery.isLoading && (
-									<Box w="40" mb="4">
-										<Center>
-											<Spinner />
-										</Center>
-									</Box>
-								)}
-								{imageQuery.isSuccess && (
-									<Image
-										w="40"
-										src={
-											imageQuery?.data?.media_details?.sizes?.['full']
-												?.source_url
-												? imageQuery?.data?.media_details?.sizes?.['full']
-														?.source_url
-												: imageQuery?.data?.source_url
-										}
-										mb="4"
-									/>
-								)}
-								{imageQuery.isError ? (
-									<Alert status="warning" mb={3}>
-										<AlertIcon />
-										{imageQuery.error?.data?.status === 404
-											? __('The image does not exist.', 'masteriyo')
-											: __('Failed to fetch image URL.', 'masteriyo')}
-									</Alert>
-								) : null}
-								<ButtonGroup d="flex" justifyContent="space-between" w="40">
-									{imageId && (
-										<Button
-											size="xs"
-											variant="outline"
-											onClick={onDelete}
-											colorScheme="red">
-											{__('Remove', 'masteriyo')}
-										</Button>
+								<Stack direction="column">
+									{imageQuery.isLoading && (
+										<Box w="40" mb="4">
+											<Center>
+												<Spinner />
+											</Center>
+										</Box>
 									)}
-									<MediaUploader
-										size="xs"
-										buttonLabel={
-											imageId
-												? __('Upload New', 'masteriyo')
-												: __('Upload', 'masteriyo')
-										}
-										modalTitle="Featured Image"
-										onSelect={(data: any) => {
-											onComplete(data[0].id);
-										}}
-										isFullWidth={false}
-									/>
-								</ButtonGroup>
-							</FormControl>
+									{imageQuery.isSuccess && (
+										<Image
+											w="40"
+											src={
+												imageQuery?.data?.media_details?.sizes?.['full']
+													?.source_url
+													? imageQuery?.data?.media_details?.sizes?.['full']
+															?.source_url
+													: imageQuery?.data?.source_url
+											}
+											mb="4"
+										/>
+									)}
+									{imageQuery.isError ? (
+										<Alert status="warning" mb={3}>
+											<AlertIcon />
+											{imageQuery.error?.data?.status === 404
+												? __('The image does not exist.', 'masteriyo')
+												: __('Failed to fetch image URL.', 'masteriyo')}
+										</Alert>
+									) : null}
+									<ButtonGroup>
+										{imageId && (
+											<Button
+												variant="outline"
+												onClick={onDelete}
+												colorScheme="red"
+												leftIcon={<BiTrash />}>
+												{__('Remove', 'masteriyo')}
+											</Button>
+										)}
+										<MediaUploader
+											buttonLabel={
+												imageId
+													? __('Upload New', 'masteriyo')
+													: __('Upload', 'masteriyo')
+											}
+											modalTitle="Featured Image"
+											onSelect={(data: any) => {
+												onComplete(data[0].id);
+											}}
+											isFullWidth={false}
+											leftIcon={<BiUpload />}
+										/>
+									</ButtonGroup>
+								</Stack>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
-								<Stack direction="row" spacing="4">
-									<FormLabel>
-										{__('Enable Questions & Answers', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Display questions & answers tab in learn page.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Switch
-										{...register('learn_page.display.enable_questions_answers')}
-										defaultChecked={
-											learningPageData?.display?.enable_questions_answers
-										}
-									/>
-								</Stack>
-							</FormControl>
+							<FormControlTwoCol>
+								<FormLabel>
+									{__('Enable Questions & Answers', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Display questions & answers tab in learn page.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
+								</FormLabel>
+								<Switch
+									w="100%"
+									{...register('learn_page.display.enable_questions_answers')}
+									defaultChecked={
+										learningPageData?.display?.enable_questions_answers
+									}
+								/>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

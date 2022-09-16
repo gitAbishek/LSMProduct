@@ -4,7 +4,6 @@ import {
 	Box,
 	Code,
 	Flex,
-	FormControl,
 	FormLabel,
 	Icon,
 	Input,
@@ -24,6 +23,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -60,7 +60,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>{__('Course Category Base', 'masteriyo')}</FormLabel>
 								<Stack direction="column">
 									<Input
@@ -73,9 +73,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('uncategorized', 'masteriyo')}
 									</Code>
 								</Stack>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Course Difficulty Base', 'masteriyo')}
 								</FormLabel>
@@ -90,9 +90,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										{__('/uncategorized', 'masteriyo')}
 									</Code>
 								</Stack>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<Stack direction="column">
 									<FormLabel>
 										{__('Single Course Permalink', 'masteriyo')}
@@ -156,7 +156,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										)}
 									/>
 								</Stack>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
@@ -167,7 +167,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									'masteriyo'
 								)}
 							</Text>
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Orders', 'masteriyo')}
 									<Tooltip
@@ -187,9 +187,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.orders')}
 									defaultValue={advanceData?.account?.orders}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('View Order', 'masteriyo')}
 									<Tooltip
@@ -209,9 +209,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.view_order')}
 									defaultValue={advanceData?.account?.view_order}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('My Courses', 'masteriyo')}
 									<Tooltip
@@ -231,9 +231,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.my_courses')}
 									defaultValue={advanceData?.account?.my_courses}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Edit Account', 'masteriyo')}
 									<Tooltip
@@ -253,9 +253,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.edit_account')}
 									defaultValue={advanceData?.account?.edit_account}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Payment Methods', 'masteriyo')}
 									<Tooltip
@@ -275,9 +275,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.payment_methods')}
 									defaultValue={advanceData?.account?.payment_methods}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Lost Password', 'masteriyo')}
 									<Tooltip
@@ -297,9 +297,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.lost_password')}
 									defaultValue={advanceData?.account?.lost_password}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Logout', 'masteriyo')}
 									<Tooltip
@@ -319,7 +319,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.account.logout')}
 									defaultValue={advanceData?.account?.logout}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
@@ -331,7 +331,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 								)}
 							</Text>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Pay', 'masteriyo')}
 									<Tooltip
@@ -351,9 +351,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.checkout.pay')}
 									defaultValue={advanceData?.checkout?.pay}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Order Received', 'masteriyo')}
 									<Tooltip
@@ -373,9 +373,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.checkout.order_received')}
 									defaultValue={advanceData?.checkout?.order_received}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Add Payment Method', 'masteriyo')}
 									<Tooltip
@@ -395,9 +395,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.checkout.add_payment_method')}
 									defaultValue={advanceData?.checkout?.add_payment_method}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Delete Payment Method', 'masteriyo')}
 									<Tooltip
@@ -417,9 +417,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 									{...register('advance.checkout.delete_payment_method')}
 									defaultValue={advanceData?.checkout?.delete_payment_method}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 
-							<FormControl>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Set Default Payment Method', 'masteriyo')}
 									<Tooltip
@@ -441,7 +441,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										advanceData?.checkout?.set_default_payment_method
 									}
 								/>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
@@ -454,7 +454,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 										'masteriyo'
 									)}
 								</Alert>
-								<FormControl>
+								<FormControlTwoCol>
 									<Stack direction={['column', 'row', 'row']}>
 										<FormLabel minW="3xs">
 											{__('Template Debug', 'masteriyo')}
@@ -481,9 +481,9 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 											)}
 										/>
 									</Stack>
-								</FormControl>
+								</FormControlTwoCol>
 
-								<FormControl>
+								<FormControlTwoCol>
 									<Stack direction={['column', 'row', 'row']}>
 										<FormLabel minW="3xs">
 											{__('Debug', 'masteriyo')}
@@ -509,7 +509,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 											)}
 										/>
 									</Stack>
-								</FormControl>
+								</FormControlTwoCol>
 							</Stack>
 						</Stack>
 					</TabPanel>

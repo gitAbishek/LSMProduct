@@ -1,7 +1,6 @@
 import {
 	Box,
 	Center,
-	FormControl,
 	FormLabel,
 	Icon,
 	Select,
@@ -20,6 +19,7 @@ import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useQuery } from 'react-query';
 import ColorInput from '../../../components/common/ColorInput';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -72,7 +72,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 							</Center>
 						) : (
 							<Stack direction="column" spacing="8">
-								<FormControl>
+								<FormControlTwoCol>
 									<FormLabel>
 										{__('Courses Page', 'masteriyo')}
 										<Tooltip
@@ -93,9 +93,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										defaultValue={generalData?.pages?.courses_page_id}>
 										{renderPagesOption()}
 									</Select>
-								</FormControl>
+								</FormControlTwoCol>
 
-								<FormControl>
+								<FormControlTwoCol>
 									<FormLabel>
 										{__('Learn Page', 'masteriyo')}
 										<Tooltip
@@ -116,9 +116,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										defaultValue={generalData?.pages?.learn_page_id}>
 										{renderPagesOption()}
 									</Select>
-								</FormControl>
+								</FormControlTwoCol>
 
-								<FormControl>
+								<FormControlTwoCol>
 									<FormLabel>
 										{__('Account Page', 'masteriyo')}
 										<Tooltip
@@ -139,9 +139,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										placeholder={__('Select a Page', 'masteriyo')}>
 										{renderPagesOption()}
 									</Select>
-								</FormControl>
+								</FormControlTwoCol>
 
-								<FormControl>
+								<FormControlTwoCol>
 									<FormLabel>
 										{__('Checkout Page', 'masteriyo')}
 										<Tooltip
@@ -162,9 +162,9 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										{...register('general.pages.checkout_page_id')}>
 										{renderPagesOption()}
 									</Select>
-								</FormControl>
+								</FormControlTwoCol>
 
-								<FormControl>
+								<FormControlTwoCol>
 									<FormLabel>
 										{__('Instructor Registration Page', 'masteriyo')}
 										<Tooltip
@@ -189,7 +189,7 @@ const GeneralSettings: React.FC<Props> = (props) => {
 										)}>
 										{renderPagesOption()}
 									</Select>
-								</FormControl>
+								</FormControlTwoCol>
 							</Stack>
 						)}
 					</TabPanel>

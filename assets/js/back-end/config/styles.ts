@@ -1,3 +1,4 @@
+import { SystemStyleObject } from '@chakra-ui/react';
 import theme from '../theme/theme';
 
 export const borderedBoxStyles = {
@@ -201,5 +202,14 @@ export const accountStyles = {
 		'.copy-from': {
 			bg: 'none',
 		},
+	},
+};
+
+export const labelStyles: SystemStyleObject = {
+	w: '240px',
+	maxW: '240px',
+	flex: '0 0 240px',
+	'@media screen and (max-width: 62em)': {
+		flex: '1',
 	},
 };

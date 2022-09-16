@@ -4,7 +4,6 @@ import {
 	ButtonGroup,
 	Container,
 	Divider,
-	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Heading,
@@ -23,6 +22,7 @@ import { BiChevronLeft } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { Link as RouterLink, NavLink, useHistory } from 'react-router-dom';
 import AsyncSelect from 'react-select/async';
+import FormControlTwoCol from '../../components/common/FormControlTwoCol';
 import Header from '../../components/common/Header';
 import {
 	navActiveStyles,
@@ -138,15 +138,13 @@ const CreateNewOrder: React.FC = () => {
 						<FormProvider {...formMethods}>
 							<form onSubmit={handleSubmit(onSubmit)}>
 								<Stack direction="column" spacing="6">
-									<Stack
-										direction={['column', 'column', 'row', 'row']}
-										spacing="6">
+									<Stack direction="column" spacing="6">
 										<Box flex="1" py="2">
 											<Heading as="h2" fontSize="medium">
 												{__('General', 'masteriyo')}
 											</Heading>
 
-											<FormControl py="3">
+											<FormControlTwoCol>
 												<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 												<Select defaultValue="pending" {...register('status')}>
 													{orderStatusList.map((option) => (
@@ -155,14 +153,21 @@ const CreateNewOrder: React.FC = () => {
 														</option>
 													))}
 												</Select>
-											</FormControl>
+											</FormControlTwoCol>
 										</Box>
 										<Box flex="1" py="2">
 											<Heading as="h2" fontSize="medium">
 												{__('Billing', 'masteriyo')}
 											</Heading>
 
-											<FormControl isInvalid={!!errors?.customer_id} py="3">
+											<FormControlTwoCol
+												sx={{
+													'.css-2b097c-container': {
+														width: '100%',
+													},
+												}}
+												isInvalid={!!errors?.customer_id}
+												py="3">
 												<FormLabel>{__('Customer', 'masteriyo')}</FormLabel>
 												<AsyncSelect
 													{...register('customer_id', {
@@ -227,7 +232,7 @@ const CreateNewOrder: React.FC = () => {
 												<FormErrorMessage>
 													{errors?.customer_id && errors?.customer_id?.message}
 												</FormErrorMessage>
-											</FormControl>
+											</FormControlTwoCol>
 										</Box>
 									</Stack>
 
@@ -235,7 +240,7 @@ const CreateNewOrder: React.FC = () => {
 										<Divider />
 									</Box>
 
-									<FormControl
+									<FormControlTwoCol
 										isInvalid={!!errors?.course_lines?.[0]?.course_id}
 										py="3">
 										<FormLabel>{__('Course', 'masteriyo')}</FormLabel>
@@ -298,7 +303,7 @@ const CreateNewOrder: React.FC = () => {
 											{errors?.course_lines?.[0]?.course_id &&
 												errors?.course_lines?.[0]?.course_id?.message}
 										</FormErrorMessage>
-									</FormControl>
+									</FormControlTwoCol>
 
 									<Box py="2">
 										<Divider />

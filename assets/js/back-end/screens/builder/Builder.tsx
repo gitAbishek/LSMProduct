@@ -70,7 +70,6 @@ const Builder: React.FC = () => {
 		[`course${courseId}`, courseId],
 		() => courseAPI.get(courseId)
 	);
-
 	const builderQuery = useQuery(
 		[`builder${courseId}`, courseId],
 		() => builderAPI.get(courseId),

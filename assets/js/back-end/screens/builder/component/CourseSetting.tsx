@@ -44,7 +44,6 @@ interface Props {
 
 const CourseSetting: React.FC<Props> = (props) => {
 	const { courseData } = props;
-
 	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
 	);

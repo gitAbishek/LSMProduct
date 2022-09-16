@@ -20,7 +20,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronLeft, BiInfoCircle } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiInfoCircle } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
@@ -34,7 +34,7 @@ import routes from '../../../../constants/routes';
 import urls from '../../../../constants/urls';
 import { UserSchema } from '../../../../schemas';
 import API from '../../../../utils/api';
-import { deepClean } from '../../../../utils/utils';
+import { deepClean, isRightDir } from '../../../../utils/utils';
 
 const AddStudent: React.FC = () => {
 	const history = useHistory();
@@ -94,7 +94,12 @@ const AddStudent: React.FC = () => {
 							<Button
 								variant="link"
 								_hover={{ color: 'primary.500' }}
-								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								leftIcon={
+									<Icon
+										fontSize="xl"
+										as={isRightDir ? BiChevronRight : BiChevronLeft}
+									/>
+								}>
 								{__('Back to Students', 'masteriyo')}
 							</Button>
 						</RouterLink>
@@ -106,7 +111,7 @@ const AddStudent: React.FC = () => {
 									<Stack
 										direction={['column', 'column', 'row', 'row']}
 										spacing="6">
-										<Stack py="3" spacing="3" flex="1">
+										<Stack spacing="3" flex="1">
 											<Heading as="h2" fontSize="lg">
 												{__('Name', 'masteriyo')}
 											</Heading>

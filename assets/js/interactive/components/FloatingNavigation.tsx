@@ -18,6 +18,7 @@ import {
 } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import { getNavigationRoute } from '../../back-end/utils/nav';
+import { isRightDir } from '../../back-end/utils/utils';
 import { ContentNavigationSchema } from '../schemas';
 
 interface Props {
@@ -66,7 +67,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						shadow="box"
 						position="fixed"
 						p="6"
-						pl="80px"
+						ps="80px"
 						top="50vh"
 						left={isSidebarOpened ? '300px' : 0}
 						transition="all 0.35s ease-in-out"
@@ -118,7 +119,10 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseEnter={onPrevOpen}
 						onMouseLeave={onPrevClose}
 						_hover={{ color: 'primary.500' }}>
-						<Icon as={BiChevronLeft} fontSize={['3rem', null, '5rem']} />
+						<Icon
+							as={isRightDir ? BiChevronRight : BiChevronLeft}
+							fontSize={['3rem', null, '5rem']}
+						/>
 					</Link>
 				</>
 			)}
@@ -130,7 +134,7 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						shadow="box"
 						position="fixed"
 						p="6"
-						pr="80px"
+						pe="80px"
 						top="50vh"
 						zIndex="99"
 						right="0"
@@ -183,7 +187,10 @@ const FloatingNavigation: React.FC<Props> = (props) => {
 						onMouseEnter={onNextOpen}
 						onMouseLeave={onNextClose}
 						_hover={{ color: 'primary.500' }}>
-						<Icon as={BiChevronRight} fontSize={['3rem', null, '5rem']} />
+						<Icon
+							as={isRightDir ? BiChevronLeft : BiChevronRight}
+							fontSize={['3rem', null, '5rem']}
+						/>
 					</Link>
 				</>
 			)}

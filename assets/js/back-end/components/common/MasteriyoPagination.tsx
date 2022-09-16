@@ -12,6 +12,7 @@ import { HStack, Select, Stack, Text } from '@chakra-ui/react';
 import { sprintf, __ } from '@wordpress/i18n';
 import React from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { isRightDir } from '../../utils/utils';
 
 interface MetaData {
 	total: number;
@@ -134,7 +135,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 					<PaginationContainer sx={{ li: { m: '0' } }}>
 						<Stack direction="row" spacing="1">
 							<PaginationPrevious size="sm" shadow="none">
-								<FaChevronLeft />
+								{isRightDir ? <FaChevronRight /> : <FaChevronLeft />}
 							</PaginationPrevious>
 							<PaginationPageGroup
 								isInline
@@ -161,7 +162,7 @@ const MasteriyoPagination: React.FC<Props> = (props) => {
 								))}
 							</PaginationPageGroup>
 							<PaginationNext size="sm" shadow="none">
-								<FaChevronRight />
+								{isRightDir ? <FaChevronLeft /> : <FaChevronRight />}
 							</PaginationNext>
 						</Stack>
 					</PaginationContainer>

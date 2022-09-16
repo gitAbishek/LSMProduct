@@ -2,6 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import RTLProvider from '../back-end/context/RTLProvider';
 import ErrorBoundary from '../back-end/errors/ErrorBoundary';
 import theme from '../back-end/theme/theme';
 import { isProduction } from '../back-end/utils/utils';
@@ -20,12 +21,14 @@ const App = () => {
 
 	return (
 		<ErrorBoundary>
-			<ChakraProvider theme={theme}>
-				<QueryClientProvider client={queryClient}>
-					<ReactQueryDevtools initialIsOpen={false} />
-					<Router />
-				</QueryClientProvider>
-			</ChakraProvider>
+			<RTLProvider>
+				<ChakraProvider theme={theme}>
+					<QueryClientProvider client={queryClient}>
+						<ReactQueryDevtools initialIsOpen={false} />
+						<Router />
+					</QueryClientProvider>
+				</ChakraProvider>
+			</RTLProvider>
 		</ErrorBoundary>
 	);
 };

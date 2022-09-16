@@ -35,9 +35,9 @@ const EnrolledCourses: React.FC = () => {
 					columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
 					spacing="6"
 					className="mto-enrolled-courses-list">
-					{myCourseQuery?.data?.data?.map((myCourse: MyCoursesSchema) => {
-						return <CourseItem key={myCourse.id} courseData={myCourse} />;
-					})}
+					{myCourseQuery?.data?.data?.map((myCourse: MyCoursesSchema) => (
+						<CourseItem key={myCourse.id} courseData={myCourse} />
+					))}
 				</SimpleGrid>
 				{myCourseQuery.isSuccess ? (
 					isEmpty(myCourseQuery?.data?.data) ? (

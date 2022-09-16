@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import CreateCatModalProvicer from './context/CreateCatProvider';
 import MasteriyoProvider from './context/MasteriyoProvider';
+import RTLProvider from './context/RTLProvider';
 import ErrorBoundary from './errors/ErrorBoundary';
 import Router from './router/Router';
 import theme from './theme/theme';
@@ -22,16 +23,18 @@ const App = () => {
 
 	return (
 		<ChakraProvider theme={theme}>
-			<ErrorBoundary>
-				<MasteriyoProvider>
-					<QueryClientProvider client={queryClient}>
-						<ReactQueryDevtools initialIsOpen={false} />
-						<CreateCatModalProvicer>
-							<Router />
-						</CreateCatModalProvicer>
-					</QueryClientProvider>
-				</MasteriyoProvider>
-			</ErrorBoundary>
+			<RTLProvider>
+				<ErrorBoundary>
+					<MasteriyoProvider>
+						<QueryClientProvider client={queryClient}>
+							<ReactQueryDevtools initialIsOpen={false} />
+							<CreateCatModalProvicer>
+								<Router />
+							</CreateCatModalProvicer>
+						</QueryClientProvider>
+					</MasteriyoProvider>
+				</ErrorBoundary>
+			</RTLProvider>
 		</ChakraProvider>
 	);
 };

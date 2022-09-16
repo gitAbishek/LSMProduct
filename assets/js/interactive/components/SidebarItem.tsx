@@ -115,7 +115,7 @@ const SidebarItem: React.FC<Props> = (props) => {
 										borderTopColor="gray.200"
 										px="3"
 										py="3"
-										pr="5">
+										pe="5">
 										<Link
 											to={getNavigationRoute(
 												content.item_id,

@@ -300,3 +300,7 @@ export const humanizeTime = humanizeDuration.humanizer({
 
 	units: ['h', 'm'],
 });
+
+export const getBrowserDir = document.dir === 'rtl' ? 'rtl' : 'ltr';
+
+export const isRightDir = getBrowserDir === 'rtl';

@@ -23,6 +23,7 @@ import {
 } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
 import { CloseCone } from '../../back-end/constants/images';
+import { isRightDir } from '../../back-end/utils/utils';
 import { CourseProgressItemMap } from '../schemas';
 import localized from '../utils/global';
 import QuestionList from './qa/QuestionList';
@@ -126,6 +127,7 @@ const Sidebar: React.FC<Props> = (props) => {
 						mask: `url(${CloseCone}) no-repeat 100% 100%`,
 						'-webkit-mask-size': 'cover',
 						maskSize: 'cover',
+						transform: isRightDir ? 'rotate(180deg)' : 'none',
 					}}
 					justifyContent="center"
 					position="absolute"

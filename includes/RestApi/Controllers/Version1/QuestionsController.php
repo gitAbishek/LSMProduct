@@ -322,6 +322,7 @@ class QuestionsController extends PostsController {
 			} else {
 				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			}
+
 			$type     = get_post_meta( $id, '_type', true );
 			$question = masteriyo( "question.${type}" );
 			$question->set_id( $id );

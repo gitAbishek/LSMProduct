@@ -34,7 +34,7 @@ const Builder = () => (
 				<ButtonIcons align="left" />
 			</Box>
 		))}
-		<ButtonIcons align={'center'} />
+		<ButtonIcons align="center" />
 	</Stack>
 );
 

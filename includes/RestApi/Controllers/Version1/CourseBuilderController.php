@@ -14,7 +14,10 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\SectionChildrenPostType;
 use Masteriyo\Helper\Permission;
+use Masteriyo\PostType\PostType;
 use Masteriyo\RestApi\Controllers\Version1\PostsController;
 
 /**
@@ -279,7 +282,7 @@ class CourseBuilderController extends PostsController {
 		$sections = $this->get_objects(
 			array(
 				'post_parent' => $request['id'],
-				'post_type'   => 'mto-section',
+				'post_type'   => PostType::SECTION,
 			)
 		);
 
@@ -289,8 +292,8 @@ class CourseBuilderController extends PostsController {
 			$contents = $this->get_objects(
 				array(
 					'post_parent' => $section->get_id(),
-					'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
-					'post_status' => 'any',
+					'post_type'   => SectionChildrenPostType::all(),
+					'post_status' => PostStatus::ANY,
 				)
 			);
 
@@ -632,5 +635,4 @@ class CourseBuilderController extends PostsController {
 			);
 		}
 	}
-
 }

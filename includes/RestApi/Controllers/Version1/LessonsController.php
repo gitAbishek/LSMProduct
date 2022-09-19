@@ -12,6 +12,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\SectionChildrenPostType;
 use Masteriyo\Helper\Permission;
 
 class LessonsController extends PostsController {
@@ -605,7 +606,7 @@ class LessonsController extends PostsController {
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
-					'post_type'      => array( 'mto-quiz', 'mto-lesson' ),
+					'post_type'      => SectionChildrenPostType::all(),
 					'post_status'    => PostStatus::all(),
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],

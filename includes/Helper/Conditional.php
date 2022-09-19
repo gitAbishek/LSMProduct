@@ -638,17 +638,34 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 	 * Return true if the page is interactive.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Added $page parameter.
+	 *
+	 * @param WP_Post|int $page Page or Page ID. (Default: current page)
 	 *
 	 * @return bool
 	 */
-	function masteriyo_is_learn_page() {
-		global $post;
+	function masteriyo_is_learn_page( $page = null ) {
+		$is_learn_page = false;
 
-		if ( is_null( $post ) ) {
-			return false;
+		if ( is_null( $page ) && isset( $GLOBALS['post'] ) ) {
+			$page = $GLOBALS['post'];
+		} elseif ( is_int( $page ) ) {
+			$page = get_post( $page );
 		}
 
-		return is_page() && masteriyo_get_page_id( 'learn' ) === $post->ID;
+		if ( $page ) {
+			$is_learn_page = is_page() && masteriyo_get_page_id( 'learn' ) === $page->ID;
+		}
+
+		/**
+		 * Filters learn page.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param boolean $is_learn_page True if the page is learn page.
+		 * @param WP_Post|null $page Current or passed page.
+		 */
+		return apply_filters( 'masteriyo_is_learn_page', $is_learn_page, $page );
 	}
 }
 

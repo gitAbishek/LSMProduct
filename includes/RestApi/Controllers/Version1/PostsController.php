@@ -10,6 +10,7 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\SectionChildrenPostType;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -237,7 +238,7 @@ abstract class PostsController extends CrudController {
 
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
+				'post_type'      => SectionChildrenPostType::all(),
 				'post_status'    => PostStatus::PUBLISH,
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',

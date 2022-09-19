@@ -11,14 +11,18 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
-use Masteriyo\Enums\CourseAccessMode;
-use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
+use Masteriyo\PostType\PostType;
+use Masteriyo\Models\CourseProgress;
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CourseChildrenPostType;
+use Masteriyo\Enums\CourseProgressPostType;
 use Masteriyo\Models\Order\OrderItem;
 use Masteriyo\Exceptions\RestException;
-use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Enums\CourseProgressStatus;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Query\CourseProgressItemQuery;
 
 /**
@@ -199,7 +203,6 @@ class CourseProgressController extends CrudController {
 			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_title',
 			'validate_callback' => 'rest_validate_request_arg',
-			'default'           => CourseProgressStatus::ANY,
 			'enum'              => CourseProgressStatus::all(),
 		);
 
@@ -972,8 +975,8 @@ class CourseProgressController extends CrudController {
 
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'mto-section', 'mto-lesson', 'mto-quiz' ),
-				'post_status'    => 'any',
+				'post_type'      => CourseChildrenPostType::all(),
+				'post_status'    => PostStatus::PUBLISH,
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',
 				'meta_value'     => $course_progress->get_course_id( 'edit' ),
@@ -1049,7 +1052,11 @@ class CourseProgressController extends CrudController {
 	 * @since 1.0.0
 	 *
 	 * @param WP_Post[] $posts
-	 * @return array
+	  * @return array(
+	 *              'item_id' => (integer)
+	 *              'item_title' => (string)
+	 *              'item_type' => (string)
+	 *          )
 	 */
 	protected function filter_course_sections( $posts ) {
 		$sections = array_filter(
@@ -1095,10 +1102,12 @@ class CourseProgressController extends CrudController {
 	 * @return array
 	 */
 	protected function filter_course_lessons_quizzes( $posts, $section_id ) {
+		$post_types = CourseProgressPostType::all();
+
 		$lessons_quizzes = array_filter(
 			$posts,
-			function( $post ) use ( $section_id ) {
-				return in_array( $post->post_type, array( 'mto-lesson', 'mto-quiz' ), true ) && $section_id === $post->post_parent;
+			function( $post ) use ( $section_id, $post_types ) {
+				return in_array( $post->post_type, $post_types, true ) && $section_id === $post->post_parent;
 			}
 		);
 

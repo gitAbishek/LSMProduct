@@ -8,8 +8,11 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
-use Masteriyo\Enums\CourseProgressStatus;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Query\CourseProgressQuery;
+use Masteriyo\Enums\CourseProgressStatus;
+use Masteriyo\Enums\CourseProgressPostType;
+use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\CourseProgressItemQuery;
 use Masteriyo\Repository\AbstractRepository;
 
@@ -380,7 +383,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	public function get_course_progress_items( $course_progress ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'      => array( 'mto-lesson', 'mto-quiz' ),
+				'post_type'      => CourseProgressPostType::all(),
 				'post_status'    => 'any',
 				'posts_per_page' => -1,
 				'meta_key'       => '_course_id',
@@ -461,16 +464,76 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * @return array
 	 */
 	public function get_summary( $course_progress, $type = 'all' ) {
-		if ( is_callable( array( $this, "get_{$type}_summary" ) ) ) {
-			$items = $this->get_course_progress_items( $course_progress );
-			return call_user_func_array( array( $this, "get_{$type}_summary" ), array( $course_progress, $items ) );
+		$items     = $this->get_course_progress_items( $course_progress );
+		$summaries = array_flip( SectionChildrenItemType::all() );
+		$summaries = array_map(
+			function( $summary ) {
+				return array(
+					'pending'   => 0,
+					'completed' => 0,
+				);
+			},
+			$summaries
+		);
+
+		foreach ( $summaries as $key => $value ) {
+			$completed = array_reduce(
+				$items,
+				function( $count, $item ) use ( $key ) {
+					if ( $key === $item->get_item_type() && $item->get_completed() ) {
+						++$count;
+					}
+
+					return $count;
+				},
+				0
+			);
+
+			$pending = array_reduce(
+				$items,
+				function( $count, $item ) use ( $key ) {
+					if ( $key === $item->get_item_type() && ! $item->get_completed() ) {
+						++$count;
+					}
+
+					return $count;
+				},
+				0
+			);
+
+			$summaries[ $key ] = array(
+				'pending'   => $pending,
+				'completed' => $completed,
+			);
 		}
+
+		if ( 'all' === $type ) {
+			$summaries['total'] = array(
+				'pending'   => array_sum( wp_list_pluck( $summaries, 'pending' ) ),
+				'completed' => array_sum( wp_list_pluck( $summaries, 'completed' ) ),
+			);
+		} elseif ( isset( $summaries[ $type ] ) ) {
+			$summaries = $summaries[ $type ];
+		}
+
+		/**
+		 * Filters course progress summary.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param $summaries array Course progress all summary.
+		 * @param CourseProgress $course_progress
+		 * @param array $items Course progress items (total and quiz),
+		 * @param string $type Summary type.
+		 */
+		return apply_filters( 'masteriyo_course_progress_summary', $summaries, $course_progress, $items, $type );
 	}
 
 	/**
 	 * Get all course progress summary.
 	 *
 	 * @since 1.0.0
+	 * @deprecated x.x.x
 	 *
 	 * @param CourseProgress $course_progress
 	 * @param array $items Course progress items (total and quiz),
@@ -478,17 +541,30 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * @return array
 	 */
 	public function get_all_summary( $course_progress, $items ) {
-		return array(
+		$all_summary = array(
 			'total'  => $this->get_total_summary( $course_progress, $items ),
 			'lesson' => $this->get_lesson_summary( $course_progress, $items ),
 			'quiz'   => $this->get_quiz_summary( $course_progress, $items ),
 		);
+
+		/**
+		 * Filters course progress all summary.
+		 *
+		 * @since 1.0.0
+		 * @deprecated x.x.x
+		 *
+		 * @param $all_summary array Course progress all summary.
+		 * @param CourseProgress $course_progress
+		 * @param array $items Course progress items (total and quiz),
+		 */
+		return apply_filters( 'masteriyo_course_progress_all_summary', $all_summary, $course_progress, $items );
 	}
 
 	/**
 	 * Get total summary(completed, pending).
 	 *
 	 * @since 1.0.0
+	 * @deprecated x.x.x
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (total and quiz),
@@ -498,11 +574,11 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected function get_total_summary( $course_progress, $items ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'    => array( 'mto-lesson', 'mto-quiz' ),
-				'post_status'  => 'any',
-				'meta_key'     => '_course_id',
-				'meta_value'   => $course_progress->get_course_id(),
-				'meta_compare' => '=',
+				'post_type'      => CourseProgressPostType::all(),
+				'post_status'    => PostStatus::PUBLISH,
+				'posts_per_page' => -1,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course_progress->get_course_id(),
 			)
 		);
 
@@ -526,6 +602,9 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get lesson summary(completed, pending).
 	 *
+	 * @since 1.0.0
+	 * @deprecated x.x.x
+	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (lesson and quiz),
 	 *
@@ -534,8 +613,8 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	protected function get_lesson_summary( $course_progress, $items ) {
 		$query = new \WP_Query(
 			array(
-				'post_type'    => 'mto-lesson',
-				'post_status'  => 'any',
+				'post_type'    => CourseProgressPostType::LESSON,
+				'post_status'  => PostStatus::PUBLISH,
 				'meta_key'     => '_course_id',
 				'meta_value'   => $course_progress->get_course_id(),
 				'meta_compare' => '=',
@@ -562,6 +641,9 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	/**
 	 * Get quiz summary(completed, pending).
 	 *
+	 * @since 1.0.0
+	 * @deprecated x.x.x
+	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (quiz and quiz),
 	 *
@@ -571,7 +653,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		$query = new \WP_Query(
 			array(
 				'post_type'    => 'mto-quiz',
-				'post_status'  => 'any',
+				'post_status'  => PostStatus::PUBLISH,
 				'meta_key'     => '_course_id',
 				'meta_value'   => $course_progress->get_course_id(),
 				'meta_compare' => '=',

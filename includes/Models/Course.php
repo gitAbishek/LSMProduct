@@ -11,10 +11,11 @@ namespace Masteriyo\Models;
 
 use Masteriyo\Helper\Utils;
 use Masteriyo\Database\Model;
-use Masteriyo\Enums\CourseAccessMode;
-use Masteriyo\Enums\CoursePriceType;
-use Masteriyo\Query\SectionQuery;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Query\SectionQuery;
+use Masteriyo\Enums\CoursePriceType;
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CourseChildrenPostType;
 use Masteriyo\Repository\RepositoryInterface;
 
 defined( 'ABSPATH' ) || exit;
@@ -1716,34 +1717,77 @@ class Course extends Model {
 	public function get_first_lesson_or_quiz() {
 		$first_lesson_or_quiz = null;
 
-		$query = new SectionQuery(
+		$posts = get_posts(
 			array(
-				'menu_order' => 0,
-				'limit'      => 1,
-				'parent_id'  => $this->get_id(),
-				'course_id'  => $this->get_id(),
+				'post_status'    => PostStatus::PUBLISH,
+				'post_type'      => CourseChildrenPostType::all(),
+				'posts_per_page' => -1,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $this->get_id(),
+
 			)
 		);
 
-		$first_section = current( $query->get_sections() );
+		$sections = array_filter(
+			$posts,
+			function( $post ) {
+				return CourseChildrenPostType::SECTION === $post->post_type;
+			}
+		);
 
-		if ( $first_section ) {
-			$posts = get_posts(
-				array(
-					'menu_order'  => 0,
-					'numberposts' => 1,
-					'post_parent' => $first_section->get_id(),
-					'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
-					'post_status' => 'any',
-				)
+		// Sort sections by menu order in ascending order.
+		usort(
+			$sections,
+			function( $a, $b ) {
+				if ( $a->menu_order === $b->menu_order ) {
+					return 0;
+				}
+
+				return $a->menu_order > $b->menu_order ? 1 : -1;
+			}
+		);
+
+		$lessons_quizzes = array_filter(
+			$posts,
+			function( $post ) {
+				return CourseChildrenPostType::SECTION !== $post->post_type;
+			}
+		);
+
+		foreach ( $sections as $section ) {
+			$section_contents = array_filter(
+				$lessons_quizzes,
+				function( $lesson_quiz ) use ( $section ) {
+					return $lesson_quiz->post_parent === $section->ID;
+				}
 			);
 
-			$first_lesson_or_quiz = current( $posts );
+			// Sort lessons and quizzes by menu order in ascending order.
+			usort(
+				$section_contents,
+				function( $a, $b ) {
+					if ( $a->menu_order === $b->menu_order ) {
+						return 0;
+					}
 
-			if ( $first_lesson_or_quiz && 'mto-lesson' === $first_lesson_or_quiz->post_type ) {
-				$first_lesson_or_quiz = masteriyo_get_lesson( $first_lesson_or_quiz );
-			} elseif ( $first_lesson_or_quiz && 'mto-quiz' === $first_lesson_or_quiz->post_type ) {
-				$first_lesson_or_quiz = masteriyo_get_quiz( $first_lesson_or_quiz );
+					return $a->menu_order > $b->menu_order ? 1 : -1;
+				}
+			);
+
+			if ( empty( $section_contents ) ) {
+				continue;
+			}
+
+			$post = current( $section_contents );
+
+			try {
+				$first_lesson_or_quiz = masteriyo( $post->post_type );
+				$first_lesson_or_quiz->set_id( $post->ID );
+				$store = masteriyo( $post->post_type . '.store' );
+				$store->read( $first_lesson_or_quiz );
+				break;
+			} catch ( \Exception $e ) {
+				$first_lesson_or_quiz = null;
 			}
 		}
 

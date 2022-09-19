@@ -7,6 +7,46 @@ namespace Masteriyo\PostType;
 
 class PostType {
 	/**
+	 * Course post type.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const COURSE = 'mto-course';
+
+	/**
+	 * Section post type.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const SECTION = 'mto-section';
+
+	/**
+	 * Lesson post type.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const LESSON = 'mto-lesson';
+
+	/**
+	 * Quiz post type.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const QUIZ = 'mto-quiz';
+
+	/**
+	 * Question post type.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const QUESTION = 'mto-question';
+
+	/**
 	 * Post slug.
 	 *
 	 * @since 1.0.0
@@ -53,7 +93,7 @@ class PostType {
 	 *
 	 * @return mixed|null
 	 */
-	public function get_label( $lable ) {
+	public function get_label( $label ) {
 		if ( isset( $this->labels[ $label ] ) ) {
 			return $this->labels[ $label ];
 		}
@@ -129,5 +169,32 @@ class PostType {
 	 */
 	protected function get_args() {
 		return $this->args;
+	}
+
+	/**
+	 * Return all post types.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string[]
+	 */
+	public function all() {
+		/**
+		 * Filter post types register in masteriyo.
+		 *
+		 * @since x.x.x
+		 */
+		$post_types = apply_filters(
+			'masteriyo_post_types',
+			array(
+				self::COURSE,
+				self::SECTION,
+				self::LESSON,
+				self::QUIZ,
+				self::QUESTION,
+			)
+		);
+
+		return array_unique( $post_types );
 	}
 }

@@ -141,7 +141,7 @@ class Section extends Model {
 	 * @return string
 	 */
 	public function get_post_type() {
-		return 'mto-section';
+		return $this->post_type;
 	}
 
 	/**

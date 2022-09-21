@@ -322,6 +322,7 @@ class QuestionsController extends PostsController {
 			} else {
 				$id = is_a( $object, '\WP_Post' ) ? $object->ID : $object->get_id();
 			}
+
 			$type     = get_post_meta( $id, '_type', true );
 			$question = masteriyo( "question.${type}" );
 			$question->set_id( $id );
@@ -453,6 +454,10 @@ class QuestionsController extends PostsController {
 		// Set post_status.
 		$args['post_status'] = $request['status'];
 
+		if ( ! isset( $args['meta_query'] ) ) {
+			$args['meta_query'] = array();
+		}
+
 		if ( ! empty( $request['course_id'] ) ) {
 			$args['meta_query'] = array(
 				'relation' => 'AND',
@@ -463,6 +468,12 @@ class QuestionsController extends PostsController {
 				),
 			);
 		}
+
+		$args['meta_query'][] = array(
+			'key'     => '_type',
+			'value'   => QuestionType::all(),
+			'compare' => 'IN',
+		);
 
 		// Taxonomy query to filter questions by type, category,
 		// tag, shipping class, and attribute.
@@ -1029,5 +1040,28 @@ class QuestionsController extends PostsController {
 		}
 
 		return $this->permission->rest_check_post_permissions( $object_type, 'read', $object_id );
+	}
+
+	/**
+	 * Process objects collection.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @param array $objects Courses data.
+	 * @param array $query_args Query arguments.
+	 * @param array $query_results Courses query result data.
+	 *
+	 * @return array
+	 */
+	protected function process_objects_collection( $objects, $query_args, $query_results ) {
+		return array(
+			'data' => $objects,
+			'meta' => array(
+				'total'        => $query_results['total'],
+				'pages'        => $query_results['pages'],
+				'current_page' => $query_args['paged'],
+				'per_page'     => $query_args['posts_per_page'],
+			),
+		);
 	}
 }

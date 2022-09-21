@@ -57,6 +57,9 @@ add_action( 'masteriyo_course_reviews_content', 'masteriyo_single_course_review_
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_single_course_price_and_enroll_button', 10 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_single_course_stats', 20 );
 add_action( 'masteriyo_single_course_sidebar_content', 'masteriyo_single_course_highlights', 30 );
+add_action( 'masteriyo_single_course_curriculum_summary', 'masteriyo_template_single_course_curriculum_summary' );
+add_action( 'masteriyo_single_course_curriculum_section_summary', 'masteriyo_template_single_course_curriculum_section_summary', 10, 2 );
+add_action( 'masteriyo_single_course_curriculum_section_content', 'masteriyo_template_single_course_curriculum_section_content', 10, 2 );
 
 /**
  * Account page.

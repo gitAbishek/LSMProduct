@@ -9,9 +9,12 @@
  */
 
 use Masteriyo\Activation;
-use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Enums\OrderStatus;
+use Masteriyo\PostType\PostType;
 use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CourseChildrenPostType;
 
 /**
  * For a given course, and optionally price/qty, work out the price with tax excluded, based on store settings.
@@ -298,48 +301,46 @@ function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
  * Get course contents.
  *
  * @since 1.0.0
+ * @since 1.5.15 $course parameter can be WP_Post or Course Object.
+ * @since 1.5.15 Added $status parameter.
  *
- * @param integer $course_id
+ * @param WP_Post|\Masteriyo\Models\Course|integer $course Course object or Course Post or Course ID.
  *
- * @return array
+ * @return \Masteriyo\Database\Model[]
  */
-function masteriyo_get_course_contents( $course_id ) {
-	$sections_query = new \WP_Query(
-		array(
-			'post_parent'    => $course_id,
-			'post_type'      => 'mto-section',
-			'posts_per_page' => -1,
+function masteriyo_get_course_contents( $course, $status = PostStatus::PUBLISH ) {
+	$course   = masteriyo_get_course( $course );
+	$contents = array();
 
-		)
-	);
-	$sections = array_map( 'masteriyo_get_section', $sections_query->posts );
-	$objects  = array_merge( array(), $sections );
-
-	foreach ( $sections as $section ) {
-		$section_content_query = new \WP_Query(
+	if ( $course ) {
+		$posts = get_posts(
 			array(
-				'post_parent' => $section->get_id(),
-				'post_type'   => array( 'mto-lesson', 'mto-quiz' ),
-				'post_status' => 'any',
-
+				'post_type'      => CourseChildrenPostType::all(),
+				'posts_per_page' => -1,
+				'post_status'    => $status,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course->get_id(),
+				'meta_compare'   => 'numeric',
 			)
 		);
-		$contents = array_map(
-			function ( $post ) {
-				if ( 'mto-lesson' === $post->post_type ) {
-					return masteriyo_get_lesson( $post );
-				}
-				if ( 'mto-quiz' === $post->post_type ) {
-					return masteriyo_get_quiz( $post );
-				}
-				return $post;
-			},
-			$section_content_query->posts
-		);
 
-		if ( 0 < count( $contents ) ) {
-			$objects = array_merge( $objects, $contents );
-		}
+		$contents = array_filter(
+			array_map(
+				function ( $post ) {
+					try {
+						$object = masteriyo( $post->post_type );
+						$object->set_id( $post->ID );
+						$store = masteriyo( $post->post_type . '.store' );
+						$store->read( $object );
+					} catch ( \Exception $e ) {
+						$object = null;
+					}
+
+					return $object;
+				},
+				$posts
+			)
+		);
 	}
 
 	/**
@@ -347,119 +348,61 @@ function masteriyo_get_course_contents( $course_id ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $objects Course contents objects.
-	 * @param integer $course_id Course ID.
+	 * @since 1.5.15 $course parameter can be WP_Post or Course Object.
+	 *
+	 * @param \Masteriyo\Database\Model $contents Course contents objects.
+	 * @param WP_Post|\Masteriyo\Models\Course|integer $course Course ID or WP Post or Course object.
 	 */
-	return apply_filters( 'masteriyo_course_contents', $objects, $course_id );
+	return apply_filters( 'masteriyo_course_contents', $contents, $course );
 }
 
 /**
  * Get course structure.
  *
  * @since 1.0.0
+ * @since 1.5.15 $course parameter can be WP_Post or Course object.
  *
- * @param integer $course_id
+* @param WP_Post|\Masteriyo\Models\Course|integer $course Course object or Course Post or Course ID.
  *
  * @return array
  */
-function masteriyo_get_course_structure( $course_id ) {
-	$objects = masteriyo_get_course_contents( $course_id );
+function masteriyo_get_course_structure( $course ) {
+	$sections = array();
+	$objects  = masteriyo_get_course_contents( $course );
 
-	$objects = array_map(
-		function( $object ) {
-			return array(
-				'id'          => $object->get_id(),
-				'name'        => $object->get_name( 'edit' ),
-				'description' => $object->get_description( 'edit' ),
-				'permalink'   => $object->get_permalink( 'edit' ),
-				'type'        => $object->get_object_type(),
-				'menu_order'  => $object->get_menu_order( 'edit' ),
-				'parent_id'   => $object->get_parent_id( 'edit' ),
-				'has_video'   => 'lesson' === $object->get_object_type() && ! empty( $object->get_video_source_url() ),
-			);
-		},
-		$objects
-	);
+	if ( $objects ) {
+		$sections = array_values(
+			array_filter(
+				$objects,
+				function( $object ) {
+					return CourseChildrenPostType::SECTION === $object->get_post_type();
+				}
+			)
+		);
 
-	$contents = array_values(
-		array_filter(
-			$objects,
-			function( $object ) {
-				return isset( $object['type'] ) && 'section' !== $object['type'];
+		// Sort sections by menu order in ascending order.
+		usort(
+			$sections,
+			function( $a, $b ) {
+				if ( $a->get_menu_order() === $b->get_menu_order() ) {
+					return 0;
+				}
+
+				return $a->get_menu_order() > $b->get_menu_order() ? 1 : -1;
 			}
-		)
-	);
-
-	// Sort section contents (lessons ane quizzes) by menu order in ascending order.
-	usort(
-		$contents,
-		function( $a, $b ) {
-			if ( $a['menu_order'] === $b['menu_order'] ) {
-				return 0;
-			}
-
-			return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
-		}
-	);
-
-	$sections = array_values(
-		array_filter(
-			$objects,
-			function( $object ) {
-				return isset( $object['type'] ) && 'section' === $object['type'];
-			}
-		)
-	);
-
-	// Sort sections by menu order in ascending order.
-	usort(
-		$sections,
-		function( $a, $b ) {
-			if ( $a['menu_order'] === $b['menu_order'] ) {
-				return 0;
-			}
-
-			return $a['menu_order'] > $b['menu_order'] ? 1 : -1;
-		}
-	);
-
-	$ordered_sections = array();
-
-	foreach ( $sections as $section ) {
-		$section_contents = array();
-		$lessons_count    = 0;
-		$quiz_count       = 0;
-
-		foreach ( $contents as $content ) {
-			if ( $content['parent_id'] !== $section['id'] ) {
-				continue;
-			}
-
-			if ( 'lesson' === $content['type'] ) {
-				$lessons_count++;
-			}
-
-			if ( 'quiz' === $content['type'] ) {
-				$quiz_count++;
-			}
-
-			$section_contents[] = $content;
-		}
-
-		$section['contents']      = $section_contents;
-		$section['lessons_count'] = $lessons_count;
-		$section['quiz_count']    = $quiz_count;
-		$ordered_sections[]       = $section;
+		);
 	}
 
 	/**
 	 * Filter course structure.
 	 *
 	 * @since 1.0.0
-	 * @param array $ordered_sections Ordered sections.
-	 * @param int $course_id Course ID.
+	 * @since 1.5.15 $course parameter can be Course object or WP_Post.
+	 *
+	 * @param array $sections Ordered sections.
+	 * @param int|WP_Post|\Masteriyo\Models\Course|null $course_id Course ID or Course object or WP_post.
 	 */
-	return apply_filters( 'masteriyo_course_structure', $ordered_sections, $course_id );
+	return apply_filters( 'masteriyo_course_structure', $sections, $course );
 }
 
 /**

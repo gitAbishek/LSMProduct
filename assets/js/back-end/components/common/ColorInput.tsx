@@ -1,6 +1,5 @@
 import {
 	Box,
-	FormControl,
 	FormLabel,
 	Icon,
 	Popover,
@@ -15,12 +14,13 @@ import { HexColorInput, HexColorPicker } from 'react-colorful';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
 import { infoIconStyles } from '../../config/styles';
+import FormControlTwoCol from './FormControlTwoCol';
 
 interface Props {
 	name: `${string}` | `${string}.${string}` | `${string}.${number}`;
-	defaultColor: String | any;
-	label: String;
-	description: String;
+	defaultColor: string | any;
+	label: string;
+	description: string;
 }
 const ColorInput: React.FC<Props> = (props) => {
 	const { defaultColor, name, label, description } = props;
@@ -32,7 +32,7 @@ const ColorInput: React.FC<Props> = (props) => {
 	}, [color, setValue, name]);
 
 	return (
-		<FormControl>
+		<FormControlTwoCol>
 			<FormLabel>
 				{label}
 				<Tooltip label={description} hasArrow fontSize="xs">
@@ -43,6 +43,7 @@ const ColorInput: React.FC<Props> = (props) => {
 			</FormLabel>
 			<input type="hidden" {...register(name)} defaultValue={defaultColor} />
 			<Box
+				flex={'1'}
 				sx={{
 					'.color-input-field': {
 						width: 'full',
@@ -52,7 +53,7 @@ const ColorInput: React.FC<Props> = (props) => {
 						borderRadius: 'sm',
 						px: '2',
 						py: '2',
-						pl: '9',
+						ps: '9',
 					},
 				}}>
 				<Popover placement="bottom-start">
@@ -82,7 +83,7 @@ const ColorInput: React.FC<Props> = (props) => {
 					</PopoverContent>
 				</Popover>
 			</Box>
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

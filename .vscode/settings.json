@@ -23,6 +23,6 @@
     "wordpress",
     "pcre",
     "json",
-    "date",
-  ],
+    "date"
+  ]
 }

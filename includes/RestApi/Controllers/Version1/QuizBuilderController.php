@@ -248,15 +248,16 @@ class QuizBuilderController extends PostsController {
 	 */
 	protected function get_object( $post ) {
 		try {
-			$item = masteriyo( $post->post_type );
-			$item->set_id( $post->ID );
-			$item_repo = masteriyo( "{$post->post_type}.store" );
-			$item_repo->read( $item );
+			$type     = get_post_meta( $post->ID, '_type', true );
+			$question = masteriyo( "question.${type}" );
+			$question->set_id( $post->ID );
+			$question_repo = masteriyo( 'question.store' );
+			$question_repo->read( $question );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		return $item;
+		return $question;
 	}
 
 	/**

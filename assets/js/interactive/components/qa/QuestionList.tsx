@@ -10,6 +10,7 @@ import {
 	Icon,
 	Input,
 	InputGroup,
+	InputLeftElement,
 	InputRightElement,
 	Link,
 	Spinner,
@@ -27,6 +28,7 @@ import { useParams } from 'react-router-dom';
 import { useOnType } from 'use-ontype';
 import urls from '../../../back-end/constants/urls';
 import API from '../../../back-end/utils/api';
+import { isRightDir } from '../../../back-end/utils/utils';
 import { QuestionAnswerSchema } from '../../schemas';
 import localized from '../../utils/global';
 import QaChat from './QaChat';
@@ -135,9 +137,15 @@ const QuestionList: React.FC = () => {
 										placeholder={__('Search a Question', 'masteriyo')}
 										{...onSearchInput}
 									/>
-									<InputRightElement>
-										<Icon as={BiSearch} />
-									</InputRightElement>
+									{isRightDir ? (
+										<InputLeftElement>
+											<Icon as={BiSearch} />
+										</InputLeftElement>
+									) : (
+										<InputRightElement>
+											<Icon as={BiSearch} />
+										</InputRightElement>
+									)}
 								</InputGroup>
 							</FormControl>
 						</Box>

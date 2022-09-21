@@ -233,12 +233,12 @@ const EditOrder = () => {
 											<Stack
 												direction={['column', 'column', 'column', 'row']}
 												spacing="6">
-												<Box flexGrow={1} py="3">
+												<Stack direction="column" gap="4" flexGrow={1}>
 													<Heading as="h2" fontSize="medium">
 														{__('General', 'masteriyo')}
 													</Heading>
 
-													<FormControl py="3">
+													<FormControl>
 														<FormLabel>
 															{__('Date created', 'masteriyo')}
 														</FormLabel>
@@ -250,7 +250,7 @@ const EditOrder = () => {
 														/>
 													</FormControl>
 
-													<FormControl isInvalid={!!errors?.status} py="3">
+													<FormControl isInvalid={!!errors?.status}>
 														<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 														<Select
 															defaultValue={orderQuery.data.status}
@@ -269,9 +269,7 @@ const EditOrder = () => {
 														</FormErrorMessage>
 													</FormControl>
 
-													<FormControl
-														isInvalid={!!errors?.payment_method}
-														py="3">
+													<FormControl isInvalid={!!errors?.payment_method}>
 														<FormLabel>
 															{__('Payment method', 'masteriyo')}
 														</FormLabel>
@@ -300,9 +298,7 @@ const EditOrder = () => {
 														</FormErrorMessage>
 													</FormControl>
 
-													<FormControl
-														isInvalid={!!errors?.transaction_id}
-														py="3">
+													<FormControl isInvalid={!!errors?.transaction_id}>
 														<FormLabel>
 															{__('Transaction ID', 'masteriyo')}
 														</FormLabel>
@@ -315,16 +311,15 @@ const EditOrder = () => {
 																errors?.transaction_id?.message}
 														</FormErrorMessage>
 													</FormControl>
-												</Box>
-												<Box flexGrow={1} py="3">
+												</Stack>
+												<Stack direction="column" gap="4" flexGrow={1}>
 													<Heading as="h2" fontSize="medium">
 														{__('Billing', 'masteriyo')}
 													</Heading>
 
 													<Stack
 														direction={['column', 'column', 'row', 'row']}
-														spacing="8"
-														py="3">
+														spacing="8">
 														<FormControl
 															isInvalid={!!errors?.billing?.first_name}>
 															<FormLabel>
@@ -373,10 +368,10 @@ const EditOrder = () => {
 																errors?.billing?.email?.message}
 														</FormErrorMessage>
 													</FormControl>
-												</Box>
+												</Stack>
 											</Stack>
 
-											<Box py="3">
+											<Box>
 												<Divider />
 											</Box>
 
@@ -411,7 +406,7 @@ const EditOrder = () => {
 														</Stack>
 													)
 												)}
-											<Box py="3">
+											<Box>
 												<Divider />
 											</Box>
 

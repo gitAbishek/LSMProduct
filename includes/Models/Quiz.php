@@ -216,6 +216,27 @@ class Quiz extends Model {
 		return apply_filters( 'masteriyo_quiz_preview_link', $preview_link, $this );
 	}
 
+	/**
+	 * Get icon.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @return string
+	 */
+	public function get_icon( $context = 'single-course.curriculum.section.content' ) {
+		$icon = masteriyo_get_svg( 'timer' );
+
+		/**
+		 * Filters lesson icon.
+		 *
+		 * @since 1.5.15
+		 *
+		 * @param string $icon.
+		 * @param string $context.
+		 */
+		return apply_filters( 'masteriyo_lesson_icon', $icon, $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Getters

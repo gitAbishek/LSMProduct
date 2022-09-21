@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
 import {
+	Assignments,
 	CourseAttachment,
 	courseFAQ,
 	DownloadMaterial,
@@ -23,6 +24,7 @@ import {
 	MultipleInstructors,
 	PasswordStrength,
 	Prerequisites,
+	Recaptcha,
 	Ribbon,
 	Stripe,
 	whiteLabel,
@@ -237,6 +239,26 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={Wishlist}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Google reCAPTCHA', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to add Google reCAPTCHA for Masteriyo forms (login, student registration and instructor registration).',
+								'masteriyo'
+							)}
+							thumbnailSrc={Recaptcha}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Assignments', 'masteriyo')}
+							addOnDescription={__(
+								'Create and assign tasks to the students with Masteriyo Assignments.',
+								'masteriyo'
+							)}
+							thumbnailSrc={Assignments}
 						/>
 					</Col>
 				</Row>

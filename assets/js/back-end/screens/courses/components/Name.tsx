@@ -3,6 +3,7 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Input,
+	Stack,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
@@ -20,7 +21,10 @@ const Name: React.FC<Props> = (props) => {
 	} = useFormContext();
 	return (
 		<FormControl isInvalid={!!errors?.name}>
-			<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+			<Stack direction={'row'} justify={'space-between'}>
+				<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+				{props.children}
+			</Stack>
 			<Input
 				defaultValue={defaultValue}
 				placeholder={__('Your Course Name', 'masteriyo')}

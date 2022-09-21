@@ -11,9 +11,12 @@ namespace Masteriyo\RestApi\Controllers\Version1;
 
 defined( 'ABSPATH' ) || exit;
 
+use Masteriyo\Enums\CourseProgressItemType;
+use Masteriyo\Enums\CourseProgressPostType;
 use Masteriyo\ModelException;
 use Masteriyo\Helper\Permission;
 use Masteriyo\Exceptions\RestException;
+use Masteriyo\Models\CourseProgressItem;
 use Masteriyo\Query\CourseProgressItemQuery;
 
 /**
@@ -409,7 +412,7 @@ class CourseProgressItemsController extends CrudController {
 				'item_type'    => array(
 					'description' => __( 'Course progress ( Lesson, Quiz) item type.', 'masteriyo' ),
 					'type'        => 'string',
-					'enum'        => array( 'lesson', 'quiz' ),
+					'enum'        => CourseProgressItemType::all(),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'completed'    => array(
@@ -793,7 +796,7 @@ class CourseProgressItemsController extends CrudController {
 		// Bail early if item_id is not either lesson or quiz.
 		$item = get_post( $course_progress_item->get_item_id( 'edit' ) );
 
-		if ( is_null( $item ) || ! in_array( $item->post_type, array( 'mto-lesson', 'mto-quiz' ), true ) ) {
+		if ( is_null( $item ) || ! in_array( $item->post_type, CourseProgressPostType::all(), true ) ) {
 			throw new RestException(
 				'masteriyo_invalid_item_id',
 				__( 'Invalid item ID.', 'masteriyo' ),

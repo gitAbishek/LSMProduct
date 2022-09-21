@@ -9,7 +9,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Divider,
 	Flex,
 	Heading,
 	Icon,
@@ -174,31 +173,70 @@ const EditCourseCategory: React.FC = () => {
 						{categoryQuery.isLoading ? (
 							<CategorySkeleton />
 						) : (
-							<Box bg="white" p="10" shadow="box">
-								<Stack direction="column" spacing="8">
-									<Flex aling="center" justify="space-between">
-										<Heading as="h1" fontSize="x-large">
-											{__('Edit Category', 'masteriyo')}
-										</Heading>
-										<Menu placement="bottom-end">
-											<MenuButton
-												as={IconButton}
-												icon={<BiDotsVerticalRounded />}
-												variant="outline"
-												rounded="sm"
-												fontSize="large"
-											/>
-											<MenuList>
-												<MenuItem icon={<BiTrash />} onClick={onDeletePress}>
-													{__('Delete', 'masteriyo')}
-												</MenuItem>
-											</MenuList>
-										</Menu>
-									</Flex>
+							<form onSubmit={methods.handleSubmit(onSubmit)}>
+								<Stack direction={['column', null, 'row']} spacing="8">
+									<Box
+										flex="1"
+										bg="white"
+										p={['4', null, '10']}
+										shadow="box"
+										d="flex"
+										flexDirection="column"
+										justifyContent="space-between">
+										<Stack direction="column" spacing="8">
+											<Flex aling="center" justify="space-between">
+												<Heading as="h1" fontSize="x-large">
+													{__('Edit Category', 'masteriyo')}
+												</Heading>
+												<Menu placement="bottom-end">
+													<MenuButton
+														as={IconButton}
+														icon={<BiDotsVerticalRounded />}
+														variant="outline"
+														rounded="sm"
+														fontSize="large"
+													/>
+													<MenuList>
+														<MenuItem
+															icon={<BiTrash />}
+															onClick={onDeletePress}>
+															{__('Delete', 'masteriyo')}
+														</MenuItem>
+													</MenuList>
+												</Menu>
+											</Flex>
 
-									<form onSubmit={methods.handleSubmit(onSubmit)}>
+											<Stack direction="column" spacing="6">
+												<NameInput defaultValue={categoryQuery.data.name} />
+
+												<DescriptionInput
+													defaultValue={categoryQuery.data.description}
+												/>
+
+												<ButtonGroup>
+													<Button
+														colorScheme="primary"
+														type="submit"
+														isLoading={updateCategoryMutation.isLoading}>
+														{__('Update', 'masteriyo')}
+													</Button>
+													<Button
+														variant="outline"
+														onClick={() =>
+															history.push(routes.course_categories.list)
+														}>
+														{__('Cancel', 'masteriyo')}
+													</Button>
+												</ButtonGroup>
+											</Stack>
+										</Stack>
+									</Box>
+									<Box
+										w={['100%', null, '400px']}
+										bg="white"
+										p={['4', null, '10']}
+										shadow="box">
 										<Stack direction="column" spacing="6">
-											<NameInput defaultValue={categoryQuery.data.name} />
 											<SlugInput
 												defaultValue={categoryQuery?.data?.slug}
 												defaultNameValue={categoryQuery?.data?.name}
@@ -206,36 +244,13 @@ const EditCourseCategory: React.FC = () => {
 											<ParentCategory
 												defaultValue={categoryQuery.data.parent_id}
 											/>
-											<DescriptionInput
-												defaultValue={categoryQuery.data.description}
-											/>
 											<FeaturedImage
 												defaultValue={categoryQuery.data?.featured_image}
 											/>
-
-											<Box py="3">
-												<Divider />
-											</Box>
-
-											<ButtonGroup>
-												<Button
-													colorScheme="primary"
-													type="submit"
-													isLoading={updateCategoryMutation.isLoading}>
-													{__('Update', 'masteriyo')}
-												</Button>
-												<Button
-													variant="outline"
-													onClick={() =>
-														history.push(routes.course_categories.list)
-													}>
-													{__('Cancel', 'masteriyo')}
-												</Button>
-											</ButtonGroup>
 										</Stack>
-									</form>
+									</Box>
 								</Stack>
-							</Box>
+							</form>
 						)}
 						<AlertDialog
 							isOpen={isDeleteModalOpen}

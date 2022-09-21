@@ -1,29 +1,20 @@
-import {
-	Pagination,
-	PaginationContainer,
-	PaginationNext,
-	PaginationPage,
-	PaginationPageGroup,
-	PaginationPrevious,
-	PaginationSeparator,
-	usePagination,
-} from '@ajna/pagination';
+import { usePagination } from '@ajna/pagination';
 import {
 	Alert,
 	AlertIcon,
 	Heading,
 	SkeletonText,
 	Stack,
-	Text,
 } from '@chakra-ui/react';
-import { sprintf, __ } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import MasteriyoPagination from '../../../../back-end/components/common/MasteriyoPagination';
 import urls from '../../../../back-end/constants/urls';
 import { QuestionSchema, QuizSchema } from '../../../../back-end/schemas';
 import API from '../../../../back-end/utils/api';
+import { isEmpty } from '../../../../back-end/utils/utils';
 import FieldMultipleChoice from './FieldMultipleChoice';
 import FieldShortAnswer from './FieldShortAnswer';
 import FieldSingleChoice from './FieldSingleChoice';
@@ -108,7 +99,7 @@ const QuizFields: React.FC<Props> = (props) => {
 							{__('Your quiz time is about to expire!', 'masteriyo')}
 						</Alert>
 					)}
-					{questionQuery?.data?.map((question: QuestionSchema) => (
+					{questionQuery?.data?.data?.map((question: QuestionSchema) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Heading fontSize="lg">{question.name}</Heading>
 
@@ -138,62 +129,14 @@ const QuizFields: React.FC<Props> = (props) => {
 							)}
 						</Stack>
 					))}
-					<Stack
-						w="full"
-						direction="row"
-						justifyContent="space-between"
-						align="center"
-						fontSize="sm">
-						<Text color="gray.500">
-							{sprintf(
-								/* translators: %1$d: shown results from, %2$d shown results to, %3$d total count */
-								__('Showing %d - %d out of %d Questions', 'masteriyo'),
-								displayCurrentPageLowest,
-								displayCurrentPageHighest,
-								quizData?.questions_count
-							)}
-						</Text>
-
-						<Pagination
-							pagesCount={pagesCount}
-							currentPage={currentPage}
-							onPageChange={handlePageChange}>
-							<PaginationContainer>
-								<Stack direction="row" spacing="1">
-									<PaginationPrevious size="sm" shadow="none">
-										<FaChevronLeft />
-									</PaginationPrevious>
-									<PaginationPageGroup
-										isInline
-										align="center"
-										separator={
-											<PaginationSeparator fontSize="sm" w={7} jumpSize={3} />
-										}>
-										{pages.map((page: number) => (
-											<PaginationPage
-												shadow="none"
-												h="8"
-												w="8"
-												key={`pagination_page_${page}`}
-												page={page}
-												_hover={{
-													bg: 'primary.400',
-												}}
-												_current={{
-													bg: 'primary.400',
-													fontSize: 'sm',
-													color: 'white',
-												}}
-											/>
-										))}
-									</PaginationPageGroup>
-									<PaginationNext size="sm" shadow="none">
-										<FaChevronRight />
-									</PaginationNext>
-								</Stack>
-							</PaginationContainer>
-						</Pagination>
-					</Stack>
+					{!isEmpty(questionQuery?.data?.data) ? (
+						<MasteriyoPagination
+							metaData={questionQuery?.data?.meta}
+							setFilterParams={setFilterParams}
+							perPageText={__('Questions Per Page:', 'masteriyo')}
+							showPerPage={false}
+						/>
+					) : null}
 				</Stack>
 			</>
 		);

@@ -27,7 +27,7 @@ const theme = extendTheme({
 			},
 
 			'.wp-admin #masteriyo': {
-				ml: '-20px',
+				ms: '-20px',
 			},
 
 			'.admin-bar': {
@@ -56,7 +56,7 @@ const theme = extendTheme({
 						},
 					ul: {
 						li: {
-							marginBottom: 0,
+							mb: 0,
 						},
 					},
 					'.chakra-tabs__tab[aria-selected=true]': {
@@ -64,12 +64,12 @@ const theme = extendTheme({
 					},
 					'.chakra-switch__track[data-checked],.chakra-radio__control[data-checked]':
 						{
-							background: 'primary.500',
+							bg: 'primary.500',
 						},
 
 					// Slider and Progress Bar
 					'.chakra-slider__filled-track,.css-1jrtelv': {
-						background: 'primary.500',
+						bg: 'primary.500',
 					},
 
 					'.ProseMirror, .masteriyo-interactive-description': {
@@ -110,13 +110,13 @@ const theme = extendTheme({
 							cursor: 'pointer',
 						},
 						blockquote: {
-							paddingLeft: '1rem',
-							borderLeft: '2px solid rgba(13,13,13,.1)',
+							ps: '1rem',
+							borderStart: '2px solid rgba(13,13,13,.1)',
 						},
 						code: {
-							backgroundColor: 'gray.100',
+							bg: 'gray.100',
 							color: 'gray.600',
-							padding: '.1rem .3rem',
+							p: '.1rem .3rem',
 							borderRadius: '4px',
 						},
 						'ul, ol': {
@@ -126,7 +126,7 @@ const theme = extendTheme({
 							listStyleType: 'disc',
 						},
 						ol: {
-							pl: '1.2rem',
+							ps: '1.2rem',
 						},
 						pre: {
 							background: '#0D0D0D',
@@ -202,10 +202,10 @@ const theme = extendTheme({
 						tr: {
 							'th, td': {
 								':first-of-type': {
-									pl: '12',
+									ps: '12',
 								},
 								':last-child': {
-									pr: '12',
+									pe: '12',
 									textAlign: 'right',
 								},
 							},
@@ -230,7 +230,7 @@ const theme = extendTheme({
 						'.responsiveTable thead tr': {
 							position: 'absolute',
 							top: '-9999px',
-							left: '-9999px',
+							insetStart: '-9999px',
 							borderBottom: '2px solid #333',
 						},
 
@@ -241,12 +241,12 @@ const theme = extendTheme({
 							textAlign: 'left !important',
 							whiteSpace: 'pre-wrap',
 							overflowWrap: 'break-word',
-							pr: '6',
+							pe: '6',
 						},
 						'.responsiveTable td .tdBefore': {
 							position: 'absolute',
 							display: 'block',
-							left: '6',
+							insetStart: '6',
 							width: 'calc(50% - 20px)',
 							whiteSpace: 'pre-wrap',
 							overflowWrap: 'break-word',

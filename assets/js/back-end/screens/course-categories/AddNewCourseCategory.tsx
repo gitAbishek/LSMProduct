@@ -3,7 +3,6 @@ import {
 	Button,
 	ButtonGroup,
 	Container,
-	Divider,
 	Icon,
 	Link,
 	List,
@@ -115,39 +114,53 @@ const AddNewCourseCategory: React.FC = () => {
 						</RouterLink>
 					</ButtonGroup>
 					<FormProvider {...methods}>
-						<Box bg="white" p="10" shadow="box">
-							<Stack direction="column" spacing="8">
-								<form onSubmit={methods.handleSubmit(onSubmit)}>
+						<form onSubmit={methods.handleSubmit(onSubmit)}>
+							<Stack direction={['column', null, 'row']} spacing="8">
+								<Box
+									flex="1"
+									bg="white"
+									p={['4', null, '10']}
+									shadow="box"
+									d="flex"
+									flexDirection="column"
+									justifyContent="space-between">
+									<Stack direction="column" spacing="8">
+										<Stack direction="column" spacing="6">
+											<NameInput />
+
+											<DescriptionInput />
+
+											<ButtonGroup>
+												<Button
+													colorScheme="primary"
+													type="submit"
+													isLoading={createCategory.isLoading}>
+													{__('Create', 'masteriyo')}
+												</Button>
+												<Button
+													variant="outline"
+													onClick={() =>
+														history.push(routes.course_categories.list)
+													}>
+													{__('Cancel', 'masteriyo')}
+												</Button>
+											</ButtonGroup>
+										</Stack>
+									</Stack>
+								</Box>
+								<Box
+									w={['100%', null, '400px']}
+									bg="white"
+									p={['4', null, '10']}
+									shadow="box">
 									<Stack direction="column" spacing="6">
-										<NameInput />
 										<SlugInput />
 										<ParentCategory />
-										<DescriptionInput />
 										<FeaturedImage />
-
-										<Box py="3">
-											<Divider />
-										</Box>
-
-										<ButtonGroup>
-											<Button
-												colorScheme="primary"
-												type="submit"
-												isLoading={createCategory.isLoading}>
-												{__('Create', 'masteriyo')}
-											</Button>
-											<Button
-												variant="outline"
-												onClick={() =>
-													history.push(routes.course_categories.list)
-												}>
-												{__('Cancel', 'masteriyo')}
-											</Button>
-										</ButtonGroup>
 									</Stack>
-								</form>
+								</Box>
 							</Stack>
-						</Box>
+						</form>
 					</FormProvider>
 				</Stack>
 			</Container>

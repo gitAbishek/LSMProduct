@@ -144,19 +144,17 @@ const ReviewForm: React.FC<Props> = (props) => {
 										<Stack direction="column" spacing="6">
 											<Title />
 											<Content />
-											<Stack direction={['column', 'column', 'row']}>
-												<Courses
-													defaultValue={
-														editMode && reviewQueryData
-															? {
-																	label: reviewQueryData.course.name,
-																	value: reviewQueryData.course.id,
-															  }
-															: null
-													}
-												/>
-												<Status />
-											</Stack>
+											<Courses
+												defaultValue={
+													editMode && reviewQueryData
+														? {
+																label: reviewQueryData.course.name,
+																value: reviewQueryData.course.id,
+														  }
+														: null
+												}
+											/>
+											<Status />
 											<Rating />
 											<Box py="2">
 												<Divider />

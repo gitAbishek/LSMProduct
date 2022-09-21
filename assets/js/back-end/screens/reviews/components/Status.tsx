@@ -29,7 +29,17 @@ const Status: React.FC = () => {
 	} = useFormContext();
 
 	return (
-		<FormControl isInvalid={!!errors?.status} py="3">
+		<FormControl
+			sx={{
+				'.css-2b097c-container': {
+					width: '100%',
+				},
+			}}
+			display="flex"
+			flexDirection={['column', 'column', 'column', 'row']}
+			alignItems={{ lg: 'center' }}
+			isInvalid={!!errors?.status}
+			py="3">
 			<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 			<Select {...register('status')}>
 				{reviewStatusList.map((option: any) => (

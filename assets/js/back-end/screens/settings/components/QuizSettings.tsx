@@ -1,6 +1,5 @@
 import {
 	Box,
-	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Icon,
@@ -21,6 +20,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -54,8 +54,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl
-								isInvalid={!!errors?.quiz?.styling?.questions_display_per_page}>
+							<FormControlTwoCol>
 								<FormLabel>
 									{__('Questions Per Page', 'masteriyo')}
 									<Tooltip
@@ -101,7 +100,7 @@ const QuizSettings: React.FC<Props> = (props) => {
 									{errors?.quiz?.styling?.questions_display_per_page &&
 										errors?.quiz?.styling?.questions_display_per_page.message}
 								</FormErrorMessage>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 				</TabPanels>

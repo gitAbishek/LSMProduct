@@ -28,7 +28,7 @@ const Highlights: React.FC<Props> = (props) => {
 				shadow="input"
 				rounded="sm"
 				minH="28"
-				pl="5"
+				ps="5"
 				sx={{
 					ul: {
 						listStyleType: 'disc',

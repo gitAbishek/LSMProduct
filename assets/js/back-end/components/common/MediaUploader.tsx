@@ -1,22 +1,17 @@
-import { Button, Icon } from '@chakra-ui/react';
+import { Button, ButtonProps } from '@chakra-ui/react';
 import React from 'react';
-import { IconType } from 'react-icons/lib';
 
 /**
  * Ref: https://wordpress.stackexchange.com/a/382291
  */
 
-interface Props {
+interface Props extends ButtonProps {
 	modalTitle: string;
 	buttonLabel?: string;
 	isMultiple?: boolean;
 	onSelect: any;
 	isFullWidth?: boolean;
 	mediaType?: string;
-	icon?: {
-		enable?: boolean;
-		name?: IconType;
-	};
 	size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
@@ -29,10 +24,6 @@ const MediaUploader: React.FC<Props> = (props) => {
 		size = 'md',
 		isFullWidth = false,
 		mediaType = 'image',
-		icon = {
-			enable: false,
-			name: null,
-		},
 	} = props;
 
 	let frame: any;
@@ -63,15 +54,14 @@ const MediaUploader: React.FC<Props> = (props) => {
 		frame.open();
 	};
 
-	return icon.enable ? (
-		<Icon onClick={handleButtonClick} as={icon.name} />
-	) : (
+	return (
 		<Button
 			colorScheme="primary"
 			size={size}
 			variant="outline"
 			isFullWidth={isFullWidth}
-			onClick={handleButtonClick}>
+			onClick={handleButtonClick}
+			{...props}>
 			{buttonLabel}
 		</Button>
 	);

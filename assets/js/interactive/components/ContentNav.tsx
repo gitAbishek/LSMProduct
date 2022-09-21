@@ -17,6 +17,7 @@ import { BiCheck, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import MobileHidden from '../../back-end/components/common/MobileHidden';
 import { getNavigationRoute } from '../../back-end/utils/nav';
+import { isRightDir } from '../../back-end/utils/utils';
 import { ContentNavigationSchema } from '../schemas';
 
 interface Props {
@@ -75,7 +76,7 @@ const ContentNav: React.FC<Props> = (props) => {
 								sx={navLinkStyles}>
 								<HStack spacing="4">
 									<Center sx={cirlceStyles}>
-										<Icon as={BiChevronLeft} />
+										<Icon as={isRightDir ? BiChevronRight : BiChevronLeft} />
 									</Center>
 									<Stack direction="column" spacing="0">
 										<Text fontSize="xs" color="gray.500">
@@ -133,7 +134,7 @@ const ContentNav: React.FC<Props> = (props) => {
 										<Heading fontSize="xs">{navigation?.next.name}</Heading>
 									</Stack>
 									<Center sx={cirlceStyles}>
-										<Icon as={BiChevronRight} />
+										<Icon as={isRightDir ? BiChevronLeft : BiChevronRight} />
 									</Center>
 								</HStack>
 							</Link>

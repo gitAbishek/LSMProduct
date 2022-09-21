@@ -9,6 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\SectionChildrenPostType;
 use Masteriyo\Helper\Utils;
 use Masteriyo\Helper\Permission;
 use Masteriyo\RestApi\Controllers\Version1\QuestionsController;
@@ -1249,7 +1250,7 @@ class QuizesController extends PostsController {
 		if ( ! isset( $request['menu_order'] ) && $creating ) {
 			$query = new \WP_Query(
 				array(
-					'post_type'      => array( 'mto-quiz', 'mto-lesson' ),
+					'post_type'      => SectionChildrenPostType::all(),
 					'post_status'    => PostStatus::all(),
 					'posts_per_page' => 1,
 					'post_parent'    => $request['parent_id'],

@@ -551,7 +551,7 @@
 			var isCollapsedAll = true;
 			$(document.body).on(
 				'click',
-				'.masteriyo-expand-collape-all',
+				'.masteriyo-expand-collapse-all',
 				function () {
 					if (isCollapsedAll) {
 						expandAllSections();

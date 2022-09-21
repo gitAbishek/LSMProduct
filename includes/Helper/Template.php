@@ -6,10 +6,14 @@
  * @since 1.0.0
  */
 
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\Enums\OrderStatus;
+use Masteriyo\PostType\PostType;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Enums\CourseProgressStatus;
+use Masteriyo\Enums\CourseChildrenPostType;
+use Masteriyo\Enums\SectionChildrenPostType;
 
 if ( ! ( function_exists( 'add_action' ) && function_exists( 'add_filter' ) ) ) {
 	return;
@@ -875,44 +879,16 @@ if ( ! function_exists( 'masteriyo_single_course_curriculum' ) ) {
 	 */
 	function masteriyo_single_course_curriculum( $course ) {
 		if ( $course->get_show_curriculum() || masteriyo_can_start_course( $course ) ) {
-			$structure     = masteriyo_get_course_structure( $course->get_id() );
-			$lessons_count = 0;
-			$quiz_count    = 0;
-
-			foreach ( $structure as $section ) {
-				if ( empty( $section ) || ! is_array( $section['contents'] ) ) {
-					continue;
-				}
-				$lessons_count += count(
-					array_filter(
-						$section['contents'],
-						function( $content ) {
-							return 'lesson' === $content['type'];
-						}
-					)
-				);
-				$quiz_count    += count(
-					array_filter(
-						$section['contents'],
-						function( $content ) {
-							return 'quiz' === $content['type'];
-						}
-					)
-				);
-			}
+			$sections = masteriyo_get_course_structure( $course->get_id() );
 
 			masteriyo_get_template(
 				'single-course/curriculum.php',
 				array(
-					'course'           => $course,
-					'course_structure' => $structure,
-					'sections_count'   => count( $structure ),
-					'lessons_count'    => $lessons_count,
-					'quiz_count'       => $quiz_count,
+					'course'   => $course,
+					'sections' => $sections,
 				)
 			);
 		}
-
 	}
 }
 
@@ -1571,6 +1547,288 @@ if ( ! function_exists( 'masteriyo_template_single_course_related_courses' ) ) {
 	function masteriyo_template_single_course_related_courses() {
 		if ( masteriyo_get_setting( 'single_course.related_courses.enable' ) ) {
 			masteriyo_get_template_part( 'content', 'related-posts' );
+		}
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_single_course_curriculum_summary' ) ) {
+
+	/**
+	 * Display single course curriculum summary.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 */
+	function masteriyo_template_single_course_curriculum_summary( $course ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => CourseChildrenPostType::all(),
+				'post_status'    => PostStatus::PUBLISH,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course->get_id(),
+				'posts_per_page' => -1,
+			)
+		);
+
+		$section_count = array_reduce(
+			$posts,
+			function( $count, $post ) {
+				if ( PostType::SECTION === $post->post_type ) {
+					++$count;
+				}
+
+				return $count;
+			},
+			0
+		);
+
+		$lesson_count = array_reduce(
+			$posts,
+			function( $count, $post ) {
+				if ( PostType::LESSON === $post->post_type ) {
+					++$count;
+				}
+
+				return $count;
+			},
+			0
+		);
+
+		$quiz_count = array_reduce(
+			$posts,
+			function( $count, $post ) {
+				if ( PostType::QUIZ === $post->post_type ) {
+					++$count;
+				}
+
+				return $count;
+			},
+			0
+		);
+
+		/**
+		 * Filters masteriyo single course summaries.
+		 *
+		 * @since 1.5.15
+		 *
+		 * @param array $summaries Summaries.
+		 * @param \Masteriyo\Models\Course $course Course object.
+		 * @param WP_Post[] $posts Array of sections, quizzes and sections.
+		 */
+		$summaries = apply_filters(
+			'masteriyo_single_course_curriculum_summaries',
+			array(
+				array(
+					'wrapper_start' => '<li class="masteriyo-list-none">',
+					'wrapper_end'   => '</li>',
+					'content'       => sprintf(
+						/* translators: %d: Course sections count */
+						esc_html( _nx( '%s Section', '%s Sections', $section_count, 'Sections Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $section_count ) )
+					),
+				),
+				array(
+					'wrapper_start' => '<li>',
+					'wrapper_end'   => '</li>',
+					'content'       => sprintf(
+						/* translators: %d: Course lessons count */
+						esc_html( _nx( '%s Lesson', '%s Lessons', $lesson_count, 'Lessons Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $lesson_count ) )
+					),
+				),
+				array(
+					'wrapper_start' => '<li>',
+					'wrapper_end'   => '</li>',
+					'content'       => sprintf(
+						/* translators: %d: Course quiz count */
+						esc_html( _nx( '%s Quiz', '%s Quizzes', $quiz_count, 'Quizzes Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $quiz_count ) )
+					),
+				),
+				array(
+					'wrapper_start' => '<li>',
+					'wrapper_end'   => '</li>',
+					'content'       => sprintf(
+						/* translators: %s: Lecture hours */
+						__( '%s Duration', 'masteriyo' ),
+						masteriyo_minutes_to_time_length_string( $course->get_duration() )
+					),
+				),
+			),
+			$course,
+			$posts
+		);
+
+		$html = '';
+		foreach ( $summaries as $summary ) {
+			$html .= $summary['wrapper_start'] . $summary['content'] . $summary['wrapper_end'];
+		}
+
+		echo wp_kses_post( $html );
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_summary' ) ) {
+	/**
+	 * Display section summary (number of lessons and quizzes) in single course curriculum page.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 * @param \Masteriyo\Models\Section $section Section object.
+	 */
+	function masteriyo_template_single_course_curriculum_section_summary( $course, $section ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => SectionChildrenPostType::all(),
+				'post_status'    => PostStatus::PUBLISH,
+				'post_parent'    => $section->get_id(),
+				'posts_per_page' => -1,
+			)
+		);
+
+		$lesson_count = array_reduce(
+			$posts,
+			function( $count, $post ) {
+				if ( SectionChildrenPostType::LESSON === $post->post_type ) {
+					++$count;
+				}
+
+				return $count;
+			},
+			0
+		);
+
+		$quiz_count = array_reduce(
+			$posts,
+			function( $count, $post ) {
+				if ( SectionChildrenPostType::QUIZ === $post->post_type ) {
+					++$count;
+				}
+
+				return $count;
+			},
+			0
+		);
+
+		/**
+		 * Filters single course curriculum section summaries.
+		 *
+		 * @since 1.5.15
+		 *
+		 * @param array $summaries Section summaries.
+		 * @param \Masteriyo\Models\Course $course Course object.
+		 * @param \Masteriyo\Models\Section $section Section object.
+		 * @param \WP_Post[] $posts Children of section (lessons and quizzes).
+		 */
+		$summaries = apply_filters(
+			'masteriyo_single_course_curriculum_section_summaries',
+			array(
+				array(
+					'wrapper_start' => '<span class="masteriyo-clessons">',
+					'wrapper_end'   => '</span>',
+					'content'       => sprintf(
+						/* translators: %d: Section lessons count */
+						esc_html( _nx( '%s Lesson', '%s Lessons', $lesson_count, 'Lessons Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $lesson_count ) )
+					),
+				),
+				array(
+					'wrapper_start' => '<span class="masteriyo-cquizzes">',
+					'wrapper_end'   => '</span>',
+					'content'       => sprintf(
+						/* translators: %d: Section quizzes count */
+						esc_html( _nx( '%s Quiz', '%s Quizzes', $quiz_count, 'Quizzes Count', 'masteriyo' ) ),
+						esc_html( number_format_i18n( $quiz_count ) )
+					),
+				),
+				array(
+					'wrapper_start' => '<span class="masteriyo-cplus masteriyo-icon-svg">',
+					'wrapper_end'   => '</span>',
+					'content'       => masteriyo_get_svg( 'plus' ),
+				),
+				array(
+					'wrapper_start' => '<span class="masteriyo-cminus masteriyo-icon-svg">',
+					'wrapper_end'   => '</span>',
+					'content'       => masteriyo_get_svg( 'minus' ),
+				),
+			),
+			$course,
+			$section,
+			$posts
+		);
+
+		$html = '';
+		foreach ( $summaries as $summary ) {
+			$html .= $summary['wrapper_start'] . $summary['content'] . $summary['wrapper_end'];
+		}
+
+		echo $html; // phpcs:ignore
+	}
+}
+
+if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_content' ) ) {
+	/**
+	 * Display single course curriculum section content.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 * @param \Masteriyo\Models\Section $section Section object.
+	 */
+	function masteriyo_template_single_course_curriculum_section_content( $course, $section ) {
+		$posts = get_posts(
+			array(
+				'post_type'      => SectionChildrenPostType::all(),
+				'post_status'    => PostStatus::PUBLISH,
+				'post_parent'    => $section->get_id(),
+				'posts_per_page' => -1,
+				'orderby'        => 'menu_order',
+				'order'          => 'asc',
+			)
+		);
+
+		$objects = array_filter(
+			array_map(
+				function ( $post ) {
+					try {
+						$object = masteriyo( $post->post_type );
+						$object->set_id( $post->ID );
+						$store = masteriyo( $post->post_type . '.store' );
+						$store->read( $object );
+					} catch ( \Exception $e ) {
+						$object = null;
+					}
+
+					return $object;
+				},
+				$posts
+			)
+		);
+
+		foreach ( $objects as $object ) {
+			$html  = '<li>';
+			$html .= '<div class="masteriyo-lesson-list__content">';
+			$html .= '<span class="masteriyo-lesson-list__content-item">';
+			$html .= '<span class="masteriyo-lesson-icon">';
+			$html .= $object->get_icon();
+			$html .= '</span>';
+			$html .= $object->get_name();
+			$html .= '</span>';
+			$html .= '</div>';
+			$html .= '</li>';
+
+			/**
+			 * Filters single course curriculum section content html.
+			 *
+			 * @since 1.5.15
+			 * @param string $html HTML content.
+			 * @param \Masteriyo\Database\Model $object Lesson or Quiz object.
+			 */
+			$html = apply_filters( 'masteriyo_single_course_curriculum_section_content_html', $html, $object );
+
+			echo $html; // phpcs:ignore
 		}
 	}
 }

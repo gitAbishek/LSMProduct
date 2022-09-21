@@ -3,7 +3,6 @@ import {
 	ButtonGroup,
 	Container,
 	Flex,
-	Heading,
 	Image,
 	Skeleton,
 	SkeletonCircle,
@@ -31,9 +30,7 @@ const QuizSKeleton: React.FC = () => {
 							<Box d={['none', null, 'block']}>
 								<Image src={Logo} w="36px" />
 							</Box>
-							<Heading>
-								<SkeletonText noOfLines={1} width="80px" />
-							</Heading>
+							<SkeletonText noOfLines={1} width="80px" />
 							<Stack
 								direction="row"
 								alignItems="center"
@@ -67,9 +64,7 @@ const QuizSKeleton: React.FC = () => {
 					<Box bg="white" p="10" shadow="box">
 						<Stack direction="column" spacing="8">
 							<Flex align="center" justify="space-between">
-								<Heading as="h1" fontSize="x-large">
-									<Skeleton height="30px" width="100px" />
-								</Heading>
+								<Skeleton height="30px" width="100px" />
 							</Flex>
 							<Stack mt="15px" direction="row" gap="5" justifyContent="center">
 								<SkeletonText noOfLines={1} width="40px" />

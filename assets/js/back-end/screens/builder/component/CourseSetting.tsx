@@ -23,13 +23,14 @@ import {
 	TabPanel,
 	TabPanels,
 	Tabs,
-	Text,
 	useMediaQuery,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
+import { labelStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
 import { CourseDataMap } from '../../../types/course';
 import API from '../../../utils/api';
@@ -44,7 +45,6 @@ interface Props {
 
 const CourseSetting: React.FC<Props> = (props) => {
 	const { courseData } = props;
-
 	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
 	);
@@ -114,18 +114,11 @@ const CourseSetting: React.FC<Props> = (props) => {
 		setValue('price_type', priceType);
 	};
 
-	let tabOrientation: 'vertical' | 'horizontal' = 'vertical';
-	if (isLargerThan768) {
-		tabOrientation = 'vertical';
-	} else {
-		tabOrientation = 'horizontal';
-	}
-
 	return (
 		<Box bg="white" p="10" shadow="box">
 			<form>
-				<Tabs orientation={tabOrientation}>
-					<Stack direction={['column', 'column', 'row', 'row']}>
+				<Tabs orientation={isLargerThan768 ? 'vertical' : 'horizontal'}>
+					<Stack direction={['column', 'column', 'row', 'row']} flex="1">
 						<TabList sx={tabListStyles}>
 							<Tab sx={tabStyles}>{__('General', 'masteriyo')}</Tab>
 							<Tab sx={tabStyles}>{__('Display', 'masteriyo')}</Tab>
@@ -141,7 +134,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 									<Stack direction="column" spacing="8">
 										<ChangeInstructorSetting courseData={courseData} />
 
-										<FormControl>
+										<FormControlTwoCol>
 											<FormLabel>{__('Difficulty', 'masteriyo')}</FormLabel>
 											<Select
 												placeholder={__('Choose Course Level', 'masteriyo')}
@@ -149,10 +142,14 @@ const CourseSetting: React.FC<Props> = (props) => {
 												{...register('difficulty.id')}>
 												{renderDifficultiesOption()}
 											</Select>
-										</FormControl>
-										<Stack direction="column" spacing="0">
-											<FormLabel>{__('Duration', 'masteriyo')}</FormLabel>
-											<Stack direction={['column', 'column', 'row']}>
+										</FormControlTwoCol>
+										<Stack
+											direction={['column', 'column', 'column', 'row']}
+											spacing="0">
+											<FormLabel sx={labelStyles}>
+												{__('Duration', 'masteriyo')}
+											</FormLabel>
+											<Stack direction={['column', 'column', 'row']} w="100%">
 												<FormControl isInvalid={!!errors?.duration_hour}>
 													<Controller
 														name="duration_hour"
@@ -213,11 +210,14 @@ const CourseSetting: React.FC<Props> = (props) => {
 												</FormControl>
 											</Stack>
 										</Stack>
-										<FormControl>
+										<FormControlTwoCol
+											display="flex"
+											flexDirection={['column', 'column', 'column', 'row']}>
 											<FormLabel>
 												{__('Maximum Students', 'masteriyo')}
 											</FormLabel>
 											<RadioGroup
+												w="100%"
 												onChange={setEnrollDisplayValue}
 												value={enrollDisplayValue}>
 												<Stack direction="column" spacing="4">
@@ -232,39 +232,38 @@ const CourseSetting: React.FC<Props> = (props) => {
 
 														<Radio value="1">{__('Limit', 'masteriyo')}</Radio>
 													</Stack>
-													<Collapse
-														in={enrollDisplayValue != '0'}
-														animateOpacity>
-														<FormControl>
-															<FormLabel>
-																{__('Number of Students', 'masteriyo')}
-															</FormLabel>
-															<Controller
-																name="enrollment_limit"
-																render={({ field }) => (
-																	<NumberInput
-																		{...field}
-																		defaultValue={courseData?.enrollment_limit}>
-																		<NumberInputField />
-																		<NumberInputStepper>
-																			<NumberIncrementStepper />
-																			<NumberDecrementStepper />
-																		</NumberInputStepper>
-																	</NumberInput>
-																)}
-															/>
-														</FormControl>
-													</Collapse>
 												</Stack>
 											</RadioGroup>
-										</FormControl>
+										</FormControlTwoCol>
+										<Collapse in={enrollDisplayValue != '0'} animateOpacity>
+											<FormControlTwoCol>
+												<FormLabel>
+													{__('Number of Students', 'masteriyo')}
+												</FormLabel>
+												<Controller
+													name="enrollment_limit"
+													render={({ field }) => (
+														<NumberInput
+															w="100%"
+															{...field}
+															defaultValue={courseData?.enrollment_limit}>
+															<NumberInputField />
+															<NumberInputStepper>
+																<NumberIncrementStepper />
+																<NumberDecrementStepper />
+															</NumberInputStepper>
+														</NumberInput>
+													)}
+												/>
+											</FormControlTwoCol>
+										</Collapse>
 									</Stack>
 								)}
 							</TabPanel>
 
 							<TabPanel>
 								<Stack direction="column" spacing="8">
-									<FormControl>
+									<FormControlTwoCol>
 										<FormLabel>
 											{__('Curriculum in Single page', 'masteriyo')}
 										</FormLabel>
@@ -273,41 +272,33 @@ const CourseSetting: React.FC<Props> = (props) => {
 												courseData?.show_curriculum ? 'true' : 'false'
 											}
 											onChange={(value) => setValue('show_curriculum', value)}>
-											<Stack direction="row" spacing="8">
-												<Stack
-													direction={{ base: 'column', sm: 'row' }}
-													justifyContent="center"
-													alignItems="center">
-													<Radio value="true" />
-													<Text textAlign="center">
-														{__('Always Visible', 'masteriyo')}
-													</Text>
-												</Stack>
-												<Stack
-													direction={{ base: 'column', sm: 'row' }}
-													justifyContent="center"
-													alignItems="center">
-													<Radio value="false" />
-													<Text textAlign="center">
-														{__('Only Visible to Enrollers', 'masteriyo')}
-													</Text>
-												</Stack>
+											<Stack
+												direction={['column', 'column', 'row']}
+												spacing={[4, 4, 8]}>
+												<Radio value="true">
+													{__('Always Visible', 'masteriyo')}
+												</Radio>
+												<Radio value="false">
+													{__('Only Visible to Enrollers', 'masteriyo')}
+												</Radio>
 											</Stack>
 										</RadioGroup>
-									</FormControl>
+									</FormControlTwoCol>
 								</Stack>
 							</TabPanel>
 
 							<TabPanel>
 								<Stack direction="column" spacing="8">
-									<FormControl>
+									<FormControlTwoCol>
 										<FormLabel>{__('Pricing Option', 'masteriyo')}</FormLabel>
 										<RadioGroup
 											onChange={onChangePriceType}
 											value={pricingDisplayValue}
 											defaultValue={courseData?.price_type}>
-											<Stack direction="column" spacing="4">
-												<Stack direction="column">
+											<Stack
+												direction={['column', 'column', 'row', 'row']}
+												spacing="4">
+												<Stack direction="column" flex={2}>
 													<Radio
 														value="free"
 														onChange={() => {
@@ -345,46 +336,48 @@ const CourseSetting: React.FC<Props> = (props) => {
 														</RadioGroup>
 													</Collapse>
 												</Stack>
-												<Radio
-													onChange={() => setValue('access_mode', 'one_time')}
-													value="paid">
-													{__('Paid', 'masteriyo')}
-												</Radio>
-												<Collapse
-													in={pricingDisplayValue != 'free'}
-													animateOpacity>
-													<FormControl>
-														<FormLabel>
-															{__('One Time Fee', 'masteriyo')}
-														</FormLabel>
-														<Controller
-															name="regular_price"
-															defaultValue={
-																courseData?.regular_price
-																	? courseData.regular_price
-																	: ''
-															}
-															render={({ field }) => (
-																<NumberInput {...field} w="full" min={0}>
-																	<NumberInputField
-																		borderRadius="sm"
-																		shadow="input"
-																	/>
-																	<NumberInputStepper>
-																		<NumberIncrementStepper />
-																		<NumberDecrementStepper />
-																	</NumberInputStepper>
-																</NumberInput>
-															)}
-														/>
-														<FormHelperText>
-															{currencyCode} ({decodeEntity(currencySymbol)})
-														</FormHelperText>
-													</FormControl>
-												</Collapse>
+												<Stack direction="column" flex={3}>
+													<Radio
+														onChange={() => setValue('access_mode', 'one_time')}
+														value="paid">
+														{__('Paid', 'masteriyo')}
+													</Radio>
+													<Collapse
+														in={pricingDisplayValue != 'free'}
+														animateOpacity>
+														<FormControl>
+															<FormLabel>
+																{__('One Time Fee', 'masteriyo')}
+															</FormLabel>
+															<Controller
+																name="regular_price"
+																defaultValue={
+																	courseData?.regular_price
+																		? courseData.regular_price
+																		: ''
+																}
+																render={({ field }) => (
+																	<NumberInput {...field} w="full" min={0}>
+																		<NumberInputField
+																			borderRadius="sm"
+																			shadow="input"
+																		/>
+																		<NumberInputStepper>
+																			<NumberIncrementStepper />
+																			<NumberDecrementStepper />
+																		</NumberInputStepper>
+																	</NumberInput>
+																)}
+															/>
+															<FormHelperText>
+																{currencyCode} ({decodeEntity(currencySymbol)})
+															</FormHelperText>
+														</FormControl>
+													</Collapse>
+												</Stack>
 											</Stack>
 										</RadioGroup>
-									</FormControl>
+									</FormControlTwoCol>
 								</Stack>
 							</TabPanel>
 						</TabPanels>

@@ -1,12 +1,8 @@
-import {
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	Input,
-} from '@chakra-ui/react';
+import { FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 
 const Title: React.FC = () => {
 	const {
@@ -15,7 +11,7 @@ const Title: React.FC = () => {
 	} = useFormContext();
 
 	return (
-		<FormControl isInvalid={!!errors?.title}>
+		<FormControlTwoCol isInvalid={!!errors?.title}>
 			<FormLabel>{__('Review Title', 'masteriyo')}</FormLabel>
 			<Input
 				placeholder={__('Your Review Title', 'masteriyo')}
@@ -26,7 +22,7 @@ const Title: React.FC = () => {
 			<FormErrorMessage>
 				{errors?.title && errors?.title?.message}
 			</FormErrorMessage>
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

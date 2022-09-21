@@ -5,6 +5,9 @@
  * @since 1.0.0
  */
 
+use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\QuestionType;
+use Masteriyo\PostType\PostType;
 
 /**
  * Get questions
@@ -45,10 +48,6 @@ function masteriyo_get_question( $question ) {
 		$id = is_a( $question, '\WP_Post' ) ? $question->ID : $question->get_id();
 	}
 
-	$type           = get_post_meta( $id, '_type', true );
-	$question_obj   = masteriyo( empty( $type ) ? 'question' : "question.{$type}" );
-	$question_store = masteriyo( 'question.store' );
-
 	if ( is_a( $question, 'Masteriyo\Models\Question' ) ) {
 		$id = $question->get_id();
 	} elseif ( is_a( $question, 'WP_Post' ) ) {
@@ -58,6 +57,10 @@ function masteriyo_get_question( $question ) {
 	}
 
 	try {
+		$type           = get_post_meta( $id, '_type', true );
+		$question_obj   = masteriyo( empty( $type ) ? 'question' : "question.{$type}" );
+		$question_store = masteriyo( 'question.store' );
+
 		$id = absint( $id );
 		$question_obj->set_id( $id );
 		$question_store->read( $question_obj );
@@ -81,28 +84,30 @@ function masteriyo_get_question( $question ) {
  * Get the number of questions of a quiz.
  *
  * @since 1.0.0
+ * @since 1.5.15 Return zero instead of WP_Error
  *
  * @param int|Question|WP_Post $question Question id or Question Model or Post.
  *
- * @return int\WP_Error
+ * @return int
  */
 function masteriyo_get_questions_count_by_quiz( $quiz ) {
-	global $wpdb;
-
-	$quiz_obj = masteriyo_get_quiz( $quiz );
+	$quiz = masteriyo_get_quiz( $quiz );
 
 	// Bail early if there is error.
-	if ( is_wp_error( $quiz_obj ) ) {
-		return $quiz_obj;
+	if ( is_null( $quiz ) ) {
+		return 0;
 	}
 
-	$count = $wpdb->get_var(
-		$wpdb->prepare(
-			"SELECT COUNT(ID) FROM {$wpdb->prefix}posts WHERE post_type = %s AND post_parent = %d",
-			'mto-question',
-			$quiz_obj->get_id()
+	$query = new \WP_Query(
+		array(
+			'post_type'    => 'mto-question',
+			'post_status'  => PostStatus::PUBLISH,
+			'post_parent'  => $quiz->get_id(),
+			'meta_key'     => '_type',
+			'meta_value'   => QuestionType::all(),
+			'meta_compare' => 'IN',
 		)
 	);
 
-	return absint( $count );
+	return absint( $query->found_posts );
 }

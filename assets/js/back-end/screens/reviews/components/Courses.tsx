@@ -38,7 +38,17 @@ const Courses: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<FormControl isInvalid={!!errors?.course_id} py="3">
+		<FormControl
+			sx={{
+				'.css-2b097c-container': {
+					width: '100%',
+				},
+			}}
+			display="flex"
+			flexDirection={['column', 'column', 'column', 'row']}
+			alignItems={{ lg: 'center' }}
+			isInvalid={!!errors?.course_id}
+			py="3">
 			<FormLabel>{__('Course', 'masteriyo')}</FormLabel>
 			<AsyncSelect
 				{...register('course_id', {

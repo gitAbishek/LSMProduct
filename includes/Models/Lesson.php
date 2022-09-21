@@ -208,6 +208,27 @@ class Lesson extends Model {
 		return apply_filters( 'masteriyo_lesson_preview_link', $preview_link, $this );
 	}
 
+	/**
+	 * Get icon.
+	 *
+	 * @since 1.5.15
+	 *
+	 * @return string
+	 */
+	public function get_icon( $context = 'single-course.curriculum.section.content' ) {
+		$icon = empty( $this->get_video_source_url() ) ? masteriyo_get_svg( 'left-align' ) : masteriyo_get_svg( 'play' );
+
+		/**
+		 * Filters lesson icon.
+		 *
+		 * @since 1.5.15
+		 *
+		 * @param string $icon.
+		 * @param string $context.
+		 */
+		return apply_filters( 'masteriyo_lesson_icon', $icon, $context );
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| CRUD Getters

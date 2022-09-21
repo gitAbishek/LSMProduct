@@ -20,7 +20,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronLeft, BiInfoCircle } from 'react-icons/bi';
+import { BiChevronLeft, BiChevronRight, BiInfoCircle } from 'react-icons/bi';
 import { useMutation, useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
@@ -35,7 +35,7 @@ import urls from '../../../../constants/urls';
 import { UserSchema } from '../../../../schemas';
 import UserSkeleton from '../../../../skeleton/UserSkeleton';
 import API from '../../../../utils/api';
-import { deepClean } from '../../../../utils/utils';
+import { deepClean, isRightDir } from '../../../../utils/utils';
 
 const EditStudent: React.FC = () => {
 	const { userId }: any = useParams();
@@ -107,7 +107,12 @@ const EditStudent: React.FC = () => {
 							<Button
 								variant="link"
 								_hover={{ color: 'primary.500' }}
-								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
+								leftIcon={
+									<Icon
+										fontSize="xl"
+										as={isRightDir ? BiChevronRight : BiChevronLeft}
+									/>
+								}>
 								{__('Back to Students', 'masteriyo')}
 							</Button>
 						</RouterLink>

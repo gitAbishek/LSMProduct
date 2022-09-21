@@ -1,12 +1,8 @@
-import {
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	Stack,
-} from '@chakra-ui/react';
+import { FormErrorMessage, FormLabel, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import RatingButton from '../../../components/common/RatingButton';
 
 const Rating: React.FC = () => {
@@ -37,22 +33,21 @@ const Rating: React.FC = () => {
 	}
 
 	return (
-		<FormControl isInvalid={!!errors?.title}>
+		<FormControlTwoCol isInvalid={!!errors?.title}>
 			<FormLabel>{__('Review Rating', 'masteriyo')}</FormLabel>
-			<Stack direction="row" spacing="3" align="center" justify="space-between">
-				<Stack
-					direction="row"
-					spacing="0"
-					color="orange.300"
-					cursor={'pointer'}>
-					<input type="hidden" {...register('rating')} />
-					{buttons}
-				</Stack>
+			<Stack
+				direction="row"
+				width="100%"
+				spacing="0"
+				color="orange.300"
+				cursor={'pointer'}>
+				<input type="hidden" {...register('rating')} />
+				{buttons}
 			</Stack>
 			<FormErrorMessage>
 				{errors?.rating && errors?.rating?.message}
 			</FormErrorMessage>
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

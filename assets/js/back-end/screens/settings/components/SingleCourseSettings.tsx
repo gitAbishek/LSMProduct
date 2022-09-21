@@ -2,7 +2,6 @@ import {
 	Alert,
 	AlertIcon,
 	Box,
-	FormControl,
 	FormLabel,
 	Icon,
 	Stack,
@@ -18,6 +17,7 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { BiInfoCircle } from 'react-icons/bi';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import {
 	infoIconStyles,
 	tabListStyles,
@@ -43,7 +43,7 @@ const SingleCourseSettings: React.FC<Props> = (props) => {
 				<TabPanels flex="1">
 					<TabPanel>
 						<Stack direction="column" spacing="8">
-							<FormControl>
+							<FormControlTwoCol>
 								<Stack direction="row" spacing="4">
 									<FormLabel>
 										{__('Enable Review', 'masteriyo')}
@@ -60,37 +60,37 @@ const SingleCourseSettings: React.FC<Props> = (props) => {
 										</Tooltip>
 									</FormLabel>
 									<Switch
+										w="100%"
 										{...register('single_course.display.enable_review')}
 										defaultChecked={singleCourseData?.display?.enable_review}
 									/>
 								</Stack>
-							</FormControl>
+							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>
 					<TabPanel>
 						<Stack spacing={4}>
-							<FormControl>
-								<Stack direction="row" spacing="4">
-									<FormLabel>
-										{__('Enable Related Courses', 'masteriyo')}
-										<Tooltip
-											label={__(
-												'Enable related courses section in single course page.',
-												'masteriyo'
-											)}
-											hasArrow
-											fontSize="xs">
-											<Box as="span" sx={infoIconStyles}>
-												<Icon as={BiInfoCircle} />
-											</Box>
-										</Tooltip>
-									</FormLabel>
-									<Switch
-										{...register('single_course.related_courses.enable')}
-										defaultChecked={singleCourseData?.related_courses?.enable}
-									/>
-								</Stack>
-							</FormControl>
+							<FormControlTwoCol>
+								<FormLabel>
+									{__('Enable', 'masteriyo')}
+									<Tooltip
+										label={__(
+											'Enable related courses section in single course page.',
+											'masteriyo'
+										)}
+										hasArrow
+										fontSize="xs">
+										<Box as="span" sx={infoIconStyles}>
+											<Icon as={BiInfoCircle} />
+										</Box>
+									</Tooltip>
+								</FormLabel>
+								<Switch
+									w="100%"
+									{...register('single_course.related_courses.enable')}
+									defaultChecked={singleCourseData?.related_courses?.enable}
+								/>
+							</FormControlTwoCol>
 							<Alert status="info">
 								<AlertIcon />
 								{__(

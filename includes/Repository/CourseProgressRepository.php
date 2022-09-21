@@ -9,10 +9,11 @@ namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\CourseProgressQuery;
 use Masteriyo\Enums\CourseProgressStatus;
 use Masteriyo\Enums\CourseProgressPostType;
-use Masteriyo\Models\CourseProgress;
+use Masteriyo\Enums\SectionChildrenItemType;
 use Masteriyo\Query\CourseProgressItemQuery;
 use Masteriyo\Repository\AbstractRepository;
 

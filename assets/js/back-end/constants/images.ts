@@ -1,4 +1,5 @@
 export { default as NotFound } from '../../../img/404.png';
+export { default as Assignments } from '../../../img/assignments.png';
 export { default as CloseCone } from '../../../img/close-cone.png';
 export { default as CourseAttachment } from '../../../img/course-attachment.png';
 export { default as CourseCategoriesBlockGridDesign } from '../../../img/course-categories-block-grid-design.png';
@@ -12,6 +13,7 @@ export { default as onboardFinishCover } from '../../../img/onboard-finish-cover
 export { default as PasswordStrength } from '../../../img/password-strength.png';
 export { default as Polygon } from '../../../img/polygon.png';
 export { default as Prerequisites } from '../../../img/prerequisites.png';
+export { default as Recaptcha } from '../../../img/recaptcha.png';
 export { default as Stripe } from '../../../img/stripe.png';
 export { default as whiteLabel } from '../../../img/white-label.png';
 export { default as Wishlist } from '../../../img/wishlist.png';

@@ -93,69 +93,65 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 							</FormControlTwoCol>
 
 							<FormControlTwoCol>
-								<Stack direction="column">
-									<FormLabel>
-										{__('Single Course Permalink', 'masteriyo')}
-									</FormLabel>
-									<Controller
-										name="advance.permalinks.single_course_permalink"
-										render={({ field }) => (
-											<RadioGroup
-												{...field}
-												defaultValue={
-													advanceData?.permalinks?.single_course_permalink
-												}>
-												<Stack spacing={3} direction="column">
-													<Radio value="course" w="100%">
-														<Flex flexDirection="column">
-															<Text fontSize="sm">
-																{__('Default', 'masteriyo')}
-															</Text>
-															<Code flex="1">
-																{localized.home_url}
-																{__('?course=sample-course', 'masteriyo')}
-															</Code>
-														</Flex>
-													</Radio>
-													{/** TS */}
-													<Radio value={localized.pageSlugs.courses}>
-														<Flex flexDirection="column">
-															<Text fontSize="sm">
-																{__('Courses page base', 'masteriyo')}
-															</Text>
-															<Code flex="1">
-																{localized.home_url}/
-																{localized.pageSlugs.courses}
-																{__('/sample-course', 'masteriyo')}
-															</Code>
-														</Flex>
-													</Radio>
-													<Radio
-														value={
-															localized.pageSlugs.courses + '/%course_cat%/'
-														}>
-														<Flex flexDirection="column">
-															<Text fontSize="sm">
-																{__(
-																	'Courses page base with category',
-																	'masteriyo'
-																)}
-															</Text>
-															<Code flex="1">
-																{localized.home_url}/
-																{localized.pageSlugs.courses}
-																{__(
-																	'/course-category/sample-course',
-																	'masteriyo'
-																)}
-															</Code>
-														</Flex>
-													</Radio>
-												</Stack>
-											</RadioGroup>
-										)}
-									/>
-								</Stack>
+								<FormLabel>
+									{__('Single Course Permalink', 'masteriyo')}
+								</FormLabel>
+								<Controller
+									name="advance.permalinks.single_course_permalink"
+									render={({ field }) => (
+										<RadioGroup
+											{...field}
+											defaultValue={
+												advanceData?.permalinks?.single_course_permalink
+											}>
+											<Stack spacing={3} direction="column">
+												<Radio value="course" w="100%">
+													<Flex flexDirection="column">
+														<Text fontSize="sm">
+															{__('Default', 'masteriyo')}
+														</Text>
+														<Code flex="1">
+															{localized.home_url}
+															{__('?course=sample-course', 'masteriyo')}
+														</Code>
+													</Flex>
+												</Radio>
+												{/** TS */}
+												<Radio value={localized.pageSlugs.courses}>
+													<Flex flexDirection="column">
+														<Text fontSize="sm">
+															{__('Courses page base', 'masteriyo')}
+														</Text>
+														<Code flex="1">
+															{localized.home_url}/{localized.pageSlugs.courses}
+															{__('/sample-course', 'masteriyo')}
+														</Code>
+													</Flex>
+												</Radio>
+												<Radio
+													value={
+														localized.pageSlugs.courses + '/%course_cat%/'
+													}>
+													<Flex flexDirection="column">
+														<Text fontSize="sm">
+															{__(
+																'Courses page base with category',
+																'masteriyo'
+															)}
+														</Text>
+														<Code flex="1">
+															{localized.home_url}/{localized.pageSlugs.courses}
+															{__(
+																'/course-category/sample-course',
+																'masteriyo'
+															)}
+														</Code>
+													</Flex>
+												</Radio>
+											</Stack>
+										</RadioGroup>
+									)}
+								/>
 							</FormControlTwoCol>
 						</Stack>
 					</TabPanel>

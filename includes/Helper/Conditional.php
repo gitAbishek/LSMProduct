@@ -638,7 +638,7 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 	 * Return true if the page is interactive.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Added $page parameter.
+	 * @since 1.5.15 Added $page parameter.
 	 *
 	 * @param WP_Post|int $page Page or Page ID. (Default: current page)
 	 *
@@ -660,7 +660,7 @@ if ( ! function_exists( 'masteriyo_is_interactive_page' ) ) {
 		/**
 		 * Filters learn page.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 *
 		 * @param boolean $is_learn_page True if the page is learn page.
 		 * @param WP_Post|null $page Current or passed page.

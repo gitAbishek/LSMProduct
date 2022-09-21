@@ -219,7 +219,7 @@ class Quiz extends Model {
 	/**
 	 * Get icon.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @return string
 	 */
@@ -229,7 +229,7 @@ class Quiz extends Model {
 		/**
 		 * Filters lesson icon.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 *
 		 * @param string $icon.
 		 * @param string $context.

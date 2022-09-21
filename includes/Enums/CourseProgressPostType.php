@@ -2,7 +2,7 @@
 /**
  * Course progress post type enums.
  *
- * @since x.x.x
+ * @since 1.5.15
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Course progress post type enum class.
  *
- * @since x.x.x
+ * @since 1.5.15
  */
 class CourseProgressPostType {
 	/**
 	 * Course progress lesson post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const LESSON = 'mto-lesson';
@@ -27,7 +27,7 @@ class CourseProgressPostType {
 	/**
 	 * Course progress quiz post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const QUIZ = 'mto-quiz';
@@ -35,7 +35,7 @@ class CourseProgressPostType {
 	/**
 	 * Return all course progress post types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @return array
 	 */
@@ -44,7 +44,7 @@ class CourseProgressPostType {
 			/**
 			 * Filters course progress post types.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.15
 			 *
 			 * @param string[] $post_types Course progress post types.
 			 */
@@ -61,7 +61,7 @@ class CourseProgressPostType {
 	/**
 	 * Return item type from post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param string $type Post type.
 	 * @return string

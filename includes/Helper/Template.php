@@ -1556,7 +1556,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_summary' ) 
 	/**
 	 * Display single course curriculum summary.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param \Masteriyo\Models\Course $course Course object.
 	 */
@@ -1610,7 +1610,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_summary' ) 
 		/**
 		 * Filters masteriyo single course summaries.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 *
 		 * @param array $summaries Summaries.
 		 * @param \Masteriyo\Models\Course $course Course object.
@@ -1673,7 +1673,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_sum
 	/**
 	 * Display section summary (number of lessons and quizzes) in single course curriculum page.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param \Masteriyo\Models\Course $course Course object.
 	 * @param \Masteriyo\Models\Section $section Section object.
@@ -1715,7 +1715,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_sum
 		/**
 		 * Filters single course curriculum section summaries.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 *
 		 * @param array $summaries Section summaries.
 		 * @param \Masteriyo\Models\Course $course Course object.
@@ -1772,7 +1772,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_con
 	/**
 	 * Display single course curriculum section content.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param \Masteriyo\Models\Course $course Course object.
 	 * @param \Masteriyo\Models\Section $section Section object.
@@ -1822,7 +1822,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_con
 			/**
 			 * Filters single course curriculum section content html.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.15
 			 * @param string $html HTML content.
 			 * @param \Masteriyo\Database\Model $object Lesson or Quiz object.
 			 */

@@ -1045,7 +1045,7 @@ class QuestionsController extends PostsController {
 	/**
 	 * Process objects collection.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param array $objects Courses data.
 	 * @param array $query_args Query arguments.

@@ -519,7 +519,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		/**
 		 * Filters course progress summary.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 *
 		 * @param $summaries array Course progress all summary.
 		 * @param CourseProgress $course_progress
@@ -533,7 +533,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * Get all course progress summary.
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.15
 	 *
 	 * @param CourseProgress $course_progress
 	 * @param array $items Course progress items (total and quiz),
@@ -551,7 +551,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 		 * Filters course progress all summary.
 		 *
 		 * @since 1.0.0
-		 * @deprecated x.x.x
+		 * @deprecated 1.5.15
 		 *
 		 * @param $all_summary array Course progress all summary.
 		 * @param CourseProgress $course_progress
@@ -564,7 +564,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * Get total summary(completed, pending).
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.15
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (total and quiz),
@@ -603,7 +603,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * Get lesson summary(completed, pending).
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.15
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (lesson and quiz),
@@ -642,7 +642,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 * Get quiz summary(completed, pending).
 	 *
 	 * @since 1.0.0
-	 * @deprecated x.x.x
+	 * @deprecated 1.5.15
 	 *
 	 * @param CourseProgress $course_progress Course progress object.
 	 * @param array $items Course progress items (quiz and quiz),

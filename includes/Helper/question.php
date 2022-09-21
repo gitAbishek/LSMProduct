@@ -84,7 +84,7 @@ function masteriyo_get_question( $question ) {
  * Get the number of questions of a quiz.
  *
  * @since 1.0.0
- * @since x.x.x Return zero instead of WP_Error
+ * @since 1.5.15 Return zero instead of WP_Error
  *
  * @param int|Question|WP_Post $question Question id or Question Model or Post.
  *

@@ -2,7 +2,7 @@
 /**
  * Section children post type enums.
  *
- * @since x.x.x
+ * @since 1.5.15
  * @package Masteriyo\Enums
  */
 
@@ -13,13 +13,13 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Section children post type enum class.
  *
- * @since x.x.x
+ * @since 1.5.15
  */
 class SectionChildrenPostType {
 	/**
 	 * Section children lesson post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const LESSON = 'mto-lesson';
@@ -27,7 +27,7 @@ class SectionChildrenPostType {
 	/**
 	 * Section children quiz post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const QUIZ = 'mto-quiz';
@@ -35,7 +35,7 @@ class SectionChildrenPostType {
 	/**
 	 * Return all section children post types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @return array
 	 */
@@ -44,7 +44,7 @@ class SectionChildrenPostType {
 			/**
 			 * Filters section children post types.
 			 *
-			 * @since x.x.x
+			 * @since 1.5.15
 			 *
 			 * @param string[] $post_types Section children post types.
 			 */
@@ -61,7 +61,7 @@ class SectionChildrenPostType {
 	/**
 	 * Return item type from post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @param string $type Post type.
 	 * @return string

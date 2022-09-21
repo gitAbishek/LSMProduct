@@ -9,7 +9,7 @@ class PostType {
 	/**
 	 * Course post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const COURSE = 'mto-course';
@@ -17,7 +17,7 @@ class PostType {
 	/**
 	 * Section post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const SECTION = 'mto-section';
@@ -25,7 +25,7 @@ class PostType {
 	/**
 	 * Lesson post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const LESSON = 'mto-lesson';
@@ -33,7 +33,7 @@ class PostType {
 	/**
 	 * Quiz post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const QUIZ = 'mto-quiz';
@@ -41,7 +41,7 @@ class PostType {
 	/**
 	 * Question post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 * @var string
 	 */
 	const QUESTION = 'mto-question';
@@ -174,7 +174,7 @@ class PostType {
 	/**
 	 * Return all post types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.15
 	 *
 	 * @return string[]
 	 */
@@ -182,7 +182,7 @@ class PostType {
 		/**
 		 * Filter post types register in masteriyo.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.15
 		 */
 		$post_types = apply_filters(
 			'masteriyo_post_types',

@@ -301,8 +301,8 @@ function masteriyo_trim_course_highlights( $highlights, $limit = 3 ) {
  * Get course contents.
  *
  * @since 1.0.0
- * @since x.x.x $course parameter can be WP_Post or Course Object.
- * @since x.x.x Added $status parameter.
+ * @since 1.5.15 $course parameter can be WP_Post or Course Object.
+ * @since 1.5.15 Added $status parameter.
  *
  * @param WP_Post|\Masteriyo\Models\Course|integer $course Course object or Course Post or Course ID.
  *
@@ -348,7 +348,7 @@ function masteriyo_get_course_contents( $course, $status = PostStatus::PUBLISH )
 	 *
 	 * @since 1.0.0
 	 *
-	 * @since x.x.x $course parameter can be WP_Post or Course Object.
+	 * @since 1.5.15 $course parameter can be WP_Post or Course Object.
 	 *
 	 * @param \Masteriyo\Database\Model $contents Course contents objects.
 	 * @param WP_Post|\Masteriyo\Models\Course|integer $course Course ID or WP Post or Course object.
@@ -360,7 +360,7 @@ function masteriyo_get_course_contents( $course, $status = PostStatus::PUBLISH )
  * Get course structure.
  *
  * @since 1.0.0
- * @since x.x.x $course parameter can be WP_Post or Course object.
+ * @since 1.5.15 $course parameter can be WP_Post or Course object.
  *
 * @param WP_Post|\Masteriyo\Models\Course|integer $course Course object or Course Post or Course ID.
  *
@@ -397,7 +397,7 @@ function masteriyo_get_course_structure( $course ) {
 	 * Filter course structure.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x $course parameter can be Course object or WP_Post.
+	 * @since 1.5.15 $course parameter can be Course object or WP_Post.
 	 *
 	 * @param array $sections Ordered sections.
 	 * @param int|WP_Post|\Masteriyo\Models\Course|null $course_id Course ID or Course object or WP_post.

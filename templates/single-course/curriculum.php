@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * Fires before rendering curriculum section in single course page.
  *
  * @since 1.0.0
- * @since x.x.x Added $course parameter.
+ * @since 1.5.15 Added $course parameter.
  *
  * @param \Masteriyo\Models\Course $course Course object.
  */
@@ -38,7 +38,7 @@ do_action( 'masteriyo_before_single_course_curriculum', $course );
 					/**
 					 * Display single course curriculum summary.( Sections, Lessons and Quizzes count)
 					 *
-					 * @since x.x.x
+					 * @since 1.5.15
 					 *
 					 * @param \Masteriyo\Model\Course $course Course object.
 					 */
@@ -62,7 +62,7 @@ do_action( 'masteriyo_before_single_course_curriculum', $course );
 						/**
 						 * Display single course curriculum summary.( Sections, Lessons and Quizzes count)
 						 *
-						 * @since x.x.x
+						 * @since 1.5.15
 						 *
 						 * @param \Masteriyo\Model\Course $course Course object.
 						 * @param \Masteriyo\Model\Section $section Section object.
@@ -78,7 +78,7 @@ do_action( 'masteriyo_before_single_course_curriculum', $course );
 					/**
 					 * Display single course curriculum section children content.
 					 *
-					 * @since x.x.x
+					 * @since 1.5.15
 					 *
 					 * @param \Masteriyo\Model\Course $course Course object.
 					 * @param \Masteriyo\Model\Section $section Section object.
@@ -98,7 +98,7 @@ do_action( 'masteriyo_before_single_course_curriculum', $course );
  * Fires after rendering curriculum section in single course page.
  *
  * @since 1.0.0
- * @since x.x.x Added $course parameter.
+ * @since 1.5.15 Added $course parameter.
  *
  * @param \Masteriyo\Models\Course $course Course object.
  */

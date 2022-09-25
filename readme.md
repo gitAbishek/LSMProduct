@@ -1,6 +1,6 @@
 ![WordPress LMS](https://ps.w.org/learning-management-system/assets/banner-1544x500.png?rev=2599799)
 
-# LMS for WordPress ![status](https://github.com/wpeverest/wordpress-lms/actions/workflows/deploy-to-staging.yml/badge.svg)
+# LMS for WordPress ![status](https://github.com/Masteriyo/learning-management-system/actions/workflows/deploy-to-staging.yml/badge.svg)
 
 **Contributors**: Masteriyo
 

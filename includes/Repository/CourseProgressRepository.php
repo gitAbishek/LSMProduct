@@ -379,7 +379,7 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function get_course_progress_items( $course_progress ) {
 		$query = new \WP_Query(
@@ -508,12 +508,12 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			);
 		}
 
-		if ( 'all' === $type ) {
-			$summaries['total'] = array(
-				'pending'   => array_sum( wp_list_pluck( $summaries, 'pending' ) ),
-				'completed' => array_sum( wp_list_pluck( $summaries, 'completed' ) ),
-			);
-		} elseif ( isset( $summaries[ $type ] ) ) {
+		$summaries['total'] = array(
+			'pending'   => array_sum( wp_list_pluck( $summaries, 'pending' ) ),
+			'completed' => array_sum( wp_list_pluck( $summaries, 'completed' ) ),
+		);
+
+		if ( isset( $summaries[ $type ] ) ) {
 			$summaries = $summaries[ $type ];
 		}
 

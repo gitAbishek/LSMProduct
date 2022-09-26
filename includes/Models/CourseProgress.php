@@ -367,9 +367,11 @@ class CourseProgress extends Model {
 	}
 
 	/**
-	 * Get user course progress summary
+	 * Get user course progress summary.
 	 *
-	 * @return void
+	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_summary( $type = 'all' ) {
 		return $this->repository->get_summary( $this, $type );

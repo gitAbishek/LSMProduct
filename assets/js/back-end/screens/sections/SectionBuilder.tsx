@@ -117,7 +117,7 @@ const SectionBuilder: React.FC<Props> = (props) => {
 													)}
 													<Link
 														isExternal
-														href="https://docs.masteriyo.com/docs/how-to-add-courses/#1-toc-title">
+														href="https://docs.masteriyo.com/course-creation/complete-course-creation">
 														<Text as="span" color="gray.800" fontSize="xs">
 															{__(' Documentation', 'masteriyo')}
 														</Text>

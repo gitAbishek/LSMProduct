@@ -206,8 +206,8 @@ export const accountStyles = {
 };
 
 export const labelStyles: SystemStyleObject = {
-	w: '240px',
-	maxW: '240px',
+	w: ['100%', '240px', '240px'],
+	maxW: ['100%', '240px', '240px'],
 	flex: '0 0 240px',
 	'@media screen and (max-width: 62em)': {
 		flex: '1',

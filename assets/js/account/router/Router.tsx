@@ -22,8 +22,11 @@ const Router: React.FC = () => {
 			) : null}
 			<Box bg="white" sx={accountStyles}>
 				<HashRouter>
-					<Container maxW="container.xl" py="16">
-						<Stack direction="row" spacing="8" id="masteriyo-account-container">
+					<Container maxW="container.xl" py="16" px={{ base: 0, sm: '1rem' }}>
+						<Stack
+							direction="row"
+							spacing={{ base: 2.5, sm: 8 }}
+							id="masteriyo-account-container">
 							<Sidebar />
 							<Box flex="1">
 								<Switch>

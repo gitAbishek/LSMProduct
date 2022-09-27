@@ -1,7 +1,8 @@
-import { FormControl, FormLabel, Select } from '@chakra-ui/react';
+import { FormLabel, Select } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 
 const reviewStatusList = [
 	{
@@ -29,17 +30,7 @@ const Status: React.FC = () => {
 	} = useFormContext();
 
 	return (
-		<FormControl
-			sx={{
-				'.css-2b097c-container': {
-					width: '100%',
-				},
-			}}
-			display="flex"
-			flexDirection={['column', 'column', 'column', 'row']}
-			alignItems={{ lg: 'center' }}
-			isInvalid={!!errors?.status}
-			py="3">
+		<FormControlTwoCol isInvalid={!!errors?.status} py="3">
 			<FormLabel>{__('Status', 'masteriyo')}</FormLabel>
 			<Select {...register('status')}>
 				{reviewStatusList.map((option: any) => (
@@ -48,7 +39,7 @@ const Status: React.FC = () => {
 					</option>
 				))}
 			</Select>
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

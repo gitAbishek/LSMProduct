@@ -1,9 +1,10 @@
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
+import { FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import AsyncSelect from 'react-select/async';
+import FormControlTwoCol from '../../../components/common/FormControlTwoCol';
 import { reactSelectStyles } from '../../../config/styles';
 import urls from '../../../constants/urls';
 import { CoursesResponse } from '../../../types/course';
@@ -38,17 +39,7 @@ const Courses: React.FC<Props> = (props) => {
 	);
 
 	return (
-		<FormControl
-			sx={{
-				'.css-2b097c-container': {
-					width: '100%',
-				},
-			}}
-			display="flex"
-			flexDirection={['column', 'column', 'column', 'row']}
-			alignItems={{ lg: 'center' }}
-			isInvalid={!!errors?.course_id}
-			py="3">
+		<FormControlTwoCol isInvalid={!!errors?.course_id} py="3">
 			<FormLabel>{__('Course', 'masteriyo')}</FormLabel>
 			<AsyncSelect
 				{...register('course_id', {
@@ -99,7 +90,7 @@ const Courses: React.FC<Props> = (props) => {
 			<FormErrorMessage>
 				{errors?.course_id && errors?.course_id?.message}
 			</FormErrorMessage>
-		</FormControl>
+		</FormControlTwoCol>
 	);
 };
 

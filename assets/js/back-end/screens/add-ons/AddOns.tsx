@@ -17,6 +17,7 @@ import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
 import {
 	Assignments,
+	Certificate,
 	CourseAttachment,
 	courseFAQ,
 	DownloadMaterial,
@@ -259,6 +260,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={Assignments}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Certificate', 'masteriyo')}
+							addOnDescription={__(
+								'Certificate builder addon for Masteriyo Pro.',
+								'masteriyo'
+							)}
+							thumbnailSrc={Certificate}
 						/>
 					</Col>
 				</Row>

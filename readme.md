@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.15
+**Stable tag**: 1.5.16
 
 **License: GNU** General Public License v3.0
 
@@ -51,6 +51,13 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
+### 1.5.16 - 27-09-2022
+
+- Fix - Course progress completion issue.
+- Fix - Documentation URL updated in section builder.
+- Fix - Bullet appearing in the account page menus in Divi theme.
+- Fix - Responsive issue in the account and global settings page.
+
 ### 1.5.15 - 21-09-2022
 
 - Feature - Added RTL support in react pages like admin, learn and account.
@@ -58,6 +65,7 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 - Enhancement - Added support to change course slug.
 - Tweak - Updated skeleton loader.
 - Tweak - Compatibility fixes.
+
 ### 1.5.14 - 13-09-2022
 
 - Fix - Currency decimals not being set to zero.

@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 6.0.2
 Requires PHP: 7.0
-Stable tag: 1.5.15
+Stable tag: 1.5.16
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,12 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.16 - 27-09-2022 =
+- Fix - Course progress completion issue.
+- Fix - Documentation URL updated in section builder.
+- Fix - Bullet appearing in the account page menus in Divi theme.
+- Fix - Responsive issue in the account and global settings page.
 
 = 1.5.15 - 21-09-2022 =
 - Feature - Added RTL support in react pages like admin, learn and account.

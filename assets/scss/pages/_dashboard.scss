@@ -283,3 +283,15 @@
 		}
 	}
 }
+
+// Center align the icon and the text in left sidebar in Dashboard and fixing bulleting icon in the left sidebar options
+#masteriyo-account-page {
+	ul {
+		list-style-type: none;
+		li {
+			.chakra-stack {
+				align-items: center;
+			}
+		}
+	}
+}

@@ -201,7 +201,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.5.16 - 27-09-2022 =
+= 1.5.16 - 28-09-2022 =
 - Fix - Course progress completion issue.
 - Fix - Documentation URL updated in section builder.
 - Fix - Bullet appearing in the account page menus in Divi theme.

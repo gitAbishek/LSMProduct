@@ -264,9 +264,9 @@ const AddOns = () => {
 					</Col>
 					<Col md={3}>
 						<AddonItem
-							addOnName={__('Certificate', 'masteriyo')}
+							addOnName={__('Certificate Builder', 'masteriyo')}
 							addOnDescription={__(
-								'Certificate builder addon for Masteriyo Pro.',
+								'Provide certificates to encourage students in completing the course.',
 								'masteriyo'
 							)}
 							thumbnailSrc={Certificate}

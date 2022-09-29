@@ -951,7 +951,7 @@ class ScriptStyle {
 							'see_more_reviews'         => __( 'See more reviews', 'masteriyo' ),
 						),
 						'ajaxURL'                 => admin_url( 'admin-ajax.php' ),
-						'course_id'               => isset( $GLOBALS['course'] ) ? $GLOBALS['course']->get_id() : 0,
+						'course_id'               => ( isset( $GLOBALS['course'] ) && is_a( $GLOBALS['course'], '\Masteriyo\Models\Course' ) ) ? $GLOBALS['course']->get_id() : 0,
 						'course_review_pages'     => isset( $GLOBALS['course'] ) ? masteriyo_get_course_reviews_infinite_loading_pages_count( $GLOBALS['course'] ) : 0,
 					),
 				),

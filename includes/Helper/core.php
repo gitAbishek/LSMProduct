@@ -15,6 +15,7 @@ use Masteriyo\ModelException;
 use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\PostType\PostType;
 
 /**
  * Get course.
@@ -799,20 +800,32 @@ function masteriyo_get_related_courses( $course ) {
  * @return integer
  */
 function masteriyo_get_lessons_count( $course ) {
+	$count  = 0;
 	$course = masteriyo_get_course( $course );
 
-	// Bail early if the course is null.
-	if ( is_null( $course ) ) {
-		return 0;
+	if ( $course ) {
+		$query = new \WP_Query(
+			array(
+				'post_type'      => PostType::LESSON,
+				'post_status'    => PostStatus::PUBLISH,
+				'posts_per_page' => 1,
+				'meta_key'       => '_course_id',
+				'meta_value'     => $course->get_id(),
+			)
+		);
+
+		$count = $query->found_posts;
 	}
 
-	$lessons = masteriyo_get_lessons(
-		array(
-			'course_id' => $course->get_id(),
-		)
-	);
-
-	return count( $lessons );
+	/**
+	 * Filters lessons count.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param integer $count Lessons count.
+	 * @param \Masteriyo\Models\Course $course Course object.
+	 */
+	return apply_filters( 'masteriyo_get_lessons_count', $count, $course );
 }
 
 /**

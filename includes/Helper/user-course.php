@@ -7,6 +7,7 @@
  * @package Masteriyo\Helper
  */
 
+use Masteriyo\Enums\UserCourseStatus;
 use Masteriyo\Query\UserCourseQuery;
 
 /**
@@ -60,28 +61,41 @@ function masteriyo_get_user_course_statuses() {
  * Count enrolled users in a course.
  *
  * @since 1.0.0
+ * @since Added support $course parameter to be Masteriyo\Models\Course or WP_Post.
+ *
+ * @param \Masteriyo\Models\Course|WP_Post|int $course Course ID or Course object.
  *
  * @return integer
  */
-function masteriyo_count_enrolled_users( $course_id ) {
-	$query                = new UserCourseQuery(
-		array(
-			'course_id' => $course_id,
-			'status'    => array( 'active', 'enrolled' ),
-		)
-	);
-	$enrolled_users_count = count( $query->get_user_courses() );
+function masteriyo_count_enrolled_users( $course ) {
+	global $wpdb;
+
+	$count  = 0;
+	$course = masteriyo_get_course( $course );
+
+	if ( $wpdb && $course ) {
+		$count = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT COUNT(*) FROM {$wpdb->prefix}masteriyo_user_items WHERE item_id = %d AND ( status = %s OR status = %s )",
+				array(
+					$course->get_id(),
+					UserCourseStatus::ACTIVE,
+					UserCourseStatus::ENROLLED,
+				)
+			)
+		);
+	}
 
 	/**
 	 * Filters enrolled users count for a course.
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Removed third $query parameter.
 	 *
 	 * @param integer $count The enrolled users count for the given course.
-	 * @param integer $course_id Course ID.
-	 * @param Masteriyo\Query\UserCourseQuery $query Query object.
+	 * @param \Masteriyo\Models\Course|null $course Course ID or Course object.
 	 */
-	return apply_filters( 'masteriyo_count_enrolled_users', $enrolled_users_count, $course_id, $query );
+	return apply_filters( 'masteriyo_count_enrolled_users', absint( $count ), $course );
 }
 
 /**

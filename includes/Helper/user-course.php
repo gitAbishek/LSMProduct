@@ -90,7 +90,7 @@ function masteriyo_count_enrolled_users( $course ) {
 	 * Filters enrolled users count for a course.
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Removed third $query parameter.
+	 * @since 1.5.17 Removed third $query parameter.
 	 *
 	 * @param integer $count The enrolled users count for the given course.
 	 * @param \Masteriyo\Models\Course|null $course Course ID or Course object.

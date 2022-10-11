@@ -820,7 +820,7 @@ function masteriyo_get_lessons_count( $course ) {
 	/**
 	 * Filters lessons count.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.17
 	 *
 	 * @param integer $count Lessons count.
 	 * @param \Masteriyo\Models\Course $course Course object.

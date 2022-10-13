@@ -6,6 +6,7 @@ import {
 	Icon,
 	Link,
 	List,
+	ListIcon,
 	ListItem,
 	Stack,
 	useToast,
@@ -13,7 +14,7 @@ import {
 import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronLeft } from 'react-icons/bi';
+import { BiCategory, BiChevronLeft } from 'react-icons/bi';
 import { useMutation, useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
@@ -55,7 +56,7 @@ const AddNewCourseCategory: React.FC = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: __('Category Added', 'masteriyo'),
+					title: __('Course Category Added', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -66,7 +67,7 @@ const AddNewCourseCategory: React.FC = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to create category.', 'masteriyo'),
+					title: __('Failed to create course category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
@@ -96,6 +97,7 @@ const AddNewCourseCategory: React.FC = () => {
 							sx={navLinkStyles}
 							_activeLink={navActiveStyles}
 							to={routes.course_categories.add}>
+							<ListIcon as={BiCategory} />
 							{__('Add New Category', 'masteriyo')}
 						</Link>
 					</ListItem>
@@ -109,7 +111,7 @@ const AddNewCourseCategory: React.FC = () => {
 								variant="link"
 								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
-								{__('Back to Categories', 'masteriyo')}
+								{__('Back to Course Categories', 'masteriyo')}
 							</Button>
 						</RouterLink>
 					</ButtonGroup>

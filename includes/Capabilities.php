@@ -439,8 +439,10 @@ class Capabilities {
 			'list_users'                      => true,
 
 			// Course Difficulties.
+			'manage_course_difficulties'      => true,
 			'delete_course_difficulties'      => true,
 			'assign_course_difficulties'      => true,
+			'edit_course_difficulties'        => true,
 		);
 
 		$capabilities = array_merge( $capabilities, self::get_instructor_capabilities() );

@@ -20,7 +20,8 @@ import {
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
-import { BiListUl, BiPlus } from 'react-icons/bi';
+import { BiCategory, BiPlus } from 'react-icons/bi';
+import { GiStairs } from 'react-icons/gi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Table, Tbody, Th, Thead, Tr } from 'react-super-responsive-table';
@@ -88,7 +89,7 @@ const AllCourseCategories = () => {
 			onError: (error: any) => {
 				onClose();
 				toast({
-					title: __('Failed to delete category.', 'masteriyo'),
+					title: __('Failed to delete course category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
@@ -136,19 +137,29 @@ const AllCourseCategories = () => {
 			<Header
 				showLinks
 				thirdBtn={{
-					label: __('Add New Category', 'masteriyo'),
+					label: __('Add New Course Category', 'masteriyo'),
 					action: () => history.push(routes.course_categories.add),
 					icon: <Icon as={BiPlus} fontSize="md" />,
 				}}>
-				<List>
+				<List d="flex">
 					<ListItem>
 						<Link
 							as={NavLink}
 							sx={navLinkStyles}
 							_activeLink={navActiveStyles}
 							to={routes.course_categories.list}>
-							<ListIcon as={BiListUl} />
-							{__('Categories', 'masteriyo')}
+							<ListIcon as={BiCategory} />
+							{__('Course Categories', 'masteriyo')}
+						</Link>
+					</ListItem>
+					<ListItem>
+						<Link
+							as={NavLink}
+							sx={navLinkStyles}
+							_activeLink={navActiveStyles}
+							to={routes.course_difficulties.list}>
+							<ListIcon as={GiStairs} />
+							{__('Course Difficulties', 'masteriyo')}
 						</Link>
 					</ListItem>
 				</List>

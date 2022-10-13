@@ -15,6 +15,7 @@ import {
 	IconButton,
 	Link,
 	List,
+	ListIcon,
 	ListItem,
 	Menu,
 	MenuButton,
@@ -26,7 +27,12 @@ import {
 import { __ } from '@wordpress/i18n';
 import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { BiChevronLeft, BiDotsVerticalRounded, BiTrash } from 'react-icons/bi';
+import {
+	BiCategory,
+	BiChevronLeft,
+	BiDotsVerticalRounded,
+	BiTrash,
+} from 'react-icons/bi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useParams } from 'react-router';
 import { Link as RouterLink, NavLink } from 'react-router-dom';
@@ -77,7 +83,7 @@ const EditCourseCategory: React.FC = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: __('Category Updated', 'masteriyo'),
+					title: __('Course Category Updated', 'masteriyo'),
 					isClosable: true,
 					status: 'success',
 				});
@@ -87,7 +93,7 @@ const EditCourseCategory: React.FC = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to update category.', 'masteriyo'),
+					title: __('Failed to update course category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
@@ -101,7 +107,7 @@ const EditCourseCategory: React.FC = () => {
 		{
 			onSuccess: () => {
 				toast({
-					title: __('Category Deleted', 'masteriyo'),
+					title: __('Course Category Deleted', 'masteriyo'),
 					isClosable: true,
 					status: 'error',
 				});
@@ -110,7 +116,7 @@ const EditCourseCategory: React.FC = () => {
 			},
 			onError: (error: any) => {
 				toast({
-					title: __('Failed to delete category.', 'masteriyo'),
+					title: __('Failed to delete course category.', 'masteriyo'),
 					description: `${error.response?.data?.message}`,
 					isClosable: true,
 					status: 'error',
@@ -152,7 +158,8 @@ const EditCourseCategory: React.FC = () => {
 							sx={navLinkStyles}
 							_activeLink={navActiveStyles}
 							to={routes.course_categories.list}>
-							{__('Categories', 'masteriyo')}
+							<ListIcon as={BiCategory} />
+							{__('Course Category', 'masteriyo')}
 						</Link>
 					</ListItem>
 				</List>
@@ -165,7 +172,7 @@ const EditCourseCategory: React.FC = () => {
 								variant="link"
 								_hover={{ color: 'primary.500' }}
 								leftIcon={<Icon fontSize="xl" as={BiChevronLeft} />}>
-								{__('Back to Categories', 'masteriyo')}
+								{__('Back to Course Categories', 'masteriyo')}
 							</Button>
 						</RouterLink>
 					</ButtonGroup>
@@ -186,7 +193,7 @@ const EditCourseCategory: React.FC = () => {
 										<Stack direction="column" spacing="8">
 											<Flex aling="center" justify="space-between">
 												<Heading as="h1" fontSize="x-large">
-													{__('Edit Category', 'masteriyo')}
+													{__('Edit Course Category', 'masteriyo')}
 												</Heading>
 												<Menu placement="bottom-end">
 													<MenuButton

@@ -2,6 +2,8 @@ import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import routes from '../constants/routes';
 import * as screens from '../screens';
+import AllCourseDifficulties from '../screens/course-difficulties/AllCourseDifficulties';
+import EditCourseDifficulty from '../screens/course-difficulties/EditCourseDifficulty';
 import AddNewQuiz from '../screens/quiz/AddNewQuiz';
 import EditQuiz from '../screens/quiz/EditQuiz';
 
@@ -32,6 +34,12 @@ const Router: React.FC = () => {
 				</Route>
 				<Route path={routes.course_categories.edit} exact>
 					<screens.EditCourseCategory />
+				</Route>
+				<Route path={routes.course_difficulties.list} exact>
+					<AllCourseDifficulties />
+				</Route>
+				<Route path={routes.course_difficulties.edit} exact>
+					<EditCourseDifficulty />
 				</Route>
 				<Route path={routes.quiz.add} exact>
 					<AddNewQuiz />

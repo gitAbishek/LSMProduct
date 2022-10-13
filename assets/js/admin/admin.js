@@ -16,6 +16,11 @@
 			hash = '#/users/students';
 		}
 
+		// Fix for when user goes to course difficulties tab and reloads.
+		if ('#/courses/difficulties' === hash) {
+			hash = '#/courses/categories';
+		}
+
 		$topLevelMenu.find('li').removeClass('current');
 		$topLevelMenu
 			.find('a[href$="' + hash + '"]')

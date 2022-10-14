@@ -59,7 +59,7 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<div class="masteriyo-course--img-wrap">
 						<!-- Difficulty Badge -->
 						<?php if ( $difficulty ) : ?>
-							<div class="difficulty-badge">
+							<div class="difficulty-badge <?php echo esc_attr( $difficulty['slug'] ); ?>">
 								<span class="masteriyo-badge <?php echo esc_attr( masteriyo_get_difficulty_badge_css_class( $difficulty['slug'] ) ); ?>"><?php echo esc_html( $difficulty['name'] ); ?></span>
 							</div>
 						<?php endif; ?>

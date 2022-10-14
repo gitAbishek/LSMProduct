@@ -16,6 +16,7 @@ use Masteriyo\Models\Section;
 use Masteriyo\Models\CourseReview;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\PostType\PostType;
+use Masteriyo\Taxonomy\Taxonomy;
 
 /**
  * Get course.
@@ -765,13 +766,13 @@ function masteriyo_get_related_courses( $course ) {
 		'tax_query'      => array(
 			'relation' => 'AND',
 			array(
-				'taxonomy' => 'course_cat',
+				'taxonomy' => Taxonomy::COURSE_CATEGORY,
 				'terms'    => $course->get_category_ids(),
 			),
 		),
 		'post__not_in'   => array( $course->get_id() ),
 		'posts_per_page' => $max_related_posts,
-		'post_type'      => 'mto-course',
+		'post_type'      => PostType::COURSE,
 	);
 
 	$query           = new WP_Query( $args );

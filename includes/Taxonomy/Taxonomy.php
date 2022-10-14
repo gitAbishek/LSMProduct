@@ -6,6 +6,31 @@
 namespace Masteriyo\Taxonomy;
 
 abstract class Taxonomy {
+
+	/**
+	 * Course category.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const COURSE_CATEGORY = 'course_cat';
+
+	/**
+	 * Course difficulty.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const COURSE_DIFFICULTY = 'course_difficulty';
+
+	/**
+	 * Course tag.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const COURSE_TAG = 'course_tag';
+
 	/**
 	 * Taxonomy.
 	 *
@@ -153,5 +178,30 @@ abstract class Taxonomy {
 			sprintf( __( "Method '%s' not implemented. Must be overridden in subclass.", 'masteriyo' ), __METHOD__ ),
 			array( 'status' => 405 )
 		);
+	}
+
+	/**
+	 * Return all taxonomies.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string[]
+	 */
+	public function all() {
+		/**
+		 * Filter taxonomies register in masteriyo.
+		 *
+		 * @since x.x.x
+		 */
+		$post_types = apply_filters(
+			'masteriyo_taxonomies',
+			array(
+				self::COURSE_CATEGORY,
+				self::COURSE_DIFFICULTY,
+				self::COURSE_TAG,
+			)
+		);
+
+		return array_unique( $post_types );
 	}
 }

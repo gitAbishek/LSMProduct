@@ -1576,7 +1576,7 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function add_to_cart_text() {
-		$text = __( 'Read more', 'masteriyo' );
+    		$text = __( 'Read more', 'masteriyo' );
 
 		if ( $this->is_purchasable() ) {
 			$text = __( 'Buy Now', 'masteriyo' );

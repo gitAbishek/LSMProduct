@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 6.0.2
+**Tested up to**: 6.0.3
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.18
+**Stable tag**: 1.5.19
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,11 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.19 - 19-10-2022
+
+- Enhancement - Add course difficulty slug in the difficulty badge html markup.
+- Enhancement - Removed account endpoints from global settings.
 
 ### 1.5.18 - 13-10-2022
 

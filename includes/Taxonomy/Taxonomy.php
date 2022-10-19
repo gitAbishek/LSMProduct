@@ -10,7 +10,7 @@ abstract class Taxonomy {
 	/**
 	 * Course category.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.19
 	 * @var string
 	 */
 	const COURSE_CATEGORY = 'course_cat';
@@ -18,7 +18,7 @@ abstract class Taxonomy {
 	/**
 	 * Course difficulty.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.19
 	 * @var string
 	 */
 	const COURSE_DIFFICULTY = 'course_difficulty';
@@ -26,7 +26,7 @@ abstract class Taxonomy {
 	/**
 	 * Course tag.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.19
 	 * @var string
 	 */
 	const COURSE_TAG = 'course_tag';
@@ -183,7 +183,7 @@ abstract class Taxonomy {
 	/**
 	 * Return all taxonomies.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.19
 	 *
 	 * @return string[]
 	 */
@@ -191,7 +191,7 @@ abstract class Taxonomy {
 		/**
 		 * Filter taxonomies register in masteriyo.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.19
 		 */
 		$post_types = apply_filters(
 			'masteriyo_taxonomies',

@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 6.0.2
+Tested up to: 6.0.3
 Requires PHP: 7.0
-Stable tag: 1.5.18
+Stable tag: 1.5.19
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,10 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.19 - 19-10-2022 =
+- Enhancement - Add course difficulty slug in the difficulty badge html markup.
+- Enhancement - Removed account endpoints from global settings.
 
 = 1.5.18 - 13-10-2022 =
 - Feature - Manage course difficulties through categories page.

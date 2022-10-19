@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Col, Row } from 'react-grid-system';
 import {
+	AdvancedQuiz,
 	Assignments,
 	Certificate,
 	CourseAttachment,
@@ -270,6 +271,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={Certificate}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Advanced Quiz', 'masteriyo')}
+							addOnDescription={__(
+								'Add more question types and options to quiz builder. Instructor will also have more control in reviewing the quizzes taken.',
+								'masteriyo'
+							)}
+							thumbnailSrc={AdvancedQuiz}
 						/>
 					</Col>
 				</Row>

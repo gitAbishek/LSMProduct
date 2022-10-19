@@ -1,4 +1,5 @@
 export { default as NotFound } from '../../../img/404.png';
+export { default as AdvancedQuiz } from '../../../img/advanced-quiz.png';
 export { default as Assignments } from '../../../img/assignments.png';
 export { default as Certificate } from '../../../img/certificate.png';
 export { default as CloseCone } from '../../../img/close-cone.png';

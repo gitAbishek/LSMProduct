@@ -15,13 +15,15 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Meta data class.
+ *
+ * @since 1.0.0
  */
 class MetaData implements \JsonSerializable {
 
 	/**
 	 * Current data for metadata
 	 *
-	 * @since 3.2.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $current_data;
@@ -29,13 +31,15 @@ class MetaData implements \JsonSerializable {
 	/**
 	 * Metadata data
 	 *
-	 * @since 3.2.0
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $data;
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param array $meta Data to wrap behind this function.
 	 */
@@ -47,14 +51,18 @@ class MetaData implements \JsonSerializable {
 	/**
 	 * When converted to JSON.
 	 *
-	 * @return object|array
+	 * @since 1.0.0
+	 *
+	 * @return object|array|mixed
 	 */
-	public function jsonSerialize() {
+	public function jsonSerialize() : mixed {
 		return $this->get_data();
 	}
 
 	/**
 	 * Merge changes with data and clear.
+	 *
+	 * @since 1.0.0
 	 */
 	public function apply_changes() {
 		$this->data = $this->current_data;
@@ -62,6 +70,8 @@ class MetaData implements \JsonSerializable {
 
 	/**
 	 * Creates or updates a property in the metadata object.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $key Key to set.
 	 * @param mixed  $value Value to set.
@@ -74,6 +84,8 @@ class MetaData implements \JsonSerializable {
 	 * Checks if a given key exists in our data. This is called internally
 	 * by `empty` and `isset`.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $key Key to check if set.
 	 *
 	 * @return bool
@@ -84,6 +96,8 @@ class MetaData implements \JsonSerializable {
 
 	/**
 	 * Returns the value of any property.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $key Key to get.
 	 * @return mixed Property value or NULL if it does not exists
@@ -97,6 +111,8 @@ class MetaData implements \JsonSerializable {
 
 	/**
 	 * Return data changes only.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -112,6 +128,8 @@ class MetaData implements \JsonSerializable {
 
 	/**
 	 * Return all data as an array.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */

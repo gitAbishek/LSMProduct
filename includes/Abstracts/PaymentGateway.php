@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 abstract class PaymentGateway {
 
 	/**
-	 * Payment gateway id.
+	 * Payment gateway name.
 	 *
 	 * @since 1.0.0
 	 *
@@ -183,7 +183,7 @@ abstract class PaymentGateway {
 	 */
 
 	/**
-	 * Get the payment gatewy id.
+	 * Get the payment gateway id.
 	 *
 	 * @since 1.0.0
 	 *

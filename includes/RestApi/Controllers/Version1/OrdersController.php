@@ -400,6 +400,13 @@ class OrdersController extends PostsController {
 	 * @return array
 	 */
 	public function get_item_schema() {
+		$gateway_methods = array( 'paypal', 'offline' );
+		try {
+			$gateways = masteriyo( 'payment-gateways' )->get_payment_gateway_names();
+		} catch ( \Exception $e ) {
+			error_log( 'Cannot initialize payment gateways' );
+		}
+
 		$schema = array(
 			'$schema'    => 'http://json-schema.org/draft-04/schema#',
 			'title'      => $this->object_type,
@@ -476,7 +483,7 @@ class OrdersController extends PostsController {
 					'description' => __( 'Payment method.', 'masteriyo' ),
 					'type'        => 'string',
 					'context'     => array( 'view', 'edit' ),
-					'enum'        => array( 'paypal', 'offline' ),
+					'enum'        => $gateway_methods,
 				),
 				'payment_method_title' => array(
 					'description' => __( 'Payment method title.', 'masteriyo' ),

@@ -116,14 +116,23 @@ class PaymentGateways {
 	}
 
 	/**
-	 * Get array of registered gateway ids
+	 * Get array of registered gateway names
 	 *
 	 * @since 1.0.0
+	 * @since x.x.x Renamed to `get_payment_gateway_names()`
 	 * @return array of strings
 	 */
-	public function get_payment_gateway_ids() {
-		return wp_list_pluck( $this->payment_gateways, 'id' );
+	public function get_payment_gateway_names() {
+		$gateways = array_map(
+			function( $gateway ) {
+				return $gateway->get_name();
+			},
+			$this->payment_gateways()
+		);
+
+		return array_values( $gateways );
 	}
+
 
 	/**
 	 * Get available gateways.

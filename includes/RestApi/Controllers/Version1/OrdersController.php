@@ -402,7 +402,7 @@ class OrdersController extends PostsController {
 	public function get_item_schema() {
 		$gateway_methods = array( 'paypal', 'offline' );
 		try {
-			$gateways = masteriyo( 'payment-gateways' )->get_payment_gateway_names();
+			$gateway_methods = masteriyo( 'payment-gateways' )->get_payment_gateway_names();
 		} catch ( \Exception $e ) {
 			error_log( 'Cannot initialize payment gateways' );
 		}

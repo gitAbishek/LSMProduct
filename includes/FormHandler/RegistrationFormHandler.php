@@ -33,8 +33,12 @@ class RegistrationFormHandler {
 
 			$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
 
+			if ( empty( $nonce_value ) ) {
+				throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing.', 'masteriyo' ) );
+			}
+
 			if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
-				throw new \Exception( __( 'Invalid nonce', 'masteriyo' ) );
+				throw new \WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'masteriyo' ) );
 			}
 
 			$result = $this->register_user();
@@ -216,15 +220,7 @@ class RegistrationFormHandler {
 	 * @return array
 	 */
 	protected function get_form_data() {
-		$nonce_value = isset( $_POST['_wpnonce'] ) ? wp_unslash( $_POST['_wpnonce'] ) : '';
-
-		if ( empty( $nonce_value ) ) {
-			throw new \WP_Error( 'nonce_missing', __( 'Nonce is missing.', 'masteriyo' ) );
-		}
-		if ( ! wp_verify_nonce( $nonce_value, 'masteriyo-register' ) ) {
-			throw new \WP_Error( 'invalid_nonce', __( 'Invalid nonce', 'masteriyo' ) );
-		}
-
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		$data   = array();
 		$fields = array( 'first-name', 'last-name', 'username', 'email', 'password', 'confirm-password' );
 
@@ -244,6 +240,8 @@ class RegistrationFormHandler {
 
 			$data[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) );
 		}
+
 		return $data;
+		// phpcs:enable
 	}
 }

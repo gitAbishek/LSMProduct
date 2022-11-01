@@ -55,6 +55,7 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 					<Tab sx={tabStyles}>{__('Permalinks', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Checkout Endpoints', 'masteriyo')}</Tab>
 					<Tab sx={tabStyles}>{__('Debug', 'masteriyo')}</Tab>
+					<Tab sx={tabStyles}>{__('Uninstall Masteriyo', 'masteriyo')}</Tab>
 				</TabList>
 				<TabPanels flex="1">
 					<TabPanel>
@@ -337,6 +338,40 @@ const AdvancedSettings: React.FC<Props> = (props) => {
 												<Switch
 													{...field}
 													defaultChecked={advanceData?.debug?.debug}
+												/>
+											)}
+										/>
+									</Stack>
+								</FormControlTwoCol>
+							</Stack>
+						</Stack>
+					</TabPanel>
+					<TabPanel>
+						<Stack direction="column" spacing="6">
+							<Stack direction="column" spacing="8">
+								<FormControlTwoCol>
+									<Stack direction={['column', 'row', 'row']}>
+										<FormLabel minW="3xs">
+											{__('Delete all data', 'masteriyo')}
+											<Tooltip
+												label={__(
+													'Enable it to delete all the Masteriyo plugin related data from your website.',
+													'masteriyo'
+												)}
+												hasArrow
+												fontSize="xs">
+												<Box as="span" sx={infoIconStyles}>
+													<Icon as={BiInfoCircle} />
+												</Box>
+											</Tooltip>
+										</FormLabel>
+
+										<Controller
+											name="advance.uninstall.remove_data"
+											render={({ field }) => (
+												<Switch
+													{...field}
+													defaultChecked={advanceData?.uninstall?.remove_data}
 												/>
 											)}
 										/>

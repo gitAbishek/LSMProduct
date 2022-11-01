@@ -32,6 +32,14 @@ abstract class Taxonomy {
 	const COURSE_TAG = 'course_tag';
 
 	/**
+	 * Course visibility.
+	 *
+	 * @since x.x.x
+	 * @var string
+	 */
+	const COURSE_VISIBILITY = 'course_visibility';
+
+	/**
 	 * Taxonomy.
 	 *
 	 * @since 1.0.0
@@ -185,9 +193,11 @@ abstract class Taxonomy {
 	 *
 	 * @since 1.5.19
 	 *
+	 * @static
+	 *
 	 * @return string[]
 	 */
-	public function all() {
+	public static function all() {
 		/**
 		 * Filter taxonomies register in masteriyo.
 		 *

@@ -142,6 +142,11 @@ class Setting extends Model {
 				'enable' => 'masteriyo_string_to_bool',
 			),
 		),
+		'advance'        => array(
+			'uninstall' => array(
+				'remove_data' => 'masteriyo_string_to_bool',
+			),
+		),
 	);
 
 	/**
@@ -302,7 +307,6 @@ class Setting extends Model {
 			),
 		),
 		'advance'        => array(
-
 			'permalinks' => array(
 				'category_base'            => 'course-category',
 				'tag_base'                 => 'course-tag',
@@ -337,6 +341,9 @@ class Setting extends Model {
 			'debug'      => array(
 				'template_debug' => false,
 				'debug'          => false,
+			),
+			'uninstall'  => array(
+				'remove_data' => false,
 			),
 		),
 	);

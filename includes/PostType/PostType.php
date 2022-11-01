@@ -47,6 +47,15 @@ class PostType {
 	const QUESTION = 'mto-question';
 
 	/**
+	 * Order post type.
+	 *
+	 * @since x.x.x
+	 *
+	 * @var string
+	 */
+	const ORDER = 'mto-order';
+
+	/**
 	 * Post slug.
 	 *
 	 * @since 1.0.0
@@ -192,6 +201,7 @@ class PostType {
 				self::LESSON,
 				self::QUIZ,
 				self::QUESTION,
+				self::ORDER,
 			)
 		);
 

@@ -65,7 +65,7 @@ class Install {
 	 *
 	 * @since 1.3.0
 	 */
-	private static function remove_roles() {
+	public static function remove_roles() {
 		// Remove the masteriyo manager role for now.
 		remove_role( 'masteriyo_manager' );
 
@@ -113,6 +113,41 @@ class Install {
 				wp_insert_term( $name, 'course_difficulty' );
 			}
 		}
+	}
+
+	/**
+	 * Return a list of Masteriyo tables.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return string[]
+	 */
+	public static function get_tables() {
+		global $wpdb;
+
+		$tables = array(
+			"{$wpdb->prefix}masteriyo_notifications",
+			"{$wpdb->prefix}masteriyo_user_items",
+			"{$wpdb->prefix}masteriyo_user_itemmeta",
+			"{$wpdb->prefix}masteriyo_user_activities",
+			"{$wpdb->prefix}masteriyo_user_activitymeta",
+			"{$wpdb->prefix}masteriyo_sessions",
+			"{$wpdb->prefix}masteriyo_order_items",
+			"{$wpdb->prefix}masteriyo_order_itemmeta",
+			"{$wpdb->prefix}masteriyo_quiz_attempts",
+			"{$wpdb->prefix}masteriyo_migrations",
+		);
+
+		/**
+		 * Filter the list of known Masteriyo tables.
+		 *
+		 * @since x.x.x
+		 *
+		 * @param array $tables An array of Masteriyo-specific database table names.
+		 */
+		$tables = apply_filters( 'masteriyo_get_tables', $tables );
+
+		return $tables;
 	}
 }
 

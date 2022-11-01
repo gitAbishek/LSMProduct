@@ -177,6 +177,9 @@ export interface AdvancedSettingsMap {
 		template_debug: boolean;
 		debug: boolean;
 	};
+	uninstall: {
+		remove_data: boolean;
+	};
 }
 
 export interface SetttingsMap {

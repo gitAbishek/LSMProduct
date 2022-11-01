@@ -3727,3 +3727,31 @@ function masteriyo_is_instructor_active() {
 
 	return $instructor->is_active();
 }
+
+
+if ( ! function_exists( 'masteriyo_join_array' ) ) {
+	/**
+	 * Join array of scalar values into a string.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $values Array of scalar values.
+	 * @param string $separator Values separator.
+	 * @param string $format_value Format string to apply for each value.
+	 *
+	 * @return string
+	 */
+	function masteriyo_join_array( $values, $separator = ',', $format_value = '' ) {
+		if ( empty( $values ) || ! is_array( $values ) ) {
+			return '';
+		}
+
+		if ( ! empty( $format_value ) ) {
+			foreach ( $values as $index => $value ) {
+				$values[ $index ] = str_replace( '{value}', $value, $format_value );
+			}
+		}
+
+		return implode( $separator, $values );
+	}
+}

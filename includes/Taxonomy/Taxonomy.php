@@ -209,6 +209,7 @@ abstract class Taxonomy {
 				self::COURSE_CATEGORY,
 				self::COURSE_DIFFICULTY,
 				self::COURSE_TAG,
+				self::COURSE_VISIBILITY,
 			)
 		);
 

@@ -70,11 +70,11 @@ if ( masteriyo_string_to_bool( masteriyo_get_setting( 'advance.uninstall.remove_
 	$wpdb->query( "DELETE FROM $wpdb->usermeta WHERE meta_key LIKE 'masteriyo\_%';" );
 
 	// Delete our data from the post and post meta tables, and remove any additional tables we created.
-	$post_types = masteriyo_join_array( ( new PostType() )->all(), ', ', "'{value}'" );
+	$post_types = masteriyo_array_join( ( new PostType() )->all(), ', ', "'{value}'" );
 	$wpdb->query( "DELETE FROM {$wpdb->posts} WHERE post_type IN ( {$post_types} );" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	$wpdb->query( "DELETE meta FROM {$wpdb->postmeta} meta LEFT JOIN {$wpdb->posts} posts ON posts.ID = meta.post_id WHERE posts.ID IS NULL;" );
 
-	$comment_types = masteriyo_join_array( CommentType::all(), ', ', "'{value}'" );
+	$comment_types = masteriyo_array_join( CommentType::all(), ', ', "'{value}'" );
 	$wpdb->query( "DELETE FROM {$wpdb->comments} WHERE comment_type IN ( {$comment_types} );" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	$wpdb->query( "DELETE meta FROM {$wpdb->commentmeta} meta LEFT JOIN {$wpdb->comments} comments ON comments.comment_ID = meta.comment_id WHERE comments.comment_ID IS NULL;" );
 

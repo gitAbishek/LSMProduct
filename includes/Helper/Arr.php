@@ -723,7 +723,6 @@ function masteriyo_parse_args( &$a, $b ) {
 	return $result;
 }
 
-
 /**
  * Convert array keys from snake to camel and return it.
  *
@@ -734,4 +733,29 @@ function masteriyo_parse_args( &$a, $b ) {
  */
 function masteriyo_array_snake_to_camel( $arr ) {
 	return array_combine( array_map( 'masteriyo_snake_to_camel', array_keys( $arr ) ), array_values( $arr ) );
+}
+
+/**
+ * Join array of scalar values into a string.
+ *
+ * @since 1.5.20
+ *
+ * @param array $values Array of scalar values.
+ * @param string $separator Values separator.
+ * @param string $format_value Format string to apply for each value.
+ *
+ * @return string
+ */
+function masteriyo_array_join( $values, $separator = ',', $format_value = '' ) {
+	if ( empty( $values ) || ! is_array( $values ) ) {
+		return '';
+	}
+
+	if ( ! empty( $format_value ) ) {
+		foreach ( $values as $index => $value ) {
+			$values[ $index ] = str_replace( '{value}', $value, $format_value );
+		}
+	}
+
+	return implode( $separator, $values );
 }

@@ -118,7 +118,7 @@ class Install {
 	/**
 	 * Return a list of Masteriyo tables.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @return string[]
 	 */
@@ -141,7 +141,7 @@ class Install {
 		/**
 		 * Filter the list of known Masteriyo tables.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.20
 		 *
 		 * @param array $tables An array of Masteriyo-specific database table names.
 		 */

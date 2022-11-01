@@ -34,7 +34,7 @@ abstract class Taxonomy {
 	/**
 	 * Course visibility.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 * @var string
 	 */
 	const COURSE_VISIBILITY = 'course_visibility';

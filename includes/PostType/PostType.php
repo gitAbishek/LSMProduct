@@ -49,7 +49,7 @@ class PostType {
 	/**
 	 * Order post type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @var string
 	 */

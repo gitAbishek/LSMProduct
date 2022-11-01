@@ -2,7 +2,7 @@
 /**
  * Comment type enums.
  *
- * @since x.x.x
+ * @since 1.5.20
  * @package Masteriyo\Enums
  */
 
@@ -14,7 +14,7 @@ class CommentType {
 	/**
 	 * Course review type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @var string
 	 */
@@ -23,7 +23,7 @@ class CommentType {
 	/**
 	 * Order note type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @var string
 	 */
@@ -32,7 +32,7 @@ class CommentType {
 	/**
 	 * Course Q&A type.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @var string
 	 */
@@ -41,7 +41,7 @@ class CommentType {
 	/**
 	 * Get all comment types.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 * @static
 	 *
 	 * @return array
@@ -50,7 +50,7 @@ class CommentType {
 		/**
 		 * Filters comment types.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.20
 		 *
 		 * @param string[] $comment_types
 		 */

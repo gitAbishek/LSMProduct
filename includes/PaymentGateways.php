@@ -119,7 +119,7 @@ class PaymentGateways {
 	 * Get array of registered gateway names
 	 *
 	 * @since 1.0.0
-	 * @since x.x.x Renamed to `get_payment_gateway_names()`
+	 * @since 1.5.20 Renamed to `get_payment_gateway_names()`
 	 * @return array of strings
 	 */
 	public function get_payment_gateway_names() {

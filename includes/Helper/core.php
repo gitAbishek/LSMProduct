@@ -3733,7 +3733,7 @@ if ( ! function_exists( 'masteriyo_join_array' ) ) {
 	/**
 	 * Join array of scalar values into a string.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.20
 	 *
 	 * @param array $values Array of scalar values.
 	 * @param string $separator Values separator.

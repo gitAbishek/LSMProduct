@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.20
+**Stable tag**: 1.5.21
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,10 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.21 - 02-11-2022
+
+- Fix - Fatal error due to Type Error in Masteriyo\MetaData::get_data().
 
 ### 1.5.20 - 01-11-2022
 

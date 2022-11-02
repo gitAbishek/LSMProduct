@@ -53,9 +53,9 @@ class MetaData implements \JsonSerializable {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return object|array|mixed
+	 * @return array
 	 */
-	public function jsonSerialize() : mixed {
+	public function jsonSerialize() : array {
 		return $this->get_data();
 	}
 
@@ -133,7 +133,7 @@ class MetaData implements \JsonSerializable {
 	 *
 	 * @return array
 	 */
-	public function get_data() {
+	public function get_data() : array {
 		return $this->data;
 	}
 }

@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.21
+**Stable tag**: 1.5.22
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,10 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.22 - 03-11-2022
+
+- Fix - 404 page not found issue while checking out when WooCommerce is active.
 
 ### 1.5.21 - 02-11-2022
 

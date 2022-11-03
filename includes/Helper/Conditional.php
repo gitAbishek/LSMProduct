@@ -1081,7 +1081,7 @@ if ( ! function_exists( 'masteriyo_is_wc_active' ) ) {
 	/**
 	 * Return true if WooCommerce is active.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.22
 	 *
 	 * @return boolean
 	 */

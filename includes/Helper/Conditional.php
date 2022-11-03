@@ -1075,3 +1075,17 @@ function masteriyo_is_edit_account_page() {
 function masteriyo_is_signin_page( $page_id = null ) {
 	return masteriyo_is_account_page( $page_id ) && ! is_user_logged_in() && ( isset( $GLOBALS['wp']->query_vars['page'] ) || empty( $GLOBALS['wp']->query_vars['page'] ) );
 }
+
+
+if ( ! function_exists( 'masteriyo_is_wc_active' ) ) {
+	/**
+	 * Return true if WooCommerce is active.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return boolean
+	 */
+	function masteriyo_is_wc_active() {
+		return in_array( 'woocommerce/woocommerce.php', get_option( 'active_plugins', array() ), true );
+	}
+}

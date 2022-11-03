@@ -139,6 +139,10 @@ class Masteriyo {
 		add_filter( 'woocommerce_prevent_admin_access', array( $this, 'prevent_admin_access' ) );
 
 		add_action( 'masteriyo_order_status_changed', array( $this, 'update_user_course_status' ), 10, 4 );
+
+		// Fixed checkout (404) issue when WC is activated.
+		// @see https://github.com/woocommerce/woocommerce/blob/76f99a482f6d05094078219225f896db9113f7d3/plugins/woocommerce/includes/wc-template-functions.php#L50
+		add_filter( 'woocommerce_account_endpoint_page_not_found', '__return_false' );
 	}
 
 	/**
@@ -698,7 +702,7 @@ class Masteriyo {
 				}
 			}
 		}
-		
+
 		/**
 		 * Fires at the end of learn page handle.
 		 *

@@ -1,11 +1,13 @@
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import RTLProvider from '../back-end/context/RTLProvider';
 import ErrorBoundary from '../back-end/errors/ErrorBoundary';
 import theme from '../back-end/theme/theme';
+import { generatePallete } from '../back-end/utils/colors';
 import Router from './router/Router';
+import localized from './utils/global';
 
 const App = () => {
 	const queryClient = new QueryClient({
@@ -18,8 +20,18 @@ const App = () => {
 		},
 	});
 
+	const color = localized.settings.styling;
+	const initialTheme = extendTheme(
+		{
+			colors: {
+				primary: generatePallete(color.primary_color),
+			},
+		},
+		theme
+	);
+
 	return (
-		<ChakraProvider theme={theme}>
+		<ChakraProvider theme={initialTheme}>
 			<RTLProvider>
 				<ErrorBoundary>
 					<QueryClientProvider client={queryClient}>

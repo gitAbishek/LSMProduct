@@ -15,6 +15,7 @@
     "@wordpress/i18n": "4.2.4",
     "chakra-ui-steps": "1.6.2",
     "classnames": "2.3.1",
+    "colord": "2.9.3",
     "dayjs": "1.11.2",
     "focus-visible": "5.2.0",
     "framer-motion": "^4",

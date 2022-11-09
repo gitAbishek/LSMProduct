@@ -712,7 +712,8 @@ if ( ! function_exists( 'masteriyo_single_course_featured_image' ) ) {
 		masteriyo_get_template(
 			'single-course/featured-image.php',
 			array(
-				'course' => $course,
+				'course'     => $course,
+				'difficulty' => $course->get_difficulty(),
 			)
 		);
 	}

@@ -6,7 +6,7 @@ import Description from './components/Description';
 import FeaturedImage from './components/FeaturedImage';
 import Highlights from './components/Highlights';
 import Name from './components/Name';
-import SlugEditor from './components/SlugEditor';
+import Slug from './components/Slug';
 
 interface Props {
 	courseData: CourseDataMap;
@@ -28,14 +28,7 @@ const EditCourse: React.FC<Props> = (props) => {
 					flexDirection="column"
 					justifyContent="space-between">
 					<Stack direction="column" spacing="6">
-						<Stack direction="column" spacing="3">
-							<Name defaultValue={courseData?.name}>
-								<SlugEditor
-									permalink={courseData?.permalink}
-									slug={courseData?.slug}
-								/>
-							</Name>
-						</Stack>
+						<Name defaultValue={courseData?.name} />
 						<Description defaultValue={courseData?.description} />
 					</Stack>
 				</Box>
@@ -46,8 +39,8 @@ const EditCourse: React.FC<Props> = (props) => {
 					shadow="box">
 					<Stack direction="column" spacing="6">
 						<Highlights defaultValue={courseData?.highlights} />
-
 						<Categories defaultValue={courseData?.categories} />
+						<Slug defaultValue={courseData?.slug} />
 						<FeaturedImage defaultValue={courseData?.featured_image} />
 					</Stack>
 				</Box>

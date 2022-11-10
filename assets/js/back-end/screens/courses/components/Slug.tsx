@@ -11,7 +11,8 @@ import { useFormContext } from 'react-hook-form';
 interface Props {
 	defaultValue?: string;
 }
-const Name: React.FC<Props> = (props) => {
+
+const Slug: React.FC<Props> = (props) => {
 	const { defaultValue } = props;
 
 	const {
@@ -19,21 +20,19 @@ const Name: React.FC<Props> = (props) => {
 		formState: { errors },
 	} = useFormContext();
 	return (
-		<FormControl isInvalid={!!errors?.name}>
-			<FormLabel>{__('Course Name', 'masteriyo')}</FormLabel>
+		<FormControl isInvalid={!!errors?.slug}>
+			<FormLabel>{__('Slug', 'masteriyo')}</FormLabel>
 
 			<Input
 				defaultValue={defaultValue}
-				placeholder={__('Your Course Name', 'masteriyo')}
-				{...register('name', {
-					required: __('You must provide a name for the course.', 'masteriyo'),
-				})}
+				placeholder={__('Course Slug', 'masteriyo')}
+				{...register('slug')}
 			/>
 			<FormErrorMessage>
-				{errors?.name && errors?.name?.message}
+				{errors?.slug && errors?.slug?.message}
 			</FormErrorMessage>
 		</FormControl>
 	);
 };
 
-export default Name;
+export default Slug;

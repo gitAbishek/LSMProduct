@@ -44,9 +44,7 @@ const FieldTrueFalse: React.FC<Props> = (props) => {
 										minW="200px"
 										shadow="input">
 										<Radio value={answer.name} isFullWidth>
-											<Text fontSize="sm" wordBreak="break-all">
-												{answer.name}
-											</Text>
+											<Text fontSize="sm">{answer.name}</Text>
 										</Radio>
 									</Flex>
 								))}

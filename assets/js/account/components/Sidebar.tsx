@@ -195,7 +195,7 @@ const Sidebar = () => {
 					<AlertDialogOverlay>
 						<AlertDialogContent>
 							<AlertDialogHeader>
-								{__('Log Out', 'masteriyo')} {name}
+								{__('Log Out', 'masteriyo')}
 							</AlertDialogHeader>
 							<AlertDialogBody>
 								{__('Do you really want to logout?', 'masteriyo')}

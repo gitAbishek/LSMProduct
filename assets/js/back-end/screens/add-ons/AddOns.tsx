@@ -23,6 +23,7 @@ import {
 	courseFAQ,
 	DownloadMaterial,
 	Logo,
+	ManualEnrollment,
 	MultipleInstructors,
 	PasswordStrength,
 	Prerequisites,
@@ -281,6 +282,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={AdvancedQuiz}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Manual Enrollment', 'masteriyo')}
+							addOnDescription={__(
+								'Allows to manually enroll students.',
+								'masteriyo'
+							)}
+							thumbnailSrc={ManualEnrollment}
 						/>
 					</Col>
 				</Row>

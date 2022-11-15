@@ -9,6 +9,7 @@ export { default as courseFAQ } from '../../../img/course-faq.png';
 export { default as CoursesBlockGridDesign } from '../../../img/courses-block-grid-design.png';
 export { default as DownloadMaterial } from '../../../img/download-materials.png';
 export { default as Logo } from '../../../img/logo.png';
+export { default as ManualEnrollment } from '../../../img/manual-enrollment.png';
 export { default as MultipleInstructors } from '../../../img/multiple-instructors.png';
 export { default as onboardCover } from '../../../img/onboard-cover.png';
 export { default as onboardFinishCover } from '../../../img/onboard-finish-cover.png';

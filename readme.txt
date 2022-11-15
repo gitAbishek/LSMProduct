@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 6.0.3
 Requires PHP: 7.0
-Stable tag: 1.5.22
+Stable tag: 1.5.23
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -200,6 +200,13 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.23 - 15-11-2022 =
+- Enhancement - Add primary color support on account page.
+- Fix - Word break in quiz.
+- Fix - Course slug error.
+- Fix - Random name being displayed on logout modal in account page.
+- Fix - Other user scoredata being shown in new user quiz page.
 
 = 1.5.22 - 03-11-2022 =
 - Fix - 404 page not found issue while checking out when WooCommerce is active.

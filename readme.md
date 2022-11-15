@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.22
+**Stable tag**: 1.5.23
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,14 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.23 - 15-11-2022
+
+- Enhancement - Add primary color support on account page.
+- Fix - Word break in quiz.
+- Fix - Course slug error.
+- Fix - Random name being displayed on logout modal in account page.
+- Fix - Other user scoredata being shown in new user quiz page.
 
 ### 1.5.22 - 03-11-2022
 

@@ -207,6 +207,13 @@ class OrdersController extends PostsController {
 			'validate_callback' => 'rest_validate_request_arg',
 		);
 
+		$params['created_via'] = array(
+			'description'       => __( 'Limit result set to orders that were created through a specific method.', 'masteriyo' ),
+			'type'              => 'string',
+			'sanitize_callback' => 'sanitize_key',
+			'validate_callback' => 'rest_validate_request_arg',
+		);
+
 		return $params;
 	}
 
@@ -292,13 +299,25 @@ class OrdersController extends PostsController {
 	/**
 	 * Get order data.
 	 *
-	 * @param Masteriyo\Models\Order\Order  $order Order instance.
+	 * @param \Masteriyo\Models\Order\Order  $order Order instance.
 	 * @param string $context Request context.
 	 *                        Options: 'view' and 'edit'.
 	 *
 	 * @return array
 	 */
 	protected function get_order_data( $order, $context = 'view' ) {
+		$customer      = masteriyo_get_user( $order->get_customer_id( $context ) );
+		$customer_info = null;
+
+		if ( ! is_wp_error( $customer ) ) {
+			$customer_info = array(
+				'id'           => $customer->get_id(),
+				'display_name' => $customer->get_display_name(),
+				'avatar_url'   => $customer->get_avatar_url(),
+				'email'        => $customer->get_email(),
+			);
+		}
+
 		$items = $order->get_items();
 
 		$data = array(
@@ -312,6 +331,7 @@ class OrdersController extends PostsController {
 			'date_created'         => masteriyo_rest_prepare_date_response( $order->get_date_created( $context ) ),
 			'date_modified'        => masteriyo_rest_prepare_date_response( $order->get_date_modified( $context ) ),
 			'customer_id'          => $order->get_customer_id( $context ),
+			'customer'             => $customer_info,
 			'payment_method'       => $order->get_payment_method( $context ),
 			'payment_method_title' => $order->get_payment_method_title( $context ),
 			'transaction_id'       => $order->get_transaction_id( $context ),
@@ -388,6 +408,20 @@ class OrdersController extends PostsController {
 				),
 			);
 		}
+
+		if ( ! empty( $request['created_via'] ) ) {
+			if ( empty( $args['meta_query'] ) ) {
+				$args['meta_query'] = array(
+					'relation' => 'AND',
+				);
+			}
+
+			$args['meta_query'][] = array(
+				'key'     => '_created_via',
+				'value'   => sanitize_text_field( $request['created_via'] ),
+				'compare' => '=',
+			);
+		};
 
 		return $args;
 	}
@@ -476,7 +510,7 @@ class OrdersController extends PostsController {
 				),
 				'customer_id'          => array(
 					'description' => __( 'Customer ID', 'masteriyo' ),
-					'type'        => 'string',
+					'type'        => array( 'string', 'number' ),
 					'context'     => array( 'view', 'edit' ),
 				),
 				'payment_method'       => array(
@@ -757,9 +791,14 @@ class OrdersController extends PostsController {
 			$order->set_status( $request['status'] );
 		}
 
-		// Set set paid.
+		// Set status as paid.
 		if ( $request['set_paid'] ) {
 			$order->set_status( OrderStatus::COMPLETED );
+		}
+
+		// Set created_via.
+		if ( $request['created_via'] ) {
+			$order->set_created_via( $request['created_via'] );
 		}
 
 		// Add course items.
@@ -1124,7 +1163,10 @@ class OrdersController extends PostsController {
 			}
 
 			if ( $creating ) {
-				$object->set_created_via( 'rest-api' );
+				if ( empty( $object->get_created_via() ) ) {
+					$object->set_created_via( 'rest-api' );
+				}
+
 				$object->set_prices_include_tax( 'yes' === get_option( 'masteriyo_prices_include_tax' ) );
 				$object->calculate_totals();
 			} else {

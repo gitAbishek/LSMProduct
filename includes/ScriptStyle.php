@@ -968,20 +968,21 @@ class ScriptStyle {
 				'learn'         => array(
 					'name' => '_MASTERIYO_',
 					'data' => array(
-						'rootApiUrl'     => esc_url_raw( rest_url() ),
-						'nonce'          => wp_create_nonce( 'wp_rest' ),
-						'urls'           => array(
+						'rootApiUrl'      => esc_url_raw( rest_url() ),
+						'nonce'           => wp_create_nonce( 'wp_rest' ),
+						'urls'            => array(
 							'logout'  => wp_logout_url( get_home_url() ),
 							'account' => masteriyo_get_page_permalink( 'account' ),
 							'courses' => masteriyo_get_page_permalink( 'courses' ),
 							'home'    => home_url(),
 						),
-						'logo'           => masteriyo_get_setting( 'learn_page.general.logo_id' ) ? masteriyo_get_learn_page_logo_data() : masteriyo_get_custom_logo_data(),
-						'siteTitle'      => get_bloginfo( 'name' ),
-						'userAvatar'     => get_avatar_url( get_current_user_id() ),
-						'qaEnable'       => masteriyo_get_setting( 'learn_page.display.enable_questions_answers' ),
-						'isUserLoggedIn' => is_user_logged_in(),
-						'settings'       => masteriyo_get_setting( 'general' ),
+						'logo'            => masteriyo_get_setting( 'learn_page.general.logo_id' ) ? masteriyo_get_learn_page_logo_data() : masteriyo_get_custom_logo_data(),
+						'siteTitle'       => get_bloginfo( 'name' ),
+						'userAvatar'      => get_avatar_url( get_current_user_id() ),
+						'qaEnable'        => masteriyo_get_setting( 'learn_page.display.enable_questions_answers' ),
+						'isUserLoggedIn'  => is_user_logged_in(),
+						'settings'        => masteriyo_get_setting( 'general' ),
+						'current_user_id' => get_current_user_id(),
 					),
 				),
 			)

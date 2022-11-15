@@ -18,4 +18,5 @@ export interface MasteriyoLocalized {
 			theme: string;
 		};
 	};
+	current_user_id: number;
 }

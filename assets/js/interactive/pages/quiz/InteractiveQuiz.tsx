@@ -25,6 +25,7 @@ import FloatingTimer from '../../components/FloatingTimer';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import { CourseProgressItemsMap, CourseProgressMap } from '../../schemas';
+import localized from '../../utils/global';
 import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
 import ScoreBoard from './components/ScoreBoard';
@@ -65,6 +66,7 @@ const InteractiveQuiz = () => {
 			quizAttemptsAPI.list({
 				quiz_id: quizId,
 				per_page: 1,
+				user_id: localized?.current_user_id,
 			}),
 		{
 			onSuccess: (data: any) => {

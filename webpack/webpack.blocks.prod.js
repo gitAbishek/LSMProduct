@@ -62,10 +62,6 @@ module.exports = (env) => ({
 		],
 	},
 
-	optimization: {
-		minimize: false,
-	},
-
 	plugins: [
 		new Dotenv(),
 		new WebpackBar(),

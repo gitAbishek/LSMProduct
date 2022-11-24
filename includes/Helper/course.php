@@ -70,15 +70,14 @@ function masteriyo_get_price_excluding_tax( $course, $args = array() ) {
 function masteriyo_can_start_course( $course, $user = null ) {
 	$can_start_course = false;
 	$user             = is_null( $user ) ? masteriyo_get_current_user() : $user;
-	$course_id        = is_a( $course, 'Masteriyo\Models\Course' ) ? $course->get_id() : $course;
-	$user_id          = is_a( $user, 'Masteriyo\Models\User' ) ? $user->get_id() : $user;
-	$course           = masteriyo_get_course( $course_id );
+	$user             = is_a( $user, 'Masteriyo\Models\User' ) ? $user : masteriyo_get_user( $user );
+	$course           = masteriyo_get_course( $course );
 
-	if ( $user_id ) {
+	if ( $user && ! is_wp_error( $user ) && $course ) {
 		$query = new UserCourseQuery(
 			array(
-				'course_id' => $course_id,
-				'user_id'   => $user_id,
+				'course_id' => $course->get_id(),
+				'user_id'   => $user->get_id(),
 				'per_page'  => 1,
 			)
 		);

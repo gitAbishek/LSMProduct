@@ -74,6 +74,7 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 	 */
 	public function create( Model &$user ) {
 		global $wpdb;
+
 		if ( ! $user->get_date_created( 'edit' ) ) {
 			$user->set_date_created( current_time( 'mysql', true ) );
 		}
@@ -139,6 +140,9 @@ class UserRepository extends AbstractRepository implements RepositoryInterface {
 			$user->set_object_read( true );
 			$this->update_user_meta( $user, true );
 			$user->apply_changes();
+
+			// Prevent wp_update_user in the update() calls in the same request and user trigger the 'Notice of Password Changed' email.
+			$user->set_password( '' );
 
 			/**
 			 * Fire after a new user is created.

@@ -368,8 +368,6 @@ class Course extends Model {
 	/**
 	 * Get course excerpt.
 	 *
-	 * Reference: https://developer.wordpress.org/reference/functions/wp_trim_excerpt/
-	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $context What the value is for. Valid values are view and edit.
@@ -377,41 +375,7 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function get_excerpt( $context = 'view' ) {
-		$short_description = $this->get_short_description( $context );
-
-		if ( ! empty( $short_description ) ) {
-			/**
-			 * Filters course excerpt.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $excerpt Course excerpt.
-			 * @param Masteriyo\Models\Course $course Course object.
-			 */
-			return apply_filters( 'masteriyo_course_excerpt', $short_description, $this );
-		}
-
-		$description = $this->get_description( $context );
-
-		if ( empty( $description ) ) {
-			/**
-			 * Filters course excerpt.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $excerpt Course excerpt.
-			 * @param Masteriyo\Models\Course $course Course object.
-			 */
-			return apply_filters( 'masteriyo_course_excerpt', '', $this );
-		}
-
-		$excerpt = strip_shortcodes( $description );
-		$excerpt = excerpt_remove_blocks( $excerpt );
-
-		/** This filter is documented in wp-includes/post-template.php */
-		$excerpt = apply_filters( 'the_content', $excerpt );
-
-		$excerpt = str_replace( ']]>', ']]&gt;', $excerpt );
+		$excerpt = get_the_excerpt( $this->get_id() );
 
 		/**
 		 * Filters course excerpt length.
@@ -1576,7 +1540,7 @@ class Course extends Model {
 	 * @return string
 	 */
 	public function add_to_cart_text() {
-    		$text = __( 'Read more', 'masteriyo' );
+			$text = __( 'Read more', 'masteriyo' );
 
 		if ( $this->is_purchasable() ) {
 			$text = __( 'Buy Now', 'masteriyo' );

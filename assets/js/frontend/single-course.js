@@ -564,14 +564,14 @@
 			// Expand all
 			function expandAllSections() {
 				$('.masteriyo-stab--citems').addClass('active');
-				$('.masteriyo-expand-collape-all').text('Collapse All');
+				$('.masteriyo-expand-collapse-all').text('Collapse All');
 				isCollapsedAll = false;
 			}
 
 			// Collapse all
 			function collapseAllSections() {
 				$('.masteriyo-stab--citems').removeClass('active');
-				$('.masteriyo-expand-collape-all').text('Expand All');
+				$('.masteriyo-expand-collapse-all').text('Expand All');
 				isCollapsedAll = true;
 			}
 		},

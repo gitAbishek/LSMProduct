@@ -138,7 +138,11 @@ const AddNewCourse: React.FC = () => {
 														<Description />
 													</Stack>
 												</Box>
-												<Box bg="white" p="10" shadow="box">
+												<Box
+													w={['100%', null, '400px']}
+													bg="white"
+													p={['4', null, '10']}
+													shadow="box">
 													<Stack direction="column" spacing="6">
 														<Highlights />
 														<Categories />

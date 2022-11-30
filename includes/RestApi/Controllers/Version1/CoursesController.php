@@ -1090,4 +1090,49 @@ class CoursesController extends PostsController {
 
 		return $response;
 	}
+
+	/**
+	 * Checks if a given request has access to get a specific item.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param WP_REST_Request $request Full details about the request.
+	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.
+	 */
+	public function get_item_permissions_check( $request ) {
+		if ( is_null( $this->permission ) ) {
+			return new \WP_Error(
+				'masteriyo_null_permission',
+				__( 'Sorry, the permission object for this resource is null.', 'masteriyo' )
+			);
+		}
+
+		$course = masteriyo_get_course( $request['id'] );
+
+		if ( is_null( $course ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_course_id',
+				__( 'Invalid Course ID.', 'masteriyo' ),
+				array(
+					'status' => 400,
+				)
+			);
+		}
+
+		if ( CourseAccessMode::OPEN === $course->get_access_mode() ) {
+			return true;
+		}
+
+		if ( ! $this->permission->rest_check_post_permissions( $this->post_type, 'read', $request['id'] ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_cannot_read',
+				__( 'Sorry, you are not allowed to read resources.', 'masteriyo' ),
+				array(
+					'status' => rest_authorization_required_code(),
+				)
+			);
+		}
+
+		return true;
+	}
 }

@@ -1094,7 +1094,7 @@ class CoursesController extends PostsController {
 	/**
 	 * Checks if a given request has access to get a specific item.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.24
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return boolean|WP_Error True if the request has read access for the item, WP_Error object otherwise.

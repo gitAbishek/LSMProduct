@@ -15,7 +15,7 @@
 	<arg value="ps" />
 
 	<!-- Check up to 8 files simultaneously. -->
-	<arg name="parallel" value="8" />
+	<arg name="parallel" value="12" />
 
 	<!-- Strip the filepaths in reports down to the relevant bit. -->
 	<arg name="basepath" value="./" />

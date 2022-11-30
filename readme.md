@@ -8,11 +8,11 @@
 
 **Requires at least**: 5.0
 
-**Tested up to**: 6.0.3
+**Tested up to**: 6.1.1
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.23
+**Stable tag**: 1.5.24
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,12 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.24 - 30-11-2022
+
+- Fix - Sending of password reset email after updating the user.
+- Fix - Typo '.masteriyo-expand-collape-all' to '.masteriyo-expand-collapse-all'.
+- Fix - Featured image width issue while adding new course.
 
 ### 1.5.23 - 15-11-2022
 

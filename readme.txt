@@ -2,9 +2,9 @@
 Contributors: Masteriyo, sanjiv-saha
 Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
-Tested up to: 6.0.3
+Tested up to: 6.1.1
 Requires PHP: 7.0
-Stable tag: 1.5.23
+Stable tag: 1.5.24
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,6 +19,8 @@ WordPress LMS & e-Learning plugin to create and sell online courses. Easy quiz c
 👉 [Documentation](https://docs.masteriyo.com/)
 👉 [Masteriyo LMS Pro](https://masteriyo.com/wordpress-lms/pricing/)
 👉 [Give a Try](https://demo.tastewp.com/learning-management-system) (Clicking this link creates a demo where you can test Masteriyo.)
+
+[youtube https://www.youtube.com/watch?v=pr1vYXNnaTI]
 
 Masteriyo LMS is the most user-friendly and most powerful WordPress LMS solution to create and sell online courses. Comes with a super-fast and minimalist course builder that lets you make online course easily and quickly. And, absolutely no coding is required.
 
@@ -200,6 +202,11 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.24 - 30-11-2022 =
+- Fix - Sending of password reset email after updating the user.
+- Fix - Typo '.masteriyo-expand-collape-all' to '.masteriyo-expand-collapse-all'.
+- Fix - Featured image width issue while adding new course.
 
 = 1.5.23 - 15-11-2022 =
 - Enhancement - Add primary color support on account page.

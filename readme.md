@@ -51,7 +51,7 @@ Want to contribute? Please have a look at [Contributor Guidelines](docs/contribu
 
 # Changelog
 
-### 1.5.24 - 30-11-2022
+### 1.5.24 - 01-12-2022
 
 - Fix - Sending of password reset email after updating the user.
 - Fix - Typo '.masteriyo-expand-collape-all' to '.masteriyo-expand-collapse-all'.

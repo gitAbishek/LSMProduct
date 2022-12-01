@@ -47,7 +47,7 @@ Here’s a brief detail of each feature offered by this WordPress online course 
 
 * **Section and Lesson Builder:** Create different sections and add unlimited lessons with ease. You can also upload featured images and videos. Our WordPress LMS plugin fully supports YouTube, Vimeo, and self-hosted videos.
 
-* **Effortless Quiz Builder:** Quizzes enhance the fun of taking courses plus strengthen the students' understanding of the topics. With our easy quiz builder, one can create multiple quiz types like True/False, Single Choice, or MultiChoice questions to evaluate the students' progress through the course.
+* **Effortless Quiz Builder:** Quizzes enhance the fun of taking courses plus strengthen the students' understanding of the topics. With our easy quiz builder, one can create multiple quiz types like True/False, Single Choice, or MultiChoice questions to evaluate the students' progress through the course. [youtube https://www.youtube.com/watch?v=JXv7egxhhQA]
 
 * **Sell Courses:** Besides creating online courses, selling them should also be as easy as anything else. That's why we have our own inbuilt order system, so you don't need to go through the hassle of installing a separate eCommerce plugin to sell your courses. Masteriyo supports both PayPal and offline payment out of the box.
 
@@ -203,7 +203,7 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
 
-= 1.5.24 - 30-11-2022 =
+= 1.5.24 - 01-12-2022 =
 - Fix - Sending of password reset email after updating the user.
 - Fix - Typo '.masteriyo-expand-collape-all' to '.masteriyo-expand-collapse-all'.
 - Fix - Featured image width issue while adding new course.

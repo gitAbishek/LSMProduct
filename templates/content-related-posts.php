@@ -73,9 +73,11 @@ do_action( 'masteriyo_before_related_posts_content' );
 					<!-- Course category -->
 					<div class="masteriyo-course--content__category">
 						<?php foreach ( $course->get_categories( 'name' ) as $category ) : ?>
-							<span class="masteriyo-course--content__category-items masteriyo-tag">
-								<?php echo esc_html( $category->get_name() ); ?>
-							</span>
+							<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
+								<span class="masteriyo-course--content__category-items masteriyo-tag">
+									<?php echo esc_html( $category->get_name() ); ?>
+								</span>
+							</a>
 						<?php endforeach; ?>
 					</div>
 					<!-- Title of the course -->
@@ -94,7 +96,9 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="masteriyo-course-author">
 							<?php if ( $author ) : ?>
 								<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
-								<span class="masteriyo-course-author--name"><?php echo esc_attr( $author->get_display_name() ); ?></span>
+								<span class="masteriyo-course-author--name">
+									<?php echo esc_attr( $author->get_display_name() ); ?>
+								</span>
 							<?php endif; ?>
 						</div>
 

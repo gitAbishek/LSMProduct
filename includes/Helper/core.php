@@ -849,9 +849,9 @@ function masteriyo_minutes_to_time_length_string( $minutes, $format = null ) {
 		$str = str_replace( '%H%', $hours, $format );
 		$str = str_replace( '%M%', $mins, $str );
 	} else {
-		$str .= $hours > 0 ? sprintf( '%d%s ', $hours, __( 'h', 'masteriyo' ) ) : '';
-		$str .= $mins > 0 ? sprintf( ' %d%s', $mins, __( 'm', 'masteriyo' ) ) : '';
-		$str  = $minutes > 0 ? $str : __( '0m', 'masteriyo' );
+		$str .= $hours > 0 ? sprintf( '%d%s ', $hours, _x( 'h', 'h for hours', 'masteriyo' ) ) : '';
+		$str .= $mins > 0 ? sprintf( ' %d%s', $mins, _x( 'm', 'm for minutes', 'masteriyo' ) ) : '';
+		$str  = $minutes > 0 ? $str : _x( '0m', 'm for minutes', 'masteriyo' );
 	}
 
 	return $str;

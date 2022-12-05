@@ -30,7 +30,9 @@ do_action( 'masteriyo_before_single_course_categories' );
 ?>
 <div class="masteriyo-course--content__category">
 	<?php foreach ( $course->get_categories() as $category ) : ?>
-		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>" class="masteriyo-course--content__category-items masteriyo-tag">
+		<a href="<?php echo esc_attr( $category->get_permalink() ); ?>"
+			alt="<?php echo esc_attr( $category->get_name() ); ?>"
+			class="masteriyo-course--content__category-items masteriyo-tag">
 			<?php echo esc_html( $category->get_name() ); ?>
 		</a>
 	<?php endforeach; ?>

@@ -140,7 +140,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 							<?php if ( ! empty( $course->get_categories() ) ) : ?>
 								<div class="masteriyo-course--content__category">
 									<?php foreach ( $course->get_categories() as $category ) : ?>
-										<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
+										<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
 										<span class="masteriyo-course--content__category-items">
 											<?php echo esc_html( $category->get_name() ); ?>
 										</span>
@@ -150,7 +150,7 @@ do_action( 'masteriyo_before_account_courses', $all_courses, $active_courses );
 							<?php endif; ?>
 
 							<h3 class="masteriyo-mycourses--header--title">
-								<a href="<?php echo esc_url( $course->get_permalink() ); ?>" title="<?php echo esc_attr( $course->get_name() ); ?>">
+								<a href="<?php echo esc_url( $course->get_permalink() ); ?>" alt="<?php echo esc_attr( $course->get_name() ); ?>">
 									<?php echo esc_html( $course->get_name() ); ?>
 								</a>
 							</h3>

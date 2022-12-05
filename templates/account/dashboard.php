@@ -79,7 +79,7 @@ defined( 'ABSPATH' ) || exit;
 						<div class="masteriyo-cstudy--body--header">
 							<div class="masteriyo-cstudy--body--tag">
 								<?php foreach ( $active_course->get_categories() as $category ) : ?>
-									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" title="<?php echo esc_attr( $category->get_name() ); ?>">
+									<a href="<?php echo esc_url( $category->get_permalink() ); ?>" alt="<?php echo esc_attr( $category->get_name() ); ?>">
 										<span class="masteriyo-course--content__category-items">
 											<?php echo esc_html( $category->get_name() ); ?>
 										</span>
@@ -87,7 +87,7 @@ defined( 'ABSPATH' ) || exit;
 								<?php endforeach; ?>
 							</div>
 
-							<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" title="<?php echo esc_attr( $active_course->get_name() ); ?>">
+							<a href="<?php echo esc_url( $active_course->get_permalink() ); ?>" alt="<?php echo esc_attr( $active_course->get_name() ); ?>">
 								<h3 class="masteriyo-cstudy--body--title">
 									<?php echo esc_html( $active_course->get_name() ); ?>
 								</h3>

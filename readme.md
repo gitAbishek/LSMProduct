@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.24
+**Stable tag**: 1.5.25
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,10 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.25 - 06-12-2022
+
+- Fix - Minor Fixes.
 
 ### 1.5.24 - 01-12-2022
 

@@ -96,9 +96,11 @@ do_action( 'masteriyo_before_related_posts_content' );
 						<div class="masteriyo-course-author">
 							<?php if ( $author ) : ?>
 								<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>" alt="" srcset="">
-								<span class="masteriyo-course-author--name">
-									<?php echo esc_attr( $author->get_display_name() ); ?>
-								</span>
+								<a href="<?php echo esc_url( $author->get_course_archive_url() ); ?>" alt="<?php echo esc_attr( $author->get_display_name() ); ?>">
+									<span class="masteriyo-course-author--name">
+										<?php echo esc_html( $author->get_display_name() ); ?>
+									</span>
+								</a>
 							<?php endif; ?>
 						</div>
 

@@ -29,7 +29,12 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 	<div class="masteriyo-course-author">
 		<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>">
 		<?php /* translators: %s: Username */ ?>
-		<span class="masteriyo-course-author--name"><?php echo esc_attr( sprintf( __( 'by %s', 'masteriyo' ), $author->get_display_name() ) ); ?></span>
+		<span class="masteriyo-course-author--name">
+			<?php echo esc_html_x( 'by', 'Author by', 'masteriyo' ); ?>
+			<a href="<?php echo esc_url( $author->get_course_archive_url() ); ?>" alt="<?php echo esc_attr( $author->get_display_name() ); ?>">
+				<?php echo esc_html( $author->get_display_name() ); ?>
+			</a>
+		</span>
 	</div>
 
 		<?php

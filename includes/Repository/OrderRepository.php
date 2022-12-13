@@ -17,6 +17,8 @@ use Masteriyo\Database\Model;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
 use Masteriyo\Enums\OrderStatus;
+use Masteriyo\Enums\PostStatus;
+use Masteriyo\Enums\UserCourseStatus;
 
 /**
  * OrderRepository class.
@@ -670,12 +672,18 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			}
 		);
 
+		$course_ids = array_map(
+			function( $order_item ) {
+				return $order_item->get_course_id();
+			},
+			$order_items
+		);
+
 		$query = new UserCourseQuery(
 			array(
-				'user_id'  => $order->get_customer_id(),
-				'per_page' => -1,
-				'type'     => 'user_course',
-				'parent'   => 0,
+				'user_id'    => $order->get_customer_id( 'edit' ),
+				'course__in' => $course_ids,
+				'per_page'   => -1,
 			)
 		);
 
@@ -684,6 +692,8 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		foreach ( $user_courses as $user_course ) {
 			$user_courses_map[ $user_course->get_course_id() ] = $user_course;
 		}
+
+		$status = OrderStatus::COMPLETED ===  $order->get_status() ? UserCourseStatus::ACTIVE : UserCourseStatus::INACTIVE;
 
 		// Update user course.
 		foreach ( $order_items as $order_item ) {
@@ -694,7 +704,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			}
 
 			$user_course->set_user_id( $order->get_customer_id( 'edit' ) );
-			$user_course->set_status( 'active' );
+			$user_course->set_status( $status);
 			$user_course->set_date_start( current_time( 'mysql', true ) );
 			$user_course->set_order_id( $order->get_id() );
 			$user_course->set_course_id( $order_item->get_course_id( 'edit' ) );

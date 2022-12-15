@@ -24,7 +24,10 @@ defined( 'MASTERIYO_ASSETS' ) || define( 'MASTERIYO_ASSETS', dirname( MASTERIYO_
 defined( 'MASTERIYO_TEMPLATES' ) || define( 'MASTERIYO_TEMPLATES', dirname( MASTERIYO_PLUGIN_FILE ) . '/templates' );
 defined( 'MASTERIYO_LANGUAGES' ) || define( 'MASTERIYO_LANGUAGES', dirname( MASTERIYO_PLUGIN_FILE ) . '/i18n/languages' );
 
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+// Fix: Plugin deletion due to function re-declaration when PRO plugin is activated.
+if ( ! in_array( 'learning-management-system-pro/lms.php', get_option( 'active_plugins', array() ), true ) ) {
+	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
 
 if ( ! function_exists( 'masteriyo' ) ) {
 	$GLOBALS['masteriyo'] = require_once dirname( __FILE__ ) . '/bootstrap/app.php';

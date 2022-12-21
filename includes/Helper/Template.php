@@ -1833,3 +1833,24 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_con
 		}
 	}
 }
+
+/**
+ * Add current theme to the body tag.
+ *
+ * @since x.x.x
+ *
+ * @param string[] $classes An array of body class names.
+ * @param string[] $class   An array of additional class names added to the body.
+ * @return string[]
+ */
+
+function masteriyo_add_current_theme_slug_to_body_tag( $classes, $class ) {
+	if ( ! function_exists( 'wp_get_theme' ) ) {
+		return $classes;
+	}
+
+	$current_theme = wp_get_theme();
+	$classes[]     = 'theme-' . $current_theme->get_template();
+
+	return $classes;
+}

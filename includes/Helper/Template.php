@@ -1837,7 +1837,7 @@ if ( ! function_exists( 'masteriyo_template_single_course_curriculum_section_con
 /**
  * Add current theme to the body tag.
  *
- * @since x.x.x
+ * @since 1.5.27
  *
  * @param string[] $classes An array of body class names.
  * @param string[] $class   An array of additional class names added to the body.

@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.26
+**Stable tag**: 1.5.27
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,11 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.27 - 23-12-2022
+
+- Compatibility - Made Masteriyo compatible with Astra theme.
+- Enhancement - By default learn page sidebar remains close on mobile devices.
 
 ### 1.5.26 - 14-12-2022
 

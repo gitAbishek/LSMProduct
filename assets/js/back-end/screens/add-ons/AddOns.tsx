@@ -95,15 +95,15 @@ const AddOns = () => {
 								pos="absolute"
 								fontSize="xs"
 								color="white"
-								left="24px"
+								left="20px"
 								top="10px">
-								{__('SPECIAL INTRODUCTORY OFFER', 'masteriyo')}
+								{__('CHRISTMAS AND NEW YEAR OFFER', 'masteriyo')}
 							</Heading>
 							<Ribbon />
 						</Box>
 						<Stack display="flex" direction="row" alignItems="center">
 							<Text fontSize="15px" fontWeight="400">
-								{__('We are giving', 'masteriyo')}
+								{__('We are giving upto', 'masteriyo')}
 							</Text>
 							<Center
 								d="inline-flex"
@@ -112,10 +112,7 @@ const AddOns = () => {
 								bg="rgba(255,255,255, 0.5)"
 								fontWeight="bold"
 								rounded="full">
-								75
-								<Text as="span" fontSize="xx-small">
-									%
-								</Text>
+								55 %
 							</Center>
 							<Text fontSize="15px" fontWeight="400">
 								{__('off on all our premium plans.', 'masteriyo')}

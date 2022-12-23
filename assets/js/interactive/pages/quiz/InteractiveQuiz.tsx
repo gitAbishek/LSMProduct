@@ -7,6 +7,7 @@ import {
 	Stack,
 	Text,
 	useDisclosure,
+	useMediaQuery,
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
@@ -43,8 +44,10 @@ const InteractiveQuiz = () => {
 
 	const queryClient = useQueryClient();
 	const toast = useToast();
+	const [largerThan768] = useMediaQuery('(min-width: 768px)');
+
 	const { isOpen: isSidebarOpen, onToggle: onSidebarToggle } = useDisclosure({
-		defaultIsOpen: true,
+		defaultIsOpen: largerThan768 ? true : false,
 	});
 	const { isOpen: isHeaderOpen, onToggle: onHeaderToggle } = useDisclosure({
 		defaultIsOpen: true,

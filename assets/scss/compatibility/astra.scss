@@ -1,0 +1,122 @@
+// Compatibility with Astra Theme
+
+// For Account and checkout page
+.theme-astra {
+	.mto-account-sidebar {
+		h5 {
+			margin-bottom: 0;
+		}
+	}
+	.mto-dashboard-courses-stats {
+		h2 {
+			font-size: 1rem;
+			margin-bottom: 0;
+			line-height: 1.2;
+			// color: #1a202c;
+			color: var(--masteriyo-color-heading);
+		}
+	}
+
+	// Account page > Enrolled Courses || Profile || Order History
+	.mto-enrolled-courses-wrapper,
+	.mto-profile-wrapper,
+	.mto-orders-wrapper {
+		h4 {
+			margin-bottom: 0;
+		}
+	}
+
+	// Account page > Dashboard
+	.mto-dashboard-courses-progress {
+		button.css-en-1zyymp {
+			&:hover {
+				color: #718096;
+				border-color: #a0aec0;
+			}
+		}
+	}
+
+	// Account page > Profile
+	.mto-profile-wrapper {
+		.mto-profile-details {
+			h3 {
+				margin-bottom: 0;
+				font-size: 2.25rem;
+			}
+
+			h2 {
+				font-size: 1.125rem;
+				line-height: 1.2;
+			}
+		}
+
+		button:hover {
+			color: #718096;
+			border-color: #a0aec0;
+		}
+	}
+
+	// Account page > Order History
+	.mto-orders-wrapper {
+		table {
+			border: 0;
+		}
+	}
+
+	button.css-en-b3j1iz {
+		&:focus {
+			// color: #1a202c;
+			color: var(--masteriyo-color-heading);
+			background: transparent;
+			border-color: #e2e8f0;
+		}
+
+		&:hover {
+			// color: #1a202c;
+			color: var(--masteriyo-color-heading);
+			border-color: #e2e8f0;
+		}
+	}
+
+	// Checkout Page
+	.masteriyo-checkout {
+		.masteriyo-checkout-main {
+			.masteriyo-input {
+				width: 100%;
+			}
+		}
+
+		.masteriyo-checkout-summary {
+			.masteriyo-checkout--btn {
+				padding: 16px 12px;
+			}
+		}
+	}
+
+	// Media Query 992px width
+	@media (max-width: 992px) {
+		.masteriyo-checkout {
+			.masteriyo-checkout-wrapper {
+				gap: 2.5em;
+
+				.masteriyo-checkout-main {
+					padding-right: 20px;
+					margin-right: 0;
+
+					.masteriyo-col-2 {
+						margin-left: 0;
+						margin-right: 0;
+
+						.masteriyo-checkout----fname {
+							padding-left: 0;
+						}
+
+						.masteriyo-checkout----lname {
+							padding-right: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -87,3 +87,27 @@
 		max-width: 1060px;
 	}
 }
+
+
+// Media Screens
+@media (max-width: 991px) {
+	#masteriyo-account-container {
+		.mto-account-sidebar {
+			li {
+				.css-en-rmxdag {
+					flex-direction: column;
+					gap: .8em;
+				}
+
+				svg {
+					margin-right: 0;
+				}
+
+				p.css-en-1sm8nn5 {
+					text-align: center;
+				}
+			}
+		}
+	}			
+}
+

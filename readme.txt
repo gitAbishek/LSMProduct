@@ -369,9 +369,9 @@ Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 - Fix - All courses count based on the draft and published courses on the backend course listing page.
 
 = 1.5.0 - 17-05-2022 =
-- Feature: Add a course review management page on the backend.
-- Enhancement: Made banner responsive on addons listing page.
-- Enhancement: Made account page responsive.
+- Feature - Add a course review management page on the backend.
+- Enhancement - Made banner responsive on addons listing page.
+- Enhancement - Made account page responsive.
 - Fix - Instructor approval notification on the account page.
 - Fix - Unable to create course review as a student.
 

@@ -21,9 +21,9 @@ import {
 	BiTargetLock,
 	BiXCircle,
 } from 'react-icons/bi';
-import { ScoreBoardSchema } from '../../../schemas';
+import { QuizAttempt } from '../../../../back-end/schemas';
 interface Props {
-	scoreData: ScoreBoardSchema;
+	scoreData: QuizAttempt;
 	onStartPress: any;
 	isButtonLoading?: boolean;
 	isButtonDisabled?: boolean;

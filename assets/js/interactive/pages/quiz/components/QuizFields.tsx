@@ -1,11 +1,4 @@
-import { usePagination } from '@ajna/pagination';
-import {
-	Alert,
-	AlertIcon,
-	Heading,
-	SkeletonText,
-	Stack,
-} from '@chakra-ui/react';
+import { Heading, SkeletonText, Stack } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -21,7 +14,6 @@ import FieldSingleChoice from './FieldSingleChoice';
 import FieldTrueFalse from './FieldTrueFalse';
 
 interface Props {
-	quizAboutToExpire: boolean;
 	quizData: QuizSchema;
 }
 
@@ -31,9 +23,10 @@ interface FilterParams {
 }
 
 const QuizFields: React.FC<Props> = (props) => {
-	const { quizAboutToExpire, quizData } = props;
+	const { quizData } = props;
 	const { quizId }: any = useParams();
 	const questionsAPI = new API(urls.questions);
+
 	// If individual quiz questions_display_per_page is 0 then set global settings value.
 	const perPage =
 		0 === quizData?.questions_display_per_page
@@ -57,48 +50,10 @@ const QuizFields: React.FC<Props> = (props) => {
 		}
 	);
 
-	const { pages, pagesCount, currentPage, setCurrentPage, pageSize } =
-		usePagination({
-			total: quizData?.questions_count,
-			limits: {
-				outer: 2,
-				inner: 2,
-			},
-			initialState: {
-				pageSize: perPage,
-				isDisabled: false,
-				currentPage: 1,
-			},
-		});
-
-	const handlePageChange = (nextPage: number): void => {
-		setFilterParams({
-			page: nextPage,
-			per_page: pageSize,
-		});
-		setCurrentPage(nextPage);
-	};
-
-	// Current page highest value. For e.g if 1 - 10, 10 is highest.
-	const currentPageHighest = perPage * currentPage;
-
-	// Current page lowest value. For e.g if 1 - 10, 1 is lowest.
-	const displayCurrentPageLowest = currentPageHighest - perPage + 1;
-
-	// Setting highest value depending on current page is last page or not.
-	const displayCurrentPageHighest =
-		currentPage === pagesCount ? quizData?.questions_count : currentPageHighest;
-
 	if (questionQuery.isSuccess) {
 		return (
 			<>
 				<Stack direction="column" spacing="16">
-					{quizAboutToExpire && (
-						<Alert status="error" fontSize="sm" p="2.5">
-							<AlertIcon />
-							{__('Your quiz time is about to expire!', 'masteriyo')}
-						</Alert>
-					)}
 					{questionQuery?.data?.data?.map((question: QuestionSchema) => (
 						<Stack direction="column" spacing="8" key={question.id}>
 							<Heading fontSize="lg">{question.name}</Heading>

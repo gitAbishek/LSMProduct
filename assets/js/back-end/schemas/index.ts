@@ -806,7 +806,7 @@ export interface QuizAttempt {
 	total_incorrect_answers: number;
 	earned_marks: string;
 	answers: {};
-	attempt_status: string;
+	attempt_status: 'attempt_started' | 'attempt_ended';
 	attempt_started_at: string;
 	attempt_ended_at: string;
 	course: {

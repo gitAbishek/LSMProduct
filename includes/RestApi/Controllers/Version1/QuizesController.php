@@ -198,7 +198,6 @@ class QuizesController extends PostsController {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -543,21 +542,28 @@ class QuizesController extends PostsController {
 			'attempt_status'           => 'attempt_started',
 			'attempt_started_at'       => current_time( 'mysql', true ),
 		);
-		$wpdb->insert(
-			$wpdb->prefix . 'masteriyo_quiz_attempts',
-			$attempt_data,
-			array(
-				'%d',
-				'%d',
-				'%s',
-				'%d',
-				'%d',
-				'%s',
-				'%s',
-			)
-		);
 
-		return $attempt_data;
+		$last_attempt = $this->is_quiz_started( $quiz_id );
+
+		if ( empty( $last_attempt ) ) {
+			$wpdb->insert(
+				$wpdb->prefix . 'masteriyo_quiz_attempts',
+				$attempt_data,
+				array(
+					'%d',
+					'%d',
+					'%s',
+					'%d',
+					'%d',
+					'%s',
+					'%s',
+				)
+			);
+
+			$last_attempt = $this->is_quiz_started( $quiz_id );
+		}
+
+		return $this->get_quiz_attempt_data( $last_attempt );
 	}
 
 	/**
@@ -1356,5 +1362,31 @@ class QuizesController extends PostsController {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return quiz attempt data.
+	 *
+	 * @param stdClass $quiz_attempt
+	 * @return array
+	 */
+	protected function get_quiz_attempt_data( $quiz_attempt ) {
+		return array(
+			'id'                       => $quiz_attempt->id,
+			'course_id'                => absint( $quiz_attempt->course_id ),
+			'quiz_id'                  => absint( $quiz_attempt->quiz_id ),
+			'user_id'                  => absint( $quiz_attempt->user_id ),
+			'total_questions'          => absint( $quiz_attempt->total_questions ),
+			'total_answered_questions' => absint( $quiz_attempt->total_answered_questions ),
+			'total_marks'              => absint( $quiz_attempt->total_marks ),
+			'total_attempts'           => absint( $quiz_attempt->total_attempts ),
+			'total_correct_answers'    => absint( $quiz_attempt->total_correct_answers ),
+			'total_incorrect_answers'  => absint( $quiz_attempt->total_incorrect_answers ),
+			'earned_marks'             => absint( $quiz_attempt->earned_marks ),
+			'answers'                  => $quiz_attempt->answers,
+			'attempt_status'           => $quiz_attempt->attempt_status,
+			'attempt_started_at'       => masteriyo_rest_prepare_date_response( $quiz_attempt->attempt_started_at ),
+			'attempt_ended_at'         => masteriyo_rest_prepare_date_response( $quiz_attempt->attempt_ended_at ),
+		);
 	}
 }

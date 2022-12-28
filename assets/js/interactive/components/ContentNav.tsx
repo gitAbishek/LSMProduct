@@ -60,6 +60,7 @@ const ContentNav: React.FC<Props> = (props) => {
 		},
 	};
 
+	console.log('quiz started', quizStarted);
 	return (
 		<Box as="nav" w="full" p="6">
 			<SimpleGrid columns={[1, 1, 3]} minChildWidth="100px">

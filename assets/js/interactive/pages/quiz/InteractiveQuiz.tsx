@@ -11,34 +11,38 @@ import {
 	useToast,
 } from '@chakra-ui/react';
 import { __ } from '@wordpress/i18n';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import FullScreenLoader from '../../../back-end/components/layout/FullScreenLoader';
 import urls from '../../../back-end/constants/urls';
-import { QuizSchema } from '../../../back-end/schemas';
+import { QuizAttempt, QuizSchema } from '../../../back-end/schemas';
 import API from '../../../back-end/utils/api';
-import { deepClean, getLocalTime } from '../../../back-end/utils/utils';
+import { deepClean, isEmpty } from '../../../back-end/utils/utils';
 import ContentNav from '../../components/ContentNav';
 import FloatingNavigation from '../../components/FloatingNavigation';
 import FloatingTimer from '../../components/FloatingTimer';
 import Header from '../../components/Header';
 import Sidebar from '../../components/Sidebar';
 import { CourseProgressItemsMap, CourseProgressMap } from '../../schemas';
-import localized from '../../utils/global';
 import QuizFields from './components/QuizFields';
 import QuizStart from './components/QuizStart';
 import ScoreBoard from './components/ScoreBoard';
-
 const InteractiveQuiz = () => {
 	const { quizId, courseId }: any = useParams();
 	const quizAPI = new API(urls.quizes);
-	const quizAttemptsAPI = new API(urls.quizesAttempts);
+	const lastQuizAttemptAPI = new API(urls.lastQuizAttemp);
 	const methods = useForm();
-	const [scoreBoardData, setScoreBoardData] = useState<any>(null);
-	const [quizStartedOn, setQuizStartedOn] = useState<any>(null);
-	const [quizAboutToExpire, setQuizAboutToExpire] = useState<boolean>(false);
+
+	const { watch, setValue } = methods;
+	useFormPersist(`quiz-${quizId}`, {
+		watch,
+		setValue,
+		storage: window.sessionStorage,
+	});
+
 	const progressItemAPI = new API(urls.courseProgressItem);
 	const progressAPI = new API(urls.courseProgress);
 
@@ -63,18 +67,11 @@ const InteractiveQuiz = () => {
 		() => quizAPI.get(quizId)
 	);
 
-	const quizProgress = useQuery<any, Error>(
-		[`attempt${quizId}`, quizId],
-		() =>
-			quizAttemptsAPI.list({
-				quiz_id: quizId,
-				per_page: 1,
-				user_id: localized?.current_user_id,
-			}),
+	const lastAttemptQuery = useQuery<QuizAttempt, Error>(
+		[`lastAttempt${quizId}`, quizId],
+		() => lastQuizAttemptAPI.list({ quiz_id: quizId }),
 		{
-			onSuccess: (data: any) => {
-				setScoreBoardData(data.data[0]);
-			},
+			retry: false,
 		}
 	);
 
@@ -105,25 +102,22 @@ const InteractiveQuiz = () => {
 				onSuccess: () => {
 					completeQuiz.refetch();
 					queryClient.invalidateQueries(`courseProgress${courseId}`);
+					// methods.reset();
 				},
 			}
 		);
 
 		startQuiz.mutate(quizId, {
-			onSuccess: (data: any) => {
-				setQuizStartedOn(getLocalTime(data.attempt_started_at));
-				setScoreBoardData(null);
-			},
+			onSuccess: () => lastAttemptQuery.refetch(),
 		});
-		setQuizAboutToExpire(false);
 	};
 
 	const onSubmit = (data: any) => {
 		checkQuizAnswers.mutate(deepClean(data), {
-			onSuccess: (data: any) => {
-				queryClient.invalidateQueries(`attempt${quizId}`);
-				setQuizStartedOn(null);
-				setScoreBoardData(data);
+			onSuccess: () => {
+				courseProgressQuery.refetch();
+				quizQuery.refetch();
+				lastAttemptQuery.refetch();
 			},
 		});
 		methods.reset();
@@ -139,8 +133,9 @@ const InteractiveQuiz = () => {
 			},
 			{
 				onSuccess: () => {
-					queryClient.invalidateQueries(`completeQuery${quizId}`);
-					queryClient.invalidateQueries(`courseProgress${courseId}`);
+					completeQuiz.refetch();
+					courseProgressQuery.refetch();
+					lastAttemptQuery.refetch();
 
 					toast({
 						title: __('Mark as Completed', 'masteriyo'),
@@ -153,17 +148,34 @@ const InteractiveQuiz = () => {
 		);
 	};
 
-	const onQuizeExpire = () => onSubmit(methods.getValues());
+	const onQuizeExpire = () => {
+		toast({
+			title: __('Quiz has been submitted', 'masteriyo'),
+			description: __(
+				'You ran out of time, quiz has been automatically submitted.',
+				'masteriyo'
+			),
+			isClosable: true,
+			status: 'warning',
+		});
+		onSubmit(methods.getValues());
+	};
 
 	if (
 		quizQuery.isSuccess &&
-		quizProgress.isSuccess &&
-		courseProgressQuery.isSuccess
+		courseProgressQuery.isSuccess &&
+		lastAttemptQuery.isFetched &&
+		completeQuiz.isFetched
 	) {
 		const maxLimitReached =
 			quizQuery?.data?.attempts_allowed != 0 &&
-			quizProgress?.data.data[0]?.total_attempts >=
+			(lastAttemptQuery.data?.total_attempts || 0) >=
 				quizQuery?.data?.attempts_allowed;
+
+		const isQuizStarted =
+			lastAttemptQuery?.data?.attempt_status === 'attempt_started' || false;
+		const quizAttemptData = lastAttemptQuery.data || false;
+		const isUnlimitedTime = quizQuery.data.duration === 0 || false;
 
 		return (
 			<Box h="full" overflowX="hidden" pos="relative">
@@ -190,7 +202,7 @@ const InteractiveQuiz = () => {
 									<Stack direction="column" spacing="8">
 										<Heading as="h5">{quizQuery?.data?.name}</Heading>
 
-										{quizQuery?.data?.description && (
+										{!isEmpty(quizQuery?.data?.description) && (
 											<Text
 												dangerouslySetInnerHTML={{
 													__html: quizQuery?.data?.description,
@@ -207,14 +219,11 @@ const InteractiveQuiz = () => {
 											</Alert>
 										)}
 
-										{quizStartedOn ? (
-											<QuizFields
-												quizAboutToExpire={quizAboutToExpire}
-												quizData={quizQuery.data}
-											/>
-										) : scoreBoardData ? (
+										{isQuizStarted ? (
+											<QuizFields quizData={quizQuery.data} />
+										) : quizAttemptData ? (
 											<ScoreBoard
-												scoreData={scoreBoardData}
+												scoreData={quizAttemptData}
 												onStartPress={onStartPress}
 												isButtonLoading={startQuiz.isLoading}
 												isFinishButtonLoading={completeMutation.isLoading}
@@ -239,13 +248,12 @@ const InteractiveQuiz = () => {
 							courseId={quizQuery?.data?.course_id}
 							isSidebarOpened={isSidebarOpen}
 						/>
-						{quizStartedOn && quizQuery.data.duration !== 0 && (
+						{isQuizStarted && !isUnlimitedTime && (
 							<FloatingTimer
-								startedOn={quizStartedOn}
+								startedOn={lastAttemptQuery?.data?.attempt_started_at}
 								duration={quizQuery?.data?.duration}
 								quizId={quizQuery?.data?.id}
 								onQuizeExpire={onQuizeExpire}
-								quizeAboutToExpire={setQuizAboutToExpire}
 							/>
 						)}
 
@@ -254,9 +262,9 @@ const InteractiveQuiz = () => {
 							onCompletePress={methods.handleSubmit(onSubmit)}
 							navigation={quizQuery?.data?.navigation}
 							courseId={quizQuery?.data?.course_id}
-							isButtonDisabled={scoreBoardData}
+							isButtonDisabled={!isQuizStarted}
 							isButtonLoading={checkQuizAnswers.isLoading}
-							quizStarted={quizStartedOn}
+							quizStarted={isQuizStarted}
 						/>
 					</Container>
 				</Box>

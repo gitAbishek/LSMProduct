@@ -50,7 +50,7 @@ function masteriyo_get_quiz_questions( $quiz_id, $by ) {
  *
  * @param int $quiz_id
  *
- * @return array|null|object|void
+ * @return array|null|object
  */
 function masteriyo_is_quiz_started( $quiz_id = 0 ) {
 	global $wpdb;

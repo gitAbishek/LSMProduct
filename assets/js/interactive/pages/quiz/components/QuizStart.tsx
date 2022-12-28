@@ -85,6 +85,7 @@ const QuizStart: React.FC<Props> = (props) => {
 					onClick={onStartPress}
 					isLoading={isButtonLoading}
 					isDisabled={isDisabled}
+					colorScheme="primary"
 					rounded="full"
 					fontWeight="bold"
 					rightIcon={<Icon as={BiChevronRight} fontSize="x-large" />}

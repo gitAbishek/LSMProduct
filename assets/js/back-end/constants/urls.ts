@@ -11,6 +11,7 @@ const urls = {
 	questions: 'masteriyo/v1/questions',
 	quizes: base + 'quizes',
 	quizesAttempts: base + 'quizes/attempts',
+	lastQuizAttemp: base + 'quizes/attempts/last-attempt',
 	sections: base + 'sections',
 	contents: base + 'sections/children',
 	orders: base + 'orders',

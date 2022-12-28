@@ -116,6 +116,28 @@ class QuizAttemptsController extends CrudController {
 				),
 			)
 		);
+
+		register_rest_route(
+			$this->namespace,
+			'/' . $this->rest_base . '/last-attempt',
+			array(
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_last_attempt' ),
+					'permission_callback' => function() {
+						return is_user_logged_in() || masteriyo( 'session' )->get_user_id();
+					},
+					'args'                => array(
+						'quiz_id' => array(
+							'description'       => __( 'Quiz ID', 'masteriyo' ),
+							'type'              => 'integer',
+							'sanitize_callback' => 'absint',
+							'validate_callback' => 'rest_validate_request_arg',
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**
@@ -584,7 +606,6 @@ class QuizAttemptsController extends CrudController {
 	 * @return array
 	 */
 	protected function get_quiz_attempt_data( $quiz_attempt, $context = 'view' ) {
-
 		$data = array(
 			'id'                       => $quiz_attempt->get_id( $context ),
 			'total_questions'          => $quiz_attempt->get_total_questions( $context ),
@@ -598,6 +619,9 @@ class QuizAttemptsController extends CrudController {
 			'attempt_status'           => $quiz_attempt->get_attempt_status( $context ),
 			'attempt_started_at'       => masteriyo_rest_prepare_date_response( $quiz_attempt->get_attempt_started_at( $context ) ),
 			'attempt_ended_at'         => masteriyo_rest_prepare_date_response( $quiz_attempt->get_attempt_ended_at( $context ) ),
+			'course'                   => null,
+			'quiz'                     => null,
+			'user'                     => null,
 		);
 
 		$course = masteriyo_get_course( $quiz_attempt->get_course_id( $context ) );
@@ -609,8 +633,6 @@ class QuizAttemptsController extends CrudController {
 				'id'   => $course->get_id(),
 				'name' => $course->get_name(),
 			);
-		} else {
-			$data['course'] = null;
 		}
 
 		if ( $quiz ) {
@@ -620,8 +642,6 @@ class QuizAttemptsController extends CrudController {
 				'pass_mark' => $quiz->get_pass_mark(),
 				'duration'  => $quiz->get_duration(),
 			);
-		} else {
-			$data['quiz'] = null;
 		}
 
 		if ( ! is_null( $user ) && ! is_wp_error( $user ) ) {
@@ -632,8 +652,6 @@ class QuizAttemptsController extends CrudController {
 				'last_name'    => $user->get_last_name(),
 				'email'        => $user->get_email(),
 			);
-		} else {
-			$data['user'] = null;
 		}
 
 		/**
@@ -921,5 +939,51 @@ class QuizAttemptsController extends CrudController {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Return last attempt of quiz.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param  WP_REST_Request $request Full details about the request.
+	 * @return WP_Error|boolean
+	 */
+	public function get_last_attempt( $request ) {
+		$quiz_id = isset( $request['quiz_id'] ) ? absint( $request['quiz_id'] ) : 0;
+		$quiz    = masteriyo_get_quiz( $quiz_id );
+
+		if ( is_null( $quiz ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_invalid_quiz_id',
+				__( 'Invalid quiz ID.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
+			);
+		}
+
+		$attempts = $this->get_objects(
+			array(
+				'quiz_id'  => $quiz_id,
+				'user_id'  => masteriyo_get_current_user_id(),
+				'order'    => 'desc',
+				'per_page' => 1,
+			)
+		);
+
+		$last_attempt = current( $attempts['objects'] );
+
+		if ( empty( $last_attempt ) ) {
+			return new \WP_Error(
+				'masteriyo_rest_last_quiz_attempt_not_found',
+				__( 'Last quiz attempt not found.', 'masteriyo' ),
+				array(
+					'status' => 404,
+				)
+			);
+		}
+
+		return $this->prepare_object_for_response( $last_attempt, $request );
 	}
 }

@@ -1,0 +1,133 @@
+// Compatibility with Divi Theme
+
+.theme-Divi {
+    #left-area {
+        padding-right: 15px;
+    }
+    // Courses page search button
+    .masteriyo-search {
+        .masteriyo-course-search {
+            button {
+                border: 0;
+                color: var(--masteriyo-color-white);
+                cursor: pointer;
+            }
+        }
+    }
+
+    // Pagination in Courses Page
+    .masteriyo-container {
+        padding: 0 15px;
+        .page-numbers {
+            &.current {
+                padding: 9px;
+            }
+        }        
+    }
+
+    // Checkout Page Styling
+    .masteriyo-checkout {
+        .masteriyo-checkout-wrapper {
+            @media (max-width: 992px) {
+                gap: 2em;
+            }
+        }
+
+        .masteriyo-checkout-main {
+            .masteriyo-input {
+                padding: 8px 16px;
+                width: 100%;
+            }
+
+            @media (max-width: 1017px) {
+                margin-right: 15px;
+            }
+
+            @media (max-width: 992px) {
+                margin-right: 0;
+                padding-right: 20px;
+            }
+        }
+
+        .masteriyo-checkout-summary {
+            .masteriyo-checkout-summary-payment-method {
+                ul {
+                    li {
+                        list-style: none;
+                    }
+                }
+            }
+
+            .masteriyo-btn-primary {
+                border: 0;
+                cursor: pointer;
+            }
+        }
+
+        .masteriyo-checkout-summary-your-order,
+        .masteriyo-checkout-summary-payment-method {
+            ul {
+                padding: 0 !important;
+            }            
+        }
+    }
+
+    // Account Page
+    .container {
+        @media (max-width: 575px) {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 15px;
+        }
+    }
+
+    #masteriyo-account-container {
+        .css-en-1rr4qq7 {
+            margin-left: 0;
+
+            @media (max-width: 767px) {
+                margin-left: 1rem;
+            }
+        }
+    }
+
+    .mto-dashboard-courses-stats {
+        > div {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+
+        .css-en-1rlcqch {
+            padding: 15px;
+        }
+
+        .css-en-3ivhej {
+            flex-wrap: wrap;
+            gap: 1em;
+        }
+
+        .css-en-n21gh5 {
+            margin-left: 0;
+        }
+
+        h2 {
+            padding: 0;
+        }
+
+        .css-en-1ie84td {
+            border-style: solid;
+        }
+    }
+
+    .mto-dashboard-courses-progress {
+        .mto-continue-course {
+            .css-en-misjay {
+                flex-wrap: wrap;
+            }
+
+            .css-en-14l2kk4 {
+                margin-left: 0;
+            }
+        }
+    }
+}

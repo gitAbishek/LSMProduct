@@ -1,0 +1,148 @@
+// Compatibility with Hello Elementor Theme
+
+.theme-hello-elementor {
+    .masteriyo-container {
+        padding: 0 15px;
+    }
+
+    // Search button color and border color fix in courses page
+    .masteriyo-search {
+        button {
+            color: 	var(--masteriyo-color-white);
+            border-color: var(--masteriyo-color-primary);
+
+            &:focus,
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+
+    // Admin avatar and name to be vertically aligned
+    .masteriyo-course {
+        .masteriyo-course-author {
+            a {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    // Account page show all button on hover fix and Title
+    .page-header {
+        .entry-title {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            font-weight: 500;
+            margin-top: .5rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .mto-enrolled-courses-wrapper {
+        .mto-enrolled-courses-list {
+            button.css-en-16jfb1u {
+                border: 1px solid #E2E8F0;
+            }
+        }
+
+        nav {
+            .pagination-previous,
+            .pagination-next {
+                &:hover {
+                    color: #444444 !important;
+                }
+            }
+
+            ol {
+                button.pagination-page {
+                    border: 1px solid #927CE6;
+                }
+            }
+        }
+    }
+
+    #masteriyo-account-container {
+        .css-en-1rr4qq7 {
+            margin-left: 0;
+        }
+
+        .mto-dashboard-courses-stats {
+            .css-en-1rlcqch {
+                padding: 20px;
+
+                @media (max-width: 1199px) {
+                    padding: 15px;
+                }
+            }
+
+            @media (max-width: 1199px) {
+                .css-en-3ivhej {
+                    flex-wrap: wrap;
+                    gap: 1em;
+
+                    .css-en-n21gh5{
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+
+        .mto-dashboard-courses-progress {
+            a {
+                text-decoration: none;
+
+                button {
+
+                    &:hover {
+                        color: #718096;
+                    }
+                }
+            }
+
+            .mto-continue-course {
+                a {
+                    button.css-en-1rashlu {
+                        border-color: var(--masteriyo-color-primary);
+
+                        &:hover {
+                            color: var(--masteriyo-color-white);
+                        }
+                    }
+                }
+
+                @media (max-width: 1199px) {
+                    .css-en-misjay {
+                        flex-wrap: wrap;
+
+                        .css-en-14l2kk4 {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }           
+        }
+
+        // Profile Tab button css
+        .mto-profile-wrapper {
+            button.css-en-17opi3y {
+                &:hover {
+                    color: #718096;
+                }
+            }
+        }
+
+    }
+
+    // Media Queries
+    @media (max-width: 992px) {
+        .masteriyo-checkout-wrapper {
+            gap: 2em;
+
+            .masteriyo-checkout-main {
+                margin-right: 0;
+                padding-right: 20px;
+            }
+        }
+    }
+}

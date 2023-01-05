@@ -91,6 +91,12 @@
         }
     }
 
+    .mto-account-sidebar {
+        h5 {
+            padding-bottom: 0;
+        }
+    }
+
     .mto-dashboard-courses-stats {
         > div {
             padding-left: 10px !important;
@@ -128,6 +134,28 @@
             .css-en-14l2kk4 {
                 margin-left: 0;
             }
+        }
+    }
+
+    .mto-enrolled-courses-wrapper {
+        .mto-enrolled-courses-list {
+            .css-en-1y0fhl2 {
+                border: 1px solid #E2E8F0 !important;
+            }
+        }
+
+        // Account page Enrolled courses pagination
+        nav {
+            ol {
+                padding-bottom: 0 !important;
+            }
+        }        
+    }
+
+    // Profile details tab design fixes
+    .mto-profile-wrapper {
+        .css-en-0 {
+            padding-bottom: 0;
         }
     }
 }

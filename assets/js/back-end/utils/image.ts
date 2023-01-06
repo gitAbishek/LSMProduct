@@ -17,9 +17,19 @@ export const getSrcSet = (mediaObject: MediaSchema) => {
 			`${mediaDetails.medium.source_url} ${mediaDetails.medium.width}w`
 		);
 
+	if (mediaDetails.medium_large)
+		imageUrls.push(
+			`${mediaDetails.medium_large.source_url} ${mediaDetails.medium_large.width}w`
+		);
+
 	if (mediaDetails.large)
 		imageUrls.push(
 			`${mediaDetails.large.source_url} ${mediaDetails.large.width}w`
+		);
+
+	if (mediaDetails.full)
+		imageUrls.push(
+			`${mediaDetails.full.source_url} ${mediaDetails.full.width}w`
 		);
 
 	return !isEmpty(imageUrls) ? imageUrls.join(', ') : '';

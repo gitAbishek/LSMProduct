@@ -65,8 +65,14 @@
 		}
 	}
 
-	.masteriyo-checkout-main {
-		flex-basis: 100%;
-		padding-right: 0;
+	.masteriyo-checkout {
+		&-wrapper {
+			gap: 32px;
+		}
+
+		&-main {
+			flex-basis: 100%;
+			margin-right: 0;
+		}
 	}
 }

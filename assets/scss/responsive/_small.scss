@@ -1,6 +1,10 @@
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 768px) {
 	//Form contianer
+	#primary {
+		padding-right: 0;
+	}
+
 	.masteriyo-form-container {
 		width: 80%;
 	}

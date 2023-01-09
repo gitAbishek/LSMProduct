@@ -1,4 +1,10 @@
 // Large devices (desktops, less than 1200px)
+@media only screen and (max-width: 1199px) {
+	#primary {
+		padding-right: 30px;
+	}
+}
+
 @media only screen and (max-width: 1024px) {
 	.masteriyo-single-course {
 		margin: 0;

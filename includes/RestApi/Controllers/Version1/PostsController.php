@@ -9,8 +9,10 @@
 namespace Masteriyo\RestApi\Controllers\Version1;
 
 use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CourseChildrenPostType;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Enums\SectionChildrenPostType;
+use Masteriyo\PostType\PostType;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,12 +50,32 @@ abstract class PostsController extends CrudController {
 		$post = get_post( (int) $request['id'] );
 
 		// Allow to get the items for open courses.
-		if ( $post && in_array( $post->post_type, array( 'mto-lesson', 'mto-quiz', 'mto-section', 'mto-question' ), true ) ) {
+		if ( $post && in_array( $post->post_type, array_merge( CourseChildrenPostType::all(), array( PostType::QUESTION ) ), true ) ) {
 			$course_id = get_post_meta( $post->ID, '_course_id', true );
 			$course    = masteriyo_get_course( $course_id );
 
-			if ( $course && CourseAccessMode::OPEN === $course->get_access_mode() ) {
+			if ( is_null( $course ) ) {
+				return new \WP_Error(
+					'masteriyo_rest_invalide_course_id',
+					__( 'Invalid course ID.', 'masteriyo' ),
+					array(
+						'status' => rest_authorization_required_code(),
+					)
+				);
+			}
+
+			if ( CourseAccessMode::OPEN === $course->get_access_mode() ) {
 				return true;
+			}
+
+			if ( is_user_logged_in() && masteriyo_is_current_user_student() && ! masteriyo_can_start_course( $course ) ) {
+				return new \WP_Error(
+					'masteriyo_rest_cannot_start_course',
+					__( 'Sorry, you have not bough the course.', 'masteriyo' ),
+					array(
+						'status' => rest_authorization_required_code(),
+					)
+				);
 			}
 		}
 

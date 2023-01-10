@@ -72,6 +72,7 @@ const InteractiveQuiz = () => {
 		() => lastQuizAttemptAPI.list({ quiz_id: quizId }),
 		{
 			retry: false,
+			useErrorBoundary: false,
 		}
 	);
 

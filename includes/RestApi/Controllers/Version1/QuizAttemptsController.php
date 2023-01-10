@@ -944,7 +944,7 @@ class QuizAttemptsController extends CrudController {
 	/**
 	 * Return last attempt of quiz.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.28
 	 *
 	 * @param  WP_REST_Request $request Full details about the request.
 	 * @return WP_Error|boolean

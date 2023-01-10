@@ -4,7 +4,7 @@ Tags: lms, learning management system, courses, elearning, education
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.0
-Stable tag: 1.5.27
+Stable tag: 1.5.28
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -202,6 +202,14 @@ Yes, Masteriyo LMS is designed to work with any themes that have been coded foll
 Yes, we do. Check out this [Getting Started Docs](https://docs.masteriyo.com/)
 
 == Changelog ==
+
+= 1.5.28 - 10-01-2023 =
+- Enhancement - Add ability to store answer on cache for quiz & fixes quiz issues.
+- Enhancement - Added extra img srcset for learn page images.
+- Compatibility – Made compatible with Hello Elementor theme.
+- Compatibility – Made compatible with Divi theme.
+- Fix - Any lesson is accessible even the course is not bought by rewriting lesson ID in URL.
+- Fix - Checkout page form input field design issues.
 
 = 1.5.27 - 23-12-2022 =
 - Compatibility - Made Masteriyo compatible with Astra theme.

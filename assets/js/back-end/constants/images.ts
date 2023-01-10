@@ -3,6 +3,7 @@ export { default as AdvancedQuiz } from '../../../img/advanced-quiz.png';
 export { default as Assignments } from '../../../img/assignments.png';
 export { default as Certificate } from '../../../img/certificate.png';
 export { default as CloseCone } from '../../../img/close-cone.png';
+export { default as ContentDrip } from '../../../img/content-drip.png';
 export { default as CourseAttachment } from '../../../img/course-attachment.png';
 export { default as CourseCategoriesBlockGridDesign } from '../../../img/course-categories-block-grid-design.png';
 export { default as courseFAQ } from '../../../img/course-faq.png';

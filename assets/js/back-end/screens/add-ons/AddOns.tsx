@@ -19,6 +19,7 @@ import {
 	AdvancedQuiz,
 	Assignments,
 	Certificate,
+	ContentDrip,
 	CourseAttachment,
 	courseFAQ,
 	DownloadMaterial,
@@ -289,6 +290,16 @@ const AddOns = () => {
 								'masteriyo'
 							)}
 							thumbnailSrc={ManualEnrollment}
+						/>
+					</Col>
+					<Col md={3}>
+						<AddonItem
+							addOnName={__('Content Drip', 'masteriyo')}
+							addOnDescription={__(
+								'Have control on how you want to deliver lessons of the course to your students with content dripping feature.',
+								'masteriyo'
+							)}
+							thumbnailSrc={ContentDrip}
 						/>
 					</Col>
 				</Row>

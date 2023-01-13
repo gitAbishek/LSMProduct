@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.28
+**Stable tag**: 1.5.29
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,10 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.29 - 13-01-2023
+
+- Fix - Paypal enabled for non supported currencies.
 
 ### 1.5.28 - 10-01-2023
 

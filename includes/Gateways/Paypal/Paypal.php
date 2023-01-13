@@ -91,17 +91,20 @@ class Paypal extends PaymentGateway implements PaymentGatewayInterface {
 			$this->description  = trim( $this->description );
 		}
 
+		// Load the settings.
+		$this->init_settings();
+
 		add_action( 'masteriyo_order_status_processing', array( $this, 'capture_payment' ) );
 		add_action( 'masteriyo_order_status_completed', array( $this, 'capture_payment' ) );
 
-		if ( ! $this->is_valid_for_use() ) {
-			$this->enabled = true;
-		} else {
+		if ( $this->is_valid_for_use() ) {
 			new IpnHandler( $this->sandbox, $this->receiver_email );
 
 			if ( $this->identity_token ) {
 				new PdtHandler( $this->sandbox, $this->identity_token );
 			}
+		} else {
+			$this->enabled = false;
 		}
 
 		if ( $this->enabled ) {

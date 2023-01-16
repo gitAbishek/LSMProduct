@@ -71,7 +71,7 @@ abstract class PostsController extends CrudController {
 			if ( is_user_logged_in() && masteriyo_is_current_user_student() && ! masteriyo_can_start_course( $course ) ) {
 				return new \WP_Error(
 					'masteriyo_rest_cannot_start_course',
-					__( 'Sorry, you have not bough the course.', 'masteriyo' ),
+					__( 'Sorry, you have not bought the course.', 'masteriyo' ),
 					array(
 						'status' => rest_authorization_required_code(),
 					)

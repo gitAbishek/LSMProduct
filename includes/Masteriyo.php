@@ -645,7 +645,7 @@ class Masteriyo {
 	 * @return string
 	 */
 	protected function handle_learn_page() {
-		$preview   = masteriyo_string_to_bool( get_query_var( 'preview', false ) );
+		$preview   = masteriyo_string_to_bool( get_query_var( 'mto-preview', false ) );
 		$course_id = get_query_var( 'course_name', 0 );
 
 		if ( '' === get_option( 'permalink_structure' ) || $preview ) {

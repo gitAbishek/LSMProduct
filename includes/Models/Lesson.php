@@ -193,7 +193,7 @@ class Lesson extends Model {
 		$course       = masteriyo_get_course( $this->get_course_id() );
 
 		if ( $course ) {
-			$course_preview_link = $course->get_preview_link( false );
+			$course_preview_link = $course->get_preview_link();
 			$preview_link        = trailingslashit( $course_preview_link ) . 'lesson/' . $this->get_id();
 		}
 

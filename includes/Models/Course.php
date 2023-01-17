@@ -193,7 +193,7 @@ class Course extends Model {
 		$preview_link = add_query_arg(
 			array(
 				'course_name' => $this->get_id(),
-				'preview'     => 'true',
+				'mto-preview' => 'true',
 			),
 			$learn_page_url
 		);

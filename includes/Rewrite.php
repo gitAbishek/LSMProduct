@@ -32,6 +32,20 @@ class Rewrite {
 		add_action( 'init', array( $this, 'rewrite_overrides' ), 4 );
 		add_action( 'init', array( $this, 'add_course_name_endpoint' ), 0 );
 		add_filter( 'author_link', array( $this, 'author_link' ), 20, 2 );
+		add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+
+	}
+
+	/**
+	 * Append query vars.
+	 *
+	 * @since x.x.x
+	 *
+	 * @param array $query_vars
+	 * @return array
+	 */
+	public function add_query_vars( $query_vars ) {
+		return array_merge( $query_vars, array( 'mto-preview' ) );
 	}
 
 	/**

@@ -196,12 +196,12 @@ class Quiz extends Model {
 	 *
 	 * @return string
 	 */
-	public function get_preview_link( $learn = false ) {
+	public function get_preview_link() {
 		$preview_link = '';
 		$course       = masteriyo_get_course( $this->get_course_id() );
 
 		if ( $course ) {
-			$course_preview_link = $course->start_course_url( false );
+			$course_preview_link = $course->get_preview_link();
 			$preview_link        = trailingslashit( $course_preview_link ) . 'quiz/' . $this->get_id();
 		}
 

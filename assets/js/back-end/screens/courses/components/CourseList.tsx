@@ -13,7 +13,7 @@ import {
 	Stack,
 	Text,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { _x, __ } from '@wordpress/i18n';
 import dayjs from 'dayjs';
 import React from 'react';
 import {
@@ -121,7 +121,9 @@ const CourseList: React.FC<Props> = (props) => {
 			</Td>
 			<Td>
 				{price === undefined || price < 1 ? (
-					<Badge textTransform="none">{__('Free', 'masteriyo')}</Badge>
+					<Badge textTransform="none">
+						{_x('Free', 'Course price text', 'masteriyo')}
+					</Badge>
 				) : (
 					<Text fontWeight="medium" fontSize="xs">
 						{PriceWithSymbol(price, currencySymbol)}

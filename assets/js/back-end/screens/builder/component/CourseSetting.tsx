@@ -25,7 +25,7 @@ import {
 	Tabs,
 	useMediaQuery,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { _x, __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useQuery } from 'react-query';
@@ -305,7 +305,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 															setAccessModeType('open');
 															setValue('access_mode', 'open');
 														}}>
-														{__('Free', 'masteriyo')}
+														{_x('Free', 'Course price text', 'masteriyo')}
 													</Radio>
 													<Collapse
 														in={pricingDisplayValue != 'paid'}

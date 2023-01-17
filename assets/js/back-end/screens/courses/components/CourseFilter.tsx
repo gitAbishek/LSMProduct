@@ -7,7 +7,7 @@ import {
 	Stack,
 	useMediaQuery,
 } from '@chakra-ui/react';
-import { __ } from '@wordpress/i18n';
+import { _x, __ } from '@wordpress/i18n';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { BiDotsVerticalRounded } from 'react-icons/bi';
@@ -25,11 +25,11 @@ import { deepClean, deepMerge } from '../../../utils/utils';
 
 const pricingOptions = [
 	{
-		label: __('Free', 'masteriyo'),
+		label: _x('Free', 'Course price text', 'masteriyo'),
 		value: 'free',
 	},
 	{
-		label: __('Paid', 'masteriyo'),
+		label: _x('Paid', 'Course price text', 'masteriyo'),
 		value: 'paid',
 	},
 ];

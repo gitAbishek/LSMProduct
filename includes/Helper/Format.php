@@ -361,7 +361,7 @@ function masteriyo_price( $price, $args = array() ) {
 		 * @param string Free text.
 		 * @param string $price Price.
 		 */
-		$formatted_price = apply_filters( 'masteriyo_price_free_text', __( 'Free', 'masteriyo' ), $price );
+		$formatted_price = apply_filters( 'masteriyo_price_free_text', _x( 'Free', 'Course price text', 'masteriyo' ), $price );
 	} else {
 		$formatted_price = sprintf( $args['price_format'], '<span class="masteriyo-price-currencySymbol">' . masteriyo_get_currency_symbol( $args['currency'] ) . '</span>', $price );
 	}

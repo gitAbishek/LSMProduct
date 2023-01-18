@@ -946,6 +946,8 @@ class ScriptStyle {
 							'submit_success'           => __( 'Submitted successfully.', 'masteriyo' ),
 							'update_success'           => __( 'Updated successfully.', 'masteriyo' ),
 							'delete_success'           => __( 'Deleted successfully.', 'masteriyo' ),
+							'expand_all'               => __( 'Expand All', 'masteriyo' ),
+							'collapse_all'             => __( 'Collapse All', 'masteriyo' ),
 							'loading'                  => __( 'Loading...', 'masteriyo' ),
 							'load_more_reviews_failed' => __( 'Failed to load more reviews', 'masteriyo' ),
 							'see_more_reviews'         => __( 'See more reviews', 'masteriyo' ),

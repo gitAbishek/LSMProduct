@@ -181,13 +181,7 @@ const CourseItem: React.FC<Props> = (props) => {
 								<Text>{dayjs(started_at).format('MM/DD/YYYY')}</Text>
 							)}
 							<Link href={course?.start_course_url}>
-								<Button
-									size="sm"
-									borderRadius="full"
-									colorScheme="primary"
-									isDisabled={
-										courseProgressQuery?.data?.status === 'completed'
-									}>
+								<Button size="sm" borderRadius="full" colorScheme="primary">
 									{courseProgressQuery?.data?.status === 'completed'
 										? __('Completed', 'masteriyo')
 										: courseProgressQuery?.data?.status === 'progress'

@@ -505,12 +505,14 @@ class CourseProgressRepository extends AbstractRepository implements RepositoryI
 			$summaries[ $key ] = array(
 				'pending'   => $pending,
 				'completed' => $completed,
+				'total'     => $pending + $completed,
 			);
 		}
 
 		$summaries['total'] = array(
 			'pending'   => array_sum( wp_list_pluck( $summaries, 'pending' ) ),
 			'completed' => array_sum( wp_list_pluck( $summaries, 'completed' ) ),
+			'total'     => array_sum( wp_list_pluck( $summaries, 'total' ) ),
 		);
 
 		if ( isset( $summaries[ $type ] ) ) {

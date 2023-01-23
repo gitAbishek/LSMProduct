@@ -171,15 +171,19 @@ const Header: React.FC<Props> = (props) => {
 														{__(' Left', 'masteriyo')} |{' '}
 													</Text>
 
-													<Text>
-														{summary.lesson.pending}{' '}
-														{__('lessons left', 'masteriyo')} |{' '}
-													</Text>
+													{summary.lesson.total ? (
+														<Text>
+															{summary.lesson.pending}{' '}
+															{__('lessons left', 'masteriyo')} |{' '}
+														</Text>
+													) : null}
 
-													<Text>
-														{summary.quiz.pending}{' '}
-														{__('quiz left', 'masteriyo')}
-													</Text>
+													{summary.quiz.total ? (
+														<Text>
+															{summary.quiz.pending}{' '}
+															{__('quiz left', 'masteriyo')}
+														</Text>
+													) : null}
 
 													<Popover
 														isOpen={isProgressOpen}
@@ -198,82 +202,87 @@ const Header: React.FC<Props> = (props) => {
 														<PopoverContent p="6" w="240px">
 															<PopoverArrow />
 															<List>
-																<ListItem
-																	borderBottom="1px"
-																	borderColor="gray.100"
-																	pb="6">
-																	<Stack direction="row" spacing="2">
-																		<CircularProgress
-																			value={lessonProgress}
-																			size="54px"
-																			capIsRound
-																			color="primary.500">
-																			<CircularProgressLabel fontWeight="bold">
-																				{lessonProgress + __('%', 'masteriyo')}
-																			</CircularProgressLabel>
-																		</CircularProgress>
-																		<Stack direction="column" spacing="1">
-																			<Text
-																				textTransform="uppercase"
-																				fontSize="x-small"
-																				color="gray.500"
-																				fontWeight="bold">
-																				{__('Lesson', 'masteriyo')}
-																			</Text>
-																			<Text
-																				fontSize="x-small"
-																				fontWeight="bold"
+																{summary.lesson.total ? (
+																	<ListItem
+																		borderBottom="1px"
+																		borderColor="gray.100"
+																		pb="6">
+																		<Stack direction="row" spacing="2">
+																			<CircularProgress
+																				value={lessonProgress}
+																				size="54px"
+																				capIsRound
 																				color="primary.500">
-																				{summary.lesson.completed}
-																				{__(' Completed', 'masteriyo')}
-																			</Text>
-																			<Text
-																				fontSize="x-small"
-																				fontWeight="bold"
-																				color="gray.700">
-																				{summary.lesson.pending}
-																				{__(' Left', 'masteriyo')}
-																			</Text>
+																				<CircularProgressLabel fontWeight="bold">
+																					{lessonProgress +
+																						__('%', 'masteriyo')}
+																				</CircularProgressLabel>
+																			</CircularProgress>
+																			<Stack direction="column" spacing="1">
+																				<Text
+																					textTransform="uppercase"
+																					fontSize="x-small"
+																					color="gray.500"
+																					fontWeight="bold">
+																					{__('Lesson', 'masteriyo')}
+																				</Text>
+																				<Text
+																					fontSize="x-small"
+																					fontWeight="bold"
+																					color="primary.500">
+																					{summary.lesson.completed}
+																					{__(' Completed', 'masteriyo')}
+																				</Text>
+																				<Text
+																					fontSize="x-small"
+																					fontWeight="bold"
+																					color="gray.700">
+																					{summary.lesson.pending}
+																					{__(' Left', 'masteriyo')}
+																				</Text>
+																			</Stack>
 																		</Stack>
-																	</Stack>
-																</ListItem>
-																<ListItem pt="6">
-																	<Stack direction="row" spacing="2">
-																		<CircularProgress
-																			value={quizProgress}
-																			size="54px"
-																			capIsRound
-																			trackColor="gray.100"
-																			color="primary.500">
-																			<CircularProgressLabel fontWeight="bold">
-																				{quizProgress + __('%', 'masteriyo')}
-																			</CircularProgressLabel>
-																		</CircularProgress>
-																		<Stack direction="column" spacing="1">
-																			<Text
-																				textTransform="uppercase"
-																				fontSize="x-small"
-																				color="gray.500"
-																				fontWeight="bold">
-																				{__('Quiz', 'masteriyo')}
-																			</Text>
-																			<Text
-																				fontSize="x-small"
-																				fontWeight="bold"
+																	</ListItem>
+																) : null}
+																{summary.quiz.total ? (
+																	<ListItem pt="6">
+																		<Stack direction="row" spacing="2">
+																			<CircularProgress
+																				value={quizProgress}
+																				size="54px"
+																				capIsRound
+																				trackColor="gray.100"
 																				color="primary.500">
-																				{summary.quiz.completed}
-																				{__(' Completed', 'masteriyo')}
-																			</Text>
-																			<Text
-																				fontSize="x-small"
-																				fontWeight="bold"
-																				color="gray.700">
-																				{summary.quiz.pending}
-																				{__(' Left', 'masteriyo')}
-																			</Text>
+																				<CircularProgressLabel fontWeight="bold">
+																					{quizProgress + __('%', 'masteriyo')}
+																				</CircularProgressLabel>
+																			</CircularProgress>
+																			<Stack direction="column" spacing="1">
+																				<Text
+																					textTransform="uppercase"
+																					fontSize="x-small"
+																					color="gray.500"
+																					fontWeight="bold">
+																					{__('Quiz', 'masteriyo')}
+																				</Text>
+																				<Text
+																					fontSize="x-small"
+																					fontWeight="bold"
+																					color="primary.500">
+																					{summary.quiz.completed}
+																					{__(' Completed', 'masteriyo')}
+																				</Text>
+																				<Text
+																					fontSize="x-small"
+																					fontWeight="bold"
+																					color="gray.700">
+																					{summary.quiz.pending}
+																					{__(' Left', 'masteriyo')}
+																				</Text>
+																			</Stack>
 																		</Stack>
-																	</Stack>
-																</ListItem>
+																	</ListItem>
+																) : null}
 															</List>
 														</PopoverContent>
 													</Popover>

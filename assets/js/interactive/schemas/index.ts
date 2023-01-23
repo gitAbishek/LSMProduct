@@ -21,10 +21,12 @@ export type CourseProgressSummaryMap = {
 	lesson: {
 		completed: number;
 		pending: number;
+		total: number;
 	};
 	quiz: {
 		completed: number;
 		pending: number;
+		total: number;
 	};
 };
 

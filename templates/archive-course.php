@@ -74,9 +74,11 @@ do_action( 'masteriyo_before_main_content' );
 do_action( 'masteriyo_after_archive_header' );
 ?>
 
+<?php if ( ! empty( trim( masteriyo_get_page_content( masteriyo_get_page_id( 'courses' ) ) ) ) ) : ?>
 <div class="masteriyo-courses--content">
 	<?php masteriyo_the_page_content( masteriyo_get_page_id( 'courses' ) ); ?>
 </div>
+<?php endif; ?>
 
 <?php
 if ( masteriyo_course_loop() ) {

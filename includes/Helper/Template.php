@@ -112,7 +112,7 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 		/**
 		 * Filter masteriyo courses loop start content.
 		 *
-		 * @since x.x.x
+		 * @since 1.5.30
 		 */
 		$loop_start = apply_filters( 'masteriyo_course_loop_start', ob_get_clean() );
 

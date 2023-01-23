@@ -12,7 +12,7 @@
 
 **Requires PHP**: 7.0
 
-**Stable tag**: 1.5.29
+**Stable tag**: 1.5.30
 
 **License: GNU** General Public License v3.0
 
@@ -50,6 +50,13 @@ No, you don't need any coding skills. One can click and create courses, lessons 
 Want to contribute? Please have a look at [Contributor Guidelines](docs/contributor-guide.md)
 
 # Changelog
+
+### 1.5.30 - 23-01-2023
+
+- Enhancement - Do not display quiz/lesson count in learn page when there are no lessons or quizzes in the course.
+- Fix - Lesson/Quiz preview link for default permalink settings.
+- Fix - Localization of expand all and collapse all text in a single course page.
+- Fix - Unable to start course from account page if a course is completed.
 
 ### 1.5.29 - 13-01-2023
 

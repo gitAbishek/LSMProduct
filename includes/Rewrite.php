@@ -39,7 +39,7 @@ class Rewrite {
 	/**
 	 * Append query vars.
 	 *
-	 * @since x.x.x
+	 * @since 1.5.30
 	 *
 	 * @param array $query_vars
 	 * @return array

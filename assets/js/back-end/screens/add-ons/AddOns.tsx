@@ -94,11 +94,11 @@ const AddOns = () => {
 						<Box pos="relative" w="250px">
 							<Heading
 								pos="absolute"
-								fontSize="xs"
+								fontSize="sm"
 								color="white"
 								left="20px"
 								top="10px">
-								{__('CHRISTMAS AND NEW YEAR OFFER', 'masteriyo')}
+								{__('Special Introductory Discount!', 'masteriyo')}
 							</Heading>
 							<Ribbon />
 						</Box>

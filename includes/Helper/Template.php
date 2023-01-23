@@ -109,6 +109,11 @@ if ( ! function_exists( 'masteriyo_course_loop_start' ) ) {
 
 		masteriyo_get_template( 'loop/loop-start.php' );
 
+		/**
+		 * Filter masteriyo courses loop start content.
+		 *
+		 * @since x.x.x
+		 */
 		$loop_start = apply_filters( 'masteriyo_course_loop_start', ob_get_clean() );
 
 		if ( $echo ) {

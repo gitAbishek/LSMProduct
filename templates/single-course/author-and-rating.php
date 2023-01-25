@@ -27,15 +27,15 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 <div class="masteriyo-course--content__rt">
 	<?php if ( $author ) : ?>
 	<div class="masteriyo-course-author">
-		<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>">
-		<?php /* translators: %s: Username */ ?>
-		<span class="masteriyo-course-author--name">
-			<?php echo esc_html_x( 'by', 'Author by', 'masteriyo' ); ?>
-			<a href="<?php echo esc_url( $author->get_course_archive_url() ); ?>" alt="<?php echo esc_attr( $author->get_display_name() ); ?>">
-				<?php echo esc_html( $author->get_display_name() ); ?>
-			</a>
-		</span>
+		<a href="<?php echo esc_url( $author->get_course_archive_url() ); ?>">
+			<img src="<?php echo esc_attr( $author->get_avatar_url() ); ?>"  alt="<?php echo esc_attr( $author->get_display_name() ); ?>">
+			<?php /* translators: %s: Username */ ?>
+			<span class="masteriyo-course-author--name">
+					<?php echo esc_html( $author->get_display_name() ); ?>
+			</span>
+		</a>
 	</div>
+	<?php endif; ?>
 
 		<?php
 		/**
@@ -48,7 +48,6 @@ do_action( 'masteriyo_before_single_course_author_and_rating' );
 		do_action( 'masteriyo_after_course_author', $course );
 		?>
 
-	<?php endif; ?>
 	<span class="masteriyo-icon-svg masteriyo-rating">
 		<?php masteriyo_format_rating( $course->get_average_rating(), true ); ?> <?php echo esc_html( masteriyo_format_decimal( $course->get_average_rating(), 1, true ) ); ?> (<?php echo esc_html( $course->get_review_count() ); ?>)
 	</span>

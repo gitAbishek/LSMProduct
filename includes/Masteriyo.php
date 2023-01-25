@@ -24,6 +24,7 @@ use Masteriyo\FormHandler\FormHandlers;
 use Masteriyo\PostType\RegisterPostType;
 use Masteriyo\Taxonomy\RegisterTaxonomies;
 use Masteriyo\FileRestrictions\FileRestrictions;
+use Masteriyo\PostType\PostType;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -362,7 +363,7 @@ class Masteriyo {
 		if ( is_tax( 'course_cat' ) ) {
 			$template = masteriyo_locate_template( 'archive-course-category.php' );
 		}
-		if ( is_author() ) {
+		if ( is_author() && is_post_type_archive( PostType::COURSE ) ) {
 			$template = masteriyo_locate_template( 'archive-instructor-courses.php' );
 		}
 

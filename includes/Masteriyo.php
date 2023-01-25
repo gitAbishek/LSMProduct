@@ -144,6 +144,11 @@ class Masteriyo {
 		// Fixed checkout (404) issue when WC is activated.
 		// @see https://github.com/woocommerce/woocommerce/blob/76f99a482f6d05094078219225f896db9113f7d3/plugins/woocommerce/includes/wc-template-functions.php#L50
 		add_filter( 'woocommerce_account_endpoint_page_not_found', '__return_false' );
+
+		// Do not output query monitor details bar in learn page.
+		add_filter( 'qm/dispatch/html', function( $dispatch) {
+			return masteriyo_is_learn_page() ? false : $dispatch;
+		});
 	}
 
 	/**

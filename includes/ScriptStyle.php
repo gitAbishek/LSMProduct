@@ -1003,7 +1003,7 @@ class ScriptStyle {
 	 * @return void
 	 */
 	public static function remove_styles_scripts_in_learn_page() {
-		global $wp_styles;
+		global $wp_styles, $wp_scripts;
 
 		// Bail early if the page is not learn.
 		if ( ! masteriyo_is_learn_page() ) {
@@ -1012,6 +1012,7 @@ class ScriptStyle {
 
 		$whitelist = self::get_whitelist_styles_in_learn_page();
 
+		// Dequeue blacklist styles
 		foreach ( $wp_styles->registered as $style ) {
 			if ( ! in_array( $style->handle, $whitelist, true ) ) {
 				wp_deregister_style( $style->handle );
@@ -1021,6 +1022,20 @@ class ScriptStyle {
 		foreach ( $wp_styles->queue as $handle ) {
 			if ( ! in_array( $handle, $whitelist, true ) ) {
 				wp_dequeue_style( $handle );
+			}
+		}
+
+		$whitelist = self::get_whitelist_scripts_in_learn_page();
+		// Dequeue blacklist scripts
+		foreach ( $wp_scripts->registered as $script ) {
+			if ( ! in_array( $script->handle, $whitelist, true ) ) {
+				wp_deregister_script( $script->handle );
+			}
+		}
+
+		foreach ( $wp_scripts->queue as $handle ) {
+			if ( ! in_array( $handle, $whitelist, true ) ) {
+				wp_dequeue_script( $handle );
 			}
 		}
 	}
@@ -1036,13 +1051,13 @@ class ScriptStyle {
 		/**
 		 * Filters the whitelisted styles for learn page.
 		 *
-		 * @since 1.0.0
+		 * @since x.x.x
 		 *
 		 * @param array $styles List of style handles.
 		 */
 		return array_unique(
 			apply_filters(
-				'masteriyo_whitelist_scripts_learn_page',
+				'masteriyo_whitelist_styles_learn_page',
 				array(
 					'masteriyo-learn',
 					'masteriyo-dependencies',
@@ -1101,6 +1116,259 @@ class ScriptStyle {
 					'wp-format-library',
 					'wp-list-resuable-blocks',
 					'wp-nux',
+				)
+			)
+		);
+	}
+
+	/**
+	 * Get the list of whitelist scripts in learn page.
+	 *
+	 * @since x.x.x
+	 *
+	 * @return array
+	 */
+	public static function get_whitelist_scripts_in_learn_page() {
+		/**
+		 * Filters the whitelisted scripts for learn page.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $scripts List of script handles.
+		 */
+		return array_unique(
+			apply_filters(
+				'masteriyo_whitelist_scripts_learn_page',
+				array(
+					'masteriyo-dependencies',
+					'masteriyo-learn',
+					'utils',
+					'common',
+					'wp-sanitize',
+					'sack',
+					'quicktags',
+					'colorpicker',
+					'editor',
+					'clipboard',
+					'wp-ajax-response',
+					'wp-api-request',
+					'wp-pointer',
+					'autosave',
+					'heartbeat',
+					'wp-auth-check',
+					'wp-lists',
+					'prototype',
+					'scriptaculous-root',
+					'scriptaculous-builder',
+					'scriptaculous-dragdrop',
+					'scriptaculous-effects',
+					'scriptaculous-slider',
+					'scriptaculous-sound',
+					'scriptaculous-controls',
+					'scriptaculous',
+					'cropper',
+					'jquery',
+					'jquery-core',
+					'jquery-migrate',
+					'jquery-ui-core',
+					'jquery-effects-core',
+					'jquery-effects-blind',
+					'jquery-effects-bounce',
+					'jquery-effects-clip',
+					'jquery-effects-drop',
+					'jquery-effects-explode',
+					'jquery-effects-fade',
+					'jquery-effects-fold',
+					'jquery-effects-highlight',
+					'jquery-effects-puff',
+					'jquery-effects-pulsate',
+					'jquery-effects-scale',
+					'jquery-effects-shake',
+					'jquery-effects-size',
+					'jquery-effects-slide',
+					'jquery-effects-transfer',
+					'jquery-ui-accordion',
+					'jquery-ui-autocomplete',
+					'jquery-ui-button',
+					'jquery-ui-datepicker',
+					'jquery-ui-dialog',
+					'jquery-ui-menu',
+					'jquery-ui-mouse',
+					'jquery-ui-progressbar',
+					'jquery-ui-selectmenu',
+					'jquery-ui-slider',
+					'jquery-ui-spinner',
+					'jquery-ui-tabs',
+					'jquery-ui-tooltip',
+					'jquery-ui-checkboxradio',
+					'jquery-ui-controlgroup',
+					'jquery-ui-draggable',
+					'jquery-ui-droppable',
+					'jquery-ui-resizable',
+					'jquery-ui-selectable',
+					'jquery-ui-sortable',
+					'jquery-ui-position',
+					'jquery-ui-widget',
+					'jquery-form',
+					'jquery-color',
+					'schedule',
+					'jquery-query',
+					'jquery-serialize-object',
+					'jquery-hotkeys',
+					'jquery-table-hotkeys',
+					'jquery-touch-punch',
+					'suggest',
+					'imagesloaded',
+					'masonry',
+					'jquery-masonry',
+					'thickbox',
+					'jcrop',
+					'swfobject',
+					'moxiejs',
+					'plupload',
+					'plupload-all',
+					'plupload-html5',
+					'plupload-flash',
+					'plupload-silverlight',
+					'plupload-html4',
+					'plupload-handlers',
+					'wp-plupload',
+					'swfupload',
+					'swfupload-all',
+					'swfupload-handlers',
+					'comment-reply',
+					'json2',
+					'underscore',
+					'backbone',
+					'wp-util',
+					'wp-backbone',
+					'revisions',
+					'imgareaselect',
+					'mediaelement',
+					'mediaelement-core',
+					'mediaelement-migrate',
+					'mediaelement-vimeo',
+					'wp-mediaelement',
+					'wp-codemirror',
+					'csslint',
+					'esprima',
+					'jshint',
+					'jsonlint',
+					'htmlhint',
+					'htmlhint-kses',
+					'code-editor',
+					'wp-theme-plugin-editor',
+					'wp-playlist',
+					'zxcvbn-async',
+					'password-strength-meter',
+					'application-passwords',
+					'auth-app',
+					'user-profile',
+					'language-chooser',
+					'user-suggest',
+					'admin-bar',
+					'wplink',
+					'wpdialogs',
+					'word-count',
+					'media-upload',
+					'hoverIntent',
+					'hoverintent-js',
+					'customize-base',
+					'customize-loader',
+					'customize-preview',
+					'customize-models',
+					'customize-views',
+					'customize-controls',
+					'customize-selective-refresh',
+					'customize-widgets',
+					'customize-preview-widgets',
+					'customize-nav-menus',
+					'customize-preview-nav-menus',
+					'wp-custom-header',
+					'accordion',
+					'shortcode',
+					'media-models',
+					'wp-embed',
+					'media-views',
+					'media-editor',
+					'media-audiovideo',
+					'mce-view',
+					'wp-api',
+					'react',
+					'react-dom',
+					'regenerator-runtime',
+					'moment',
+					'lodash',
+					'wp-polyfill-fetch',
+					'wp-polyfill-formdata',
+					'wp-polyfill-node-contains',
+					'wp-polyfill-url',
+					'wp-polyfill-dom-rect',
+					'wp-polyfill-element-closest',
+					'wp-polyfill-object-fit',
+					'wp-polyfill',
+					'wp-react-refresh-entry',
+					'wp-react-refresh-runtime',
+					'wp-tinymce-root',
+					'wp-tinymce',
+					'wp-tinymce-lists',
+					'wp-a11y',
+					'wp-annotations',
+					'wp-api-fetch',
+					'wp-autop',
+					'wp-blob',
+					'wp-block-directory',
+					'wp-block-editor',
+					'wp-block-library',
+					'wp-block-serialization-default-parser',
+					'wp-blocks',
+					'wp-components',
+					'wp-compose',
+					'wp-core-data',
+					'wp-customize-widgets',
+					'wp-data',
+					'wp-data-controls',
+					'wp-date',
+					'wp-deprecated',
+					'wp-dom',
+					'wp-dom-ready',
+					'wp-edit-post',
+					'wp-edit-site',
+					'wp-edit-widgets',
+					'wp-editor',
+					'wp-element',
+					'wp-escape-html',
+					'wp-format-library',
+					'wp-hooks',
+					'wp-html-entities',
+					'wp-i18n',
+					'wp-is-shallow-equal',
+					'wp-keyboard-shortcuts',
+					'wp-keycodes',
+					'wp-list-reusable-blocks',
+					'wp-media-utils',
+					'wp-notices',
+					'wp-nux',
+					'wp-plugins',
+					'wp-preferences',
+					'wp-preferences-persistence',
+					'wp-primitives',
+					'wp-priority-queue',
+					'wp-redux-routine',
+					'wp-reusable-blocks',
+					'wp-rich-text',
+					'wp-server-side-render',
+					'wp-shortcode',
+					'wp-style-engine',
+					'wp-token-list',
+					'wp-url',
+					'wp-viewport',
+					'wp-warning',
+					'wp-widgets',
+					'wp-wordcount',
+					'wp-block-file-view',
+					'wp-block-navigation-view',
+					'wp-block-navigation-view-2',
 				)
 			)
 		);

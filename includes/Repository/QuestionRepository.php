@@ -12,6 +12,7 @@ namespace Masteriyo\Repository;
 use Masteriyo\Database\Model;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Question;
+use Masteriyo\PostType\PostType;
 
 /**
  * Question repository class.
@@ -72,7 +73,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			apply_filters(
 				'masteriyo_new_question_data',
 				array(
-					'post_type'     => 'mto-question',
+					'post_type'     => PostType::QUESTION,
 					'post_status'   => $question->get_status() ? $question->get_status() : PostStatus::PUBLISH,
 					'post_author'   => $question->get_author_id( 'edit' ),
 					'post_title'    => $question->get_name() ? $question->get_name() : __( 'Question', 'masteriyo' ),
@@ -81,9 +82,9 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 					'post_parent'   => $question->get_parent_id(),
 					'ping_status'   => 'closed',
 					'menu_order'    => $question->get_menu_order(),
-					'post_date'     => $question->get_date_created( 'edit' ),
-					'post_date_gmt' => $question->get_date_created( 'edit' ),
 					'post_name'     => '',
+					'post_date'     => gmdate( 'Y-m-d H:i:s', $question->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $question->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$question
 			)
@@ -120,15 +121,15 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 	public function read( Model &$question ) {
 		$question_post = get_post( $question->get_id() );
 
-		if ( ! $question->get_id() || ! $question_post || 'mto-question' !== $question_post->post_type ) {
+		if ( ! $question->get_id() || ! $question_post || PostType::QUESTION !== $question_post->post_type ) {
 			throw new \Exception( __( 'Invalid question.', 'masteriyo' ) );
 		}
 
 		$question->set_props(
 			array(
 				'name'          => $question_post->post_title,
-				'date_created'  => $question_post->post_date_gmt,
-				'date_modified' => $question_post->post_modified_gmt,
+				'date_created'  => $this->string_to_timestamp( $question_post->post_date_gmt ) ? $this->string_to_timestamp( $question_post->post_date_gmt ) : $this->string_to_timestamp( $question_post->post_date ),
+				'date_modified' => $this->string_to_timestamp( $question_post->post_modified_gmt ) ? $this->string_to_timestamp( $question_post->post_modified_gmt ) : $this->string_to_timestamp( $question_post->post ),
 				'status'        => $question_post->post_status,
 				'answers'       => json_decode( $question_post->post_content ),
 				'description'   => $question_post->post_excerpt,
@@ -184,7 +185,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 				'menu_order'   => $question->get_menu_order( 'edit' ),
 				'post_name'    => '',
 				'post_parent'  => $question->get_parent_id( 'edit' ),
-				'post_type'    => 'mto-question',
+				'post_type'    => PostType::QUESTION,
 			);
 
 			/**
@@ -343,7 +344,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-question' ) );
+			update_post_caches( $query->posts, array( PostType::QUESTION ) );
 		}
 
 		$questions = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_question', $query->posts ) );
@@ -381,7 +382,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			}
 		}
 
-		$query_vars['post_type'] = 'mto-question';
+		$query_vars['post_type'] = PostType::QUESTION;
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

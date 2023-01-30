@@ -8,6 +8,7 @@ namespace Masteriyo\Repository;
 use Masteriyo\Database\Model;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Lesson;
+use Masteriyo\PostType\PostType;
 
 class LessonRepository extends AbstractRepository implements RepositoryInterface {
 
@@ -64,7 +65,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			apply_filters(
 				'masteriyo_new_lesson_data',
 				array(
-					'post_type'      => 'mto-lesson',
+					'post_type'      => PostType::LESSON,
 					'post_status'    => $lesson->get_status() ? $lesson->get_status() : PostStatus::PUBLISH,
 					'post_author'    => $lesson->get_author_id(),
 					'post_title'     => $lesson->get_name() ? $lesson->get_name() : __( 'Lesson', 'masteriyo' ),
@@ -75,9 +76,9 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 					'ping_status'    => 'closed',
 					'menu_order'     => $lesson->get_menu_order(),
 					'post_password'  => $lesson->get_post_password( 'edit' ),
-					'post_date'      => $lesson->get_date_created( 'edit' ),
-					'post_date_gmt'  => $lesson->get_date_created( 'edit' ),
 					'post_name'      => $lesson->get_slug( 'edit' ),
+					'post_date'      => gmdate( 'Y-m-d H:i:s', $lesson->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt'  => gmdate( 'Y-m-d H:i:s', $lesson->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$lesson
 			)
@@ -115,7 +116,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 	public function read( Model &$lesson ) {
 		$lesson_post = get_post( $lesson->get_id() );
 
-		if ( ! $lesson->get_id() || ! $lesson_post || 'mto-lesson' !== $lesson_post->post_type ) {
+		if ( ! $lesson->get_id() || ! $lesson_post || PostType::LESSON !== $lesson_post->post_type ) {
 			throw new \Exception( __( 'Invalid lesson.', 'masteriyo' ) );
 		}
 
@@ -123,8 +124,8 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			array(
 				'name'              => $lesson_post->post_title,
 				'slug'              => $lesson_post->post_name,
-				'date_created'      => $lesson_post->post_date_gmt,
-				'date_modified'     => $lesson_post->post_modified_gmt,
+				'date_created'      => $this->string_to_timestamp( $lesson_post->post_date_gmt ) ? $this->string_to_timestamp( $lesson_post->post_date_gmt ) : $this->string_to_timestamp( $lesson_post->post_date ),
+				'date_modified'     => $this->string_to_timestamp( $lesson_post->post_modified_gmt ) ? $this->string_to_timestamp( $lesson_post->post_modified_gmt ) : $this->string_to_timestamp( $lesson_post->post ),
 				'status'            => $lesson_post->post_status,
 				'description'       => $lesson_post->post_content,
 				'short_description' => $lesson_post->post_excerpt,
@@ -187,7 +188,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 				'menu_order'     => $lesson->get_menu_order( 'edit' ),
 				'post_password'  => $lesson->get_post_password( 'edit' ),
 				'post_name'      => $lesson->get_slug( 'edit' ),
-				'post_type'      => 'mto-lesson',
+				'post_type'      => PostType::LESSON,
 			);
 
 			/**
@@ -421,7 +422,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 			}
 		}
 
-		$query_vars['post_type'] = 'mto-lesson';
+		$query_vars['post_type'] = PostType::LESSON;
 
 		// These queries cannot be auto-generated so we have to remove them and build them manually.
 		$manual_queries = array(

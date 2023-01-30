@@ -12,6 +12,7 @@ namespace Masteriyo\Repository;
 use Masteriyo\Database\Model;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Quiz;
+use Masteriyo\PostType\PostType;
 
 /**
  * Quiz repository class.
@@ -70,7 +71,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			apply_filters(
 				'masteriyo_new_quiz_data',
 				array(
-					'post_type'     => 'mto-quiz',
+					'post_type'     => PostType::QUIZ,
 					'post_status'   => $quiz->get_status() ? $quiz->get_status() : PostStatus::PUBLISH,
 					'post_author'   => $quiz->get_author_id( 'edit' ),
 					'post_title'    => $quiz->get_name() ? $quiz->get_name() : __( 'Quiz', 'masteriyo' ),
@@ -79,9 +80,9 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 					'post_parent'   => $quiz->get_parent_id(),
 					'ping_status'   => 'closed',
 					'menu_order'    => $quiz->get_menu_order(),
-					'post_date'     => $quiz->get_date_created( 'edit' ),
-					'post_date_gmt' => $quiz->get_date_created( 'edit' ),
 					'post_name'     => $quiz->get_slug( 'edit' ),
+					'post_date'     => gmdate( 'Y-m-d H:i:s', $quiz->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt' => gmdate( 'Y-m-d H:i:s', $quiz->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$quiz
 			)
@@ -119,7 +120,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 	public function read( Model &$quiz ) {
 		$quiz_post = get_post( $quiz->get_id() );
 
-		if ( ! $quiz->get_id() || ! $quiz_post || 'mto-quiz' !== $quiz_post->post_type ) {
+		if ( ! $quiz->get_id() || ! $quiz_post || PostType::QUIZ !== $quiz_post->post_type ) {
 			throw new \Exception( __( 'Invalid quiz.', 'masteriyo' ) );
 		}
 
@@ -127,8 +128,8 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			array(
 				'name'              => $quiz_post->post_title,
 				'slug'              => $quiz_post->post_name,
-				'date_created'      => $quiz_post->post_date_gmt,
-				'date_modified'     => $quiz_post->post_modified_gmt,
+				'date_created'      => $this->string_to_timestamp( $quiz_post->post_date_gmt ) ? $this->string_to_timestamp( $quiz_post->post_date_gmt ) : $this->string_to_timestamp( $quiz_post->post_date ),
+				'date_modified'     => $this->string_to_timestamp( $quiz_post->post_modified_gmt ) ? $this->string_to_timestamp( $quiz_post->post_modified_gmt ) : $this->string_to_timestamp( $quiz_post->post ),
 				'status'            => $quiz_post->post_status,
 				'parent_id'         => $quiz_post->post_parent,
 				'menu_order'        => $quiz_post->menu_order,
@@ -184,7 +185,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				'post_status'  => $quiz->get_status( 'edit' ) ? $quiz->get_status( 'edit' ) : PostStatus::PUBLISH,
 				'post_name'    => $quiz->get_slug( 'edit' ),
 				'post_parent'  => $quiz->get_parent_id(),
-				'post_type'    => 'mto-quiz',
+				'post_type'    => PostType::QUIZ,
 			);
 
 			/**
@@ -381,7 +382,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-quiz' ) );
+			update_post_caches( $query->posts, array( PostType::QUIZ ) );
 		}
 
 		$quizzes = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_quiz', $query->posts ) );
@@ -419,7 +420,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 			}
 		}
 
-		$query_vars['post_type'] = 'mto-quiz';
+		$query_vars['post_type'] = PostType::QUIZ;
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

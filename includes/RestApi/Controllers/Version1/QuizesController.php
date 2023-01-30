@@ -939,6 +939,8 @@ class QuizesController extends PostsController {
 			'status'                            => $quiz->get_status( $context ),
 			'description'                       => 'view' === $context ? wpautop( do_shortcode( $quiz->get_description() ) ) : $quiz->get_description( $context ),
 			'short_description'                 => $short_description,
+			'date_created'                      => masteriyo_rest_prepare_date_response( $quiz->get_date_created( $context ) ),
+			'date_modified'                     => masteriyo_rest_prepare_date_response( $quiz->get_date_modified( $context ) ),
 			'pass_mark'                         => $quiz->get_pass_mark( $context ),
 			'full_mark'                         => $quiz->get_full_mark( $context ),
 			'duration'                          => $quiz->get_duration( $context ),

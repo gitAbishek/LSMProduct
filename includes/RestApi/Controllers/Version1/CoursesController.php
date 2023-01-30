@@ -385,7 +385,7 @@ class CoursesController extends PostsController {
 			'menu_order'        => $course->get_menu_order( $context ),
 			'author'            => $author,
 			'date_created'      => masteriyo_rest_prepare_date_response( $course->get_date_created( $context ) ),
-			'date_modified'     => $course->get_date_modified( $context ),
+			'date_modified'     => masteriyo_rest_prepare_date_response( $course->get_date_modified( $context ) ),
 			'featured'          => $course->get_featured( $context ),
 			'price'             => $course->get_price( $context ),
 			'regular_price'     => $course->get_regular_price( $context ),

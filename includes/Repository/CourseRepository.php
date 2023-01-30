@@ -12,11 +12,12 @@ namespace Masteriyo\Repository;
 use Masteriyo\Helper\Number;
 use Masteriyo\Models\Course;
 use Masteriyo\Database\Model;
-use Masteriyo\Enums\CourseAccessMode;
-use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Enums\PostStatus;
+use Masteriyo\PostType\PostType;
+use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\UserCourseQuery;
+use Masteriyo\Enums\CourseAccessMode;
 use Masteriyo\Query\CourseProgressQuery;
 
 /**
@@ -82,7 +83,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			apply_filters(
 				'masteriyo_new_course_data',
 				array(
-					'post_type'      => 'mto-course',
+					'post_type'      => PostType::COURSE,
 					'post_status'    => $course->get_status() ? $course->get_status() : PostStatus::PUBLISH,
 					'post_author'    => $course->get_author_id( 'edit' ),
 					'post_title'     => $course->get_name() ? $course->get_name() : __( 'Course', 'masteriyo' ),
@@ -93,9 +94,9 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 					'ping_status'    => 'closed',
 					'menu_order'     => $course->get_menu_order(),
 					'post_password'  => $course->get_post_password( 'edit' ),
-					'post_date'      => $course->get_date_created( 'edit' ),
-					'post_date_gmt'  => $course->get_date_created( 'edit' ),
 					'post_name'      => $course->get_slug( 'edit' ),
+					'post_date'      => gmdate( 'Y-m-d H:i:s', $course->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt'  => gmdate( 'Y-m-d H:i:s', $course->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$course
 			)
@@ -138,7 +139,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 	public function read( Model &$course ) {
 		$course_post = get_post( $course->get_id() );
 
-		if ( ! $course->get_id() || ! $course_post || 'mto-course' !== $course_post->post_type ) {
+		if ( ! $course->get_id() || ! $course_post || PostType::COURSE !== $course_post->post_type ) {
 			throw new \Exception( __( 'Invalid course.', 'masteriyo' ) );
 		}
 
@@ -146,8 +147,8 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 			array(
 				'name'              => $course_post->post_title,
 				'slug'              => $course_post->post_name,
-				'date_created'      => $course_post->post_date_gmt,
-				'date_modified'     => $course_post->post_modified_gmt,
+				'date_created'      => $this->string_to_timestamp( $course_post->post_date_gmt ) ? $this->string_to_timestamp( $course_post->post_date_gmt ) : $this->string_to_timestamp( $course_post->post_date ),
+				'date_modified'     => $this->string_to_timestamp( $course_post->post_modified_gmt ) ? $this->string_to_timestamp( $course_post->post_modified_gmt ) : $this->string_to_timestamp( $course_post->post ),
 				'status'            => $course_post->post_status,
 				'description'       => $course_post->post_content,
 				'short_description' => $course_post->post_excerpt,
@@ -214,7 +215,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'post_password'  => $course->get_post_password( 'edit' ),
 				'post_name'      => $course->get_slug( 'edit' ),
 				'post_author'    => $course->get_author_id( 'edit' ),
-				'post_type'      => 'mto-course',
+				'post_type'      => PostType::COURSE,
 			);
 
 			/**
@@ -598,7 +599,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-course' ) );
+			update_post_caches( $query->posts, array( PostType::COURSE ) );
 		}
 
 		$courses = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_course', $query->posts ) );

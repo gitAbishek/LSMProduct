@@ -19,6 +19,7 @@ use Masteriyo\Contracts\OrderRepository as OrderRepositoryInterface;
 use Masteriyo\Enums\OrderStatus;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Enums\UserCourseStatus;
+use Masteriyo\PostType\PostType;
 
 /**
  * OrderRepository class.
@@ -93,7 +94,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 			apply_filters(
 				'masteriyo_new_order_data',
 				array(
-					'post_type'     => 'mto-order',
+					'post_type'     => PostType::ORDER,
 					'post_status'   => $order->get_status() ? $order->get_status() : OrderStatus::PENDING,
 					'post_author'   => 1,
 					'post_title'    => $this->get_order_title(),
@@ -143,7 +144,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 	public function read( Model &$order ) {
 		$order_post = get_post( $order->get_id() );
 
-		if ( ! $order->get_id() || ! $order_post || 'mto-order' !== $order_post->post_type ) {
+		if ( ! $order->get_id() || ! $order_post || PostType::ORDER !== $order_post->post_type ) {
 			throw new \Exception( __( 'Invalid order.', 'masteriyo' ) );
 		}
 
@@ -194,7 +195,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 		if ( array_intersect( $post_data_keys, array_keys( $changes ) ) ) {
 			$post_data = array(
 				'post_status' => $order->get_status( 'edit' ),
-				'post_type'   => 'mto-order',
+				'post_type'   => PostType::ORDER,
 			);
 
 			/**
@@ -333,7 +334,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		$post_data = array(
 			'post_status'       => $order->get_status( 'edit' ),
-			'post_type'         => 'mto-order',
+			'post_type'         => PostType::ORDER,
 			'post_modified'     => current_time( 'mysql' ),
 			'post_modified_gmt' => current_time( 'mysql', true ),
 		);
@@ -427,7 +428,7 @@ class OrderRepository extends AbstractRepository implements RepositoryInterface,
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-order' ) );
+			update_post_caches( $query->posts, array( PostType::ORDER ) );
 		}
 
 		$orders = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_order', $query->posts ) );

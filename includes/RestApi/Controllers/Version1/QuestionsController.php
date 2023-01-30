@@ -397,6 +397,8 @@ class QuestionsController extends PostsController {
 			'permalink'         => $question->get_permalink(),
 			'status'            => $question->get_status( $context ),
 			'description'       => $description,
+			'date_created'      => masteriyo_rest_prepare_date_response( $question->get_date_created( $context ) ),
+			'date_modified'     => masteriyo_rest_prepare_date_response( $question->get_date_modified( $context ) ),
 			'type'              => $question->get_type( $context ),
 			'parent_id'         => $question->get_parent_id( $context ),
 			'course_id'         => $question->get_course_id( $context ),

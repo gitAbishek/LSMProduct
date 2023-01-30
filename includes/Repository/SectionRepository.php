@@ -12,6 +12,7 @@ namespace Masteriyo\Repository;
 use Masteriyo\Database\Model;
 use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Section;
+use Masteriyo\PostType\PostType;
 
 /**
  * SectionRepository class.
@@ -62,7 +63,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			apply_filters(
 				'masteriyo_new_section_data',
 				array(
-					'post_type'      => 'mto-section',
+					'post_type'      => PostType::SECTION,
 					'post_status'    => PostStatus::PUBLISH,
 					'post_author'    => $section->get_author_id( 'edit' ),
 					'post_title'     => $section->get_name(),
@@ -71,8 +72,8 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 					'comment_status' => 'closed',
 					'ping_status'    => 'closed',
 					'menu_order'     => $section->get_menu_order(),
-					'post_date'      => $section->get_date_created( 'edit' ),
-					'post_date_gmt'  => $section->get_date_created( 'edit' ),
+					'post_date'      => gmdate( 'Y-m-d H:i:s', $section->get_date_created( 'edit' )->getOffsetTimestamp() ),
+					'post_date_gmt'  => gmdate( 'Y-m-d H:i:s', $section->get_date_created( 'edit' )->getTimestamp() ),
 				),
 				$section
 			)
@@ -110,15 +111,15 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	public function read( Model &$section ) {
 		$section_post = get_post( $section->get_id() );
 
-		if ( ! $section->get_id() || ! $section_post || 'mto-section' !== $section_post->post_type ) {
+		if ( ! $section->get_id() || ! $section_post || PostType::SECTION !== $section_post->post_type ) {
 			throw new \Exception( __( 'Invalid section.', 'masteriyo' ) );
 		}
 
 		$section->set_props(
 			array(
 				'name'          => $section_post->post_title,
-				'date_created'  => $section_post->post_date_gmt,
-				'date_modified' => $section_post->post_modified_gmt,
+				'date_created'  => $this->string_to_timestamp( $section_post->post_date_gmt ) ? $this->string_to_timestamp( $section_post->post_date_gmt ) : $this->string_to_timestamp( $section_post->post_date ),
+				'date_modified' => $this->string_to_timestamp( $section_post->post_modified_gmt ) ? $this->string_to_timestamp( $section_post->post_modified_gmt ) : $this->string_to_timestamp( $section_post->post ),
 				'description'   => $section_post->post_content,
 				'parent_id'     => $section_post->post_parent,
 				'menu_order'    => $section_post->menu_order,
@@ -170,7 +171,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 				'comment_status' => 'closed',
 				'post_status'    => PostStatus::PUBLISH,
 				'menu_order'     => $section->get_menu_order( 'edit' ),
-				'post_type'      => 'mto-section',
+				'post_type'      => PostType::SECTION,
 			);
 
 			/**
@@ -368,7 +369,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 
 		if ( isset( $query_vars['return'] ) && 'objects' === $query_vars['return'] && ! empty( $query->posts ) ) {
 			// Prime caches before grabbing objects.
-			update_post_caches( $query->posts, array( 'mto-section' ) );
+			update_post_caches( $query->posts, array( PostType::SECTION ) );
 		}
 
 		$sections = ( isset( $query_vars['return'] ) && 'ids' === $query_vars['return'] ) ? $query->posts : array_filter( array_map( 'masteriyo_get_section', $query->posts ) );
@@ -407,7 +408,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			}
 		}
 
-		$query_vars['post_type'] = 'mto-section';
+		$query_vars['post_type'] = PostType::SECTION;
 
 		$wp_query_args = parent::get_wp_query_args( $query_vars );
 

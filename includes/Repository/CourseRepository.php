@@ -148,7 +148,7 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 				'name'              => $course_post->post_title,
 				'slug'              => $course_post->post_name,
 				'date_created'      => $this->string_to_timestamp( $course_post->post_date_gmt ) ? $this->string_to_timestamp( $course_post->post_date_gmt ) : $this->string_to_timestamp( $course_post->post_date ),
-				'date_modified'     => $this->string_to_timestamp( $course_post->post_modified_gmt ) ? $this->string_to_timestamp( $course_post->post_modified_gmt ) : $this->string_to_timestamp( $course_post->post ),
+				'date_modified'     => $this->string_to_timestamp( $course_post->post_modified_gmt ) ? $this->string_to_timestamp( $course_post->post_modified_gmt ) : $this->string_to_timestamp( $course_post->post_modified ),
 				'status'            => $course_post->post_status,
 				'description'       => $course_post->post_content,
 				'short_description' => $course_post->post_excerpt,

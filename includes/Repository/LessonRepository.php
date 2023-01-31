@@ -125,7 +125,7 @@ class LessonRepository extends AbstractRepository implements RepositoryInterface
 				'name'              => $lesson_post->post_title,
 				'slug'              => $lesson_post->post_name,
 				'date_created'      => $this->string_to_timestamp( $lesson_post->post_date_gmt ) ? $this->string_to_timestamp( $lesson_post->post_date_gmt ) : $this->string_to_timestamp( $lesson_post->post_date ),
-				'date_modified'     => $this->string_to_timestamp( $lesson_post->post_modified_gmt ) ? $this->string_to_timestamp( $lesson_post->post_modified_gmt ) : $this->string_to_timestamp( $lesson_post->post ),
+				'date_modified'     => $this->string_to_timestamp( $lesson_post->post_modified_gmt ) ? $this->string_to_timestamp( $lesson_post->post_modified_gmt ) : $this->string_to_timestamp( $lesson_post->post_modified ),
 				'status'            => $lesson_post->post_status,
 				'description'       => $lesson_post->post_content,
 				'short_description' => $lesson_post->post_excerpt,

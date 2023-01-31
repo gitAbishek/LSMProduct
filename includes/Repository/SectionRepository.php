@@ -119,7 +119,7 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 			array(
 				'name'          => $section_post->post_title,
 				'date_created'  => $this->string_to_timestamp( $section_post->post_date_gmt ) ? $this->string_to_timestamp( $section_post->post_date_gmt ) : $this->string_to_timestamp( $section_post->post_date ),
-				'date_modified' => $this->string_to_timestamp( $section_post->post_modified_gmt ) ? $this->string_to_timestamp( $section_post->post_modified_gmt ) : $this->string_to_timestamp( $section_post->post ),
+				'date_modified' => $this->string_to_timestamp( $section_post->post_modified_gmt ) ? $this->string_to_timestamp( $section_post->post_modified_gmt ) : $this->string_to_timestamp( $section_post->post_modified ),
 				'description'   => $section_post->post_content,
 				'parent_id'     => $section_post->post_parent,
 				'menu_order'    => $section_post->menu_order,

@@ -129,7 +129,7 @@ class QuestionRepository extends AbstractRepository implements RepositoryInterfa
 			array(
 				'name'          => $question_post->post_title,
 				'date_created'  => $this->string_to_timestamp( $question_post->post_date_gmt ) ? $this->string_to_timestamp( $question_post->post_date_gmt ) : $this->string_to_timestamp( $question_post->post_date ),
-				'date_modified' => $this->string_to_timestamp( $question_post->post_modified_gmt ) ? $this->string_to_timestamp( $question_post->post_modified_gmt ) : $this->string_to_timestamp( $question_post->post ),
+				'date_modified' => $this->string_to_timestamp( $question_post->post_modified_gmt ) ? $this->string_to_timestamp( $question_post->post_modified_gmt ) : $this->string_to_timestamp( $question_post->post_modified ),
 				'status'        => $question_post->post_status,
 				'answers'       => json_decode( $question_post->post_content ),
 				'description'   => $question_post->post_excerpt,

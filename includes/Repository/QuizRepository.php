@@ -129,7 +129,7 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 				'name'              => $quiz_post->post_title,
 				'slug'              => $quiz_post->post_name,
 				'date_created'      => $this->string_to_timestamp( $quiz_post->post_date_gmt ) ? $this->string_to_timestamp( $quiz_post->post_date_gmt ) : $this->string_to_timestamp( $quiz_post->post_date ),
-				'date_modified'     => $this->string_to_timestamp( $quiz_post->post_modified_gmt ) ? $this->string_to_timestamp( $quiz_post->post_modified_gmt ) : $this->string_to_timestamp( $quiz_post->post ),
+				'date_modified'     => $this->string_to_timestamp( $quiz_post->post_modified_gmt ) ? $this->string_to_timestamp( $quiz_post->post_modified_gmt ) : $this->string_to_timestamp( $quiz_post->post_modified ),
 				'status'            => $quiz_post->post_status,
 				'parent_id'         => $quiz_post->post_parent,
 				'menu_order'        => $quiz_post->menu_order,

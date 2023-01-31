@@ -219,6 +219,19 @@ const Section: React.FC<Props> = (props) => {
 										{__('Add New Quiz', 'masteriyo')}
 									</MenuItem>
 								</Link>
+
+								<Link
+									as={RouterLink}
+									to={routes.zoom.add
+										.replace(':sectionId', id.toString())
+										.replace(':courseId', courseId.toString())}>
+									<MenuItem
+										fontSize="sm"
+										fontWeight="medium"
+										icon={<Icon as={BiAlignLeft} fontSize="lg" />}>
+										{__('Add New Zoom', 'masteriyo')}
+									</MenuItem>
+								</Link>
 							</MenuList>
 						</Menu>
 					</Box>

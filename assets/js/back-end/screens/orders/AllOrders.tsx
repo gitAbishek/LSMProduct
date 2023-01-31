@@ -19,6 +19,7 @@ import {
 	Text,
 	useMediaQuery,
 } from '@chakra-ui/react';
+
 import { __ } from '@wordpress/i18n';
 import React, { useState } from 'react';
 import { IconType } from 'react-icons';

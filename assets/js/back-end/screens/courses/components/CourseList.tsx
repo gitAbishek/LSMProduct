@@ -31,11 +31,13 @@ import routes from '../../../constants/routes';
 import { CourseCategorySchema } from '../../../schemas';
 import localized from '../../../utils/global';
 import { isEmpty } from '../../../utils/utils';
+
 interface Props {
 	id: number;
 	name: string;
 	price?: any;
 	categories?: any;
+	difficulty?: { id: number; name: string; slug: string };
 	permalink: string;
 	editPostLink: string;
 	createdOn: string;
@@ -52,6 +54,7 @@ const CourseList: React.FC<Props> = (props) => {
 		name,
 		price,
 		categories,
+		difficulty,
 		permalink,
 		editPostLink,
 		createdOn,
@@ -61,6 +64,9 @@ const CourseList: React.FC<Props> = (props) => {
 		onRestorePress,
 		status,
 	} = props;
+
+	console.log('categories', categories);
+	console.log('difficulty', difficulty);
 
 	const createdOnDate = createdOn.split(' ')[0];
 	const currencySymbol = localized.currency.symbol;
@@ -108,6 +114,44 @@ const CourseList: React.FC<Props> = (props) => {
 				) : (
 					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
 						{__('Uncategorized', 'masteriyo')}
+					</Text>
+				)}
+			</Td>
+			<Td>
+				{!isEmpty(difficulty) ? (
+					<Text
+						as="span"
+						fontSize="xs"
+						fontWeight="medium"
+						color="gray.600"
+						key={difficulty?.id}
+						_last={{
+							_after: {
+								content: 'none',
+							},
+						}}
+						_after={{
+							content: `", "`,
+						}}>
+						{difficulty?.id === 4 ? (
+							<Badge colorScheme="blue" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						) : difficulty?.id === 3 ? (
+							<Badge colorScheme="yellow" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						) : (
+							<Badge colorScheme="green" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						)}
+					</Text>
+				) : (
+					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
+						<Badge colorScheme="black">
+							{__('Uncategorized', 'masteriyo')}
+						</Badge>
 					</Text>
 				)}
 			</Td>

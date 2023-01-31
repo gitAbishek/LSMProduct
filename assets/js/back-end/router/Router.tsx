@@ -6,10 +6,12 @@ import AllCourseDifficulties from '../screens/course-difficulties/AllCourseDiffi
 import EditCourseDifficulty from '../screens/course-difficulties/EditCourseDifficulty';
 import AddNewQuiz from '../screens/quiz/AddNewQuiz';
 import EditQuiz from '../screens/quiz/EditQuiz';
+import AddNewZoom from '../screens/zoom/AddNewZoom';
 
 const Router: React.FC = () => {
 	return (
-		<HashRouter>
+		<HashRouter>                                       
+
 			<Switch>
 				<Route path={routes.orders.list} exact>
 					<screens.AllOrders />
@@ -44,6 +46,11 @@ const Router: React.FC = () => {
 				<Route path={routes.quiz.add} exact>
 					<AddNewQuiz />
 				</Route>
+
+				<Route path={routes.zoom.add} exact>
+					<AddNewZoom />
+				</Route>                                 
+
 				<Route path={routes.quiz.edit} exact>
 					<EditQuiz />
 				</Route>

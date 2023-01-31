@@ -45,6 +45,7 @@ interface Props {
 
 const CourseSetting: React.FC<Props> = (props) => {
 	const { courseData } = props;
+
 	const [enrollDisplayValue, setEnrollDisplayValue] = useState(
 		courseData?.enrollment_limit != 0 ? '1' : '0'
 	);
@@ -62,6 +63,7 @@ const CourseSetting: React.FC<Props> = (props) => {
 	const [hours, minutes] = convertMinutesToHours(courseData?.duration || 0);
 
 	const difficultiesAPI = new API(urls.difficulties);
+
 	const {
 		register,
 		formState: { errors },

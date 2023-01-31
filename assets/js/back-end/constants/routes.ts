@@ -20,6 +20,10 @@ const routes = {
 		add: '/courses/:courseId/quiz/:sectionId/add-new-quiz',
 		edit: '/courses/:courseId/quiz/edit/:quizId',
 	},
+	zoom: {
+		add: '/courses/:courseId/zoom/:sectionId/add-new-zoom',
+		edit: '/courses/:courseId/zoom/edit/:zoomId',
+	},
 	course_categories: {
 		list: '/courses/categories',
 		add: '/courses/categories/new',

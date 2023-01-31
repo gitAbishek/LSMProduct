@@ -47,6 +47,7 @@ import { deepMerge, isEmpty } from '../../utils/utils';
 import CourseFilter from './components/CourseFilter';
 import CourseList from './components/CourseList';
 interface FilterParams {
+	difficulty?: string | number;
 	category?: string | number;
 	search?: string;
 	status?: string;
@@ -93,6 +94,8 @@ const AllCourses = () => {
 			keepPreviousData: true,
 		}
 	);
+
+	console.log(courseQuery.data);
 
 	const cancelRef = React.useRef<any>();
 
@@ -293,6 +296,7 @@ const AllCourses = () => {
 											</Stack>
 										</Th>
 										<Th>{__('Categories', 'masteriyo')}</Th>
+										<Th>{__('Difficulties', 'masteriyo')}</Th>
 										<Th>{__('Instructor', 'masteriyo')}</Th>
 										<Th>{__('Price', 'masteriyo')}</Th>
 										<Th>
@@ -341,6 +345,7 @@ const AllCourses = () => {
 												name={course?.name}
 												price={course?.price}
 												categories={course?.categories}
+												difficulty={course?.difficulty}
 												key={course?.id}
 												createdOn={course?.date_created}
 												permalink={course?.permalink}

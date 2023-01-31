@@ -482,15 +482,14 @@ class QuizRepository extends AbstractRepository implements RepositoryInterface {
 		$questions = get_posts(
 			array(
 				'numberposts' => -1,
-				'post_type'   => 'mto-question',
-				'post_status' => 'any',
+				'post_type'   => PostType::QUESTION,
+				'post_status' => PostStatus::ANY,
 				'post_parent' => $quiz->get_id(),
-				'fields'      => 'ids',
 			)
 		);
 
 		foreach ( $questions as $question ) {
-			wp_delete_post( $question, true );
+			wp_delete_post( $question->ID, true );
 		}
 	}
 }

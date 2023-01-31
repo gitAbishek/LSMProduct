@@ -18,6 +18,7 @@ use Masteriyo\Enums\CoursePriceType;
 use Masteriyo\Models\CourseProgress;
 use Masteriyo\Query\UserCourseQuery;
 use Masteriyo\Enums\CourseAccessMode;
+use Masteriyo\Enums\CourseChildrenPostType;
 use Masteriyo\Query\CourseProgressQuery;
 
 /**
@@ -852,16 +853,15 @@ class CourseRepository extends AbstractRepository implements RepositoryInterface
 		$children = get_posts(
 			array(
 				'numberposts' => -1,
-				'post_type'   => array( 'mto-section', 'mto-lesson', 'mto-quiz', 'mto-question' ),
-				'post_status' => 'any',
-				'fields'      => 'ids',
+				'post_type'   => array_merge( CourseChildrenPostType::all(), array( PostType::QUESTION ) ),
+				'post_status' => PostStatus::ANY,
 				'meta_key'    => '_course_id',
 				'meta_value'  => $course->get_id(),
 			)
 		);
 
 		foreach ( $children as $child ) {
-			wp_delete_post( $child, true );
+			wp_delete_post( $child->ID, true );
 		}
 	}
 }

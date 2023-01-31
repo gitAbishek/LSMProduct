@@ -10,9 +10,10 @@
 namespace Masteriyo\Repository;
 
 use Masteriyo\Database\Model;
-use Masteriyo\Enums\PostStatus;
 use Masteriyo\Models\Section;
+use Masteriyo\Enums\PostStatus;
 use Masteriyo\PostType\PostType;
+use Masteriyo\Enums\SectionChildrenPostType;
 
 /**
  * SectionRepository class.
@@ -467,46 +468,37 @@ class SectionRepository extends AbstractRepository implements RepositoryInterfac
 	 * @param Masteriyo\Models\Section $section Section object.
 	 */
 	protected function delete_children( $section ) {
-		$lessons = get_posts(
+		$children = get_posts(
 			array(
 				'numberposts' => -1,
-				'post_type'   => array( 'mto-lesson' ),
-				'post_status' => 'any',
+				'post_type'   => SectionChildrenPostType::all(),
+				'post_status' => PostStatus::ANY,
 				'post_parent' => $section->get_id(),
-				'fields'      => 'ids',
 			)
 		);
 
-		foreach ( $lessons as $lesson ) {
-			wp_delete_post( $lesson, true );
+		foreach ( $children as $child ) {
+			wp_delete_post( $child->ID, true );
 		}
 
-		$quizzes = get_posts(
-			array(
-				'numberposts' => -1,
-				'post_type'   => array( 'mto-quiz' ),
-				'post_status' => 'any',
-				'post_parent' => $section->get_id(),
-				'fields'      => 'ids',
-			)
+		$quizzes = array_filter(
+			$children,
+			function( $child ) {
+				return PostType::QUIZ === $child->post_type;
+			}
 		);
-
-		foreach ( $quizzes as $quiz ) {
-			wp_delete_post( $quiz, true );
-		}
 
 		$questions = get_posts(
 			array(
 				'numberposts'     => -1,
-				'post_type'       => 'mto-question',
-				'post_status'     => 'any',
-				'post_parent__in' => $quizzes,
-				'fields'          => 'ids',
+				'post_type'       => PostType::QUESTION,
+				'post_status'     => PostStatus::ANY,
+				'post_parent__in' => wp_list_pluck( $quizzes, 'ID' ),
 			)
 		);
 
 		foreach ( $questions as $question ) {
-			wp_delete_post( $question, true );
+			wp_delete_post( $question->ID, true );
 		}
 	}
 }

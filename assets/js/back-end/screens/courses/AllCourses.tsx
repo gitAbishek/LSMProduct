@@ -47,10 +47,12 @@ import { deepMerge, isEmpty } from '../../utils/utils';
 import CourseFilter from './components/CourseFilter';
 import CourseList from './components/CourseList';
 interface FilterParams {
+	difficulty?: string | number | any;
 	category?: string | number;
 	search?: string;
 	status?: string;
 	isOnlyFree?: boolean;
+	slug?: string;
 	price?: string | number;
 	per_page?: number;
 	page?: number;
@@ -293,6 +295,7 @@ const AllCourses = () => {
 											</Stack>
 										</Th>
 										<Th>{__('Categories', 'masteriyo')}</Th>
+										<Th>{__('Difficulties', 'masteriyo')}</Th>
 										<Th>{__('Instructor', 'masteriyo')}</Th>
 										<Th>{__('Price', 'masteriyo')}</Th>
 										<Th>
@@ -340,6 +343,8 @@ const AllCourses = () => {
 												id={course?.id}
 												name={course?.name}
 												price={course?.price}
+												slug={course?.slug}
+												difficulty={course?.difficulty}
 												categories={course?.categories}
 												key={course?.id}
 												createdOn={course?.date_created}

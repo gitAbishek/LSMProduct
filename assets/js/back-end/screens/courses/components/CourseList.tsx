@@ -3,6 +3,7 @@ import {
 	Badge,
 	Button,
 	ButtonGroup,
+	Divider,
 	Icon,
 	IconButton,
 	Link,
@@ -10,8 +11,19 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalHeader,
+	ModalOverlay,
 	Stack,
+	Table,
+	TableContainer,
+	Tbody,
 	Text,
+	Th,
+	useDisclosure,
 } from '@chakra-ui/react';
 import { _x, __ } from '@wordpress/i18n';
 import dayjs from 'dayjs';
@@ -35,6 +47,8 @@ interface Props {
 	id: number;
 	name: string;
 	price?: any;
+	slug?: string;
+	difficulty?: { id: number; name: string; slug: string };
 	categories?: any;
 	permalink: string;
 	editPostLink: string;
@@ -51,6 +65,8 @@ const CourseList: React.FC<Props> = (props) => {
 		id,
 		name,
 		price,
+		slug,
+		difficulty,
 		categories,
 		permalink,
 		editPostLink,
@@ -64,6 +80,7 @@ const CourseList: React.FC<Props> = (props) => {
 
 	const createdOnDate = createdOn.split(' ')[0];
 	const currencySymbol = localized.currency.symbol;
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
 		<Tr>
@@ -108,6 +125,44 @@ const CourseList: React.FC<Props> = (props) => {
 				) : (
 					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
 						{__('Uncategorized', 'masteriyo')}
+					</Text>
+				)}
+			</Td>
+			<Td>
+				{!isEmpty(difficulty) ? (
+					<Text
+						as="span"
+						fontSize="xs"
+						fontWeight="medium"
+						color="gray.600"
+						key={difficulty?.id}
+						_last={{
+							_after: {
+								content: 'none',
+							},
+						}}
+						_after={{
+							content: `", "`,
+						}}>
+						{difficulty?.id === 4 ? (
+							<Badge colorScheme="blue" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						) : difficulty?.id === 3 ? (
+							<Badge colorScheme="yellow" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						) : (
+							<Badge colorScheme="green" variant="subtle">
+								{difficulty?.name}
+							</Badge>
+						)}
+					</Text>
+				) : (
+					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
+						<Badge colorScheme="black">
+							{__('Uncategorized', 'masteriyo')}
+						</Badge>
 					</Text>
 				)}
 			</Td>
@@ -198,8 +253,53 @@ const CourseList: React.FC<Props> = (props) => {
 									_hover={{ color: 'red.500' }}>
 									{__('Trash', 'masteriyo')}
 								</MenuItem>
+
+								<MenuItem onClick={onOpen} icon={<BiShow />}>
+									{__('Course Details', 'masteriyo')}
+								</MenuItem>
 							</MenuList>
 						</Menu>
+
+						<Modal isOpen={isOpen} onClose={onClose} size="3xl">
+							<ModalOverlay />
+							<ModalContent>
+								<ModalHeader ml="6" color="green.400">
+									Course Details
+								</ModalHeader>
+								<Divider />
+								<ModalCloseButton />
+								<ModalBody height="500">
+									<TableContainer>
+										<Table variant="striped">
+											<Tbody>
+												<Tr>
+													<Th>Course Title</Th>
+													<Th>Slug</Th>
+													<Th>Status</Th>
+													<Th>Author</Th>
+												</Tr>
+											</Tbody>
+											<Tbody>
+												<Tr>
+													<Th fontWeight="medium" textTransform="capitalize">
+														<Text color="pink.400">{name}</Text>
+													</Th>
+													<Th fontWeight="medium" textTransform="capitalize">
+														<Text color="pink.400">{slug}</Text>
+													</Th>
+													<Th fontWeight="medium" textTransform="capitalize">
+														<Text color="pink.400">{status}</Text>
+													</Th>
+													<Th fontWeight="medium" textTransform="capitalize">
+														<Text color="pink.400">{author?.display_name}</Text>
+													</Th>
+												</Tr>
+											</Tbody>
+										</Table>
+									</TableContainer>
+								</ModalBody>
+							</ModalContent>
+						</Modal>
 					</ButtonGroup>
 				)}
 			</Td>

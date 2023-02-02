@@ -214,6 +214,10 @@ const AllCourses = () => {
 	return (
 		<Stack direction="column" spacing="8" alignItems="center">
 			<Header
+				firstBtn={{
+					label: __('Add New Course', 'masteriyo'),
+					action: () => history.push(routes.courses.add),
+				}}
 				thirdBtn={{
 					label: __('Add New Course', 'masteriyo'),
 					action: () => history.push(routes.courses.add),
@@ -231,6 +235,8 @@ const AllCourses = () => {
 					</ListItem>
 					<ListItem mb="0">{courseStatusButton('trash', BiTrash)}</ListItem>
 				</List>
+				{/* Post List  */}
+
 				{/* Start Mobile View */}
 				<Stack direction="column" display={{ sm: 'none' }}>
 					<Stack direction="row" gap="6">

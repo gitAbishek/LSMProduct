@@ -60,6 +60,19 @@ interface Props {
 	status?: 'draft' | 'publish' | 'trash';
 }
 
+const list = ['red', 'yellow', 'gray', 'blue', 'black'];
+let counter = 0;
+const pickedColors = {};
+function pickColor(id: string | number) {
+	if (pickedColors[id]) {
+		return pickedColors[id];
+	}
+	const color = list[counter];
+	counter++;
+	pickedColors[id] = color;
+	return color;
+}
+
 const CourseList: React.FC<Props> = (props) => {
 	const {
 		id,
@@ -144,19 +157,13 @@ const CourseList: React.FC<Props> = (props) => {
 						_after={{
 							content: `", "`,
 						}}>
-						{difficulty?.id === 4 ? (
-							<Badge colorScheme="blue" variant="subtle">
+						{difficulty ? (
+							<Badge
+								colorScheme={pickColor(difficulty?.id + 500)}
+								variant="subtle">
 								{difficulty?.name}
 							</Badge>
-						) : difficulty?.id === 3 ? (
-							<Badge colorScheme="yellow" variant="subtle">
-								{difficulty?.name}
-							</Badge>
-						) : (
-							<Badge colorScheme="green" variant="subtle">
-								{difficulty?.name}
-							</Badge>
-						)}
+						) : null}
 					</Text>
 				) : (
 					<Text as="span" fontSize="xs" fontWeight="medium" color="gray.600">
